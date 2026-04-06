@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="666" height="666" viewBox="0 0 666 666">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1.646" y1="1.47" x2="0.084" y2="0.145" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#173c98"/>
+      <stop offset="1" stop-color="#3a84cc"/>
+    </linearGradient>
+    <clipPath id="clip-アートボード_74">
+      <rect width="666" height="666"/>
+    </clipPath>
+  </defs>
+  <g id="アートボード_74" data-name="アートボード – 74" clip-path="url(#clip-アートボード_74)">
+    <circle id="楕円形_459" data-name="楕円形 459" cx="324.5" cy="324.5" r="324.5" transform="translate(9 9)" fill="url(#linear-gradient)"/>
+    <g id="グループ_8890" data-name="グループ 8890" transform="translate(151.288 157.904)">
+      <path id="パス_40" data-name="パス 40" d="M129.2,71.812V31.892H15.75v39.92Z" transform="translate(234.225 254.188)" fill="#fdc831"/>
+      <g id="グループ_2225" data-name="グループ 2225">
+        <path id="線_37" data-name="線 37" d="M33.687,314.86H-27.5V0H33.687Z" transform="translate(27.5)" fill="#fff"/>
+        <rect id="長方形_881" data-name="長方形 881" width="143.842" height="145.45" transform="translate(30.593 147.822)" fill="rgba(0,0,0,0)"/>
+        <path id="長方形_881_-_アウトライン" data-name="長方形 881 - アウトライン" d="M-27.5-27.5H177.529V179.137H-27.5ZM116.342,33.687H33.727v84.424h82.614Z" transform="translate(27.5 144.728)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

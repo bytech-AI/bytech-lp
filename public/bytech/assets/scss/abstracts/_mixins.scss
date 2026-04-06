@@ -1,0 +1,66 @@
+@use './variables' as *;
+@use 'sass:math';
+
+/* ----------------------------------------------------------
+  メディアクエリ：max-width / min-width 両対応
+  @include mq(med)       → max-width: 67.5em
+  @include mq-min(med)   → min-width: 67.5625em
+---------------------------------------------------------- */
+
+// max-width / min-width 両対応のメイン mixin
+@mixin mq(
+  $mq-breakpoint: 'sp',
+  $mq-width: 'max', // デフォルトは max-width
+  $mq-type: 'screen',
+  $mq-breakpoints: null
+) {
+  // ブレイクポイントマップを取得
+  $mq-breakpoints: if($mq-breakpoints == null, $em-breakpoints, $mq-breakpoints);
+  $unit: 'em';
+  $onepx: 0.0625; // 1px = 0.0625em（16px基準）
+
+  // px指定を使う場合
+  @if $mq-breakpoints == 'px' {
+    $mq-breakpoints: $px-breakpoints;
+    $onepx: 1;
+    $unit: 'px';
+  }
+
+  // ブレイクポイント数値を取得
+  @if map-has-key($mq-breakpoints, $mq-breakpoint) {
+    $mq-breakpoint: map-get($mq-breakpoints, $mq-breakpoint);
+  } @else if $mq-breakpoints == $em-breakpoints {
+    $mq-breakpoint: math.div($mq-breakpoint, 16);
+  }
+
+  // type補完（省略記法対応）
+  @if $mq-type == 'ps' {
+    $mq-type: 'print, screen';
+  } @else if $mq-type == 'p' {
+    $mq-type: 'print';
+  } @else if $mq-type == 's' {
+    $mq-type: 'screen';
+  }
+
+  // min-width / max-width で出力切り替え
+  @if $mq-width == 'min' {
+    @media #{$mq-type} and (#{$mq-width}-width: #{($mq-breakpoint + $onepx)}#{$unit}) {
+      @content;
+    }
+  } @else {
+    @media #{$mq-type} and (#{$mq-width}-width: #{$mq-breakpoint}#{$unit}) {
+      @content;
+    }
+  }
+}
+
+// min-width専用：@include mq-min(med)
+@mixin mq-min(
+  $mq-breakpoint: 'sp',
+  $mq-type: 'screen',
+  $mq-breakpoints: null
+) {
+  @include mq($mq-breakpoint, 'min', $mq-type, $mq-breakpoints) {
+    @content;
+  }
+}

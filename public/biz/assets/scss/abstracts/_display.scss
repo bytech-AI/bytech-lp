@@ -1,0 +1,76 @@
+@use "mixins" as *;
+
+.is-hidden {
+  display: none !important;
+}
+
+.is-visible {
+  display: block !important;
+}
+// =====================================
+// Display & Layout Utilities
+// =====================================
+
+// Flex 基本
+@mixin flex($justify: flex-start, $align: stretch, $wrap: nowrap, $direction: row) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+  flex-direction: $direction;
+}
+
+// Inline-Flex
+@mixin inline-flex($justify: flex-start, $align: stretch, $wrap: nowrap, $direction: row) {
+  display: inline-flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+  flex-direction: $direction;
+}
+
+// Grid 基本
+@mixin grid($columns: auto-fit, $min: 200px, $gap: 20px) {
+  display: grid;
+  grid-template-columns: repeat($columns, minmax($min, 1fr));
+  gap: $gap;
+}
+
+// Centering（中央寄せ）
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ========== Display Utilities ========== */
+.sp-only {
+  display: block !important;
+
+  @media (min-width: 769px) { // ←タブレット以上なら非表示
+    display: none !important;
+  }
+}
+.pc-only {
+  display: none !important;
+
+  @media (min-width: 769px) {
+    display: block !important;
+  }
+}
+tr.pc-only {
+  @media (min-width: 769px) {
+    display: table-row !important;
+  }
+}
+
+/* タブレットのみ表示（必要なら） */
+.tab-only {
+  display: none !important;
+
+  @include mq-min(sp) {
+    @include mq(med) {
+      display: block !important;
+    }
+  }
+}

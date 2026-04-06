@@ -1,0 +1,17 @@
+@use "sass:map";
+@use "variables" as *;
+
+// メディアクエリ
+@mixin mq($breakpoint) {
+  $size: map.get($breakpoints, $breakpoint);
+  @media (max-width: #{$size}) {
+    @content;
+  }
+}
+
+@mixin mq-min($breakpoint) {
+  $size: map.get($breakpoints, $breakpoint);
+  @media (min-width: #{$size}) {
+    @content;
+  }
+}

@@ -1,0 +1,38 @@
+// ベースフォントサイズ
+$base-font-size: 16px;
+
+// 色設定
+$clr-main: #00A0E9;
+
+// ブレイクポイント（em単位）
+$em-breakpoints: (
+  xl: 160,
+  lg: 120,
+  pc: 85.375,
+  med: 67.5,
+  sp: 47.9375,
+  sm: 40,
+  xs: 34.375,
+  se: 21.25,
+);
+
+// ブレイクポイント（px単位）
+$px-breakpoints: (
+  xl: 2560,
+  lg: 1920,
+  pc: 1366,
+  med: 1080,
+  sp: 767,
+  sm: 640,
+  xs: 500,
+  se: 350,
+);
+
+// デザインの基準幅
+$designWidth: 1920px;
+
+:root {
+  --font-jp: 'Noto Sans JP', sans-serif;
+  --font-en: 'Montserrat', sans-serif;
+
+}

@@ -1,0 +1,92 @@
+@use 'sass:math';
+@use 'functions' as *;
+@use 'mixins' as *;
+@use 'variables' as *;
+
+/* --- font-size --- */
+// フォントサイズを8pxから140pxまでREMで生成
+@for $i from 8 to 140 {
+  .fz-#{$i} { font-size: math.div($i, 16) + rem}
+}
+// フォンt-サイズをREM:14引く1px
+// これは古い .fz-{数字}のクラスをマネする
+@include mq(sp) {
+  @for $i from 8 to 140 {
+    .fz-#{$i} { font-size: math.div(($i - 1), 14) + rem}
+  }
+}
+
+/* txt
+**************************************** */
+.txt-lg { font-size: 1.125rem; /* 18px */ }
+.txt-sm { font-size: .875rem; /* 14px */ }
+.txt-wh,
+.txt-wh * { color: var(--clr-wht, #fff); }
+.txt-main,
+.txt-main * { color: var(--clr-main, #1d7fb7); }
+.txt-sub,
+.txt-sub * { color: var(--clr-sub, #eee); }
+
+/* --- font --- */
+@font-face {
+  font-family: "Montserrat", sans-serif;
+}
+.font-jp {
+  font-family: var(--font-jp);
+}
+.font-en,
+.font-en-l,
+.font-en-r,
+.font-en-m,
+.font-en-b,
+.font-en-exb {
+  font-family: var(--font-en);
+}
+.font-en {
+  font-weight: 600;
+}
+.font-en-l {
+  font-weight: 300;
+}
+.font-en-r {
+  font-weight: 400;
+}
+.font-en-m {
+  font-weight: 500;
+}
+.font-en-b {
+  font-weight: 700;
+}
+.font-en-exb {
+  font-weight: 800;
+}
+.font-en2 {
+  font-family: var(--font-en2);
+}
+.font-en3 {
+  font-family: var(--font-en3);
+  font-weight: 500;
+}
+
+/* txt
+**************************************** */
+.txt-ctr,
+.txt-ctr-pc {
+  text-align: center;
+}
+.txt-rgt,
+.txt-rgt-pc {
+  text-align: right;
+}
+
+.wrm-vr {
+  writing-mode: vertical-rl;
+  text-orientation: sideways; 
+}
+
+@include mq(sp) {
+  .txt-lg { font-size: 1rem; /* 15px */ }
+  .txt-sm { font-size: remSP(10); }
+  .txt-ctr-pc,
+  .txt-rgt-pc { text-align: left; }
+}

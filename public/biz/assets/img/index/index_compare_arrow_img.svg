@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_レイヤー_2" data-name="レイヤー 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 205.14 678.48">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#_名称未設定グラデーション_3);
+      }
+
+      .cls-2 {
+        fill: url(#_名称未設定グラデーション_3-3);
+      }
+
+      .cls-3 {
+        fill: url(#_名称未設定グラデーション_3-2);
+      }
+    </style>
+    <linearGradient id="_名称未設定グラデーション_3" data-name="名称未設定グラデーション 3" x1="-856.48" y1="885.52" x2="-855.48" y2="885.52" gradientTransform="translate(-44683.51 581102.29) rotate(90) scale(678.48 -50.58)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#001eff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#3a82ca"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_3-2" data-name="名称未設定グラデーション 3" x1="-856.49" y1="885.52" x2="-855.49" y2="885.52" gradientTransform="translate(-44606.23 451693.58) rotate(90) scale(527.29 -50.58)" xlink:href="#_名称未設定グラデーション_3"/>
+    <linearGradient id="_名称未設定グラデーション_3-3" data-name="名称未設定グラデーション 3" x1="-856.5" y1="885.52" x2="-855.5" y2="885.52" gradientTransform="translate(-44760.79 398871.66) rotate(90) scale(465.54 -50.58)" xlink:href="#_名称未設定グラデーション_3"/>
+  </defs>
+  <g id="_レイヤー_1-2" data-name="レイヤー 1">
+    <g id="_Слой_2" data-name="Слой 2">
+      <g id="Layer_1" data-name="Layer 1">
+        <path id="_パス_13451" data-name="パス 13451" class="cls-1" d="M102.51,678.48l-25.23-39.51V0h50.58v638.8l-25.34,39.68Z"/>
+        <path id="_パス_13452" data-name="パス 13452" class="cls-3" d="M154.56,597.05V69.76h50.58v448.16l-50.58,79.14Z"/>
+        <path id="_パス_13453" data-name="パス 13453" class="cls-2" d="M50.58,597.11L0,517.92V131.56h50.58v465.54Z"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,18 @@
+@use "functions" as *;
+@use "variables" as *;
+
+// =====================================
+// Typography Settings
+// =====================================
+
+body {
+  font-family: $font-family;
+  font-size: rem(16);
+  line-height: 1.7;
+  color: $color-text;
+}
+
+.font-en {
+  font-family: "Futura", "Futura Light", sans-serif;
+  font-weight: 500;
+}

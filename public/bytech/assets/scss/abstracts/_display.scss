@@ -1,0 +1,63 @@
+@use './mixins' as *;
+@use './variables' as *;
+@use './typography' as *;
+
+.pc-none,
+.pc-none-inline,
+.pc-none-table,
+.pc-none-flex {
+  display: none;
+}
+
+.sp-none {
+  display: block;
+}
+.sp-none-inline {
+  display: inline;
+}
+.sp-none-table {
+  display: table;
+}
+.sp-none-flex {
+  display: flex;
+}
+
+.med-none {
+  display: block;
+}
+.med-block {
+  display: none;
+}
+
+// ----------- 中間幅（med）以下のブレイクポイント用 -----------
+@include mq(med) {
+  .med-none {
+    display: none;
+  }
+  .med-block {
+    display: block;
+  }
+}
+
+// ----------- SPサイズ（sp）以下のブレイクポイント用 -----------
+@include mq(sp) {
+  .sp-none,
+  .sp-none-inline,
+  .sp-none-table,
+  .sp-none-flex {
+    display: none;
+  }
+
+  .pc-none {
+    display: block;
+  }
+  .pc-none-inline {
+    display: inline;
+  }
+  .pc-none-table {
+    display: table;
+  }
+  .pc-none-flex {
+    display: flex;
+  }
+}

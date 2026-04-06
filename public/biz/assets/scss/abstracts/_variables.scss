@@ -1,0 +1,76 @@
+// =====================================
+// Variables
+// =====================================
+
+// -------------------------------------
+// Color Palette
+// -------------------------------------
+$color-primary: #2e599b; // メインカラー
+$color-sub-1: #000080;   // サブカラー1（濃紺）
+$color-sub-2: #2e6dc4;   // サブカラー2（ブルー系）
+$color-accent: #d4215f;  // アクセントカラー（ピンク系）
+
+// グラデーション
+$gradient-1: linear-gradient(to right, #2d45fc, #d4215f); // パターン1
+$gradient-2: linear-gradient(#2700ff, #10b6ff);           // パターン2
+
+// -------------------------------------
+// Neutral & Background Colors
+// -------------------------------------
+$color-bg: #ffffff;
+$color-bg-alt: #f9f9f9;
+$color-text: #222;
+$color-border: #e5e5e5;
+$color-gray: #999;
+
+// -------------------------------------
+// Font Settings
+// -------------------------------------
+$font-base: 16px;
+$font-family: "Noto Sans JP", sans-serif;
+$font-heading: "Quantico", sans-serif;
+
+// -------------------------------------
+// Breakpoints
+// -------------------------------------
+$breakpoints: (
+  sp: 767px,
+  tab: 1100px, // ←ここを1000→1100に変更
+  pc: 1440px
+);
+
+
+// -------------------------------------
+// Easing
+// -------------------------------------
+$easing-default: cubic-bezier(0.25, 0.1, 0.25, 1);
+$easing-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+
+// -------------------------------------
+// Spacing Scale
+// -------------------------------------
+$space-xxs: 4px;
+$space-xs: 8px;
+$space-sm: 12px;
+$space-md: 20px;
+$space-lg: 32px;
+$space-xl: 48px;
+$space-xxl: 80px;
+
+// -------------------------------------
+// Z-index Layer Map
+// -------------------------------------
+$z-layers: (
+  base: 1,
+  header: 10,
+  modal: 100,
+  overlay: 200,
+  loader: 500
+);
+
+// -------------------------------------
+// Shadows
+// -------------------------------------
+$shadow-base: 0 2px 10px rgba(0, 0, 0, 0.08);
+$shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.12);
+$shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.2);
