@@ -23,7 +23,7 @@ const jost = Jost({
 export const metadata: Metadata = {
   metadataBase: new URL("https://bytech.jp"),
   title: "【公式】バイテック生成AI｜未経験からプロのAI活用人材を目指せる実践型AIスクール",
-  description: "最短2ヶ月で年収・キャリアを上げるAI活用スキルを武器に。成果直結の実践型オンラインAIスクール「バイテック生成AI」。2500人以上の受講生が実績を上げています。",
+  description: "最短2ヶ月で年収・キャリアを上げるAI活用スキルを武器に。ずっと学べて、何度でも相談できる実践型AIスクール「バイテック生成AI」。2500人以上の受講生が実績を上げています。",
   alternates: { canonical: "/" },
   robots: { index: true, follow: true },
 };
