@@ -250,6 +250,7 @@ export function BizFooter() {
             <li><a href="https://biz.bytech.jp/blog/" target="_blank" rel="noopener">オウンドメディア【バイテックBLOG Biz】</a></li>
             <li><a href="https://ai-bou.co.jp/ai-sanbo" target="_blank" rel="noopener">企業向けAI顧問サービス【AI参謀】</a></li>
             <li><a href="https://degit.jp" target="_blank" rel="noopener">AI動画編集スクール【デジット】</a></li>
+            <li><a href="https://ai-katsu.jp/" target="_blank" rel="noopener">AI活用ナレッジメディア【AI活】</a></li>
           </ul>
         </div>
       </div>
