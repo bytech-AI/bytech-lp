@@ -824,7 +824,7 @@ export default function PlanPage() {
         </div>
         <div className="feature-card__content">
           <h3>カリキュラムの無期限視聴</h3>
-          <p><strong>約600以上</strong>の最新のAIスキルが学べるカリキュラムを<strong>無期限で��聴可能！</strong>追加教材も見れるので常に最新のAIスキルが学べる！</p>
+          <p><strong>約800以上</strong>の最新のAIスキルが学べるカリキュラムを<strong>無期限で��聴可能！</strong>追加教材も見れるので常に最新のAIスキルが学べる！</p>
         </div>
       </div>
 
