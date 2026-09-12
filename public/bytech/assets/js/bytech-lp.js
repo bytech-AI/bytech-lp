@@ -53,6 +53,72 @@ document.querySelectorAll('.faq__item').forEach(function(item) {
   }
 })();
 
+// ホーム右下ポップアップを無料個別相談の案内へ差し替え。
+(function() {
+  var popup = document.getElementById('btShindanPopup');
+  if (!popup) return;
+  var link = popup.querySelector('.bt-popup__link');
+  if (!link) return;
+
+  popup.classList.add('bt-popup--counseling');
+  link.href = '/counseling';
+  link.setAttribute('aria-label', '無料カウンセリングの候補日程を見る');
+  link.innerHTML =
+    '<div class="bt-popup__meeting">' +
+      '<img class="bt-popup__profile" src="/bytech/assets/images/counselor-profile-2026-09.png" width="256" height="256" alt="個別相談担当者" loading="lazy">' +
+      '<div class="bt-popup__meeting-icon" aria-hidden="true">' +
+        '<svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="3"></rect><path d="m16 10 5-3v10l-5-3z"></path></svg>' +
+      '</div>' +
+      '<strong>Zoom</strong><span></span><b>60分</b>' +
+    '</div>' +
+    '<div class="bt-popup__headline">無料カウンセリングを<br><em>予約しませんか？</em></div>' +
+    '<p class="bt-popup__lead">担当者との面談で、この場でご予約いただけます。</p>' +
+    '<ul class="bt-popup__points">' +
+      '<li>バイテック生成AIのサービス概要</li>' +
+      '<li>他社での活用事例・受講生の成果</li>' +
+      '<li>料金プラン・サポート内容の詳細</li>' +
+    '</ul>' +
+    '<p class="bt-popup__footnote">などをご案内し、お客様からのご質問にも<br>丁寧にお答えします。</p>' +
+    '<span class="bt-popup__cta">候補日程を見る<i aria-hidden="true"></i></span>';
+
+  // SPのみ、画面下部にも無料カウンセリングCTAを固定表示する。
+  var fixedCta = document.createElement('div');
+  fixedCta.className = 'bt-sp-fixed-cta';
+  fixedCta.innerHTML =
+    '<a href="/counseling" class="bt-sp-fixed-cta__link">' +
+      '<span><small>簡単30秒で予約完了！</small>無料カウンセリングを予約する</span>' +
+      '<i aria-hidden="true"></i>' +
+    '</a>';
+  document.body.appendChild(fixedCta);
+
+  var hero = document.querySelector('.hero');
+  var calendar = document.querySelector('.consult-form-section');
+  var updateFixedCta = function() {
+    var heroBottom = hero ? hero.offsetTop + hero.offsetHeight : window.innerHeight;
+    var calendarBottom = calendar ? calendar.offsetTop + calendar.offsetHeight : heroBottom;
+    // カレンダー下端が画面外へ十分離れてから表示する。
+    var showAfter = calendarBottom + Math.max(420, window.innerHeight * 0.65);
+    fixedCta.classList.toggle('is-visible', window.innerWidth <= 767 && window.scrollY > showAfter);
+  };
+  updateFixedCta();
+  window.addEventListener('scroll', updateFixedCta, { passive: true });
+  window.addEventListener('resize', updateFixedCta, { passive: true });
+  if (calendar && 'ResizeObserver' in window) {
+    new ResizeObserver(updateFixedCta).observe(calendar);
+  }
+
+  // SPではFV直後に出さず、ページを十分読み進めてから表示する。
+  var delayPopupOnMobile = function() {
+    if (window.innerWidth > 767) return;
+    var pageHeight = document.documentElement.scrollHeight;
+    var showAfter = Math.max(1400, pageHeight * 0.3);
+    if (window.scrollY <= showAfter) popup.classList.remove('is-visible');
+  };
+  delayPopupOnMobile();
+  window.addEventListener('scroll', delayPopupOnMobile, { passive: true });
+  window.addEventListener('resize', delayPopupOnMobile, { passive: true });
+})();
+
 document.querySelectorAll('a[href^="#"]').forEach(function(a) {
   a.addEventListener('click', function(e) {
     var href = a.getAttribute('href');
@@ -67,6 +133,8 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
 
 (function() {
   const GAS_URL    = 'https://script.google.com/macros/s/AKfycbzFK2HDxL3BwTfK2DBR8flrCIll2lr5ZyOB1W9Vy5s6V5EcAIhNc_plwDu-lFMCU__1fg/exec';
+  const SLOTS_URL  = '/api/slots';
+  const SLOTS_CACHE_KEY = 'bytech_calendar_slots';
   const THANKS_URL = 'https://bytech.jp/thanks';
   const SOURCE     = 'GEN【オーガニック/指名広告】CP2万円';
   const LP_TYPE    = 'gen';
@@ -87,14 +155,25 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
   }
 
   async function csFetchSlots() {
+    let hasCachedSlots = false;
     try {
-      const res = await fetch(GAS_URL + '?action=slots', { cache: 'no-store' });
+      const cached = JSON.parse(sessionStorage.getItem(SLOTS_CACHE_KEY) || 'null');
+      if (cached && Array.isArray(cached.slots) && cached.slots.length) {
+        csAllSlots = cached.slots;
+        hasCachedSlots = true;
+        csRenderDay();
+      }
+    } catch(e) {}
+
+    try {
+      const res = await fetch(SLOTS_URL);
       const text = await res.text();
-      let result; try { result = JSON.parse(text); } catch(e) { csShowNoSlots('枠の取得に失敗しました'); return; }
-      if (!result.success || !result.slots || result.slots.length === 0) { csShowNoSlots('現在、予約可能な枠がありません'); return; }
+      let result; try { result = JSON.parse(text); } catch(e) { if (!hasCachedSlots) csShowNoSlots('枠の取得に失敗しました'); return; }
+      if (!result.success || !result.slots || result.slots.length === 0) { if (!hasCachedSlots) csShowNoSlots('現在、予約可能な枠がありません'); return; }
       csAllSlots = result.slots;
+      try { sessionStorage.setItem(SLOTS_CACHE_KEY, JSON.stringify({ slots: result.slots })); } catch(e) {}
       csRenderDay();
-    } catch(e) { csShowNoSlots('枠の取得に失敗しました'); }
+    } catch(e) { if (!hasCachedSlots) csShowNoSlots('枠の取得に失敗しました'); }
   }
 
   window.csSelectDay = function(day) {

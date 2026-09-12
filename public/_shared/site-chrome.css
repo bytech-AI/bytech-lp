@@ -295,3 +295,146 @@
   .bt-site-footer .footer__copyright { text-align: left; letter-spacing: 0.15em; }
 }
 
+/* Home FV: move the No.1 badge slightly inward and upward. */
+@media (min-width: 1025px) {
+  .hero__no1 {
+    right: clamp(24px, 7.2vw, 100px);
+    bottom: clamp(32px, 8.5vw, 96px);
+  }
+}
+
+/* Home: free counseling popup */
+.bt-popup.bt-popup--counseling {
+  width: min(320px, 26vw);
+  color: #111827;
+  font-family: var(--font-jp, "Noto Sans JP", sans-serif);
+}
+.bt-popup--counseling .bt-popup__link {
+  display: block;
+  padding: 16px;
+  border: 1px solid rgba(83, 58, 252, .12);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, .97);
+  box-shadow: 0 18px 54px rgba(22, 18, 51, .24);
+  color: #111827;
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+}
+.bt-popup--counseling .bt-popup__close {
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  color: #fff;
+  background: #171717;
+  font-size: 24px;
+  line-height: 33px;
+  box-shadow: none;
+}
+.bt-popup__meeting { display: flex; align-items: center; gap: 8px; padding-right: 38px; }
+.bt-popup--counseling .bt-popup__link .bt-popup__profile {
+  display: block;
+  flex: 0 0 38px;
+  width: 38px;
+  max-width: 38px;
+  height: 38px;
+  border: 3px solid #e2dcff;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.bt-popup__meeting-icon { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; color: #fff; background: linear-gradient(145deg, #1594ff, #2259ee); }
+.bt-popup__meeting-icon svg { width: 21px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
+.bt-popup__meeting strong { color: #050505; font-size: 20px; line-height: 1; }
+.bt-popup__meeting span { width: 1px; height: 23px; margin-left: 2px; background: #a7afbd; }
+.bt-popup__meeting b { color: #34445d; font-size: 16px; }
+.bt-popup__headline { margin-top: 14px; font-size: clamp(23px, 1.8vw, 28px); font-weight: 900; line-height: 1.25; letter-spacing: -.035em; }
+.bt-popup__headline em { color: #533afc; font-style: normal; }
+.bt-popup__lead { margin: 13px 0 10px; font-size: 13px; line-height: 1.6; }
+.bt-popup__points { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.bt-popup__points li { position: relative; padding-left: 26px; font-size: 13px; line-height: 1.45; }
+.bt-popup__points li::before { content: "✓"; position: absolute; top: 0; left: 0; display: grid; place-items: center; width: 19px; height: 19px; border-radius: 50%; background: #6547ff; color: #fff; font-size: 12px; font-weight: 900; }
+.bt-popup__footnote { margin: 10px 0 14px; font-size: 12px; line-height: 1.6; }
+.bt-popup__cta { display: flex; justify-content: center; align-items: center; gap: 17px; min-height: 48px; border-radius: 14px; background: linear-gradient(100deg, #6833ff, #6738f2); color: #fff; font-size: 16px; font-weight: 900; box-shadow: 0 8px 24px rgba(83, 58, 252, .24); }
+.bt-popup__cta i { width: 12px; height: 12px; border-top: 3px solid #fff; border-right: 3px solid #fff; transform: rotate(45deg); }
+@media (max-width: 767px) {
+  .bt-popup.bt-popup--counseling { width: min(255px, calc(100vw - 32px)); right: 16px; bottom: calc(78px + env(safe-area-inset-bottom)); }
+  .bt-popup--counseling .bt-popup__link { padding: 12px; border-radius: 16px; }
+  .bt-popup--counseling .bt-popup__close { top: 9px; right: 9px; width: 31px; height: 31px; font-size: 21px; line-height: 28px; }
+  .bt-popup--counseling .bt-popup__link .bt-popup__profile { flex-basis: 31px; width: 31px; max-width: 31px; height: 31px; border-width: 2px; }
+  .bt-popup__meeting { gap: 6px; padding-right: 32px; }
+  .bt-popup__meeting-icon { width: 27px; height: 27px; border-radius: 8px; }
+  .bt-popup__meeting-icon svg { width: 18px; }
+  .bt-popup__meeting strong { font-size: 17px; }
+  .bt-popup__meeting b { font-size: 14px; }
+  .bt-popup__headline { margin-top: 11px; font-size: 21px; }
+  .bt-popup__lead { margin-top: 10px; font-size: 11px; }
+  .bt-popup__points { gap: 4px; }
+  .bt-popup__points li { padding-left: 22px; font-size: 11px; }
+  .bt-popup__points li::before { width: 17px; height: 17px; font-size: 10px; }
+  .bt-popup__footnote { margin: 8px 0 11px; font-size: 10px; }
+  .bt-popup__cta { min-height: 40px; border-radius: 11px; font-size: 14px; }
+}
+
+/* SP-only fixed counseling CTA */
+.bt-sp-fixed-cta { display: none; }
+@media (max-width: 767px) {
+  .bt-sp-fixed-cta {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(16px);
+    transition: opacity .3s ease, visibility .3s ease, transform .3s ease;
+    padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+    background: transparent;
+    box-shadow: none;
+  }
+  .bt-sp-fixed-cta.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
+  .bt-sp-fixed-cta__link {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    min-height: 54px;
+    border-radius: 999px;
+    background: linear-gradient(100deg, #ffc224, #ffd874);
+    color: #26221a;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 900;
+    line-height: 1.25;
+    box-shadow: 0 5px 14px rgba(199, 145, 0, .3);
+  }
+  .bt-sp-fixed-cta__link::after {
+    content: "";
+    position: absolute;
+    top: -35%;
+    left: -55%;
+    width: 35%;
+    height: 170%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .9), transparent);
+    transform: skewX(-20deg);
+    animation: btSpCtaShine 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .bt-sp-fixed-cta__link span { position: relative; z-index: 1; display: flex; flex-direction: column; }
+  .bt-sp-fixed-cta__link small { font-size: 9px; font-weight: 700; }
+  .bt-sp-fixed-cta__link i { position: relative; z-index: 1; width: 10px; height: 10px; border-top: 2px solid #26221a; border-right: 2px solid #26221a; transform: rotate(45deg); }
+}
+@keyframes btSpCtaShine {
+  0%, 58% { left: -55%; opacity: 0; }
+  62% { opacity: 1; }
+  82% { left: 125%; opacity: 1; }
+  83%, 100% { left: 125%; opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bt-sp-fixed-cta__link::after { animation: none; }
+}
