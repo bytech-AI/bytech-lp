@@ -82,6 +82,27 @@ export function proxy(request: NextRequest) {
     return NextResponse.rewrite(new URL(newPath, request.url))
   }
 
+  // lp2 は lp2.bytech.jp（ASP・もしも経由の広告LP）。lp と同一コンテンツを
+  // public/lp2/* に持ち（GTM=NGDNZD36・予約source=GEN【ASP_もしも】CP無し・
+  // もしも/レントラックスのクリック計測タグ入り）、全パスを /lp2/* へリライト。
+  // 旧WPの完了ページは /thanks-1 だったため、既存流入向けに /thanks-1 も thanks に割当。
+  if (hostname === 'lp2.bytech.jp') {
+    const normalizedPath = pathname.replace(/\/+$/, '') || '/'
+    if (normalizedPath === '/thanks' || normalizedPath === '/thanks-1' || normalizedPath === '/thnks') {
+      return NextResponse.rewrite(new URL('/lp2/thanks/index.html', request.url))
+    }
+    if (pathname === '/lp2' || pathname.startsWith('/lp2/')) {
+      return NextResponse.next()
+    }
+    let newPath = `/lp2${pathname}`
+    if (newPath.endsWith('/')) {
+      newPath += 'index.html'
+    } else if (!/\.[a-z0-9]+$/i.test(newPath)) {
+      newPath += '/index.html'
+    }
+    return NextResponse.rewrite(new URL(newPath, request.url))
+  }
+
   // lp4 は lp4.bytech.jp（ASP流入の広告LP）。旧WordPressから移設した静的LPを
   // public/lp4/* に丸ごと持ち、全パスを /lp4/* へリライトして返す。
   // ページ内のアセット参照が相対パス（wp-content/...）なので、アセットも含めて
