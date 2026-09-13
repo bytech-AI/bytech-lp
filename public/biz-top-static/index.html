@@ -98,15 +98,16 @@
             justify-content: center !important;
             align-items: center !important;
             text-align: center !important;
-            padding-left: max(24px, calc((100% - 1080px) / 2)) !important;
-            padding-right: calc(max(24px, calc((100% - 1080px) / 2)) + 424px) !important;
+            padding-left: max(24px, calc((100% - 1080px) / 2 - 2%)) !important;
+            padding-right: calc(max(56px, calc((100% - 1080px) / 2 + 3%)) + 384px) !important;
             padding-top: 24px !important;
           }
           /* テキストブロックは左カラム内で中央寄せ */
           .hero__catch > div { width: 100% !important; max-width: 760px !important; margin-left: auto !important; margin-right: auto !important; }
           /* 実績バッジ：見出しに合わせて中央寄せ */
           .hero__catch .hero__label__logo { text-align: center !important; margin-top: 20px !important; padding-left: 0 !important; }
-          .hero__catch .hero__label__logo img { margin: 0 auto !important; width: 70% !important; }
+          /* バッジ幅は見出し2行目（生成AI研修=455px）と揃える */
+          .hero__catch .hero__label__logo img { margin: 0 auto !important; width: 455px !important; max-width: 100% !important; }
           .hero__form { display: none !important; }
           /* モバイル用CTAはPCでは非表示（PCはフォームがCTA） */
           .hero__cta-sp { display: none !important; }
@@ -125,8 +126,8 @@
           .right-form-fixed {
             position: absolute;
             top: 110px;
-            right: max(24px, calc((100% - 1080px) / 2));
-            width: 384px;
+            right: max(56px, calc((100% - 1080px) / 2 + 3%));
+            width: 344px;
             background: #fff;
             border-radius: 14px;
             box-shadow: 0 12px 40px rgba(0,0,0,0.2);
@@ -208,12 +209,13 @@
           .right-form-fixed .form_header {
             display: flex !important;
             align-items: center !important;
-            gap: 12px !important;
+            justify-content: center !important;
+            gap: 14px !important;
             margin: 0 0 20px !important;
             padding: 16px 16px 14px !important;
             background: linear-gradient(135deg, #204aa8 0%, #1a6fb5 100%) !important;
           }
-          .right-form-fixed .form_header__text { flex: 1 !important; min-width: 0 !important; }
+          .right-form-fixed .form_header__text { flex: 0 0 auto !important; min-width: 0 !important; }
           .right-form-fixed .form_eyebrow { color: rgba(255,255,255,.92) !important; font-size: 13px !important; font-weight: 700 !important; text-align: left !important; margin: 0 0 4px !important; letter-spacing: .02em !important; }
           .right-form-fixed .form_title { color: #fff !important; font-size: 24px !important; font-weight: 900 !important; text-align: left !important; margin: 0 !important; line-height: 1.2 !important; }
           .right-form-fixed .form_cover { display: block !important; position: static !important; width: 92px !important; height: auto !important; flex-shrink: 0 !important; filter: drop-shadow(0 6px 14px rgba(0,0,0,.35)) !important; }
@@ -226,20 +228,20 @@
           .hero__l-main-img__img { position: absolute !important; inset: 0 !important; height: 100% !important; max-height: none !important; min-height: 0 !important; overflow: hidden !important; }
           .hero__l-main-img__img picture { position: absolute !important; inset: 0 !important; left: 0 !important; top: 0 !important; transform: none !important; height: 100% !important; display: block !important; }
           .hero__l-main-img__img picture img, .hero__l-main-img__img img { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: 62% center !important; transform: scale(1.1) translateY(-4%) !important; transform-origin: 62% 0% !important; }
-          .hero__catch { position: relative !important; z-index: 2 !important; inset: auto !important; display: block !important; width: 100% !important; max-width: 100% !important; padding: 200px 12px 0 !important; text-align: center !important; }
+          .hero__catch { position: relative !important; z-index: 2 !important; inset: auto !important; display: block !important; width: 100% !important; max-width: 100% !important; padding: 200px 26px 0 !important; text-align: center !important; }
           .hero__catch > div { max-width: 100% !important; }
           .hero__ttl { overflow-wrap: anywhere !important; }
           /* SPの見出しサイズ（旧デザイン踏襲・はみ出さない範囲で） */
-          .hero__catch .txt { font-size: clamp(1.4rem, 4.8vw, 1.95rem) !important; margin-bottom: 3.2rem !important; }
+          .hero__catch .txt { font-size: 5.4vw !important; margin-bottom: 3.2rem !important; }
           .hero__catch .txt::after { width: 100% !important; height: 22px !important; bottom: -26px !important; }
           .hero__catch .txt span { font-size: 0.8em !important; }
           .hero__ttl { font-size: clamp(3.2rem, 12vw, 5.6rem) !important; }
-          .hero__catch .hero__ttl .hero_txt01 { font-size: clamp(1.9rem, 6.6vw, 2.6rem) !important; }
-          .hero__catch .hero__ttl .hero_txt02 { font-size: clamp(3.2rem, 12vw, 5.6rem) !important; }
+          .hero__catch .hero__ttl .hero_txt01 { font-size: 7.15vw !important; }
+          .hero__catch .hero__ttl .hero_txt02 { font-size: 15.8vw !important; }
 
           .hero__element__txt { display: none !important; }
-          .hero__label__logo { text-align: center !important; margin-top: 18px !important; margin-bottom: 16px !important; }
-          .hero__label__logo img { width: 86% !important; max-width: 440px !important; margin: 0 auto !important; }
+          .hero__label__logo { text-align: center !important; margin-top: 18px !important; margin-bottom: 16px !important; padding: 0 !important; }
+          .hero__label__logo img { width: 100% !important; max-width: none !important; margin: 0 auto !important; }
           /* モバイルCTA */
           /* CTAは全幅ネイビーパネルとして画像に重ねる */
           .hero__cta-sp { display: flex !important; flex-direction: column !important; gap: 12px !important; margin: 26px -12px 0 !important; padding: 26px 20px 32px !important; background: #0f2a5e !important; position: relative !important; z-index: 2 !important; }
@@ -264,16 +266,23 @@
 .df-submit { padding-left: 18px !important; }
 @media (min-width: 1081px) {
   /* フォームヘッダー：文字とebook表紙をひとまわり小さく */
-  .right-form-fixed .form_header { padding-right: 96px !important; margin-bottom: 14px !important; }
+  .right-form-fixed .form_header { padding-right: 88px !important; margin-bottom: 14px !important; }
   .right-form-fixed .form_eyebrow { font-size: 12px !important; }
   .right-form-fixed .form_title { font-size: 21px !important; }
-  .right-form-fixed .form_cover { width: 92px !important; top: -30px !important; right: 6px !important; }
+  .right-form-fixed .form_cover { width: 84px !important; top: -26px !important; right: 6px !important; }
 }
 @media (max-width: 1080px) {
   .right-form-fixed .form_eyebrow { font-size: 12px !important; }
   .right-form-fixed .form_title { font-size: 21px !important; }
   .right-form-fixed .form_cover { width: 76px !important; }
 }
+/* 未入力の先頭フィールドの枠を点滅させて入力位置を示す（/doc-a と同じ挙動） */
+.right-form-fixed .df-field.df-active .df-input,
+.right-form-fixed .df-field.df-active .df-select,
+.right-form-fixed .df-field.df-active .df-opt { border-width: 2px !important; animation: df-blink 1.2s step-end infinite; }
+.right-form-fixed .df-field.df-active .df-input:focus,
+.right-form-fixed .df-field.df-active .df-select:focus { animation: none !important; }
+@keyframes df-blink { 0% { border-color: #e53935; } 50% { border-color: #d0d5dd; } }
 </style><style>
           .logo-marquee { padding: 28px 0 28px; background: #f5f6f8; overflow: hidden; }
           .logo-marquee__eyebrow { text-align: center; font-size: 18px; letter-spacing: .06em; color: #16202e; font-weight: 700; margin: 0 0 22px; font-family: "Futura","Futura Medium",var(--font-montserrat),sans-serif; }
