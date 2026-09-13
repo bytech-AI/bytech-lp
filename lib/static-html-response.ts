@@ -14,7 +14,7 @@ const headers = {
 // counseling / サンクス等、プレースホルダを置かないページは無変更で配信される。
 const HEADER_PLACEHOLDER = "<!--SHARED_HEADER-->";
 const FOOTER_PLACEHOLDER = "<!--SHARED_FOOTER-->";
-const CHROME_CSS_LINK = '<link rel="stylesheet" href="/_shared/site-chrome.css">';
+const CHROME_CSS_LINK = '<link rel="stylesheet" href="/_shared/site-chrome.css?v=20260913">';
 
 // 全ページ共通: 見出しウェイト統一 (h2=900 / h3=800)。<head> 末尾に一度だけ注入。
 const HEADING_WEIGHT_STYLE =
