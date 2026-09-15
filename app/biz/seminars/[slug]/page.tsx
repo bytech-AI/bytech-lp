@@ -1,10 +1,19 @@
 import { notFound } from "next/navigation";
-import { getAllSeminars, getSeminar } from "../data";
+import { SEMINAR_FORM_ACTION, getAllSeminars, getSeminar } from "../data";
+import type { Seminar } from "../data";
 import { BizHeader, BizFooter } from "../../_chrome/BizChrome";
 
-function seminarFormHtml(action: string) {
+// フォームは全セミナー共通の1本。どのセミナーの申込かは hidden 項目で送る
+// （formrun 側の自動返信メールで、この値に応じてアーカイブ視聴URLを出し分ける）。
+function escapeAttr(v: string) {
+  return v.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+function seminarFormHtml(seminar: Seminar) {
   return `
-    <form class="formrun df-form" action="${action}" method="post">
+    <form class="formrun df-form" action="${SEMINAR_FORM_ACTION}" method="post">
+      <input type="hidden" name="セミナー" value="${escapeAttr(seminar.title)}">
+      <input type="hidden" name="セミナーID" value="${escapeAttr(seminar.slug)}">
       <div class="df-field">
         <label class="df-label">お名前<span class="df-req">必須</span></label>
         <input class="df-input" type="text" name="お名前" placeholder="山田 太郎" data-formrun-required>
@@ -280,7 +289,7 @@ export default async function SeminarDetailPage({
                 <p className="sem-side__head-title">アーカイブ視聴申し込みフォーム</p>
               </div>
               <div className="sem-side__form">
-                <div dangerouslySetInnerHTML={{ __html: seminarFormHtml(seminar.formAction) }} />
+                <div dangerouslySetInnerHTML={{ __html: seminarFormHtml(seminar) }} />
               </div>
             </div>
           </aside>
