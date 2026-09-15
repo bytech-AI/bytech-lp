@@ -44,7 +44,8 @@ export function proxy(request: NextRequest) {
     if (pathname === '/sitemap.xml') {
       return NextResponse.rewrite(new URL('/biz/sitemap.xml', request.url))
     }
-    // biz 専用サンクス（静的HTML）。counseling(→/thanks) と 資料DL(→/thanks-2)。
+    // biz 専用サンクス（静的HTML）。counseling(→/thanks) / 資料DL(→/thanks-2) /
+    // セミナーアーカイブ視聴申込(→/thanks-3)。
     // public/biz/thanks* の index.html を明示リライト（拡張子なしのため /biz/* 既定
     // リライトでは解決しない）。
     if (pathname === '/thanks' || pathname === '/thanks/') {
@@ -52,6 +53,9 @@ export function proxy(request: NextRequest) {
     }
     if (pathname === '/thanks-2' || pathname === '/thanks-2/') {
       return NextResponse.rewrite(new URL('/biz/thanks-2/index.html', request.url))
+    }
+    if (pathname === '/thanks-3' || pathname === '/thanks-3/') {
+      return NextResponse.rewrite(new URL('/biz/thanks-3/index.html', request.url))
     }
     // 旧 /biz プレフィックス付きURLはクリーンURLへ 301（重複コンテンツ回避）
     if (pathname === '/biz' || pathname === '/biz/') {
