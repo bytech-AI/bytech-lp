@@ -3,7 +3,9 @@
 //
 // セミナー内容は株式会社AI棒の公開済みセミナーページをもとに管理する。
 // サムネイルは既存デザインのプレースホルダーを使用し、元サイトの画像・デザインは持ち込まない。
-// formAction はセミナーごとの formrun 送信先URL。個別URLの発行後は各データの値だけ差し替える。
+// 申込フォームは全セミナー共通の formrun フォーム1本（SEMINAR_FORM_ACTION）。
+// どのセミナーの申込かは hidden 項目（セミナー / セミナーID）で送信し、formrun 側の
+// 自動返信メールで出し分ける。以前はセミナーごとに別フォームを持っていた（git履歴参照）。
 //
 // ── なぜ「コード内データ配列」なのか / microCMS への移行について ─────────────
 // このサイトは静的HTML配信・パフォーマンス最適化前提のため、まずはリポジトリ内の
@@ -32,9 +34,13 @@ export type Seminar = {
     photo?: string;
   };
   program: { title: string; body: string }[]; // プログラム/内容
-  // 申込フォーム(formrun)の送信先。送信後に視聴URLをメールで配布する運用。
-  formAction: string;
 };
+
+// 申込フォーム(formrun)の送信先。全セミナー共通の1フォームに集約している。
+// 送信後は formrun の自動返信メールで、hidden 項目「セミナー」に応じた
+// アーカイブ視聴URLを配布する運用。
+// URLは旧 seminar-6 用フォームをそのまま共通フォームに転用したもの（新規発行はしない）。
+export const SEMINAR_FORM_ACTION = "https://form.run/api/v1/r/29rr531p3vq5hc13jvy0xlej";
 
 export const SEMINARS: Seminar[] = [
   {
@@ -72,7 +78,6 @@ export const SEMINARS: Seminar[] = [
       { title: "LPをネットに公開する手順", body: "ローカルで作ったLPを、実際にネット上へ公開するまでを体験します。" },
       { title: "公開先サービスの選び方", body: "無料で始めやすいサービスと、LP公開に向いているサービスの違いを整理します。" },
     ],
-    formAction: "https://form.run/api/v1/r/29rr531p3vq5hc13jvy0xlej",
   },
   {
     slug: "seminar-5",
@@ -109,7 +114,6 @@ export const SEMINARS: Seminar[] = [
       { title: "自然な日本語スライドの作り方", body: "違和感の少ない文章と、伝わりやすい構成へ整えるポイントを紹介します。" },
       { title: "Canvaで細部を仕上げる", body: "生成した資料の見た目をCanvaで仕上げ、業務や発信に使える状態にします。" },
     ],
-    formAction: "https://form.run/api/v1/r/tvultfqt44qfbm0rsur2a4va",
   },
   {
     slug: "seminar-4",
@@ -146,7 +150,6 @@ export const SEMINARS: Seminar[] = [
       { title: "サンプル画像からビジュアルを再現", body: "参考画像をもとに、自分が作りたいビジュアルへ近づける方法を学びます。" },
       { title: "スプレッドシートによる画像量産", body: "スプレッドシートとGemを活用し、スライド画像を量産するフローを構築します。" },
     ],
-    formAction: "https://form.run/api/v1/r/37hslq2ub6r8ipv7lso01ftd",
   },
   {
     slug: "seminar-1",
@@ -184,7 +187,6 @@ export const SEMINARS: Seminar[] = [
       { title: "画像からAI動画風コンテンツを作る", body: "複数の画像をつなぎ、動画コンテンツとして仕上げる流れを学びます。" },
       { title: "Claude Code専用の指示テンプレート", body: "動画制作で繰り返し使える、専用の指示テンプレートの作り方を解説します。" },
     ],
-    formAction: "https://form.run/api/v1/r/6dmczxo1xen6x7z6q2emzl4c",
   },
   {
     slug: "seminar-2",
@@ -221,7 +223,6 @@ export const SEMINARS: Seminar[] = [
       { title: "経費表とスライドの自動生成", body: "領収書写真からのExcel経費表作成と、PowerPointスライド生成を紹介します。" },
       { title: "Gmailの未返信メール対応", body: "未返信メールをAIが検出し、返信の下書きまで作る連携方法を解説します。" },
     ],
-    formAction: "https://form.run/api/v1/r/jnvybqixep2n7hd21rc2arpo",
   },
   {
     slug: "seminar-3",
@@ -259,7 +260,6 @@ export const SEMINARS: Seminar[] = [
       { title: "コピー＆ペースト作業をなくす", body: "生成AIの回答を手作業で転記する工程をなくす方法を解説します。" },
       { title: "作業自動化の実践", body: "複数のツールをまたぐ作業を自動化するためのポイントを紹介します。" },
     ],
-    formAction: "https://form.run/api/v1/r/roka9v546izyr57okvgc3xmn",
   },
 ];
 
