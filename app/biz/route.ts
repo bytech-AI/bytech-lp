@@ -335,10 +335,9 @@ export async function GET() {
     '<meta name="twitter:description" content="AIを最高の部下に変えるハンズオン型法人向けAI研修"/>',
     `<meta name="twitter:description" content="${SITE_DESCRIPTION}"/>`,
   );
-  html = html.replace(
-    'href="./download" class="hero__cta-sp__btn hero__cta-sp__btn--fill"',
-    'href="/doc-a" class="hero__cta-sp__btn hero__cta-sp__btn--fill"',
-  );
+  // 旧WPの資料DL導線 ./download は biz には存在しない（404）。PC/SP 両方のヒーローCTAを
+  // 資料ダウンロードLP /doc-a へ寄せる。
+  html = html.replaceAll('href="./download"', 'href="/doc-a"');
   html = html.replace(
     '<span class="mark_b">企業向け生成AI研修</span>',
     '<span class="mark_b">実務伴走型AI研修</span>',
