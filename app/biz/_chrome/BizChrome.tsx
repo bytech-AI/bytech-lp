@@ -44,7 +44,7 @@ const CHROME_CSS = `
 .top-header__nav { display: flex; gap: 4px; align-items: center; background: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.7); border-radius: 50px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 4px 24px rgba(0,0,0,0.06); padding: 4px 4px 4px 16px; }
 .top-header__nav a { color: #333; text-decoration: none; font-size: 13px; font-weight: 600; padding: 10px 10px; border-radius: 40px; border: 1px solid transparent; transition: all 0.3s ease; white-space: nowrap; }
 .top-header__nav a.top-nav-link:hover { background: rgba(0,0,0,0.04); }
-.top-nav-caret { display: inline-block; width: 8px; height: 6px; margin-left: 5px; vertical-align: middle; background: center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23555555'/%3E%3C/svg%3E"); }
+.top-nav-caret { display: inline-block; width: 8px; height: 6px; margin-left: 5px; vertical-align: middle; background: center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%231a6fb5'/%3E%3C/svg%3E"); }
 .top-nav-item { position: relative; align-self: stretch; display: flex; align-items: center; }
 .top-nav-item > .top-nav-link { display: flex; align-items: center; height: 100%; box-sizing: border-box; }
 .top-nav-item > .top-nav-link .top-nav-caret { transition: transform 0.2s ease; }
