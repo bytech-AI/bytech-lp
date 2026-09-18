@@ -70,14 +70,13 @@ const radioCards = (group: string, values: string[]) =>
     .join("");
 
 // 吹き出し付きの設問パネル（SmartHRのオペレーター吹き出しを踏襲）
-// アバターはインラインSVGだと .biz-root *{all:revert} のリセットで描画が壊れるため、
-// CSSの影響を受けない data URI の <img> にする。
-const AVATAR_SVG =
-  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='24' fill='%231a6fb5'/%3E%3Ccircle cx='24' cy='19' r='7.5' fill='%23fff'/%3E%3Cpath d='M10 40c1.8-7.2 7.5-10.5 14-10.5S36.2 32.8 38 40' stroke='%23fff' stroke-width='4' stroke-linecap='round' fill='none'/%3E%3C/svg%3E";
+// アバターはAI生成の実写風オペレーター写真（192px正方形・CSSで円形クロップ）。
+// ※インラインSVGは .biz-root *{all:revert} のリセットで描画が壊れるので使わないこと。
+const AVATAR_IMG = "/biz/assets/img/estimate-operator.webp";
 
 const bubble = (text: string) => `
   <div class="es-bubble">
-    <img class="es-avatar" src="${AVATAR_SVG}" alt="" aria-hidden="true">
+    <img class="es-avatar" src="${AVATAR_IMG}" alt="" aria-hidden="true" width="48" height="48">
     <p class="es-bubble__text">${text}</p>
   </div>`;
 
@@ -241,7 +240,7 @@ export default function EstimatePage() {
           gap: 14px;
           margin-bottom: 28px;
         }
-        .es-avatar { flex: 0 0 48px; width: 48px; height: 48px; display: block; }
+        .es-avatar { flex: 0 0 48px; width: 48px; height: 48px; display: block; border-radius: 50%; object-fit: cover; }
         .es-bubble__text {
           position: relative;
           margin: 0;
