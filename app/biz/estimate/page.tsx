@@ -1,29 +1,28 @@
 import { COURSES } from "../_course/courses";
 
 // 見積もりシミュレーター（SmartHR pricing/form 風のステップ式フォーム）。
-// 1画面1設問で進み、最後に概算金額を提示して formrun へ送信するリード獲得フォーム。
+// 1画面1設問で進み、最後にformrunへ送信するリード獲得フォーム。
 // counseling / doc-a と同方式：サーバーコンポーネント＋インラインstyle、
 // フォームHTMLは dangerouslySetInnerHTML（React管理外）、JSはネイティブ<script>
 // （next/scriptはNext16でinline評価が壊れ未実行になるため不使用）。
 
-// ★ formrun 管理画面で見積もりフォーム用の新規フォームを作成し、発行された
-//   エンドポイントURLへ差し替えること。差し替えるまで送信は失敗する。
-//   登録が必要なフィールド名：会社名／お名前／メールアドレス／電話番号／
-//   研修コース／受講プラン／受講人数／助成金／導入時期／概算見積もり
-//   送信後のリダイレクト先（例: https://biz.bytech.jp/thanks-2）も管理画面で設定する。
-const FORMRUN_ACTION = "https://form.run/api/v1/r/REPLACE_WITH_ESTIMATE_FORM";
+// POST先はformrun（doc-aと同方式の直接POST）。class / action / method はformrun指定のため変更不可。
+// バリデーションは自前ウィザードで完結するため formrun.js SDK は読み込まない。
+// 送信後はformrun側の完了画面へ遷移する（管理画面のリダイレクト先を /estimate/thanks に設定すること）。
+const ESTIMATE_ACTION = "https://form.run/api/v1/r/x4332ymk27jj5z0fd8z7fu4t";
 
-// 受講プランと単価（円〜/名）。各コースページ（CourseLp）の料金表記と一致させること。
-// subsidized は助成金活用時の実質単価（subsidy.svg の訴求値）。eラーニングは
-// 適用条件により変わるため数値を持たず「個別案内」扱い。
+// 研修形式と単価。eラーニングは受講者1名あたり、他形式は1回あたりの価格。
+// AI効率化研修・AI自動化研修以外は助成金対象外。
 const PLANS = [
-  { name: "eラーニング", unit: 100000, subsidized: null },
-  { name: "AI効率化研修", unit: 200000, subsidized: 50000 },
-  { name: "AI自動化研修", unit: 300000, subsidized: 150000 },
+  { name: "eラーニング", unit: 100000, billingUnit: "名", subsidized: null, subsidyEligible: false },
+  { name: "セミナー", unit: 200000, billingUnit: "回", subsidized: null, subsidyEligible: false },
+  { name: "ハンズオン", unit: 300000, billingUnit: "回", subsidized: null, subsidyEligible: false },
+  { name: "ワークショップ", unit: 500000, billingUnit: "回", subsidized: null, subsidyEligible: false },
+  { name: "AI効率化研修", unit: 200000, billingUnit: "名", subsidized: 50000, subsidyEligible: true },
+  { name: "AI自動化研修", unit: 300000, billingUnit: "名", subsidized: 150000, subsidyEligible: true },
 ] as const;
 
 const fmt = (n: number) => n.toLocaleString("ja-JP");
-
 // ステップ定義（1問1画面）。result はプログレス100%の結果画面。
 const STEP_COUNT = 8;
 
@@ -47,8 +46,8 @@ const planCards = [
   ...PLANS.map(
     (p) => `
     <button type="button" class="es-opt es-opt--plan" data-group="plan" data-value="${p.name}" onclick="esPick(this)">
-      <span class="es-opt__name">${p.name}</span>
-      <span class="es-opt__price">${fmt(p.unit)}<small>円〜／名</small></span>
+      <span class="es-opt__name"><span>${p.name}</span>${p.subsidyEligible ? '<span class="es-subsidy-tag">助成金対応</span>' : ""}</span>
+      <span class="es-opt__price">${fmt(p.unit)}<small>円〜／${p.billingUnit}</small></span>
       <span class="es-opt__check" aria-hidden="true"></span>
     </button>`,
   ),
@@ -83,7 +82,7 @@ const bubble = (text: string) => `
   </div>`;
 
 const FORM_HTML = `
-<form class="es-form" action="${FORMRUN_ACTION}" method="post" id="esForm">
+<form class="formrun es-form" action="${ESTIMATE_ACTION}" method="post" id="esForm">
 
   <div class="es-panel active" data-step="1">
     ${bubble("ご検討中の研修コースをお選びください。まだ決まっていない場合は「未定・相談して決めたい」で大丈夫です。")}
@@ -93,10 +92,10 @@ const FORM_HTML = `
   </div>
 
   <div class="es-panel" data-step="2">
-    ${bubble("ご希望の受講プランをお選びください。プランの詳しい違いは、担当より個別にご案内できます。")}
-    <p class="es-q">受講プラン<span class="es-req">必須</span></p>
+    ${bubble("ご希望の研修形式をお選びください。形式の詳しい違いは、担当より個別にご案内できます。")}
+    <p class="es-q">研修形式<span class="es-req">必須</span></p>
     <div class="es-grid es-grid--plan">${planCards}</div>
-    <div class="es-err" id="esErr2">受講プランを選択してください</div>
+    <div class="es-err" id="esErr2">研修形式を選択してください</div>
   </div>
 
   <div class="es-panel" data-step="3">
@@ -122,6 +121,7 @@ const FORM_HTML = `
     ${bubble("助成金を活用すると、研修費用の実質負担を大きく抑えられる場合があります（最大75%OFF）。")}
     <p class="es-q">助成金の活用<span class="es-req">必須</span></p>
     <div class="es-grid es-grid--v">${radioCards("subsidy", ["活用したい", "詳しく知りたい", "活用しない"])}</div>
+    <p class="es-subsidy-notice" id="esSubsidyNotice" role="status">この研修形式は助成金の対象外です。見積もりには「対象外」として反映します。</p>
     <div class="es-err" id="esErr4">1つ選択してください</div>
   </div>
 
@@ -160,20 +160,24 @@ const FORM_HTML = `
   </div>
 
   <div class="es-panel" data-step="8">
-    ${bubble("概算のお見積り結果です。この内容で送信いただくと、担当より正式なお見積りをご案内いたします。")}
+    ${bubble("送信後、選択内容に合わせた正式なお見積もりをメールでご案内します。")}
     <div class="es-result">
-      <p class="es-result__label">概算お見積り金額</p>
-      <p class="es-result__price" id="esResultPrice"></p>
-      <p class="es-result__subsidy" id="esResultSubsidy"></p>
+      <p class="es-result__label">お見積もりについて</p>
+      <p class="es-result__message">内容を確認のうえ、担当よりメールにてご連絡します。</p>
     </div>
     <dl class="es-summary" id="esSummary"></dl>
-    <p class="es-note">※「〜／名」の下限単価に基づく概算です。人数やカリキュラムのカスタマイズ内容により変動します。助成金の適用可否・金額は企業規模や条件により異なります。</p>
+    <p class="es-note">※研修内容や人数、カリキュラムのカスタマイズにより費用は変動します。助成金の適用可否・金額は企業規模や条件により異なります。</p>
+    <!-- 選択内容の隠しフィールド。個別フィールドはformrun管理画面で同名登録が必要（未登録だと通知に載らない・doc-aと同様）。
+         「お問い合わせ」はフォーム既定の必須項目のため、未登録でも全内容が届くよう選択内容のまとめを入れる。 -->
     <input type="hidden" name="研修コース" id="esHidCourse">
-    <input type="hidden" name="受講プラン" id="esHidPlan">
+    <input type="hidden" name="研修形式" id="esHidPlan">
     <input type="hidden" name="受講人数" id="esHidPeople">
     <input type="hidden" name="助成金" id="esHidSubsidy">
     <input type="hidden" name="導入時期" id="esHidTiming">
     <input type="hidden" name="概算見積もり" id="esHidPrice">
+    <input type="hidden" name="お問い合わせ" id="esHidInquiry">
+    <!-- 同意チェックボックス相当。UI上は「送信をもって同意」の文言で担保（doc-aと同基準） -->
+    <input type="hidden" name="個人情報利用同意" value="on">
     <div class="_formrun_gotcha" aria-hidden="true" style="position:absolute;height:1px;width:1px;overflow:hidden;">
       <input type="text" name="_formrun_gotcha" tabindex="-1" autocomplete="off">
     </div>
@@ -312,6 +316,8 @@ export default function EstimatePage() {
         .es-opt__logo img { max-width: 34px; max-height: 26px; width: auto; height: auto; }
         .es-opt__name { flex: 1; line-height: 1.5; }
         .es-opt--plan { flex-direction: column; align-items: flex-start; gap: 6px; }
+        .es-opt--plan .es-opt__name { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; }
+        .es-subsidy-tag { display: inline-flex; align-items: center; padding: 2px 6px; border-radius: 3px; background: #e5f3e9; color: #19733a; font-size: 10px; font-weight: 800; line-height: 1.4; }
         .es-opt__price { color: #1a6fb5; font-size: 20px; font-weight: 800; }
         .es-opt__price small { margin-left: 2px; font-size: 12px; font-weight: 700; color: #687386; }
         .es-opt--undecided { justify-content: center; text-align: center; color: #687386; }
@@ -403,6 +409,10 @@ export default function EstimatePage() {
         .es-result__price small { font-size: 16px; font-weight: 700; margin-left: 2px; }
         .es-result__subsidy { margin: 10px 0 0; font-size: 14px; font-weight: 700; color: #d7443e; }
         .es-result__subsidy:empty { display: none; }
+        .es-result__message { margin: 12px auto 0; max-width: 520px; color: #314b68; font-size: 17px; font-weight: 700; line-height: 1.8; }
+        .es-subsidy-notice { display: none; margin: 16px 0 0; padding: 12px 14px; border-radius: 6px; background: #fff7e8; color: #8a5600; font-size: 13px; font-weight: 700; line-height: 1.7; }
+        .es-subsidy-notice.show { display: block; }
+        .es-panel--subsidy-unavailable .es-grid { display: none; }
         .es-summary {
           margin: 0 0 18px;
           padding: 4px 0;
@@ -494,6 +504,8 @@ export default function EstimatePage() {
           transition: opacity .15s ease;
         }
         .es-bar__next:hover { opacity: .9; }
+        .es-bar__next:disabled { background: #b7c2cf; box-shadow: none; cursor: not-allowed; opacity: 1; }
+        .es-bar__next:disabled:hover { opacity: 1; }
         .es-bar__next.hide { display: none; }
         @media (max-width: 640px) {
           .es-main { padding: 20px 14px 130px; }
@@ -541,7 +553,7 @@ export default function EstimatePage() {
             <div class="es-progress__track"><div class="es-progress__fill" id="esFill"></div></div>
             <span class="es-progress__pct" id="esPct">0%</span>
           </div>
-          <button type="button" class="es-bar__next" id="esNext">次へ進む</button>
+          <button type="button" class="es-bar__next" id="esNext" disabled>次へ進む</button>
         </div>
       </div>`,
         }}
@@ -555,12 +567,18 @@ export default function EstimatePage() {
   var PLAN_CONF=` +
             JSON.stringify(
               Object.fromEntries(
-                PLANS.map((p) => [p.name, { unit: p.unit, subsidized: p.subsidized }]),
+                PLANS.map((p) => [
+                  p.name,
+                  {
+                    unit: p.unit,
+                    billingUnit: p.billingUnit,
+                    subsidized: p.subsidized,
+                    subsidyEligible: p.subsidyEligible,
+                  },
+                ]),
               ),
             ) +
             `;
-  var UNIT_MIN=${Math.min(...PLANS.map((p) => p.unit))};
-  var UNIT_MAX=${Math.max(...PLANS.map((p) => p.unit))};
   var TOTAL=${STEP_COUNT};
   var step=1;
   var state={course:'',plan:'',subsidy:'',timing:''};
@@ -572,12 +590,48 @@ export default function EstimatePage() {
   function hideErr(n){var e=$('esErr'+n);if(e)e.classList.remove('show');}
   function showErr(n){var e=$('esErr'+n);if(e)e.classList.add('show');}
 
+  function isStepComplete(n){
+    if(n===1)return !!state.course;
+    if(n===2)return !!state.plan;
+    if(n===3)return peopleVal()>=1;
+    if(n===4)return !!state.subsidy;
+    if(n===5)return !!state.timing;
+    if(n===6)return !!$('esCompany').value.trim()&&!!$('esName').value.trim();
+    if(n===7){
+      var em=$('esEmail').value.trim(),ph=$('esPhone').value.replace(/-/g,'').trim();
+      return /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(em)&&!isFree(em)&&/^0\\d{9,10}$/.test(ph);
+    }
+    return true;
+  }
+  function updateNextState(){
+    var next=$('esNext');
+    if(next)next.disabled=!isStepComplete(step);
+  }
+
+  function syncSubsidyEligibility(){
+    var conf=PLAN_CONF[state.plan];
+    var unavailable=!!conf&&!conf.subsidyEligible;
+    var panel=document.querySelector('.es-panel[data-step="4"]');
+    var notice=$('esSubsidyNotice');
+    if(panel)panel.classList[unavailable?'add':'remove']('es-panel--subsidy-unavailable');
+    if(notice)notice.classList[unavailable?'add':'remove']('show');
+    if(unavailable){
+      state.subsidy='対象外（選択した研修形式は助成金対象外）';
+      [].slice.call(document.querySelectorAll('.es-opt[data-group="subsidy"]')).forEach(function(o){o.classList.remove('selected');});
+      hideErr(4);
+    }else if(state.subsidy.indexOf('対象外')===0){
+      state.subsidy='';
+    }
+  }
+
   window.esPick=function(el){
     var group=el.getAttribute('data-group');
     state[group]=el.getAttribute('data-value');
     [].slice.call(document.querySelectorAll('.es-opt[data-group="'+group+'"]')).forEach(function(o){o.classList.remove('selected');});
     el.classList.add('selected');
+    if(group==='plan')syncSubsidyEligibility();
     hideErr(step);
+    updateNextState();
   };
 
   function peopleVal(){
@@ -588,14 +642,17 @@ export default function EstimatePage() {
     var v=Math.max(1,peopleVal()+d);
     $('esPeopleInput').value=v;
     hideErr(3);
+    updateNextState();
   };
   window.esPeopleSet=function(v){
     $('esPeopleInput').value=v;
     hideErr(3);
+    updateNextState();
   };
   window.esPeopleInput=function(){
     var v=peopleVal();
     if(v>0){$('esPeopleInput').value=v;hideErr(3);}
+    updateNextState();
   };
 
   /* doc-a と同基準のフリーメール拒否（会社メール限定） */
@@ -636,10 +693,12 @@ export default function EstimatePage() {
     var conf=PLAN_CONF[state.plan];
     var priceText='',priceHtml='',subsidyText='';
     if(conf){
-      var total=conf.unit*p;
+      var total=conf.unit*(conf.billingUnit==='名'?p:1);
       priceHtml=fmt(total)+'<small>円〜</small>';
       priceText=fmt(total)+'円〜';
-      if(state.subsidy!=='活用しない'){
+      if(!conf.subsidyEligible){
+        subsidyText='この研修形式は助成金の対象外です';
+      }else if(state.subsidy!=='活用しない'){
         if(conf.subsidized){
           subsidyText='助成金活用時の実質負担額：'+fmt(conf.subsidized*p)+'円〜';
         }else{
@@ -647,17 +706,13 @@ export default function EstimatePage() {
         }
       }
     }else{
-      priceHtml=fmt(UNIT_MIN*p)+'<small>円</small> 〜 '+fmt(UNIT_MAX*p)+'<small>円</small>';
-      priceText=fmt(UNIT_MIN*p)+'円〜'+fmt(UNIT_MAX*p)+'円（プランにより変動）';
-      if(state.subsidy!=='活用しない'){
-        subsidyText='助成金活用で実質負担は最大75%OFFになる場合があります';
-      }
+      priceHtml='個別お見積もり';
+      priceText='個別お見積もり（研修形式未定）';
+      subsidyText='助成金の適用可否・金額は研修形式により異なります';
     }
-    $('esResultPrice').innerHTML=priceHtml;
-    $('esResultSubsidy').textContent=subsidyText;
     var rows=[
       ['研修コース',state.course],
-      ['受講プラン',state.plan],
+      ['研修形式',state.plan],
       ['受講予定人数',p+'名'],
       ['助成金の活用',state.subsidy],
       ['導入検討時期',state.timing]
@@ -671,6 +726,8 @@ export default function EstimatePage() {
     $('esHidSubsidy').value=state.subsidy;
     $('esHidTiming').value=state.timing;
     $('esHidPrice').value=priceText+(subsidyText?'／'+subsidyText:'');
+    /* 会社名・電話番号はformrun側に未登録の可能性があるため、登録済みの「お問い合わせ」にも全項目をまとめて入れる */
+    $('esHidInquiry').value='【見積もりシミュレーター】\\n会社名：'+$('esCompany').value.trim()+'\\n電話番号：'+$('esPhone').value.trim()+'\\n'+rows.map(function(r){return r[0]+'：'+r[1];}).join('\\n')+'\\n概算見積もり：'+priceText+(subsidyText?'（'+subsidyText+'）':'');
   }
 
   function render(){
@@ -684,8 +741,13 @@ export default function EstimatePage() {
     var next=$('esNext');
     next.classList[step>=TOTAL?'add':'remove']('hide');
     next.textContent=(step===TOTAL-1)?'見積もり結果を見る':'次へ進む';
+    updateNextState();
     window.scrollTo({top:0,behavior:'smooth'});
   }
+
+  ['esPeopleInput','esCompany','esName','esEmail','esPhone'].forEach(function(id){
+    $(id).addEventListener('input',updateNextState);
+  });
 
   $('esNext').addEventListener('click',function(){
     if(!validate(step))return;
