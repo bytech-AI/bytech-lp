@@ -3927,7 +3927,7 @@ body {
   height: 6px;
   margin-left: 5px;
   vertical-align: middle;
-  background: center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23555555'/%3E%3C/svg%3E");
+  background: center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%231a6fb5'/%3E%3C/svg%3E");
 }
 .top-nav-item {
   position: relative;
