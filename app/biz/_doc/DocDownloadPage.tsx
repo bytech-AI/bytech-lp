@@ -546,6 +546,34 @@ export default function DocDownloadPage({ title, covers, desc, items, docName, c
         window.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='SCRIPT'&&/sdk\\.form\\.run/.test(t.src||''))apply();},true);
         if(document.readyState==='complete')apply();else window.addEventListener('load',apply);
       })();` }} />
+      {/* 送信成功のDiscord通知。formrun SDKのXHR/fetchが form.run へ2xxを返した時だけ
+          /api/doc-dl-notify へ sendBeacon（→サーバーがDiscordへ転送）。
+          formrunの送信自体には一切干渉しない（通知が失敗しても送信は成立する）。 */}
+      <script dangerouslySetInnerHTML={{ __html: `(function(){
+        var SUBMIT_RE=/form\\.run\\/api\\/v1\\/r\\//;
+        function notify(){
+          try{
+            var form=document.querySelector('form.formrun');
+            var val=function(n){var e=form&&form.querySelector('[name="'+n+'"]:checked,[name="'+n+'"]');return e?e.value:'';};
+            var payload={'資料名':${JSON.stringify(docName)},'お名前':val('お名前'),'企業名':val('企業名'),'役職':val('役職'),'研修導入予定':val('研修導入予定'),'メールアドレス':val('メールアドレス'),'電話番号':val('電話番号'),'ページ':location.pathname};
+            var body=new Blob([JSON.stringify(payload)],{type:'application/json'});
+            if(!(navigator.sendBeacon&&navigator.sendBeacon('/api/doc-dl-notify',body)))
+              fetch('/api/doc-dl-notify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload),keepalive:true}).catch(function(){});
+          }catch(e){}
+        }
+        var open=XMLHttpRequest.prototype.open;
+        XMLHttpRequest.prototype.open=function(m,u){this.__frUrl=String(u||'');return open.apply(this,arguments);};
+        var send=XMLHttpRequest.prototype.send;
+        XMLHttpRequest.prototype.send=function(){var x=this;
+          if(SUBMIT_RE.test(x.__frUrl))x.addEventListener('load',function(){if(x.status>=200&&x.status<300)notify();});
+          return send.apply(this,arguments);};
+        var of=window.fetch;
+        if(of)window.fetch=function(input,init){
+          var u=typeof input==='string'?input:(input&&input.url)||'';
+          var p=of.apply(this,arguments);
+          if(SUBMIT_RE.test(u))p.then(function(r){if(r&&r.ok)notify();}).catch(function(){});
+          return p;};
+      })();` }} />
       {/* formrun SDK（フォームのバリデーション/送信）。以前はルートlayoutで全ページに
           beforeInteractiveで読んでいたが、81KBのサードパーティを高優先度で全ページに
           撒くとCSSの帯域を奪いFCPが遅れるため、フォームのあるページだけ defer で読む。 */}
