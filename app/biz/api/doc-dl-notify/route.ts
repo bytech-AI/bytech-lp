@@ -13,28 +13,45 @@ import { z } from "zod";
 import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 
 export const runtime = "nodejs";
-// AI審査がweb検索を数回行うため余裕を持たせる（Vercel Functions）
-export const maxDuration = 120;
+// AI審査がweb検索を数回行うため余裕を持たせる（Vercel Functions・実測で2分近くかかることがある）
+export const maxDuration = 300;
 
 const SITE = "https://biz.bytech.jp";
 
 // 資料名 → 案内する資料。閲覧ページとPDFの両方を載せる。
-const DOCS: Record<string, { title: string; view: string; pdf: string }[]> = {
-  サービス概要資料: [
-    { title: "サービス概要資料", view: `${SITE}/documents/ebook-01`, pdf: `${SITE}/assets/docs/ebook-01.pdf` },
-  ],
-  助成金活用ガイド: [
-    { title: "助成金活用ガイド", view: `${SITE}/documents/ebook-02`, pdf: `${SITE}/assets/docs/ebook-02.pdf` },
-  ],
-  AI導入50チェックシート: [
-    { title: "AI導入を成功させる50のチェックシート", view: `${SITE}/documents/ebook-03`, pdf: `${SITE}/assets/docs/ebook-03.pdf` },
+// intro はメール本文に入る資料別の紹介文（1〜2文）。
+const DOCS: Record<string, { intro: string; items: { title: string; view: string; pdf: string }[] }> = {
+  サービス概要資料: {
+    intro:
+      "研修プラン・6つのコース・料金と助成金活用・導入事例・研修開始までの流れまで、ご検討に必要な情報をこの1冊にまとめています。",
+    items: [
+      { title: "サービス概要資料", view: `${SITE}/documents/ebook-01`, pdf: `${SITE}/assets/docs/ebook-01.pdf` },
+    ],
+  },
+  助成金活用ガイド: {
+    intro:
+      "人材開発支援助成金を使って研修費用を最大75%抑える方法を、要件の確認から試算例・申請の流れまでまとめています。自社で使えるかの事前チェックリスト（13項目）もぜひご活用ください。",
+    items: [
+      { title: "助成金活用ガイド", view: `${SITE}/documents/ebook-02`, pdf: `${SITE}/assets/docs/ebook-02.pdf` },
+    ],
+  },
+  AI導入50チェックシート: {
+    intro:
+      "「導入したのに使われない」を防ぐための50項目のチェックシートです。5カテゴリで現状を可視化し、スコアからフェーズ別の次の一手が分かります。まずはチームでの自己診断にお使いください。",
+    items: [
+      { title: "AI導入を成功させる50のチェックシート", view: `${SITE}/documents/ebook-03`, pdf: `${SITE}/assets/docs/ebook-03.pdf` },
+    ],
+  },
+};
+DOCS["お役立ち資料3点セット"] = {
+  intro:
+    "人気の3冊をセットでお届けします。まずは「サービス概要資料」で全体像をご覧いただき、費用面は「助成金活用ガイド」、社内推進には「50のチェックシート」をあわせてご活用ください。",
+  items: [
+    ...DOCS["サービス概要資料"].items,
+    ...DOCS["助成金活用ガイド"].items,
+    ...DOCS["AI導入50チェックシート"].items,
   ],
 };
-DOCS["お役立ち資料3点セット"] = [
-  ...DOCS["サービス概要資料"],
-  ...DOCS["助成金活用ガイド"],
-  ...DOCS["AI導入50チェックシート"],
-];
 
 const NOTIFY_FIELDS = [
   ["資料名", "📄 資料名"],
@@ -97,7 +114,12 @@ async function screenLead(data: Record<string, unknown>): Promise<Screening> {
   // --- AI審査 ---
   if (!process.env.ANTHROPIC_API_KEY) return { verdict: "skipped", reasons: [] };
   try {
-    const client = new Anthropic();
+    // 組織設定によりワークスペース未スコープのキーは anthropic-workspace-id ヘッダが必須
+    const client = new Anthropic({
+      defaultHeaders: process.env.ANTHROPIC_WORKSPACE_ID
+        ? { "anthropic-workspace-id": process.env.ANTHROPIC_WORKSPACE_ID }
+        : undefined,
+    });
     const response = await client.messages.parse({
       model: "claude-opus-5",
       max_tokens: 8000,
@@ -181,7 +203,12 @@ async function sendAutoReply(data: Record<string, unknown>) {
 
   const name = clip(data["お名前"]);
   const docName = clip(data["資料名"]);
-  const linksHtml = docs
+  // 件名用：お名前の名字（半角/全角スペース区切りの先頭）。例「山田 太郎」→「山田」
+  const surname = name.split(/[\s　]+/)[0] || "";
+  const subject = surname
+    ? `${surname}さま【資料ダウンロードリンクのご案内】バイテック法人AI研修 ${docName}`
+    : `【資料ダウンロードリンクのご案内】バイテック法人AI研修 ${docName}`;
+  const linksHtml = docs.items
     .map(
       (d) =>
         `<p style="margin:0 0 14px;"><b>${escapeHtml(d.title)}</b><br>` +
@@ -189,27 +216,53 @@ async function sendAutoReply(data: Record<string, unknown>) {
         `▶ PDFダウンロード: <a href="${d.pdf}">${d.pdf}</a></p>`,
     )
     .join("");
-  const linksText = docs.map((d) => `■ ${d.title}\n  ブラウザで読む: ${d.view}\n  PDF: ${d.pdf}`).join("\n\n");
+  const linksText = docs.items
+    .map((d) => `■ ${d.title}\n  ブラウザで読む: ${d.view}\n  PDF: ${d.pdf}`)
+    .join("\n\n");
 
-  const html = `<div style="font-family:sans-serif;font-size:14px;line-height:1.9;color:#1a2330;">
-<p>${escapeHtml(name)} 様</p>
-<p>この度は「バイテック法人AI研修」の資料をダウンロードいただき、誠にありがとうございます。<br>
-ご請求いただいた資料は、以下よりご覧いただけます。</p>
-<div style="background:#f4f7fb;border-radius:8px;padding:18px 20px;margin:18px 0;">${linksHtml}</div>
-<p>研修内容や助成金の活用について、より詳しくお知りになりたい場合は、<br>
-無料の個別相談も承っております。<br>
-▶ <a href="${SITE}/counseling">無料個別相談を予約する</a></p>
-<p>ご不明な点がございましたら、本メールへの返信にてお気軽にお問い合わせください。</p>
-<p style="margin-top:26px;color:#5a6472;font-size:12px;">――――――――――――――――――――<br>
-株式会社AI棒　バイテック法人AI研修<br>
-<a href="${SITE}">${SITE}</a><br>
-※本メールは資料ダウンロードフォームにご入力いただいた方へ自動送信しています。</p>
-</div>`;
+  // メールクライアント互換のためテーブルレイアウト。ロゴPNGは自サイト配信（?v=でキャッシュ管理）
+  const LOGO_W = `${SITE}/biz/assets/img/mail/logo-w.png?v=20260920`;
+  const LOGO_B = `${SITE}/biz/assets/img/mail/logo-b.png?v=20260920`;
+  const html = `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef1f5;">
+<tr><td align="center" style="padding:0;">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px;max-width:100%;background:#ffffff;">
+  <tr><td align="center" style="background:#2963B4;padding:20px 0;">
+    <img src="${LOGO_W}" width="150" alt="byTech BUSINESS" style="display:block;width:150px;height:auto;">
+  </td></tr>
+  <tr><td style="padding:32px 28px 8px;font-family:sans-serif;font-size:14px;line-height:1.9;color:#1a2330;">
+    <p style="margin:0 0 18px;">${escapeHtml(name)} 様</p>
+    <p style="margin:0 0 18px;">この度は「バイテック法人AI研修」の資料をダウンロードいただき、誠にありがとうございます。<br>
+    ご請求いただいた資料は、以下よりご覧いただけます。</p>
+    <p style="margin:0 0 18px;">${escapeHtml(docs.intro)}</p>
+    <div style="background:#f4f7fb;border-radius:8px;padding:18px 20px;margin:0 0 18px;">${linksHtml}</div>
+    <p style="margin:0 0 18px;">研修内容や助成金の活用について、より詳しくお知りになりたい場合は、<br>
+    無料の個別相談も承っております。<br>
+    ▶ <a href="${SITE}/counseling" style="color:#2963B4;">無料個別相談を予約する</a></p>
+    <p style="margin:0 0 8px;">ご不明な点がございましたら、本メールへの返信にてお気軽にお問い合わせください。</p>
+  </td></tr>
+  <tr><td style="padding:24px 28px 32px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      <tr><td style="border-top:1px solid #e6eaf0;padding-top:24px;font-family:sans-serif;font-size:12px;line-height:1.9;color:#5a6472;text-align:left;">
+        ※ このメールは、資料ダウンロードフォームにご入力いただいた方にお送りしています。<br>
+        ご不明点などございましたら <a href="mailto:customer-success@bytech.jp" style="color:#2963B4;">customer-success@bytech.jp</a> までご連絡ください。
+      </td></tr>
+      <tr><td align="center" style="padding:28px 0 14px;">
+        <img src="${LOGO_B}" width="140" alt="byTech BUSINESS" style="display:block;width:140px;height:auto;">
+      </td></tr>
+      <tr><td align="center" style="font-family:sans-serif;font-size:12px;color:#5a6472;">
+        <a href="${SITE}/specified_commercial" style="color:#2963B4;">運営会社</a>&nbsp;&nbsp;&nbsp;<a href="${SITE}/privacy-policy" style="color:#2963B4;">プライバシーポリシー</a>
+      </td></tr>
+    </table>
+  </td></tr>
+</table>
+</td></tr></table>`;
 
   const text = `${name} 様
 
 この度は「バイテック法人AI研修」の資料をダウンロードいただき、誠にありがとうございます。
 ご請求いただいた資料は、以下よりご覧いただけます。
+
+${docs.intro}
 
 ${linksText}
 
@@ -228,10 +281,11 @@ ${SITE}
     method: "POST",
     headers: { authorization: `Bearer ${apiKey}`, "content-type": "application/json" },
     body: JSON.stringify({
-      from: process.env.DOC_DL_MAIL_FROM || "バイテック法人AI研修 <noreply@bytech.jp>",
+      // 差出人ドメインは biz.bytech.jp（2026-09-20 Resend認証済み・トラッキング無効）
+      from: process.env.DOC_DL_MAIL_FROM || "バイテック法人AI研修 <noreply@biz.bytech.jp>",
       to: [email],
       reply_to: "customer-success@bytech.jp",
-      subject: `【バイテック法人AI研修】資料のご案内（${docName}）`,
+      subject,
       html,
       text,
     }),
@@ -244,11 +298,13 @@ export async function POST(req: NextRequest) {
   if (!data || !clip(data["資料名"])) {
     return new Response(null, { status: 204 });
   }
-  // 審査してから通知＆返信。review のときだけ自動返信を保留（Discordに理由付きで出る）
+  // 審査してから分岐。問題なければ通知せず自動返信のみ、疑わしい(review)ときだけ
+  // Discordへ理由付きで通知して返信を保留する（通常DLの記録はformrun管理画面で見る運用）。
   const screening = await screenLead(data);
-  await Promise.all([
-    notifyDiscord(data, screening),
-    screening.verdict === "review" ? Promise.resolve() : sendAutoReply(data),
-  ]);
+  if (screening.verdict === "review") {
+    await notifyDiscord(data, screening);
+  } else {
+    await sendAutoReply(data);
+  }
   return new Response(null, { status: 204 });
 }
