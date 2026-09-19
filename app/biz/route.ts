@@ -85,7 +85,7 @@ const SERVICE_SCHEMA = `<script type="application/ld+json">${JSON.stringify(
 
 // トップの静的HTMLとCSSのデプロイタイミングがずれても、メガメニューが崩れないための必須スタイル。
 const HEADER_MEGA_MENU_STYLE = `<style id="biz-header-mega-menu-style">
-.top-nav-caret{display:inline-block;width:8px;height:6px;margin-left:5px;vertical-align:middle;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23555555'/%3E%3C/svg%3E")}
+.top-nav-caret{display:inline-block;width:8px;height:6px;margin-left:5px;vertical-align:middle;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%231a6fb5'/%3E%3C/svg%3E")}
 .top-nav-item{position:relative;align-self:stretch;display:flex;align-items:center}.top-nav-item>.top-nav-link{display:flex;align-items:center;height:100%;box-sizing:border-box}.top-nav-item>.top-nav-link .top-nav-caret{transition:transform .2s ease}.top-nav-item:hover>.top-nav-link,.top-nav-item:focus-within>.top-nav-link{background:rgba(0,0,0,.04)}.top-nav-item:hover>.top-nav-link .top-nav-caret,.top-nav-item:focus-within>.top-nav-link .top-nav-caret{transform:rotate(180deg)}
 .top-mega-menu{position:absolute;top:calc(100% + 13px);right:-150px;width:min(560px,calc(100vw - 48px));padding:22px;box-sizing:border-box;background:rgba(255,255,255,.98);border:1px solid rgba(26,111,181,.13);border-radius:4px;box-shadow:0 20px 55px rgba(22,32,46,.18);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-7px);transition:opacity .2s ease,transform .2s ease,visibility .2s ease}.top-mega-menu:before{content:"";position:absolute;right:0;bottom:100%;width:100%;height:14px}.top-nav-item:hover .top-mega-menu,.top-nav-item:focus-within .top-mega-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
 .top-header__nav .top-mega-menu--left{left:-120px;right:auto;width:min(1060px,calc(100vw - 48px))!important;max-width:none}.top-mega-menu--left .top-mega-menu__grid{grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr}.top-header__nav .top-mega-menu__card--course{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-height:132px;box-sizing:border-box}.top-mega-menu__logo{display:flex;align-items:center;justify-content:center;flex:0 0 auto;width:46px;height:30px}.top-mega-menu__logo img{display:block;width:auto;height:auto;max-width:100%;max-height:26px;object-fit:contain}.top-mega-menu__card-body{display:flex;min-width:0;flex-direction:column}
@@ -237,7 +237,7 @@ export async function GET() {
   html = html.replace('<html lang="en"', '<html lang="ja"');
   html = html.replaceAll(
     "/biz/assets/css/style.css",
-    "/biz/assets/css/style.css?v=20260717-3",
+    "/biz/assets/css/style.css?v=20260918",
   );
   html = html.replace(
     '<nav class="top-header__nav"><a href="#course" class="top-nav-link">研修一覧</a>',
