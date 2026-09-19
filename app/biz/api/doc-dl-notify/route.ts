@@ -13,8 +13,8 @@ import { z } from "zod";
 import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 
 export const runtime = "nodejs";
-// AI審査がweb検索を数回行うため余裕を持たせる（Vercel Functions）
-export const maxDuration = 120;
+// AI審査がweb検索を数回行うため余裕を持たせる（Vercel Functions・実測で2分近くかかることがある）
+export const maxDuration = 300;
 
 const SITE = "https://biz.bytech.jp";
 
@@ -250,11 +250,13 @@ export async function POST(req: NextRequest) {
   if (!data || !clip(data["資料名"])) {
     return new Response(null, { status: 204 });
   }
-  // 審査してから通知＆返信。review のときだけ自動返信を保留（Discordに理由付きで出る）
+  // 審査してから分岐。問題なければ通知せず自動返信のみ、疑わしい(review)ときだけ
+  // Discordへ理由付きで通知して返信を保留する（通常DLの記録はformrun管理画面で見る運用）。
   const screening = await screenLead(data);
-  await Promise.all([
-    notifyDiscord(data, screening),
-    screening.verdict === "review" ? Promise.resolve() : sendAutoReply(data),
-  ]);
+  if (screening.verdict === "review") {
+    await notifyDiscord(data, screening);
+  } else {
+    await sendAutoReply(data);
+  }
   return new Response(null, { status: 204 });
 }
