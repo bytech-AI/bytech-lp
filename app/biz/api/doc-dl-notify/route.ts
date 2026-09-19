@@ -19,22 +19,39 @@ export const maxDuration = 300;
 const SITE = "https://biz.bytech.jp";
 
 // 資料名 → 案内する資料。閲覧ページとPDFの両方を載せる。
-const DOCS: Record<string, { title: string; view: string; pdf: string }[]> = {
-  サービス概要資料: [
-    { title: "サービス概要資料", view: `${SITE}/documents/ebook-01`, pdf: `${SITE}/assets/docs/ebook-01.pdf` },
-  ],
-  助成金活用ガイド: [
-    { title: "助成金活用ガイド", view: `${SITE}/documents/ebook-02`, pdf: `${SITE}/assets/docs/ebook-02.pdf` },
-  ],
-  AI導入50チェックシート: [
-    { title: "AI導入を成功させる50のチェックシート", view: `${SITE}/documents/ebook-03`, pdf: `${SITE}/assets/docs/ebook-03.pdf` },
+// intro はメール本文に入る資料別の紹介文（1〜2文）。
+const DOCS: Record<string, { intro: string; items: { title: string; view: string; pdf: string }[] }> = {
+  サービス概要資料: {
+    intro:
+      "研修プラン・6つのコース・料金と助成金活用・導入事例・研修開始までの流れまで、ご検討に必要な情報をこの1冊にまとめています。",
+    items: [
+      { title: "サービス概要資料", view: `${SITE}/documents/ebook-01`, pdf: `${SITE}/assets/docs/ebook-01.pdf` },
+    ],
+  },
+  助成金活用ガイド: {
+    intro:
+      "人材開発支援助成金を使って研修費用を最大75%抑える方法を、要件の確認から試算例・申請の流れまでまとめています。自社で使えるかの事前チェックリスト（13項目）もぜひご活用ください。",
+    items: [
+      { title: "助成金活用ガイド", view: `${SITE}/documents/ebook-02`, pdf: `${SITE}/assets/docs/ebook-02.pdf` },
+    ],
+  },
+  AI導入50チェックシート: {
+    intro:
+      "「導入したのに使われない」を防ぐための50項目のチェックシートです。5カテゴリで現状を可視化し、スコアからフェーズ別の次の一手が分かります。まずはチームでの自己診断にお使いください。",
+    items: [
+      { title: "AI導入を成功させる50のチェックシート", view: `${SITE}/documents/ebook-03`, pdf: `${SITE}/assets/docs/ebook-03.pdf` },
+    ],
+  },
+};
+DOCS["お役立ち資料3点セット"] = {
+  intro:
+    "人気の3冊をセットでお届けします。まずは「サービス概要資料」で全体像をご覧いただき、費用面は「助成金活用ガイド」、社内推進には「50のチェックシート」をあわせてご活用ください。",
+  items: [
+    ...DOCS["サービス概要資料"].items,
+    ...DOCS["助成金活用ガイド"].items,
+    ...DOCS["AI導入50チェックシート"].items,
   ],
 };
-DOCS["お役立ち資料3点セット"] = [
-  ...DOCS["サービス概要資料"],
-  ...DOCS["助成金活用ガイド"],
-  ...DOCS["AI導入50チェックシート"],
-];
 
 const NOTIFY_FIELDS = [
   ["資料名", "📄 資料名"],
@@ -186,7 +203,7 @@ async function sendAutoReply(data: Record<string, unknown>) {
 
   const name = clip(data["お名前"]);
   const docName = clip(data["資料名"]);
-  const linksHtml = docs
+  const linksHtml = docs.items
     .map(
       (d) =>
         `<p style="margin:0 0 14px;"><b>${escapeHtml(d.title)}</b><br>` +
@@ -194,12 +211,15 @@ async function sendAutoReply(data: Record<string, unknown>) {
         `▶ PDFダウンロード: <a href="${d.pdf}">${d.pdf}</a></p>`,
     )
     .join("");
-  const linksText = docs.map((d) => `■ ${d.title}\n  ブラウザで読む: ${d.view}\n  PDF: ${d.pdf}`).join("\n\n");
+  const linksText = docs.items
+    .map((d) => `■ ${d.title}\n  ブラウザで読む: ${d.view}\n  PDF: ${d.pdf}`)
+    .join("\n\n");
 
   const html = `<div style="font-family:sans-serif;font-size:14px;line-height:1.9;color:#1a2330;">
 <p>${escapeHtml(name)} 様</p>
 <p>この度は「バイテック法人AI研修」の資料をダウンロードいただき、誠にありがとうございます。<br>
 ご請求いただいた資料は、以下よりご覧いただけます。</p>
+<p>${escapeHtml(docs.intro)}</p>
 <div style="background:#f4f7fb;border-radius:8px;padding:18px 20px;margin:18px 0;">${linksHtml}</div>
 <p>研修内容や助成金の活用について、より詳しくお知りになりたい場合は、<br>
 無料の個別相談も承っております。<br>
@@ -215,6 +235,8 @@ async function sendAutoReply(data: Record<string, unknown>) {
 
 この度は「バイテック法人AI研修」の資料をダウンロードいただき、誠にありがとうございます。
 ご請求いただいた資料は、以下よりご覧いただけます。
+
+${docs.intro}
 
 ${linksText}
 
