@@ -97,7 +97,12 @@ async function screenLead(data: Record<string, unknown>): Promise<Screening> {
   // --- AI審査 ---
   if (!process.env.ANTHROPIC_API_KEY) return { verdict: "skipped", reasons: [] };
   try {
-    const client = new Anthropic();
+    // 組織設定によりワークスペース未スコープのキーは anthropic-workspace-id ヘッダが必須
+    const client = new Anthropic({
+      defaultHeaders: process.env.ANTHROPIC_WORKSPACE_ID
+        ? { "anthropic-workspace-id": process.env.ANTHROPIC_WORKSPACE_ID }
+        : undefined,
+    });
     const response = await client.messages.parse({
       model: "claude-opus-5",
       max_tokens: 8000,
@@ -228,7 +233,8 @@ ${SITE}
     method: "POST",
     headers: { authorization: `Bearer ${apiKey}`, "content-type": "application/json" },
     body: JSON.stringify({
-      from: process.env.DOC_DL_MAIL_FROM || "バイテック法人AI研修 <noreply@bytech.jp>",
+      // Resendでドメイン認証済みなのは send.bytech.jp（bytech.jp本体は未認証）
+      from: process.env.DOC_DL_MAIL_FROM || "バイテック法人AI研修 <noreply@send.bytech.jp>",
       to: [email],
       reply_to: "customer-success@bytech.jp",
       subject: `【バイテック法人AI研修】資料のご案内（${docName}）`,
