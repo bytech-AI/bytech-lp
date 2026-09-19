@@ -18,14 +18,15 @@ export const LIB_CSS = `
         /* ヒーロー帯（フルブリード） */
         .dl-hero { background: #2c5c9c; width: 100%; }
         .dl-hero__inner { max-width: 1200px; margin: 0 auto; padding: 26px 40px; display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 44px; align-items: center; }
-        .dl-hero__title { color: #fff; font-size: 40px; font-weight: 800; margin: 0 0 18px; letter-spacing: .02em; }
+        /* 見出しはW8を持つ Hiragino Sans を優先（ProNはW6止まりで800が細く見えるため） */
+        .dl-hero__title { color: #fff; font-size: 40px; font-weight: 800; margin: 0 0 18px; letter-spacing: .02em; font-family: "Hiragino Sans", var(--font-noto-jp), sans-serif; }
         .dl-hero__desc { color: #d7e2f1; font-size: 15px; line-height: 2; margin: 0; }
 
         /* 販促カード */
         .dl-promo { background: #fff; border: 1px solid #dfe4ec; border-radius: 6px; padding: 18px 22px; }
         .dl-promo__top { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: center; }
         .dl-promo__eyebrow { font-size: 15px; font-weight: 800; color: #1a2e50; margin: 0 0 10px; padding-bottom: 10px; border-bottom: 1px solid #e6eaf0; }
-        .dl-promo__heading { font-size: 23px; font-weight: 800; color: #1a2e50; margin: 0 0 12px; }
+        .dl-promo__heading { font-size: 23px; font-weight: 800; color: #1a2e50; margin: 0 0 12px; font-family: "Hiragino Sans", var(--font-noto-jp), sans-serif; }
         .dl-promo__btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg, #e83e8c, #d6266f); color: #fff; font-size: 16px; font-weight: 800; padding: 13px 18px; border-radius: 4px; text-decoration: none; }
         .dl-promo__btn:hover { opacity: .93; }
         .dl-promo__img { aspect-ratio: 16/9; overflow: hidden; background: linear-gradient(135deg, #eef3f9, #dbe6f3); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #9db8d2; font-family: "Futura","Futura Medium",sans-serif; letter-spacing: .1em; font-size: 12px; font-weight: 700; }
@@ -86,8 +87,10 @@ export const LIB_CSS = `
         .dl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
         .dl-card { background: #fff; border: 1px solid #dfe4ec; border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; transition: transform .2s ease, border-color .2s ease; }
         .dl-card:hover { transform: translateY(-3px); border-color: #b9c8dc; }
-        .dl-card__thumb { aspect-ratio: 16/9; background: linear-gradient(135deg, #f0f4f9, #e0e9f3); display: flex; align-items: center; justify-content: center; }
-        .dl-card__thumb img { width: 100%; height: 100%; object-fit: contain; }
+        /* 縦長画像でも16:9を維持する。imgを通常フローに置くと中身の高さに箱が
+           押し広げられる(aspect-ratioは最小高さに勝てない)ため、絶対配置で切り離す。 */
+        .dl-card__thumb { position: relative; aspect-ratio: 16/9; overflow: hidden; background: linear-gradient(135deg, #f0f4f9, #e0e9f3); display: flex; align-items: center; justify-content: center; }
+        .dl-card__thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
         .dl-card__body { padding: 18px 18px 20px; display: flex; flex-direction: column; flex: 1; }
         .dl-card__title { font-size: 15px; font-weight: 700; line-height: 1.55; margin: 0 0 12px; }
         .dl-card__body .dl-points { margin-bottom: 16px; flex: 1; }
