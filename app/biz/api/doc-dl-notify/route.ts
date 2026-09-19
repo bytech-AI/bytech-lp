@@ -203,6 +203,11 @@ async function sendAutoReply(data: Record<string, unknown>) {
 
   const name = clip(data["お名前"]);
   const docName = clip(data["資料名"]);
+  // 件名用：お名前の名字（半角/全角スペース区切りの先頭）。例「山田 太郎」→「山田」
+  const surname = name.split(/[\s　]+/)[0] || "";
+  const subject = surname
+    ? `${surname}さま【資料ダウンロードリンクのご案内】バイテック法人AI研修 ${docName}`
+    : `【資料ダウンロードリンクのご案内】バイテック法人AI研修 ${docName}`;
   const linksHtml = docs.items
     .map(
       (d) =>
@@ -280,7 +285,7 @@ ${SITE}
       from: process.env.DOC_DL_MAIL_FROM || "バイテック法人AI研修 <noreply@biz.bytech.jp>",
       to: [email],
       reply_to: "customer-success@bytech.jp",
-      subject: `【バイテック法人AI研修】資料のご案内（${docName}）`,
+      subject,
       html,
       text,
     }),
