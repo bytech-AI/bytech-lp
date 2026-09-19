@@ -17,9 +17,11 @@ export type DocDownloadPageProps = {
   docName: string;
   /** 中身チラ見せカルーセル（省略時はカルーセル自体を出さない） */
   carousel?: Cover[];
+  /** 表紙エリアをスライド3枚の重ね置きにする（配列順=奥→手前。指定時は covers の代わりに表示） */
+  stack?: Cover[];
 };
 
-export default function DocDownloadPage({ title, covers, desc, items, docName, carousel }: DocDownloadPageProps) {
+export default function DocDownloadPage({ title, covers, desc, items, docName, carousel, stack }: DocDownloadPageProps) {
   return (
     <>
       {carousel && <link rel="stylesheet" href="/biz/assets/slick/slick.css" />}
@@ -159,6 +161,34 @@ export default function DocDownloadPage({ title, covers, desc, items, docName, c
         .doc-content__set img:only-child {
           width: 46%;
           transform: none;
+        }
+        /* スライド3枚の重ね置き（stack指定時）。奥2枚を左右に傾け、手前=表紙スライドを中央に */
+        .doc-content__stack {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 16 / 11;
+          background: #fff;
+          border-radius: 8px;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+          margin-bottom: 24px;
+          overflow: hidden;
+        }
+        .doc-content__stack img {
+          position: absolute;
+          width: 62%;
+          height: auto;
+          border-radius: 6px;
+          border: 1px solid #e6ebf2;
+          box-shadow: 0 14px 30px rgba(20, 40, 80, .28);
+        }
+        .doc-content__stack img:nth-child(1) { left: 5%; top: 9%; transform: rotate(-6deg); }
+        .doc-content__stack img:nth-child(2) { right: 5%; top: 12%; transform: rotate(5deg); }
+        .doc-content__stack img:nth-child(3) {
+          left: 50%;
+          bottom: 8%;
+          transform: translateX(-50%);
+          width: 66%;
+          box-shadow: 0 18px 38px rgba(20, 40, 80, .34);
         }
         .doc-content__desc {
           font-size: 15px;
@@ -343,11 +373,19 @@ export default function DocDownloadPage({ title, covers, desc, items, docName, c
         <div className="doc-content">
           <p className="doc-content__eyebrow">Download _</p>
           <h1 className="doc-content__title">{title}</h1>
-          <div className="doc-content__set">
-            {covers.map((c) => (
-              <img src={c.src} alt={c.alt} loading="eager" key={c.src} />
-            ))}
-          </div>
+          {stack ? (
+            <div className="doc-content__stack">
+              {stack.map((c) => (
+                <img src={c.src} alt={c.alt} loading="eager" key={c.src} />
+              ))}
+            </div>
+          ) : (
+            <div className="doc-content__set">
+              {covers.map((c) => (
+                <img src={c.src} alt={c.alt} loading="eager" key={c.src} />
+              ))}
+            </div>
+          )}
           <p className="doc-content__desc">{desc}</p>
           <h2 className="doc-content__subtitle">この資料で分かること</h2>
           <div className="doc-content__list-wrap">

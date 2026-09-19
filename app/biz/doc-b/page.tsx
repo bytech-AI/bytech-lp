@@ -14,6 +14,11 @@ export default function DocBPage() {
         "講師紹介・研修開始までの流れ・会社概要",
       ]}
       docName="サービス概要資料"
+      stack={[
+        { src: "/biz/assets/img/documents/preview/ebook-01-p06.webp", alt: "対応する6つのコース" },
+        { src: "/biz/assets/img/documents/preview/ebook-01-p14.webp", alt: "累計受講企業300社の実績" },
+        { src: "/biz/assets/img/documents/preview/ebook-01-p01.webp", alt: "サービス概要資料 表紙" },
+      ]}
       carousel={[
         { src: "/biz/assets/img/documents/preview/ebook-01-p01.webp", alt: "サービス概要資料 表紙" },
         { src: "/biz/assets/img/documents/preview/ebook-01-p02.webp", alt: "目次" },

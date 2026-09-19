@@ -14,6 +14,11 @@ export default function DocCPage() {
         "申請スケジュールと必要書類",
       ]}
       docName="助成金活用ガイド"
+      stack={[
+        { src: "/biz/assets/img/documents/preview/ebook-02-p03.webp", alt: "結論：AI研修は助成金の対象になり得ます" },
+        { src: "/biz/assets/img/documents/preview/ebook-02-p08.webp", alt: "試算例" },
+        { src: "/biz/assets/img/documents/preview/ebook-02-p01.webp", alt: "助成金活用ガイド 表紙" },
+      ]}
       carousel={[
         { src: "/biz/assets/img/documents/preview/ebook-02-p01.webp", alt: "助成金活用ガイド 表紙" },
         { src: "/biz/assets/img/documents/preview/ebook-02-p02.webp", alt: "この資料でわかること" },

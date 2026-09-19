@@ -14,6 +14,11 @@ export default function DocDPage() {
         "フェーズ別・次の一手",
       ]}
       docName="AI導入50チェックシート"
+      stack={[
+        { src: "/biz/assets/img/documents/preview/ebook-03-p05.webp", alt: "カテゴリ1 目的設定のチェック項目" },
+        { src: "/biz/assets/img/documents/preview/ebook-03-p10.webp", alt: "スコア判定（3フェーズ）" },
+        { src: "/biz/assets/img/documents/preview/ebook-03-p01.webp", alt: "AI導入を成功させる50のチェックシート 表紙" },
+      ]}
       carousel={[
         { src: "/biz/assets/img/documents/preview/ebook-03-p01.webp", alt: "AI導入を成功させる50のチェックシート 表紙" },
         { src: "/biz/assets/img/documents/preview/ebook-03-p02.webp", alt: "目次" },
