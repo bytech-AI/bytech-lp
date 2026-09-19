@@ -215,21 +215,42 @@ async function sendAutoReply(data: Record<string, unknown>) {
     .map((d) => `■ ${d.title}\n  ブラウザで読む: ${d.view}\n  PDF: ${d.pdf}`)
     .join("\n\n");
 
-  const html = `<div style="font-family:sans-serif;font-size:14px;line-height:1.9;color:#1a2330;">
-<p>${escapeHtml(name)} 様</p>
-<p>この度は「バイテック法人AI研修」の資料をダウンロードいただき、誠にありがとうございます。<br>
-ご請求いただいた資料は、以下よりご覧いただけます。</p>
-<p>${escapeHtml(docs.intro)}</p>
-<div style="background:#f4f7fb;border-radius:8px;padding:18px 20px;margin:18px 0;">${linksHtml}</div>
-<p>研修内容や助成金の活用について、より詳しくお知りになりたい場合は、<br>
-無料の個別相談も承っております。<br>
-▶ <a href="${SITE}/counseling">無料個別相談を予約する</a></p>
-<p>ご不明な点がございましたら、本メールへの返信にてお気軽にお問い合わせください。</p>
-<p style="margin-top:26px;color:#5a6472;font-size:12px;">――――――――――――――――――――<br>
-株式会社AI棒　バイテック法人AI研修<br>
-<a href="${SITE}">${SITE}</a><br>
-※本メールは資料ダウンロードフォームにご入力いただいた方へ自動送信しています。</p>
-</div>`;
+  // メールクライアント互換のためテーブルレイアウト。ロゴPNGは自サイト配信（?v=でキャッシュ管理）
+  const LOGO_W = `${SITE}/biz/assets/img/mail/logo-w.png?v=20260920`;
+  const LOGO_B = `${SITE}/biz/assets/img/mail/logo-b.png?v=20260920`;
+  const html = `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef1f5;">
+<tr><td align="center" style="padding:0;">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px;max-width:100%;background:#ffffff;">
+  <tr><td align="center" style="background:#2963B4;padding:20px 0;">
+    <img src="${LOGO_W}" width="150" alt="byTech BUSINESS" style="display:block;width:150px;height:auto;">
+  </td></tr>
+  <tr><td style="padding:32px 28px 8px;font-family:sans-serif;font-size:14px;line-height:1.9;color:#1a2330;">
+    <p style="margin:0 0 18px;">${escapeHtml(name)} 様</p>
+    <p style="margin:0 0 18px;">この度は「バイテック法人AI研修」の資料をダウンロードいただき、誠にありがとうございます。<br>
+    ご請求いただいた資料は、以下よりご覧いただけます。</p>
+    <p style="margin:0 0 18px;">${escapeHtml(docs.intro)}</p>
+    <div style="background:#f4f7fb;border-radius:8px;padding:18px 20px;margin:0 0 18px;">${linksHtml}</div>
+    <p style="margin:0 0 18px;">研修内容や助成金の活用について、より詳しくお知りになりたい場合は、<br>
+    無料の個別相談も承っております。<br>
+    ▶ <a href="${SITE}/counseling" style="color:#2963B4;">無料個別相談を予約する</a></p>
+    <p style="margin:0 0 8px;">ご不明な点がございましたら、本メールへの返信にてお気軽にお問い合わせください。</p>
+  </td></tr>
+  <tr><td style="padding:24px 28px 32px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      <tr><td style="border-top:1px solid #e6eaf0;padding-top:24px;font-family:sans-serif;font-size:12px;line-height:1.9;color:#5a6472;text-align:left;">
+        ※ このメールは、資料ダウンロードフォームにご入力いただいた方にお送りしています。<br>
+        ご不明点などございましたら <a href="mailto:customer-success@bytech.jp" style="color:#2963B4;">customer-success@bytech.jp</a> までご連絡ください。
+      </td></tr>
+      <tr><td align="center" style="padding:28px 0 14px;">
+        <img src="${LOGO_B}" width="140" alt="byTech BUSINESS" style="display:block;width:140px;height:auto;">
+      </td></tr>
+      <tr><td align="center" style="font-family:sans-serif;font-size:12px;color:#5a6472;">
+        <a href="${SITE}/specified_commercial" style="color:#2963B4;">運営会社</a>&nbsp;&nbsp;&nbsp;<a href="${SITE}/privacy-policy" style="color:#2963B4;">プライバシーポリシー</a>
+      </td></tr>
+    </table>
+  </td></tr>
+</table>
+</td></tr></table>`;
 
   const text = `${name} 様
 
