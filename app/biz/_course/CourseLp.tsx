@@ -588,7 +588,7 @@ export function CourseLp({ data }: { data: CourseData }) {
               </div>
             </div>
             <div className="ct-ringi__visual">
-              <img src="/biz/assets/img/wp/biz-doc-cover.webp" alt="バイテック法人AI研修 稟議用資料" loading="lazy" />
+              <img src="/biz/assets/img/index/cta-docs-fan.webp" alt="バイテック法人AI研修 お役立ち資料3点セット" loading="lazy" />
             </div>
           </div>
         </section>

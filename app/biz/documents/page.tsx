@@ -11,8 +11,9 @@ import {
 } from "@/lib/microcms";
 
 // お役立ち資料一覧（資料ライブラリ型）。共通スタイルは _chrome/libStyles.ts（archive と共有）。
-// データソースは microCMS「documents」（スキーマ: docs/microcms-documents-schema.md）。
-// CMS が空のうちはヒーロー/ピックアップ/カード類を出さない（ダミーは表示しない）。
+// データソースは microCMS「documents」（スキーマ: docs/microcms-documents-schema.md）に加え、
+// リポジトリ内の静的ebook（STATIC_DOCS: /documents/ebook-01〜03）を常時表示する。
+// ヒーローは CMS の isHero を優先し、無ければ3点セットDL訴求（SET_PROMO → /doc-a）を出す。
 
 type DocItem = {
   title: string;
@@ -20,6 +21,7 @@ type DocItem = {
   thumbLabel: string;
   thumb?: string;
   href: string;
+  btnLabel?: string;
 };
 
 type Promo = {
@@ -29,6 +31,7 @@ type Promo = {
   href: string;
   thumbLabel: string;
   thumb?: string;
+  trio?: string[]; // 3点セット用：カバー3枚を並べて表示（thumb より優先）
   recos: string[];
 };
 
@@ -37,6 +40,59 @@ type Category = { name: string; en: string; docs: DocItem[] };
 // カテゴリ別のデフォルトサムネ。資料側で画像未設定のとき、このカテゴリの共通サムネを使う。
 const CATEGORY_THUMB: Record<string, string> = {
   サービス概要: "/biz/assets/img/documents/category-service.webp",
+};
+
+// リポジトリ内で持つ静的な資料。カードのリンク先はフォーム付きDLページ（/doc-b〜d）。
+// 閲覧ページ /documents/ebook-0X は直リンクしない（DL導線はフォーム経由に統一）。
+// カバーは public/biz/assets/img/documents/ のwebp。
+const EBOOK_COVERS = [
+  "/biz/assets/img/documents/ebook-01-cover.webp",
+  "/biz/assets/img/documents/ebook-02-cover.webp",
+  "/biz/assets/img/documents/ebook-03-cover.webp",
+];
+
+const STATIC_DOCS: { category: string; doc: DocItem }[] = [
+  {
+    category: "サービス概要",
+    doc: {
+      title: "サービス概要資料",
+      points: ["研修プラン・6つのコースと料金", "助成金活用・導入事例", "研修開始までの流れ"],
+      thumbLabel: "DOCUMENT",
+      thumb: EBOOK_COVERS[0],
+      href: "/doc-b",
+    },
+  },
+  {
+    category: "AI活用ノウハウ",
+    doc: {
+      title: "助成金活用ガイド",
+      points: ["研修費用を最大75%抑える制度の使い方", "対象要件・助成額の試算例", "申請スケジュールとつまずきポイント"],
+      thumbLabel: "DOCUMENT",
+      thumb: EBOOK_COVERS[1],
+      href: "/doc-c",
+    },
+  },
+  {
+    category: "AI活用ノウハウ",
+    doc: {
+      title: "AI導入を成功させる50のチェックシート",
+      points: ["「導入したのに使われない」を防ぐ50項目", "目的設定・体制・ルール・教育・定着の5カテゴリ", "スコアからフェーズ別の次の一手がわかる"],
+      thumbLabel: "DOCUMENT",
+      thumb: EBOOK_COVERS[2],
+      href: "/doc-d",
+    },
+  },
+];
+
+// CMSにヒーローが無いときのフォールバック：3点セットDL訴求（/doc-a）。
+const SET_PROMO: Promo = {
+  eyebrow: "無料でダウンロードいただけます",
+  heading: "お役立ち資料 3点セット",
+  btnLabel: "無料で資料を受け取る",
+  href: "/doc-a",
+  thumbLabel: "DOCUMENT",
+  trio: EBOOK_COVERS,
+  recos: [],
 };
 
 // ---- CMS → 表示モデル変換 ----
@@ -51,12 +107,12 @@ function toDocItem(doc: MicroCmsDocument, defaultThumb?: string): DocItem {
 }
 
 function buildView(cms: MicroCmsDocument[]): {
-  promo: Promo | null;
+  promo: Promo;
   pickups: DocItem[];
   categories: Category[];
 } {
   const hero = cms.find((d) => d.isHero) || cms[0];
-  const promo: Promo | null = hero
+  const promo: Promo = hero
     ? {
         eyebrow: hero.eyebrow || "無料でダウンロードいただけます",
         heading: hero.title,
@@ -66,20 +122,28 @@ function buildView(cms: MicroCmsDocument[]): {
         thumb: docThumbnail(hero) || undefined,
         recos: docLines(hero.recos),
       }
-    : null;
+    : SET_PROMO;
 
   const pickups = cms.filter((d) => d.isPickup).map((d) => toDocItem(d));
 
   // カテゴリ別にグルーピング（出現順を維持）
   const categories: Category[] = [];
-  for (const doc of cms) {
-    const name = docCategory(doc);
+  const push = (name: string, item: DocItem) => {
     let cat = categories.find((c) => c.name === name);
     if (!cat) {
       cat = { name, en: docCategoryEn(name), docs: [] };
       categories.push(cat);
     }
-    cat.docs.push(toDocItem(doc, CATEGORY_THUMB[name]));
+    cat.docs.push(item);
+  };
+  for (const doc of cms) {
+    const name = docCategory(doc);
+    push(name, toDocItem(doc, CATEGORY_THUMB[name]));
+  }
+  // 静的ebookを追加（CMSに同名資料が登録されたらCMS側を正としてスキップ）
+  for (const { category, doc } of STATIC_DOCS) {
+    const exists = categories.some((c) => c.docs.some((d) => d.title === doc.title));
+    if (!exists) push(category, doc);
   }
 
   return { promo, pickups, categories };
@@ -109,7 +173,7 @@ function DocCard({ doc }: { doc: DocItem }) {
             <li key={i}>{p}</li>
           ))}
         </ul>
-        <a className="dl-btn dl-btn--block" href={doc.href}>資料を受け取る<DlIcon /></a>
+        <a className="dl-btn dl-btn--block" href={doc.href}>{doc.btnLabel || "資料を受け取る"}<DlIcon /></a>
       </div>
     </article>
   );
@@ -122,6 +186,16 @@ export default async function DocumentsPage() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: LIB_CSS }} />
+      {/* 3点セット用：ヒーロー右にカバー3枚を横並び（SmartHRの資料集セクション風）。中央を少し大きく前面に */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        /* カバー画像は角丸を焼き込んだ透過webpなので、影はbox-shadowではなく
+           アルファ形状に追従するdrop-shadowで付ける（box-shadowだと四角い影が出る） */
+        .dl-promo__trio { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 6px 0; }
+        .dl-promo__trio img { width: 31%; height: auto; filter: drop-shadow(0 6px 14px rgba(20, 40, 80, .28)); }
+        .dl-promo__trio img:nth-child(2) { width: 34%; transform: translateY(-4px); filter: drop-shadow(0 9px 18px rgba(20, 40, 80, .34)); }
+        /* 縦長カバーは16:9サムネ枠に余白を付けて収める（archive側の16:9画像には影響させない） */
+        .dl-card__thumb img { padding: 12px; box-sizing: border-box; filter: drop-shadow(0 4px 10px rgba(20, 40, 80, .22)); }
+      ` }} />
       <BizHeader />
 
       <div className="dl-topbar">
@@ -150,9 +224,17 @@ export default async function DocumentsPage() {
                   <p className="dl-promo__heading">{promo.heading}</p>
                   <a className="dl-promo__btn" href={promo.href}>{promo.btnLabel}<DlIcon /></a>
                 </div>
-                <div className="dl-promo__img">
-                  <Thumb label={promo.thumbLabel} thumb={promo.thumb} title={promo.heading} />
-                </div>
+                {promo.trio ? (
+                  <div className="dl-promo__trio">
+                    {promo.trio.map((src, i) => (
+                      <img src={src} alt="" key={i} loading="lazy" />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="dl-promo__img">
+                    <Thumb label={promo.thumbLabel} thumb={promo.thumb} title={promo.heading} />
+                  </div>
+                )}
               </div>
               {promo.recos.length > 0 && (
                 <div className="dl-promo__reco">
