@@ -233,8 +233,8 @@ ${SITE}
     method: "POST",
     headers: { authorization: `Bearer ${apiKey}`, "content-type": "application/json" },
     body: JSON.stringify({
-      // Resendでドメイン認証済みなのは send.bytech.jp（bytech.jp本体は未認証）
-      from: process.env.DOC_DL_MAIL_FROM || "バイテック法人AI研修 <noreply@send.bytech.jp>",
+      // 差出人ドメインは biz.bytech.jp（2026-09-20 Resend認証済み・トラッキング無効）
+      from: process.env.DOC_DL_MAIL_FROM || "バイテック法人AI研修 <noreply@biz.bytech.jp>",
       to: [email],
       reply_to: "customer-success@bytech.jp",
       subject: `【バイテック法人AI研修】資料のご案内（${docName}）`,
