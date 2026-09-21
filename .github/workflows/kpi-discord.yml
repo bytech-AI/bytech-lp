@@ -23,5 +23,7 @@ jobs:
       - name: Post KPI to Discord
         env:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GA_SERVICE_ACCOUNT_JSON }}
+          SUPABASE_CRM_URL: ${{ secrets.SUPABASE_CRM_URL }}
+          SUPABASE_CRM_SECRET_KEY: ${{ secrets.SUPABASE_CRM_SECRET_KEY }}
           DISCORD_KPI_WEBHOOK_URL: ${{ secrets.DISCORD_KPI_WEBHOOK_URL }}
         run: node scripts/kpi-discord.mjs --days "${{ github.event.inputs.days || '7' }}"
