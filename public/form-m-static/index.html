@@ -942,7 +942,7 @@ body {
       var text=await res.text();
       var result;try{result=JSON.parse(text);}catch{throw new Error('Invalid');}
       if(result.error){alert('エラー: '+result.error);}
-      else{dataLayer.push({event:'fc_form_complete',booking_id:result.bookingId||''});window.location.href=THANKS_URL;}
+      else{dataLayer.push({event:'fc_form_complete',booking_id:result.bookingId||''});try{sessionStorage.setItem('bytech_cv',JSON.stringify({lp:'gen',id:result.bookingId||'',src:SOURCE}));}catch(e){}window.location.href=THANKS_URL;}
     }catch{alert('通信エラーが発生しました。もう一度お試しください。');}
     finally{btn.classList.remove('loading');btn.disabled=false;}
   }
