@@ -150,7 +150,7 @@ async function fetchGa4(token, propertyId, label) {
   const range = { dateRanges: [{ startDate: START, endDate: END }] };
   const run = (body) => gPost(token, url, { ...range, ...body });
 
-  const [totals, bySource, events, landing, meta] = await Promise.all([
+  const [totals, bySource, events, landing, byHost, meta] = await Promise.all([
     run({ metrics: [{ name: "sessions" }, { name: "totalUsers" }, { name: "newUsers" }, { name: "engagementRate" }, { name: "conversions" }] }),
     run({
       dimensions: [{ name: "sessionSourceMedium" }],
@@ -169,6 +169,13 @@ async function fetchGa4(token, propertyId, label) {
       metrics: [{ name: "sessions" }, { name: "conversions" }],
       orderBys: [{ metric: { metricName: "sessions" }, desc: true }],
       limit: 25,
+    }),
+    // ホスト名別（広告ドメインを1プロパティに集約している構成のため必須）
+    run({
+      dimensions: [{ name: "hostName" }],
+      metrics: [{ name: "sessions" }, { name: "keyEvents" }],
+      orderBys: [{ metric: { metricName: "sessions" }, desc: true }],
+      limit: 40,
     }),
     fetch(`https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}/metadata`, {
       headers: { Authorization: `Bearer ${token}` },
@@ -193,6 +200,7 @@ async function fetchGa4(token, propertyId, label) {
     bySource: toRows(bySource),
     events: toRows(events),
     landing: toRows(landing),
+    byHost: toRows(byHost),
     keyEvents,
   };
 }
@@ -283,6 +291,8 @@ for (const a of out.ga4) {
   md.push(`| キーイベント設定 | ${a.keyEvents.join(", ") || "（未設定）"} |`, "");
   md.push(`### 流入元（source / medium）`, "", `| 流入元 | セッション | CV |`, `|---|---|---|`);
   for (const r of a.bySource) md.push(`| ${r.sessionSourceMedium} | ${num(r.sessions)} | ${num(r.conversions)} |`);
+  md.push("", `### ホスト名別`, "", `| ホスト | セッション | キーイベント |`, `|---|---|---|`);
+  for (const r of a.byHost) md.push(`| ${r.hostName} | ${num(r.sessions)} | ${num(r.keyEvents)} |`);
   md.push("", `### ランディングページ`, "", `| LP | セッション | CV |`, `|---|---|---|`);
   for (const r of a.landing) md.push(`| ${r.landingPage} | ${num(r.sessions)} | ${num(r.conversions)} |`);
   md.push("", `### イベント`, "", `| イベント | 回数 |`, `|---|---|`);
