@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "analytics:baseline": "node scripts/analytics-baseline.mjs"
+    "analytics:baseline": "node scripts/analytics-baseline.mjs",
+    "kpi:discord": "node scripts/kpi-discord.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.127.0",

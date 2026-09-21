@@ -1,0 +1,27 @@
+name: KPI weekly report to Discord
+
+on:
+  schedule:
+    # 毎週月曜 09:00 JST（= 日曜 00:00 UTC）に直近7日 vs 前7日を投稿
+    - cron: "0 0 * * 1"
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "集計日数（既定 7）"
+        required: false
+        default: "7"
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Post KPI to Discord
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GA_SERVICE_ACCOUNT_JSON }}
+          DISCORD_KPI_WEBHOOK_URL: ${{ secrets.DISCORD_KPI_WEBHOOK_URL }}
+        run: node scripts/kpi-discord.mjs --days "${{ github.event.inputs.days || '7' }}"
