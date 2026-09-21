@@ -19,7 +19,7 @@ export default function CurriculumPage() {
         <header className="header">
           <div className="header__inner">
             <div className="header__logo">
-              <a href="/bytech"><img src="/bytech/assets/img/hd-logo.svg" className="" alt="バイテック生成AI" /></a>
+              <a href="/bytech"><img src="/bytech/assets/img/hd-logo.svg" className="" alt="バイテックAIスクール" /></a>
             </div>
             <nav className="header__nav">
               <ul className="header__nav__gnav--menu">

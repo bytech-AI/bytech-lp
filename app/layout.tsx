@@ -22,10 +22,14 @@ const jost = Jost({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://bytech.jp"),
-  title: "【公式】バイテック生成AI｜未経験からプロのAI活用人材を目指せる実践型AIスクール",
-  description: "最短2ヶ月で年収・キャリアを上げるAI活用スキルを武器に。ずっと学べて、何度でも相談できる実践型AIスクール「バイテック生成AI」。2500人以上の受講生が実績を上げています。",
+  title: "【公式】バイテックAIスクール｜ずっと学べて、何度でも相談できる",
+  description: "最短2ヶ月で年収・キャリアを上げるAI活用スキルを武器に。ずっと学べて、何度でも相談できる実践型スクール「バイテックAIスクール」。2500人以上の受講生が実績を上げています。",
   alternates: { canonical: "/" },
   robots: { index: true, follow: true },
+  // Googleの検索結果に出るサイト名は title / og:site_name / JSON-LDの WebSite.name の
+  // 3つから決まる。食い違うとGoogleが旧称を拾い続けるため、必ずこの3つを揃えること
+  // （ホームの JSON-LD は public/bytech-home-static/index.html に焼き込み済み）。
+  openGraph: { siteName: "バイテックAIスクール", locale: "ja_JP", type: "website" },
 };
 
 export default function RootLayout({
