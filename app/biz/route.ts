@@ -32,7 +32,7 @@ const BRAND_OLD = "バイテックBiz";
 // ロゴ画像そのものは「Bytech Biz」のままなので、書き換えが再発しないか要観測。
 // BRAND_OLD は alternateName として残す。
 // サイト名はトップページの title / og:site_name / WebSite.name から決まり、
-// 3つが食い違うと親ドメイン bytech.jp の「バイテック生成AI」が使われてしまうため、
+// 3つが食い違うと親ドメイン bytech.jp の「バイテックAIスクール」が使われてしまうため、
 // 必ずこの3つを SITE_NAME で揃えること。
 const SITE_NAME = BRAND_OFFICIAL;
 const SITE_TITLE = `実務伴走型の企業向けAI研修｜${SITE_NAME}【公式】`;

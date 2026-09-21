@@ -61,7 +61,7 @@
 - 特定商取引法に関する表示: https://geek.bytech.jp/specified_commercial
 
 ## 姉妹サービス
-- バイテック生成AI（生成AI活用スクール）: https://bytech.jp
+- バイテックAIスクール（生成AI活用スクール）: https://bytech.jp
 
 ## 運営者情報
 - 会社名: 株式会社AI棒（byTech事業部）

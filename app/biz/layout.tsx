@@ -61,7 +61,7 @@ export const metadata: Metadata = {
 // のに合わせて戻した（旧称「バイテックBiz」は alternateName に保持）。
 // ロゴ画像自体は「Bytech Biz」のままなので、Googleがサイト名を書き換えないか要観測。
 // title / og:site_name / WebSite.name の3つが食い違うとGoogleがサイト名を確定できず、
-// 親ドメイン bytech.jp の「バイテック生成AI」が検索結果に出てしまうため、必ず3つを揃えること。
+// 親ドメイン bytech.jp の「バイテックAIスクール」が検索結果に出てしまうため、必ず3つを揃えること。
 // 会社情報は特商法ページ準拠（株式会社AI棒／恵比寿）。
 const bizJsonLd = {
   "@context": "https://schema.org",

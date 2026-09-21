@@ -74,7 +74,7 @@ document.querySelectorAll('.faq__item').forEach(function(item) {
     '<div class="bt-popup__headline">無料カウンセリングを<br><em>予約しませんか？</em></div>' +
     '<p class="bt-popup__lead">担当者との面談で、この場でご予約いただけます。</p>' +
     '<ul class="bt-popup__points">' +
-      '<li>バイテック生成AIのサービス概要</li>' +
+      '<li>バイテックAIスクールのサービス概要</li>' +
       '<li>他社での活用事例・受講生の成果</li>' +
       '<li>料金プラン・サポート内容の詳細</li>' +
     '</ul>' +

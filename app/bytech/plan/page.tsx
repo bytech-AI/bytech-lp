@@ -519,7 +519,7 @@ export default function PlanPage() {
     <div className="header__bar">
       <div className="header__logo">
         <a href="/bytech">
-          <img src="/bytech/assets/images/logo-black.svg" alt="バイテック生成AI" />
+          <img src="/bytech/assets/images/logo-black.svg" alt="バイテックAIスクール" />
         </a>
       </div>
       <nav className="header__nav">
@@ -1034,7 +1034,7 @@ export default function PlanPage() {
       <div className="footer__grid">
         <div className="footer__brand">
           <div className="footer__brand__logo">
-            <img src="/bytech/assets/images/plan/生成AIロゴ黒.svg" alt="バイテック生成AI" />
+            <img src="/bytech/assets/images/plan/生成AIロゴ黒.svg" alt="バイテックAIスクール" />
           </div>
           <p className="footer__brand__catch">最短2ヶ月で、<br />生成AI活用のプロに。</p>
           <div className="footer__brand__cta">
