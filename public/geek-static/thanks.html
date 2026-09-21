@@ -6,6 +6,15 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/x-icon" href="/geek-static/files/favicon.ico">
 <title>ご予約ありがとうございます – バイテックGEEK | 無料個別カウンセリング</title>
+<!-- GA4 直接計測（GEEK: G-CETVPNZPV5）。完了ページには GTM が無いため gtag を直接読み込み、
+     予約フォームから遷移した時（sessionStorage の bytech_cv フラグ）だけ cv_setsumeikai を送る。 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CETVPNZPV5"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-CETVPNZPV5');
+(function(){var f='';try{f=sessionStorage.getItem('bytech_cv')||'';}catch(e){}
+if(f.indexOf('geek:')===0){gtag('event','cv_setsumeikai',{lp_type:'geek',booking_id:f.slice(5)});try{sessionStorage.removeItem('bytech_cv');}catch(e){}}})();
+</script>
 <style>
   :root {
     --color-primary: #533AFC;
