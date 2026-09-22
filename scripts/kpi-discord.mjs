@@ -11,8 +11,9 @@
  *       ※ 本校・GEEKは GTM 遅延読込のため直帰の一部が数えられず、ユーザー数は実態より少なめ
  *
  * 使い方:
- *   node scripts/kpi-discord.mjs              # 直近7日（昨日まで） vs その前7日
+ *   node scripts/kpi-discord.mjs              # 週報: 直近7日（昨日まで） vs その前7日
  *   node scripts/kpi-discord.mjs --days 28
+ *   node scripts/kpi-discord.mjs --daily      # 日報: 本日（JST） vs 前日、直近7日累計つき
  *   node scripts/kpi-discord.mjs --dry-run    # 投稿せず内容を表示
  *
  * 環境変数（.env.local / CI secrets）:
@@ -30,7 +31,8 @@ const argVal = (name, def) => {
   const i = args.indexOf(name);
   return i >= 0 && args[i + 1] ? args[i + 1] : def;
 };
-const DAYS = Number(argVal("--days", "7"));
+const DAILY = args.includes("--daily");
+const DAYS = DAILY ? 1 : Number(argVal("--days", "7"));
 const DRY = args.includes("--dry-run");
 
 // ---------- 期間（JST、昨日まで） ----------
@@ -38,14 +40,19 @@ const JST = 9 * 60 * 60 * 1000;
 const todayJst = new Date(Date.now() + JST);
 const dateStr = (d) => d.toISOString().slice(0, 10);
 const shift = (d, n) => new Date(d.getTime() + n * 86400000);
-const curEnd = shift(new Date(Date.UTC(todayJst.getUTCFullYear(), todayJst.getUTCMonth(), todayJst.getUTCDate())), -1);
+const todayUtc0 = new Date(Date.UTC(todayJst.getUTCFullYear(), todayJst.getUTCMonth(), todayJst.getUTCDate()));
+const curEnd = DAILY ? todayUtc0 : shift(todayUtc0, -1); // 日報は本日、週報は昨日まで
 const curStart = shift(curEnd, -(DAYS - 1));
 const prevEnd = shift(curStart, -1);
 const prevStart = shift(prevEnd, -(DAYS - 1));
 const RANGES = {
   current: { startDate: dateStr(curStart), endDate: dateStr(curEnd) },
   previous: { startDate: dateStr(prevStart), endDate: dateStr(prevEnd) },
+  // 日報の文脈用: 本日を含む直近7日
+  week: { startDate: dateStr(shift(curEnd, -6)), endDate: dateStr(curEnd) },
 };
+const PERIODS = DAILY ? ["current", "previous", "week"] : ["current", "previous"];
+const earliest = [RANGES.previous.startDate, RANGES.week.startDate].sort()[0];
 const inRange = (iso, r) => {
   if (!iso) return false;
   const d = dateStr(new Date(new Date(iso).getTime() + JST)); // JST の日付
@@ -71,12 +78,12 @@ async function sb(path) {
   if (!res.ok) throw new Error(`CRM ${path} → ${res.status} ${await res.text()}`);
   return res.json();
 }
-const sinceIso = `${RANGES.previous.startDate}T00:00:00+09:00`;
+const sinceIso = `${earliest}T00:00:00+09:00`;
 const [sources, leads, meetings, contracts] = await Promise.all([
   sb("inflow_sources?select=id,label,product_line,media_name,category"),
   sb(`leads?select=id,created_at,inflow_source_id,inflow_label,acuity_lp_type,rebooking_type,status&created_at=gte.${encodeURIComponent(sinceIso)}&limit=5000`),
   sb(`meetings?select=id,lead_id,actual_date,course_type&actual_date=gte.${encodeURIComponent(sinceIso)}&limit=5000`),
-  sb(`contracts?select=id,lead_id,plan,amount,applied_at&applied_at=gte.${RANGES.previous.startDate}&limit=5000`),
+  sb(`contracts?select=id,lead_id,plan,amount,applied_at&applied_at=gte.${earliest}&limit=5000`),
 ]);
 const srcById = Object.fromEntries(sources.map((s) => [s.id, s]));
 
@@ -112,7 +119,7 @@ const propertyIds = [...new Set(BRANDS.flatMap((b) => b.ga4.map((s) => s.propert
 const ga4Users = {}; // property → host → {current, previous}（activeUsers）
 for (const p of propertyIds) {
   const rep = await googlePost(token, `https://analyticsdata.googleapis.com/v1beta/properties/${p}:runReport`, {
-    dateRanges: [{ name: "current", ...RANGES.current }, { name: "previous", ...RANGES.previous }],
+    dateRanges: PERIODS.map((k) => ({ name: k, ...RANGES[k] })),
     dimensions: [{ name: "hostName" }],
     metrics: [{ name: "activeUsers" }],
     limit: 200,
@@ -120,24 +127,24 @@ for (const p of propertyIds) {
   const byHost = {};
   for (const r of rep.rows ?? []) {
     const [host, range] = r.dimensionValues.map((d) => d.value);
-    (byHost[host] ??= { current: 0, previous: 0 })[range === "previous" ? "previous" : "current"] += Number(r.metricValues[0].value);
+    (byHost[host] ??= { current: 0, previous: 0, week: 0 })[PERIODS.includes(range) ? range : "current"] += Number(r.metricValues[0].value);
   }
   ga4Users[p] = byHost;
 }
 
 // ---------- 集計 ----------
 function brandStats(b) {
-  const s = { users: { current: 0, previous: 0 }, cv: { current: 0, previous: 0 }, rebook: { current: 0, previous: 0 }, meet: { current: 0, previous: 0 }, contract: { current: 0, previous: 0 }, amount: { current: 0, previous: 0 }, media: {} };
+  const z = () => ({ current: 0, previous: 0, week: 0 });
+  const s = { users: z(), cv: z(), rebook: z(), meet: z(), contract: z(), amount: z(), media: {} };
   for (const src of b.ga4) {
     for (const [host, v] of Object.entries(ga4Users[src.property] ?? {})) {
       if (IGNORE_HOST.test(host) || !src.host(host)) continue;
-      s.users.current += v.current;
-      s.users.previous += v.previous;
+      for (const k of PERIODS) s.users[k] += v[k] ?? 0;
     }
   }
   for (const l of leads) {
     if (leadBrand(l) !== b.key) continue;
-    for (const k of ["current", "previous"]) {
+    for (const k of PERIODS) {
       if (!inRange(l.created_at, RANGES[k])) continue;
       if (isRebooking(l)) s.rebook[k] += 1;
       else {
@@ -149,12 +156,12 @@ function brandStats(b) {
   for (const m of meetings) {
     const l = leadById[m.lead_id];
     if (!l || leadBrand(l) !== b.key) continue;
-    for (const k of ["current", "previous"]) if (inRange(m.actual_date, RANGES[k])) s.meet[k] += 1;
+    for (const k of PERIODS) if (inRange(m.actual_date, RANGES[k])) s.meet[k] += 1;
   }
   for (const c of contracts) {
     const l = leadById[c.lead_id];
     if (!l || leadBrand(l) !== b.key) continue;
-    for (const k of ["current", "previous"]) {
+    for (const k of PERIODS) {
       if (c.applied_at >= RANGES[k].startDate && c.applied_at <= RANGES[k].endDate) {
         s.contract[k] += 1;
         s.amount[k] += c.amount || 0;
@@ -180,9 +187,20 @@ const dpt = (cur, prev) => {
   return x > 0 ? `+${x.toFixed(1)}pt` : x < 0 ? `−${(-x).toFixed(1)}pt` : "±0";
 };
 
+const PREV_LABEL = DAILY ? "前日" : "前期";
 const fields = results.map((r) => {
   const cvrCur = cvr(r.cv.current, r.users.current);
   const cvrPrev = cvr(r.cv.previous, r.users.previous);
+  if (DAILY) {
+    const lines = [
+      `**予約CV ${r.cv.current}**（前日 ${r.cv.previous}）　**CVR ${pct(cvrCur)}**（前日 ${pct(cvrPrev)}）　AU ${num(r.users.current)}`,
+      `直近7日: 予約CV ${r.cv.week} / CVR ${pct(cvr(r.cv.week, r.users.week))} / 商談 ${r.meet.week} / 契約 ${r.contract.week}件`,
+    ];
+    if (r.contract.current) lines.push(`本日の契約 ${r.contract.current}件 ${yen(r.amount.current)}`);
+    const media = Object.entries(r.media).sort((a, b) => b[1] - a[1]).slice(0, 4);
+    if (media.length) lines.push(`媒体別: ${media.map(([m, n]) => `${m.replace(/^(GEN|GEEK|DEGIT|Biz)/, "")} ${n}`).join(" / ")}`);
+    return { name: r.label, value: lines.join("\n").slice(0, 1024), inline: false };
+  }
   const lines = [
     `**予約CV ${r.cv.current}**（前期 ${r.cv.previous}、${d(r.cv.current, r.cv.previous)}）`,
     `**CVR ${pct(cvrCur)}**（前期 ${pct(cvrPrev)}、${dpt(cvrCur, cvrPrev)}）　アクティブユーザー ${num(r.users.current)}`,
@@ -201,8 +219,21 @@ const totMeet = sum("meet", "current"), totMeetPrev = sum("meet", "previous");
 const totCon = sum("contract", "current"), totConPrev = sum("contract", "previous");
 const totAmt = sum("amount", "current"), totAmtPrev = sum("amount", "previous");
 const other = leads.filter((l) => leadBrand(l) === "OTHER" && !isRebooking(l) && inRange(l.created_at, RANGES.current)).length;
+const wkCv = sum("cv", "week"), wkUsers = sum("users", "week"), wkCon = sum("contract", "week"), wkAmt = sum("amount", "week");
 
-const embed = {
+const embed = DAILY ? {
+  title: `KPI日報 ${RANGES.current.startDate}｜予約CV ${totCv}件 / CVR ${pct(totCvr)}`,
+  description: [
+    `本日 ${RANGES.current.startDate}（JST、集計時点まで）　前日 ${RANGES.previous.startDate}`,
+    `予約CV ${d(totCv, totCvPrev)}（前日 ${totCvPrev}）　CVR ${dpt(totCvr, totCvrPrev)}（前日 ${pct(totCvrPrev)}）　商談実施 ${totMeet}　契約 ${totCon}件 ${yen(totAmt)}`,
+    `直近7日（${RANGES.week.startDate}〜）: 予約CV ${wkCv} / CVR ${pct(cvr(wkCv, wkUsers))} / 契約 ${wkCon}件 ${yen(wkAmt)}`,
+    other ? `※ 商材を判定できない予約 ${other}件は各商材に含めていません` : "",
+  ].filter(Boolean).join("\n"),
+  color: totCvr >= totCvrPrev ? 0x2ecc71 : 0xe67e22,
+  fields,
+  footer: { text: "予約・商談・契約 = CRM（Supabase） ／ AU = GA4アクティブユーザー（当日分は数時間遅れて確定） ／ CVR = 予約CV ÷ AU ／ 再予約・リスケはCVから除外" },
+  timestamp: new Date().toISOString(),
+} : {
   title: `KPI週報｜予約CV ${totCv}件 / CVR ${pct(totCvr)} / 契約 ${totCon}件 ${yen(totAmt)}`,
   description: [
     `期間 ${RANGES.current.startDate} 〜 ${RANGES.current.endDate}（${DAYS}日）　前期 ${RANGES.previous.startDate} 〜 ${RANGES.previous.endDate}`,
@@ -224,4 +255,4 @@ const hook = process.env.DISCORD_KPI_WEBHOOK_URL?.trim();
 if (!hook) throw new Error("DISCORD_KPI_WEBHOOK_URL が未設定");
 const res = await fetch(hook, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
 if (!res.ok) throw new Error(`Discord 投稿失敗: ${res.status} ${await res.text()}`);
-console.log(`投稿完了: 予約CV ${totCv} / CVR ${pct(totCvr)} / 契約 ${totCon}件（${RANGES.current.startDate}〜${RANGES.current.endDate}）`);
+console.log(`投稿完了(${DAILY ? "日報" : "週報"}): 予約CV ${totCv} / CVR ${pct(totCvr)} / 契約 ${totCon}件（${RANGES.current.startDate}〜${RANGES.current.endDate}）`);
