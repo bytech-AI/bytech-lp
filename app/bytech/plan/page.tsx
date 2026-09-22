@@ -1104,7 +1104,7 @@ export default function PlanPage() {
 
 
       {/* 共有ヘッダーJS（ハンバーガー/ドロワー/メガメニュー） */}
-      <Script id="bytech-lp-scripts" src="/bytech/assets/js/bytech-lp.js?v=20260913" strategy="afterInteractive" />
+      <Script id="bytech-lp-scripts" src="/bytech/assets/js/bytech-lp.js?v=20260922" strategy="afterInteractive" />
 
       <Script id="page-inline-script" strategy="afterInteractive">
         {`// Fadein on scroll
