@@ -44,3 +44,9 @@ next-env.d.ts
 # biz redesign scratch / reference (not for deploy)
 /public/biz-static/
 /shot_biz_plan.mjs
+
+# Google service account keys
+secrets/
+
+# analytics baseline raw dumps
+docs/analytics/*.json

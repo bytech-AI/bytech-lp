@@ -8,6 +8,14 @@
 <link rel="icon" href="/thanks-static/files/favicon-192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="/thanks-static/files/favicon-180.png">
 <title>ご予約ありがとうございます – バイテック | 無料個別カウンセリング</title>
+<!-- GA4 CV計測（本校: G-PR1BB3X47K。page_view は配信時に注入される GTM-K6HH9C2F が送るので event のみ）。予約フォームから遷移した時（sessionStorage の bytech_cv、lp='gen'）だけ cv_setsumeikai を送る。 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PR1BB3X47K"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-PR1BB3X47K',{send_page_view:false});
+(function(){var f=null;try{f=JSON.parse(sessionStorage.getItem('bytech_cv')||'null');}catch(e){}
+if(f&&f.lp==='gen'){gtag('event','cv_setsumeikai',{lp_type:f.lp,booking_id:f.id||'',source:f.src||''});try{sessionStorage.removeItem('bytech_cv');}catch(e){}}})();
+</script>
 <style>
   :root {
     --color-primary: #533AFC;

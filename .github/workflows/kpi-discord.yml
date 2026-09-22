@@ -1,0 +1,45 @@
+name: KPI report to Discord
+
+on:
+  schedule:
+    # 週報: 毎週月曜 09:00 JST（= 日曜 00:00 UTC）に直近7日 vs 前7日
+    - cron: "0 0 * * 1"
+    # 日報: 毎日 23:30 JST（= 14:30 UTC）に当日 vs 前日 + 直近7日累計
+    - cron: "30 14 * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "weekly または daily"
+        required: false
+        default: "weekly"
+      days:
+        description: "週報の集計日数（既定 7）"
+        required: false
+        default: "7"
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Decide mode
+        id: mode
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            if [ "${{ github.event.schedule }}" = "30 14 * * *" ]; then echo "flag=--daily" >> "$GITHUB_OUTPUT"; else echo "flag=--days ${{ github.event.inputs.days || '7' }}" >> "$GITHUB_OUTPUT"; fi
+          elif [ "${{ github.event.inputs.mode }}" = "daily" ]; then
+            echo "flag=--daily" >> "$GITHUB_OUTPUT"
+          else
+            echo "flag=--days ${{ github.event.inputs.days || '7' }}" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Post KPI to Discord
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GA_SERVICE_ACCOUNT_JSON }}
+          SUPABASE_CRM_URL: ${{ secrets.SUPABASE_CRM_URL }}
+          SUPABASE_CRM_SECRET_KEY: ${{ secrets.SUPABASE_CRM_SECRET_KEY }}
+          DISCORD_KPI_WEBHOOK_URL: ${{ secrets.DISCORD_KPI_WEBHOOK_URL }}
+        run: node scripts/kpi-discord.mjs ${{ steps.mode.outputs.flag }}

@@ -2635,7 +2635,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       var text=await res.text();
       var result;try{result=JSON.parse(text);}catch{throw new Error('Invalid');}
       if(result.error){alert('エラー: '+result.error);}
-      else{dataLayer.push({event:'fc_form_complete',booking_id:result.bookingId||''});window.location.href=THANKS_URL;}
+      else{dataLayer.push({event:'fc_form_complete',booking_id:result.bookingId||''});try{sessionStorage.setItem('bytech_cv',JSON.stringify({lp:'geek',id:result.bookingId||'',src:SOURCE}));}catch(e){}window.location.href=THANKS_URL;}
     }catch{alert('通信エラーが発生しました。もう一度お試しください。');}
     finally{btn.classList.remove('loading');btn.disabled=false;}
   }
@@ -3123,7 +3123,7 @@ return ok;}
 function csPopulateConfirm(){var last=document.getElementById('csLastName').value.trim();var first=document.getElementById('csFirstName').value.trim();document.getElementById('csConfTime').textContent=csSelectedLabel;document.getElementById('csConfName').textContent=(last+' '+first).trim();document.getElementById('csConfEmail').textContent=document.getElementById('csEmail').value;document.getElementById('csConfPhone').textContent=document.getElementById('csPhone').value;}
 async function csSubmit(){var btn=document.getElementById('csBtnSubmit');btn.classList.add('loading');btn.disabled=true;dataLayer.push({event:'consultation_form_submit'});try{var last=document.getElementById('csLastName').value.trim();var first=document.getElementById('csFirstName').value.trim();var params=new URLSearchParams({action:'book',started_at:csSelectedStart,displayed_date:csSelectedDateStr||(csSelectedStart?csSelectedStart.substring(0,10):''),last_name:last,first_name:first,name:(last+' '+first).trim(),email:document.getElementById('csEmail').value.trim(),phone:document.getElementById('csPhone').value.trim(),source:SOURCE,lp_type:LP_TYPE,entry:ENTRY,route_id:ROUTE_ID});var res=await fetch(GAS_URL+'?'+params,{cache:'no-store'});var text=await res.text();var result;try{result=JSON.parse(text);}catch{throw new Error('Invalid response');}
 if(result.error){alert('エラー: '+result.error);}
-else{dataLayer.push({event:'consultation_form_complete',booking_id:result.bookingId||''});window.location.href=THANKS_URL;}}catch{alert('通信エラーが発生しました。もう一度お試しください。');}
+else{dataLayer.push({event:'consultation_form_complete',booking_id:result.bookingId||''});try{sessionStorage.setItem('bytech_cv',JSON.stringify({lp:'geek',id:result.bookingId||'',src:SOURCE}));}catch(e){}window.location.href=THANKS_URL;}}catch{alert('通信エラーが発生しました。もう一度お試しください。');}
 finally{btn.classList.remove('loading');btn.disabled=false;}}
 document.querySelectorAll('.cs-input').forEach(function(input){input.addEventListener('input',function(){this.classList.remove('error');var err=this.closest('.cs-field').querySelector('.cs-err');if(err)err.classList.remove('show');});});document.getElementById('csLastName').addEventListener('focus',function(){dataLayer.push({event:'consultation_name_focus'});},{once:true});document.getElementById('csEmail').addEventListener('focus',function(){dataLayer.push({event:'consultation_email_focus'});},{once:true});window.addEventListener('resize',csSyncFvHeight);csInit();
 
