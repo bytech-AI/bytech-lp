@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 /**
  * KPI週報を Discord に投稿する。
- * リブランディングの主指標 = CV数（予約）と CVR（予約 ÷ ユーザー数）。加えて商談実施・契約まで追う。
+ * リブランディングの主指標 = CV数（予約）と CVR（予約 ÷ アクティブユーザー数）。加えて商談実施・契約まで追う。
  *
  * データソース:
  *   - CV・商談・契約: CRM（Supabase byTech_Sales-Management-System）= 正データ
  *       leads.created_at（予約）→ meetings.actual_date（商談実施）→ contracts.applied_at（契約）
- *   - ユーザー数（CVRの分母）: GA4 totalUsers（新規＋再訪）。広告LPはホスト名で商材に振り分け
+ *   - アクティブユーザー数（CVRの分母）: GA4 activeUsers（GA4画面の「ユーザー」と同じ。新規＋再訪）。広告LPはホスト名で商材に振り分け
  *       ※ 予約は「人」が1回する行為なので分母は人数。新規ユーザーだと再訪して予約した人が分母から欠ける
  *       ※ 本校・GEEKは GTM 遅延読込のため直帰の一部が数えられず、ユーザー数は実態より少なめ
  *
@@ -109,12 +109,12 @@ if (missing.length) {
 // ---------- GA4 セッション ----------
 const token = await googleAccessToken(["https://www.googleapis.com/auth/analytics.readonly"]);
 const propertyIds = [...new Set(BRANDS.flatMap((b) => b.ga4.map((s) => s.property)))];
-const ga4Users = {}; // property → host → {current, previous}（totalUsers）
+const ga4Users = {}; // property → host → {current, previous}（activeUsers）
 for (const p of propertyIds) {
   const rep = await googlePost(token, `https://analyticsdata.googleapis.com/v1beta/properties/${p}:runReport`, {
     dateRanges: [{ name: "current", ...RANGES.current }, { name: "previous", ...RANGES.previous }],
     dimensions: [{ name: "hostName" }],
-    metrics: [{ name: "totalUsers" }],
+    metrics: [{ name: "activeUsers" }],
     limit: 200,
   });
   const byHost = {};
@@ -185,7 +185,7 @@ const fields = results.map((r) => {
   const cvrPrev = cvr(r.cv.previous, r.users.previous);
   const lines = [
     `**予約CV ${r.cv.current}**（前期 ${r.cv.previous}、${d(r.cv.current, r.cv.previous)}）`,
-    `**CVR ${pct(cvrCur)}**（前期 ${pct(cvrPrev)}、${dpt(cvrCur, cvrPrev)}）　ユーザー ${num(r.users.current)}`,
+    `**CVR ${pct(cvrCur)}**（前期 ${pct(cvrPrev)}、${dpt(cvrCur, cvrPrev)}）　アクティブユーザー ${num(r.users.current)}`,
     `商談実施 ${r.meet.current}（前期 ${r.meet.previous}）　契約 ${r.contract.current}件 ${yen(r.amount.current)}（前期 ${r.contract.previous}件）`,
   ];
   if (r.rebook.current || r.rebook.previous) lines.push(`再予約・リスケ ${r.rebook.current}（CVには含めず）`);
@@ -211,7 +211,7 @@ const embed = {
   ].filter(Boolean).join("\n"),
   color: totCvr >= totCvrPrev ? 0x2ecc71 : 0xe67e22,
   fields,
-  footer: { text: "予約・商談・契約 = CRM（Supabase） ／ ユーザー数 = GA4 totalUsers（本校・GEEKは遅延読込のため少なめ） ／ CVR = 予約CV ÷ ユーザー数 ／ 再予約・リスケはCVから除外" },
+  footer: { text: "予約・商談・契約 = CRM（Supabase） ／ アクティブユーザー = GA4 activeUsers（本校・GEEKは遅延読込のため少なめ） ／ CVR = 予約CV ÷ アクティブユーザー ／ 再予約・リスケはCVから除外" },
   timestamp: new Date().toISOString(),
 };
 const payload = { username: "バイテック KPI", embeds: [embed] };
