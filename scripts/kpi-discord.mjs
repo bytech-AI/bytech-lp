@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 /**
  * KPI週報を Discord に投稿する。
- * リブランディングの主指標 = CV数（予約）と CVR（予約 ÷ セッション）。加えて商談実施・契約まで追う。
+ * リブランディングの主指標 = CV数（予約）と CVR（予約 ÷ ユーザー数）。加えて商談実施・契約まで追う。
  *
  * データソース:
  *   - CV・商談・契約: CRM（Supabase byTech_Sales-Management-System）= 正データ
  *       leads.created_at（予約）→ meetings.actual_date（商談実施）→ contracts.applied_at（契約）
- *   - セッション（CVRの分母）: GA4。広告LPはホスト名で商材に振り分け
- *       ※ 本校・GEEKは GTM 遅延読込のため直帰の一部が数えられず、セッションは実態より少なめ
+ *   - ユーザー数（CVRの分母）: GA4 totalUsers（新規＋再訪）。広告LPはホスト名で商材に振り分け
+ *       ※ 予約は「人」が1回する行為なので分母は人数。新規ユーザーだと再訪して予約した人が分母から欠ける
+ *       ※ 本校・GEEKは GTM 遅延読込のため直帰の一部が数えられず、ユーザー数は実態より少なめ
  *
  * 使い方:
  *   node scripts/kpi-discord.mjs              # 直近7日（昨日まで） vs その前7日
@@ -108,12 +109,12 @@ if (missing.length) {
 // ---------- GA4 セッション ----------
 const token = await googleAccessToken(["https://www.googleapis.com/auth/analytics.readonly"]);
 const propertyIds = [...new Set(BRANDS.flatMap((b) => b.ga4.map((s) => s.property)))];
-const ga4Sessions = {}; // property → host → {current, previous}
+const ga4Users = {}; // property → host → {current, previous}（totalUsers）
 for (const p of propertyIds) {
   const rep = await googlePost(token, `https://analyticsdata.googleapis.com/v1beta/properties/${p}:runReport`, {
     dateRanges: [{ name: "current", ...RANGES.current }, { name: "previous", ...RANGES.previous }],
     dimensions: [{ name: "hostName" }],
-    metrics: [{ name: "sessions" }],
+    metrics: [{ name: "totalUsers" }],
     limit: 200,
   });
   const byHost = {};
@@ -121,17 +122,17 @@ for (const p of propertyIds) {
     const [host, range] = r.dimensionValues.map((d) => d.value);
     (byHost[host] ??= { current: 0, previous: 0 })[range === "previous" ? "previous" : "current"] += Number(r.metricValues[0].value);
   }
-  ga4Sessions[p] = byHost;
+  ga4Users[p] = byHost;
 }
 
 // ---------- 集計 ----------
 function brandStats(b) {
-  const s = { sessions: { current: 0, previous: 0 }, cv: { current: 0, previous: 0 }, rebook: { current: 0, previous: 0 }, meet: { current: 0, previous: 0 }, contract: { current: 0, previous: 0 }, amount: { current: 0, previous: 0 }, media: {} };
+  const s = { users: { current: 0, previous: 0 }, cv: { current: 0, previous: 0 }, rebook: { current: 0, previous: 0 }, meet: { current: 0, previous: 0 }, contract: { current: 0, previous: 0 }, amount: { current: 0, previous: 0 }, media: {} };
   for (const src of b.ga4) {
-    for (const [host, v] of Object.entries(ga4Sessions[src.property] ?? {})) {
+    for (const [host, v] of Object.entries(ga4Users[src.property] ?? {})) {
       if (IGNORE_HOST.test(host) || !src.host(host)) continue;
-      s.sessions.current += v.current;
-      s.sessions.previous += v.previous;
+      s.users.current += v.current;
+      s.users.previous += v.previous;
     }
   }
   for (const l of leads) {
@@ -180,11 +181,11 @@ const dpt = (cur, prev) => {
 };
 
 const fields = results.map((r) => {
-  const cvrCur = cvr(r.cv.current, r.sessions.current);
-  const cvrPrev = cvr(r.cv.previous, r.sessions.previous);
+  const cvrCur = cvr(r.cv.current, r.users.current);
+  const cvrPrev = cvr(r.cv.previous, r.users.previous);
   const lines = [
     `**予約CV ${r.cv.current}**（前期 ${r.cv.previous}、${d(r.cv.current, r.cv.previous)}）`,
-    `**CVR ${pct(cvrCur)}**（前期 ${pct(cvrPrev)}、${dpt(cvrCur, cvrPrev)}）　セッション ${num(r.sessions.current)}`,
+    `**CVR ${pct(cvrCur)}**（前期 ${pct(cvrPrev)}、${dpt(cvrCur, cvrPrev)}）　ユーザー ${num(r.users.current)}`,
     `商談実施 ${r.meet.current}（前期 ${r.meet.previous}）　契約 ${r.contract.current}件 ${yen(r.amount.current)}（前期 ${r.contract.previous}件）`,
   ];
   if (r.rebook.current || r.rebook.previous) lines.push(`再予約・リスケ ${r.rebook.current}（CVには含めず）`);
@@ -194,8 +195,8 @@ const fields = results.map((r) => {
 });
 
 const totCv = sum("cv", "current"), totCvPrev = sum("cv", "previous");
-const totSess = sum("sessions", "current"), totSessPrev = sum("sessions", "previous");
-const totCvr = cvr(totCv, totSess), totCvrPrev = cvr(totCvPrev, totSessPrev);
+const totUsers = sum("users", "current"), totUsersPrev = sum("users", "previous");
+const totCvr = cvr(totCv, totUsers), totCvrPrev = cvr(totCvPrev, totUsersPrev);
 const totMeet = sum("meet", "current"), totMeetPrev = sum("meet", "previous");
 const totCon = sum("contract", "current"), totConPrev = sum("contract", "previous");
 const totAmt = sum("amount", "current"), totAmtPrev = sum("amount", "previous");
@@ -210,7 +211,7 @@ const embed = {
   ].filter(Boolean).join("\n"),
   color: totCvr >= totCvrPrev ? 0x2ecc71 : 0xe67e22,
   fields,
-  footer: { text: "予約・商談・契約 = CRM（Supabase） ／ セッション = GA4（本校・GEEKは遅延読込のため少なめ） ／ CVR = 予約CV ÷ セッション ／ 再予約・リスケはCVから除外" },
+  footer: { text: "予約・商談・契約 = CRM（Supabase） ／ ユーザー数 = GA4 totalUsers（本校・GEEKは遅延読込のため少なめ） ／ CVR = 予約CV ÷ ユーザー数 ／ 再予約・リスケはCVから除外" },
   timestamp: new Date().toISOString(),
 };
 const payload = { username: "バイテック KPI", embeds: [embed] };
