@@ -271,6 +271,8 @@
   @page { size: 1280px 720px; margin: 0; }
   @media print {
     body { padding: 0; background: #fff; }
+    /* box-shadow はPDF化でラスタ画像に変換され、Preview等でカード間に灰色の帯として出るため印刷時は無効化 */
+    * { box-shadow: none !important; }
     .note { display: none; }
     .deck { gap: 0; display: block; }
     .slide-shell { width: 1280px; }
