@@ -42,6 +42,13 @@ const DOCS: Record<string, { intro: string; items: { title: string; view: string
       { title: "AI導入を成功させる50のチェックシート", view: `${SITE}/documents/ebook-03`, pdf: `${SITE}/assets/docs/ebook-03.pdf` },
     ],
   },
+  AI研修タイプ比較ガイド: {
+    intro:
+      "eラーニング・セミナー・ハンズオン・ワークショップ、4つの研修タイプの違いを、概要・料金目安・見込める効果・導入事例・FAQでまとめています。比較表と目的別の選び方から、貴社に合う研修タイプの検討にお使いください。",
+    items: [
+      { title: "AI研修タイプ 比較ガイド", view: `${SITE}/documents/ebook-04`, pdf: `${SITE}/assets/docs/ebook-04.pdf` },
+    ],
+  },
 };
 DOCS["お役立ち資料3点セット"] = {
   intro:

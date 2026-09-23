@@ -42,7 +42,7 @@ const CATEGORY_THUMB: Record<string, string> = {
   サービス概要: "/biz/assets/img/documents/category-service.webp",
 };
 
-// リポジトリ内で持つ静的な資料。カードのリンク先はフォーム付きDLページ（/doc-b〜d）。
+// リポジトリ内で持つ静的な資料。カードのリンク先はフォーム付きDLページ（/doc-b〜e）。
 // 閲覧ページ /documents/ebook-0X は直リンクしない（DL導線はフォーム経由に統一）。
 // カバーは public/biz/assets/img/documents/ のwebp。
 const EBOOK_COVERS = [
@@ -80,6 +80,16 @@ const STATIC_DOCS: { category: string; doc: DocItem }[] = [
       thumbLabel: "DOCUMENT",
       thumb: EBOOK_COVERS[2],
       href: "/doc-d",
+    },
+  },
+  {
+    category: "サービス概要",
+    doc: {
+      title: "AI研修タイプ 比較ガイド",
+      points: ["eラーニング・セミナー・ハンズオン・ワークショップの違い", "タイプ別の料金目安・見込める効果・導入事例・FAQ", "比較表と目的別の選び方"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-04-cover.webp",
+      href: "/doc-e",
     },
   },
 ];
