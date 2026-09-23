@@ -78,6 +78,9 @@ html = html.replace("</head>", EMBED_CSS);
 // 相対アセット参照を絶対パスへ。biz の proxy は拡張子つき相対パス(/ebooks/...svg)を
 // リライトせず素通しして404にするため、/biz/ 起点の絶対参照に変換して配信する。
 html = html.replaceAll('src="assets/', `src="/biz/ebooks/${slug}/assets/`);
+// スタイルを別ファイルに切り出した原稿（<link href="assets/deck.css">）にも対応する。
+// 外部CDN(fonts.googleapis.com)のhrefは絶対URLなのでこの置換に一致しない。
+html = html.replaceAll('href="assets/', `href="/biz/ebooks/${slug}/assets/`);
 writeFileSync(join(embedDir, "index.html"), html);
 if (existsSync(join(deckDir, "assets"))) {
   cpSync(join(deckDir, "assets"), join(embedDir, "assets"), { recursive: true });
