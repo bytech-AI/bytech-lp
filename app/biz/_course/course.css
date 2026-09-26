@@ -660,3 +660,37 @@ html { scroll-behavior: smooth; }
 .ct-breadcrumb--hero { max-width: none; margin: 0 0 clamp(16px, 2vw, 22px); padding: 0; color: rgba(255, 255, 255, .85); font-weight: 700; }
 .ct-breadcrumb--hero a { color: #9fd3ff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 .ct-breadcrumb--hero a:hover { text-decoration: none; }
+
+/* ===== FAQ下の資料DL導線（上段＝コース別資料 ／ 下段＝無料相談・お役立ち資料） ===== */
+.ct-dl { background: #f5f7fb; padding: clamp(48px, 6vw, 80px) 20px; }
+.ct-dl__inner { max-width: 1080px; margin: 0 auto; display: grid; gap: 16px; }
+.ct-dl__main { display: grid; grid-template-columns: 1.15fr 1fr; align-items: stretch; background: #fff; border: 2px solid var(--ct-accent, #204aa8); border-radius: 10px; overflow: hidden; }
+.ct-dl__body { padding: clamp(28px, 3.4vw, 44px); display: flex; flex-direction: column; justify-content: center; }
+.ct-dl__eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .08em; color: var(--ct-accent, #204aa8); margin-bottom: 10px; }
+.ct-dl__title { font-size: clamp(20px, 2.2vw, 25px); font-weight: 800; line-height: 1.45; color: #17233a; margin: 0 0 12px; }
+.ct-dl__desc { font-size: 14px; font-weight: 500; line-height: 1.9; color: #4a5568; margin: 0 0 24px; }
+.ct-dl__btn { align-self: flex-start; display: inline-flex; align-items: center; gap: 12px; background: var(--ct-accent, #204aa8); color: #fff; font-size: 15px; font-weight: 700; text-decoration: none; padding: 14px 30px; border-radius: 9999px; transition: opacity .2s ease; }
+.ct-dl__btn:hover { opacity: .88; }
+.ct-dl__btn-ico { width: 18px; height: 18px; flex: 0 0 auto; background: center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v12'/%3E%3Cpath d='m7 11 5 5 5-5'/%3E%3Cpath d='M4 20h16'/%3E%3C/svg%3E"); transition: transform .2s ease; }
+.ct-dl__btn:hover .ct-dl__btn-ico { transform: translateY(3px); }
+.ct-dl__visual { background: color-mix(in srgb, var(--ct-accent, #204aa8) 16%, #fff); display: flex; align-items: center; justify-content: center; padding: 28px 20px; min-height: 260px; }
+.ct-dl__visual img { width: auto; max-width: 62%; max-height: 300px; object-fit: contain; display: block; filter: drop-shadow(0 10px 26px rgba(20, 40, 80, .28)); }
+
+.ct-dl__row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.ct-dl__card { display: flex; align-items: center; justify-content: space-between; gap: 20px; background: #fff; border: 2px solid var(--ct-accent, #204aa8); border-radius: 10px; padding: clamp(20px, 2.4vw, 28px) clamp(20px, 2.6vw, 30px); }
+.ct-dl__card-body { flex: 1; min-width: 0; }
+.ct-dl__card-title { font-size: 18px; font-weight: 800; color: #17233a; margin: 0 0 6px; white-space: nowrap; }
+.ct-dl__card-desc { font-size: 12.5px; font-weight: 500; line-height: 1.7; color: #4a5568; margin: 0; }
+.ct-dl__card-btn { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 10px; background: var(--ct-accent, #204aa8); color: #fff; font-size: 14px; font-weight: 700; text-decoration: none; padding: 12px 22px; border-radius: 9999px; white-space: nowrap; transition: opacity .2s ease; }
+.ct-dl__card-btn:hover { opacity: .88; }
+.ct-dl__card-ico { width: 20px; height: 20px; flex: 0 0 auto; border-radius: 50%; background: rgba(255,255,255,.22) center/9px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6h7M6 3l3.2 3L6 9' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+
+@media (max-width: 900px) {
+  .ct-dl__main { grid-template-columns: 1fr; }
+  .ct-dl__visual { order: -1; min-height: 0; padding: 24px 20px; }
+  .ct-dl__visual img { max-width: 44%; max-height: 220px; }
+  .ct-dl__row { grid-template-columns: 1fr; }
+  .ct-dl__card { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .ct-dl__card-btn { align-self: stretch; justify-content: center; }
+  .ct-dl__btn { align-self: stretch; justify-content: center; }
+}

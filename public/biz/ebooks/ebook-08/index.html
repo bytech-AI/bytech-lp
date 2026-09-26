@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code研修 コース紹介｜全17スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* 自動生成: scripts/gen-course-decks から courses.json をもとに出力。手で直さず生成側を直すこと。
+     設計は ebook-05（ChatGPT研修）で確定したもの。四角要素の角丸なし・円とピルのみ角丸。 */
+  :root {
+    --blue: #2c5c9c; --blue-deep: #1a2e50; --blue-bright: #1a6fb5; --blue-pale: #8fb0d8;
+    --ink: #2a2f3a; --line: #e3e8ef; --amber: #f0b429; --tint: #eef4fb;
+    --acc: #c2643c; --acc-deep: #8a3f21; --acc-tint: #f9ece5;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f4f6f8; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; color: var(--ink); padding: 48px 0 96px; }
+  .note { max-width: 1120px; margin: 0 auto 28px; font-size: 13px; font-weight: 700; color: #8a93a3; }
+  .en { font-family: Montserrat, "Noto Sans JP", sans-serif; }
+
+  .deck { display: flex; flex-direction: column; gap: 34px; align-items: center; counter-reset: pg -1; }
+  .slide-shell { width: 1120px; counter-increment: pg; }
+  .slide-shell figcaption { font-size: 12px; font-weight: 700; color: #8a93a3; margin: 8px 2px 0; letter-spacing: .04em; }
+  .slide { width: 1280px; height: 720px; transform: scale(0.875); transform-origin: top left; background: #fff; position: relative; overflow: hidden; }
+  .slide-shell .clip { height: 630px; overflow: hidden; border-radius: 0; box-shadow: 0 2px 10px rgba(26,35,48,.08); }
+
+  /* ===== 共通 ===== */
+  .s-body { position: absolute; inset: 0; padding: 44px 64px; z-index: 1; }
+  .s-eyebrow { font-family: Montserrat, "Noto Sans JP", sans-serif; display: flex; align-items: center; gap: 9px; font-size: 15.5px; font-weight: 700; color: var(--blue-pale); letter-spacing: .02em; }
+  .s-eyebrow::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--acc); }
+  .s-title { font-size: 34px; font-weight: 800; color: #1a2330; letter-spacing: .02em; margin-top: 8px; line-height: 1.5; }
+  .s-title b { color: var(--acc); }
+  .s-title i { font-style: normal; color: var(--blue-bright); }
+  .s-logo { position: absolute; top: 46px; right: 64px; height: 34px; }
+  .s-lead { font-size: 16.5px; font-weight: 600; line-height: 1.85; color: #4a5568; margin-top: 10px; }
+  .s-lead b { color: var(--acc); font-weight: 800; }
+  .s-foot { position: absolute; left: 64px; bottom: 22px; font-size: 12.5px; color: #8a93a3; z-index: 5; }
+  .s-num { position: absolute; right: 0; bottom: 0; width: 72px; height: 72px; background: var(--blue); border-radius: 72px 0 0 0; color: #fff; font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 700; display: flex; align-items: flex-end; justify-content: flex-end; padding: 0 16px 11px 0; z-index: 5; }
+  .s-num::before { content: counter(pg); }
+  .blue-bg { background: linear-gradient(135deg, #1c3a6b 0%, var(--blue) 46%, #3a76c4 100%); color: #fff; }
+  svg.waves { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .band { display: flex; align-items: center; gap: 11px; background: var(--acc-tint); border: 1.5px solid var(--acc); padding: 12px 20px; font-size: 14.5px; font-weight: 800; color: var(--acc-deep); }
+  .band::before { content: "✓"; flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; background: var(--acc); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+
+  /* ===== 表紙 ===== */
+  .cover .badge-row { position: absolute; top: 62px; left: 64px; display: flex; align-items: center; gap: 16px; }
+  .cover .badge { background: var(--amber); color: #4a3605; font-size: 16px; font-weight: 800; padding: 10px 18px; }
+  .cover .badge-note { font-size: 20px; font-weight: 700; padding-bottom: 12px; border-bottom: 2px solid rgba(255,255,255,.85); letter-spacing: .04em; }
+  .cover .sub { position: absolute; left: 66px; top: 228px; max-width: 620px; font-size: 21px; font-weight: 700; letter-spacing: .03em; line-height: 1.65; }
+  .cover .title { position: absolute; left: 62px; top: 330px; max-width: 640px; font-weight: 800; letter-spacing: .03em; line-height: 1.2; }
+  .cover .title small { display: block; font-size: 38px; letter-spacing: .08em; margin-top: 10px; font-weight: 700; }
+  .cover .date { position: absolute; left: 66px; top: 600px; font-family: Montserrat, "Noto Sans JP", sans-serif; font-size: 15px; font-weight: 600; letter-spacing: .18em; opacity: .8; }
+  .cover .logo { position: absolute; right: 64px; bottom: 48px; height: 44px; }
+  .cover .tool-logo { position: absolute; right: 70px; top: 318px; width: 470px; height: 190px; object-fit: contain; object-position: right center; }
+  .cover .tool-panel { position: absolute; right: 70px; top: 318px; width: 470px; height: 190px; background: #fff; display: flex; align-items: center; justify-content: center; }
+  .cover .tool-panel img { max-width: 78%; max-height: 66%; object-fit: contain; }
+
+  /* ===== 目次 ===== */
+  .toc { margin-top: 26px; display: flex; flex-direction: column; gap: 11px; max-width: 830px; }
+  .toc .row { display: flex; align-items: center; gap: 20px; font-size: 19px; font-weight: 800; color: #1a2330; background: #fff; border: 1px solid #d9e1ec; border-radius: 999px; padding: 10px 16px; box-shadow: 0 4px 14px rgba(26,35,48,.05); }
+  .toc .no { font-family: Montserrat, sans-serif; flex: 0 0 auto; width: 42px; height: 42px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; }
+
+  /* ===== 3カード（研修とは） ===== */
+  .card3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 22px; }
+  .fc { background: #fff; border: 1px solid var(--line); box-shadow: 0 6px 20px rgba(26,35,48,.06); overflow: hidden; display: flex; flex-direction: column; }
+  .fc img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .fc .bd { padding: 14px 18px 16px; }
+  .fc .no { font-family: Montserrat, sans-serif; font-size: 13px; font-weight: 800; color: var(--acc); letter-spacing: .06em; }
+  .fc .h { font-size: 17px; font-weight: 800; color: #1a2330; line-height: 1.45; margin-top: 3px; }
+  .fc .d { font-size: 12.6px; font-weight: 500; color: #4a5568; line-height: 1.75; margin-top: 8px; }
+
+  /* ===== 4カード（おすすめ） ===== */
+  .card4 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; margin-top: 24px; }
+  .rc { background: #fff; border: 1px solid var(--line); border-left: 5px solid var(--acc); box-shadow: 0 6px 20px rgba(26,35,48,.06); padding: 16px 20px; }
+  .rc .h { display: flex; align-items: flex-start; gap: 10px; font-size: 17px; font-weight: 800; color: #1a2330; line-height: 1.5; }
+  .rc .h::before { content: "✓"; flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; background: var(--acc); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; margin-top: 2px; }
+  .rc .d { font-size: 13px; font-weight: 500; color: #4a5568; line-height: 1.75; margin-top: 7px; padding-left: 32px; }
+
+  /* ===== スペック＋ステップ ===== */
+  .spec4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 24px; }
+  .sp4 { background: var(--acc-tint); border: 1px solid rgba(0,0,0,.06); padding: 16px 14px; text-align: center; }
+  .sp4 .k { font-size: 13px; font-weight: 800; color: var(--acc-deep); }
+  .sp4 .v { font-size: 19px; font-weight: 800; color: #1a2330; margin-top: 5px; line-height: 1.3; }
+  .sp4 .v b { font-family: Montserrat, "Noto Sans JP", sans-serif; font-size: 32px; font-weight: 800; color: var(--acc); padding: 0 2px; }
+  .stepN { display: grid; align-items: stretch; margin-top: 22px; gap: 0; }
+  .st { background: #fff; border: 1px solid var(--line); box-shadow: 0 6px 20px rgba(26,35,48,.06); padding: 0 0 16px; }
+  .st .hd { background: var(--blue); color: #fff; padding: 9px 12px; display: flex; align-items: center; gap: 9px; }
+  .st .hd .n { font-family: Montserrat, sans-serif; font-size: 11.5px; font-weight: 800; border: 1.5px solid rgba(255,255,255,.75); padding: 3px 8px; white-space: nowrap; }
+  .st .hd .t { font-size: 15.5px; font-weight: 800; }
+  .st .li { font-size: 12.4px; font-weight: 700; color: #2a3446; padding: 8px 14px 0 26px; position: relative; line-height: 1.5; }
+  .st .li::before { content: ""; position: absolute; left: 14px; top: 14px; width: 6px; height: 6px; border-radius: 50%; background: var(--acc); }
+  .st-arrow { display: flex; align-items: center; justify-content: center; }
+  .st-arrow::before { content: ""; width: 13px; height: 22px; background: var(--blue-pale); clip-path: polygon(0 0, 52% 0, 100% 50%, 52% 100%, 0 100%, 46% 50%); }
+
+  /* ===== カリキュラム ===== */
+  .cur-hd { display: flex; align-items: center; gap: 16px; margin-top: 22px; }
+  .cur-hd .n { font-family: Montserrat, sans-serif; background: var(--acc); color: #fff; font-size: 15px; font-weight: 800; padding: 8px 16px; letter-spacing: .06em; white-space: nowrap; }
+  .cur-hd .t { font-size: 24px; font-weight: 800; color: #1a2330; }
+  .cur-hd .prog { margin-left: auto; display: flex; align-items: center; gap: 7px; }
+  .cur-hd .prog i { width: 36px; height: 7px; background: #e3eaf2; }
+  .cur-hd .prog i.on { background: var(--acc); }
+  .cur-hd .prog span { font-family: Montserrat, sans-serif; font-size: 12.5px; font-weight: 700; color: #8a93a3; margin-left: 5px; }
+  .cur { display: grid; gap: 22px; margin-top: 20px; }
+  .cur.c2 { grid-template-columns: 1fr 1fr; max-width: 820px; }
+  .cur.c3 { grid-template-columns: 1fr 1fr 1fr; }
+  .cur.c4 { grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .cc { background: #fff; border: 1px solid var(--line); box-shadow: 0 6px 20px rgba(26,35,48,.06); overflow: hidden; display: flex; flex-direction: column; }
+  .cc img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-bottom: 1px solid var(--line); }
+  .cc .bd { padding: 13px 16px 16px; flex: 1; }
+  .cc .cat { display: inline-block; font-size: 11.5px; font-weight: 800; color: var(--acc-deep); background: var(--acc-tint); padding: 4px 10px; }
+  .cc .h { font-size: 16px; font-weight: 800; color: #1a2330; line-height: 1.5; margin-top: 8px; }
+  .cc .tg { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .cc .tg span { font-size: 10.8px; font-weight: 700; color: var(--blue); background: var(--tint); border-radius: 999px; padding: 3px 9px; }
+  .cc .d { font-size: 12.2px; font-weight: 500; color: #4a5568; line-height: 1.7; margin-top: 9px; }
+  .cur.c4 .cc .h { font-size: 15px; }
+  .cur.c4 .cc .d { font-size: 11.6px; }
+
+  /* ===== レッスン一覧 ===== */
+  table.ls { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 20px; }
+  .ls th { background: var(--blue); color: #fff; font-size: 13.5px; font-weight: 800; padding: 10px 12px; text-align: left; }
+  .ls th:nth-child(1), .ls th:nth-child(3), .ls th:nth-child(4) { text-align: center; }
+  .ls td { font-size: 12.8px; font-weight: 500; color: #2a3446; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  .ls tr:nth-child(even) td { background: #f7f9fc; }
+  .ls td.no { font-family: Montserrat, sans-serif; text-align: center; font-weight: 800; color: var(--acc); width: 54px; }
+  .ls td.ti { font-weight: 800; color: #1a2330; width: 320px; }
+  .ls td.ch, .ls td.tm { text-align: center; font-family: Montserrat, "Noto Sans JP", sans-serif; font-weight: 700; width: 92px; }
+  .ls td.bo { font-size: 11.8px; color: #4a5568; line-height: 1.55; }
+
+  /* ===== 料金プラン ===== */
+  .plan3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 22px; margin-top: 26px; }
+  .pl { background: #fff; border: 1.5px solid var(--line); box-shadow: 0 6px 20px rgba(26,35,48,.06); }
+  .pl.main { border-color: var(--acc); }
+  .pl .hd { background: #f1f3f7; color: #1a2330; font-size: 19px; font-weight: 800; padding: 13px 18px; text-align: center; }
+  .pl.main .hd { background: var(--acc); color: #fff; }
+  .pl .bd { padding: 20px 20px 22px; text-align: center; }
+  .pl .v { font-family: Montserrat, "Noto Sans JP", sans-serif; font-size: 33px; font-weight: 800; color: #1a2330; line-height: 1.1; }
+  .pl .v small { font-family: "Noto Sans JP", sans-serif; font-size: 14px; font-weight: 700; color: #6b7789; margin-left: 3px; }
+  .pl .tax { font-size: 11.5px; font-weight: 600; color: #8a93a3; margin-top: 6px; }
+  .pl .d { font-size: 13px; font-weight: 500; color: #4a5568; line-height: 1.8; margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--line); text-align: left; }
+  .pl .sub { display: inline-block; font-size: 11.5px; font-weight: 800; color: var(--acc-deep); background: var(--acc-tint); padding: 4px 12px; margin-top: 12px; }
+
+  /* ===== 助成金 ===== */
+  .sub2 { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 26px; }
+  .sb { border: 1.5px solid var(--acc); }
+  .sb .hd { background: var(--acc); color: #fff; font-size: 18px; font-weight: 800; padding: 12px 18px; text-align: center; }
+  .sb .bd { padding: 20px; display: grid; grid-template-columns: 1fr 30px 1fr; align-items: center; gap: 8px; }
+  .sb .c { text-align: center; padding: 14px 8px; }
+  .sb .c.g { background: #f1f3f7; }
+  .sb .c.b { background: var(--acc-tint); border: 1.5px solid var(--acc); }
+  .sb .k { font-size: 11.5px; font-weight: 800; color: #6b7789; }
+  .sb .c.b .k { color: var(--acc-deep); }
+  .sb .v { font-family: Montserrat, "Noto Sans JP", sans-serif; font-size: 27px; font-weight: 800; color: #1a2330; line-height: 1.15; margin-top: 3px; }
+  .sb .v small { font-family: "Noto Sans JP", sans-serif; font-size: 12px; font-weight: 700; color: #6b7789; }
+  .sb .arr { font-family: Montserrat, sans-serif; font-size: 22px; font-weight: 800; color: var(--acc); text-align: center; }
+  .sup5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 26px; }
+  .sup5 div { background: var(--tint); padding: 14px 8px; text-align: center; font-size: 13.5px; font-weight: 800; color: var(--blue); line-height: 1.45; }
+
+  /* ===== 流れ ===== */
+  .flow { display: grid; grid-template-columns: 1fr 22px 1fr 22px 1fr 22px 1fr 22px 1fr; gap: 6px; margin-top: 30px; align-items: stretch; }
+  .fs { background: #fff; border: 1px solid var(--line); padding: 18px 14px 16px; box-shadow: 0 6px 20px rgba(26,35,48,.06); text-align: center; position: relative; }
+  .fs .n { font-family: Montserrat, sans-serif; width: 40px; height: 40px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; margin: 0 auto; }
+  .fs .t { font-size: 16.5px; font-weight: 800; color: #1a2330; margin-top: 10px; line-height: 1.4; min-height: 46px; }
+  .fs .d { font-size: 12.3px; font-weight: 500; color: #4a5568; line-height: 1.7; margin-top: 6px; text-align: left; }
+  .fs .opt { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); font-size: 10.5px; font-weight: 800; background: var(--amber); color: #4a3605; border-radius: 999px; padding: 3px 10px; white-space: nowrap; }
+  .farr { display: flex; align-items: center; justify-content: center; }
+  .farr::before { content: ""; width: 14px; height: 24px; background: var(--blue-pale); clip-path: polygon(0 0, 52% 0, 100% 50%, 52% 100%, 0 100%, 46% 50%); }
+  .cta { margin-top: 26px; padding: 26px 38px; color: #fff; display: flex; align-items: center; justify-content: space-between; gap: 30px; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--acc-deep) 0%, var(--acc) 70%); }
+  .cta .l .t { font-size: 20px; font-weight: 800; }
+  .cta .l .d { font-size: 13.5px; font-weight: 500; opacity: .94; margin-top: 6px; }
+  .cta .btn { flex: 0 0 auto; background: #fff; color: var(--acc-deep); border-radius: 999px; padding: 15px 30px; font-size: 16px; font-weight: 800; }
+
+  /* ===== FAQ ===== */
+  .faq { margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 24px; }
+  .qa { background: #fff; border: 1px solid var(--line); padding: 14px 18px; box-shadow: 0 6px 20px rgba(26,35,48,.05); }
+  .qa .q { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; font-weight: 800; color: #1a2330; line-height: 1.5; }
+  .qa .q::before { content: "Q"; flex: 0 0 auto; font-family: Montserrat, sans-serif; width: 24px; height: 24px; border-radius: 50%; background: var(--acc); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 800; }
+  .qa .a { display: flex; align-items: flex-start; gap: 10px; font-size: 12.6px; font-weight: 500; color: #4a5568; line-height: 1.75; margin-top: 7px; }
+  .qa .a::before { content: "A"; flex: 0 0 auto; font-family: Montserrat, sans-serif; width: 24px; height: 24px; border-radius: 50%; background: var(--acc-tint); color: var(--acc-deep); display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 800; }
+
+  /* ===== 留意事項 ===== */
+  .legal { margin-top: 36px; max-width: 1040px; }
+  .legal .li { display: flex; gap: 12px; font-size: 14.5px; font-weight: 500; color: #4a5568; line-height: 1.9; padding: 14px 2px; border-bottom: 1px solid #eef1f5; }
+  .legal .li::before { content: "※"; flex: 0 0 auto; color: var(--acc); font-weight: 800; }
+
+  /* ===== PDF出力 ===== */
+  @page { size: 1280px 720px; margin: 0; }
+  @media print {
+    body { padding: 0; background: #fff; }
+    /* box-shadow はPDF化でラスタ画像になり、Preview等でカード間に灰色の帯として出るため無効化 */
+    * { box-shadow: none !important; }
+    .note { display: none; }
+    .deck { gap: 0; display: block; }
+    .slide-shell { width: 1280px; }
+    .slide-shell figcaption { display: none; }
+    .slide-shell .clip { height: 720px; overflow: hidden; border-radius: 0; box-shadow: none; }
+    .slide { transform: none; border: none; border-radius: 0; }
+    figure.slide-shell { page-break-after: always; break-after: page; margin: 0; }
+    figure.slide-shell:last-child { page-break-after: auto; }
+  }
+</style>
+
+<style id="ebook-embed-overrides">
+  body { padding: 0 !important; background: #e9edf3 !important; }
+  .note { display: none !important; }
+  .deck { gap: 16px !important; }
+  .slide-shell { width: 1280px !important; }
+  .slide-shell figcaption { display: none !important; }
+  .slide-shell .clip { height: 720px !important; border-radius: 0 !important; box-shadow: none !important; }
+  .slide { transform: none !important; border: none !important; border-radius: 0 !important; }
+</style>
+</head>
+<body>
+  <p class="note">Claude Code研修 コース紹介｜全17スライド（研修概要・カリキュラム・レッスン一覧・料金・サポート・FAQ）</p>
+  <div class="deck">
+
+    <!-- ===== 01 表紙 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide blue-bg cover">
+        <svg class="waves" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <path d="M700,-80 C980,60 820,300 1120,380 C1320,433 1360,560 1280,760 L1380,760 L1380,-80 Z" fill="rgba(255,255,255,0.07)"/>
+          <path d="M880,-120 C1150,40 980,260 1240,330 L1340,330 L1340,-120 Z" fill="#c2643c4d"/>
+          <path d="M-80,560 C240,480 420,660 760,600 C1040,551 1180,640 1300,760 L-80,760 Z" fill="rgba(20,40,80,0.22)"/>
+          <path d="M-80,640 C300,560 560,720 900,660 C1120,621 1240,690 1310,760 L-80,760 Z" fill="#c2643c33"/>
+        </svg>
+        <div class="badge-row">
+          <span class="badge">研修コース紹介</span>
+          <span class="badge-note">バイテック法人AI研修</span>
+        </div>
+        <p class="sub">非エンジニアでも業務の自動化・開発を進めたい組織・チームにおすすめ。<br>オンライン ｜ 助成金未対応</p>
+        <h1 class="title" style="font-size:76px">Claude Code研修<small>コース紹介資料</small></h1>
+        <img class="tool-logo" src="/biz/ebooks/ebook-08/assets/tool-logo.svg" alt="Claude Code">
+        <p class="date en">UPDATE 2026.9</p>
+        <img class="logo" src="/biz/ebooks/ebook-08/assets/biz-logo-w.svg" alt="byTech BUSINESS">
+      </div>
+    </div><figcaption>01 表紙</figcaption></figure>
+
+    <!-- ===== 02 目次 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">Contents</p>
+        <h2 class="s-title">目次</h2>
+        <img class="s-logo" src="/biz/ebooks/ebook-08/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="toc">
+          <p class="row"><span class="no en">01</span>Claude Code研修とは</p>
+          <p class="row"><span class="no en">02</span>こんな組織におすすめ</p>
+          <p class="row"><span class="no en">03</span>研修の概要と5つのステップ</p>
+          <p class="row"><span class="no en">04</span>カリキュラム（STEP01〜05）</p>
+          <p class="row"><span class="no en">05</span>レッスン一覧（全5ユニット）</p>
+          <p class="row"><span class="no en">06</span>料金プランとサポート体制</p>
+          <p class="row"><span class="no en">07</span>研修開始までの流れ・よくあるご質問</p>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>02 目次</figcaption></figure>
+
+    <!-- ===== 03 研修とは ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">01 Claude Code研修とは</p>
+        <h2 class="s-title">非エンジニアでも自動化・開発に取り組み、<br><b>AIで業務改善を当たり前に進める力</b>を身につける</h2>
+        <img class="s-logo" src="/biz/ebooks/ebook-08/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <p class="s-lead">Claude Codeを使い、ファイル操作やデータ処理、定型業務の自動化から簡単なツール開発までを実践。専門的な開発経験がない方でも、日々の課題を自分で仕組みに変えられるスキルを体系的に習得する法人向け研修です。</p>
+        <div class="card3">
+          <div class="fc">
+            <img src="/biz/ebooks/ebook-08/assets/about/claude-code-01.webp" alt="">
+            <div class="bd">
+              <p class="no en">01</p>
+              <p class="h">開発環境から基本操作まで 迷わず始められる</p>
+              <p class="d">導入・認証・権限設定から、ターミナルでの対話やプロジェクト理解までを順に学習。初めてでも、既存の開発環境へ安全にClaude Codeを取り入れられます。</p>
+            </div>
+          </div>
+          <div class="fc">
+            <img src="/biz/ebooks/ebook-08/assets/about/claude-code-02.webp" alt="">
+            <div class="bd">
+              <p class="no en">02</p>
+              <p class="h">実装・テスト・レビューを 一つの流れで効率化</p>
+              <p class="d">コードの調査、実装、修正、テスト作成、レビューを連続した作業として実践。速さだけを求めず、確認を挟みながら品質の高い開発を進める力が身につきます。</p>
+            </div>
+          </div>
+          <div class="fc">
+            <img src="/biz/ebooks/ebook-08/assets/about/claude-code-03.webp" alt="">
+            <div class="bd">
+              <p class="no en">03</p>
+              <p class="h">MCP・Hooks・Skillsで チームの開発を自動化</p>
+              <p class="d">外部ツール連携、定型処理の自動実行、用途別の指示やサブエージェントまで習得。個人の便利な道具から、チームで再現できる開発の仕組みへ広げられます。</p>
+            </div>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>03 研修とは</figcaption></figure>
+
+    <!-- ===== 04 こんな組織におすすめ ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">02 こんな組織におすすめ</p>
+        <h2 class="s-title">Claude Codeを開発工程へ組み込み、チームで品質と速度を高め続けられる状態へ</h2>
+        <img class="s-logo" src="/biz/ebooks/ebook-08/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="card4">
+          <div class="rc">
+            <p class="h">AIコーディングをチーム標準にしたい開発組織</p>
+            <p class="d">個々の使い方に任せず、コンテキスト設計や指示方法を共通化したい組織に。再現性のあるClaude Code活用を開発工程へ定着させます。</p>
+          </div>
+          <div class="rc">
+            <p class="h">実装からテストまでの時間を短縮したいチーム</p>
+            <p class="d">コード生成、修正、リファクタリング、テスト作成を一連の流れで効率化。機能開発の速度を上げながら品質も維持したいチームに適しています。</p>
+          </div>
+          <div class="rc">
+            <p class="h">複雑なコードベースの保守負荷を下げたい組織</p>
+            <p class="d">既存コードの理解、調査、レビュー、文書化をClaude Codeで支援。担当者しか分からない状態を減らし、引き継ぎや改修を進めやすくします。</p>
+          </div>
+          <div class="rc">
+            <p class="h">MCP・Hooks・サブエージェントまで使いたい組織</p>
+            <p class="d">補完や単発のコード生成から一歩進み、外部ツール連携や処理の自動化まで広げたい組織に。安全な運用ルールも含めて実践します。</p>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>04 こんな組織におすすめ</figcaption></figure>
+
+    <!-- ===== 05 研修の概要とステップ ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">03 研修の概要</p>
+        <h2 class="s-title">実務で成果につなげるための<b>5つのステップ</b>で構成</h2>
+        <img class="s-logo" src="/biz/ebooks/ebook-08/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="spec4">
+          <div class="sp4"><p class="k">試聴時間</p><p class="v">約<b>12</b>時間</p></div>
+          <div class="sp4"><p class="k">レッスン数</p><p class="v">全<b>44</b>レッスン</p></div>
+          <div class="sp4"><p class="k">受講形式</p><p class="v">オンライン</p></div>
+          <div class="sp4"><p class="k">使用ツール</p><p class="v">Claude Code</p></div>
+        </div>
+        <div class="stepN" style="grid-template-columns: 1fr 26px 1fr 26px 1fr 26px 1fr 26px 1fr">
+          <div class="st">
+            <p class="hd"><span class="n">STEP 01</span><span class="t">環境構築・基礎</span></p>
+            <p class="li">開発環境の構築とClaude Codeの初動</p>
+            <p class="li">プロンプト設計とVercel初公開</p>
+          </div>
+          <div class="st-arrow"></div>
+          <div class="st">
+            <p class="hd"><span class="n">STEP 02</span><span class="t">Claude Code実践</span></p>
+            <p class="li">.claude/機能マップとSkills活用</p>
+            <p class="li">役割分担とHooksによる安全制御</p>
+          </div>
+          <div class="st-arrow"></div>
+          <div class="st">
+            <p class="hd"><span class="n">STEP 03</span><span class="t">業務自動化</span></p>
+            <p class="li">外部システムと繋ぐ自動化基盤</p>
+            <p class="li">ファイル・帳票処理と定型業務の自動化</p>
+          </div>
+          <div class="st-arrow"></div>
+          <div class="st">
+            <p class="hd"><span class="n">STEP 04</span><span class="t">アプリ開発</span></p>
+            <p class="li">Next.js/Supabaseによるアプリ実装</p>
+            <p class="li">Preview公開と品質担保の開発サイクル</p>
+          </div>
+          <div class="st-arrow"></div>
+          <div class="st">
+            <p class="hd"><span class="n">STEP 05</span><span class="t">品質・セキュリティ・運用</span></p>
+            <p class="li">Webとエージェントのセキュリティ点検</p>
+            <p class="li">障害対応・コスト管理と実務演習</p>
+          </div>
+        </div>
+        <div class="band" style="margin-top:20px">受講形式はオンライン。全国の拠点やリモート勤務の社員も同一環境で受講でき、移動負担なく組織全体へ展開できます。</div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>05 研修の概要とステップ</figcaption></figure>
+
+    <!-- ===== 06 カリキュラム STEP01 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">04 カリキュラム</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-08/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="cur-hd">
+          <span class="n">STEP 01</span><span class="t">環境構築・基礎</span>
+          <span class="prog"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><span class="en">1 / 5</span></span>
+        </div>
+        <div class="cur c2">
+          <div class="cc">
+            <img src="/biz/ebooks/ebook-08/assets/ui/01.webp" alt="">
+            <div class="bd">
+              <span class="cat">環境構築・Claude Code基礎</span>
+              <p class="h">開発環境の構築とClaude Codeの初動</p>
+              <div class="tg"><span>#環境構築</span><span>#Plan mode</span><span>#CLAUDE.md</span></div>
+              <p class="d">Mac/Windowsの開発環境とGit/GitHubを整え、Plan modeやスラッシュコマンド、コンテキスト管理でClaude Codeの初動を掴みます。CLAUDE.mdでプロジェクト規約を伝えるところまで押さえます。</p>
+            </div>
+          </div>
+          <div class="cc">
+            <img src="/biz/ebooks/ebook-08/assets/ui/02.webp" alt="">
+            <div class="bd">
+              <span class="cat">コンテキスト設計・初公開</span>
+              <p class="h">プロンプト設計とVercel初公開</p>
+              <div class="tg"><span>#プロンプト設計</span><span>#コンテキスト</span><span>#Vercel</span></div>
+              <p class="d">曖昧な指示で終わらせないプロンプト設計とコンテキストエンジニアリングを学習。最初のVercel公開まで通しで体験し、作って動かす感覚を最短で身につけます。</p>
+            </div>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>06 カリキュラム STEP01</figcaption></figure>
+
+    <!-- ===== 07 カリキュラム STEP02 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">04 カリキュラム</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-08/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="cur-hd">
+          <span class="n">STEP 02</span><span class="t">Claude Code実践</span>
+          <span class="prog"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><span class="en">2 / 5</span></span>
+        </div>
+        <div class="cur c2">
+          <div class="cc">
+            <img src="/biz/ebooks/ebook-08/assets/ui/03.webp" alt="">
+            <div class="bd">
+              <span class="cat">スラッシュコマンド・Skills</span>
+              <p class="h">.claude/機能マップとSkills活用</p>
+              <div class="tg"><span>#スラッシュコマンド</span><span>#Skills</span><span>#機能マップ</span></div>
+              <p class="d">スラッシュコマンドの使い分けと.claude/ディレクトリの全体像を把握し、最小のSkill作成から実戦活用まで進めます。反復作業を仕組み化し、開発の型を整えます。</p>
+            </div>
+          </div>
+          <div class="cc">
+            <img src="/biz/ebooks/ebook-08/assets/ui/04.webp" alt="">
+            <div class="bd">
+              <span class="cat">サブエージェント・Hooks</span>
+              <p class="h">役割分担とHooksによる安全制御</p>
+              <div class="tg"><span>#サブエージェント</span><span>#Hooks</span><span>#安全運用</span></div>
+              <p class="d">reviewer/planner/security-auditorなどサブエージェントの役割分担を設計し、複数エージェントで開発を進めます。Hooksで危険な操作を止め、安全に自動化する土台を築きます。</p>
+            </div>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>07 カリキュラム STEP02</figcaption></figure>
+
+    <!-- ===== 08 カリキュラム STEP03 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">04 カリキュラム</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-08/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="cur-hd">
+          <span class="n">STEP 03</span><span class="t">業務自動化</span>
+          <span class="prog"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><span class="en">3 / 5</span></span>
+        </div>
+        <div class="cur c2">
+          <div class="cc">
+            <img src="/biz/ebooks/ebook-08/assets/ui/05.webp" alt="">
+            <div class="bd">
+              <span class="cat">MCP/CLI/API連携</span>
+              <p class="h">外部システムと繋ぐ自動化基盤</p>
+              <div class="tg"><span>#MCP</span><span>#CLI</span><span>#API</span></div>
+              <p class="d">API/CLI/MCPの3択判断とcurl・jqの基本操作を押さえ、GitHub/Supabase/Vercel/FigmaのMCPサーバへ接続。Notion・Slack・freeeやGitHub公式MCPでリポジトリ・Issue解析まで連携させます。</p>
+            </div>
+          </div>
+          <div class="cc">
+            <img src="/biz/ebooks/ebook-08/assets/ui/06.webp" alt="">
+            <div class="bd">
+              <span class="cat">成果物生成・GAS自動化</span>
+              <p class="h">ファイル・帳票処理と定型業務の自動化</p>
+              <div class="tg"><span>#PDF自動化</span><span>#Excel</span><span>#GAS</span></div>
+              <p class="d">ファイル整理やPDF処理、テキスト・CSV・Excelを成果物へ変換する自動化を構築。GASプロジェクトの編集やGAS+OpenAI APIの連携で、繰り返し発生する定型業務を効率化します。</p>
+            </div>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>08 カリキュラム STEP03</figcaption></figure>
+
+    <!-- ===== 09 カリキュラム STEP04 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">04 カリキュラム</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-08/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="cur-hd">
+          <span class="n">STEP 04</span><span class="t">アプリ開発</span>
+          <span class="prog"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><span class="en">4 / 5</span></span>
+        </div>
+        <div class="cur c2">
+          <div class="cc">
+            <img src="/biz/ebooks/ebook-08/assets/ui/07.webp" alt="">
+            <div class="bd">
+              <span class="cat">Web開発・データベース</span>
+              <p class="h">Next.js/Supabaseによるアプリ実装</p>
+              <div class="tg"><span>#Next.js</span><span>#Tailwind</span><span>#Supabase</span></div>
+              <p class="d">DESIGN.mdで画面設計し、Next.js/Tailwindで土台を構築。SQLのCRUDを安全に読み、Supabaseでテーブル作成・ログイン機能・RLSによるアクセス制御まで実装します。</p>
+            </div>
+          </div>
+          <div class="cc">
+            <img src="/biz/ebooks/ebook-08/assets/ui/08.webp" alt="">
+            <div class="bd">
+              <span class="cat">デプロイ・テスト・レビュー</span>
+              <p class="h">Preview公開と品質担保の開発サイクル</p>
+              <div class="tg"><span>#Vercel Preview</span><span>#テスト</span><span>#コードレビュー</span></div>
+              <p class="d">データ保存を伴うアプリをVercelにデプロイし、Preview環境で検証。AIと考えるソフトウェアテストや生成コードのレビューを回し、継続的に改善するサイクルを確立します。</p>
+            </div>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>09 カリキュラム STEP04</figcaption></figure>
+
+    <!-- ===== 010 カリキュラム STEP05 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">04 カリキュラム</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-08/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="cur-hd">
+          <span class="n">STEP 05</span><span class="t">品質・セキュリティ・運用</span>
+          <span class="prog"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><span class="en">5 / 5</span></span>
+        </div>
+        <div class="cur c2">
+          <div class="cc">
+            <img src="/biz/ebooks/ebook-08/assets/ui/09.webp" alt="">
+            <div class="bd">
+              <span class="cat">脆弱性点検・安全運用</span>
+              <p class="h">Webとエージェントのセキュリティ点検</p>
+              <div class="tg"><span>#XSS/CSRF/SQLi</span><span>#OWASP Agentic</span><span>#権限管理</span></div>
+              <p class="d">XSS/CSRF/SQLiなどWebアプリの危険箇所を点検し、OWASP Agentic Top10に沿ってAIエージェントを安全に運用。Claude Codeの権限と設定を安全に管理する勘所を押さえます。</p>
+            </div>
+          </div>
+          <div class="cc">
+            <img src="/biz/ebooks/ebook-08/assets/ui/10.webp" alt="">
+            <div class="bd">
+              <span class="cat">運用・修了後ロードマップ</span>
+              <p class="h">障害対応・コスト管理と実務演習</p>
+              <div class="tg"><span>#障害対応</span><span>#コスト管理</span><span>#ロードマップ</span></div>
+              <p class="d">公開後のエラーをログから追い、障害対応とコスト管理を実践。設計から公開までの実務プロジェクト演習と、30/60/90日のエンジニアロードマップで定着につなげます。</p>
+            </div>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>010 カリキュラム STEP05</figcaption></figure>
+
+    <!-- ===== レッスン一覧 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body" style="padding-top:38px">
+        <p class="s-eyebrow">05 レッスン一覧</p>
+        <h2 class="s-title">全<i>5</i>ユニット／視聴時間 約<i>12</i>時間</h2>
+        <img class="s-logo" src="/biz/ebooks/ebook-08/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <table class="ls">
+          <tr><th>No.</th><th>ユニット</th><th>チャプター</th><th>時間</th><th>主な内容</th></tr>
+          <tr><td class="no">01</td><td class="ti">環境構築・Claude Code基礎・Vercel初公開</td><td class="ch">7</td><td class="tm"></td><td class="bo">コースオリエンテーション／開発環境構築（Mac・Windows）／Git・GitHubの最低限／Claude Codeで小さな成功体験（Plan mode・スラッシュコマンド・コンテキスト管理）／プロンプト設計とコンテキストエンジニアリング／CLAUDE.mdでプロジェクトのルールを伝える／最初のVercel公開体験</td></tr>
+          <tr><td class="no">02</td><td class="ti">Claude Code実践（Skills・Agents・Hooks）</td><td class="ch">7</td><td class="tm"></td><td class="bo">スラッシュコマンドの使い分け／.claude/ディレクトリの全体像と機能マップ／最小のSkillを作る／Skillsの実戦活用／サブエージェント設計の基礎／サブエージェントの役割分担（reviewer/planner/security-auditor等）／Hooksで危険な操作を止める</td></tr>
+          <tr><td class="no">03</td><td class="ti">業務自動化（MCP・CLI・API・GAS）</td><td class="ch">9</td><td class="tm"></td><td class="bo">API/CLI/MCP入門（3択判断）／CLI基本操作（curl・jq・API）／MCPサーバ接続（GitHub/Supabase/Vercel/Figma）／ファイル整理・PDF自動化／テキスト・CSV・Excelを成果物に／GitHub公式MCPでリポジトリ・Issue解析／Notion・Slack・freee連携／GAS+OpenAI APIで業務自動化</td></tr>
+          <tr><td class="no">04</td><td class="ti">アプリ開発（Next.js・Supabase・RLS・Vercel）</td><td class="ch">15</td><td class="tm"></td><td class="bo">コードを読む基礎／DESIGN.mdで画面設計／Next.jsで土台構築／Tailwindで画面を整える／状態管理とフォーム／SQLのCRUDを安全に読む／Supabaseにテーブル作成／ログイン機能／RLSで入口を閉じる／データ保存／Vercelデプロイ・Preview／AIと考えるソフトウェアテスト／生成コードのレビュー</td></tr>
+          <tr><td class="no">05</td><td class="ti">品質・セキュリティ・運用・修了後</td><td class="ch">6</td><td class="tm"></td><td class="bo">Webアプリの危険箇所点検（XSS/CSRF/SQLi等）／AIエージェントを安全に使う（OWASP Agentic Top10）／Claude Codeの権限と設定を安全に運用／障害対応とコスト管理／実務プロジェクト演習（設計から公開まで）／エンジニアロードマップ（30/60/90日）</td></tr>
+        </table>
+        <p class="s-foot">© 株式会社AI棒　※カリキュラムは最新のアップデートに合わせて随時更新しています。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>レッスン一覧</figcaption></figure>
+
+    <!-- ===== 料金プラン ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">06 料金プラン</p>
+        <h2 class="s-title">Claude Code研修は<b>3つの研修プラン</b>で受講できます</h2>
+        <img class="s-logo" src="/biz/ebooks/ebook-08/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="plan3">
+          <div class="pl">
+            <p class="hd">eラーニング</p>
+            <div class="bd">
+              <p class="v">100,000<small>円〜／名</small></p>
+              <p class="tax">税抜・受講者1名ごと</p>
+              <p class="d">動画教材で、時間や場所を選ばず自分のペースで学習。全社員へ均一な基礎を低コストで浸透させたい場合に。</p>
+            </div>
+          </div>
+          <div class="pl main">
+            <p class="hd">AI効率化研修</p>
+            <div class="bd">
+              <p class="v">200,000<small>円〜／名</small></p>
+              <p class="tax">税抜・サポート期間2ヶ月</p>
+              <p class="d">eラーニングに1on1のハンズオンを組み合わせ、日々の定型業務を効率化。現場で使えるレベルまで伴走します。</p>
+              
+            </div>
+          </div>
+          <div class="pl main">
+            <p class="hd">AI自動化研修</p>
+            <div class="bd">
+              <p class="v">300,000<small>円〜／名</small></p>
+              <p class="tax">税抜・サポート期間4ヶ月</p>
+              <p class="d">業務プロセスそのものの自動化まで踏み込み、社内で推進できる人材を育成。内製化の起点をつくります。</p>
+              
+            </div>
+          </div>
+        </div>
+        <div class="band" style="margin-top:24px">料金は目安です。受講人数・実施内容により変動します。本コースはオーダーメイド構成のため助成金の対象外です。</div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>料金プラン</figcaption></figure>
+
+    <!-- ===== サポート体制 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">06 サポート体制</p>
+        <h2 class="s-title">研修期間中は<b>専任担当が伴走</b>します</h2>
+        <img class="s-logo" src="/biz/ebooks/ebook-08/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <p class="s-lead">受講中の疑問やつまずきはチャットと個別面談で解消し、学んだ内容を実務へ落とし込むところまで支援します。研修終了後も、社内で活用が定着するまで継続的にフォローします。</p>
+        <div class="sup5">
+          <div>研修期間中の<br>無制限チャットサポート</div>
+          <div>月2回の<br>オンライン個別面談</div>
+          <div>スキル証明課題の実施<br>＆証明書発行</div>
+          <div>隔週開催の<br>オンラインセミナー</div>
+          <div>ハンズオンでの<br>検証サポート</div>
+        </div>
+        <div class="band" style="margin-top:26px">本コースはオーダーメイド構成のため助成金の対象外です。助成金を活用したい場合は、対象コースとの組み合わせをご提案します。</div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>サポート体制</figcaption></figure>
+
+    <!-- ===== 研修開始までの流れ＋CTA ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">07 研修開始までの流れ</p>
+        <h2 class="s-title">無料個別相談から、<b>最短7日</b>で研修開始まで</h2>
+        <img class="s-logo" src="/biz/ebooks/ebook-08/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="flow">
+          <div class="fs"><span class="n en">01</span><p class="t">無料個別相談</p><p class="d">現状の課題・目的・受講人数をヒアリングし、最適なプランをその場でご提案します。（60分・Zoom）</p></div>
+          <div class="farr"></div>
+          <div class="fs"><span class="n en">02</span><p class="t">ご提案・お見積り</p><p class="d">カリキュラム・スケジュール・料金をご提示。導入を希望される方は申込フォームへご入力ください。</p></div>
+          <div class="farr"></div>
+          <div class="fs"><span class="n en">03</span><p class="t">ご契約</p><p class="d">実施内容とスケジュールを確定し、契約手続きを進めます。</p></div>
+          <div class="farr"></div>
+          <div class="fs"><span class="n en">04</span><p class="t">お支払い・初回面談</p><p class="d">お支払い後、学習の進め方〜サポートの受け方をご案内する初回面談を実施します。</p></div>
+          <div class="farr"></div>
+          <div class="fs"><span class="n en">05</span><p class="t">研修開始</p><p class="d">学習システムのID/Passを発行し、研修スタート。チャット・面談・セミナーで研修期間中を伴走します。</p></div>
+        </div>
+        <div class="cta">
+          <div class="l">
+            <p class="t">まずは無料個別相談で、貴社に合う受講プランをご提案します</p>
+            <p class="d">課題・人数・予算をもとに、研修プランの組み合わせまでその場でご案内します。</p>
+          </div>
+          <span class="btn">無料個別相談を予約する ›</span>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>研修開始までの流れ＋CTA</figcaption></figure>
+
+    <!-- ===== FAQ（1/2） ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">07 よくあるご質問</p>
+        <h2 class="s-title">Claude Code研修の<b>よくあるご質問</b></h2>
+        <img class="s-logo" src="/biz/ebooks/ebook-08/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="faq">
+          <div class="qa"><p class="q">エンジニアでなくても受講できますか？</p><p class="a">実務でコードに触れるエンジニアを主対象としていますが、Phase1で開発環境構築やGit/GitHubの基礎から丁寧に扱うため、プログラミング初学者のエンジニアや開発に関わる技術職の方でも段階的に習得いただけます。</p></div>
+          <div class="qa"><p class="q">研修期間はどのくらいですか？</p><p class="a">全5Phase・44レッスンを約6ヶ月かけて進めるPhase制のカリキュラムです。環境構築から実践、業務自動化、アプリ開発、セキュリティ・運用まで、実務で使えるスキルを段階的に積み上げていきます。</p></div>
+          <div class="qa"><p class="q">受講形式を教えてください。</p><p class="a">オンラインのみで提供する研修です。動画教材とハンズオンを組み合わせ、開発環境を実際に操作しながら進めるため、リモート環境でも実践的にClaude Codeの活用スキルを習得できます。</p></div>
+          <div class="qa"><p class="q">受講に必要な環境はありますか？</p><p class="a">Mac/Windowsいずれのマシンでも受講可能です。Node.jsやGit、Claude Code本体などの開発環境はPhase1で構築手順を解説しながら整えるため、事前に環境が整っていなくても問題なく開始いただけます。</p></div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>FAQ（1/2）</figcaption></figure>
+
+    <!-- ===== FAQ（2/2） ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">07 よくあるご質問</p>
+        <h2 class="s-title">導入・費用・研修後の<b>サポートについて</b></h2>
+        <img class="s-logo" src="/biz/ebooks/ebook-08/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="faq">
+          <div class="qa"><p class="q">具体的にどこまで学べますか？</p><p class="a">コード生成・修正・レビューといった基本から、MCP/CLI/APIによる外部連携、Next.js/Supabaseを用いたアプリ開発、XSS/CSRFなどのセキュリティ点検まで扱います。開発プロセス全体をClaude Codeで加速させる実践力が身につきます。</p></div>
+          <div class="qa"><p class="q">助成金は活用できますか？</p><p class="a">本研修は助成金の対象外です。エンジニア向けの専門的なAIコーディング研修として設計しており、助成金を前提としないプランでご提供しています。費用や導入形態はお気軽にご相談ください。</p></div>
+          <div class="qa"><p class="q">受講後のサポートはありますか？</p><p class="a">最終Phaseで設計から公開までの実務プロジェクト演習と、30/60/90日のエンジニアロードマップを提供し、研修後も自走して開発現場に定着できる状態を目指します。組織導入時の運用相談にも対応いたします。</p></div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>FAQ（2/2）</figcaption></figure>
+
+    <!-- ===== ご留意事項・発行元 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">ご留意事項</p>
+        <h2 class="s-title">ご利用にあたって</h2>
+        <img class="s-logo" src="/biz/ebooks/ebook-08/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="legal">
+          <p class="li">本資料に記載の料金はいずれも税抜の目安であり、受講人数・実施内容により変動します。正式な料金はお見積りにてご提示します。</p>
+          <p class="li">本コースはオーダーメイド構成のため、人材開発支援助成金の対象外です。助成金の活用をご希望の場合は対象コースをご案内します。</p>
+          <p class="li">カリキュラムの内容・レッスン数・視聴時間は2026年9月時点のものです。ツールのアップデートに合わせて随時更新しています。</p>
+          <p class="li">掲載しているツール名・サービス名は各社の商標または登録商標です。</p>
+          <p class="li">社内でのコピー・配布はご自由にどうぞ。社外への転載・再配布はご遠慮ください。</p>
+          <p class="li">研修内容・受講のご相談は、無料個別相談（biz.bytech.jp/counseling）で承ります。</p>
+          <p class="li">発行：バイテック法人AI研修（株式会社AI棒）　2026年9月版</p>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>ご留意事項・発行元</figcaption></figure>
+
+  </div>
+</body>
+</html>

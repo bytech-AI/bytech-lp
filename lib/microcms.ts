@@ -108,6 +108,7 @@ export type MicroCmsDocument = {
 export const CATEGORY_EN: Record<string, string> = {
   サービス概要: "Service",
   AI活用ノウハウ: "Knowledge",
+  研修コース紹介: "Course",
 };
 
 export function docCategory(doc: MicroCmsDocument): string {

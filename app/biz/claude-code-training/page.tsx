@@ -31,7 +31,7 @@ const course: CourseData = {
     visualAlt: "Claude Codeの活用イメージ（PC画面）",
     compactVisual: true,
   },
-  docHref: "/doc-a",
+  docHref: "/doc-i",
   noSubsidy: true,
   about: {
     title: "Claude Code研修とは？",

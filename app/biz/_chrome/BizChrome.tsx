@@ -137,7 +137,8 @@ const HAMBURGER_JS = `(function(){
 // 固定ヘッダー分の本文オフセット（利用ページの先頭要素に padding-top で確保する目安）。
 export const BIZ_HEADER_OFFSET = 92;
 
-export function BizHeader() {
+// docHref: ヘッダーの「資料をダウンロード」の遷移先。研修コースページは自コースの資料DLページを渡す。
+export function BizHeader({ docHref = "/doc-a" }: { docHref?: string } = {}) {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: CHROME_CSS }} />
@@ -200,7 +201,7 @@ export function BizHeader() {
           </div>
           <a href="/faq" className="top-nav-link">よくある質問</a>
           <a href="https://biz.bytech.jp/blog" className="top-nav-link">ブログ</a>
-          <a href="/doc-a" className="btn-outline">資料をダウンロード</a>
+          <a href={docHref} className="btn-outline">資料をダウンロード</a>
           <a href="/counseling" className="btn-fill">無料個別相談を予約する</a>
         </nav>
       </div>

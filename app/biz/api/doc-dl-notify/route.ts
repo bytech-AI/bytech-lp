@@ -49,6 +49,62 @@ const DOCS: Record<string, { intro: string; items: { title: string; view: string
       { title: "AI研修タイプ 比較ガイド", view: `${SITE}/documents/ebook-04`, pdf: `${SITE}/assets/docs/ebook-04.pdf` },
     ],
   },
+  ChatGPT研修コース紹介資料: {
+    intro:
+      "法人向けChatGPT研修のコース紹介資料です。カリキュラム（全8ユニット・45レッスン）から、3つの研修プランと料金・助成金活用、サポート体制、研修開始までの流れまでまとめています。導入のご検討にお役立てください。",
+    items: [
+      { title: "ChatGPT研修 コース紹介資料", view: `${SITE}/documents/ebook-05`, pdf: `${SITE}/assets/docs/ebook-05.pdf` },
+    ],
+  },
+  Gemini研修コース紹介資料: {
+    intro:
+      "法人向けGemini研修のコース紹介資料です。カリキュラム（全11ユニット・67レッスン）から、3つの研修プランと料金・助成金活用、サポート体制、研修開始までの流れまでまとめています。導入のご検討にお役立てください。",
+    items: [
+      { title: "Gemini研修 コース紹介資料", view: `${SITE}/documents/ebook-06`, pdf: `${SITE}/assets/docs/ebook-06.pdf` },
+    ],
+  },
+  Claude研修コース紹介資料: {
+    intro:
+      "法人向けClaude研修のコース紹介資料です。カリキュラム（全14ユニット・81レッスン）から、3つの研修プランと料金・助成金活用、サポート体制、研修開始までの流れまでまとめています。導入のご検討にお役立てください。",
+    items: [
+      { title: "Claude研修 コース紹介資料", view: `${SITE}/documents/ebook-07`, pdf: `${SITE}/assets/docs/ebook-07.pdf` },
+    ],
+  },
+  "Claude Code研修コース紹介資料": {
+    intro:
+      "法人向けClaude Code研修のコース紹介資料です。カリキュラム（全5ユニット）から、3つの研修プランと料金、サポート体制、研修開始までの流れまでまとめています。導入のご検討にお役立てください。",
+    items: [
+      { title: "Claude Code研修 コース紹介資料", view: `${SITE}/documents/ebook-08`, pdf: `${SITE}/assets/docs/ebook-08.pdf` },
+    ],
+  },
+  Copilot研修コース紹介資料: {
+    intro:
+      "法人向けCopilot研修のコース紹介資料です。カリキュラム（全6ユニット・48レッスン）から、3つの研修プランと料金・助成金活用、サポート体制、研修開始までの流れまでまとめています。導入のご検討にお役立てください。",
+    items: [
+      { title: "Copilot研修 コース紹介資料", view: `${SITE}/documents/ebook-09`, pdf: `${SITE}/assets/docs/ebook-09.pdf` },
+    ],
+  },
+  "Copilot Studio研修コース紹介資料": {
+    intro:
+      "法人向けCopilot Studio研修のコース紹介資料です。カリキュラム（全11ユニット・70レッスン）から、3つの研修プランと料金・助成金活用、サポート体制、研修開始までの流れまでまとめています。導入のご検討にお役立てください。",
+    items: [
+      { title: "Copilot Studio研修 コース紹介資料", view: `${SITE}/documents/ebook-10`, pdf: `${SITE}/assets/docs/ebook-10.pdf` },
+    ],
+  },
+  AIクリエイティブ研修コース紹介資料: {
+    intro:
+      "法人向けAIクリエイティブ研修のコース紹介資料です。カリキュラム（全12ユニット・108レッスン）から、3つの研修プランと料金・助成金活用、サポート体制、研修開始までの流れまでまとめています。導入のご検討にお役立てください。",
+    items: [
+      { title: "AIクリエイティブ研修 コース紹介資料", view: `${SITE}/documents/ebook-11`, pdf: `${SITE}/assets/docs/ebook-11.pdf` },
+    ],
+  },
+  Dify研修コース紹介資料: {
+    intro:
+      "法人向けDify研修のコース紹介資料です。カリキュラム（全14ユニット・85レッスン）から、3つの研修プランと料金・助成金活用、サポート体制、研修開始までの流れまでまとめています。導入のご検討にお役立てください。",
+    items: [
+      { title: "Dify研修 コース紹介資料", view: `${SITE}/documents/ebook-12`, pdf: `${SITE}/assets/docs/ebook-12.pdf` },
+    ],
+  },
 };
 DOCS["お役立ち資料3点セット"] = {
   intro:

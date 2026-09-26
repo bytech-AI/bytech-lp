@@ -21,6 +21,7 @@ const STATIC_PAGES: Entry[] = [
   { path: "/dify-training", lastmod: "2026-07-26", priority: "0.9" },
   { path: "/archive", lastmod: "2026-07-16", priority: "0.8" },
   { path: "/counseling", lastmod: "2026-07-24", priority: "0.8" },
+  { path: "/estimate", lastmod: "2026-09-26", priority: "0.8" },
   { path: "/documents", lastmod: "2026-07-16", priority: "0.7" },
   { path: "/faq", lastmod: "2026-07-24", priority: "0.7" },
   { path: "/doc-a", lastmod: "2026-07-24", priority: "0.7" },
