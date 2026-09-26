@@ -32,7 +32,7 @@ const course: CourseData = {
     visualH: 1183,
     visualAlt: "Copilot Studioの活用イメージ（PC画面）",
   },
-  docHref: "/doc-a",
+  docHref: "/doc-k",
   about: {
     title: "Copilot Studio研修とは？",
     subLead: (

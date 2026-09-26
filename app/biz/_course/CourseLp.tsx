@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BizFooter, BizHeader } from "../_chrome/BizChrome";
 import { COURSES } from "./courses";
+import { COURSE_DOCS } from "./courseDocs";
 import "./course.css";
 
 // ── biz 研修コース個別ページの共通テンプレート。
@@ -206,6 +207,9 @@ export function CourseLp({ data }: { data: CourseData }) {
   const plans = d.plans ?? DEFAULT_PLANS;
   const subsidy = d.subsidy ?? DEFAULT_SUBSIDY;
   const faqs = d.faqs ?? DEFAULT_FAQS;
+  // FAQ下の資料DL導線。コース別の紹介資料とアクセント色（未登録のコースはセクションごと出さない）
+  const courseDoc = COURSE_DOCS[d.slug];
+  const accent = COURSES.find((c) => c.slug === d.slug)?.color ?? "#204aa8";
   const chapterCount = d.lessons.chapterCount ?? d.lessons.items.length;
   const lessonCount =
     d.lessons.lessonCount ??
@@ -272,7 +276,7 @@ export function CourseLp({ data }: { data: CourseData }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <BizHeader />
+      <BizHeader docHref={courseDoc?.href ?? d.docHref} />
 
       <main className="ct-page">
         {/* ============ FV / ヒーロー ============ */}
@@ -623,6 +627,50 @@ export function CourseLp({ data }: { data: CourseData }) {
             </a>
           </div>
         </section>
+
+        {/* 資料ダウンロード＋出口導線（FAQの直後）。上段にコース別の紹介資料、下段に無料相談とお役立ち資料 */}
+        {courseDoc && (
+          <section className="ct-dl" id="course-doc" style={{ ["--ct-accent" as string]: accent }}>
+            <div className="ct-dl__inner">
+              <div className="ct-dl__main">
+                <div className="ct-dl__body">
+                  <p className="ct-dl__eyebrow">無料ダウンロード</p>
+                  <h2 className="ct-dl__title">{courseDoc.title}</h2>
+                  <p className="ct-dl__desc">{courseDoc.desc}</p>
+                  <a className="ct-dl__btn" href={courseDoc.href}>
+                    ダウンロード
+                    <span className="ct-dl__btn-ico" aria-hidden="true" />
+                  </a>
+                </div>
+                <div className="ct-dl__visual">
+                  <img src={courseDoc.cover} alt={`${courseDoc.title}の表紙`} loading="lazy" />
+                </div>
+              </div>
+              <div className="ct-dl__row">
+                <div className="ct-dl__card">
+                  <div className="ct-dl__card-body">
+                    <h3 className="ct-dl__card-title">無料個別相談</h3>
+                    <p className="ct-dl__card-desc">研修内容や助成金の活用まで、お気軽にご相談ください。</p>
+                  </div>
+                  <a className="ct-dl__card-btn" href="/counseling">
+                    相談を予約する
+                    <span className="ct-dl__card-ico" aria-hidden="true" />
+                  </a>
+                </div>
+                <div className="ct-dl__card">
+                  <div className="ct-dl__card-body">
+                    <h3 className="ct-dl__card-title">見積もりシミュレーター</h3>
+                    <p className="ct-dl__card-desc">受講人数やプランから、費用の目安をその場で試算できます。</p>
+                  </div>
+                  <a className="ct-dl__card-btn" href="/estimate">
+                    見積もりをしてみる
+                    <span className="ct-dl__card-ico" aria-hidden="true" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* 他にもおすすめの研修コース（FAQの後・内部リンク導線／出口導線） */}
         <section className="ct-more" id="more-courses">

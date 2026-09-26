@@ -31,7 +31,7 @@ const course: CourseData = {
     visualAlt: "AIクリエイティブツールの活用イメージ（PC画面）",
     wideTitle: true,
   },
-  docHref: "/doc-a",
+  docHref: "/doc-l",
   about: {
     title: "AIクリエイティブ研修とは？",
     subLead: (
