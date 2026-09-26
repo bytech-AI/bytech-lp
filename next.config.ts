@@ -25,8 +25,28 @@ const nextConfig: NextConfig = {
   // NOTE: experimental.inlineCss は検証済みで不採用。render-blocking は消えるが
   // HTML が 36KB→87KB に膨らみ、後続（LCP画像）の発見が遅れて LCP が 5.4s→6.2s と悪化した。
   // 低速回線のボトルネックは CSS の往復ではなく帯域の奪い合いのため。
+  // public/ を動的パスで読む箇所（lib/static-html-response.ts の readPublic）があるため、
+  // Next のトレースが public/ 配下を丸ごと関数へ同梱してしまう。実行時に読むのは
+  // HTML と CSS だけ（いずれも utf8 テキスト）なので、重いバイナリは除外する。
+  // 除外しないと関数が 250MB 上限を超えてデプロイが失敗する（2026-09-26 実際に発生）。
   outputFileTracingExcludes: {
-    "*": ["public/*-static/**"],
+    "*": [
+      "public/*-static/**",
+      "public/**/*.pdf",
+      "public/**/*.webp",
+      "public/**/*.avif",
+      "public/**/*.png",
+      "public/**/*.jpg",
+      "public/**/*.jpeg",
+      "public/**/*.gif",
+      "public/**/*.ico",
+      "public/**/*.mp4",
+      "public/**/*.woff",
+      "public/**/*.woff2",
+      "public/**/*.ttf",
+      "public/**/*.otf",
+      "public/**/*.eot",
+    ],
   },
   async redirects() {
     return [
