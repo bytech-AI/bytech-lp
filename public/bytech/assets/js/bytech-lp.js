@@ -1,3 +1,5 @@
+/* 流入元メモ（ASP経由の予約をメディア単位で特定するため）: 外部サイトから来た時の紹介元と到着時のクエリをタブ内に保持し、予約・トラッキング時に送る */
+window.btRefInfo=window.btRefInfo||function(){var k='bt_ref_v1',v=null,r=document.referrer||'',q=(location.search||'').slice(1),ext=false;try{v=JSON.parse(sessionStorage.getItem(k)||'null')}catch(e){}try{ext=!!r&&new URL(r).host!==location.host}catch(e){}if(!v||ext){v={ref:r,q:q};try{sessionStorage.setItem(k,JSON.stringify(v))}catch(e){}}return v};window.btRefInfo();
 /* eslint-disable */
 // Extracted from app/bytech/page.tsx inline <Script> blocks.
 // Keep this file dependency-free; it runs after Next hydration starts.
@@ -279,7 +281,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
       const nameVal = (document.getElementById('csName') || {value:''}).value.trim();
       const emailVal = (document.getElementById('csEmail') || {value:''}).value.trim();
       const phoneVal = (document.getElementById('csPhone') || {value:''}).value.trim();
-      const params = new URLSearchParams({ action:'book', started_at:csSelectedStart, name:nameVal, email:emailVal, phone:phoneVal, source:SOURCE, lp_type:LP_TYPE, entry:ENTRY, route_id:ROUTE_ID });
+      const params = new URLSearchParams({ action:'book', started_at:csSelectedStart, name:nameVal, email:emailVal, phone:phoneVal, source:SOURCE, lp_type:LP_TYPE, entry:ENTRY, route_id:ROUTE_ID,ref:(window.btRefInfo?window.btRefInfo().ref:''),lp_query:(window.btRefInfo?window.btRefInfo().q:'') });
       const res = await fetch(GAS_URL+'?'+params, { cache:'no-store' });
       const text = await res.text();
       let result; try { result = JSON.parse(text); } catch(e) { throw new Error('Invalid response'); }

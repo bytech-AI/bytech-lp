@@ -777,6 +777,9 @@ body {
 </div>
 
 <script>
+/* 流入元メモ（ASP経由の予約をメディア単位で特定するため）: 外部サイトから来た時の紹介元と到着時のクエリをタブ内に保持し、予約・トラッキング時に送る */
+window.btRefInfo=window.btRefInfo||function(){var k='bt_ref_v1',v=null,r=document.referrer||'',q=(location.search||'').slice(1),ext=false;try{v=JSON.parse(sessionStorage.getItem(k)||'null')}catch(e){}try{ext=!!r&&new URL(r).host!==location.host}catch(e){}if(!v||ext){v={ref:r,q:q};try{sessionStorage.setItem(k,JSON.stringify(v))}catch(e){}}return v};window.btRefInfo();
+
   const FC_ENTRY='calendar';
   const DAY_NAMES_FC=['日','月','火','水','木','金','土'];
   let fcStep=1,fcSelectedStart='',fcSelectedLabel='',fcSelectedDateStr='',fcAllSlots=[],fcInterest='';
@@ -959,6 +962,8 @@ body {
         lp_type:LP_TYPE,
         entry:FC_ENTRY,
         route_id:ROUTE_ID,
+        ref:(window.btRefInfo?window.btRefInfo().ref:''),
+        lp_query:(window.btRefInfo?window.btRefInfo().q:''),
         interest:fcInterest,
         comment:document.getElementById('fcComment').value.trim()
       });
@@ -988,7 +993,7 @@ body {
 <script>
 (function(){
   var maxStep=1,submitted=false,slotSelected=false;
-  function tk(type,data){data=data||{};data.route_id=ROUTE_ID;data.source=SOURCE;data.entry='calendar';data.ts=new Date().toISOString();var img=new Image();img.src=GAS_URL+'?action=track&type='+encodeURIComponent(type)+'&id='+encodeURIComponent(data.email||ROUTE_ID)+'&route_id='+encodeURIComponent(ROUTE_ID)+'&data='+encodeURIComponent(JSON.stringify(data));}
+  function tk(type,data){data=data||{};data.route_id=ROUTE_ID;data.ref=(window.btRefInfo?window.btRefInfo().ref:'');data.lp_query=(window.btRefInfo?window.btRefInfo().q:'');data.source=SOURCE;data.entry='calendar';data.ts=new Date().toISOString();var img=new Image();img.src=GAS_URL+'?action=track&type='+encodeURIComponent(type)+'&id='+encodeURIComponent(data.email||ROUTE_ID)+'&route_id='+encodeURIComponent(ROUTE_ID)+'&data='+encodeURIComponent(JSON.stringify(data));}
   tk('page_view',{page:'calendar',lp:ROUTE_ID});
   var _origGoTo=window.fcGoTo;
   window.fcGoTo=function(step){var prev=window.fcStep;_origGoTo(step);if(window.fcStep!==prev&&window.fcStep>maxStep){maxStep=window.fcStep;tk('form_step',{step:window.fcStep,total:3,email:(document.getElementById('fcEmail').value||'').trim()});}};

@@ -2445,6 +2445,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 <script>
+/* 流入元メモ（ASP経由の予約をメディア単位で特定するため）: 外部サイトから来た時の紹介元と到着時のクエリをタブ内に保持し、予約・トラッキング時に送る */
+window.btRefInfo=window.btRefInfo||function(){var k='bt_ref_v1',v=null,r=document.referrer||'',q=(location.search||'').slice(1),ext=false;try{v=JSON.parse(sessionStorage.getItem(k)||'null')}catch(e){}try{ext=!!r&&new URL(r).host!==location.host}catch(e){}if(!v||ext){v={ref:r,q:q};try{sessionStorage.setItem(k,JSON.stringify(v))}catch(e){}}return v};window.btRefInfo();
+
   const FC_ENTRY='calendar';
   const DAY_NAMES_FC=['日','月','火','水','木','金','土'];
   let fcStep=1,fcSelectedStart='',fcSelectedLabel='',fcSelectedDateStr='',fcAllSlots=[],fcInterest='';
@@ -2628,6 +2631,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         lp_type:LP_TYPE,
         entry:FC_ENTRY,
         route_id:ROUTE_ID,
+        ref:(window.btRefInfo?window.btRefInfo().ref:''),
+        lp_query:(window.btRefInfo?window.btRefInfo().q:''),
         interest:fcInterest,
         comment:document.getElementById('fcComment').value.trim()
       });
@@ -3080,6 +3085,9 @@ document.querySelectorAll(`.faq__q>div`).forEach(tar => {
 
 
 <script id="g2quick-js">
+/* 流入元メモ（ASP経由の予約をメディア単位で特定するため）: 外部サイトから来た時の紹介元と到着時のクエリをタブ内に保持し、予約・トラッキング時に送る */
+window.btRefInfo=window.btRefInfo||function(){var k='bt_ref_v1',v=null,r=document.referrer||'',q=(location.search||'').slice(1),ext=false;try{v=JSON.parse(sessionStorage.getItem(k)||'null')}catch(e){}try{ext=!!r&&new URL(r).host!==location.host}catch(e){}if(!v||ext){v={ref:r,q:q};try{sessionStorage.setItem(k,JSON.stringify(v))}catch(e){}}return v};window.btRefInfo();
+
 const ENTRY='fv_quick';const DAY_NAMES=['日','月','火','水','木','金','土'];let csStep=1,csSelectedStart='',csSelectedLabel='',csSelectedDateStr='',csCurrentDay='today',csAllSlots=[];window.dataLayer=window.dataLayer||[];function csJstTodayStr(){return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());}
 function csAddDaysJst(ymd,n){var p=ymd.split('-').map(Number);var d=new Date(Date.UTC(p[0],p[1]-1,p[2])+n*86400000);return d.getUTCFullYear()+'-'+String(d.getUTCMonth()+1).padStart(2,'0')+'-'+String(d.getUTCDate()).padStart(2,'0');}
 function csJstDow(ymd){var p=ymd.split('-').map(Number);return new Date(Date.UTC(p[0],p[1]-1,p[2])).getUTCDay();}
@@ -3121,7 +3129,7 @@ if(!em.value.trim()||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value)){em.classList.
 if(!ph.value.trim()){ph.classList.add('error');document.getElementById('csErrPhone').classList.add('show');ok=false;}
 return ok;}
 function csPopulateConfirm(){var last=document.getElementById('csLastName').value.trim();var first=document.getElementById('csFirstName').value.trim();document.getElementById('csConfTime').textContent=csSelectedLabel;document.getElementById('csConfName').textContent=(last+' '+first).trim();document.getElementById('csConfEmail').textContent=document.getElementById('csEmail').value;document.getElementById('csConfPhone').textContent=document.getElementById('csPhone').value;}
-async function csSubmit(){var btn=document.getElementById('csBtnSubmit');btn.classList.add('loading');btn.disabled=true;dataLayer.push({event:'consultation_form_submit'});try{var last=document.getElementById('csLastName').value.trim();var first=document.getElementById('csFirstName').value.trim();var params=new URLSearchParams({action:'book',started_at:csSelectedStart,displayed_date:csSelectedDateStr||(csSelectedStart?csSelectedStart.substring(0,10):''),last_name:last,first_name:first,name:(last+' '+first).trim(),email:document.getElementById('csEmail').value.trim(),phone:document.getElementById('csPhone').value.trim(),source:SOURCE,lp_type:LP_TYPE,entry:ENTRY,route_id:ROUTE_ID});var res=await fetch(GAS_URL+'?'+params,{cache:'no-store'});var text=await res.text();var result;try{result=JSON.parse(text);}catch{throw new Error('Invalid response');}
+async function csSubmit(){var btn=document.getElementById('csBtnSubmit');btn.classList.add('loading');btn.disabled=true;dataLayer.push({event:'consultation_form_submit'});try{var last=document.getElementById('csLastName').value.trim();var first=document.getElementById('csFirstName').value.trim();var params=new URLSearchParams({action:'book',started_at:csSelectedStart,displayed_date:csSelectedDateStr||(csSelectedStart?csSelectedStart.substring(0,10):''),last_name:last,first_name:first,name:(last+' '+first).trim(),email:document.getElementById('csEmail').value.trim(),phone:document.getElementById('csPhone').value.trim(),source:SOURCE,lp_type:LP_TYPE,entry:ENTRY,route_id:ROUTE_ID,ref:(window.btRefInfo?window.btRefInfo().ref:''),lp_query:(window.btRefInfo?window.btRefInfo().q:'')});var res=await fetch(GAS_URL+'?'+params,{cache:'no-store'});var text=await res.text();var result;try{result=JSON.parse(text);}catch{throw new Error('Invalid response');}
 if(result.error){alert('エラー: '+result.error);}
 else{dataLayer.push({event:'consultation_form_complete',booking_id:result.bookingId||''});window.location.href=THANKS_URL;}}catch{alert('通信エラーが発生しました。もう一度お試しください。');}
 finally{btn.classList.remove('loading');btn.disabled=false;}}

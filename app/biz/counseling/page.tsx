@@ -275,6 +275,9 @@ export default function CounselingPage() {
 
       {/* 予約ウィジェット — ネイティブ<script>（next/scriptはNext16でinline評価が壊れ未実行になるため不使用） */}
       <script dangerouslySetInnerHTML={{ __html: `
+/* 流入元メモ（ASP経由の予約をメディア単位で特定するため）: 外部サイトから来た時の紹介元と到着時のクエリをタブ内に保持し、予約・トラッキング時に送る */
+window.btRefInfo=window.btRefInfo||function(){var k='bt_ref_v1',v=null,r=document.referrer||'',q=(location.search||'').slice(1),ext=false;try{v=JSON.parse(sessionStorage.getItem(k)||'null')}catch(e){}try{ext=!!r&&new URL(r).host!==location.host}catch(e){}if(!v||ext){v={ref:r,q:q};try{sessionStorage.setItem(k,JSON.stringify(v))}catch(e){}}return v};window.btRefInfo();
+
   const GAS_URL    = 'https://script.google.com/macros/s/AKfycbzFK2HDxL3BwTfK2DBR8flrCIll2lr5ZyOB1W9Vy5s6V5EcAIhNc_plwDu-lFMCU__1fg/exec';
   const SLOTS_URL  = '/api/slots';
   const THANKS_URL = '/thanks';
@@ -537,6 +540,8 @@ export default function CounselingPage() {
         lp_type:BC_LP_TYPE,
         entry:BC_ENTRY,
         route_id:ROUTE_ID,
+        ref:(window.btRefInfo?window.btRefInfo().ref:''),
+        lp_query:(window.btRefInfo?window.btRefInfo().q:''),
         company:document.getElementById('bcCompany').value.trim(),
         department:document.getElementById('bcDept').value.trim(),
         employees:bcRadios.employees,
