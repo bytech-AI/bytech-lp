@@ -31,7 +31,7 @@ const course: CourseData = {
     visualH: 1283,
     visualAlt: "Difyの活用イメージ（PC画面）",
   },
-  docHref: "/doc-a",
+  docHref: "/doc-m",
   about: {
     title: "Dify研修とは？",
     subLead: (

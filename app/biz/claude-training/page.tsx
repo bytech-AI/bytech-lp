@@ -30,7 +30,7 @@ const course: CourseData = {
     visualH: 1169,
     visualAlt: "Claudeの活用イメージ（PC画面）",
   },
-  docHref: "/doc-a",
+  docHref: "/doc-h",
   about: {
     title: "Claude研修とは？",
     subLead: (

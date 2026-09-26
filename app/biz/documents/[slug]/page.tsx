@@ -39,6 +39,60 @@ const EBOOKS: Ebook[] = [
     description:
       "社内のAI活用が「導入したのに使われない」状態に陥らないための50項目のチェックシートです。目的設定・推進体制・ルール整備・教育・定着の5カテゴリで現状を可視化し、スコアからフェーズ別の次の一手がわかります。",
   },
+  {
+    slug: "ebook-04",
+    title: "AI研修タイプ 比較ガイド",
+    description:
+      "eラーニング・セミナー・ハンズオン・ワークショップ、4つの研修タイプの違いをまとめた資料です。実施方法・料金目安・向いている目的を比較表で整理し、目的別の選び方・組み合わせ例・助成金対応プランまで解説します。",
+  },
+  {
+    slug: "ebook-05",
+    title: "ChatGPT研修 コース紹介資料",
+    description:
+      "法人向けChatGPT研修のコース紹介資料です。カリキュラム（全8ユニット・45レッスン）、3つの研修プランと料金、助成金活用、サポート体制、研修開始までの流れ、よくあるご質問をまとめています。",
+  },
+  {
+    slug: "ebook-06",
+    title: "Gemini研修 コース紹介資料",
+    description:
+      "法人向けGemini研修のコース紹介資料です。カリキュラム（全11ユニット・67レッスン）、3つの研修プランと料金、助成金活用、サポート体制、研修開始までの流れ、よくあるご質問をまとめています。",
+  },
+  {
+    slug: "ebook-07",
+    title: "Claude研修 コース紹介資料",
+    description:
+      "法人向けClaude研修のコース紹介資料です。カリキュラム（全14ユニット・81レッスン）、3つの研修プランと料金、助成金活用、サポート体制、研修開始までの流れ、よくあるご質問をまとめています。",
+  },
+  {
+    slug: "ebook-08",
+    title: "Claude Code研修 コース紹介資料",
+    description:
+      "法人向けClaude Code研修のコース紹介資料です。カリキュラム（全5ユニット）、3つの研修プランと料金、サポート体制、研修開始までの流れ、よくあるご質問をまとめています。",
+  },
+  {
+    slug: "ebook-09",
+    title: "Copilot研修 コース紹介資料",
+    description:
+      "法人向けCopilot研修のコース紹介資料です。カリキュラム（全6ユニット・48レッスン）、3つの研修プランと料金、助成金活用、サポート体制、研修開始までの流れ、よくあるご質問をまとめています。",
+  },
+  {
+    slug: "ebook-10",
+    title: "Copilot Studio研修 コース紹介資料",
+    description:
+      "法人向けCopilot Studio研修のコース紹介資料です。カリキュラム（全11ユニット・70レッスン）、3つの研修プランと料金、助成金活用、サポート体制、研修開始までの流れ、よくあるご質問をまとめています。",
+  },
+  {
+    slug: "ebook-11",
+    title: "AIクリエイティブ研修 コース紹介資料",
+    description:
+      "法人向けAIクリエイティブ研修のコース紹介資料です。カリキュラム（全12ユニット・108レッスン）、3つの研修プランと料金、助成金活用、サポート体制、研修開始までの流れ、よくあるご質問をまとめています。",
+  },
+  {
+    slug: "ebook-12",
+    title: "Dify研修 コース紹介資料",
+    description:
+      "法人向けDify研修のコース紹介資料です。カリキュラム（全14ユニット・85レッスン）、3つの研修プランと料金、助成金活用、サポート体制、研修開始までの流れ、よくあるご質問をまとめています。",
+  },
 ];
 
 const getEbook = (slug: string) => EBOOKS.find((e) => e.slug === slug);
@@ -97,7 +151,7 @@ const PAGE_CSS = `
         .eb-dl__ico { width: 20px; height: 20px; flex: 0 0 auto; transition: transform .2s ease; background: center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232c5c9c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v12'/%3E%3Cpath d='m7 11 5 5 5-5'/%3E%3Cpath d='M4 20h16'/%3E%3C/svg%3E"); }
 
         /* スライド（1280px固定の埋め込みHTMLを、コンテナ幅に合わせて縮小表示） */
-        .eb-deck { position: relative; margin-top: 64px; width: 100%; overflow: hidden; border: 1px solid #e3e8ef; border-radius: 0 0 10px 10px; background: #e9edf3; }
+        .eb-deck { position: relative; margin-top: 64px; width: 100%; overflow: hidden; border: 1px solid #e3e8ef; border-radius: 0; background: #e9edf3; }
         .eb-deck iframe { display: block; width: 1280px; height: 720px; border: 0; transform-origin: top left; }
 
         /* 末尾のCTA */

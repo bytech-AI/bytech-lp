@@ -69,7 +69,7 @@
   .divider .t { position: absolute; top: 316px; left: 258px; font-size: 44px; font-weight: 900; letter-spacing: .06em; line-height: 1.2; }
 
   /* ===== 研修プラン（比較表） ===== */
-  table.cmp { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 42px; font-size: 13.5px; }
+  table.cmp { width: 900px; margin: 42px auto 0; border-collapse: separate; border-spacing: 0; font-size: 13.5px; }
   .cmp th, .cmp td { padding: 6px 8px; text-align: center; vertical-align: middle; border-bottom: 1px solid var(--line); }
   .cmp thead th { border-bottom: none; padding: 0 5px 10px; }
   .cmp thead .hx { display: block; background: var(--blue); color: #fff; font-size: 16.5px; font-weight: 700; padding: 12px 6px; border-radius: 0; letter-spacing: .02em; }
@@ -79,7 +79,7 @@
   .cmp td .em { color: var(--blue); font-weight: 700; }
   .cmp td .big { font-family: Poppins, "Noto Sans JP", sans-serif; font-size: 19px; font-weight: 600; color: var(--ink); }
   .cmp td .big small { font-family: "Noto Sans JP", sans-serif; font-size: 11px; font-weight: 500; color: var(--gray); }
-  .cmp td .cl6 { display: grid; grid-template-columns: 1fr 1fr; gap: 1px 8px; font-size: 11.3px; font-weight: 500; text-align: left; padding: 0 4px; color: var(--body); }
+  .cmp td .cl6 { display: grid; grid-template-columns: 1fr 1fr; gap: 1px 8px; font-size: 11.3px; font-weight: 500; text-align: left; padding: 0 4px; max-width: 330px; margin: 0 auto; color: var(--body); }
   .cmp .pill { display: block; background: var(--tint); color: var(--blue); font-size: 11.3px; font-weight: 700; border-radius: 999px; padding: 4px 8px; margin: 2.5px auto; max-width: 250px; }
 
   /* ===== 学習環境（原本の破線枠×青ヘッダーバー） ===== */
@@ -299,6 +299,8 @@
   @page { size: 1280px 720px; margin: 0; }
   @media print {
     body { padding: 0; background: #fff; }
+    /* box-shadow はPDF化でラスタ画像に変換され、Preview等でカード間に灰色の帯として出るため印刷時は無効化 */
+    * { box-shadow: none !important; }
     .note { display: none; }
     .deck { gap: 0; display: block; }
     .slide-shell { width: 1280px; }
@@ -456,32 +458,26 @@
             <th></th>
             <th><span class="hx">AI業務効率化研修</span></th>
             <th><span class="hx">AI業務自動化研修</span></th>
-            <th class="h3"><span class="hx">オーダーメイドハンズオン研修</span></th>
           </tr></thead>
           <tr><td class="rh">コース対象</td>
             <td><span class="em">各種AIツールの使い方から業務の効率化</span><br>を実現したい企業様向け</td>
-            <td>効率化にとどまらず<br><span class="em">既存業務の自動化を実現したい</span>企業様向け</td>
-            <td>ハイレベルな<br><span class="em">AI活用推進リーダーを育成したい</span>企業様向け</td></tr>
+            <td>効率化にとどまらず<br><span class="em">既存業務の自動化を実現したい</span>企業様向け</td></tr>
           <tr><td class="rh">受講料金</td>
             <td><span class="big">¥200,000<small>（税抜）/ 人</small></span></td>
-            <td><span class="big">¥300,000<small>（税抜）/ 人</small></span></td>
-            <td><span class="big" style="font-family:'Noto Sans JP',sans-serif; font-weight:900">お見積もり</span></td></tr>
+            <td><span class="big">¥300,000<small>（税抜）/ 人</small></span></td></tr>
           <tr><td class="rh">実質お支払額</td>
             <td><span class="big">¥50,000<small>（税抜）/ 人</small></span></td>
-            <td><span class="big">¥150,000<small>（税抜）/ 人</small></span></td>
-            <td>オーダーメイドのため<br>助成金未対応</td></tr>
-          <tr><td class="rh">サポート期間</td><td>2ヶ月</td><td>4ヶ月</td><td>1ヶ月〜</td></tr>
-          <tr><td class="rh">研修形式</td><td>eラーニング＋1on1</td><td>eラーニング＋1on1</td><td>eラーニング/1on1/セミナー<br>ワークショップ</td></tr>
+            <td><span class="big">¥150,000<small>（税抜）/ 人</small></span></td></tr>
+          <tr><td class="rh">サポート期間</td><td>2ヶ月</td><td>4ヶ月</td></tr>
+          <tr><td class="rh">研修形式</td><td>eラーニング＋1on1</td><td>eラーニング＋1on1</td></tr>
           <tr><td class="rh">選べる学習コース</td>
             <td><span class="cl6"><span>ChatGPT活用コース</span><span>Copilot活用コース</span><span>Gemini活用コース</span><span>Claude活用コース</span><span>ノーコード開発コース</span><span>AIクリエイティブ活用コース</span></span></td>
-            <td><span class="cl6"><span>ChatGPT活用コース</span><span>Copilot活用コース</span><span>Gemini活用コース</span><span>Claude活用コース</span><span>ノーコード開発コース</span><span>AIクリエイティブ活用コース</span></span></td>
             <td><span class="cl6"><span>ChatGPT活用コース</span><span>Copilot活用コース</span><span>Gemini活用コース</span><span>Claude活用コース</span><span>ノーコード開発コース</span><span>AIクリエイティブ活用コース</span></span></td></tr>
-          <tr><td class="rh">訓練時間</td><td>10時間〜</td><td>10時間〜</td><td>3時間〜</td></tr>
-          <tr><td class="rh">個別サポート</td><td>2ヶ月</td><td>4ヶ月</td><td>1ヶ月〜</td></tr>
+          <tr><td class="rh">訓練時間</td><td>10時間〜</td><td>10時間〜</td></tr>
+          <tr><td class="rh">個別サポート</td><td>2ヶ月</td><td>4ヶ月</td></tr>
           <tr><td class="rh">サポート内容</td>
             <td><span class="pill">研修期間の無制限チャットサポート</span><span class="pill">スキル証明課題の実施＆証明書発行</span><span class="pill">月2回のオンライン面談サポート</span><span class="pill">ハンズオン検証サポート</span></td>
-            <td><span class="pill">研修期間の無制限チャットサポート</span><span class="pill">スキル証明課題の実施＆証明書発行</span><span class="pill">月2回のオンライン面談サポート</span><span class="pill">ハンズオン検証サポート</span></td>
-            <td>カスタマイズ</td></tr>
+            <td><span class="pill">研修期間の無制限チャットサポート</span><span class="pill">スキル証明課題の実施＆証明書発行</span><span class="pill">月2回のオンライン面談サポート</span><span class="pill">ハンズオン検証サポート</span></td></tr>
         </table>
         <p class="s-pn en">2</p>
       </div></div>
@@ -814,39 +810,39 @@
       </div></div>
     </div><figcaption>15 導入事例①リヴァンプ</figcaption></figure>
 
-    <!-- ===== 16 導入事例② NTTデータビジネスシステムズ ===== -->
+    <!-- ===== 16 導入事例② 日天 ===== -->
     <figure class="slide-shell"><div class="clip">
       <div class="slide"><div class="s-body" style="padding-top:38px">
         <p class="s-head">導入実績：②</p>
         <img class="s-logo" src="assets/biz-logo-dark.svg" alt="byTech BUSINESS">
         <div class="case-top">
-          <div class="co"><p class="nm">株式会社NTTデータ<br>ビジネスシステムズ様</p><img src="assets/nttdata-bs-logo.png" alt="株式会社NTTデータ ビジネスシステムズ" style="width:230px; margin-top:14px"></div>
+          <div class="co"><p class="nm">日天株式会社様</p><img src="assets/nitten-logo.svg" alt="日天株式会社" style="width:150px; margin-top:20px"></div>
           <div class="case-info">
             <div class="r"><p class="k">プラン</p><p class="v"><b>AI業務自動化研修</b></p></div>
-            <div class="r"><p class="k">受講者</p><p class="v"><b>10名</b></p></div>
-            <div class="r"><p class="k">受講前の課題</p><p class="v">Copilotを使って検索や文章作成を行っている程度で活用できていない。<br>社内のAIに関するセキュリティ要件が整っていないため、一歩踏み出せないままいる。</p></div>
-            <div class="r"><p class="k">契約の決め手</p><p class="v">ハンズオン研修であれば、部門ごとに異なる課題へアプローチができると評価。<br>費用対効果を優先し、少数精鋭での受講ができる点に共感。DX推進プロジェクトのメンバーが受講。</p></div>
+            <div class="r"><p class="k">受講者</p><p class="v"><b>5名</b></p></div>
+            <div class="r"><p class="k">受講前の課題</p><p class="v">Google Workspaceは全社で使っているが、生成AIは個人が試す程度にとどまっていた。<br>問い合わせ対応のメール作成や、施工管理・販売管理システムをまたぐ転記が手作業のまま残っていた。</p></div>
+            <div class="r"><p class="k">契約の決め手</p><p class="v">動画教材だけで終わらず、自社の業務を題材に自動化の実装まで伴走できる点を評価。<br>少人数で受講でき、ツール選定やセキュリティ要件まで相談しながら進められる点に共感。</p></div>
           </div>
         </div>
         <div class="case3">
           <div class="cs"><p class="h">全社ゴール</p>
-            <p class="bt">基礎レベルの底上げ</p><p class="bd">ただ活用するだけでなく、AIエージェントやツール連携を駆使した活用ができる。個別最適化したAI活用ができる状態へ。</p>
-            <p class="bt">各部署のAI人材になる</p><p class="bd">チーム・部署へ落とし込める人材になる。相談内容を受けられるレベルになる。</p>
+            <p class="bt">定型業務の自動化</p><p class="bd">メール作成・資料整理・システム間の転記といった日々の定型業務を、AIと自動化ツールで仕組み化する。</p>
+            <p class="bt">自社で回せる状態へ</p><p class="bd">外部に頼らず、自社で業務フローを組み立て・改善できる人材を育てる。</p>
           </div>
           <div class="cs"><p class="h">ご支援内容</p>
-            <p class="bt">業務ヒアリング</p><p class="bd">業務内容の棚卸し〜課題特定。理想の状況・状態をAIを活用しながら言語化</p>
-            <p class="bt">汎用AIツールの徹底習得</p><p class="bd">社内導入ツールのCopilotを集中学習。上記ツールを中心としたツール連携の課題。</p>
-            <p class="bt">実務への実装</p><p class="bd">座学だけで終わらずに、実務に近い課題をオーダメイドで提案。モニタリングまで伴走することで運用・保守の重要性を実感。</p>
+            <p class="bt">業務ヒアリング</p><p class="bd">業務内容の棚卸し〜課題特定。自動化の効果が大きい業務を洗い出し、着手の優先順位を設定。</p>
+            <p class="bt">Google環境に合わせた習得</p><p class="bd">Gemini・NotebookLMを中心に学習。メンション機能やGemによるメール文面のテンプレート化など、実務での使いどころまで落とし込み。</p>
+            <p class="bt">自動化の技術選定と実装伴走</p><p class="bd">Difyを検証したうえで、社内業務にはGASが適すると判断。セキュリティ要件をふまえた開発環境の選定まで支援。</p>
           </div>
           <div class="cs result"><p class="h">研修結果</p>
-            <p class="bt">一人前のAI人材へ</p><p class="bd">Officeツールを横断した連携機能を使いこなし、業務課題に対して自己完結ができるレベルへ到達。部署内で相談役として頼られる人材が増加。</p>
-            <p class="bt">学習意欲UP</p><p class="bd">AI活用の成功体験が増え、継続的に学びたいというモチベーションが向上。社内で学びを共有する動きが生まれ、部署横断のAIナレッジが蓄積しはじめた。</p>
-            <p class="bt">運用・保守まで</p><p class="bd">研修で作成したAIプロンプト・テンプレートを現場で運用できる。現場での「つまずきポイント」を吸い上げ、改善サイクルを回せる仕組みが整備された。</p>
+            <p class="bt">メール業務の効率化</p><p class="bd">Gemでメール文面をテンプレート化し、問い合わせ・案内メールを短時間で作成できる体制づくりが進行。</p>
+            <p class="bt">社内システムの自動化に着手</p><p class="bd">GASによるGmail・カレンダー・スプレッドシートの連携が稼働。ANDPADや楽楽販売などのSaaSとのAPI連携へ展開を計画。</p>
+            <p class="bt">技術選定の指針が明確に</p><p class="bd">検証を通じて「社内業務の自動化はGAS中心」という方針が定まり、迷わず内製を進められる状態に。</p>
           </div>
         </div>
         <p class="s-pn en">14</p>
       </div></div>
-    </div><figcaption>16 導入事例②NTTデータビジネスシステムズ</figcaption></figure>
+    </div><figcaption>16 導入事例②日天</figcaption></figure>
 
     <!-- ===== 17 導入事例③ 西日本イシダ ===== -->
     <figure class="slide-shell"><div class="clip">

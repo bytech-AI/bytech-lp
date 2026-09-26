@@ -31,7 +31,7 @@ const course: CourseData = {
     visualAlt: "ChatGPTの活用イメージ（PC画面）",
     nowrapEyebrow: true,
   },
-  docHref: "/doc-a",
+  docHref: "/doc-f",
   about: {
     title: "ChatGPT研修とは？",
     subLead: (

@@ -42,7 +42,7 @@ const CATEGORY_THUMB: Record<string, string> = {
   サービス概要: "/biz/assets/img/documents/category-service.webp",
 };
 
-// リポジトリ内で持つ静的な資料。カードのリンク先はフォーム付きDLページ（/doc-b〜d）。
+// リポジトリ内で持つ静的な資料。カードのリンク先はフォーム付きDLページ（/doc-b〜f）。
 // 閲覧ページ /documents/ebook-0X は直リンクしない（DL導線はフォーム経由に統一）。
 // カバーは public/biz/assets/img/documents/ のwebp。
 const EBOOK_COVERS = [
@@ -80,6 +80,96 @@ const STATIC_DOCS: { category: string; doc: DocItem }[] = [
       thumbLabel: "DOCUMENT",
       thumb: EBOOK_COVERS[2],
       href: "/doc-d",
+    },
+  },
+  {
+    category: "サービス概要",
+    doc: {
+      title: "AI研修タイプ 比較ガイド",
+      points: ["eラーニング・セミナー・ハンズオン・ワークショップの違い", "タイプ別の料金目安・見込める効果・導入事例・FAQ", "比較表と目的別の選び方"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-04-cover.webp",
+      href: "/doc-e",
+    },
+  },
+  {
+    category: "研修コース紹介",
+    doc: {
+      title: "ChatGPT研修 コース紹介資料",
+      points: ["カリキュラム全8ユニット・45レッスンの詳細", "3つの研修プランと料金・助成金活用", "サポート体制・研修開始までの流れ・FAQ"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-05-cover.webp",
+      href: "/doc-f",
+    },
+  },
+  {
+    category: "研修コース紹介",
+    doc: {
+      title: "Gemini研修 コース紹介資料",
+      points: ["カリキュラム全11ユニット・67レッスンの詳細", "3つの研修プランと料金・助成金活用", "研修開始までの流れ・FAQ"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-06-cover.webp",
+      href: "/doc-g",
+    },
+  },
+  {
+    category: "研修コース紹介",
+    doc: {
+      title: "Claude研修 コース紹介資料",
+      points: ["カリキュラム全14ユニット・81レッスンの詳細", "3つの研修プランと料金・助成金活用", "研修開始までの流れ・FAQ"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-07-cover.webp",
+      href: "/doc-h",
+    },
+  },
+  {
+    category: "研修コース紹介",
+    doc: {
+      title: "Claude Code研修 コース紹介資料",
+      points: ["カリキュラム全5ユニットの詳細", "3つの研修プランと料金・サポート体制", "研修開始までの流れ・FAQ"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-08-cover.webp",
+      href: "/doc-i",
+    },
+  },
+  {
+    category: "研修コース紹介",
+    doc: {
+      title: "Copilot研修 コース紹介資料",
+      points: ["カリキュラム全6ユニット・48レッスンの詳細", "3つの研修プランと料金・助成金活用", "研修開始までの流れ・FAQ"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-09-cover.webp",
+      href: "/doc-j",
+    },
+  },
+  {
+    category: "研修コース紹介",
+    doc: {
+      title: "Copilot Studio研修 コース紹介資料",
+      points: ["カリキュラム全11ユニット・70レッスンの詳細", "3つの研修プランと料金・助成金活用", "研修開始までの流れ・FAQ"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-10-cover.webp",
+      href: "/doc-k",
+    },
+  },
+  {
+    category: "研修コース紹介",
+    doc: {
+      title: "AIクリエイティブ研修 コース紹介資料",
+      points: ["カリキュラム全12ユニット・108レッスンの詳細", "3つの研修プランと料金・助成金活用", "研修開始までの流れ・FAQ"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-11-cover.webp",
+      href: "/doc-l",
+    },
+  },
+  {
+    category: "研修コース紹介",
+    doc: {
+      title: "Dify研修 コース紹介資料",
+      points: ["カリキュラム全14ユニット・85レッスンの詳細", "3つの研修プランと料金・助成金活用", "研修開始までの流れ・FAQ"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-12-cover.webp",
+      href: "/doc-m",
     },
   },
 ];

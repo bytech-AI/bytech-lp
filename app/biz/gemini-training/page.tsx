@@ -30,7 +30,7 @@ const course: CourseData = {
     visualH: 1162,
     visualAlt: "Gemini/NotebookLMの活用イメージ（PC画面）",
   },
-  docHref: "/doc-a",
+  docHref: "/doc-g",
   about: {
     title: "Gemini研修とは？",
     subLead: (

@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI研修タイプ 比較ガイド｜全32スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* デザイン: ebook-03（KYOSOU リファレンス）と同系統。
+     流線グラデ表紙／eyebrow（●＋章名）→大見出し／番号サークル入り丸角ピル行／1/4円ページ番号。
+     研修タイプ（eラーニング／セミナー／ハンズオン／ワークショップ）の写真は
+     旧 biz トップ「研修タイプ」セクションの素材（public/biz/assets/img/index/plan_*.webp）を流用。 */
+  :root {
+    --blue: #2c5c9c;
+    --blue-deep: #1a2e50;
+    --blue-bright: #1a6fb5;
+    --blue-pale: #8fb0d8;
+    --ink: #2a2f3a;
+    --line: #e3e8ef;
+    --amber: #f0b429;
+    --tint: #eef4fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f4f6f8; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; color: var(--ink); padding: 48px 0 96px; }
+  .note { max-width: 1120px; margin: 0 auto 28px; font-size: 13px; font-weight: 700; color: #8a93a3; }
+  .en { font-family: Montserrat, "Noto Sans JP", sans-serif; }
+
+  .deck { display: flex; flex-direction: column; gap: 34px; align-items: center; }
+  .slide-shell { width: 1120px; }
+  .slide-shell figcaption { font-size: 12px; font-weight: 700; color: #8a93a3; margin: 8px 2px 0; letter-spacing: .04em; }
+  .slide { width: 1280px; height: 720px; transform: scale(0.875); transform-origin: top left; background: #fff; position: relative; overflow: hidden; }
+  .slide-shell .clip { height: 630px; overflow: hidden; border-radius: 0; box-shadow: 0 2px 10px rgba(26,35,48,.08); }
+
+  /* ===== 共通 ===== */
+  .s-body { position: absolute; inset: 0; padding: 44px 64px; z-index: 1; }
+  .s-eyebrow { font-family: Montserrat, "Noto Sans JP", sans-serif; display: flex; align-items: center; gap: 9px; font-size: 15.5px; font-weight: 700; color: var(--blue-pale); letter-spacing: .02em; }
+  .s-eyebrow::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); }
+  .s-title { font-size: 34px; font-weight: 800; color: #1a2330; letter-spacing: .02em; margin-top: 8px; line-height: 1.5; }
+  .s-title b { color: var(--blue-bright); }
+  .s-logo { position: absolute; top: 46px; right: 64px; height: 34px; }
+  .s-lead { text-align: center; font-size: 21px; font-weight: 700; line-height: 1.85; color: #333; }
+  .s-lead b { color: var(--blue-bright); }
+  .s-foot { position: absolute; left: 64px; bottom: 22px; font-size: 12.5px; color: #8a93a3; z-index: 5; }
+  .s-num { position: absolute; right: 0; bottom: 0; width: 72px; height: 72px; background: var(--blue); border-radius: 72px 0 0 0; color: #fff; font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 700; display: flex; align-items: flex-end; justify-content: flex-end; padding: 0 16px 11px 0; z-index: 5; }
+  .blue-bg { background: linear-gradient(135deg, #1c3a6b 0%, var(--blue) 46%, #3a76c4 100%); color: #fff; }
+  svg.waves { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .bgil { position: absolute; pointer-events: none; z-index: 0; }
+  .checkband { display: flex; align-items: center; gap: 11px; background: var(--tint); border: 1.5px solid var(--blue); border-radius: 0; padding: 12px 20px; font-size: 14.5px; font-weight: 800; color: var(--blue); }
+  .checkband::before { content: "✓"; flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+
+  /* ===== 表紙 ===== */
+  .cover .badge-row { position: absolute; top: 66px; left: 64px; display: flex; align-items: center; gap: 16px; }
+  .cover .badge { background: var(--amber); color: #4a3605; font-size: 16px; font-weight: 800; padding: 10px 18px; border-radius: 0; }
+  .cover .badge-note { font-size: 20px; font-weight: 700; padding-bottom: 12px; border-bottom: 2px solid rgba(255,255,255,.85); letter-spacing: .04em; }
+  .cover .sub { position: absolute; left: 66px; top: 226px; font-size: 24px; font-weight: 700; letter-spacing: .04em; line-height: 1.6; }
+  .cover .title { position: absolute; left: 62px; top: 322px; font-size: 86px; font-weight: 800; letter-spacing: .04em; line-height: 1.3; }
+  .cover .title small { display: block; font-size: 46px; letter-spacing: .08em; margin-top: 4px; }
+  .cover .date { position: absolute; left: 66px; top: 610px; font-family: Montserrat, "Noto Sans JP", sans-serif; font-size: 15px; font-weight: 600; letter-spacing: .18em; opacity: .8; }
+  .cover .logo { position: absolute; right: 64px; bottom: 48px; height: 44px; }
+  .cover .types { position: absolute; right: 64px; top: 226px; display: flex; flex-direction: column; gap: 10px; }
+  .cover .types span { background: rgba(255,255,255,.14); border: 1.5px solid rgba(255,255,255,.55); border-radius: 999px; padding: 9px 22px; font-size: 17px; font-weight: 700; letter-spacing: .04em; text-align: center; }
+
+  /* ===== 目次 ===== */
+  .toc { margin-top: 26px; display: flex; flex-direction: column; gap: 11px; max-width: 780px; }
+  .toc .row { display: flex; align-items: center; gap: 20px; font-size: 19px; font-weight: 800; color: #1a2330; background: #fff; border: 1px solid #d9e1ec; border-radius: 999px; padding: 10px 16px; box-shadow: 0 4px 14px rgba(26,35,48,.05); }
+  .toc .no { font-family: Montserrat, sans-serif; flex: 0 0 auto; width: 42px; height: 42px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; }
+
+  /* ===== 3カード（つまずき） ===== */
+  .card3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px; margin-top: 52px; }
+  .fcard { background: #fff; border: 1px solid var(--line); border-radius: 0; padding: 38px 28px 34px; box-shadow: 0 6px 20px rgba(26,35,48,.06); }
+  .fcard .ic { width: 78px; height: 78px; margin: 0 auto 18px; border-radius: 50%; background: #e9f0f9; display: flex; align-items: center; justify-content: center; }
+  .fcard .h { text-align: center; font-size: 22px; font-weight: 800; color: var(--blue); padding-bottom: 12px; border-bottom: 2.5px solid var(--blue); }
+  .fcard .d { font-size: 15px; font-weight: 500; color: #4a5568; line-height: 1.95; margin-top: 16px; }
+  .fcard .tag { display: block; text-align: center; margin-top: 18px; font-size: 13px; font-weight: 800; color: var(--blue); background: var(--tint); border-radius: 999px; padding: 7px; }
+
+  /* ===== 4タイプ 全体像 ===== */
+  .type4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 34px; }
+  .tcard { background: #fff; border: 1px solid var(--line); border-radius: 0; overflow: hidden; box-shadow: 0 6px 20px rgba(26,35,48,.06); display: flex; flex-direction: column; }
+  .tcard img.ph { display: block; width: 100%; aspect-ratio: 16 / 8; object-fit: cover; }
+  .tcard .hd { display: flex; align-items: center; gap: 9px; background: var(--blue); color: #fff; padding: 10px 14px; font-size: 17px; font-weight: 800; }
+  .tcard .hd .no { font-family: Montserrat, sans-serif; flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%; background: #fff; color: var(--blue); display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 700; }
+  .tcard .bd { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .tcard .d { font-size: 13.4px; font-weight: 500; color: #4a5568; line-height: 1.7; }
+  .tcard .kv { display: flex; align-items: baseline; gap: 8px; font-size: 12px; font-weight: 500; color: #4a5568; border-top: 1px dashed #e3e8ef; padding-top: 7px; }
+  .tcard .kv .k { flex: 0 0 auto; font-size: 11px; font-weight: 800; color: var(--blue); background: var(--tint); border-radius: 0; padding: 2px 7px; }
+  .tcard .kv b { font-family: Montserrat, "Noto Sans JP", sans-serif; font-size: 15px; font-weight: 800; color: #1a2330; }
+  .tcard .kv b small { font-family: "Noto Sans JP", sans-serif; font-size: 11px; font-weight: 700; color: #6b7789; }
+
+  /* ===== タイプ別 詳細 ===== */
+  .det { display: grid; grid-template-columns: 470px 1fr; gap: 40px; margin-top: 30px; align-items: start; }
+  .det .ph { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 0; }
+  .spec { margin-top: 16px; background: #fff; border: 1px solid var(--line); border-radius: 0; overflow: hidden; }
+  .spec .r { display: grid; grid-template-columns: 108px 1fr; align-items: center; border-bottom: 1px solid #eef1f5; }
+  .spec .r:last-child { border-bottom: none; }
+  .spec .k { background: var(--tint); color: var(--blue); font-size: 13px; font-weight: 800; padding: 11px 14px; align-self: stretch; display: flex; align-items: center; }
+  .spec .v { font-size: 14.5px; font-weight: 600; color: #2a3446; padding: 10px 14px; line-height: 1.5; }
+  .spec .v b { font-family: Montserrat, "Noto Sans JP", sans-serif; font-size: 19px; font-weight: 800; color: #1a2330; }
+  .spec .v b small { font-family: "Noto Sans JP", sans-serif; font-size: 11px; font-weight: 700; color: #6b7789; }
+  .det .lead { font-size: 18.5px; font-weight: 800; color: #1a2330; line-height: 1.75; }
+  .det .lead b { color: var(--blue-bright); }
+  .feat { margin-top: 18px; display: flex; flex-direction: column; gap: 11px; }
+  .feat .f { display: flex; align-items: flex-start; gap: 10px; font-size: 15.5px; font-weight: 600; color: #2a3446; line-height: 1.6; }
+  .feat .f::before { content: "✓"; flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; margin-top: 1px; }
+  .reco { margin-top: 20px; background: var(--blue); color: #fff; border-radius: 0; padding: 16px 20px 18px; }
+  .reco .h { font-size: 15px; font-weight: 800; letter-spacing: .04em; margin-bottom: 8px; }
+  .reco .i { display: flex; align-items: flex-start; gap: 9px; font-size: 14.5px; font-weight: 500; line-height: 1.65; margin-top: 7px; }
+  .reco .i::before { content: ""; flex: 0 0 auto; width: 16px; height: 16px; margin-top: 3px; border-radius: 50%; border: 2px solid #fff; background: center/9px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.5l2.5 2.5 4.5-5' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+  .prog { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .prog .lb { font-size: 13px; font-weight: 800; color: var(--blue); margin-right: 4px; }
+  .prog span:not(.lb) { font-size: 12.5px; font-weight: 700; color: #2a3446; background: #fff; border: 1px solid #c9d6e8; border-radius: 999px; padding: 5px 12px; }
+
+  /* ===== 比較表 ===== */
+  table.cmp { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 34px; font-size: 14px; }
+  .cmp th, .cmp td { padding: 12px 10px; text-align: center; vertical-align: middle; border-bottom: 1px solid var(--line); }
+  .cmp thead th { border-bottom: none; padding: 0 5px 8px; }
+  .cmp thead .hx { display: block; background: var(--blue); color: #fff; font-size: 17px; font-weight: 800; padding: 13px 6px; border-radius: 0; letter-spacing: .02em; }
+  .cmp .rh { color: var(--ink); font-weight: 800; width: 150px; font-size: 13.5px; text-align: left; padding-left: 6px; background: #f7f9fc; }
+  .cmp td { font-weight: 500; color: #2a3446; line-height: 1.55; }
+  .cmp td .em { color: var(--blue); font-weight: 800; }
+  .cmp td .big { font-family: Montserrat, "Noto Sans JP", sans-serif; font-size: 19px; font-weight: 800; color: #1a2330; }
+  .cmp td .big small { font-family: "Noto Sans JP", sans-serif; font-size: 11px; font-weight: 700; color: #6b7789; }
+  .cmp td .ok { display: inline-block; font-size: 12px; font-weight: 800; color: var(--blue); background: var(--tint); border-radius: 999px; padding: 3px 12px; }
+  .cmp td .ask { display: inline-block; font-size: 12px; font-weight: 800; color: #6b7789; background: #f1f3f7; border-radius: 999px; padding: 3px 12px; }
+
+  /* ===== 選び方（番号ピル） ===== */
+  .kpills { margin-top: 26px; display: flex; flex-direction: column; gap: 14px; }
+  .kp { display: grid; grid-template-columns: 58px 1fr 300px; align-items: center; gap: 20px; background: #fff; border: 1px solid #d9e1ec; border-radius: 999px; padding: 12px 22px 12px 14px; box-shadow: 0 4px 14px rgba(26,35,48,.05); }
+  .kp .no { font-family: Montserrat, sans-serif; flex: 0 0 auto; width: 58px; height: 58px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; }
+  .kp .q { font-size: 18.5px; font-weight: 800; color: #1a2330; line-height: 1.5; }
+  .kp .q small { display: block; font-size: 12.5px; font-weight: 500; color: #6b7789; margin-top: 2px; }
+  .kp .a { display: flex; align-items: center; gap: 10px; }
+  .kp .a::before { content: "→"; font-family: Montserrat, sans-serif; font-size: 20px; font-weight: 800; color: var(--blue-pale); }
+  .kp .a .t { font-size: 16.5px; font-weight: 800; color: #fff; background: var(--blue); border-radius: 999px; padding: 9px 18px; white-space: nowrap; }
+  .kp .a .s { font-size: 11.5px; font-weight: 600; color: #4a5568; line-height: 1.45; }
+
+  /* ===== 助成金対応プラン ===== */
+  .plan2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 28px; }
+  .pl { background: #fff; border: 1.5px solid var(--blue); border-radius: 0; overflow: hidden; }
+  .pl .hd { background: var(--blue); color: #fff; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; }
+  .pl .hd .n { font-size: 20px; font-weight: 800; }
+  .pl .hd .m { font-size: 12px; font-weight: 700; background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.6); border-radius: 999px; padding: 4px 12px; }
+  .pl .bd { padding: 20px 22px 22px; }
+  .pl .price { display: grid; grid-template-columns: 1fr 26px 1fr; align-items: center; gap: 8px; }
+  .pl .price .c { text-align: center; border-radius: 0; padding: 14px 8px; }
+  .pl .price .c.g { background: #f1f3f7; }
+  .pl .price .c.b { background: var(--tint); border: 1.5px solid var(--blue); }
+  .pl .price .k { font-size: 11px; font-weight: 800; color: #6b7789; }
+  .pl .price .c.b .k { color: var(--blue); }
+  .pl .price .v { font-family: Montserrat, "Noto Sans JP", sans-serif; font-size: 28px; font-weight: 800; color: #1a2330; line-height: 1.2; margin-top: 2px; }
+  .pl .price .v small { font-family: "Noto Sans JP", sans-serif; font-size: 11px; font-weight: 700; color: #6b7789; }
+  .pl .price .arr { font-family: Montserrat, sans-serif; font-size: 22px; font-weight: 800; color: var(--blue); text-align: center; }
+  .pl .kv { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+  .pl .kv div { background: #f7f9fc; border-radius: 0; padding: 10px 8px; text-align: center; }
+  .pl .kv .k { font-size: 11.5px; font-weight: 800; color: var(--blue); }
+  .pl .kv .v { font-size: 15.5px; font-weight: 800; color: #1a2330; margin-top: 2px; }
+  .pl .pg { margin-top: 14px; font-size: 13.5px; font-weight: 600; color: #4a5568; line-height: 1.8; }
+  .pl .pg b { color: var(--blue); font-weight: 800; }
+  .sup5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 24px; }
+  .sup5 div { background: var(--tint); border-radius: 0; padding: 14px 8px; text-align: center; font-size: 13.5px; font-weight: 800; color: var(--blue); line-height: 1.45; }
+
+  /* ===== 研修開始までの流れ ===== */
+  .flow { display: grid; grid-template-columns: 1fr 22px 1fr 22px 1fr 22px 1fr 22px 1fr; gap: 6px; margin-top: 30px; align-items: stretch; }
+  .fs { background: #fff; border: 1px solid var(--line); border-radius: 0; padding: 18px 14px 16px; box-shadow: 0 6px 20px rgba(26,35,48,.06); text-align: center; position: relative; }
+  .fs .n { font-family: Montserrat, sans-serif; width: 40px; height: 40px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; margin: 0 auto; }
+  .fs .t { font-size: 16.5px; font-weight: 800; color: #1a2330; margin-top: 10px; line-height: 1.4; min-height: 46px; }
+  .fs .d { font-size: 12.3px; font-weight: 500; color: #4a5568; line-height: 1.7; margin-top: 6px; text-align: left; }
+  .fs .opt { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); font-size: 10.5px; font-weight: 800; color: #fff; background: var(--amber); color: #4a3605; border-radius: 999px; padding: 3px 10px; white-space: nowrap; }
+  .farr { display: flex; align-items: center; justify-content: center; }
+  .farr::before { content: ""; width: 14px; height: 24px; background: var(--blue-pale); clip-path: polygon(0 0, 52% 0, 100% 50%, 52% 100%, 0 100%, 46% 50%); }
+  .cta-band { margin-top: 26px; border-radius: 0; padding: 26px 38px; color: #fff; display: flex; align-items: center; justify-content: space-between; gap: 30px; position: relative; overflow: hidden; background: linear-gradient(135deg, #1c3a6b 0%, var(--blue) 46%, #3a76c4 100%); }
+  .cta-band svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .cta-band .l { position: relative; }
+  .cta-band .l .t { font-size: 20px; font-weight: 800; }
+  .cta-band .l .d { font-size: 13.5px; font-weight: 500; opacity: .92; margin-top: 6px; }
+  .cta-band .btn { position: relative; flex: 0 0 auto; background: #fff; color: var(--blue-deep); border-radius: 999px; padding: 15px 30px; font-size: 16px; font-weight: 800; }
+
+  /* ===== 留意事項 ===== */
+  .legal { margin-top: 44px; max-width: 1040px; }
+  .legal .li { display: flex; gap: 12px; font-size: 15.5px; font-weight: 500; color: #4a5568; line-height: 1.95; padding: 17px 2px; border-bottom: 1px solid #eef1f5; }
+  .legal .li::before { content: "※"; flex: 0 0 auto; color: var(--blue); font-weight: 800; }
+
+
+  /* ===== 中間表紙（章扉） ===== */
+  .divider .no { position: absolute; left: 64px; top: 150px; font-family: Montserrat, sans-serif; font-size: 120px; font-weight: 800; line-height: 1; color: rgba(255,255,255,.28); letter-spacing: .02em; }
+  .divider .t { position: absolute; left: 66px; top: 260px; max-width: 1000px; font-size: 62px; font-weight: 800; letter-spacing: .04em; line-height: 1.25; }
+  .divider .t small { display: block; font-size: 22px; font-weight: 700; letter-spacing: .06em; margin-top: 14px; opacity: .92; }
+  .divider .chap { position: absolute; left: 66px; bottom: 64px; display: flex; gap: 10px; }
+  .divider .chap span { font-size: 14.5px; font-weight: 700; border: 1.5px solid rgba(255,255,255,.6); background: rgba(255,255,255,.12); border-radius: 999px; padding: 8px 18px; letter-spacing: .04em; }
+  .divider .ph { position: absolute; right: 64px; top: 150px; width: 460px; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 0; box-shadow: 0 20px 50px rgba(10,25,60,.35); border: 3px solid rgba(255,255,255,.35); }
+  .divider .logo { position: absolute; right: 64px; bottom: 48px; height: 44px; }
+
+  /* ===== 料金 ===== */
+  .price-wrap { display: grid; grid-template-columns: 400px 1fr; gap: 34px; margin-top: 28px; align-items: stretch; }
+  .pbox { background: linear-gradient(135deg, #1c3a6b 0%, var(--blue) 60%, #3a76c4 100%); color: #fff; border-radius: 0; padding: 28px 30px 26px; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+  .pbox .k { font-size: 14px; font-weight: 800; letter-spacing: .06em; opacity: .9; }
+  .pbox .v { white-space: nowrap; font-family: Montserrat, "Noto Sans JP", sans-serif; font-size: 50px; font-weight: 800; line-height: 1.1; margin-top: 8px; letter-spacing: .01em; }
+  .pbox .v small { font-family: "Noto Sans JP", sans-serif; font-size: 17px; font-weight: 700; margin-left: 4px; }
+  .pbox .tax { font-size: 12.5px; font-weight: 600; opacity: .85; margin-top: 6px; }
+  .pbox .sep { height: 1px; background: rgba(255,255,255,.3); margin: auto 0 14px; padding-top: 0; }
+  .pbox .tax { margin-bottom: 18px; }
+  .pbox .row { display: flex; justify-content: space-between; align-items: center; font-size: 13.5px; font-weight: 600; padding: 6px 0; border-bottom: 1px dashed rgba(255,255,255,.22); }
+  .pbox .row:last-child { border-bottom: none; }
+  .pbox .row b { font-weight: 800; font-size: 14.5px; }
+  .inc-h { font-size: 16px; font-weight: 800; color: #1a2330; display: flex; align-items: center; gap: 10px; }
+  .inc-h::before { content: ""; width: 6px; height: 22px; border-radius: 0; background: var(--blue); }
+  .inc { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 18px; }
+  .inc .i { display: flex; align-items: flex-start; gap: 9px; font-size: 14.5px; font-weight: 600; color: #2a3446; line-height: 1.55; background: #fff; border: 1px solid var(--line); border-radius: 0; padding: 10px 12px; }
+  .inc .i::before { content: "✓"; flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; margin-top: 1px; }
+  .vary { margin-top: 18px; }
+  .vary .pills { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .vary .pills span { font-size: 13px; font-weight: 700; color: var(--blue); background: var(--tint); border-radius: 999px; padding: 6px 14px; }
+  .plans-mini { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .plans-mini div { background: #fff; border: 1.5px solid var(--blue); border-radius: 0; padding: 12px 16px; font-size: 13.5px; font-weight: 700; color: #2a3446; line-height: 1.6; }
+  .plans-mini div b { display: block; color: var(--blue); font-size: 14px; }
+  .plans-mini div .p { font-family: Montserrat, "Noto Sans JP", sans-serif; font-weight: 800; color: #1a2330; }
+
+  /* ===== 見込める効果 ===== */
+  .eff { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 30px; }
+  .ef { background: #fff; border: 1px solid var(--line); border-radius: 0; padding: 22px 24px 22px; box-shadow: 0 6px 20px rgba(26,35,48,.06); }
+  .ef .il { height: 96px; display: flex; align-items: center; justify-content: center; }
+  .ef .il img { max-height: 100%; max-width: 100%; }
+  .ef .h { font-size: 19px; font-weight: 800; color: #1a2330; margin-top: 14px; line-height: 1.4; text-align: center; }
+  .ef .d { font-size: 14px; font-weight: 500; color: #4a5568; line-height: 1.85; margin-top: 10px; }
+  .ba { margin-top: 24px; display: grid; grid-template-columns: 1fr 60px 1fr; align-items: stretch; gap: 0; }
+  .ba .b, .ba .a { border-radius: 0; padding: 16px 22px; }
+  .ba .b { background: #f1f3f7; }
+  .ba .a { background: var(--tint); border: 1.5px solid var(--blue); }
+  .ba .lb { font-family: Montserrat, "Noto Sans JP", sans-serif; font-size: 12.5px; font-weight: 800; letter-spacing: .1em; color: #6b7789; }
+  .ba .a .lb { color: var(--blue); }
+  .ba .tx { font-size: 15px; font-weight: 700; color: #2a3446; line-height: 1.7; margin-top: 4px; }
+  .ba .a .tx { color: #1a2330; }
+  .ba .arr { display: flex; align-items: center; justify-content: center; font-family: Montserrat, sans-serif; font-size: 30px; font-weight: 800; color: var(--blue); }
+
+  /* ===== 導入事例 ===== */
+  .case-hd { display: flex; align-items: center; gap: 22px; margin-top: 22px; background: #fff; border: 1px solid var(--line); border-radius: 0; padding: 14px 22px; box-shadow: 0 6px 20px rgba(26,35,48,.06); }
+  .case-hd .lg { flex: 0 0 auto; width: 200px; height: 56px; display: flex; align-items: center; }
+  .case-hd .lg img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .case-hd .nm { font-size: 22px; font-weight: 800; color: #1a2330; flex: 1; min-width: 0; }
+  .case-hd .nm small { display: block; font-size: 12.5px; font-weight: 600; color: #6b7789; margin-top: 2px; }
+  .case-hd .tags { margin-left: auto; display: flex; gap: 8px; flex: 0 0 auto; }
+  .case-hd .tags span { font-size: 12.5px; font-weight: 800; color: var(--blue); background: var(--tint); border-radius: 999px; padding: 7px 14px; white-space: nowrap; }
+  .case-hd .tags span b { font-weight: 800; color: #1a2330; }
+  .case { display: grid; grid-template-columns: 1fr 1fr 1.15fr; gap: 18px; margin-top: 16px; }
+  .cs { background: #fff; border: 1px solid var(--line); border-radius: 0; overflow: hidden; box-shadow: 0 6px 20px rgba(26,35,48,.06); }
+  .cs .ch { background: var(--blue); color: #fff; font-size: 15px; font-weight: 800; padding: 10px 16px; display: flex; align-items: center; gap: 9px; }
+  .cs .ch .b { font-family: Montserrat, sans-serif; width: 24px; height: 24px; border-radius: 50%; background: #fff; color: var(--blue); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+  .cs.r .ch { background: var(--blue-deep); }
+  .cs .cb { padding: 10px 16px 12px; }
+  .cs .it { font-size: 13.5px; font-weight: 500; color: #2a3446; line-height: 1.6; padding: 6px 0; border-bottom: 1px dashed #e6ebf2; }
+  .cs .it:last-child { border-bottom: none; }
+  .cs .it b { display: block; font-weight: 800; color: var(--blue); font-size: 14.5px; }
+  .cs.r .it b { color: var(--blue-deep); }
+  .case-note { position: absolute; left: 64px; right: 140px; bottom: 42px; margin: 0; font-size: 12px; font-weight: 600; color: #6b7789; }
+
+  /* ===== FAQ ===== */
+  .faq { margin-top: 30px; display: flex; flex-direction: column; gap: 16px; }
+  .qa { background: #fff; border: 1px solid var(--line); border-radius: 0; padding: 18px 24px; box-shadow: 0 6px 20px rgba(26,35,48,.05); }
+  .qa .q { display: flex; align-items: flex-start; gap: 12px; font-size: 18px; font-weight: 800; color: #1a2330; line-height: 1.5; }
+  .qa .q::before { content: "Q"; flex: 0 0 auto; font-family: Montserrat, sans-serif; width: 28px; height: 28px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; }
+  .qa .a { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; font-weight: 500; color: #4a5568; line-height: 1.8; margin-top: 10px; }
+  .qa .a::before { content: "A"; flex: 0 0 auto; font-family: Montserrat, sans-serif; width: 28px; height: 28px; border-radius: 50%; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; margin-top: -2px; }
+
+  /* ===== ページ番号（CSSカウンタ。表紙は数えない） ===== */
+  .deck { counter-reset: pg -1; }
+  figure.slide-shell { counter-increment: pg; }
+  .s-num::before { content: counter(pg); }
+
+  /* ===== PDF出力 ===== */
+  @page { size: 1280px 720px; margin: 0; }
+  @media print {
+    body { padding: 0; background: #fff; }
+    /* box-shadow はPDF化でラスタ画像に変換され、Preview等でカード間に灰色の帯として出るため印刷時は無効化 */
+    * { box-shadow: none !important; }
+    .note { display: none; }
+    .deck { gap: 0; display: block; }
+    .slide-shell { width: 1280px; }
+    .slide-shell figcaption { display: none; }
+    .slide-shell .clip { height: 720px; overflow: hidden; border-radius: 0; box-shadow: none; }
+    .slide { transform: none; border: none; border-radius: 0; }
+    figure.slide-shell { page-break-after: always; break-after: page; margin: 0; }
+    figure.slide-shell:last-child { page-break-after: auto; }
+  }
+</style>
+</head>
+<body>
+  <p class="note">AI研修タイプ 比較ガイド｜全32スライド（4タイプ × 概要・料金・見込める効果・導入事例・FAQ ＋ 比較表・選び方）</p>
+  <div class="deck">
+
+    <!-- ===== 01 表紙 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide blue-bg cover">
+        <svg class="waves" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <path d="M700,-80 C980,60 820,300 1120,380 C1320,433 1360,560 1280,760 L1380,760 L1380,-80 Z" fill="rgba(255,255,255,0.07)"/>
+          <path d="M880,-120 C1150,40 980,260 1240,330 L1340,330 L1340,-120 Z" fill="rgba(90,160,230,0.28)"/>
+          <path d="M-80,560 C240,480 420,660 760,600 C1040,551 1180,640 1300,760 L-80,760 Z" fill="rgba(20,40,80,0.22)"/>
+          <path d="M-80,640 C300,560 560,720 900,660 C1120,621 1240,690 1310,760 L-80,760 Z" fill="rgba(90,160,230,0.18)"/>
+        </svg>
+        <div class="badge-row">
+          <span class="badge">お役立ち資料</span>
+          <span class="badge-note">バイテック法人AI研修</span>
+        </div>
+        <p class="sub">eラーニング・セミナー・ハンズオン・ワークショップ<br>4つの研修タイプの概要・料金・見込める効果・導入事例・FAQ</p>
+        <h1 class="title">AI研修タイプ<small>比較ガイド</small></h1>
+        <div class="types">
+          <span>eラーニング形式</span>
+          <span>セミナー形式</span>
+          <span>ハンズオン形式</span>
+          <span>ワークショップ形式</span>
+        </div>
+        <p class="date en">UPDATE 2026.9</p>
+        <img class="logo" src="assets/biz-logo-w.svg" alt="byTech BUSINESS">
+      </div>
+    </div><figcaption>01 表紙</figcaption></figure>
+
+
+    <!-- ===== 02 目次 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <img class="bgil" src="assets/illus/intro.svg" alt="" style="right:80px; bottom:60px; width:320px; opacity:.95;">
+        <div class="s-body">
+        <p class="s-eyebrow">Contents</p>
+        <h2 class="s-title">目次</h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="toc">
+          <p class="row"><span class="no en" style="font-size:11px">Intro</span>研修タイプ選びの考え方（ミスマッチ／4タイプ全体像）</p>
+          <p class="row"><span class="no en">01</span>eラーニング</p>
+          <p class="row"><span class="no en">02</span>集団研修（セミナー形式）</p>
+          <p class="row"><span class="no en">03</span>ハンズオン研修（セミナー形式）</p>
+          <p class="row"><span class="no en">04</span>ワークショップ</p>
+          <p class="row"><span class="no en">05</span>比較表・目的別の選び方</p>
+          <p class="row"><span class="no en">06</span>研修開始までの流れ</p>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>02 目次</figcaption></figure>
+
+
+    <!-- ===== 01-1 3つのミスマッチ ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">研修タイプ選びで起きる、3つのミスマッチ</p>
+        <h2 class="s-title">研修の成果は「何を学ぶか」より<b>「どう学ぶか」</b>で決まります</h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <p class="s-lead" style="margin-top:8px; font-size:16.5px; font-weight:600; color:#4a5568">同じカリキュラムでも、研修タイプが目的に合っていないと定着しません。多くの企業で見られる典型的なミスマッチは次の3つです。</p>
+        <div class="card3">
+          <div class="fcard">
+            <div class="ic"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2c5c9c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M10 8.5v4l3.5-2z" fill="#2c5c9c" stroke="none"/></svg></div>
+            <p class="h">動画を配って、終わり</p>
+            <p class="d">eラーニングのIDだけ配布し、視聴も活用も追わない。忙しい社員ほど後回しにし、「見ていない」まま期限を迎えます。</p>
+            <span class="tag">→ 伴走（ハンズオン）や面談の設計が必要</span>
+          </div>
+          <div class="fcard">
+            <div class="ic"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2c5c9c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M6 19V9l6-4 6 4v10"/><path d="M10 19v-5h4v5"/></svg></div>
+            <p class="h">1回のセミナーで満足</p>
+            <p class="d">全社セミナーで盛り上がったものの、翌週には元どおり。知識のインプットだけでは、業務での行動は変わりません。</p>
+            <span class="tag">→ 実践の場（ハンズオン／ワークショップ）が必要</span>
+          </div>
+          <div class="fcard">
+            <div class="ic"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2c5c9c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+            <p class="h">目的と形式のミスマッチ</p>
+            <p class="d">「自社課題の解決」が目的なのに汎用の講義を選ぶ、「基礎の底上げ」が目的なのに高額な少人数研修を選ぶ、など。</p>
+            <span class="tag">→ 目的から逆算してタイプを選ぶ</span>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>01-1 3つのミスマッチ</figcaption></figure>
+
+
+    <!-- ===== 01-2 4タイプ 全体像 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">4つの研修タイプ 全体像</p>
+        <h2 class="s-title">目的・予算・人数に合わせて選べる、<b>4つの研修タイプ</b></h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="type4">
+          <div class="tcard">
+            <img class="ph" src="assets/photo/elearning.webp" alt="">
+            <p class="hd"><span class="no en">1</span>eラーニング形式</p>
+            <div class="bd">
+              <p class="d">動画教材で、時間や場所を選ばず自分のペースでAIスキルを習得。</p>
+              <p class="kv"><span class="k">実施</span>専用LMSでの動画学習（オンライン）</p>
+              <p class="kv"><span class="k">料金</span><b>¥100,000<small>〜 / 名</small></b></p>
+            </div>
+          </div>
+          <div class="tcard">
+            <img class="ph" src="assets/photo/lecture.webp" alt="">
+            <p class="hd"><span class="no en">2</span>セミナー形式</p>
+            <div class="bd">
+              <p class="d">専門講師による講義形式で、最新知識と活用事例を体系的にインプット。</p>
+              <p class="kv"><span class="k">実施</span>リアルタイム講義（オンライン／対面）</p>
+              <p class="kv"><span class="k">料金</span><b>¥200,000<small>〜 / 回</small></b></p>
+            </div>
+          </div>
+          <div class="tcard">
+            <img class="ph" src="assets/photo/handson.webp" alt="">
+            <p class="hd"><span class="no en">3</span>ハンズオン形式</p>
+            <div class="bd">
+              <p class="d">実際に手を動かしながら、AIツールの使い方を実践的に習得。</p>
+              <p class="kv"><span class="k">実施</span>講師伴走の実践演習（少人数〜1on1）</p>
+              <p class="kv"><span class="k">料金</span><b>¥300,000<small>〜 / 回</small></b></p>
+            </div>
+          </div>
+          <div class="tcard">
+            <img class="ph" src="assets/photo/workshop.webp" alt="">
+            <p class="hd"><span class="no en">4</span>ワークショップ形式</p>
+            <div class="bd">
+              <p class="d">チームで議論しながら、自社課題のAI活用アイデアを形にする。</p>
+              <p class="kv"><span class="k">実施</span>グループ演習・双方向型（オンライン／対面）</p>
+              <p class="kv"><span class="k">料金</span><b>¥500,000<small>〜 / 回</small></b></p>
+            </div>
+          </div>
+        </div>
+        <div class="checkband" style="margin-top:18px">4タイプは組み合わせが可能です。eラーニング＋ハンズオンの組み合わせは、助成金対応の「AI業務効率化研修／AI業務自動化研修」として提供しています。</div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>01-2 4タイプ 全体像</figcaption></figure>
+
+
+    <!-- ===== S2-1 中間表紙（eラーニング） ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide blue-bg divider">
+        <svg class="waves" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <path d="M700,-80 C980,60 820,300 1120,380 C1320,433 1360,560 1280,760 L1380,760 L1380,-80 Z" fill="rgba(255,255,255,0.07)"/>
+          <path d="M880,-120 C1150,40 980,260 1240,330 L1340,330 L1340,-120 Z" fill="rgba(90,160,230,0.28)"/>
+          <path d="M-80,560 C240,480 420,660 760,600 C1040,551 1180,640 1300,760 L-80,760 Z" fill="rgba(20,40,80,0.22)"/>
+          <path d="M-80,640 C300,560 560,720 900,660 C1120,621 1240,690 1310,760 L-80,760 Z" fill="rgba(90,160,230,0.18)"/>
+        </svg>
+        <p class="no">01</p>
+        <h2 class="t">eラーニング<small>動画教材で、時間や場所を選ばず自分のペースで</small></h2>
+        <div class="chap"><span>概要</span><span>料金</span><span>見込める効果</span><span>導入事例</span><span>FAQ</span></div>
+        <img class="logo" src="assets/biz-logo-w.svg" alt="byTech BUSINESS">
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+      </div>
+    </div><figcaption>S2-1 中間表紙（eラーニング）</figcaption></figure>
+
+    <!-- ===== S2-2 eラーニング 概要 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">01 eラーニング｜概要</p>
+        <h2 class="s-title">eラーニング形式 ── <b>全社員へ均一な基礎</b>を、低コストで</h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="det">
+          <div>
+            <img class="ph" src="assets/photo/elearning.webp" alt="">
+            <div class="spec">
+              <div class="r"><span class="k">実施方法</span><span class="v">専用LMSでの動画学習（オンライン）</span></div>
+              <div class="r"><span class="k">料金目安</span><span class="v"><b>¥100,000<small>〜 / 名</small></b></span></div>
+              <div class="r"><span class="k">対象人数</span><span class="v">1名〜（全社展開も可）</span></div>
+              <div class="r"><span class="k">学習時間</span><span class="v">プログラムにより約2.4〜10時間（36〜106レッスン）</span></div>
+            </div>
+          </div>
+          <div>
+            <p class="lead">オンデマンドの動画コンテンツで、<b>時間・場所の制約を受けずに</b>各職種で即戦力となるAIスキルを習得します。</p>
+            <div class="feat">
+              <p class="f">忙しい社員も、空き時間に自分のペースで学習できる</p>
+              <p class="f">拠点・部署が分散していても、全社員に均一な学習機会を提供できる</p>
+              <p class="f">受講状況を管理画面で把握でき、対面研修の実施コストを抑えられる</p>
+            </div>
+            <div class="reco">
+              <p class="h">こんな企業におすすめ</p>
+              <p class="i">全社員へ均一な基礎知識を低コストで浸透させたい</p>
+              <p class="i">忙しい社員が空き時間に自分のペースで学びたい</p>
+              <p class="i">まずはスモールスタートでAI教育を始めたい</p>
+            </div>
+            <div class="prog"><span class="lb">選べるプログラム</span><span>ChatGPT</span><span>Claude</span><span>Gemini / NotebookLM</span><span>Copilot</span><span>ノーコード開発</span><span>AIクリエイティブ</span><span>Claude Code</span><span>Copilot Studio</span></div>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>S2-2 eラーニング 概要</figcaption></figure>
+
+
+    <!-- ===== S2-3 eラーニング 料金 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">01 eラーニング｜料金</p>
+        <h2 class="s-title">eラーニングの<b>料金</b></h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="price-wrap">
+          <div class="pbox">
+            <p class="k">料金目安</p>
+            <p class="v">¥100,000<small>〜 / 名</small></p>
+            <p class="tax">税抜。人数・内容・回数により変動します。正式な料金はお見積りにてご提示します。</p>
+            <div class="sep"></div>
+            <p class="row"><span>課金単位</span><b>受講者1名ごと</b></p><p class="row"><span>プログラム</span><b>1名につき1プログラム</b></p><p class="row"><span>対象人数</span><b>1名〜（全社展開可）</b></p><p class="row"><span>実施形態</span><b>オンライン（専用LMS）</b></p>
+          </div>
+          <div>
+            <p class="inc-h">料金に含まれるもの</p>
+            <div class="inc"><p class="i">選択プログラムの全レッスン動画（受講期間内は見放題）</p><p class="i">専用LMS（学習管理システム）のアカウント発行</p><p class="i">受講状況・進捗の確認</p><p class="i">学習の進め方をご案内する初回オリエンテーション</p></div>
+            <div class="vary"><p class="inc-h">料金が変わる主な要素</p><div class="pills"><span>受講人数</span><span>プログラムの種類・数</span><span>受講期間の延長</span><span>チャット・面談サポートの追加（ハンズオン付きプランへ）</span></div></div>
+            <div class="plans-mini">
+              <div><b>助成金を使いたい場合</b>eラーニング単体は対象外。ハンズオン（1on1）を組み合わせた<span class="p">AI業務効率化研修 ¥200,000/名 → 実質 ¥50,000/名</span>が対象になります。</div>
+              <div><b>選べるプログラム（8種）</b>ChatGPT（45レッスン・約5.3h）／Claude（81・約6.4h）／Gemini・NotebookLM（36・約2.4h）／Copilot（106・約6.5h）／ノーコード開発（82・約5.1h）／AIクリエイティブ（89・約10.2h）／Claude Code／Copilot Studio</div>
+            </div>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒　※レッスン数・視聴時間は2026年9月時点。プログラムは順次更新されます。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>S2-3 eラーニング 料金</figcaption></figure>
+
+    <!-- ===== S2-4 eラーニング 見込める効果 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">01 eラーニング｜見込める効果</p>
+        <h2 class="s-title">全社員の<b>基礎リテラシーを均一に</b>、最小コストで</h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="eff"><div class="ef"><div class="il"><img src="assets/illus/eff/el-1.webp" alt=""></div><p class="h">全社員の基礎知識が揃う</p><p class="d">拠点・部署・入社時期に関係なく、同じ教材で同じ基礎を学べます。「使える人と使えない人」の差が広がる前に底上げできます。</p></div><div class="ef"><div class="il"><img src="assets/illus/eff/el-2.webp" alt=""></div><p class="h">学習コストを最小化</p><p class="d">講師の手配・会場・日程調整が不要。忙しい社員も空き時間に受講でき、対面研修に比べて実施コストを大幅に抑えられます。</p></div><div class="ef"><div class="il"><img src="assets/illus/eff/el-3.webp" alt=""></div><p class="h">次の一手が見える</p><p class="d">受講状況から「どの部署・誰が進んでいるか」が把握でき、ハンズオンやワークショップに進めるべき対象を絞り込めます。</p></div></div>
+        <div class="ba">
+          <div class="b"><p class="lb">BEFORE</p><p class="tx">一部の得意な社員だけがAIを使い、部署ごとに知識レベルがバラバラ。研修の日程調整だけで数か月かかる。</p></div>
+          <div class="arr">→</div>
+          <div class="a"><p class="lb">AFTER</p><p class="tx">全社員が同じ基礎を修得し、共通言語でAI活用を語れる状態。次段階（実践・定着）の対象と優先順位が明確になる。</p></div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>S2-4 eラーニング 見込める効果</figcaption></figure>
+
+    <!-- ===== S2-5 eラーニング 導入事例 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">01 eラーニング｜導入事例</p>
+        <h2 class="s-title">eラーニングの<b>導入事例</b></h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="case-hd">
+          <div class="lg"><img src="assets/logos/nttdata-bs-logo.png" alt="株式会社NTTデータビジネスシステムズ様"></div>
+          <p class="nm">株式会社NTTデータビジネスシステムズ様<small>eラーニング（動画学習）のみで受講した事例</small></p>
+          <div class="tags"><span>プラン：<b>eラーニング</b></span><span>受講者：<b>10名</b></span></div>
+        </div>
+        <div class="case">
+          <div class="cs "><p class="ch"><span class="b">1</span>受講前の課題</p><div class="cb"><p class="it">Copilotを使って検索や文章作成を行っている程度で、活用できていない。</p><p class="it">社内のAIに関するセキュリティ要件が整っていないため、一歩踏み出せないままでいる。</p><p class="it"><b>契約の決め手</b>時間や場所を選ばず各自のペースで学べる点を評価。費用対効果を優先し、DX推進プロジェクトのメンバーが受講。</p></div></div>
+          <div class="cs "><p class="ch"><span class="b">2</span>ご支援内容</p><div class="cb"><p class="it"><b>学習プログラムの選定</b>社内導入ツールと業務内容をふまえ、受講するプログラムと学習範囲を設計。</p><p class="it"><b>eラーニングで基礎を集中習得</b>社内導入ツールのCopilotをeラーニングで体系的に学習。各自のペースで基礎を固め、ツール連携の課題に取り組む。</p><p class="it"><b>受講状況のフォロー</b>管理画面で進捗を可視化し、停滞している受講者へ声かけ。全員が修了できる状態をつくる。</p></div></div>
+          <div class="cs r"><p class="ch"><span class="b">3</span>研修結果</p><div class="cb"><p class="it"><b>一人前のAI人材へ</b>Officeツールを横断した連携機能を使いこなし、業務課題に対して自己完結できるレベルへ。部署内で相談役として頼られる人材が増加。</p><p class="it"><b>学習意欲UP</b>AI活用の成功体験が増え、継続的に学びたいというモチベーションが向上。部署横断のAIナレッジが蓄積しはじめた。</p><p class="it"><b>現場での活用が定着</b>学習で身につけたプロンプトやテンプレートを各自の業務で活用。部署内で共有する動きが生まれた。</p></div></div>
+        </div>
+        <p class="case-note">※eラーニング（動画学習）のみで受講したプランの事例です。</p>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>S2-5 eラーニング 導入事例</figcaption></figure>
+
+    <!-- ===== S2-6 eラーニング FAQ ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">01 eラーニング｜FAQ</p>
+        <h2 class="s-title">eラーニングの<b>よくあるご質問</b></h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="faq"><div class="qa"><p class="q">AI未経験の社員でも受講できますか？</p><p class="a">はい。多くの受講者が生成AI未経験からのスタートです。基礎から順に学べる構成のため、業務で活用できるレベルまで無理なくスキルアップできます。</p></div><div class="qa"><p class="q">どのプログラムを選べばよいですか？</p><p class="a">まだ使うAIを決めていなければ定番のChatGPT、Microsoft 365環境ならCopilot、Google Workspace環境ならGemini・NotebookLM、文章・資料作成の質を重視するならClaudeがおすすめです。無料個別相談でもご提案します。</p></div><div class="qa"><p class="q">学習中に質問はできますか？</p><p class="a">eラーニング単体は教材内で完結する自習型です。チャットでの質問や講師との面談が必要な場合は、ハンズオン（1on1）を組み合わせたAI業務効率化研修／自動化研修をご検討ください。</p></div><div class="qa"><p class="q">受講人数に上限はありますか？</p><p class="a">チーム・組織単位での受講に対応しており、全社展開も可能です。人数や体制に応じて最適なプランをご提案します。</p></div></div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>S2-6 eラーニング FAQ</figcaption></figure>
+
+    <!-- ===== S3-1 中間表紙（集団研修） ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide blue-bg divider">
+        <svg class="waves" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <path d="M700,-80 C980,60 820,300 1120,380 C1320,433 1360,560 1280,760 L1380,760 L1380,-80 Z" fill="rgba(255,255,255,0.07)"/>
+          <path d="M880,-120 C1150,40 980,260 1240,330 L1340,330 L1340,-120 Z" fill="rgba(90,160,230,0.28)"/>
+          <path d="M-80,560 C240,480 420,660 760,600 C1040,551 1180,640 1300,760 L-80,760 Z" fill="rgba(20,40,80,0.22)"/>
+          <path d="M-80,640 C300,560 560,720 900,660 C1120,621 1240,690 1310,760 L-80,760 Z" fill="rgba(90,160,230,0.18)"/>
+        </svg>
+        <p class="no">02</p>
+        <h2 class="t">集団研修<small style='font-size:.5em;margin-top:6px;opacity:1'>（セミナー形式）</small><small>専門講師のリアルタイム講義で、一度に多くの社員へ体系的に</small></h2>
+        <div class="chap"><span>概要</span><span>料金</span><span>見込める効果</span><span>導入事例</span><span>FAQ</span></div>
+        <img class="logo" src="assets/biz-logo-w.svg" alt="byTech BUSINESS">
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+      </div>
+    </div><figcaption>S3-1 中間表紙（集団研修）</figcaption></figure>
+
+    <!-- ===== S3-2 集団研修 概要 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">02 集団研修（セミナー形式）｜概要</p>
+        <h2 class="s-title">セミナー形式 ── <b>一度に多くの社員へ</b>、専門家から体系的に</h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="det">
+          <div>
+            <img class="ph" src="assets/photo/lecture.webp" alt="">
+            <div class="spec">
+              <div class="r"><span class="k">実施方法</span><span class="v">専門講師によるリアルタイム講義（オンライン／対面）</span></div>
+              <div class="r"><span class="k">料金目安</span><span class="v"><b>¥200,000<small>〜 / 回</small></b></span></div>
+              <div class="r"><span class="k">対象人数</span><span class="v">部門〜全社（1回で多人数に対応）</span></div>
+              <div class="r"><span class="k">所要時間</span><span class="v">2.5時間〜（半日・1日構成も可）</span></div>
+            </div>
+          </div>
+          <div>
+            <p class="lead">専門講師によるリアルタイム講義で、<b>短期間で全社・部門のAI活用スキルを底上げ</b>します。</p>
+            <div class="feat">
+              <p class="f">最新のAIトレンドや活用事例を、体系的にインプットできる</p>
+              <p class="f">質疑応答で、自己学習では解消しにくい疑問をその場で解決できる</p>
+              <p class="f">部署横断で同じ内容を受講し、社内の知識レベルを揃えられる</p>
+            </div>
+            <div class="reco">
+              <p class="h">こんな企業におすすめ</p>
+              <p class="i">一度に多くの社員へ効率よく知識を届けたい</p>
+              <p class="i">最新のAIトレンドや事例を専門家から学びたい</p>
+              <p class="i">全社的なAI活用の機運を高めたい（キックオフとしても最適）</p>
+            </div>
+            <div class="prog"><span class="lb">テーマ例</span><span>生成AIの基礎と業務活用</span><span>ツール別の活用法</span><span>セキュリティ・ガイドライン</span><span>業界別の活用事例</span></div>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>S3-2 集団研修 概要</figcaption></figure>
+
+
+    <!-- ===== S3-3 集団研修 料金 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">02 集団研修（セミナー形式）｜料金</p>
+        <h2 class="s-title">集団研修（セミナー形式）の<b>料金</b></h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="price-wrap">
+          <div class="pbox">
+            <p class="k">料金目安</p>
+            <p class="v">¥200,000<small>〜 / 回</small></p>
+            <p class="tax">税抜。人数・内容・回数により変動します。正式な料金はお見積りにてご提示します。</p>
+            <div class="sep"></div>
+            <p class="row"><span>課金単位</span><b>1回の開催ごと</b></p><p class="row"><span>所要時間</span><b>2.5時間〜（半日・1日構成も可）</b></p><p class="row"><span>対象人数</span><b>部門〜全社（1回で多人数に対応）</b></p><p class="row"><span>実施形態</span><b>オンライン／対面</b></p>
+          </div>
+          <div>
+            <p class="inc-h">料金に含まれるもの</p>
+            <div class="inc"><p class="i">専門講師によるリアルタイム講義（2.5時間〜）</p><p class="i">質疑応答の時間</p><p class="i">講義資料（PDF）の受講者配布</p><p class="i">事前ヒアリングにもとづくテーマ・事例の調整</p></div>
+            <div class="vary"><p class="inc-h">料金が変わる主な要素</p><div class="pills"><span>開催回数</span><span>講義時間（2.5時間／半日／1日）</span><span>対面開催時の会場・交通費</span><span>自社業務に合わせたカスタマイズの度合い</span></div></div>
+            <div class="plans-mini">
+              <div><b>構成例</b>2.5時間：生成AIの基礎＋業務活用事例／半日：基礎＋ツール実演＋Q&amp;A／1日：基礎＋ツール実演＋ミニ演習</div>
+              <div><b>助成金の活用</b>集団研修単体での適用可否は内容・時期により異なります。eラーニング＋ハンズオンの助成金対応プランと組み合わせる設計も可能です。無料個別相談でご案内します。</div>
+            </div>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>S3-3 集団研修 料金</figcaption></figure>
+
+    <!-- ===== S3-4 集団研修 見込める効果 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">02 集団研修（セミナー形式）｜見込める効果</p>
+        <h2 class="s-title">短期間で<b>全社の知識レベルを揃え</b>、AI活用の機運をつくる</h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="eff"><div class="ef"><div class="il"><img src="assets/illus/eff/sem-1.webp" alt=""></div><p class="h">知識レベルが一気に揃う</p><p class="d">部署横断で同じ講義を受けることで、社内の「AIについての共通認識」ができます。導入初期の説明コストが下がります。</p></div><div class="ef"><div class="il"><img src="assets/illus/eff/sem-2.webp" alt=""></div><p class="h">疑問がその場で解消</p><p class="d">自己学習では解消しにくい「うちの業務ではどう使う？」「情報を入れて大丈夫？」といった疑問を、質疑応答でその場で解決できます。</p></div><div class="ef"><div class="il"><img src="assets/illus/eff/sem-3.webp" alt=""></div><p class="h">推進の機運が高まる</p><p class="d">経営層・管理職も同席することで、AI活用が「一部の人の取り組み」から「会社の方針」に変わります。キックオフとして最適です。</p></div></div>
+        <div class="ba">
+          <div class="b"><p class="lb">BEFORE</p><p class="tx">AIへの関心はあるが、社員ごとに理解も温度感もバラバラ。「何ができて何が危ないのか」が共有されていない。</p></div>
+          <div class="arr">→</div>
+          <div class="a"><p class="lb">AFTER</p><p class="tx">全社が同じ基礎知識と活用イメージを持ち、ガイドラインも周知済み。次の実践研修（ハンズオン等）にスムーズに進める。</p></div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>S3-4 集団研修 見込める効果</figcaption></figure>
+
+    <!-- ===== S3-5 集団研修 導入事例 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">02 集団研修（セミナー形式）｜導入事例</p>
+        <h2 class="s-title">集団研修の<b>導入事例</b></h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="case-hd">
+          <div class="lg"><img src="assets/logos/blanc-create.svg" alt="株式会社ブラン・クリエイト様"></div>
+          <p class="nm">株式会社ブラン・クリエイト様<small>Copilotの業務活用研修（集団研修・セミナー形式）</small></p>
+          <div class="tags"><span>プラン：<b>集団研修（Copilot業務活用研修）</b></span><span>受講者：<b>全社員</b></span></div>
+        </div>
+        <div class="case">
+          <div class="cs "><p class="ch"><span class="b">1</span>受講前の課題</p><div class="cb"><p class="it">Microsoft 365は全社で導入済みだが、Copilotは一部の社員が検索や文章作成に使う程度にとどまっていた。</p><p class="it">部署ごとに活用レベルがバラバラで、「Copilotで何ができるのか」の共通認識がなかった。</p><p class="it"><b>実施の目的</b>全社員に同じ基礎と活用イメージを短期間で共有し、社内のAI活用の機運をつくる。</p></div></div>
+          <div class="cs "><p class="ch"><span class="b">2</span>ご支援内容</p><div class="cb"><p class="it"><b>事前ヒアリング</b>業務内容とOfficeツールの利用実態を把握し、講義で扱う事例を自社の業務に置き換えて設計。</p><p class="it"><b>Copilot業務活用の集団研修</b>Word・Excel・Outlook・Teams上でのCopilot活用を講師がリアルタイムで実演。質疑応答で「うちの業務ではどう使う？」をその場で解消。</p><p class="it"><b>すぐ使える活用ガイドの配布</b>講義資料に加え、業務別のプロンプト例と注意点をまとめた活用ガイドを受講者へ配布。</p></div></div>
+          <div class="cs r"><p class="ch"><span class="b">3</span>研修結果</p><div class="cb"><p class="it"><b>全社の共通認識ができた</b>「Copilotで何ができて、何に気をつけるか」が全社員に共有され、部署間の温度差が解消。</p><p class="it"><b>翌日から業務で活用</b>会議メモの要約・メール下書き・資料のたたき台作成など、日常業務での活用がすぐに始まった。</p><p class="it"><b>次の一手が決まった</b>研修後のアンケートで活用ニーズの高い部署が明確になり、推進メンバーを選定してハンズオン研修へ進む流れができた。</p></div></div>
+        </div>
+        
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>S3-5 集団研修 導入事例</figcaption></figure>
+
+    <!-- ===== S3-6 集団研修 FAQ ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">02 集団研修（セミナー形式）｜FAQ</p>
+        <h2 class="s-title">集団研修の<b>よくあるご質問</b></h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="faq"><div class="qa"><p class="q">オンラインと対面、どちらにも対応していますか？</p><p class="a">はい。オンライン・対面・ハイブリッドのいずれにも対応しています。貴社の働き方や拠点に合わせて実施形態をお選びください。</p></div><div class="qa"><p class="q">参加人数に上限はありますか？</p><p class="a">1回の講義で部門〜全社規模まで対応可能です。人数・会場・オンライン環境に応じて最適な進め方をご提案します。</p></div><div class="qa"><p class="q">自社の業務に合わせた内容にできますか？</p><p class="a">はい。事前ヒアリングで貴社の業務・導入ツール・課題を伺い、事例やデモをカスタマイズします。業界別の活用事例を中心に構成することも可能です。</p></div><div class="qa"><p class="q">申し込みから実施まで、どのくらいかかりますか？</p><p class="a">ご決済後、最短7日で開始できます。講義内容のカスタマイズ度合いや会場手配により前後しますので、開催希望日が決まっている場合は早めにご相談ください。</p></div></div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>S3-6 集団研修 FAQ</figcaption></figure>
+
+    <!-- ===== S4-1 中間表紙（ハンズオン研修） ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide blue-bg divider">
+        <svg class="waves" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <path d="M700,-80 C980,60 820,300 1120,380 C1320,433 1360,560 1280,760 L1380,760 L1380,-80 Z" fill="rgba(255,255,255,0.07)"/>
+          <path d="M880,-120 C1150,40 980,260 1240,330 L1340,330 L1340,-120 Z" fill="rgba(90,160,230,0.28)"/>
+          <path d="M-80,560 C240,480 420,660 760,600 C1040,551 1180,640 1300,760 L-80,760 Z" fill="rgba(20,40,80,0.22)"/>
+          <path d="M-80,640 C300,560 560,720 900,660 C1120,621 1240,690 1310,760 L-80,760 Z" fill="rgba(90,160,230,0.18)"/>
+        </svg>
+        <p class="no">03</p>
+        <h2 class="t">ハンズオン研修<small style='font-size:.5em;margin-top:6px;opacity:1'>（セミナー形式）</small><small>講師の伴走のもと手を動かし、実務で使えるスキルを定着させる</small></h2>
+        <div class="chap"><span>概要</span><span>料金</span><span>見込める効果</span><span>導入事例</span><span>FAQ</span></div>
+        <img class="logo" src="assets/biz-logo-w.svg" alt="byTech BUSINESS">
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+      </div>
+    </div><figcaption>S4-1 中間表紙（ハンズオン研修）</figcaption></figure>
+
+    <!-- ===== S4-2 ハンズオン研修 概要 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">03 ハンズオン研修（セミナー形式）｜概要</p>
+        <h2 class="s-title">ハンズオン形式 ── <b>実務で使えるスキル</b>を、手を動かして定着</h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="det">
+          <div>
+            <img class="ph" src="assets/photo/handson.webp" alt="">
+            <div class="spec">
+              <div class="r"><span class="k">実施方法</span><span class="v">講師伴走の実践演習（オンライン／対面・少人数〜1on1）</span></div>
+              <div class="r"><span class="k">料金目安</span><span class="v"><b>¥300,000<small>〜 / 回</small></b></span></div>
+              <div class="r"><span class="k">対象人数</span><span class="v">少人数〜（1on1のマンツーマンも可）</span></div>
+              <div class="r"><span class="k">所要時間</span><span class="v">3時間〜（内容に応じて設計）</span></div>
+            </div>
+          </div>
+          <div>
+            <p class="lead">専任講師のサポートのもと実際に手を動かし、<b>最短で「効率化」から「自動化」まで</b>のAI活用スキルを身に付けます。</p>
+            <div class="feat">
+              <p class="f">自社の業務・使っているツールをそのまま題材にできる</p>
+              <p class="f">つまずきをその場で解消でき、受講後すぐ現場で使える状態になる</p>
+              <p class="f">経営層・管理職など、個別業務に直結した支援にも対応</p>
+            </div>
+            <div class="reco">
+              <p class="h">こんな企業におすすめ</p>
+              <p class="i">知識だけでなく、実務で使えるスキルを定着させたい</p>
+              <p class="i">自社の業務やツールに沿って学ばせたい</p>
+              <p class="i">AI活用推進のリーダーや内製化担当を、短期間で育成したい</p>
+            </div>
+            <div class="prog"><span class="lb">テーマ例</span><span>プロンプト設計の実践</span><span>資料・議事録作成の自動化</span><span>Copilot / Gemini の業務活用</span><span>ノーコードでの業務アプリ作成</span></div>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>S4-2 ハンズオン研修 概要</figcaption></figure>
+
+
+    <!-- ===== S4-3 ハンズオン研修 料金 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">03 ハンズオン研修（セミナー形式）｜料金</p>
+        <h2 class="s-title">ハンズオン研修の<b>料金</b></h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="price-wrap">
+          <div class="pbox">
+            <p class="k">料金目安</p>
+            <p class="v">¥300,000<small>〜 / 回</small></p>
+            <p class="tax">税抜。人数・内容・回数により変動します。正式な料金はお見積りにてご提示します。</p>
+            <div class="sep"></div>
+            <p class="row"><span>課金単位</span><b>1回の開催ごと</b></p><p class="row"><span>所要時間</span><b>3時間〜（内容に応じて設計）</b></p><p class="row"><span>対象人数</span><b>少人数〜（1on1のマンツーマンも可）</b></p><p class="row"><span>実施形態</span><b>オンライン／対面</b></p>
+          </div>
+          <div>
+            <p class="inc-h">料金に含まれるもの</p>
+            <div class="inc"><p class="i">講師伴走の実践演習（3時間〜）</p><p class="i">貴社の業務・ツールを題材にした演習課題の設計</p><p class="i">演習で使うプロンプト・テンプレート一式</p><p class="i">実施後のフォローアップ（質問対応）</p></div>
+            <div class="vary"><p class="inc-h">料金が変わる主な要素</p><div class="pills"><span>開催回数・時間</span><span>受講人数（少人数〜1on1）</span><span>題材のカスタマイズ度合い</span><span>対面開催時の会場・交通費</span></div></div>
+            <div class="plans-mini">
+              <div><b>助成金対応プラン（eラーニング＋1on1ハンズオン）</b><span class="p">AI業務効率化研修 ¥200,000/名 → 実質 ¥50,000/名</span>（2ヶ月）<br><span class="p">AI業務自動化研修 ¥300,000/名 → 実質 ¥150,000/名</span>（4ヶ月）</div>
+              <div><b>プランに含まれるサポート</b>研修期間中の無制限チャットサポート／月2回のオンライン個別面談／スキル証明課題＆証明書発行／隔週のオンラインセミナー／ハンズオンでの検証サポート</div>
+            </div>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒　※実質負担額は人材開発支援助成金（事業展開等リスキリング支援コース）活用時の試算例。適用可否・助成額は要件により異なります。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>S4-3 ハンズオン研修 料金</figcaption></figure>
+
+    <!-- ===== S4-4 ハンズオン研修 見込める効果 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">03 ハンズオン研修（セミナー形式）｜見込める効果</p>
+        <h2 class="s-title">受講後すぐ現場で使える。<b>「知っている」を「できる」に</b></h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="eff"><div class="ef"><div class="il"><img src="assets/illus/eff/ho-1.webp" alt=""></div><p class="h">実務スキルが定着する</p><p class="d">自社の業務・ツールを題材に手を動かすため、研修の翌日から実務で再現できます。つまずきはその場で講師が解消します。</p></div><div class="ef"><div class="il"><img src="assets/illus/eff/ho-2.webp" alt=""></div><p class="h">業務時間の削減が数字で見える</p><p class="d">導入事例では受講者の80%以上が「実務にAIを使えている」と回答し、1人あたり平均1時間の業務削減を実現しました。</p></div><div class="ef"><div class="il"><img src="assets/illus/eff/ho-3.webp" alt=""></div><p class="h">推進リーダーが育つ</p><p class="d">課題の特定→検証→仕組み化→実装を自分で回せる人材が育ち、部署内の相談役・社内展開の推進役になります。</p></div></div>
+        <div class="ba">
+          <div class="b"><p class="lb">BEFORE</p><p class="tx">セミナーやeラーニングで知識は得たが、実務での使い方が分からず定着しない。一部の社員の「個人技」で止まっている。</p></div>
+          <div class="arr">→</div>
+          <div class="a"><p class="lb">AFTER</p><p class="tx">受講者全員が自分の業務でAIを日常的に活用。作成したプロンプト・テンプレートが現場で運用され、改善サイクルが回っている。</p></div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>S4-4 ハンズオン研修 見込める効果</figcaption></figure>
+
+    <!-- ===== S4-5 ハンズオン研修 導入事例 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">03 ハンズオン研修（セミナー形式）｜導入事例</p>
+        <h2 class="s-title">ハンズオン研修の<b>導入事例</b></h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="case-hd">
+          <div class="lg"><img src="assets/logos/daiichi-life.webp" alt="株式会社第一ライフグループ様"></div>
+          <p class="nm">株式会社第一ライフグループ様<small>推進メンバー向けの実践ハンズオン研修</small></p>
+          <div class="tags"><span>プラン：<b>ハンズオン研修</b></span><span>受講者：<b>推進メンバー（少人数）</b></span></div>
+        </div>
+        <div class="case">
+          <div class="cs "><p class="ch"><span class="b">1</span>受講前の課題</p><div class="cb"><p class="it">生成AIの全社ガイドラインは整備されているが、各部門の実務での具体的な使い方は個人任せになっていた。</p><p class="it">セキュリティ要件をふまえた「安全に使える範囲」で成果を出す方法を、推進メンバーが身につける必要があった。</p><p class="it"><b>実施の目的</b>推進メンバーが自部門の業務でAI活用を再現できる状態にし、社内展開の起点をつくる。</p></div></div>
+          <div class="cs "><p class="ch"><span class="b">2</span>ご支援内容</p><div class="cb"><p class="it"><b>業務ヒアリングと題材の選定</b>対象部門の業務を棚卸しし、資料作成・議事録・データ整理など効果の出やすい業務を演習の題材に選定。</p><p class="it"><b>自社業務を題材にしたハンズオン</b>実際の業務資料を使い、参加者が手を動かして演習。つまずきは講師がその場で解消し、ガイドラインの範囲内で使い切る方法を習得。</p><p class="it"><b>フォローアップ</b>演習で作成したプロンプト・テンプレートを整理し、部門展開用の資料として整備。実施後の質問にも対応。</p></div></div>
+          <div class="cs r"><p class="ch"><span class="b">3</span>研修結果</p><div class="cb"><p class="it"><b>翌週から実務で再現</b>研修で扱った業務は翌週から各自の実務で再現。「知っている」から「できる」へ移行。</p><p class="it"><b>推進メンバーが部門の相談役に</b>参加者が部門内の相談窓口となり、周囲の社員の活用を後押しする体制ができた。</p><p class="it"><b>社内展開の土台ができた</b>テンプレートと活用ルールが整い、他部門への横展開と次の研修計画につながった。</p></div></div>
+        </div>
+        
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>S4-5 ハンズオン研修 導入事例</figcaption></figure>
+
+    <!-- ===== S4-6 ハンズオン研修 FAQ ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">03 ハンズオン研修（セミナー形式）｜FAQ</p>
+        <h2 class="s-title">ハンズオン研修の<b>よくあるご質問</b></h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="faq"><div class="qa"><p class="q">自社の業務やツールを題材にできますか？</p><p class="a">はい。事前ヒアリングで実際の業務課題やよく使う資料を伺い、現場ですぐ使えるユースケースに落とし込んで演習を設計します。</p></div><div class="qa"><p class="q">1on1と少人数、どちらがよいですか？</p><p class="a">経営層・管理職など個別業務に直結した支援は1on1、推進メンバーの育成は少人数がおすすめです。目的と人数に応じてご提案します。</p></div><div class="qa"><p class="q">受講前に準備するものはありますか？</p><p class="a">演習で使うAIツールのアカウント（ChatGPT・Copilot等）と、題材にする業務・資料をご用意ください。ツール選定や有料プランの要否から一緒に検討することも可能です。</p></div><div class="qa"><p class="q">業務情報をAIに入力しても大丈夫ですか？</p><p class="a">業務での安全な活用を前提に、情報の取り扱いやAI利用ガイドラインの整備からご支援します。ツール選定も貴社のセキュリティ要件をふまえてご提案します。NDAの締結も可能です。</p></div></div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>S4-6 ハンズオン研修 FAQ</figcaption></figure>
+
+    <!-- ===== S5-1 中間表紙（ワークショップ） ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide blue-bg divider">
+        <svg class="waves" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <path d="M700,-80 C980,60 820,300 1120,380 C1320,433 1360,560 1280,760 L1380,760 L1380,-80 Z" fill="rgba(255,255,255,0.07)"/>
+          <path d="M880,-120 C1150,40 980,260 1240,330 L1340,330 L1340,-120 Z" fill="rgba(90,160,230,0.28)"/>
+          <path d="M-80,560 C240,480 420,660 760,600 C1040,551 1180,640 1300,760 L-80,760 Z" fill="rgba(20,40,80,0.22)"/>
+          <path d="M-80,640 C300,560 560,720 900,660 C1120,621 1240,690 1310,760 L-80,760 Z" fill="rgba(90,160,230,0.18)"/>
+        </svg>
+        <p class="no">04</p>
+        <h2 class="t">ワークショップ<small>チームで議論しながら、自社課題のAI活用アイデアを形にする</small></h2>
+        <div class="chap"><span>概要</span><span>料金</span><span>見込める効果</span><span>導入事例</span><span>FAQ</span></div>
+        <img class="logo" src="assets/biz-logo-w.svg" alt="byTech BUSINESS">
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+      </div>
+    </div><figcaption>S5-1 中間表紙（ワークショップ）</figcaption></figure>
+
+    <!-- ===== S5-2 ワークショップ 概要 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">04 ワークショップ｜概要</p>
+        <h2 class="s-title">ワークショップ形式 ── <b>自社課題のAI活用</b>を、チームで形にする</h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="det">
+          <div>
+            <img class="ph" src="assets/photo/workshop.webp" alt="">
+            <div class="spec">
+              <div class="r"><span class="k">実施方法</span><span class="v">グループ演習・双方向ディスカッション（オンライン／対面）</span></div>
+              <div class="r"><span class="k">料金目安</span><span class="v"><b>¥500,000<small>〜 / 回</small></b></span></div>
+              <div class="r"><span class="k">対象人数</span><span class="v">チーム・部門単位（部門横断も可）</span></div>
+              <div class="r"><span class="k">所要時間</span><span class="v">3時間〜（テーマに応じて設計）</span></div>
+            </div>
+          </div>
+          <div>
+            <p class="lead">グループ演習と双方向のディスカッションを通じて、<b>学んだ知識を「自社業務でどう使うか」まで</b>落とし込みます。</p>
+            <div class="feat">
+              <p class="f">部門・チーム単位で議論し、AI活用のユースケースを発掘できる</p>
+              <p class="f">受け身ではなく、手を動かしながら定着させる実践型</p>
+              <p class="f">成果物として「具体的な業務改善プラン」が残る</p>
+            </div>
+            <div class="reco">
+              <p class="h">こんな企業におすすめ</p>
+              <p class="i">自社の課題に合わせたAI活用を検討したい</p>
+              <p class="i">部門横断でアイデアを出し合い、推進したい</p>
+              <p class="i">具体的な業務改善プランまで落とし込みたい</p>
+            </div>
+            <div class="prog"><span class="lb">テーマ例</span><span>業務棚卸しとAI適用領域の特定</span><span>部門別ユースケース設計</span><span>社内ガイドライン策定</span><span>推進ロードマップ作成</span></div>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>S5-2 ワークショップ 概要</figcaption></figure>
+
+
+    <!-- ===== S5-3 ワークショップ 料金 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">04 ワークショップ｜料金</p>
+        <h2 class="s-title">ワークショップの<b>料金</b></h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="price-wrap">
+          <div class="pbox">
+            <p class="k">料金目安</p>
+            <p class="v">¥500,000<small>〜 / 回</small></p>
+            <p class="tax">税抜。人数・内容・回数により変動します。正式な料金はお見積りにてご提示します。</p>
+            <div class="sep"></div>
+            <p class="row"><span>課金単位</span><b>1回の開催ごと</b></p><p class="row"><span>所要時間</span><b>3時間〜（テーマに応じて設計）</b></p><p class="row"><span>対象人数</span><b>チーム・部門単位（部門横断も可）</b></p><p class="row"><span>実施形態</span><b>オンライン／対面</b></p>
+          </div>
+          <div>
+            <p class="inc-h">料金に含まれるもの</p>
+            <div class="inc"><p class="i">事前ヒアリングとワークショップの設計</p><p class="i">ファシリテーター（AIコンサルタント）の進行</p><p class="i">グループ演習用のワークシート・テンプレート</p><p class="i">成果物（ユースケース一覧・業務改善プラン）のとりまとめ</p></div>
+            <div class="vary"><p class="inc-h">料金が変わる主な要素</p><div class="pills"><span>開催回数・時間</span><span>参加人数・グループ数</span><span>テーマ数（部門別・課題別）</span><span>対面開催時の会場・交通費</span></div></div>
+            <div class="plans-mini">
+              <div><b>テーマ例</b>業務棚卸しとAI適用領域の特定／部門別ユースケース設計／社内AI利用ガイドラインの策定／AI活用推進ロードマップの作成</div>
+              <div><b>助成金の活用</b>ワークショップ単体での適用可否は内容・時期により異なります。eラーニング＋ハンズオンの助成金対応プランの導入期・定着期に組み込む設計も可能です。</div>
+            </div>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>S5-3 ワークショップ 料金</figcaption></figure>
+
+    <!-- ===== S5-4 ワークショップ 見込める効果 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">04 ワークショップ｜見込める効果</p>
+        <h2 class="s-title">自社課題に直結した<b>AI活用アイデアと推進体制</b>をつくる</h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="eff"><div class="ef"><div class="il"><img src="assets/illus/eff/ws-1.webp" alt=""></div><p class="h">自社課題のユースケースが出る</p><p class="d">汎用的な事例ではなく、自社の業務から「AIで何をどう変えるか」を参加者自身が発掘。実行したくなるアイデアが残ります。</p></div><div class="ef"><div class="il"><img src="assets/illus/eff/ws-2.webp" alt=""></div><p class="h">部門横断の推進体制ができる</p><p class="d">部門を越えて議論することで、業務のつながりと共通課題が見え、推進メンバーの当事者意識が生まれます。</p></div><div class="ef"><div class="il"><img src="assets/illus/eff/ws-3.webp" alt=""></div><p class="h">改善プランが成果物として残る</p><p class="d">議論で終わらせず、業務改善プラン・優先順位・担当を成果物としてまとめます。経営層への提案・稟議の材料になります。</p></div></div>
+        <div class="ba">
+          <div class="b"><p class="lb">BEFORE</p><p class="tx">「AIで何かやりたい」が、どの業務にどう使うか決まらない。部門ごとにバラバラに検討し、推進役も曖昧。</p></div>
+          <div class="arr">→</div>
+          <div class="a"><p class="lb">AFTER</p><p class="tx">自社課題に沿ったユースケース一覧と改善プランが手元にあり、推進メンバーと優先順位が決まっている。次の実践研修へ進める。</p></div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>S5-4 ワークショップ 見込める効果</figcaption></figure>
+
+    <!-- ===== S5-5 ワークショップ 導入事例 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">04 ワークショップ｜導入事例</p>
+        <h2 class="s-title">ワークショップの<b>導入事例</b></h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="case-hd">
+          <div class="lg"><img src="assets/logos/revamp-logo.svg" alt="株式会社リヴァンプ様"></div>
+          <p class="nm">株式会社リヴァンプ様<small>ワークショップ型の共同検証を組み合わせた事例</small></p>
+          <div class="tags"><span>プラン：<b>AI業務自動化研修＋ワークショップ</b></span><span>受講者：<b>35名</b></span></div>
+        </div>
+        <div class="case">
+          <div class="cs "><p class="ch"><span class="b">1</span>受講前の課題</p><div class="cb"><p class="it">社内の勉強会だけでは網羅的な知識が得られず、外部研修が必要だった。</p><p class="it">コンサルティング部隊がクライアント先で提案する際に、AIの知識・スキルが足りていない。</p><p class="it"><b>契約の決め手</b>カリキュラムを超えて、AIコンサルタントが伴走支援できること。自走できる人材を育成できると評価。</p></div></div>
+          <div class="cs "><p class="ch"><span class="b">2</span>ご支援内容</p><div class="cb"><p class="it"><b>業務ヒアリングとワークショップ設計</b>業務内容の棚卸し〜課題特定。理想の状況・状態をAIを活用しながら言語化。</p><p class="it"><b>実務課題からの逆算</b>グループで効率化・自動化できる実務を洗い出し、逆算したカリキュラムをオーダーメイドで作成。学習→課題→実務実装を繰り返す。</p><p class="it"><b>共同PoC（試作・検証）</b>AIコンサルタントと共同で実装に向けた検証→フィードバック。プロンプト設計の見直し〜セキュリティ要件のブラッシュアップまで伴走。</p></div></div>
+          <div class="cs r"><p class="ch"><span class="b">3</span>研修結果</p><div class="cb"><p class="it"><b>AIスキルの見える化</b>修了課題の成果物をもとにスキル証明バッジを全員へ付与。個々の強みが明確になり、社内展開やアサインが円滑に。</p><p class="it"><b>実務の効率化</b>受講者の80%以上が「実務にAIを使えている」と回答。レポート作成・メール草案・データ整理などで1人あたり平均1時間の業務削減を実現。</p><p class="it"><b>自走力・提案力UP</b>課題の特定→検証→仕組み化→実装まで自分で行える力を習得。Difyを活用したワークフロー自動化により、クライアントへ「提案できる人材」へ。</p></div></div>
+        </div>
+        <p class="case-note">※ワークショップ型の共同検証と、eラーニング＋1on1ハンズオンを組み合わせて実装まで伴走したプランの事例です。</p>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>S5-5 ワークショップ 導入事例</figcaption></figure>
+
+    <!-- ===== S5-6 ワークショップ FAQ ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">04 ワークショップ｜FAQ</p>
+        <h2 class="s-title">ワークショップの<b>よくあるご質問</b></h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="faq"><div class="qa"><p class="q">参加人数はどのくらいが適切ですか？</p><p class="a">グループ議論が成り立つ規模として、チーム・部門単位でのご参加をおすすめしています。人数が多い場合はグループ数やファシリテーターの増員でご対応します。</p></div><div class="qa"><p class="q">事前に準備するものはありますか？</p><p class="a">参加者の所属・業務内容と、現在の困りごとを事前アンケートで伺います。詳細な資料の準備は不要です。設計はこちらで行います。</p></div><div class="qa"><p class="q">成果物として何が残りますか？</p><p class="a">ユースケース一覧、優先順位付きの業務改善プラン、推進体制案をとりまとめてお渡しします。経営層への報告や稟議資料としてそのまま活用できます。</p></div><div class="qa"><p class="q">オンラインでも実施できますか？</p><p class="a">はい。オンライン・対面・ハイブリッドのいずれにも対応しています。オンラインの場合はブレイクアウトルームとオンラインホワイトボードを用いて進行します。</p></div></div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>S5-6 ワークショップ FAQ</figcaption></figure>
+
+    <!-- ===== 06-1 比較表 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">比較表</p>
+        <h2 class="s-title">4つの研修タイプを<b>ひと目で比較</b></h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <table class="cmp">
+          <thead><tr>
+            <th></th>
+            <th><span class="hx">eラーニング</span></th>
+            <th><span class="hx">セミナー</span></th>
+            <th><span class="hx">ハンズオン</span></th>
+            <th><span class="hx">ワークショップ</span></th>
+          </tr></thead>
+          <tr><td class="rh">実施方法</td>
+            <td>専用LMSでの動画学習<br>（オンライン）</td>
+            <td>講師のリアルタイム講義<br>（オンライン／対面）</td>
+            <td>講師伴走の実践演習<br>（少人数〜1on1）</td>
+            <td>グループ演習・双方向型<br>（オンライン／対面）</td></tr>
+          <tr><td class="rh">料金目安（税抜）</td>
+            <td><span class="big">¥100,000<small>〜 / 名</small></span></td>
+            <td><span class="big">¥200,000<small>〜 / 回</small></span></td>
+            <td><span class="big">¥300,000<small>〜 / 回</small></span></td>
+            <td><span class="big">¥500,000<small>〜 / 回</small></span></td></tr>
+          <tr><td class="rh">対象人数</td>
+            <td>1名〜（全社展開可）</td><td>部門〜全社</td><td>少人数〜1on1</td><td>チーム・部門単位</td></tr>
+          <tr><td class="rh">所要時間の目安</td>
+            <td>約2.4〜10時間／プログラム</td><td>2.5時間〜</td><td>3時間〜</td><td>3時間〜</td></tr>
+          <tr><td class="rh">主なゴール</td>
+            <td><span class="em">基礎知識の底上げ</span></td>
+            <td><span class="em">知識の体系的インプット</span><br>機運づくり</td>
+            <td><span class="em">実務スキルの定着</span><br>推進リーダー育成</td>
+            <td><span class="em">自社課題の活用アイデア</span><br>業務改善プラン</td></tr>
+          <tr><td class="rh">助成金活用</td>
+            <td><span class="ok">組み合わせプランで対象</span></td>
+            <td><span class="ask">要相談</span></td>
+            <td><span class="ok">組み合わせプランで対象</span></td>
+            <td><span class="ask">要相談</span></td></tr>
+          <tr><td class="rh">こんな企業に</td>
+            <td>全社員へ均一な基礎を<br>低コストで浸透させたい</td>
+            <td>一度に多くの社員へ<br>効率よく知識を届けたい</td>
+            <td>受講後すぐ現場で<br>活用できる状態にしたい</td>
+            <td>部門横断でアイデアを<br>出し合い推進したい</td></tr>
+        </table>
+        <p class="s-foot">© 株式会社AI棒　※料金は目安です。人数・内容により変動します。助成金の適用可否は要件により異なります。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>06-1 比較表</figcaption></figure>
+
+
+    <!-- ===== 06-2 目的別の選び方 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">目的別の選び方</p>
+        <h2 class="s-title">「まず何を実現したいか」から、<b>研修タイプを逆算</b>する</h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kpills">
+          <div class="kp"><span class="no en">01</span>
+            <p class="q">全社員のAIリテラシーを底上げしたい<small>拠点・部署が分散、人数が多い、まずは基礎から</small></p>
+            <div class="a"><span class="t">eラーニング</span><span class="s">キックオフに<br>セミナーを併用</span></div></div>
+          <div class="kp"><span class="no en">02</span>
+            <p class="q">社内のAI活用の機運を高めたい<small>経営層の理解を得たい、最新事例を知りたい</small></p>
+            <div class="a"><span class="t">セミナー</span><span class="s">2.5時間〜で<br>全社一斉に実施</span></div></div>
+          <div class="kp"><span class="no en">03</span>
+            <p class="q">現場で使えるスキルを定着させたい<small>受講後すぐ業務で使わせたい、推進リーダーを育てたい</small></p>
+            <div class="a"><span class="t">ハンズオン</span><span class="s">eラーニングとの<br>組み合わせが定番（助成金対応）</span></div></div>
+          <div class="kp"><span class="no en">04</span>
+            <p class="q">自社課題のAI活用アイデアを形にしたい<small>部門横断で推進したい、業務改善プランまで作りたい</small></p>
+            <div class="a"><span class="t">ワークショップ</span><span class="s">推進メンバーには<br>ハンズオンを併用</span></div></div>
+        </div>
+        <div class="checkband" style="margin-top:18px">迷ったら「eラーニング＋ハンズオン」から。基礎はeラーニングで効率よく、定着は伴走で確実に──助成金を活用でき、費用対効果がもっとも高い組み合わせです。</div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>06-2 目的別の選び方</figcaption></figure>
+
+
+
+    <!-- ===== 07 研修開始までの流れ＋CTA（最後スライド） ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">研修開始までの流れ</p>
+        <h2 class="s-title">無料個別相談から、<b>最短で研修開始</b>まで</h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="flow">
+          <div class="fs"><span class="n en">01</span><p class="t">無料個別相談</p><p class="d">現状の課題・目的・人数をヒアリング。研修タイプの組み合わせをその場でご提案します。（60分・Zoom）</p></div>
+          <div class="farr"></div>
+          <div class="fs"><span class="n en">02</span><p class="t">ご提案・お見積り</p><p class="d">研修タイプ・プログラム・スケジュールを設計し、お見積りをご提示。導入を希望される方は申込フォームへご入力ください。</p></div>
+          <div class="farr"></div>
+          <div class="fs"><span class="opt">助成金活用の場合</span><span class="n en">03</span><p class="t">助成金申請<br>（計画届の提出）</p><p class="d">研修内容・スケジュール・受講人数をもとに計画届を提出。提携社労士のご紹介も可能です。</p></div>
+          <div class="farr"></div>
+          <div class="fs"><span class="n en">04</span><p class="t">お支払い・初回面談</p><p class="d">お支払い後、学習の進め方〜サポートの受け方をご案内する初回面談を実施します。</p></div>
+          <div class="farr"></div>
+          <div class="fs"><span class="n en">05</span><p class="t">研修開始</p><p class="d">学習システムのID/Passを発行し、研修スタート。チャット・面談・セミナーで研修期間中を伴走します。</p></div>
+        </div>
+        <div class="cta-band">
+          <svg viewBox="0 0 1160 130" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <path d="M700,-40 C900,20 840,120 1080,140 L1180,140 L1180,-40 Z" fill="rgba(255,255,255,0.08)"/>
+            <path d="M-40,110 C240,60 420,140 760,100 C1000,72 1100,110 1180,140 L-40,140 Z" fill="rgba(20,40,80,0.2)"/>
+          </svg>
+          <div class="l">
+            <p class="t">どのタイプが合うか迷ったら、無料個別相談でご提案します</p>
+            <p class="d">貴社の課題・人数・予算をもとに、研修タイプの組み合わせと助成金活用までその場でご案内します。</p>
+          </div>
+          <span class="btn">無料個別相談を予約する ›</span>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>07 研修開始までの流れ＋CTA（最後スライド）</figcaption></figure>
+
+
+    <!-- ===== 08 ご留意事項・発行元 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">ご留意事項</p>
+        <h2 class="s-title">ご利用にあたって</h2>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="legal">
+          <p class="li">本資料に記載の料金はいずれも税抜の目安であり、受講人数・実施内容・実施回数により変動します。正式な料金はお見積りにてご提示します。</p>
+          <p class="li">助成金（人材開発支援助成金）の適用可否・助成額は、貴社の状況および申請時点の制度要件により異なります。記載の実質負担額は試算例です。</p>
+          <p class="li">各研修タイプの所要時間・対象人数は目安です。貴社のご要望に応じて組み合わせ・カスタマイズが可能です。</p>
+          <p class="li">社内でのコピー・配布はご自由にどうぞ。社外への転載・再配布はご遠慮ください。</p>
+          <p class="li">AI研修・助成金活用のご相談は、無料個別相談（biz.bytech.jp/counseling）で承ります。</p>
+          <p class="li">発行：バイテック法人AI研修（株式会社AI棒）　2026年9月版</p>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>13 ご留意事項・発行元</figcaption></figure>
+
+  </div>
+</body>
+</html>

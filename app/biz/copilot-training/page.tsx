@@ -30,7 +30,7 @@ const course: CourseData = {
     visualH: 946,
     visualAlt: "Microsoft 365 Copilotの活用イメージ（PC画面）",
   },
-  docHref: "/doc-a",
+  docHref: "/doc-j",
   about: {
     title: "Copilot研修とは？",
     subLead: (
