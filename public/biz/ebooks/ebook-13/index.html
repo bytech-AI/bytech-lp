@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>製造業のAI活用事例集｜全14スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* 業種別 活用事例集。設計は ebook-04/05 と同系統（四角の角丸なし・円とピルのみ角丸）。
+     ★事例はすべて各社の公開情報にもとづく。数値は出典の表記どおりに記載し、推測で丸めたり
+       脚色したりしないこと。出典はスライド下部に必ず明記する。他社名を出す資料のため、
+       まとめサイトの孫引きは使わず一次情報（プレスリリース・公式サイト）で裏を取る。 */
+  :root {
+    --blue: #2c5c9c; --blue-deep: #1a2e50; --blue-bright: #1a6fb5; --blue-pale: #8fb0d8;
+    --ink: #2a2f3a; --line: #e3e8ef; --amber: #f0b429; --tint: #eef4fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f4f6f8; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; color: var(--ink); padding: 48px 0 96px; }
+  .note { max-width: 1120px; margin: 0 auto 28px; font-size: 13px; font-weight: 700; color: #8a93a3; }
+  .en { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; }
+
+  .deck { display: flex; flex-direction: column; gap: 34px; align-items: center; counter-reset: pg -1; }
+  .slide-shell { width: 1120px; counter-increment: pg; }
+  .slide-shell figcaption { font-size: 12px; font-weight: 700; color: #8a93a3; margin: 8px 2px 0; letter-spacing: .04em; }
+  .slide { width: 1280px; height: 720px; transform: scale(0.875); transform-origin: top left; background: #fff; position: relative; overflow: hidden; }
+  .slide-shell .clip { height: 630px; overflow: hidden; border-radius: 0; box-shadow: 0 2px 10px rgba(26,35,48,.08); }
+
+  /* ===== 共通 ===== */
+  .s-body { position: absolute; inset: 0; padding: 36px 56px; z-index: 1; }
+  .s-eyebrow { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 700; color: var(--blue-pale); letter-spacing: .02em; }
+  .s-eyebrow::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); }
+  .s-logo { position: absolute; top: 38px; right: 56px; height: 30px; }
+  .s-foot { position: absolute; left: 56px; right: 120px; bottom: 14px; font-size: 10px; color: #9aa3b2; line-height: 1.6; z-index: 5; }
+  .s-num { position: absolute; right: 0; bottom: 0; width: 66px; height: 66px; background: var(--blue); border-radius: 66px 0 0 0; color: #fff; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 13px; font-weight: 700; display: flex; align-items: flex-end; justify-content: flex-end; padding: 0 14px 10px 0; z-index: 5; }
+  .s-num::before { content: counter(pg); }
+
+  /* ===== 見出し行（業種バッジ＋要点） ===== */
+  .hd { display: flex; align-items: center; gap: 18px; margin-top: 8px; }
+  .hd .badge { background: var(--blue); color: #fff; font-size: 24px; font-weight: 800; padding: 10px 22px; letter-spacing: .06em; white-space: nowrap; text-align: center; }
+  .hd .badge small { display: block; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; opacity: .8; margin-top: 3px; }
+  .hd .t { font-size: 25px; font-weight: 800; color: #1a2330; line-height: 1.4; letter-spacing: .01em; }
+  .hd .t b { color: var(--blue-bright); }
+
+  /* ===== 事例テーブル ===== */
+  table.cs { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 18px; table-layout: fixed; }
+  .cs th { background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; padding: 10px 14px; text-align: left; letter-spacing: .02em; }
+  .cs th:first-child { text-align: center; }
+  .cs td { font-size: 12.8px; font-weight: 500; color: #4a5568; padding: 13px 14px; border-bottom: 1px solid var(--line); vertical-align: middle; line-height: 1.55; }
+  .cs tr:nth-child(even) td { background: #f7f9fc; }
+  .cs td.no { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; text-align: center; font-weight: 800; color: var(--blue-pale); }
+  /* 社名は他社商標のためロゴを使わず、文字組みだけで見せる */
+  .cs td.co span { display: block; font-size: 14.5px; font-weight: 800; color: #1a2330; line-height: 1.4; }
+  .cs td.ar span { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; padding: 4px 9px; white-space: nowrap; }
+  .cs td.ar svg { flex: 0 0 auto; }
+  .cs td.rs { font-size: 13px; font-weight: 700; color: #1a2330; line-height: 1.5; }
+  .cs td.rs b { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 19px; font-weight: 800; color: var(--blue-bright); padding: 0 1px; }
+
+  /* ===== まとめ帯 ===== */
+  .band { display: flex; align-items: center; gap: 11px; background: var(--tint); border: 1.5px solid var(--blue); padding: 12px 20px; font-size: 13.5px; font-weight: 800; color: var(--blue-deep); margin-top: 12px; }
+  .band::before { content: "✓"; flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+
+
+  /* ===== 個別詳細スライド ===== */
+  .dhd { display: flex; align-items: flex-start; gap: 18px; margin-top: 8px; }
+  .dhd .no { background: var(--blue-deep); color: #fff; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 22px; font-weight: 800; padding: 12px 18px; letter-spacing: .06em; }
+  .dhd .mark { flex: 0 0 auto; width: 46px; height: 46px; background: var(--tint); border: 1.5px solid #cfdcee; color: var(--blue); display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .dhd .mark svg { width: 24px; height: 24px; }
+  .dhd .co { font-size: 25px; font-weight: 800; color: #1a2330; line-height: 1.3; }
+  .dhd .co small { display: block; font-size: 14px; font-weight: 700; color: #6b7789; margin-top: 5px; }
+  .dhd .tags { margin-left: auto; display: flex; gap: 7px; padding-top: 6px; }
+  .dhd .tags span { font-size: 11.5px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; border-radius: 999px; padding: 5px 13px; white-space: nowrap; }
+
+  .dt { display: grid; grid-template-columns: 1.18fr 1fr; gap: 20px; margin-top: 14px; align-items: start; }
+  .sec { border: 1px solid var(--line); }
+  .sec .h { background: #f2f5fa; border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 800; color: var(--blue-deep); padding: 9px 16px; display: flex; align-items: center; gap: 8px; }
+  .sec .h::before { content: ""; width: 5px; height: 15px; background: var(--blue); }
+  .sec .b { padding: 10px 16px 11px; }
+  .sec .i { position: relative; font-size: 12.6px; font-weight: 500; color: #4a5568; line-height: 1.7; padding: 4px 0 4px 15px; }
+  .sec .i::before { content: ""; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-pale); }
+  .sec .i b { color: #1a2330; font-weight: 800; }
+
+  .kpi { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi div { background: var(--tint); border-left: 4px solid var(--blue); padding: 11px 13px; }
+  .kpi .k { font-size: 10.5px; font-weight: 800; color: var(--blue); }
+  .kpi .v { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 24px; font-weight: 800; color: #1a2330; line-height: 1.15; margin-top: 3px; }
+  .kpi .v small { font-family: "Noto Sans JP", sans-serif; font-size: 11px; font-weight: 700; color: #6b7789; margin-left: 2px; }
+  .kpi .n { font-size: 10.5px; font-weight: 600; color: #7a8698; margin-top: 3px; }
+  .trend { margin-top: 10px; background: var(--blue-deep); color: #fff; padding: 12px 15px; display: flex; align-items: center; gap: 12px; }
+  .trend .l { font-size: 11.5px; font-weight: 800; opacity: .85; line-height: 1.5; }
+  .trend .r { margin-left: auto; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 15px; font-weight: 800; white-space: nowrap; }
+  .trend .r b { font-size: 22px; color: #8fd0ff; }
+
+  .learn { margin-top: 12px; border: 1.5px solid var(--blue); }
+  .learn .h { background: var(--blue); color: #fff; font-size: 12.5px; font-weight: 800; padding: 8px 16px; letter-spacing: .02em; }
+  .learn .g { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+  .learn .g div { padding: 9px 16px 10px; border-right: 1px solid var(--line); }
+  .learn .g div:last-child { border-right: none; }
+  .learn .t { font-size: 13px; font-weight: 800; color: var(--blue-deep); }
+  .learn .d { font-size: 11.4px; font-weight: 500; color: #4a5568; line-height: 1.6; margin-top: 3px; }
+
+
+  /* ===== 表紙（白地・左に大見出し／右にイラスト） ===== */
+  .cv { background: #fff; }
+  .cv .t { position: absolute; left: 72px; top: 104px; font-size: 74px; font-weight: 900; color: var(--blue); line-height: 1.34; letter-spacing: .02em; }
+  .cv .sub { position: absolute; left: 75px; top: 316px; font-size: 19px; font-weight: 800; color: #2a2f3a; letter-spacing: .05em; line-height: 1.7; }
+  .cv .meta { position: absolute; left: 75px; top: 392px; font-size: 14px; font-weight: 700; color: #8a93a3; letter-spacing: .06em; }
+  .cv .il { position: absolute; right: 44px; bottom: 74px; width: 560px; }
+  .cv .logo { position: absolute; left: 72px; bottom: 58px; height: 38px; }
+
+  /* ===== 目次 ===== */
+  .ix { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 26px; margin-top: 30px; }
+  .ix a, .ix div { display: flex; align-items: center; gap: 16px; background: #fff; border: 1px solid #d9e1ec; padding: 18px 20px; text-decoration: none; box-shadow: 0 4px 14px rgba(26,35,48,.05); }
+  .ix .n { flex: 0 0 auto; width: 46px; height: 46px; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; }
+  .ix .b { flex: 1; min-width: 0; display: block; }
+  .ix .nm { display: block; font-size: 19px; font-weight: 800; color: #1a2330; line-height: 1.35; }
+  .ix .ds { display: block; font-size: 12px; font-weight: 600; color: #7a8698; margin-top: 4px; line-height: 1.5; }
+  .ix .pg { flex: 0 0 auto; font-size: 12.5px; font-weight: 800; color: var(--blue); }
+  .ix .soon { border-style: dashed; opacity: .62; }
+  .ix .soon .n { background: #b9c4d4; }
+
+
+
+
+  /* ===== 目次（この資料の中身） ===== */
+  .ixh { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
+  .ixh .lb { background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; padding: 7px 16px; letter-spacing: .04em; white-space: nowrap; }
+  .ixh .tx { font-size: 15px; font-weight: 700; color: #4a5568; }
+  .ixh .pg { margin-left: auto; font-size: 13px; font-weight: 800; color: var(--blue); white-space: nowrap; }
+  .ixg { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 26px; margin-top: 14px; }
+  .ixg div { display: flex; align-items: center; gap: 13px; background: #fff; border: 1px solid var(--line); padding: 10px 14px; }
+  .ixg .n { flex: 0 0 auto; width: 30px; height: 30px; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 800; }
+  .ixg .nm { font-size: 14.5px; font-weight: 800; color: #1a2330; }
+  .ixg .ar { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; padding: 3px 8px; margin-left: 8px; white-space: nowrap; }
+  .ixg .pg { margin-left: auto; font-size: 12px; font-weight: 800; color: #8a93a3; white-space: nowrap; }
+
+  /* ===== PDF出力 ===== */
+  @page { size: 1280px 720px; margin: 0; }
+  @media print {
+    body { padding: 0; background: #fff; }
+    * { box-shadow: none !important; }
+    .note { display: none; }
+    .deck { gap: 0; display: block; }
+    .slide-shell { width: 1280px; }
+    .slide-shell figcaption { display: none; }
+    .slide-shell .clip { height: 720px; overflow: hidden; border-radius: 0; box-shadow: none; }
+    .slide { transform: none; border: none; border-radius: 0; }
+    figure.slide-shell { page-break-after: always; break-after: page; margin: 0; }
+    figure.slide-shell:last-child { page-break-after: auto; }
+  }
+</style>
+
+<style id="ebook-embed-overrides">
+  body { padding: 0 !important; background: #e9edf3 !important; }
+  .note { display: none !important; }
+  .deck { gap: 16px !important; }
+  .slide-shell { width: 1280px !important; }
+  .slide-shell figcaption { display: none !important; }
+  .slide-shell .clip { height: 720px !important; border-radius: 0 !important; box-shadow: none !important; }
+  .slide { transform: none !important; border: none !important; border-radius: 0 !important; }
+</style>
+</head>
+<body>
+  <p class="note">製造業のAI活用事例集｜一覧2ページ＋詳細10ページ／事例はすべて各社の公開情報にもとづく</p>
+  <div class="deck">
+
+    <!-- ===== 表紙 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide cv">
+        <p class="t">製造業の<br>AI活用事例集</p>
+        <p class="sub">公開情報でみる、国内メーカー10社の取り組み</p>
+        <p class="meta">2026年9月版　｜　バイテック法人AI研修</p>
+        <img class="il" src="/biz/ebooks/ebook-13/assets/cover-illus.png" alt="">
+        <img class="logo" src="/biz/ebooks/ebook-13/assets/biz-logo.svg" alt="byTech BUSINESS">
+      </div>
+    </div><figcaption>表紙</figcaption></figure>
+
+    <!-- ===== 目次 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">Contents</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-13/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd" style="margin-top:4px">
+          <p class="t" style="font-size:27px">目次</p>
+        </div>
+        <div class="ixh"><span class="lb">詳細事例</span><span class="tx">1社1ページ。背景・取り組み・成果・自社への応用まで</span><span class="pg">P.4 - 13</span></div>
+        <div class="ixg"><div><span class="n">01</span><span class="nm">パナソニック コネクト<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg>全社活用</span></span><span class="pg">P.4</span></div><div><span class="n">02</span><span class="nm">日立製作所<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.8C7.9 18.7 5 15.2 5 11V6z"/><path d="M9 11.6l2.1 2.1L15.2 9.6"/></svg>品質保証</span></span><span class="pg">P.5</span></div><div><span class="n">03</span><span class="nm">ダイキン工業<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg>設備保全</span></span><span class="pg">P.6</span></div><div><span class="n">04</span><span class="nm">旭化成<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.2 3h5.6M10.3 3v6.2L5 18.4A2 2 0 006.7 21.4h10.6a2 2 0 001.7-3L13.7 9.2V3"/></svg>研究開発</span></span><span class="pg">P.7</span></div><div><span class="n">05</span><span class="nm">日本精工（NSK）<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.8C7.9 18.7 5 15.2 5 11V6z"/><path d="M9 11.6l2.1 2.1L15.2 9.6"/></svg>品質保証</span></span><span class="pg">P.8</span></div><div><span class="n">06</span><span class="nm">味の素<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg>全社活用</span></span><span class="pg">P.9</span></div><div><span class="n">07</span><span class="nm">味の素冷凍食品<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg>現場浸透</span></span><span class="pg">P.10</span></div><div><span class="n">08</span><span class="nm">LIXIL<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18V10.2l-6 3.9v-3.9l-6 3.9V6.6H3z"/><path d="M7 21v-3.4M12 21v-3.4M17 21v-3.4"/></svg>全社＋工場</span></span><span class="pg">P.11</span></div><div><span class="n">09</span><span class="nm">花王<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg>全社活用</span></span><span class="pg">P.12</span></div><div><span class="n">10</span><span class="nm">キリン<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg>全社活用</span></span><span class="pg">P.13</span></div></div>
+        <p class="s-foot">本資料は各社が公開している情報をもとにバイテック法人AI研修が編集したものです。掲載している数値はすべて各社の公表値であり、当社による測定値ではありません。掲載企業との取引関係や、各社による推薦を示すものではありません。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>目次</figcaption></figure>
+
+    <!-- ===== 製造業 1/2 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">製造業 活用事例</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-13/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd">
+          <span class="badge">製造業<small>1 / 2</small></span>
+          <p class="t">成果が出ているのは<b>設計・品質保証・技術伝承</b>。<br>熟練者しか分からない情報を、誰でも引き出せる形にしている。</p>
+        </div>
+        <table class="cs">
+          <colgroup><col style="width:40px"><col style="width:176px"><col style="width:112px"><col><col style="width:262px"></colgroup>
+          <tr><th>No.</th><th>企業</th><th>活用領域</th><th>取り組み</th><th>公表されている成果</th></tr>
+          <tr>
+            <td class="no">01</td><td class="co"><span>パナソニック コネクト</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg>全社活用</span></td>
+            <td>自社AIアシスタント「ConnectAI」を国内全社員 約11,800人へ展開。議事録・提案書・設計書作成などで年間361万回利用</td>
+            <td class="rs">2025年度に<b>78.8</b>万時間を削減（総労働時間の<b>3.4</b>%）</td>
+          </tr>
+          <tr>
+            <td class="no">02</td><td class="co"><span>日立製作所</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.8C7.9 18.7 5 15.2 5 11V6z"/><path d="M9 11.6l2.1 2.1L15.2 9.6"/></svg>品質保証</span></td>
+            <td>熟練者の暗黙知を引き出し、設備トラブルの過去事例検索と対応レポート作成を支援するAIエージェントを構築（大みか事業所）</td>
+            <td class="rs">事例の検索時間を約<b>90</b>%削減。レポート作成・原因分析も<b>80</b>%以上短縮</td>
+          </tr>
+          <tr>
+            <td class="no">03</td><td class="co"><span>ダイキン工業</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg>設備保全</span></td>
+            <td>日立と協創し、工場設備の故障診断を支援するAIエージェントを開発。試験運用を開始</td>
+            <td class="rs">実証実験で<b>10</b>秒以内に<b>90</b>%以上の精度で回答</td>
+          </tr>
+          <tr>
+            <td class="no">04</td><td class="co"><span>旭化成</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9.2 3h5.6M10.3 3v6.2L5 18.4A2 2 0 006.7 21.4h10.6a2 2 0 001.7-3L13.7 9.2V3"/></svg>研究開発</span></td>
+            <td>論文・特許から用途を自動抽出するAIと、有望な候補を絞り込む生成AIを開発。製造現場の技術伝承にも活用</td>
+            <td class="rs">用途候補の選別時間を従来の約<b>40</b>%に短縮</td>
+          </tr>
+          <tr>
+            <td class="no">05</td><td class="co"><span>日本精工（NSK）</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.8C7.9 18.7 5 15.2 5 11V6z"/><path d="M9 11.6l2.1 2.1L15.2 9.6"/></svg>品質保証</span></td>
+            <td>表形式の品質トラブルデータを扱う参照アプリを自社開発。ハルシネーション等を踏まえた運用ルールも整備</td>
+            <td class="rs">機能設計から約<b>6</b>か月で本番運用を開始。国内<b>5,000</b>名超へ展開</td>
+          </tr>
+        </table>
+        <div class="band">熟練者の判断を必要とする工程ほど効果が大きい。まずは図面・仕様書・トラブル事例など、社内に溜まった文書から着手するのが近道です。</div>
+        <p class="s-foot">出典：各社の公式発表（プレスリリース・ニュースルーム・公式サイト）。パナソニック コネクト（2026.7.29）／日立製作所（2026.6.4）／日立製作所・ダイキン工業（2025.4.22）／旭化成（2024.12.9）／日本精工（2025.6.23）／味の素（DXサイト）／味の素冷凍食品／LIXIL（DXサイト）／花王（2026.8.17ほか）／キリン（2026.2.27ほか）。数値は各社の公表値であり、当社による測定値ではありません。社名・製品名は各社の商標です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>サンプル 製造業（1/2）</figcaption></figure>
+
+    <!-- ===== 製造業 2/2 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">製造業 活用事例</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-13/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd">
+          <span class="badge">製造業<small>2 / 2</small></span>
+          <p class="t"><b>全社への展開</b>で差がつく。<br>利用率を上げる仕組みを持つ企業が、削減時間を数字で示せている。</p>
+        </div>
+        <table class="cs">
+          <colgroup><col style="width:40px"><col style="width:176px"><col style="width:112px"><col><col style="width:262px"></colgroup>
+          <tr><th>No.</th><th>企業</th><th>活用領域</th><th>取り組み</th><th>公表されている成果</th></tr>
+          <tr>
+            <td class="no">06</td><td class="co"><span>味の素</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg>全社活用</span></td>
+            <td>専用ツール「AJI AI Chat」を全従業員に導入し、社内情報も参照可能に。勉強会・コミュニティに約1,200名が参加</td>
+            <td class="rs">業務の標準化・半自動化で年間 約<b>1,000</b>時間強の削減を見込む</td>
+          </tr>
+          <tr>
+            <td class="no">07</td><td class="co"><span>味の素冷凍食品</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg>現場浸透</span></td>
+            <td>70以上の業務テーマを組織横断で推進し、現場主導で活用を広げている</td>
+            <td class="rs">社内利用率<b>80</b>%超を毎月維持</td>
+          </tr>
+          <tr>
+            <td class="no">08</td><td class="co"><span>LIXIL</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18V10.2l-6 3.9v-3.9l-6 3.9V6.6H3z"/><path d="M7 21v-3.4M12 21v-3.4M17 21v-3.4"/></svg>全社＋工場</span></td>
+            <td>「LIXIL Ai Portal」を展開。大和工場では在庫管理・生産段取り・製品検査を一元管理するツールを内製</td>
+            <td class="rs">毎日<b>9,000</b>名超が利用。大和工場は作業時間<b>20</b>%減・生産量<b>30</b>%増</td>
+          </tr>
+          <tr>
+            <td class="no">09</td><td class="co"><span>花王</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg>全社活用</span></td>
+            <td>セキュアな「Kao AI Chat」を全社員が利用。需要計画の立案を支援するAIエージェントも導入</td>
+            <td class="rs">グローバル約<b>16,000</b>人が活用。化粧品の製品在庫を2027年までに約<b>25</b>%削減へ</td>
+          </tr>
+          <tr>
+            <td class="no">10</td><td class="co"><span>キリン</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg>全社活用</span></td>
+            <td>自社開発「Buddy AI」を国内従業員 約1万人へ展開。新卒から役員まで対象の生成AI教育プログラムも実施</td>
+            <td class="rs">2025年10月時点で平均利用率<b>70</b>%</td>
+          </tr>
+        </table>
+        <div class="band">10社に共通するのは「AIを配って終わり」にしていないこと。教育・社内ルール・現場テーマの設定をセットで進めた企業が、数字で語れる成果に到達しています。</div>
+        <p class="s-foot">出典：各社の公式発表（プレスリリース・ニュースルーム・公式サイト）。パナソニック コネクト（2026.7.29）／日立製作所（2026.6.4）／日立製作所・ダイキン工業（2025.4.22）／旭化成（2024.12.9）／日本精工（2025.6.23）／味の素（DXサイト）／味の素冷凍食品／LIXIL（DXサイト）／花王（2026.8.17ほか）／キリン（2026.2.27ほか）。数値は各社の公表値であり、当社による測定値ではありません。社名・製品名は各社の商標です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>サンプル 製造業（2/2）</figcaption></figure>
+
+    <!-- ===== 詳細事例 01 パナソニック コネクト ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜製造業</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-13/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">01</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg></span>
+          <p class="co">パナソニック コネクト<small>全社員に配って終わりにせず、「使われ続ける」仕組みをつくった</small></p>
+          <div class="tags"><span>全社活用</span><span>国内全社員 約11,800人</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">自社向けAIアシスタント「<b>ConnectAI</b>」を国内全社員に展開。社内情報を参照できるよう自社特化を進めた</p><p class="i">議事録作成・コード生成・ログ分析・提案書作成・設計書／仕様書作成など、<b>個人業務での利用</b>を広げた</p><p class="i">図面と設計仕様の照合など、<b>業務特化のAIエージェント</b>へ展開。2026年度はプレゼン生成機能も追加予定</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">「聞く」から「<b>頼む</b>」へ。調べ物の相談役から、作業そのものを任せる相手へ使い方が移った</p><p class="i">1回あたりの削減時間が<b>33分（前年比1.2倍）</b>に伸び、効果の大きい業務へ用途が移動した</p><p class="i">月間ユニークユーザー率<b>61%（前年比12ポイント増）</b>。一部の人でなく全社の日常業務に定着</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">2025年度 削減時間</p><p class="v">78.8<small>万時間</small></p><p class="n">総労働時間の3.4%に相当</p></div><div><p class="k">年間利用回数</p><p class="v">361<small>万回</small></p><p class="n">前年比 1.6倍</p></div><div><p class="k">1回あたり削減</p><p class="v">33<small>分</small></p><p class="n">前年比 1.2倍</p></div><div><p class="k">月間利用者率</p><p class="v">61<small>%</small></p><p class="n">前年比 12ポイント増</p></div></div><div class="trend"><p class="l">削減時間の推移<br>2024年度 → 2025年度</p><p class="r">44.8万h → <b>78.8</b>万h</p></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">AIエージェントの活用範囲を広げ、<b>2030年に総労働時間の10%削減</b>をめざす</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">配布ではなく用途を決める</p><p class="d">議事録・提案書・仕様書など、頻度が高く時間のかかる業務を先に指定すると使われ方が定まります。</p></div><div><p class="t">利用率を指標に置く</p><p class="d">削減時間だけでなく「何人が毎月使ったか」を見ると、定着しているかが早く分かります。</p></div><div><p class="t">聞く→頼むへ引き上げる</p><p class="d">調べ物で止まらず、作業を任せる使い方まで教育で引き上げると1回あたりの効果が伸びます。</p></div></div>
+        </div>
+        <p class="s-foot">出典：パナソニック コネクト プレスリリース「AI活用で総労働時間の3.4％削減」（2026年7月29日）ほか同社発表。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 01 パナソニック コネクト</figcaption></figure>
+
+    <!-- ===== 詳細事例 02 日立製作所 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜製造業</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-13/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">02</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.8C7.9 18.7 5 15.2 5 11V6z"/><path d="M9 11.6l2.1 2.1L15.2 9.6"/></svg></span>
+          <p class="co">日立製作所<small>熟練者の暗黙知を形式知化し、経験の浅い担当者でも初動対応できる状態へ</small></p>
+          <div class="tags"><span>品質保証</span><span>大みか事業所で先行導入</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">背景と課題</p><div class="b"><p class="i">人材不足と世代交代が進む一方、製品・システムは<b>高度化・複雑化</b>。求められる知識は専門化していた</p><p class="i">トラブル対応や原因分析は<b>熟練者の経験と判断に依存</b>し、担当者の経験値で対応品質が揺れていた</p></div></div><div class="sec" style="margin-top:12px"><p class="h">取り組み</p><div class="b"><p class="i">AIプロフェッショナルと現場の熟練者が連携し、<b>熟練者が持つ100件以上の業務知見</b>をAIへ組み込んだ</p><p class="i">「どのキーワードで、どの順序で探すか」という<b>探索プロセスそのものを形式知化</b></p><p class="i">自社工場に最初のユーザーとして導入する「<b>カスタマーゼロ</b>」で磨き上げ、2026年4月に外販を開始</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">トラブル事例の検索</p><p class="v">60→5<small>分</small></p><p class="n">1件あたり。約9割削減</p></div><div><p class="k">対応レポート作成</p><p class="v">120→15<small>分</small></p><p class="n">8割以上削減</p></div><div><p class="k">不具合の原因分析</p><p class="v">16→3<small>時間</small></p><p class="n">8割以上削減</p></div><div><p class="k">組み込んだ業務知見</p><p class="v">100<small>件以上</small></p><p class="n">熟練者が持つノウハウ</p></div></div><div class="sec" style="margin-top:12px"><p class="h">この先の展開</p><div class="b"><p class="i">品質保証だけでなく<b>設計・製造・保守</b>へ同様のサービスを拡大予定</p><p class="i">ナレッジを上流工程へ戻す<b>好循環サイクル</b>の確立をめざす</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">暗黙知は聞き取りで出す</p><p class="d">AIに入れる前に、熟練者が何をどの順で見ているかを言語化する工程が要ります。</p></div><div><p class="t">まず自社で使い切る</p><p class="d">社内で磨いてから外に出す進め方は、精度と現場の納得感の両方を上げます。</p></div><div><p class="t">初動の速さを指標にする</p><p class="d">検索1件60分が5分になるように、詰まりやすい工程を1つ選ぶと効果が測れます。</p></div></div>
+        </div>
+        <p class="s-foot">出典：日立製作所 ニュースリリース「熟練ノウハウを形式知化し、品質保証業務を大幅に効率化するAIエージェントをHMAX Industryとして提供開始」（2026年6月4日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 02 日立製作所</figcaption></figure>
+
+    <!-- ===== 詳細事例 03 ダイキン工業 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜製造業</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-13/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">03</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg></span>
+          <p class="co">ダイキン工業<small>設備の図面をAIが読める形に変換し、故障診断のノウハウを引き継ぐ</small></p>
+          <div class="tags"><span>設備保全</span><span>日立製作所との協創</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">背景と課題</p><div class="b"><p class="i">生産年齢人口の減少にともない<b>熟練技術者が減少</b>。グローバル展開で保全技術者の確保と育成が追いつかない</p><p class="i">結果として<b>保全のリードタイム増加と品質のばらつき</b>が課題になっていた</p></div></div><div class="sec" style="margin-top:12px"><p class="h">取り組み</p><div class="b"><p class="i">蓄積してきた生産設備・ユーティリティ設備の<b>図面をナレッジグラフへ変換</b>し、生成AIが読み取れる形にした</p><p class="i">設備の稼働データ（OTデータ）と、日立独自の<b>故障原因分析プロセス</b>を生成AIに学習させた</p><p class="i">現場担当者が対話で原因と対策を引き出せるAIエージェントとして、試験運用を開始</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">回答までの時間</p><p class="v">10<small>秒以内</small></p><p class="n">実証実験での確認値</p></div><div><p class="k">回答の精度</p><p class="v">90<small>%以上</small></p><p class="n">故障の原因と対策について</p></div></div><div class="sec" style="margin-top:12px"><p class="h">この先の展開</p><div class="b"><p class="i">2025年9月までに試験運用を完了し<b>実用化</b>、国内外のダイキン生産拠点へ展開</p><p class="i">日立はLumadaソリューションとして<b>製造業全般へ展開</b>する方針</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">図面や帳票から始める</p><p class="d">紙やCADに眠る情報をAIが読める形にする工程が、実は成果の分かれ目になります。</p></div><div><p class="t">現場の判断プロセスを組む</p><p class="d">データだけでなく「どう切り分けるか」の手順を学習させると回答が実用レベルになります。</p></div><div><p class="t">拠点展開を前提に設計する</p><p class="d">1拠点で作って終わりにせず、横展開できる形で作ると投資が回収しやすくなります。</p></div></div>
+        </div>
+        <p class="s-foot">出典：日立製作所・ダイキン工業 ニュースリリース「ダイキンと日立が協創、工場の設備故障診断を支援するAIエージェントの実用化に向けた試験運用を開始」（2025年4月22日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 03 ダイキン工業</figcaption></figure>
+
+    <!-- ===== 詳細事例 04 旭化成 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜製造業</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-13/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">04</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9.2 3h5.6M10.3 3v6.2L5 18.4A2 2 0 006.7 21.4h10.6a2 2 0 001.7-3L13.7 9.2V3"/></svg></span>
+          <p class="co">旭化成<small>材料の用途探索と、現場の危険予知。研究開発と製造現場の両方で使う</small></p>
+          <div class="tags"><span>研究開発</span><span>技術伝承</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">背景と課題</p><div class="b"><p class="i"><b>熟練社員の高年齢化と退職</b>により、ノウハウの継承が課題になっていた</p><p class="i">材料の新規用途探索は文献量が膨大で、<b>有望な候補を絞り込む作業に時間</b>がかかっていた</p></div></div><div class="sec" style="margin-top:12px"><p class="h">取り組み</p><div class="b"><p class="i">専門人材と各事業領域が連携し、<b>用途を自動抽出するAI</b>と、有望な候補を抽出する生成AIを開発</p><p class="i">膨大な文献データから<b>6,000以上の用途候補</b>を考案</p><p class="i">製造現場では過去事例を読み込ませた生成AIで、経験の浅い従業員でも<b>リスクと対応策を抜け漏れなく洗い出せる</b>ようにした</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">候補の選別時間</p><p class="v">約40<small>%に短縮</small></p><p class="n">ある材料での実績</p></div><div><p class="k">考案した用途候補</p><p class="v">6,000<small>以上</small></p><p class="n">膨大な文献データから</p></div></div><div class="sec" style="margin-top:12px"><p class="h">この先の展開</p><div class="b"><p class="i">作業前の危険予知に加え、画像・音声など<b>工場のセンサーの非構造化データ</b>を解析し、作業中の危険回避にも活用予定</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">探索と選別を分けて考える</p><p class="d">候補を出すAIと、絞り込むAIを分けると、それぞれの精度を上げやすくなります。</p></div><div><p class="t">過去事例が資産になる</p><p class="d">トラブルや対応の記録が溜まっているほど、経験の浅い人を引き上げる効果が出ます。</p></div><div><p class="t">研究と現場の両輪で使う</p><p class="d">一部門に閉じず、研究開発と製造現場の両方で使うと社内の理解が進みます。</p></div></div>
+        </div>
+        <p class="s-foot">出典：旭化成 ニュースリリース「生成AIを新規用途探索の自動化や製造現場の技術伝承において活用開始」（2024年12月9日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 04 旭化成</figcaption></figure>
+
+    <!-- ===== 詳細事例 05 日本精工（NSK） ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜製造業</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-13/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">05</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.8C7.9 18.7 5 15.2 5 11V6z"/><path d="M9 11.6l2.1 2.1L15.2 9.6"/></svg></span>
+          <p class="co">日本精工（NSK）<small>専門性が高く読み解きにくい品質データを、誰でも扱える形にした</small></p>
+          <div class="tags"><span>品質保証</span><span>自社開発</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">背景と課題</p><div class="b"><p class="i">品質トラブルデータは専用DBやレポートで管理され、<b>形式が定まらず専門性が高い</b></p><p class="i"><b>因果関係を読み解くことが難しく</b>、必要な情報にたどり着ける人が限られていた</p></div></div><div class="sec" style="margin-top:12px"><p class="h">取り組み</p><div class="b"><p class="i">約4,000件の品質トラブルデータについて、<b>グラフによる可視化と生成AIによる要約</b>を搭載したアプリを自社開発</p><p class="i">自社専用の生成AI環境に構築し、ハルシネーション等のリスクに備えて<b>AI品質コントロールと業務運営ルール</b>を策定</p><p class="i">アジャイル開発により、機能設計から<b>約半年で本番運用</b>を開始</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">情報要約までの時間</p><p class="v">約30<small>秒</small></p><p class="n">データ到達から要約生成まで</p></div><div><p class="k">対象の品質データ</p><p class="v">約4,000<small>件</small></p><p class="n">蓄積されたトラブルデータ</p></div><div><p class="k">利用対象</p><p class="v">5,000<small>名以上</small></p><p class="n">国内社員</p></div><div><p class="k">開発期間</p><p class="v">約6<small>か月</small></p><p class="n">技術検証から本番運用まで</p></div></div><div class="sec" style="margin-top:12px"><p class="h">この先の展開</p><div class="b"><p class="i">国内外の拠点での活用と、<b>回答精度・検索性の向上</b>など機能拡充を予定</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">ルールを先に決める</p><p class="d">誤答リスクへの対処方針を決めてから配ると、現場が安心して使えます。</p></div><div><p class="t">表形式のデータも対象になる</p><p class="d">文章だけでなく、表で溜まった業務データも生成AIの入口になります。</p></div><div><p class="t">小さく速く出す</p><p class="d">半年で本番に出す進め方は、現場の熱量が冷めないうちに定着させる効果があります。</p></div></div>
+        </div>
+        <p class="s-foot">出典：日本精工 ニュースリリース「生成AIを活用した品質トラブル参照アプリケーションを自社開発し運用開始」（2025年6月23日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 05 日本精工（NSK）</figcaption></figure>
+
+    <!-- ===== 詳細事例 06 味の素 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜製造業</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-13/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">06</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg></span>
+          <p class="co">味の素<small>ツール配布と人材育成をセットで進め、全社に生成AIを根づかせる</small></p>
+          <div class="tags"><span>全社活用</span><span>人材育成</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">専用ツール「<b>AJI AI Chat</b>」を2023年10月から全従業員に導入。社内情報も参照できるよう機能を強化</p><p class="i">DX推進委員会の中に「<b>AI小委員会</b>」を設置し、活用状況の可視化と横展開、セキュリティ判断を担う</p><p class="i">生成AI勉強会やコミュニティ活動を実施し、<b>約1,200名が参加</b></p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">ツールを配るだけでなく、<b>業務フローの見直し</b>とセットで進めた</p><p class="i">エクセル作業や社内マスタ登録申請などを<b>標準化・半自動化</b>し、削減時間を積み上げた</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">業務削減の見込み</p><p class="v">約1,000<small>時間強/年</small></p><p class="n">業務の標準化・半自動化による</p></div><div><p class="k">勉強会・コミュニティ</p><p class="v">約1,200<small>名</small></p><p class="n">参加した従業員数</p></div></div><div class="sec" style="margin-top:12px"><p class="h">グループでの展開</p><div class="b"><p class="i">味の素冷凍食品では<b>社内利用率80%超</b>を維持し、70以上の業務テーマを横断で推進</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">推進する組織を置く</p><p class="d">推進する委員会のような旗振り役があると、部署ごとの取り組みが横につながります。</p></div><div><p class="t">業務の見直しと同時に行う</p><p class="d">AIを入れる前にフローを整理すると、削減効果がはっきり出ます。</p></div><div><p class="t">学ぶ場を継続する</p><p class="d">勉強会やコミュニティは、使い方の差が開くのを防ぐ最も確実な手段です。</p></div></div>
+        </div>
+        <p class="s-foot">出典：味の素 DXサイト・統合報告資料ほか同社公開情報。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 06 味の素</figcaption></figure>
+
+    <!-- ===== 詳細事例 07 味の素冷凍食品 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜製造業</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-13/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">07</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>
+          <p class="co">味の素冷凍食品<small>使われ続けるかどうかを、利用率という一つの数字で管理する</small></p>
+          <div class="tags"><span>現場浸透</span><span>利用率で管理</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i"><b>70以上の業務テーマ</b>を組織横断で設定し、現場主導で活用を広げている</p><p class="i">一部の部署に閉じず、<b>組織をまたいでテーマを持ち寄る</b>進め方をとっている</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">2025年3月に社内利用率80%を突破し、以降も<b>毎月80%以上を維持</b></p><p class="i">「誰がどれだけ使っているか」を追い続けることで、<b>導入したが使われない状態を防いでいる</b></p></div></div></div>
+          <div><div class="kpi"><div><p class="k">社内利用率</p><p class="v">80<small>%超</small></p><p class="n">2025年3月に突破し毎月維持</p></div><div><p class="k">推進中の業務テーマ</p><p class="v">70<small>以上</small></p><p class="n">組織横断で設定</p></div></div><div class="sec" style="margin-top:12px"><p class="h">参考：親会社の取り組み</p><div class="b"><p class="i">味の素本体では専用ツールを全従業員へ導入し、<b>勉強会・コミュニティに約1,200名</b>が参加</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">利用率を毎月見る</p><p class="d">削減時間より先に利用率を見ると、定着しているかが早く分かります。</p></div><div><p class="t">テーマを現場に持たせる</p><p class="d">上から配るより、部署ごとにテーマを決めるほうが自分ごとになります。</p></div><div><p class="t">80%を一つの目安に</p><p class="d">全社の大半が毎月触っている状態まで来ると、成果の話ができるようになります。</p></div></div>
+        </div>
+        <p class="s-foot">出典：味の素グループ DXサイトほか同社公開情報。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 07 味の素冷凍食品</figcaption></figure>
+
+    <!-- ===== 詳細事例 08 LIXIL ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜製造業</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-13/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">08</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18V10.2l-6 3.9v-3.9l-6 3.9V6.6H3z"/><path d="M7 21v-3.4M12 21v-3.4M17 21v-3.4"/></svg></span>
+          <p class="co">LIXIL<small>全社の土台と工場の現場改善を、どちらも社内の人材で回す</small></p>
+          <div class="tags"><span>全社活用</span><span>工場改善</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">生成AIを取り入れた「<b>LIXIL Ai Portal</b>」を導入し、毎日9,000名を超える従業員が活用</p><p class="i">社内に<b>生成AIツール開発のエンジニアチーム</b>を持ち、生産性向上のツールを自前で提供</p><p class="i">大和工場では在庫管理・生産段取り・製品検査を<b>一つのツールで一元管理</b>するシステムを開発</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">「<b>デジタルの民主化</b>」を掲げ、ノーコード開発ツールを全社に開放</p><p class="i">2025年3月末時点で<b>開発者9,916名・4,020のアプリ</b>が稼働し、現場が自分で課題を解いている</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">日次の利用者</p><p class="v">9,000<small>名超</small></p><p class="n">LIXIL Ai Portal</p></div><div><p class="k">大和工場の作業時間</p><p class="v">20<small>%削減</small></p><p class="n">在庫・段取り・検査の一元管理</p></div><div><p class="k">大和工場の生産量</p><p class="v">30<small>%向上</small></p><p class="n">同上</p></div><div><p class="k">社内の開発者</p><p class="v">9,916<small>名</small></p><p class="n">4,020アプリが稼働</p></div></div><div class="sec" style="margin-top:12px"><p class="h">特徴</p><div class="b"><p class="i">ツール提供だけでなく、<b>現場が自分でつくる文化</b>を制度として整えている点が特徴</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">作る側を社内に増やす</p><p class="d">外注に頼らず現場が作れるようになると、改善のスピードが変わります。</p></div><div><p class="t">全社基盤と現場改善は別物</p><p class="d">全社ツールの利用者数と、工場の作業時間削減は別々に設計して測ります。</p></div><div><p class="t">工程をまとめて見る</p><p class="d">在庫・段取り・検査をバラバラでなく一つにまとめたことが効果につながっています。</p></div></div>
+        </div>
+        <p class="s-foot">出典：LIXIL DXサイト・ニュースルームほか同社公開情報。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 08 LIXIL</figcaption></figure>
+
+    <!-- ===== 詳細事例 09 花王 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜製造業</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-13/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">09</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg></span>
+          <p class="co">花王<small>全社利用の土台をつくり、次は業務特化のAIエージェントへ</small></p>
+          <div class="tags"><span>全社活用</span><span>AIエージェント</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">セキュアな環境で全社員が使える「<b>Kao AI Chat</b>」を独自開発し、グローバルで約16,000人が活用</p><p class="i">需要計画の立案を支援するAIエージェント「<b>Kao-MIKOMIL</b>」を2026年7月から化粧品ブランドで導入</p><p class="i">「<b>花王AIガバナンス方針</b>」を策定し、AIを事業変革と価値創出を支える技術と位置づけた</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">全社チャットで土台を作ったうえで、<b>特定業務に効くエージェント</b>へ段階的に進んだ</p><p class="i">需要計画では立案リードタイムの短縮に加え、<b>判断根拠の明確化</b>まで狙っている</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">利用者</p><p class="v">約16,000<small>人</small></p><p class="n">グローバルの社員</p></div><div><p class="k">製品在庫の削減目標</p><p class="v">約25<small>%</small></p><p class="n">化粧品事業・2027年までに</p></div></div><div class="sec" style="margin-top:12px"><p class="h">この先の展開</p><div class="b"><p class="i">事業・生産・物流・販売をデータでつなぎ、<b>在庫運営の効率化</b>を進める</p><p class="i">AIガバナンス方針のもとで活用範囲を広げる</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">土台→特化の順で進める</p><p class="d">全社チャットで慣れた後に業務特化へ進むと、現場が受け入れやすくなります。</p></div><div><p class="t">ガバナンスを先に決める</p><p class="d">使ってよい範囲を明文化しておくと、展開のたびに止まらずに済みます。</p></div><div><p class="t">判断根拠まで出させる</p><p class="d">答えだけでなく根拠を出させると、AIの提案を業務で採用しやすくなります。</p></div></div>
+        </div>
+        <p class="s-foot">出典：花王 ニュースリリース「花王、需要計画立案を支援するAIエージェントを開発」（2026年8月17日）、「花王AIガバナンス方針を策定」（2026年7月27日）ほか同社公開情報。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 09 花王</figcaption></figure>
+
+    <!-- ===== 詳細事例 10 キリン ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜製造業</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-13/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">10</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg></span>
+          <p class="co">キリン<small>先行部門で磨いてから広げ、教育で利用率を引き上げる</small></p>
+          <div class="tags"><span>全社活用</span><span>段階展開</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">自社開発の「<b>Buddy AI</b>」を2024年11月にマーケティング部門へ先行導入</p><p class="i">改良・機能追加と<b>従業員のリテラシー教育</b>を経て、2025年5月に展開を拡大。国内従業員 約1万人へ</p><p class="i">過去のデータベースや外部の最新情報をもとに、<b>部門ごとの業務に特化した機能</b>を搭載</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">人材育成プログラム「<b>DX道場</b>」を長年続け、学びの場を継続してつくってきた</p><p class="i">2025年からは生成AIをテーマに、<b>新卒から役員まで全従業員</b>を対象とした教育プログラムを開始</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">平均利用率</p><p class="v">70<small>%</small></p><p class="n">2025年10月時点</p></div><div><p class="k">展開規模</p><p class="v">約1<small>万人</small></p><p class="n">国内従業員</p></div></div><div class="sec" style="margin-top:12px"><p class="h">この先の展開</p><div class="b"><p class="i">研究部門ではAIエージェントを研究活動に組み込み、<b>AIネイティブな研究環境</b>の実現をめざす</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">先行部門で磨いてから広げる</p><p class="d">いきなり全社に出さず、1部門で使い勝手を整えると失敗が減ります。</p></div><div><p class="t">教育を続ける仕組みを持つ</p><p class="d">一度の研修で終わらせず、継続的な学びの場が利用率の差を生みます。</p></div><div><p class="t">役員まで対象にする</p><p class="d">経営層が使っていると、現場の取り組みが本気の施策として受け止められます。</p></div></div>
+        </div>
+        <p class="s-foot">出典：キリンホールディングス ニュースリリース・キリンジャーナル（2026年2月27日ほか）同社公開情報。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 10 キリン</figcaption></figure>
+  </div>
+</body>
+</html>

@@ -105,6 +105,13 @@ const DOCS: Record<string, { intro: string; items: { title: string; view: string
       { title: "Dify研修 コース紹介資料", view: `${SITE}/documents/ebook-12`, pdf: `${SITE}/assets/docs/ebook-12.pdf` },
     ],
   },
+  製造業のAI活用事例集: {
+    intro:
+      "国内メーカー10社が公開しているAI活用の取り組みを、一覧と1社1ページの詳細でまとめた資料です。設計・品質保証・設備保全・研究開発のどこから着手すると成果が出ているかが分かります。掲載している数値はすべて各社の公式発表にもとづく公表値です。",
+    items: [
+      { title: "製造業のAI活用事例集", view: `${SITE}/documents/ebook-13`, pdf: `${SITE}/assets/docs/ebook-13.pdf` },
+    ],
+  },
 };
 DOCS["お役立ち資料3点セット"] = {
   intro:
