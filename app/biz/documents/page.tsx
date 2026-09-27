@@ -42,7 +42,7 @@ const CATEGORY_THUMB: Record<string, string> = {
   サービス概要: "/biz/assets/img/documents/category-service.webp",
 };
 
-// リポジトリ内で持つ静的な資料。カードのリンク先はフォーム付きDLページ（/doc-b〜f）。
+// リポジトリ内で持つ静的な資料。カードのリンク先はフォーム付きDLページ（/doc-b〜n）。
 // 閲覧ページ /documents/ebook-0X は直リンクしない（DL導線はフォーム経由に統一）。
 // カバーは public/biz/assets/img/documents/ のwebp。
 const EBOOK_COVERS = [
@@ -170,6 +170,16 @@ const STATIC_DOCS: { category: string; doc: DocItem }[] = [
       thumbLabel: "DOCUMENT",
       thumb: "/biz/assets/img/documents/ebook-12-cover.webp",
       href: "/doc-m",
+    },
+  },
+  {
+    category: "業種別事例集",
+    doc: {
+      title: "製造業のAI活用事例集",
+      points: ["国内メーカー10社の取り組みと公表されている成果", "1社1ページの詳細事例（背景・取り組み・成果）", "すべて公開情報ベース・出典明記"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-13-cover.webp",
+      href: "/doc-n",
     },
   },
 ];
