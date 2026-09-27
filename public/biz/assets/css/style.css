@@ -4041,6 +4041,13 @@ body {
   height: 100%;
   object-fit: contain;
 }
+
+/* お役立ち資料メニュー: 4カテゴリーを表紙サムネイル付きで見せる */
+.top-mega-menu--docs { width: min(760px, calc(100vw - 48px)); right: -118px; }
+.top-mega-menu--docs .top-mega-menu__grid { grid-template-columns: repeat(4, 1fr); }
+.top-mega-menu--docs .top-mega-menu__thumb { aspect-ratio: 16/10; background: #f1f5fa; border: 1px solid #e7edf5; }
+.top-mega-menu--docs .top-mega-menu__thumb img { object-fit: cover; object-position: center top; }
+
 .top-mega-menu__card-title {
   display: block;
   margin-bottom: 4px;

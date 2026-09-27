@@ -71,6 +71,12 @@ const CHROME_CSS = `
 .top-header__nav .top-mega-menu__card:hover { background: #fff; border-color: #9ec7e8; transform: translateY(-2px); }
 .top-mega-menu__thumb { display: block; aspect-ratio: 16/9; overflow: hidden; margin-bottom: 9px; background: #eaf1f8; border-radius: 0; }
 .top-mega-menu__thumb img { display: block; width: 100%; height: 100%; object-fit: contain; }
+/* お役立ち資料メニュー: 4カテゴリーを表紙サムネイル付きで見せる */
+.top-mega-menu--docs { width: min(760px, calc(100vw - 48px)); right: -118px; }
+.top-mega-menu--docs .top-mega-menu__grid { grid-template-columns: repeat(4, 1fr); }
+.top-mega-menu--docs .top-mega-menu__thumb { aspect-ratio: 16/10; background: #f1f5fa; border: 1px solid #e7edf5; }
+.top-mega-menu--docs .top-mega-menu__thumb img { object-fit: cover; object-position: center top; }
+
 .top-mega-menu__card-title { display: block; margin-bottom: 4px; color: #173e6c; font-size: 12px; font-weight: 700; line-height: 1.5; }
 .top-mega-menu__card-desc { display: block; color: #687386; font-size: 10px; font-weight: 500; line-height: 1.55; }
 .top-header__nav .top-mega-menu__all { display: flex; align-items: center; justify-content: flex-end; gap: 7px; margin-top: 13px; padding: 7px 1px 0; color: #1a6fb5; font-size: 12px; border-radius: 0; }
@@ -187,14 +193,15 @@ export function BizHeader({ docHref = "/doc-a" }: { docHref?: string } = {}) {
           </div>
           <div className="top-nav-item">
             <a href="/documents" className="top-nav-link">お役立ち資料<span className="top-nav-caret" aria-hidden="true" /></a>
-            <div className="top-mega-menu" aria-label="お役立ち資料の内容">
+            <div className="top-mega-menu top-mega-menu--docs" aria-label="お役立ち資料の内容">
               <span className="top-mega-menu__eyebrow">Useful Documents</span>
               <p className="top-mega-menu__heading">お役立ち資料</p>
               <p className="top-mega-menu__desc">研修の検討から社内活用まで、目的に合う資料を選べます。</p>
               <div className="top-mega-menu__grid">
-                <a className="top-mega-menu__card" href="/documents#pickup"><span className="top-mega-menu__card-title">ピックアップ</span><span className="top-mega-menu__card-desc">まず読んでほしい注目資料</span></a>
-                <a className="top-mega-menu__card" href="/documents#cat-0"><span className="top-mega-menu__card-title">サービス概要</span><span className="top-mega-menu__card-desc">プラン・料金・導入事例</span></a>
-                <a className="top-mega-menu__card" href="/documents#cat-1"><span className="top-mega-menu__card-title">AI活用ノウハウ</span><span className="top-mega-menu__card-desc">実践ガイド・テンプレート</span></a>
+                <a className="top-mega-menu__card" href="/documents#cat-0"><span className="top-mega-menu__thumb"><img src="/biz/assets/img/documents/ebook-01-cover.webp" alt="" loading="lazy" /></span><span className="top-mega-menu__card-title">サービス概要</span><span className="top-mega-menu__card-desc">プラン・料金・導入事例</span></a>
+                <a className="top-mega-menu__card" href="/documents#cat-1"><span className="top-mega-menu__thumb"><img src="/biz/assets/img/documents/ebook-02-cover.webp" alt="" loading="lazy" /></span><span className="top-mega-menu__card-title">AI活用ノウハウ</span><span className="top-mega-menu__card-desc">助成金・チェックシート</span></a>
+                <a className="top-mega-menu__card" href="/documents#cat-2"><span className="top-mega-menu__thumb"><img src="/biz/assets/img/documents/ebook-05-cover.webp" alt="" loading="lazy" /></span><span className="top-mega-menu__card-title">研修コース紹介</span><span className="top-mega-menu__card-desc">8コースのカリキュラム</span></a>
+                <a className="top-mega-menu__card" href="/documents#cat-3"><span className="top-mega-menu__thumb"><img src="/biz/assets/img/documents/ebook-13-cover.webp?v=20260927" alt="" loading="lazy" /></span><span className="top-mega-menu__card-title">業種別事例集</span><span className="top-mega-menu__card-desc">公開事例でみる他社の取り組み</span></a>
               </div>
               <a className="top-mega-menu__all" href="/documents">資料をすべて見る</a>
             </div>

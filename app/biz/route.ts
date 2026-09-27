@@ -237,7 +237,7 @@ export async function GET() {
   html = html.replace('<html lang="en"', '<html lang="ja"');
   html = html.replaceAll(
     "/biz/assets/css/style.css",
-    "/biz/assets/css/style.css?v=20260918",
+    "/biz/assets/css/style.css?v=20260927",
   );
   html = html.replace(
     '<nav class="top-header__nav"><a href="#course" class="top-nav-link">研修一覧</a>',
