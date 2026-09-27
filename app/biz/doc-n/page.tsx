@@ -5,7 +5,7 @@ export default function DocNPage() {
   return (
     <DocDownloadPage
       title="【製造業のAI活用事例集】「バイテック法人AI研修」【資料ダウンロード】"
-      covers={[{ src: "/biz/assets/img/documents/ebook-13-cover.webp", alt: "製造業のAI活用事例集の表紙" }]}
+      covers={[{ src: "/biz/assets/img/documents/ebook-13-cover.webp?v=20260927", alt: "製造業のAI活用事例集の表紙" }]}
       desc="国内メーカー10社が公開しているAI活用の取り組みを、一覧と1社1ページの詳細でまとめた資料です。掲載している数値はすべて各社の公式発表にもとづく公表値で、出典を明記しています。自社で同じことをするなら何から着手すべきか、当社の見解も添えています。"
       items={[
         "製造業10社の取り組みと公表されている成果の一覧（設計・品質保証・設備保全・研究開発）",

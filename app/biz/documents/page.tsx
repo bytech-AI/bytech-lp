@@ -178,7 +178,7 @@ const STATIC_DOCS: { category: string; doc: DocItem }[] = [
       title: "製造業のAI活用事例集",
       points: ["国内メーカー10社の取り組みと公表されている成果", "1社1ページの詳細事例（背景・取り組み・成果）", "すべて公開情報ベース・出典明記"],
       thumbLabel: "DOCUMENT",
-      thumb: "/biz/assets/img/documents/ebook-13-cover.webp",
+      thumb: "/biz/assets/img/documents/ebook-13-cover.webp?v=20260927",
       href: "/doc-n",
     },
   },
