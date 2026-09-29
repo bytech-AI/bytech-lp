@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ベル様 ご提案書（B案：稟議書形式）｜全13スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* ベル様向け個別提案書（A案：社長向け1枚＋詳細）。設計は ebook-04/13 と同系統
+     （四角の角丸なし・円とピルのみ角丸）。
+     ★お客様固有の提案書。/proposals/<slug> の閲覧ページのみで配信し、DLフォーム・PDF・
+       お役立ち資料一覧・サイトマップには載せない。noindex。
+     ★金額・人数・日付はすべて面談内容にもとづく。変更は本ファイルを直して
+       `node scripts/build-ebook.mjs proposal-bell-2610` を実行する。 */
+  :root {
+    --blue: #2c5c9c; --blue-deep: #1a2e50; --blue-bright: #1a6fb5; --blue-pale: #8fb0d8;
+    --ink: #2a2f3a; --line: #e3e8ef; --amber: #f0b429; --tint: #eef4fb; --red: #c9463d; --red-tint: #fbf0ef;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f4f6f8; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; color: var(--ink); padding: 48px 0 96px; }
+  .note { max-width: 1120px; margin: 0 auto 28px; font-size: 13px; font-weight: 700; color: #8a93a3; }
+  .en { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; }
+
+  .deck { display: flex; flex-direction: column; gap: 34px; align-items: center; counter-reset: pg -1; }
+  .slide-shell { width: 1120px; counter-increment: pg; }
+  .slide-shell figcaption { font-size: 12px; font-weight: 700; color: #8a93a3; margin: 8px 2px 0; letter-spacing: .04em; }
+  .slide { width: 1280px; height: 720px; transform: scale(0.875); transform-origin: top left; background: #fff; position: relative; overflow: hidden; }
+  .slide-shell .clip { height: 630px; overflow: hidden; border-radius: 0; box-shadow: 0 2px 10px rgba(26,35,48,.08); }
+
+  /* ===== 共通 ===== */
+  .s-body { position: absolute; inset: 0; padding: 36px 56px; z-index: 1; }
+  .s-eyebrow { display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 700; color: var(--blue-pale); letter-spacing: .02em; }
+  .s-eyebrow::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); }
+  .s-logo { position: absolute; top: 38px; right: 56px; height: 30px; }
+  .s-title { font-size: 28px; font-weight: 800; color: #1a2330; line-height: 1.4; letter-spacing: .01em; margin-top: 10px; }
+  .s-title b { color: var(--blue-bright); }
+  .s-lead { font-size: 14px; font-weight: 600; color: #4a5568; line-height: 1.7; margin-top: 8px; }
+  .s-foot { position: absolute; left: 56px; right: 120px; bottom: 14px; font-size: 10px; color: #9aa3b2; line-height: 1.6; z-index: 5; }
+  .s-num { position: absolute; right: 0; bottom: 0; width: 66px; height: 66px; background: var(--blue); border-radius: 66px 0 0 0; color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: flex-end; justify-content: flex-end; padding: 0 14px 10px 0; z-index: 5; }
+  .s-num::before { content: counter(pg); }
+
+  /* 汎用パーツ */
+  .sec { border: 1px solid var(--line); background: #fff; }
+  .sec .h { background: #f2f5fa; border-bottom: 1px solid var(--line); font-size: 13.5px; font-weight: 800; color: var(--blue-deep); padding: 9px 16px; display: flex; align-items: center; gap: 8px; }
+  .sec .h::before { content: ""; width: 5px; height: 15px; background: var(--blue); }
+  .sec .b { padding: 10px 16px 12px; }
+  .sec .i { position: relative; font-size: 13.2px; font-weight: 500; color: #4a5568; line-height: 1.7; padding: 4px 0 4px 15px; }
+  .sec .i::before { content: ""; position: absolute; left: 0; top: 13px; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-pale); }
+  .sec .i b { color: #1a2330; font-weight: 800; }
+  .sec.warn .h::before { background: var(--red); }
+  .sec.warn .i::before { background: #e6a09a; }
+  .band { display: flex; align-items: center; gap: 12px; background: var(--tint); border: 1.5px solid var(--blue); padding: 14px 22px; font-size: 14.5px; font-weight: 800; color: var(--blue-deep); margin-top: 16px; line-height: 1.6; }
+  .band > span { flex: 1; }
+  .band::before { content: "✓"; flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+  .band b { color: var(--blue-bright); }
+  .tag { display: inline-flex; align-items: center; font-size: 11px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; padding: 3px 9px; white-space: nowrap; }
+
+  /* ===== 表紙 ===== */
+  .cv { background: #fff; }
+  .cv .eyebrow { position: absolute; left: 72px; top: 92px; display: inline-flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 800; color: var(--blue); letter-spacing: .12em; }
+  .cv .eyebrow::before { content: ""; width: 28px; height: 3px; background: var(--blue); }
+  .cv .to { position: absolute; left: 72px; top: 132px; font-size: 26px; font-weight: 800; color: #1a2330; letter-spacing: .04em; }
+  .cv .to small { font-size: 15px; font-weight: 700; color: #6b7789; margin-left: 10px; letter-spacing: .06em; }
+  .cv .t { position: absolute; left: 70px; top: 214px; font-size: 58px; font-weight: 900; color: var(--blue); line-height: 1.32; letter-spacing: .02em; }
+  .cv .sub { position: absolute; left: 73px; top: 392px; font-size: 20px; font-weight: 800; color: #2a2f3a; letter-spacing: .04em; line-height: 1.7; }
+  .cv .meta { position: absolute; left: 73px; top: 480px; font-size: 13.5px; font-weight: 700; color: #8a93a3; letter-spacing: .06em; line-height: 1.9; }
+  .cv .logo { position: absolute; left: 72px; bottom: 58px; height: 38px; }
+  .cv .il { position: absolute; left: 590px; top: 386px; height: 300px; }
+  .cv .panel { position: absolute; right: 0; top: 0; bottom: 0; width: 400px; background: var(--blue-deep); color: #fff; padding: 92px 48px 0; }
+  .cv .panel .ph { font-size: 12.5px; font-weight: 800; letter-spacing: .14em; color: #8fd0ff; }
+  .cv .panel .pi { border-top: 1px solid rgba(255,255,255,.18); padding: 22px 0 20px; }
+  .cv .panel .pi:first-of-type { margin-top: 18px; }
+  .cv .panel .pk { font-size: 12px; font-weight: 700; color: #b7c6dc; }
+  .cv .panel .pv { font-size: 21px; font-weight: 800; line-height: 1.45; margin-top: 6px; }
+  .cv .panel .pv b { color: #8fd0ff; font-size: 30px; }
+  .cv .panel .pv small { font-size: 13px; font-weight: 700; color: #b7c6dc; }
+  .cv .panel .conf { position: absolute; left: 48px; bottom: 60px; font-size: 11px; font-weight: 700; color: #8ea2c0; line-height: 1.7; }
+
+  /* ===== 社長向け1枚（サマリー） ===== */
+  .sum { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; margin-top: 14px; }
+  .sum .box { border: 1px solid var(--line); padding: 11px 16px 12px; position: relative; }
+  .sum .box .k { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; color: var(--blue); letter-spacing: .06em; }
+  .sum .box .k::before { content: ""; width: 5px; height: 13px; background: var(--blue); }
+  .sum .box .v { font-size: 15.5px; font-weight: 800; color: #1a2330; line-height: 1.5; margin-top: 5px; }
+  .sum .box .v b { color: var(--blue-bright); }
+  .sum .box .d { font-size: 12.2px; font-weight: 500; color: #4a5568; line-height: 1.65; margin-top: 4px; }
+  .sum .box .d b { color: #1a2330; font-weight: 800; }
+  .sum .box.price { background: var(--blue-deep); border-color: var(--blue-deep); color: #fff; }
+  .sum .box.price .k { color: #8fd0ff; } .sum .box.price .k::before { background: #8fd0ff; }
+  .sum .box.price .v { color: #fff; font-size: 15px; margin-top: 8px; }
+  .sum .box.price .v b { color: #8fd0ff; font-size: 34px; letter-spacing: .01em; }
+  .sum .box.price .v small { font-size: 12.5px; font-weight: 700; color: #b7c6dc; }
+  .sum .box.price .d { color: #c4d2e6; }
+  .sum .box.price .d b { color: #fff; }
+  .sum .lines { display: grid; gap: 4px; margin-top: 6px; }
+  .sum .lines p { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; font-weight: 700; color: #1a2330; line-height: 1.6; }
+  .sum .lines p span { flex: 0 0 auto; width: 20px; height: 20px; background: var(--tint); color: var(--blue); font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+  .sum .wide { grid-column: 1 / -1; }
+
+  /* ===== 現状と目的 ===== */
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 22px; align-items: stretch; }
+  .two .sec { display: flex; flex-direction: column; }
+  .two .sec .b { padding: 14px 20px 18px; flex: 1; display: flex; flex-direction: column; }
+  .two .kpi { margin-top: auto !important; padding-top: 14px; }
+  .two .sec .i { font-size: 14.5px; line-height: 1.85; padding: 6px 0 6px 17px; }
+  .two .sec .i::before { top: 16px; }
+  .two .kpi div { padding: 14px 16px; }
+  .two .kpi .k { font-size: 11.5px; }
+  .two .kpi .v { font-size: 28px; }
+  .two .kpi .n { font-size: 11.5px; margin-top: 5px; }
+  .kpi { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi div { background: var(--tint); border-left: 4px solid var(--blue); padding: 11px 13px; }
+  .kpi .k { font-size: 10.5px; font-weight: 800; color: var(--blue); }
+  .kpi .v { font-size: 22px; font-weight: 800; color: #1a2330; line-height: 1.2; margin-top: 3px; }
+  .kpi .v small { font-size: 11px; font-weight: 700; color: #6b7789; margin-left: 2px; }
+  .kpi .v .arrow { font-size: 15px; color: var(--blue-pale); margin: 0 4px; }
+  .kpi .n { font-size: 10.5px; font-weight: 600; color: #7a8698; margin-top: 3px; }
+  .kpi.red div { background: var(--red-tint); border-left-color: var(--red); }
+  .kpi.red .k { color: var(--red); }
+  .goal { margin-top: 22px; background: var(--blue-deep); color: #fff; padding: 26px 30px; display: flex; align-items: center; gap: 26px; }
+  .goal .l { flex: 0 0 auto; font-size: 12px; font-weight: 800; letter-spacing: .12em; color: #8fd0ff; border-right: 1px solid rgba(255,255,255,.2); padding-right: 22px; line-height: 1.6; }
+  .goal .t { font-size: 26px; font-weight: 800; line-height: 1.45; }
+  .goal .t b { color: #8fd0ff; }
+  .goal .d { font-size: 14px; font-weight: 600; color: #c4d2e6; margin-top: 6px; }
+
+  /* ===== なぜ推進担当か（対比） ===== */
+  .vs { display: grid; grid-template-columns: 1fr 52px 1.25fr; gap: 0; margin-top: 16px; align-items: stretch; }
+  .vs .col { border: 1px solid var(--line); padding: 0; }
+  .vs .col .h { font-size: 15px; font-weight: 800; padding: 12px 20px; color: #fff; background: #8a93a3; }
+  .vs .col.ok .h { background: var(--blue); }
+  .vs .col .b { padding: 12px 20px 14px; }
+  .vs .row { display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px dashed var(--line); }
+  .vs .row:last-child { border-bottom: none; }
+  .vs .row .ic { flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; }
+  .vs .col.ng .row .ic { background: var(--red-tint); color: var(--red); }
+  .vs .col.ok .row .ic { background: var(--tint); color: var(--blue); }
+  .vs .row .t { font-size: 15.5px; font-weight: 800; color: #1a2330; line-height: 1.45; }
+  .vs .row .d { font-size: 13.2px; font-weight: 500; color: #4a5568; line-height: 1.7; margin-top: 4px; }
+  .vs .row .d b { color: #1a2330; font-weight: 800; }
+  .vs .mid { display: flex; align-items: center; justify-content: center; color: var(--blue-pale); font-size: 26px; font-weight: 900; }
+  .aim { display: grid; grid-template-columns: auto 1fr 1fr; gap: 0; margin-top: 16px; border: 1.5px solid var(--blue); }
+  .aim .l { background: var(--blue); color: #fff; font-size: 13.5px; font-weight: 800; padding: 14px 18px; display: flex; align-items: center; letter-spacing: .04em; }
+  .aim .c { padding: 14px 20px; display: flex; align-items: center; gap: 12px; }
+  .aim .c + .c { border-left: 1px solid var(--line); }
+  .aim .c .n { flex: 0 0 auto; width: 26px; height: 26px; background: var(--tint); color: var(--blue); font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .aim .c .t { font-size: 15.5px; font-weight: 800; color: #1a2330; }
+  .aim .c .d { font-size: 12.6px; font-weight: 500; color: #4a5568; margin-top: 3px; line-height: 1.5; }
+
+  /* ===== 研修の中身 ===== */
+  .step0 { display: flex; align-items: center; gap: 16px; margin-top: 18px; background: var(--tint); border: 1px solid #cfdcee; padding: 14px 20px; }
+  .step0 .lb { flex: 0 0 auto; background: var(--blue); color: #fff; font-size: 12px; font-weight: 800; padding: 6px 12px; letter-spacing: .06em; }
+  .step0 .t { font-size: 15.5px; font-weight: 800; color: #1a2330; }
+  .step0 .mw { display: flex; gap: 8px; margin-left: auto; }
+  .step0 .mw span { font-size: 12px; font-weight: 800; padding: 6px 12px; border: 1.5px solid var(--blue); color: var(--blue); background: #fff; }
+  .step0 .mw span.must { background: var(--blue); color: #fff; }
+  .comp { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 16px; }
+  .comp .c { border: 1px solid var(--line); padding: 18px 16px 16px; position: relative; }
+  .comp .c .n { font-size: 11px; font-weight: 800; color: var(--blue-pale); letter-spacing: .1em; }
+  .comp .c .ic { height: 84px; display: flex; align-items: flex-end; margin-top: 10px; }
+  .comp .c .ic img { height: 84px; width: auto; display: block; }
+  .comp .c .t { font-size: 15.5px; font-weight: 800; color: #1a2330; margin-top: 11px; line-height: 1.35; }
+  .comp .c .t small { display: block; font-size: 11px; font-weight: 700; color: var(--blue); margin-top: 2px; }
+  .comp .c .d { font-size: 12.3px; font-weight: 500; color: #4a5568; line-height: 1.7; margin-top: 8px; }
+  .three { display: grid; grid-template-columns: 1fr 1fr 1.3fr; gap: 12px; margin-top: 14px; }
+  .three .c { border: 1px solid var(--line); background: #f9fafc; padding: 14px 16px; }
+  .three .c .k { font-size: 12.5px; font-weight: 800; color: var(--blue); display: flex; align-items: center; gap: 7px; }
+  .three .c .k::before { content: ""; width: 4px; height: 12px; background: var(--blue); }
+  .three .c .d { font-size: 13px; font-weight: 500; color: #4a5568; line-height: 1.7; margin-top: 6px; }
+  .three .c .d b { color: #1a2330; font-weight: 800; }
+
+  /* ===== 学習期間・時間イメージ ===== */
+  .cycle { display: flex; align-items: stretch; gap: 0; margin-top: 16px; border: 1px solid var(--line); }
+  .cycle .lb { flex: 0 0 auto; width: 120px; background: var(--blue-deep); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px; }
+  .cycle .lb .a { font-size: 22px; font-weight: 900; color: #8fd0ff; line-height: 1.1; }
+  .cycle .lb .b { font-size: 11.5px; font-weight: 800; margin-top: 4px; letter-spacing: .06em; }
+  .cycle .st { flex: 1; display: flex; align-items: center; gap: 12px; padding: 12px 18px; }
+  .cycle .st + .st { border-left: 1px dashed var(--line); }
+  .cycle .st .n { flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%; background: var(--tint); color: var(--blue); font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .cycle .st .t { font-size: 13.5px; font-weight: 800; color: #1a2330; }
+  .cycle .st .d { font-size: 11.3px; font-weight: 500; color: #4a5568; line-height: 1.5; margin-top: 2px; }
+  table.pl { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 14px; table-layout: fixed; }
+  .pl th { background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; padding: 10px 14px; text-align: center; letter-spacing: .02em; }
+  .pl th:first-child { background: #f2f5fa; color: var(--blue-deep); text-align: left; }
+  .pl th.rec { background: var(--blue-deep); }
+  .pl th.rec small { display: inline-block; margin-left: 8px; font-size: 10.5px; font-weight: 800; color: var(--blue-deep); background: #8fd0ff; padding: 2px 8px; border-radius: 999px; vertical-align: middle; }
+  .pl td { font-size: 13px; font-weight: 600; color: #4a5568; padding: 10px 14px; border-bottom: 1px solid var(--line); text-align: center; line-height: 1.5; }
+  .pl td:first-child { text-align: left; font-weight: 800; color: #1a2330; background: #f9fafc; }
+  .pl td b { font-size: 18px; font-weight: 800; color: #1a2330; }
+  .pl td b.hi { color: var(--blue-bright); }
+  .pl td small { display: block; font-size: 10.5px; font-weight: 600; color: #8a93a3; margin-top: 1px; }
+
+  /* ===== セキュリティ ===== */
+  .sec3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 22px; }
+  .sec3 .c { border: 1px solid var(--line); padding: 26px 24px 24px; display: flex; flex-direction: column; }
+  .sec3 .c .ex { margin-top: auto !important; }
+  .sec3 .c .d { padding-bottom: 14px; }
+  .sec3 .c .ic { height: 104px; display: flex; align-items: flex-end; }
+  .sec3 .c .ic img { height: 104px; width: auto; display: block; }
+  .sec3 .c .n { font-size: 11.5px; font-weight: 800; color: var(--blue-pale); letter-spacing: .12em; margin-top: 18px; }
+  .sec3 .c .t { font-size: 19px; font-weight: 800; color: #1a2330; line-height: 1.4; margin-top: 5px; }
+  .sec3 .c .d { font-size: 14px; font-weight: 500; color: #4a5568; line-height: 1.85; margin-top: 10px; }
+  .sec3 .c .d b { color: #1a2330; font-weight: 800; }
+  .sec3 .c .ex { margin-top: 14px; background: #f9fafc; border: 1px dashed #cfd7e2; padding: 10px 13px; font-size: 12.3px; font-weight: 600; color: #5a6578; line-height: 1.65; }
+  .sec3 .c .ex b { color: var(--blue); font-weight: 800; }
+
+  /* ===== 助成金を使わない理由 ===== */
+  .rs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; margin-top: 12px; }
+  .rs .r { display: flex; gap: 16px; border: 1px solid var(--line); padding: 11px 18px 11px 16px; }
+  .rs .r .n { flex: 0 0 auto; width: 34px; height: 34px; background: var(--blue-deep); color: #fff; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .rs .r .t { font-size: 15.5px; font-weight: 800; color: #1a2330; line-height: 1.4; }
+  .rs .r .d { font-size: 12.6px; font-weight: 500; color: #4a5568; line-height: 1.65; margin-top: 4px; }
+  table.cmp { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 12px; table-layout: fixed; }
+  .cmp th { font-size: 13px; font-weight: 800; padding: 8px 16px; text-align: left; }
+  .cmp th:first-child { background: #f2f5fa; color: var(--blue-deep); }
+  .cmp th.ng { background: #8a93a3; color: #fff; }
+  .cmp th.ok { background: var(--blue); color: #fff; }
+  .cmp td { font-size: 12.8px; font-weight: 600; color: #4a5568; padding: 7px 16px; border-bottom: 1px solid var(--line); line-height: 1.55; }
+  .cmp td:first-child { font-weight: 800; color: #1a2330; background: #f9fafc; }
+  .cmp td.ok { background: var(--tint); color: #1a2330; font-weight: 700; }
+  .cmp td.ok b { color: var(--blue-bright); font-weight: 800; }
+  .rs .r .d b { color: #1a2330; font-weight: 800; }
+  .rs .r.wide { grid-column: 1 / -1; }
+
+  /* ===== 料金 ===== */
+  table.pr { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 16px; table-layout: fixed; }
+  .pr th { background: var(--blue); color: #fff; font-size: 14px; font-weight: 800; padding: 13px 16px; text-align: center; }
+  .pr th:first-child { background: #f2f5fa; color: var(--blue-deep); text-align: left; }
+  .pr th.sp { background: var(--blue-deep); }
+  .pr td { padding: 24px 16px; border-bottom: 1px solid var(--line); text-align: center; vertical-align: middle; }
+  .pr td:first-child { text-align: left; background: #f9fafc; }
+  .pr td .pn { font-size: 21px; font-weight: 800; color: #1a2330; }
+  .pr td .pd { font-size: 12.5px; font-weight: 600; color: #6b7789; margin-top: 5px; line-height: 1.6; }
+  .pr td .list { font-size: 17px; font-weight: 700; color: #8a93a3; text-decoration: line-through; }
+  .pr td .list small { font-size: 11px; }
+  .pr td .sp { font-size: 32px; font-weight: 900; color: var(--blue-bright); line-height: 1.1; }
+  .pr td .sp small { font-size: 13px; font-weight: 800; color: #4a5568; margin-left: 2px; }
+  .pr td .off { display: inline-block; margin-top: 6px; font-size: 11.5px; font-weight: 800; color: var(--red); background: var(--red-tint); padding: 2px 8px; border-radius: 999px; }
+  .pr td.tot { background: var(--tint); }
+  .pr td.tot .sp { font-size: 38px; }
+  .prn { display: flex; gap: 12px; margin-top: 16px; }
+  .prn div { flex: 1; border: 1px solid var(--line); background: #f9fafc; padding: 14px 16px; font-size: 13px; font-weight: 600; color: #4a5568; line-height: 1.7; }
+  .prn div b { color: #1a2330; font-weight: 800; }
+
+  /* ===== 費用対効果 ===== */
+  .calc { display: flex; align-items: stretch; gap: 0; margin-top: 18px; }
+  .calc .c { flex: 1; border: 1px solid var(--line); padding: 20px 16px; text-align: center; }
+  .calc .c .k { font-size: 12.5px; font-weight: 800; color: var(--blue); }
+  .calc .c .v { font-size: 32px; font-weight: 900; color: #1a2330; margin-top: 8px; line-height: 1.1; }
+  .calc .c .v small { font-size: 12px; font-weight: 700; color: #6b7789; margin-left: 2px; }
+  .calc .c .n { font-size: 11.5px; font-weight: 600; color: #7a8698; margin-top: 7px; line-height: 1.5; }
+  .calc .op { flex: 0 0 44px; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 900; color: var(--blue-pale); }
+  .calc .c.res { background: var(--blue-deep); border-color: var(--blue-deep); color: #fff; flex: 1.25; }
+  .calc .c.res .k { color: #8fd0ff; } .calc .c.res .v { color: #fff; } .calc .c.res .v b { color: #8fd0ff; font-size: 42px; } .calc .c.res .n { color: #b7c6dc; }
+  .bars { margin-top: 16px; border: 1px solid var(--line); padding: 14px 20px 16px; }
+  .bars .k { font-size: 12.5px; font-weight: 800; color: var(--blue); display: flex; align-items: center; gap: 7px; }
+  .bars .k::before { content: ""; width: 4px; height: 12px; background: var(--blue); }
+  .bars .row { display: grid; grid-template-columns: 200px 1fr; align-items: center; gap: 14px; margin-top: 10px; }
+  .bars .lb { font-size: 13px; font-weight: 800; color: #1a2330; }
+  .bars .lb small { display: block; font-size: 11px; font-weight: 600; color: #7a8698; }
+  .bars .bar { height: 26px; display: flex; align-items: center; }
+  .bars .bar span { height: 100%; display: flex; align-items: center; padding: 0 12px; font-size: 13px; font-weight: 800; color: #fff; white-space: nowrap; }
+  .bars .bar.cost span { background: #8a93a3; }
+  .bars .bar.gain span { background: var(--blue-bright); }
+  .roi { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .roi .c { border: 1.5px solid var(--blue); padding: 18px 22px; display: flex; align-items: center; gap: 20px; }
+  .roi .c .big { flex: 0 0 auto; text-align: center; }
+  .roi .c .big .v { font-size: 38px; font-weight: 900; color: var(--blue-bright); line-height: 1; }
+  .roi .c .big .v small { font-size: 13px; font-weight: 800; color: #4a5568; }
+  .roi .c .big .k { font-size: 10.5px; font-weight: 800; color: var(--blue); margin-top: 4px; }
+  .roi .c .t { font-size: 15px; font-weight: 800; color: #1a2330; line-height: 1.45; }
+  .roi .c .d { font-size: 12.8px; font-weight: 500; color: #4a5568; line-height: 1.7; margin-top: 5px; }
+  .roi .c .d b { color: #1a2330; font-weight: 800; }
+
+  /* ===== 他社との違い ===== */
+  table.df { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 16px; table-layout: fixed; }
+  .df th { font-size: 14.5px; font-weight: 800; padding: 13px 18px; text-align: left; }
+  .df th:first-child { background: #f2f5fa; color: var(--blue-deep); }
+  .df th.ng { background: #8a93a3; color: #fff; }
+  .df th.ok { background: var(--blue); color: #fff; }
+  .df td { font-size: 13.6px; font-weight: 500; color: #4a5568; padding: 17px 18px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.7; }
+  .df td:first-child { font-size: 14.5px; font-weight: 800; color: #1a2330; background: #f9fafc; }
+  .df td.ok { background: var(--tint); color: #1a2330; font-weight: 600; }
+  .df td.ok b { color: var(--blue-bright); font-weight: 800; }
+  .df td .x { display: inline-block; width: 18px; height: 18px; border-radius: 50%; background: var(--red-tint); color: var(--red); font-size: 11px; font-weight: 800; text-align: center; line-height: 18px; margin-right: 6px; vertical-align: 1px; }
+  .df td .o { display: inline-block; width: 18px; height: 18px; border-radius: 50%; background: var(--blue); color: #fff; font-size: 11px; font-weight: 800; text-align: center; line-height: 18px; margin-right: 6px; vertical-align: 1px; }
+
+  /* ===== 導入の流れ ===== */
+  .flow { display: flex; align-items: stretch; gap: 0; margin-top: 16px; }
+  .fs { flex: 1; border: 1px solid var(--line); padding: 18px 16px 16px; position: relative; }
+  .fs .n { font-size: 11px; font-weight: 800; color: var(--blue-pale); letter-spacing: .12em; }
+  .fs .il { display: block; height: 72px; width: auto; margin: 0 0 12px; }
+  .fs.go .il { background: #fff; padding: 6px; height: 72px; }
+  .fs .t { font-size: 16.5px; font-weight: 800; color: #1a2330; margin-top: 6px; line-height: 1.35; }
+  .fs .d { font-size: 12.6px; font-weight: 500; color: #4a5568; line-height: 1.7; margin-top: 8px; }
+  .fs .d b { color: #1a2330; font-weight: 800; }
+  .fs.go { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .fs.go .n { color: #8fd0ff; } .fs.go .t { color: #fff; } .fs.go .d { color: #d7e3f3; } .fs.go .d b { color: #fff; }
+  .farr { flex: 0 0 26px; display: flex; align-items: center; justify-content: center; color: var(--blue-pale); font-size: 18px; font-weight: 900; }
+  .tl { margin-top: 14px; border: 1px solid var(--line); padding: 14px 20px 18px; }
+  .tl .k { font-size: 12px; font-weight: 800; color: var(--blue); display: flex; align-items: center; gap: 7px; }
+  .tl .k::before { content: ""; width: 4px; height: 12px; background: var(--blue); }
+  .tl .bar { position: relative; height: 58px; margin-top: 12px; }
+  .tl .bar .ax { position: absolute; left: 0; right: 0; top: 24px; height: 2px; background: var(--line); }
+  .tl .bar .m { position: absolute; top: 0; transform: translateX(-50%); text-align: center; }
+  .tl .bar .m::before { content: ""; display: block; width: 12px; height: 12px; border-radius: 50%; background: var(--blue); margin: 19px auto 0; }
+  .tl .bar .m .mo { position: absolute; top: 0; left: 50%; transform: translateX(-50%); font-size: 11px; font-weight: 800; color: #8a93a3; white-space: nowrap; }
+  .tl .bar .m .ev { position: absolute; top: 34px; left: 50%; transform: translateX(-50%); font-size: 12px; font-weight: 800; color: #1a2330; white-space: nowrap; }
+  .tl .bar .m.hi::before { background: var(--blue-bright); }
+  .tl .bar .m.hi .ev { color: var(--blue-bright); }
+  .tl .bar .seg { position: absolute; top: 24px; height: 2px; background: var(--blue); }
+  .nx { display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; margin-top: 14px; }
+  .nx .c { border: 1.5px solid var(--blue); padding: 16px 20px; }
+  .nx .c .k { font-size: 12px; font-weight: 800; color: var(--blue); letter-spacing: .06em; }
+  .nx .c .i { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; font-weight: 700; color: #1a2330; line-height: 1.55; margin-top: 9px; }
+  .nx .c .i > span:first-child { flex: 0 0 auto; width: 20px; height: 20px; background: var(--blue); color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+  .nx .c .i .tx { flex: 1; }
+  .nx .c .i b { color: var(--blue-bright); }
+  .nx .c.dk { background: var(--blue-deep); border-color: var(--blue-deep); color: #fff; }
+  .nx .c.dk .k { color: #8fd0ff; }
+  .nx .c.dk .t { font-size: 17.5px; font-weight: 800; line-height: 1.5; margin-top: 8px; }
+  .nx .c.dk .t b { color: #8fd0ff; }
+  .nx .c.dk .d { font-size: 13px; font-weight: 600; color: #c4d2e6; line-height: 1.65; margin-top: 7px; }
+
+  /* ===== PDF出力 ===== */
+  @page { size: 1280px 720px; margin: 0; }
+  @media print {
+    body { padding: 0; background: #fff; }
+    * { box-shadow: none !important; }
+    .note { display: none; }
+    .deck { gap: 0; display: block; }
+    .slide-shell { width: 1280px; }
+    .slide-shell figcaption { display: none; }
+    .slide-shell .clip { height: 720px; overflow: hidden; border-radius: 0; box-shadow: none; }
+    .slide { transform: none; border: none; border-radius: 0; }
+    figure.slide-shell { page-break-after: always; break-after: page; margin: 0; }
+    figure.slide-shell:last-child { page-break-after: auto; }
+  }
+
+  /* ===== B/C案 固有パーツ（_variants.py が付加） ===== */
+  /* 稟議サマリー表 */
+  table.rg { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 16px; table-layout: fixed; }
+  .rg td { padding: 15px 18px; border-bottom: 1px solid var(--line); font-size: 14.2px; font-weight: 600; color: #1a2330; line-height: 1.65; vertical-align: top; }
+  .rg td:first-child { background: #f2f5fa; color: var(--blue-deep); font-weight: 800; width: 160px; }
+  .rg td b { color: var(--blue-bright); font-weight: 800; }
+  .rg td small { display: block; font-size: 12.5px; font-weight: 600; color: #6b7789; margin-top: 2px; }
+  .rg tr.hi td { background: var(--tint); }
+  .rg tr.hi td:first-child { background: var(--blue); color: #fff; }
+  /* 目的スライド */
+  .obj { margin-top: 22px; background: var(--blue-deep); color: #fff; padding: 36px 40px; }
+  .obj .l { font-size: 12.5px; font-weight: 800; letter-spacing: .14em; color: #8fd0ff; }
+  .obj .t { font-size: 34px; font-weight: 800; line-height: 1.45; margin-top: 8px; }
+  .obj .t b { color: #8fd0ff; }
+  .obj .d { font-size: 15.5px; font-weight: 600; color: #c4d2e6; line-height: 1.7; margin-top: 8px; }
+  .def { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 22px; }
+  .def .c { border: 1px solid var(--line); padding: 26px 24px; }
+  .def .c .n { font-size: 11px; font-weight: 800; color: var(--blue-pale); letter-spacing: .12em; }
+  .def .c .t { font-size: 18.5px; font-weight: 800; color: #1a2330; line-height: 1.4; margin-top: 6px; }
+  .def .c .d { font-size: 14.2px; font-weight: 500; color: #4a5568; line-height: 1.8; margin-top: 10px; }
+  .def .c .d b { color: #1a2330; font-weight: 800; }
+  /* C案: 失敗の構造（両列とも課題） */
+  .vs .col.gy .h { background: var(--blue-deep); }
+  .vs .col.gy .row .ic { background: var(--red-tint); color: var(--red); }
+  .vs.big { margin-top: 22px; }
+  .vs.big .col .h { font-size: 16px; padding: 14px 22px; }
+  .vs.big .col .b { padding: 14px 22px 16px; }
+  .vs.big .row { padding: 18px 0; }
+  .vs.big .row .t { font-size: 17px; }
+  .vs.big .row .d { font-size: 14px; line-height: 1.75; margin-top: 6px; }
+  /* C案: 解決の考え方 3ステップ */
+  .way { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 22px; }
+  .way .c { border: 1px solid var(--line); padding: 26px 24px 24px; position: relative; }
+  .way .c .n { width: 34px; height: 34px; background: var(--blue); color: #fff; font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .way .c .t { font-size: 19px; font-weight: 800; color: #1a2330; line-height: 1.4; margin-top: 12px; }
+  .way .c .d { font-size: 14.2px; font-weight: 500; color: #4a5568; line-height: 1.8; margin-top: 10px; }
+  .way .c .d b { color: #1a2330; font-weight: 800; }
+  .way .c img { position: absolute; right: 20px; top: 18px; height: 76px; width: auto; }
+  /* C案: 参考事例（ebook-13 の詳細事例レイアウトを流用） */
+  .dhd { display: flex; align-items: flex-start; gap: 18px; margin-top: 12px; }
+  .dhd .co { font-size: 25px; font-weight: 800; color: #1a2330; line-height: 1.3; }
+  .dhd .co small { display: block; font-size: 14px; font-weight: 700; color: #6b7789; margin-top: 5px; }
+  .dhd .tags { margin-left: auto; display: flex; gap: 7px; padding-top: 6px; }
+  .dhd .tags span { font-size: 11.5px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; border-radius: 999px; padding: 5px 13px; white-space: nowrap; }
+  .dt { display: grid; grid-template-columns: 1.18fr 1fr; gap: 20px; margin-top: 14px; align-items: start; }
+  .dt .kpi .v { font-size: 26px; }
+  .learn { margin-top: 12px; border: 1.5px solid var(--blue); }
+  .learn .h { background: var(--blue); color: #fff; font-size: 12.5px; font-weight: 800; padding: 8px 16px; letter-spacing: .02em; }
+  .learn .g { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+  .learn .g div { padding: 10px 16px 11px; border-right: 1px solid var(--line); }
+  .learn .g div:last-child { border-right: none; }
+  .learn .t { font-size: 13.5px; font-weight: 800; color: var(--blue-deep); }
+  .learn .d { font-size: 12px; font-weight: 500; color: #4a5568; line-height: 1.6; margin-top: 3px; }
+</style>
+</head>
+<body>
+  <p class="note">ベル様 ご提案書（B案：稟議書の形にそろえる）｜_variants.py が A案 deck.html から生成。直接編集せず A案または _variants.py を直す</p>
+  <div class="deck">
+    <!-- ===== 01 表紙 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide cv">
+        <p class="eyebrow">ご提案書</p>
+        <p class="to">ベル様<small>御中</small></p>
+        <p class="t">AI推進担当を育て、<br>1年で全社に広げる。</p>
+        <p class="sub">推進担当3名の「マンツーマン研修」のご提案｜稟議資料</p>
+        <p class="meta">2026年10月　｜　バイテック法人AI研修（株式会社AI棒）<br>担当：安原</p>
+        <img class="il" src="assets/illus/cover.webp" alt="">
+        <img class="logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="panel">
+          <p class="ph">ご提案の要点</p>
+          <div class="pi"><p class="pk">目的</p><p class="pv">この1年で、AIを<br>全社の業務の根幹に置く</p></div>
+          <div class="pi"><p class="pk">ご提案内容</p><p class="pv">推進担当3名の<br>マンツーマン研修<small>（4ヶ月 / 2ヶ月）</small></p></div>
+          <div class="pi"><p class="pk">ご費用（3名合計・税抜）</p><p class="pv"><b>66</b>万円<small>　4ヶ月プラン・特別価格</small></p></div>
+          <p class="conf">本資料はベル様向けの個別提案書です。<br>社外への転載はご遠慮ください。</p>
+        </div>
+      </div>
+    </div><figcaption>01 表紙</figcaption></figure>
+
+    <!-- ===== 02 稟議用サマリー ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">稟議用サマリー</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+
+        <h2 class="s-title">稟議用サマリー：<b>AI推進担当3名のマンツーマン研修</b>の導入</h2>
+        <table class="rg">
+          <colgroup><col style="width:150px"><col></colgroup>
+          <tr><td>件名</td><td>AI推進担当の育成研修（バイテック法人AI研修「マンツーマン研修」）の導入</td></tr>
+          <tr><td>目的</td><td>来期（10月〜）の1年で<b>AIを全社の業務の根幹に置く</b>。まず推進担当3名を育て、社内に広げる役にする</td></tr>
+          <tr><td>背景・課題</td><td>大阪営業の自発的なChatGPT活用で成果あり（商品台帳の更新 1時間→10〜15分）。一方で毎日使う人は全社の10％未満。過去に社内AIチャットを導入したが定着せず1ヶ月で解約</td></tr>
+          <tr><td>施策の内容</td><td>推進担当3名（大阪営業2名・内勤1名）に1人1講師で伴走。業務の棚卸し → Must／Want課題の実装 → 社内勉強会・実演会の実施まで支援。動画教材＋2週間に1回の面談（60分）＋チャット無制限＋月1回の事務局面談</td></tr>
+          <tr class="hi"><td>費用（税抜）</td><td>4ヶ月プラン <b>66万円</b>（3名・定価90万円）／2ヶ月プラン <b>45万円</b>（3名・定価60万円）<small>ベル様 特別価格。助成金は使わない（申請費用・待機期間なし。理由はP.6）</small></td></tr>
+          <tr><td>期待効果</td><td>1人1日1時間の削減で、3名で<b>年間 約216万円</b>相当（240営業日・時給3,000円換算）。研修費は約3.7ヶ月で回収。社内に広がった分は上乗せ</td></tr>
+          <tr><td>リスクと対策</td><td>情報の取り扱い → 入力しない情報のルール化・連携時の確認手順を研修内で整備／受講者の業務負担 → 1日約1時間を目安に設計し、繁忙期は面談で調整</td></tr>
+          <tr><td>スケジュール</td><td>10月開始。4ヶ月プランは2027年2月、2ヶ月プランは2026年12月に修了。お申し込み → 事前説明会 → 個別ヒアリング面談（講師確定） → 研修開始</td></tr>
+        </table>
+
+        <p class="s-foot">© 株式会社AI棒　｜　金額はすべて税抜。特別価格は本ご提案（2026年10月開始）に限ります。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>02 稟議用サマリー</figcaption></figure>
+
+    <!-- ===== 03 1 目的 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">1｜目的</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+
+        <h2 class="s-title">来期の1年で、<b>AIを全社の業務の根幹に置く</b>。</h2>
+        <p class="s-lead">一部の人の工夫で終わらせず、全社が活用できる状態にする。そのための「起爆剤」として、推進担当を育てる研修を導入します。</p>
+        <div class="obj">
+          <p class="l">本施策の目的</p>
+          <p class="t">推進担当3名を育て、<b>「AIを使わないと回らない業務の流れ」</b>を社内に作る</p>
+          <p class="d">研修の目的は「個人の効率化」にとどめず、「チームとして成果を出す／全社に広げる」まで含めます。推進担当が社内向けの内製化施策（勉強会・実演会）を打てる状態にすることがゴールです。</p>
+        </div>
+        <div class="def">
+          <div class="c"><p class="n">GOAL 01</p><p class="t">3名それぞれの業務にAIが組み込まれている</p><p class="d">棚卸しで決めた<b>Must課題が実務に実装</b>され、「業務がどう変わったか」を語れる状態で修了する。</p></div>
+          <div class="c"><p class="n">GOAL 02</p><p class="t">社内に広げる施策を自分たちで打てる</p><p class="d">研修期間中に<b>社内勉強会・実演会</b>を実施し、使っていない人の目の前で実演できるようになる。</p></div>
+          <div class="c"><p class="n">GOAL 03</p><p class="t">セキュリティも社内で判断できる</p><p class="d">扱う情報のルールと連携時の確認手順を持ち、<b>外部に聞かずに判断</b>できる推進担当になる。</p></div>
+        </div>
+
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>03 1｜目的</figcaption></figure>
+
+    <!-- ===== 04 2 背景と課題 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">2｜背景と課題</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">成果は出ている。ただし、<b>使っているのは一部の人だけ</b>。</h2>
+        <p class="s-lead">面談で上月様・山田様よりお伺いした内容を整理しました。</p>
+        <div class="two">
+          <div class="sec">
+            <p class="h">うまくいっていること</p>
+            <div class="b">
+              <p class="i">約半年前から、<b>大阪の営業が自発的にChatGPTを活用</b>。実際の業務で成果が出ている</p>
+              <p class="i">例：<b>商品台帳の更新が1時間 → 10〜15分</b>に短縮</p>
+              <div class="kpi" style="margin-top:8px">
+                <div><p class="k">商品台帳の更新</p><p class="v">1<small>時間</small><span class="arrow">→</span>10〜15<small>分</small></p><p class="n">大阪営業での実績</p></div>
+                <div><p class="k">活用開始</p><p class="v">約半年<small>前</small></p><p class="n">現場発で自発的に開始</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="sec warn">
+            <p class="h">課題</p>
+            <div class="b">
+              <p class="i">毎日使っているのは<b>数名のみ（全社で10％未満）</b>。個人の工夫にとどまり、全社の力になっていない</p>
+              <p class="i">以前、社内向けのAIチャットツールを導入したが、<b>登録・ログインすらしない人</b>もおり、1ヶ月で解約</p>
+              <div class="kpi red" style="margin-top:8px">
+                <div><p class="k">毎日使っている人</p><p class="v">10<small>％未満</small></p><p class="n">全社のうち数名</p></div>
+                <div><p class="k">過去のツール導入</p><p class="v">1<small>ヶ月で解約</small></p><p class="n">「入れただけ」では使われなかった</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="goal">
+          <p class="l">来期の目的<br>（10月〜）</p>
+          <div>
+            <p class="t">この1年で、<b>AIを全社の業務の根幹に置く</b></p>
+            <p class="d">一部の人の工夫で終わらせず、全社が活用できる状態にする。そのための「起爆剤」となる施策が必要です。</p>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>04 2｜背景と課題</figcaption></figure>
+
+    <!-- ===== 05 3 施策の内容 1/2 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">3｜施策の内容（1/2）考え方</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">全員に一斉に教えるより、<b>広げる人を先に育てる</b>ほうが、全社に残る。</h2>
+        <div class="vs">
+          <div class="col ng">
+            <p class="h">よくあるやり方（全員向け）</p>
+            <div class="b">
+              <div class="row"><span class="ic">✕</span><div><p class="t">全員向けのeラーニング・集団研修</p><p class="d">「受けて終わり、すぐ元どおり」になりやすい。自分の業務にどう使うかまで落ちない。</p></div></div>
+              <div class="row"><span class="ic">✕</span><div><p class="t">ツールを入れて「使ってください」</p><p class="d">貴社で起きた<b>登録・ログインすらしない</b>状態がまさにこれ。使う理由がなければ使われない。</p></div></div>
+              <div class="row"><span class="ic">✕</span><div><p class="t">個人の効率化で止まる</p><p class="d">使える人は速くなるが、周りに広がらない。今の貴社の状態です。</p></div></div>
+            </div>
+          </div>
+          <p class="mid">›</p>
+          <div class="col ok">
+            <p class="h">今回のご提案（推進担当を育てる）</p>
+            <div class="b">
+              <div class="row"><span class="ic">1</span><div><p class="t">推進担当（AI人材）を少人数から育てる</p><p class="d">大阪営業2名＋内勤1名の3名を、<b>社内に広げる役</b>として育成。1人に1人の講師がつきます。</p></div></div>
+              <div class="row"><span class="ic">2</span><div><p class="t">「AIを使わないと回らない業務の流れ」を作る</p><p class="d">使う・使わないを個人の意欲に任せず、<b>業務の流れそのものにAIを組み込む</b>。推進担当がその設計をできるようにします。</p></div></div>
+              <div class="row"><span class="ic">3</span><div><p class="t">研修期間中に、社内向けの内製化施策まで打つ</p><p class="d">社内勉強会・実演会など、<b>使っていない人の目の前で実演する</b>施策を、研修の中で実施するところまで支援します。</p></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="aim">
+          <p class="l">研修の目的</p>
+          <div class="c"><span class="n">A</span><div><p class="t">個人の効率化</p><p class="d">自分の業務をAIで速く・正確にする</p></div></div>
+          <div class="c"><span class="n">B</span><div><p class="t">チームとして成果を出す／全社に広げる</p><p class="d">周りが使う仕組みを作り、成果を社内に展開する</p></div></div>
+        </div>
+        <div class="band"><span>大阪の営業で起きた「自発的に使って成果が出た」流れを、<b>3名から全社へ意図的に再現する</b>のが今回の研修です。</span></div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>05 3｜施策の内容（1/2）</figcaption></figure>
+
+    <!-- ===== 06 3 施策の内容 2/2 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">3｜施策の内容（2/2）研修の中身と進め方</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">最初に業務を棚卸しし、<b>実務の課題をそのまま研修の教材</b>にします。</h2>
+        <div class="step0">
+          <span class="lb">はじめに</span>
+          <p class="t">業務を棚卸しし、研修期間中に取り組む課題を決めます</p>
+          <div class="mw"><span class="must">Must｜必ず達成する課題</span><span>Want｜できれば達成したい課題</span></div>
+        </div>
+        <div class="comp">
+          <div class="c"><p class="n">01</p><div class="ic"><img src="assets/illus/comp-01.webp" alt=""></div><p class="t">動画教材<small>基礎知識</small></p><p class="d">ChatGPTの基礎から実務活用までを動画で。自分のペースで学べます。</p></div>
+          <div class="c"><p class="n">02</p><div class="ic"><img src="assets/illus/comp-02.webp" alt=""></div><p class="t">面談<small>月2回・60分</small></p><p class="d">担当講師との1対1。課題の進み具合を確認し、次の2週間の進め方を決めます。</p></div>
+          <div class="c"><p class="n">03</p><div class="ic"><img src="assets/illus/comp-03.webp" alt=""></div><p class="t">チャット<small>回数無制限</small></p><p class="d">面談と面談の間も、つまずいたらその場で質問。手が止まる時間を減らします。</p></div>
+          <div class="c"><p class="n">04</p><div class="ic"><img src="assets/illus/comp-04.webp" alt=""></div><p class="t">実務課題の実装<small>Must・Want</small></p><p class="d">個人ごとに決めた課題を、実際の業務で使える形まで作り込みます。</p></div>
+          <div class="c"><p class="n">05</p><div class="ic"><img src="assets/illus/comp-05.webp" alt=""></div><p class="t">内製化施策サポート<small>社内に広げる</small></p><p class="d">社内勉強会・実演会の企画から実施まで、講師が一緒に準備します。</p></div>
+        </div>
+        <div class="three">
+          <div class="c"><p class="k">事務局面談（月1回）</p><p class="d">受講者3名の進み具合を全社のゴールと照らし合わせ、<b>ずれがあれば軌道修正</b>。上月様・山田様と方向を合わせる場です。</p></div>
+          <div class="c"><p class="k">講師は業務に合わせて選びます</p><p class="d">営業／内勤／クリエイティブなど、<b>受講者の業務・得意領域に合う講師</b>を個別ヒアリング面談で確定します。</p></div>
+          <div class="c"><p class="k">ツールは今お使いのChatGPTでOK</p><p class="d">推進担当は<b>Plusプラン以上</b>でCodexの活用まで学び、最終的には<b>Businessプランで全社活用</b>が理想です。可能であれば受講者はClaude Codeも検討します。</p></div>
+        </div>
+        <div class="band"><span>修了時のゴール：<b>Must課題が実際の業務に組み込まれ</b>、その成果を社内の勉強会・実演会で自分たちで見せられる状態。</span></div>
+        <p class="s-foot">© 株式会社AI棒　｜　ChatGPT・Codex は OpenAI、Claude Code は Anthropic の商標です。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>06 3｜施策の内容（2/2）</figcaption></figure>
+
+    <!-- ===== 07 4 比較検討 1/2 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">4｜比較検討（1/2）助成金を使わない理由</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">助成金は魅力的ですが、<b>今回は使わないほうが得</b>だと考えています。</h2>
+        <p class="s-lead">ご相談のきっかけが助成金だったことは承知しています。そのうえで、5つの理由から「助成金なし」をご提案します。</p>
+        <div class="rs">
+          <div class="r"><span class="n">1</span><div><p class="t">8月の改正で要件が厳しくなり、通るかどうか読めない</p><p class="d">2026年8月の制度改正で受給要件が厳格化。申請しても<b>受給できるかの見通しが立ちにくい</b>状況です。</p></div></div>
+          <div class="r"><span class="n">2</span><div><p class="t">カリキュラムが固定され、オーダーメイドにできない</p><p class="d">助成金の対象にするには事前に届け出た内容で実施する必要があり、<b>貴社の業務に合わせて中身を変える</b>研修ができません。</p></div></div>
+          <div class="r"><span class="n">3</span><div><p class="t">成果に直結しない研修になれば、長期では損失</p><p class="d">受給できても、業務が変わらない研修に時間を使えば<b>受講者の工数と機会損失のほうが大きく</b>なる可能性が高いです。</p></div></div>
+          <div class="r"><span class="n">4</span><div><p class="t">計画届の提出から1ヶ月以上あけないと始められない</p><p class="d">事前に全日程の計画届が必要で、提出から1ヶ月以上経たないと開始できません。<b>10月からすぐ始める</b>ことができなくなります。</p></div></div>
+          <div class="r wide"><span class="n">5</span><div><p class="t">社労士への報酬が前払いの場合、受給できなければ定価より高くつく</p><p class="d">弊社提携の社労士をご紹介する場合、報酬は前払いです。受給できなかった場合は<b>研修費＋社労士報酬</b>となり、今回の特別価格より高くなります。</p></div></div>
+        </div>
+        <table class="cmp">
+          <colgroup><col style="width:180px"><col><col></colgroup>
+          <tr><th>比較</th><th class="ng">助成金を使う場合</th><th class="ok">助成金を使わない場合（今回のご提案）</th></tr>
+          <tr><td>開始できる時期</td><td>計画届の提出から1ヶ月以上あけて開始（早くても11月以降）</td><td class="ok"><b>10月からすぐ開始</b>できる</td></tr>
+          <tr><td>研修の中身</td><td>届け出た内容で固定。貴社の業務に合わせた変更ができない</td><td class="ok">業務の棚卸しから始める<b>オーダーメイド</b></td></tr>
+          <tr><td>費用の確定</td><td>受給できれば軽減。できなければ<b style="color:var(--red)">定価＋社労士報酬（前払い）</b>で特別価格より高くつく</td><td class="ok">3名で<b>66万円（4ヶ月）／45万円（2ヶ月）</b>に確定。追加の申請費用なし</td></tr>
+        </table>
+        <div class="band" style="margin-top:12px;padding:11px 20px"><span>助成金ありきではなく<b>「成果ありき」</b>で設計し、費用面は<b>ベル様 特別価格</b>でご配慮しました（P.8）。</span></div>
+        <p class="s-foot">© 株式会社AI棒　｜　助成金は人材開発支援助成金を想定。制度の内容は2026年9月時点の情報にもとづきます。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>07 4｜比較検討（1/2）</figcaption></figure>
+
+    <!-- ===== 08 4 比較検討 2/2 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">4｜比較検討（2/2）他社との違い</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">研修で終わらせず、<b>「業務がどう変わったか」を語れる状態</b>で修了します。</h2>
+        <table class="df">
+          <colgroup><col style="width:200px"><col><col></colgroup>
+          <tr><th>比較の観点</th><th class="ng">助成金ありきの一般的なAI研修</th><th class="ok">バイテック法人AI研修（今回のご提案）</th></tr>
+          <tr>
+            <td>カリキュラム</td>
+            <td><span class="x">✕</span>届け出た内容で固定。受講者が誰でも同じ教材・同じ進め方になりやすい</td>
+            <td class="ok"><span class="o">✓</span>業務の棚卸しから始める<b>オーダーメイド</b>。受講者ごとに Must／Want の課題を決めて進める</td>
+          </tr>
+          <tr>
+            <td>講師と受講者の関係</td>
+            <td><span class="x">✕</span>1人の講師が大人数を担当。個別の業務までは踏み込めない</td>
+            <td class="ok"><span class="o">✓</span><b>1人に1人の講師</b>がつく。営業／内勤など受講者の業務に合わせて講師を選定</td>
+          </tr>
+          <tr>
+            <td>修了時の状態</td>
+            <td><span class="x">✕</span>「受講した」で終わり。何が変わったかを説明しにくい</td>
+            <td class="ok"><span class="o">✓</span>自分の業務で<b>成果（どう変わったか）を語れる</b>状態で修了</td>
+          </tr>
+          <tr>
+            <td>研修後の広がり</td>
+            <td><span class="x">✕</span>受講者個人のスキルで止まる</td>
+            <td class="ok"><span class="o">✓</span>期間中に<b>社内勉強会・実演会</b>まで実施し、社内に広げる仕組みづくりを支援</td>
+          </tr>
+          <tr>
+            <td>開始までの期間</td>
+            <td><span class="x">✕</span>計画届の提出から1ヶ月以上待つ</td>
+            <td class="ok"><span class="o">✓</span>お申し込み後、<b>10月からすぐ開始</b></td>
+          </tr>
+        </table>
+        <div class="band"><span>修了時には、3名それぞれが<b>「自分の業務がどう変わったか」を具体的に語れる</b>状態になっています。それが次に広げるときの説得材料になります。</span></div>
+        <p class="s-foot">© 株式会社AI棒　｜　「一般的なAI研修」は当社が把握している一般的な傾向であり、特定の事業者を指すものではありません。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>08 4｜比較検討（2/2）</figcaption></figure>
+
+    <!-- ===== 09 5 費用 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">5｜費用（3名・税抜）</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">4ヶ月プランは3名で<b>66万円</b>、2ヶ月プランは<b>45万円</b>（ベル様 特別価格）。</h2>
+        <table class="pr">
+          <colgroup><col style="width:250px"><col><col><col style="width:300px"></colgroup>
+          <tr><th>プラン</th><th>定価（1名）</th><th class="sp">特別価格（1名）</th><th class="sp">3名合計（特別価格）</th></tr>
+          <tr>
+            <td><p class="pn">4ヶ月プラン</p><p class="pd">面談8回・事務局面談4回<br>1日約1時間のペースで無理なく</p></td>
+            <td><p class="list">30<small>万円</small></p></td>
+            <td><p class="sp">22<small>万円</small></p><span class="off">8万円 OFF</span></td>
+            <td class="tot"><p class="list">90<small>万円</small></p><p class="sp">66<small>万円</small></p><span class="off">24万円 OFF（約27％）</span></td>
+          </tr>
+          <tr>
+            <td><p class="pn">2ヶ月プラン</p><p class="pd">面談4回・事務局面談2回<br>同じ中身を短期集中で</p></td>
+            <td><p class="list">20<small>万円</small></p></td>
+            <td><p class="sp">15<small>万円</small></p><span class="off">5万円 OFF</span></td>
+            <td class="tot"><p class="list">60<small>万円</small></p><p class="sp">45<small>万円</small></p><span class="off">15万円 OFF（25％）</span></td>
+          </tr>
+        </table>
+        <div class="prn">
+          <div><b>中身は同じ、期間の違いだけ。</b>動画教材・面談・チャット無制限・実務課題の実装・内製化施策サポートは両プラン共通です。</div>
+          <div><b>受講者：3名</b>（大阪の営業2名＋内勤1名）。人数が変わる場合は1名あたりの特別価格で再計算します。</div>
+          <div><b>助成金の申請費用は不要。</b>社労士報酬・計画届の準備工数がかからず、お申し込み後すぐに開始できます。</div>
+        </div>
+        <div class="band"><span>おすすめは<b>4ヶ月プラン</b>。1日約1時間のペースで無理なく続けられ、期間中に社内勉強会・実演会を複数回まわせます。</span></div>
+        <p class="s-foot">© 株式会社AI棒　｜　金額はすべて税抜。特別価格は本ご提案（2026年10月開始）に限ります。お支払い条件は個別にご相談ください。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>09 5｜費用</figcaption></figure>
+
+    <!-- ===== 10 6 期待効果 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">6｜期待効果</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">1人1日1時間の削減で、3名で<b>年間 約216万円</b>。研修費は<b>4ヶ月弱で回収</b>できます。</h2>
+        <div class="calc">
+          <div class="c"><p class="k">1日あたりの削減</p><p class="v">1<small>時間／人</small></p><p class="n">大阪営業の実績（1時間→10〜15分）を踏まえた控えめな前提</p></div>
+          <p class="op">×</p>
+          <div class="c"><p class="k">年間の営業日</p><p class="v">240<small>日</small></p><p class="n">1人あたり年240時間の削減</p></div>
+          <p class="op">×</p>
+          <div class="c"><p class="k">時給換算</p><p class="v">3,000<small>円</small></p><p class="n">1人あたり年 約72万円</p></div>
+          <p class="op">×</p>
+          <div class="c"><p class="k">受講者</p><p class="v">3<small>名</small></p><p class="n">大阪営業2名＋内勤1名</p></div>
+          <p class="op">＝</p>
+          <div class="c res"><p class="k">年間の削減額（3名）</p><p class="v">約<b>216</b>万円</p><p class="n">研修費66万円（4ヶ月・特別価格）の約3.3倍</p></div>
+        </div>
+        <div class="bars">
+          <p class="k">研修費と年間削減額の比較（4ヶ月プラン・3名）</p>
+          <div class="row"><p class="lb">研修費<small>特別価格・税抜</small></p><div class="bar cost"><span style="width:30.5%">66万円</span></div></div>
+          <div class="row"><p class="lb">年間の削減額<small>3名・試算</small></p><div class="bar gain"><span style="width:100%">約216万円（研修費の約3.3倍）</span></div></div>
+        </div>
+        <div class="roi">
+          <div class="c">
+            <div class="big"><p class="v">約3.7<small>ヶ月</small></p><p class="k">投資回収の目安</p></div>
+            <div><p class="t">4ヶ月プラン（66万円）は、修了とほぼ同時に回収</p><p class="d">月あたりの削減額 約18万円に対し、研修費66万円。2ヶ月プラン（45万円）なら<b>約2.5ヶ月</b>で回収する計算です。</p></div>
+          </div>
+          <div class="c">
+            <div class="big"><p class="v">上乗せ</p><p class="k">全社に広がった分</p></div>
+            <div><p class="t">推進担当が社内に広げれば、その分がそのまま上乗せ</p><p class="d">上の試算は受講者3名分のみ。社内勉強会・実演会で使う人が増えるほど、<b>1人あたり年 約72万円</b>ずつ削減額が積み上がります。</p></div>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒　｜　試算は「1人1日1時間の削減・年240営業日・時給3,000円」の仮定にもとづく概算です。実際の効果は業務内容・活用度により異なります。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>10 6｜期待効果</figcaption></figure>
+
+    <!-- ===== 11 7 リスクと対策 1/2 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">7｜リスクと対策（1/2）セキュリティ</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">安心して広げるために、<b>ルールと判断を社内に持つ</b>。</h2>
+        <p class="s-lead">全社に広げるほど、「何を入れてよいか」「何をつないでよいか」の判断が必要になります。研修の中で、推進担当がその判断をできるようにします。</p>
+        <div class="sec3">
+          <div class="c">
+            <div class="ic"><img src="assets/illus/sec-01.webp" alt=""></div>
+            <p class="n">01</p>
+            <p class="t">扱う情報のルール化</p>
+            <p class="d">セキュリティ設定（学習に使われない設定など）と、<b>「入力しない情報」の社内ルール</b>を決めます。</p>
+            <p class="ex"><b>例</b>　顧客の個人情報・未公開の取引条件は入力しない／設定はチームで統一する</p>
+          </div>
+          <div class="c">
+            <div class="ic"><img src="assets/illus/sec-02.webp" alt=""></div>
+            <p class="n">02</p>
+            <p class="t">ツール同士をつなぐときは、確認してから</p>
+            <p class="d">AIと社内のツール（台帳・メール・ファイルなど）を連携すると便利になる一方、<b>情報が外に出るリスク</b>も生まれます。リスクを理解し、確認してからつなぐ手順を身につけます。</p>
+            <p class="ex"><b>例</b>　どのデータがどこへ送られるかを確認してから連携する</p>
+          </div>
+          <div class="c">
+            <div class="ic"><img src="assets/illus/sec-03.webp" alt=""></div>
+            <p class="n">03</p>
+            <p class="t">推進担当が、セキュリティも判断できる人材に</p>
+            <p class="d">「これは使っていい？」を毎回外部に聞かなくても、<b>社内で判断できる</b>状態にします。全社に広げるときの安全弁になります。</p>
+            <p class="ex"><b>例</b>　新しい使い方の相談を、推進担当が社内で受けて判断する</p>
+          </div>
+        </div>
+        <div class="band"><span>セキュリティは「禁止するため」ではなく、<b>安心して全社に広げるための土台</b>です。研修の中で、貴社の情報の扱い方のルール化まで行います。</span></div>
+        <p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>11 7｜リスクと対策（1/2）</figcaption></figure>
+
+    <!-- ===== 12 7 リスクと対策 2/2 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">7｜リスクと対策（2/2）受講者の業務負担</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">受講者の負担は<b>1日約1時間</b>。2週間サイクルで、繁忙期は面談で調整します。</h2>
+        <p class="s-lead">受講者の業務負担を見積もるためのイメージです。本日ご参加でない内勤の方にも、このページでお伝えください。</p>
+        <div class="cycle">
+          <div class="lb"><p class="a">2週間</p><p class="b">＝ 1サイクル</p></div>
+          <div class="st"><span class="n">1</span><div><p class="t">面談（60分）</p><p class="d">課題の確認と、次の2週間の進め方を決める</p></div></div>
+          <div class="st"><span class="n">2</span><div><p class="t">動画学習</p><p class="d">必要な基礎知識を、自分のペースで学ぶ</p></div></div>
+          <div class="st"><span class="n">3</span><div><p class="t">実務課題（Must・Want）</p><p class="d">自分の業務でAIを使い、作り込む。詰まったらチャットで質問</p></div></div>
+          <div class="st"><span class="n">4</span><div><p class="t">次の面談へ</p><p class="d">成果を持ち寄り、次のサイクルへ</p></div></div>
+        </div>
+        <table class="pl">
+          <colgroup><col style="width:220px"><col><col></colgroup>
+          <tr><th>1日1時間を想定した場合</th><th class="rec">4ヶ月コース<small>推奨</small></th><th>2ヶ月コース</th></tr>
+          <tr><td>研修の中身</td><td colspan="2" style="font-weight:700;color:#1a2330">同じ内容（動画教材・面談・チャット・実務課題・内製化施策サポート）。期間の違いだけです</td></tr>
+          <tr><td>面談回数（60分）</td><td><b class="hi">8</b> 回<small>2週間に1回</small></td><td><b>4</b> 回<small>2週間に1回</small></td></tr>
+          <tr><td>事務局面談（月1回）</td><td><b class="hi">4</b> 回</td><td><b>2</b> 回</td></tr>
+          <tr><td>1日あたりの目安</td><td><b class="hi">約1</b> 時間<small>動画学習＋実務課題</small></td><td><b>約2</b> 時間<small>同じ内容を半分の期間で</small></td></tr>
+          <tr><td>1週間あたりの目安</td><td><b class="hi">約5</b> 時間<small>＋隔週の面談60分</small></td><td><b>約10</b> 時間<small>＋隔週の面談60分</small></td></tr>
+          <tr><td>10月開始の場合の修了</td><td><b class="hi">2027年2月</b></td><td><b>2026年12月</b></td></tr>
+        </table>
+        <p class="s-foot">© 株式会社AI棒　｜　時間は目安です。実務課題は業務の中で取り組むため、業務そのものの時間と重なる部分があります。繁忙期などは面談で進め方を調整します。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>12 7｜リスクと対策（2/2）</figcaption></figure>
+
+    <!-- ===== 13 8 スケジュール ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">8｜スケジュール</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">お申し込みから、<b>10月中の研修開始</b>まで。</h2>
+        <div class="flow">
+          <div class="fs"><img class="il" src="assets/illus/step-01.webp" alt=""><p class="n">STEP 01</p><p class="t">お申し込み</p><p class="d">社内稟議のご承認後、お申し込みフォームにご入力いただきます。</p></div>
+          <p class="farr">›</p>
+          <div class="fs"><img class="il" src="assets/illus/step-02.webp" alt=""><p class="n">STEP 02</p><p class="t">事前説明会</p><p class="d">受講者3名と上月様・山田様へ、研修の進め方・学習時間・サポートの受け方をご説明します。</p></div>
+          <p class="farr">›</p>
+          <div class="fs"><img class="il" src="assets/illus/step-03.webp" alt=""><p class="n">STEP 03</p><p class="t">個別ヒアリング面談</p><p class="d">受講者ごとに業務・得意領域を伺い、<b>担当講師を確定</b>。Must／Want の課題の方向性を決めます。</p></div>
+          <p class="farr">›</p>
+          <div class="fs go"><img class="il" src="assets/illus/step-04.webp" alt=""><p class="n">STEP 04</p><p class="t">研修開始</p><p class="d">動画教材・面談・チャットで伴走。月1回の事務局面談で全社のゴールと擦り合わせます。</p></div>
+        </div>
+        <div class="tl">
+          <p class="k">スケジュールの目安（10月開始の場合）</p>
+          <div class="bar">
+            <div class="ax"></div>
+            <div class="seg" style="left:6%;width:32%"></div>
+            <div class="m" style="left:6%"><span class="mo">2026年10月</span><span class="ev">研修開始</span></div>
+            <div class="m" style="left:22%"><span class="mo">12月</span><span class="ev">2ヶ月コース 修了</span></div>
+            <div class="m hi" style="left:38%"><span class="mo">2027年2月</span><span class="ev">4ヶ月コース 修了</span></div>
+            <div class="m" style="left:94%"><span class="mo">2027年9月</span><span class="ev">来期末</span></div>
+          </div>
+        </div>
+        <div class="nx">
+          <div class="c">
+            <p class="k">次のステップ</p>
+            <p class="i"><span>1</span><span class="tx">本資料をもとに、社内でご検討・稟議（1週間以内を目安）</span></p>
+            <p class="i"><span>2</span><span class="tx"><b>10月6日（火）</b>に弊社 安原より、進捗のご確認のご連絡を差し上げます</span></p>
+            <p class="i"><span>3</span><span class="tx">ご承認後、お申し込み → 事前説明会の日程調整へ</span></p>
+          </div>
+          <div class="c dk">
+            <p class="k">鈴木社長へ</p>
+            <p class="t">ご不明点は、<b>15分ほどで直接ご説明</b>します。</p>
+            <p class="d">お電話・オンラインどちらでも結構です。上月様・山田様経由でお声がけください。担当：安原（バイテック法人AI研修）</p>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒　｜　本資料はベル様向けの個別提案書です。記載の特別価格・スケジュールは2026年10月開始を前提としています。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>13 8｜スケジュール</figcaption></figure>
+
+  </div>
+</body>
+</html>
