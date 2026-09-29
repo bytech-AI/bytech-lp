@@ -153,10 +153,10 @@ B_OBJECTIVE = wrap("03 1 目的", "03 1｜目的", "1｜目的", """
         </div>
 """)
 
-def cover(tag, tag_desc, sub, panel_title, panel_items, panel_bg, compact=False):
+def cover(tag, tag_desc, sub, panel_title, panel_items, panel_bg, compact=False, show_tag=True):
     """表紙を案ごとに差し替える。panel_items は (ラベル, 本文HTML) のリスト。"""
     c = swap(COVER, '<p class="vtag"><b>A案</b>社長向け1枚＋詳細<small>｜1枚目でご判断、2枚目以降で詳細</small></p>',
-             f'<p class="vtag"><b>{tag}</b>{tag_desc[0]}<small>｜{tag_desc[1]}</small></p>')
+             f'<p class="vtag"><b>{tag}</b>{tag_desc[0]}<small>｜{tag_desc[1]}</small></p>' if show_tag else "")
     c = swap(c, "推進担当3名の「マンツーマン研修」のご提案</p>", sub + "</p>")
     items = "".join(f'<div class="pi"><p class="pk">{k}</p><p class="pv">{v}</p></div>' for k, v in panel_items)
     c = re.sub(r'<div class="panel">.*?<p class="conf">', f'<div class="panel{" compact" if compact else ""}" style="background:{panel_bg}">\n          <p class="ph">{panel_title}</p>\n          {items}\n          <p class="conf">', c, count=1, flags=re.S)
@@ -175,7 +175,7 @@ C_COVER = cover("C案", ("ストーリー型", "面談の流れを読み物と�
                 "この資料の流れ",
                 [("はじめに", "なぜ「誰も使わない」が起きるのか"), ("考え方", "推進担当と、使わないと回らない流れ<small>（参考事例：LINEヤフー）</small>"),
                  ("貴社でやること", "研修の中身・セキュリティ・料金と効果"), ("次のステップ", "10月開始 → 2027年2月修了")],
-                "#1a6fb5", compact=True)
+                "#1a6fb5", compact=True, show_tag=False)
 
 B = [
     B_COVER,
@@ -276,6 +276,7 @@ C_CASE = wrap("04 3 参考事例 LINEヤフー", "04 3｜参考事例：LINEヤ�
 
 C = [
     C_COVER,
+    slide(SUMMARY, "02 サマリー", "Summary｜この1枚でご判断いただけるように", "02 サマリー（A案と共通）"),  # 助成金の詳細は C でも P.8
     C_WHY,
     C_HOW,
     C_CASE,
@@ -300,5 +301,5 @@ def emit(name, title, note, slides_):
 
 emit("proposal-bell-2610-b", "ベル様 ご提案書（B案：稟議書形式）｜全13スライド",
      "ベル様 ご提案書（B案：稟議書の形にそろえる）｜_variants.py が A案 deck.html から生成。直接編集せず A案または _variants.py を直す", B)
-emit("proposal-bell-2610-c", "ベル様 ご提案書（C案：ストーリー型）｜全11スライド",
-     "ベル様 ご提案書（C案：ストーリー型）｜_variants.py が A案 deck.html から生成。直接編集せず A案または _variants.py を直す", C)
+emit("proposal-bell-2610-c", "ベル様 ご提案書｜全12スライド",
+     "ベル様 ご提案書（C：ストーリー型）｜_variants.py が A案 deck.html から生成。直接編集せず A案または _variants.py を直す", C)
