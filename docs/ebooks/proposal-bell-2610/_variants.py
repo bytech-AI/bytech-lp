@@ -276,6 +276,7 @@ C_CASE = wrap("04 3 参考事例 LINEヤフー", "04 3｜参考事例：LINEヤ�
 
 C = [
     C_COVER,
+    slide(SUMMARY, "02 サマリー", "Summary｜この1枚でご判断いただけるように", "02 サマリー（A案と共通）"),  # 助成金の詳細は C でも P.8
     C_WHY,
     C_HOW,
     C_CASE,
@@ -300,5 +301,5 @@ def emit(name, title, note, slides_):
 
 emit("proposal-bell-2610-b", "ベル様 ご提案書（B案：稟議書形式）｜全13スライド",
      "ベル様 ご提案書（B案：稟議書の形にそろえる）｜_variants.py が A案 deck.html から生成。直接編集せず A案または _variants.py を直す", B)
-emit("proposal-bell-2610-c", "ベル様 ご提案書（C案：ストーリー型）｜全11スライド",
+emit("proposal-bell-2610-c", "ベル様 ご提案書（C案：ストーリー型）｜全12スライド",
      "ベル様 ご提案書（C案：ストーリー型）｜_variants.py が A案 deck.html から生成。直接編集せず A案または _variants.py を直す", C)
