@@ -290,16 +290,15 @@
   .flow { display: flex; align-items: stretch; gap: 0; margin-top: 16px; }
   .fs { flex: 1; border: 1px solid var(--line); padding: 18px 16px 16px; position: relative; }
   .fs .n { font-size: 11px; font-weight: 800; color: var(--blue-pale); letter-spacing: .12em; }
-  .fs .il { position: absolute; right: 14px; top: 14px; height: 64px; width: auto; }
-  .fs .t { padding-right: 88px; }
-  .fs.go .il { background: #fff; padding: 5px; }
+  .fs .il { display: block; height: 72px; width: auto; margin: 0 0 12px; }
+  .fs.go .il { background: #fff; padding: 6px; height: 72px; }
   .fs .t { font-size: 16.5px; font-weight: 800; color: #1a2330; margin-top: 6px; line-height: 1.35; }
   .fs .d { font-size: 12.6px; font-weight: 500; color: #4a5568; line-height: 1.7; margin-top: 8px; }
   .fs .d b { color: #1a2330; font-weight: 800; }
   .fs.go { background: var(--blue); border-color: var(--blue); color: #fff; }
   .fs.go .n { color: #8fd0ff; } .fs.go .t { color: #fff; } .fs.go .d { color: #d7e3f3; } .fs.go .d b { color: #fff; }
   .farr { flex: 0 0 26px; display: flex; align-items: center; justify-content: center; color: var(--blue-pale); font-size: 18px; font-weight: 900; }
-  .tl { margin-top: 16px; border: 1px solid var(--line); padding: 14px 20px 18px; }
+  .tl { margin-top: 14px; border: 1px solid var(--line); padding: 14px 20px 18px; }
   .tl .k { font-size: 12px; font-weight: 800; color: var(--blue); display: flex; align-items: center; gap: 7px; }
   .tl .k::before { content: ""; width: 4px; height: 12px; background: var(--blue); }
   .tl .bar { position: relative; height: 58px; margin-top: 12px; }
@@ -311,7 +310,7 @@
   .tl .bar .m.hi::before { background: var(--blue-bright); }
   .tl .bar .m.hi .ev { color: var(--blue-bright); }
   .tl .bar .seg { position: absolute; top: 24px; height: 2px; background: var(--blue); }
-  .nx { display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; margin-top: 16px; }
+  .nx { display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; margin-top: 14px; }
   .nx .c { border: 1.5px solid var(--blue); padding: 16px 20px; }
   .nx .c .k { font-size: 12px; font-weight: 800; color: var(--blue); letter-spacing: .06em; }
   .nx .c .i { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; font-weight: 700; color: #1a2330; line-height: 1.55; margin-top: 9px; }
