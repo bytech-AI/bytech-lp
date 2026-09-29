@@ -100,10 +100,11 @@
 
   /* ===== 現状と目的 ===== */
   .two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 22px; align-items: stretch; }
-  .two .sec .b { padding: 14px 20px 18px; }
+  .two .sec { display: flex; flex-direction: column; }
+  .two .sec .b { padding: 14px 20px 18px; flex: 1; display: flex; flex-direction: column; }
+  .two .kpi { margin-top: auto !important; padding-top: 14px; }
   .two .sec .i { font-size: 14.5px; line-height: 1.85; padding: 6px 0 6px 17px; }
   .two .sec .i::before { top: 16px; }
-  .two .kpi { margin-top: 14px !important; }
   .two .kpi div { padding: 14px 16px; }
   .two .kpi .k { font-size: 11.5px; }
   .two .kpi .v { font-size: 28px; }
