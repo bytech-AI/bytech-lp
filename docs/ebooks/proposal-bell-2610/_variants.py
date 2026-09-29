@@ -45,6 +45,9 @@ def swap(s, old, new):
 
 EXTRA_CSS = """
   /* ===== B/C案 固有パーツ（_variants.py が付加） ===== */
+  .cv .panel.compact .pi { padding: 17px 0 15px; }
+  .cv .panel.compact .pv { font-size: 19px; }
+  .cv .panel .pv small { display: block; margin-top: 3px; }
   /* 稟議サマリー表 */
   table.rg { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 16px; table-layout: fixed; }
   .rg td { padding: 15px 18px; border-bottom: 1px solid var(--line); font-size: 14.2px; font-weight: 600; color: #1a2330; line-height: 1.65; vertical-align: top; }
@@ -150,8 +153,32 @@ B_OBJECTIVE = wrap("03 1 目的", "03 1｜目的", "1｜目的", """
         </div>
 """)
 
+def cover(tag, tag_desc, sub, panel_title, panel_items, panel_bg, compact=False):
+    """表紙を案ごとに差し替える。panel_items は (ラベル, 本文HTML) のリスト。"""
+    c = swap(COVER, '<p class="vtag"><b>A案</b>社長向け1枚＋詳細<small>｜1枚目でご判断、2枚目以降で詳細</small></p>',
+             f'<p class="vtag"><b>{tag}</b>{tag_desc[0]}<small>｜{tag_desc[1]}</small></p>')
+    c = swap(c, "推進担当3名の「マンツーマン研修」のご提案</p>", sub + "</p>")
+    items = "".join(f'<div class="pi"><p class="pk">{k}</p><p class="pv">{v}</p></div>' for k, v in panel_items)
+    c = re.sub(r'<div class="panel">.*?<p class="conf">', f'<div class="panel{" compact" if compact else ""}" style="background:{panel_bg}">\n          <p class="ph">{panel_title}</p>\n          {items}\n          <p class="conf">', c, count=1, flags=re.S)
+    return c
+
+
+B_COVER = cover("B案", ("稟議書形式", "社内の稟議にそのまま使える並び"),
+                "推進担当3名の「マンツーマン研修」の導入（稟議資料）",
+                "この資料の構成",
+                [("1〜2", "目的／背景と課題"), ("3〜4", "施策の内容／比較検討"),
+                 ("5〜6", "費用／期待効果<small>（3名・4ヶ月 66万円 税抜）</small>"), ("7〜8", "リスクと対策／スケジュール")],
+                "var(--blue)")
+
+C_COVER = cover("C案", ("ストーリー型", "面談の流れを読み物として再現"),
+                "「全社に入れたのに、誰も使わない」を終わらせる。",
+                "この資料の流れ",
+                [("はじめに", "なぜ「誰も使わない」が起きるのか"), ("考え方", "推進担当と、使わないと回らない流れ<small>（参考事例：LINEヤフー）</small>"),
+                 ("貴社でやること", "研修の中身・セキュリティ・料金と効果"), ("次のステップ", "10月開始 → 2027年2月修了")],
+                "#1a6fb5", compact=True)
+
 B = [
-    swap(COVER, "推進担当3名の「マンツーマン研修」のご提案</p>", "推進担当3名の「マンツーマン研修」のご提案｜稟議資料</p>"),
+    B_COVER,
     B_SUMMARY,
     B_OBJECTIVE,
     slide(S1, "04 2 背景と課題", "2｜背景と課題", "04 2｜背景と課題"),
@@ -248,7 +275,7 @@ C_CASE = wrap("04 3 参考事例 LINEヤフー", "04 3｜参考事例：LINEヤ�
 """).replace(FOOT, '<p class="s-foot">出典：LINEヤフー株式会社 プレスリリース「全従業員約11,000人を対象に業務における『生成AI活用の義務化』を前提とした新しい働き方を開始」（2025年7月14日）、Business Insider Japan（2025年12月）ほか同社公開情報・報道。数値は同社の公表値・報道によるもので、当社による測定値ではありません。「貴社に置き換えるなら」は当社の見解です。社名は同社の商標です。</p><div class="s-num en"></div>')
 
 C = [
-    COVER,
+    C_COVER,
     C_WHY,
     C_HOW,
     C_CASE,

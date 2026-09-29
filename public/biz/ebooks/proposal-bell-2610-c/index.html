@@ -59,6 +59,9 @@
 
   /* ===== 表紙 ===== */
   .cv { background: #fff; }
+  .cv .vtag { position: absolute; left: 72px; top: 40px; display: inline-flex; align-items: center; gap: 10px; background: var(--blue-deep); color: #fff; font-size: 13px; font-weight: 800; letter-spacing: .08em; padding: 8px 16px; }
+  .cv .vtag b { background: #8fd0ff; color: var(--blue-deep); font-size: 12px; padding: 2px 8px; }
+  .cv .vtag small { font-weight: 700; opacity: .85; }
   .cv .eyebrow { position: absolute; left: 72px; top: 92px; display: inline-flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 800; color: var(--blue); letter-spacing: .12em; }
   .cv .eyebrow::before { content: ""; width: 28px; height: 3px; background: var(--blue); }
   .cv .to { position: absolute; left: 72px; top: 132px; font-size: 26px; font-weight: 800; color: #1a2330; letter-spacing: .04em; }
@@ -339,6 +342,9 @@
   }
 
   /* ===== B/C案 固有パーツ（_variants.py が付加） ===== */
+  .cv .panel.compact .pi { padding: 17px 0 15px; }
+  .cv .panel.compact .pv { font-size: 19px; }
+  .cv .panel .pv small { display: block; margin-top: 3px; }
   /* 稟議サマリー表 */
   table.rg { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 16px; table-layout: fixed; }
   .rg td { padding: 15px 18px; border-bottom: 1px solid var(--line); font-size: 14.2px; font-weight: 600; color: #1a2330; line-height: 1.65; vertical-align: top; }
@@ -409,18 +415,17 @@
     <!-- ===== 01 表紙 ===== -->
     <figure class="slide-shell"><div class="clip">
       <div class="slide cv">
+        <p class="vtag"><b>C案</b>ストーリー型<small>｜面談の流れを読み物として再現</small></p>
         <p class="eyebrow">ご提案書</p>
         <p class="to">ベル様<small>御中</small></p>
         <p class="t">AI推進担当を育て、<br>1年で全社に広げる。</p>
-        <p class="sub">推進担当3名の「マンツーマン研修」のご提案</p>
+        <p class="sub">「全社に入れたのに、誰も使わない」を終わらせる。</p>
         <p class="meta">2026年10月　｜　バイテック法人AI研修（株式会社AI棒）<br>担当：安原</p>
         <img class="il" src="/biz/ebooks/proposal-bell-2610-c/assets/illus/cover.webp" alt="">
         <img class="logo" src="/biz/ebooks/proposal-bell-2610-c/assets/biz-logo.svg" alt="byTech BUSINESS">
-        <div class="panel">
-          <p class="ph">ご提案の要点</p>
-          <div class="pi"><p class="pk">目的</p><p class="pv">この1年で、AIを<br>全社の業務の根幹に置く</p></div>
-          <div class="pi"><p class="pk">ご提案内容</p><p class="pv">推進担当3名の<br>マンツーマン研修<small>（4ヶ月 / 2ヶ月）</small></p></div>
-          <div class="pi"><p class="pk">ご費用（3名合計・税抜）</p><p class="pv"><b>66</b>万円<small>　4ヶ月プラン・特別価格</small></p></div>
+        <div class="panel compact" style="background:#1a6fb5">
+          <p class="ph">この資料の流れ</p>
+          <div class="pi"><p class="pk">はじめに</p><p class="pv">なぜ「誰も使わない」が起きるのか</p></div><div class="pi"><p class="pk">考え方</p><p class="pv">推進担当と、使わないと回らない流れ<small>（参考事例：LINEヤフー）</small></p></div><div class="pi"><p class="pk">貴社でやること</p><p class="pv">研修の中身・セキュリティ・料金と効果</p></div><div class="pi"><p class="pk">次のステップ</p><p class="pv">10月開始 → 2027年2月修了</p></div>
           <p class="conf">本資料はベル様向けの個別提案書です。<br>社外への転載はご遠慮ください。</p>
         </div>
       </div>
