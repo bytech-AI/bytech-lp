@@ -67,6 +67,7 @@
   .cv .sub { position: absolute; left: 73px; top: 392px; font-size: 20px; font-weight: 800; color: #2a2f3a; letter-spacing: .04em; line-height: 1.7; }
   .cv .meta { position: absolute; left: 73px; top: 480px; font-size: 13.5px; font-weight: 700; color: #8a93a3; letter-spacing: .06em; line-height: 1.9; }
   .cv .logo { position: absolute; left: 72px; bottom: 58px; height: 38px; }
+  .cv .il { position: absolute; left: 590px; top: 386px; height: 300px; }
   .cv .panel { position: absolute; right: 0; top: 0; bottom: 0; width: 400px; background: var(--blue-deep); color: #fff; padding: 92px 48px 0; }
   .cv .panel .ph { font-size: 12.5px; font-weight: 800; letter-spacing: .14em; color: #8fd0ff; }
   .cv .panel .pi { border-top: 1px solid rgba(255,255,255,.18); padding: 22px 0 20px; }
@@ -157,8 +158,8 @@
   .comp { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 16px; }
   .comp .c { border: 1px solid var(--line); padding: 18px 16px 16px; position: relative; }
   .comp .c .n { font-size: 11px; font-weight: 800; color: var(--blue-pale); letter-spacing: .1em; }
-  .comp .c .ic { width: 44px; height: 44px; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; margin-top: 10px; }
-  .comp .c .ic svg { width: 24px; height: 24px; }
+  .comp .c .ic { height: 84px; display: flex; align-items: flex-end; margin-top: 10px; }
+  .comp .c .ic img { height: 84px; width: auto; display: block; }
   .comp .c .t { font-size: 15.5px; font-weight: 800; color: #1a2330; margin-top: 11px; line-height: 1.35; }
   .comp .c .t small { display: block; font-size: 11px; font-weight: 700; color: var(--blue); margin-top: 2px; }
   .comp .c .d { font-size: 12.3px; font-weight: 500; color: #4a5568; line-height: 1.7; margin-top: 8px; }
@@ -193,8 +194,8 @@
   /* ===== セキュリティ ===== */
   .sec3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 22px; }
   .sec3 .c { border: 1px solid var(--line); padding: 26px 24px 24px; }
-  .sec3 .c .ic { width: 58px; height: 58px; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; }
-  .sec3 .c .ic svg { width: 30px; height: 30px; }
+  .sec3 .c .ic { height: 104px; display: flex; align-items: flex-end; }
+  .sec3 .c .ic img { height: 104px; width: auto; display: block; }
   .sec3 .c .n { font-size: 11.5px; font-weight: 800; color: var(--blue-pale); letter-spacing: .12em; margin-top: 18px; }
   .sec3 .c .t { font-size: 19px; font-weight: 800; color: #1a2330; line-height: 1.4; margin-top: 5px; }
   .sec3 .c .d { font-size: 14px; font-weight: 500; color: #4a5568; line-height: 1.85; margin-top: 10px; }
@@ -287,6 +288,9 @@
   .flow { display: flex; align-items: stretch; gap: 0; margin-top: 16px; }
   .fs { flex: 1; border: 1px solid var(--line); padding: 18px 16px 16px; position: relative; }
   .fs .n { font-size: 11px; font-weight: 800; color: var(--blue-pale); letter-spacing: .12em; }
+  .fs .il { position: absolute; right: 14px; top: 14px; height: 64px; width: auto; }
+  .fs .t { padding-right: 88px; }
+  .fs.go .il { background: #fff; padding: 5px; }
   .fs .t { font-size: 16.5px; font-weight: 800; color: #1a2330; margin-top: 6px; line-height: 1.35; }
   .fs .d { font-size: 12.6px; font-weight: 500; color: #4a5568; line-height: 1.7; margin-top: 8px; }
   .fs .d b { color: #1a2330; font-weight: 800; }
@@ -346,6 +350,7 @@
         <p class="t">AI推進担当を育て、<br>1年で全社に広げる。</p>
         <p class="sub">推進担当3名の「マンツーマン研修」のご提案</p>
         <p class="meta">2026年10月　｜　バイテック法人AI研修（株式会社AI棒）<br>担当：安原</p>
+        <img class="il" src="assets/illus/cover.webp" alt="">
         <img class="logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
         <div class="panel">
           <p class="ph">ご提案の要点</p>
@@ -497,11 +502,11 @@
           <div class="mw"><span class="must">Must｜必ず達成する課題</span><span>Want｜できれば達成したい課題</span></div>
         </div>
         <div class="comp">
-          <div class="c"><p class="n">01</p><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14"/><path d="m10 9 5 3-5 3z"/></svg></div><p class="t">動画教材<small>基礎知識</small></p><p class="d">ChatGPTの基礎から実務活用までを動画で。自分のペースで学べます。</p></div>
-          <div class="c"><p class="n">02</p><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 20a4.5 4.5 0 0 1 5-4.4"/></svg></div><p class="t">面談<small>月2回・60分</small></p><p class="d">担当講師との1対1。課題の進み具合を確認し、次の2週間の進め方を決めます。</p></div>
-          <div class="c"><p class="n">03</p><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12.5h5"/></svg></div><p class="t">チャット<small>回数無制限</small></p><p class="d">面談と面談の間も、つまずいたらその場で質問。手が止まる時間を減らします。</p></div>
-          <div class="c"><p class="n">04</p><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m8 12 3 3 5-6"/></svg></div><p class="t">実務課題の実装<small>Must・Want</small></p><p class="d">個人ごとに決めた課題を、実際の業務で使える形まで作り込みます。</p></div>
-          <div class="c"><p class="n">05</p><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M5.6 6.6l2.8 2.8M3 13h4M18.4 6.6l-2.8 2.8M21 13h-4"/><path d="M8 21h8M9 17h6a3 3 0 0 0-1-2.3 4 4 0 1 0-4 0A3 3 0 0 0 9 17z"/></svg></div><p class="t">内製化施策サポート<small>社内に広げる</small></p><p class="d">社内勉強会・実演会の企画から実施まで、講師が一緒に準備します。</p></div>
+          <div class="c"><p class="n">01</p><div class="ic"><img src="assets/illus/comp-01.webp" alt=""></div><p class="t">動画教材<small>基礎知識</small></p><p class="d">ChatGPTの基礎から実務活用までを動画で。自分のペースで学べます。</p></div>
+          <div class="c"><p class="n">02</p><div class="ic"><img src="assets/illus/comp-02.webp" alt=""></div><p class="t">面談<small>月2回・60分</small></p><p class="d">担当講師との1対1。課題の進み具合を確認し、次の2週間の進め方を決めます。</p></div>
+          <div class="c"><p class="n">03</p><div class="ic"><img src="assets/illus/comp-03.webp" alt=""></div><p class="t">チャット<small>回数無制限</small></p><p class="d">面談と面談の間も、つまずいたらその場で質問。手が止まる時間を減らします。</p></div>
+          <div class="c"><p class="n">04</p><div class="ic"><img src="assets/illus/comp-04.webp" alt=""></div><p class="t">実務課題の実装<small>Must・Want</small></p><p class="d">個人ごとに決めた課題を、実際の業務で使える形まで作り込みます。</p></div>
+          <div class="c"><p class="n">05</p><div class="ic"><img src="assets/illus/comp-05.webp" alt=""></div><p class="t">内製化施策サポート<small>社内に広げる</small></p><p class="d">社内勉強会・実演会の企画から実施まで、講師が一緒に準備します。</p></div>
         </div>
         <div class="three">
           <div class="c"><p class="k">事務局面談（月1回）</p><p class="d">受講者3名の進み具合を全社のゴールと照らし合わせ、<b>ずれがあれば軌道修正</b>。上月様・山田様と方向を合わせる場です。</p></div>
@@ -554,21 +559,21 @@
         <p class="s-lead">全社に広げるほど、「何を入れてよいか」「何をつないでよいか」の判断が必要になります。研修の中で、推進担当がその判断をできるようにします。</p>
         <div class="sec3">
           <div class="c">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 12.5h8M8 16h5"/></svg></div>
+            <div class="ic"><img src="assets/illus/sec-01.webp" alt=""></div>
             <p class="n">01</p>
             <p class="t">扱う情報のルール化</p>
             <p class="d">セキュリティ設定（学習に使われない設定など）と、<b>「入力しない情報」の社内ルール</b>を決めます。</p>
             <p class="ex"><b>例</b>　顧客の個人情報・未公開の取引条件は入力しない／設定はチームで統一する</p>
           </div>
           <div class="c">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="7"/><rect x="14" y="13" width="7" height="7"/><path d="M10 7.5h4v9"/><path d="m12 14.5 2 2 2-2"/></svg></div>
+            <div class="ic"><img src="assets/illus/sec-02.webp" alt=""></div>
             <p class="n">02</p>
             <p class="t">ツール同士をつなぐときは、確認してから</p>
             <p class="d">AIと社内のツール（台帳・メール・ファイルなど）を連携すると便利になる一方、<b>情報が外に出るリスク</b>も生まれます。リスクを理解し、確認してからつなぐ手順を身につけます。</p>
             <p class="ex"><b>例</b>　どのデータがどこへ送られるかを確認してから連携する</p>
           </div>
           <div class="c">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.8C7.9 18.7 5 15.2 5 11V6z"/><path d="M9 11.6l2.1 2.1L15.2 9.6"/></svg></div>
+            <div class="ic"><img src="assets/illus/sec-03.webp" alt=""></div>
             <p class="n">03</p>
             <p class="t">推進担当が、セキュリティも判断できる人材に</p>
             <p class="d">「これは使っていい？」を毎回外部に聞かなくても、<b>社内で判断できる</b>状態にします。全社に広げるときの安全弁になります。</p>
@@ -731,13 +736,13 @@
         <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
         <h2 class="s-title">お申し込みから、<b>10月中の研修開始</b>まで。</h2>
         <div class="flow">
-          <div class="fs"><p class="n">STEP 01</p><p class="t">お申し込み</p><p class="d">社内稟議のご承認後、お申し込みフォームにご入力いただきます。</p></div>
+          <div class="fs"><img class="il" src="assets/illus/step-01.webp" alt=""><p class="n">STEP 01</p><p class="t">お申し込み</p><p class="d">社内稟議のご承認後、お申し込みフォームにご入力いただきます。</p></div>
           <p class="farr">›</p>
-          <div class="fs"><p class="n">STEP 02</p><p class="t">事前説明会</p><p class="d">受講者3名と上月様・山田様へ、研修の進め方・学習時間・サポートの受け方をご説明します。</p></div>
+          <div class="fs"><img class="il" src="assets/illus/step-02.webp" alt=""><p class="n">STEP 02</p><p class="t">事前説明会</p><p class="d">受講者3名と上月様・山田様へ、研修の進め方・学習時間・サポートの受け方をご説明します。</p></div>
           <p class="farr">›</p>
-          <div class="fs"><p class="n">STEP 03</p><p class="t">個別ヒアリング面談</p><p class="d">受講者ごとに業務・得意領域を伺い、<b>担当講師を確定</b>。Must／Want の課題の方向性を決めます。</p></div>
+          <div class="fs"><img class="il" src="assets/illus/step-03.webp" alt=""><p class="n">STEP 03</p><p class="t">個別ヒアリング面談</p><p class="d">受講者ごとに業務・得意領域を伺い、<b>担当講師を確定</b>。Must／Want の課題の方向性を決めます。</p></div>
           <p class="farr">›</p>
-          <div class="fs go"><p class="n">STEP 04</p><p class="t">研修開始</p><p class="d">動画教材・面談・チャットで伴走。月1回の事務局面談で全社のゴールと擦り合わせます。</p></div>
+          <div class="fs go"><img class="il" src="assets/illus/step-04.webp" alt=""><p class="n">STEP 04</p><p class="t">研修開始</p><p class="d">動画教材・面談・チャットで伴走。月1回の事務局面談で全社のゴールと擦り合わせます。</p></div>
         </div>
         <div class="tl">
           <p class="k">スケジュールの目安（10月開始の場合）</p>
