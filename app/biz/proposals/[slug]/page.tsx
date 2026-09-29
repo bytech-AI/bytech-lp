@@ -17,6 +17,8 @@ type Proposal = {
   client: string;
   description: string;
   contact: string;
+  /** 配布用PDF（public/biz/assets/docs/<pdf>.pdf）。指定した提案書だけDLボタンを出す */
+  pdf?: string;
 };
 
 const PROPOSALS: Proposal[] = [
@@ -46,6 +48,7 @@ const PROPOSALS: Proposal[] = [
     description:
       "推進担当3名（大阪営業2名・内勤1名）のマンツーマン研修のご提案書です。「全社に入れたのに誰も使わない」はなぜ起きるかから始め、解決の考え方、参考事例、貴社でやること、安心して進めるために、助成金を使わない理由、料金と費用対効果、次のステップの順にお読みいただけます。",
     contact: "担当：安原",
+    pdf: "proposal-bell-2610-c",
   },
 ];
 
@@ -98,6 +101,13 @@ const PAGE_CSS = `
         .eb-meta { font-size: 13px; font-weight: 700; color: #8a93a3; margin: 18px 0 0; }
         .eb-conf { margin: 28px 0 0; padding: 12px 16px; border: 1px solid #e3e8ef; background: #f9fafc; font-size: 12.5px; line-height: 1.8; color: #5a6578; }
 
+        .eb-dl { display: flex; justify-content: center; margin: 40px 0 0; }
+        .eb-dl a { display: inline-flex; align-items: center; gap: 14px; background: #fff; border: 1px solid #d7dde6; border-radius: 9999px; padding: 18px 40px; font-size: 16px; font-weight: 800; color: #1a2330; text-decoration: none; box-shadow: 0 1px 2px rgba(26,35,48,.05); transition: border-color .2s ease; }
+        .eb-dl a:hover { border-color: #2c5c9c; }
+        .eb-dl a:hover .eb-dl__ico { transform: translateY(3px); }
+        .eb-dl__ico { width: 20px; height: 20px; flex: 0 0 auto; transition: transform .2s ease; background: center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232c5c9c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v12'/%3E%3Cpath d='m7 11 5 5 5-5'/%3E%3Cpath d='M4 20h16'/%3E%3C/svg%3E"); }
+        .eb-foot__btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 9999px; padding: 16px 34px; font-size: 15px; font-weight: 800; text-decoration: none; background: #2c5c9c; color: #fff; margin-top: 22px; }
+        .eb-foot__btn:hover { opacity: .92; }
         .eb-deck { position: relative; margin-top: 56px; width: 100%; overflow: hidden; border: 1px solid #e3e8ef; border-radius: 0; background: #e9edf3; }
         .eb-deck iframe { display: block; width: 1280px; height: 720px; border: 0; transform-origin: top left; }
 
@@ -112,6 +122,9 @@ const PAGE_CSS = `
           .eb-card { border-radius: 10px; padding: 40px 20px 52px; }
           .eb-title { font-size: 25px; margin-bottom: 18px; }
           .eb-desc { font-size: 14px; line-height: 1.95; }
+          .eb-dl { margin-top: 30px; }
+          .eb-dl a { width: 100%; justify-content: center; padding: 16px 20px; font-size: 15px; }
+          .eb-foot__btn { width: 100%; }
           .eb-deck { margin-top: 36px; }
           .eb-foot { margin-top: 48px; padding-top: 32px; }
         }
@@ -154,6 +167,9 @@ export default async function ProposalPage({
 
   // biz ホストはクリーンURLで参照。proxy の汎用リライトで内部の /biz/ebooks/... に解決される。
   const embedSrc = `/ebooks/${proposal.deck}/index.html`;
+  // biz ホストはクリーンURLで参照（/biz付きだと301を挟む）。proxy が内部の /biz/assets/... に解決する。
+  const pdfHref = proposal.pdf ? `/assets/docs/${proposal.pdf}.pdf` : null;
+  const pdfName = `${proposal.client}_${proposal.title}.pdf`;
 
   return (
     <>
@@ -188,6 +204,15 @@ export default async function ProposalPage({
             </p>
           </div>
 
+          {pdfHref && (
+            <div className="eb-dl">
+              <a href={pdfHref} download={pdfName}>
+                ダウンロードする(PDF形式)
+                <span className="eb-dl__ico" aria-hidden="true" />
+              </a>
+            </div>
+          )}
+
           <div className="eb-deck">
             <iframe src={embedSrc} title={`${proposal.title} スライド`} scrolling="no" />
           </div>
@@ -198,6 +223,11 @@ export default async function ProposalPage({
             <p className="eb-foot__desc">
               お電話・オンラインどちらでも結構です。{proposal.contact}（バイテック法人AI研修）
             </p>
+            {pdfHref && (
+              <a className="eb-foot__btn" href={pdfHref} download={pdfName}>
+                ダウンロードする(PDF形式)
+              </a>
+            )}
           </div>
         </article>
       </main>
