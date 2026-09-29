@@ -193,7 +193,9 @@
 
   /* ===== セキュリティ ===== */
   .sec3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 22px; }
-  .sec3 .c { border: 1px solid var(--line); padding: 26px 24px 24px; }
+  .sec3 .c { border: 1px solid var(--line); padding: 26px 24px 24px; display: flex; flex-direction: column; }
+  .sec3 .c .ex { margin-top: auto !important; }
+  .sec3 .c .d { padding-bottom: 14px; }
   .sec3 .c .ic { height: 104px; display: flex; align-items: flex-end; }
   .sec3 .c .ic img { height: 104px; width: auto; display: block; }
   .sec3 .c .n { font-size: 11.5px; font-weight: 800; color: var(--blue-pale); letter-spacing: .12em; margin-top: 18px; }
