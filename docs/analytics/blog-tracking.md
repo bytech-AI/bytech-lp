@@ -23,6 +23,24 @@ Google検索 ─▶ bytech.jp/blog/記事 ─▶ bytech.jp/counseling (or /diagn
   本校と同じセッションで見るには `GTM-K6HH9C2F` も必要。TCRNZFW6 は別プロパティへの送信なので残しても二重計上にはならない。
   不要なら SWELL 側で外す（判断はユーザー）。
 
+## 経路の3分類（集計の軸）
+
+| 分類 | 判定 | 例 |
+|---|---|---|
+| 検索→公式直接 | ref が検索エンジン かつ landing が `/blog/` 以外 | `ref=https://www.google.com/`, `landing=/` |
+| バイテックブログ経由 | landing が `/blog/…` | `ref=https://www.google.com/`, `landing=/blog/記事名` |
+| AI HACK記事経由 | lp_query に `utm_source=ai-hack`（ref は noreferrer で空） | `utm_content=articles_記事ID__sidebar` |
+
+AI HACK → lp.bytech.jp は従来どおり `gen_ai_hack_cp5`（CRM で別ラベル）。AI HACK → bytech.jp 本体は CRM ラベルはオーガニックのまま、
+上記の分類で「AI HACK記事経由」として数える（utm_content でどの記事・どの位置かまで分かる）。
+
+## ブログ側の反映状況（2026-10-01）
+
+Worker `blog-router` を `infra/cloudflare/blog-router/worker.js` の内容で更新済み（API経由）。
+bytech.jp/blog の全HTMLに GTM-K6HH9C2F + btRefInfo + noscript が入り、biz.bytech.jp/blog と HTML以外は無変更なのを確認した。
+更新手順: `docs/analytics/blog-head-snippet.html` を直す → worker.js の `__SNIPPET__` を JSON 文字列として埋めて
+`PUT /accounts/<id>/workers/scripts/blog-router`（multipart: metadata + worker.js、`.env.local` の `CLOUDFLARE_WORKERS_TOKEN`）。
+
 ## AI HACK（ai-hack.jp）経由の扱い
 
 - AI HACK → bytech.jp のリンクは `addBytechUtm` で `utm_source=ai-hack&utm_medium=referral&utm_campaign=cta-bytech&utm_content=ページ__位置` が付く。

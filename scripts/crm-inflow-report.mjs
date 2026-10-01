@@ -76,6 +76,42 @@ function classifyRef(ref, lpQuery) {
     return `外部:${host}`;
 }
 
+/**
+ * 経路の3分類（ユーザー定義）:
+ *   検索→公式直接   = 検索エンジンから bytech.jp 本体に直接着地（landing が /blog/ 以外）
+ *   バイテックブログ経由 = セッション最初のページが /blog/（紹介元は問わない。検索が大半）
+ *   AI HACK記事経由   = utm_source=ai-hack（rel=noreferrer のため ref ではなく lp_query で判定）。utm_content で記事と位置まで分かる
+ *   lp.bytech.jp 着地の AI HACK は route_id=gen_ai_hack_cp5 で CRM 側が別ラベルにしているのでここでは「AI HACK(LP経由)」
+ */
+function classifyRoute(lead) {
+    const q = parseQuery(lead.acuity_lp_query);
+    const src = (q.get('utm_source') || '').toLowerCase();
+    const landing = (lead.acuity_landing || '').split('?')[0];
+    if (['ai-hack', 'aihack', 'ai_hack'].includes(src) || /(^|\.)ai-hack\.jp$/.test(refHost(lead.acuity_ref))) {
+        return (lead.acuity_route_id || '').startsWith('gen_ai_hack') ? 'AI HACK(LP経由)' : 'AI HACK記事経由';
+    }
+    if (landing.startsWith('/blog/')) return 'バイテックブログ経由';
+    const r = classifyRef(lead.acuity_ref, lead.acuity_lp_query);
+    if (r.startsWith('検索:')) return '検索→公式直接';
+    if (r === 'なし(直接)' && !lead.acuity_landing) return '流入元データなし';
+    return `その他(${r})`;
+}
+
+function refHost(ref) {
+    try {
+        return ref ? new URL(ref).host.toLowerCase() : '';
+    } catch {
+        return '';
+    }
+}
+
+/** AI HACK の utm_content（例: articles_abc123__sidebar / schools_bytech__editor-pr）を「ページ / 位置」に分ける */
+function describeAiHackContent(content) {
+    if (!content) return '(utm_content なし)';
+    const [page, position] = content.split('__');
+    return position ? `${page} / ${position}` : page;
+}
+
 /** 最初に開いたパスを「ブログ記事 / トップ / LP種別」に分類する */
 function classifyLanding(landing) {
     if (!landing) return 'なし';
@@ -136,9 +172,17 @@ const byLanding = new Map();
 const byPair = new Map();
 const byWeekBlog = new Map();
 const byAiHackPage = new Map();
+const byRoute = new Map();
+const byRouteWeek = new Map();
 for (const l of target) {
+    const route = classifyRoute(l);
+    tally(byRoute, route);
+    const d = new Date(l.created_at);
+    const monday = new Date(d);
+    monday.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7));
+    tally(byRouteWeek, `${fmtDate(monday)}週  ${route}`);
+    if (route === 'AI HACK記事経由') tally(byAiHackPage, describeAiHackContent(parseQuery(l.acuity_lp_query).get('utm_content')));
     const r = classifyRef(l.acuity_ref, l.acuity_lp_query);
-    if (r === 'AI HACK') tally(byAiHackPage, parseQuery(l.acuity_lp_query).get('utm_content') || '(utm_content なし)');
     const g = classifyLanding(l.acuity_landing);
     tally(byRef, r);
     tally(byLanding, g);
@@ -150,8 +194,10 @@ for (const l of target) {
         tally(byWeekBlog, `${fmtDate(monday)}週`);
     }
 }
+printTable('経路の3分類（検索→公式直接 / バイテックブログ経由 / AI HACK記事経由）', byRoute);
+printTable('経路の3分類 × 週', new Map([...byRouteWeek.entries()].sort()), 60);
 printTable('流入元(ref)別', byRef);
 printTable('最初のページ(landing)別', byLanding);
 printTable('ref × landing（検索→ブログ→予約 はここで読む）', byPair, 40);
 printTable('ブログ着地の予約数（週別）', byWeekBlog);
-printTable('AI HACK 経由: どのページ・位置から（utm_content）', byAiHackPage);
+printTable('AI HACK記事経由: どの記事・位置から（utm_content = ページ / 位置）', byAiHackPage);

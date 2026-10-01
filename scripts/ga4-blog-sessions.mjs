@@ -93,11 +93,32 @@ function printRows(title, rows, limit = 25) {
     }
 }
 
-const blogLanding = {
-    dimensionFilter: { filter: { fieldName: 'landingPage', stringFilter: { matchType: 'BEGINS_WITH', value: '/blog/' } } },
-};
+const blogLandingFilter = { filter: { fieldName: 'landingPage', stringFilter: { matchType: 'BEGINS_WITH', value: '/blog/' } } };
+const notBlogLandingFilter = { notExpression: blogLandingFilter };
+const organicFilter = { filter: { fieldName: 'sessionDefaultChannelGroup', stringFilter: { matchType: 'EXACT', value: 'Organic Search' } } };
+// utm 付きは source=ai-hack、utm 無しのリンク（旧記事など）は参照元ドメインの ai-hack.jp になるので前方一致で両方拾う
+const aiHackFilter = { filter: { fieldName: 'sessionSource', stringFilter: { matchType: 'BEGINS_WITH', value: 'ai-hack' } } };
+const blogLanding = { dimensionFilter: blogLandingFilter };
+
+/** 経路の3分類（CRM 側 crm-inflow-report.mjs と同じ定義）をセッション数と cv_setsumeikai で出す */
+async function printRouteSummary(token) {
+    const routes = [
+        ['検索→公式直接（Organic Search & 着地が /blog/ 以外）', { andGroup: { expressions: [organicFilter, notBlogLandingFilter] } }],
+        ['バイテックブログ経由（着地が /blog/）', blogLandingFilter],
+        ['AI HACK記事経由（utm_source=ai-hack）', aiHackFilter],
+    ];
+    const rows = [];
+    for (const [label, dimensionFilter] of routes) {
+        const r = await runReport(token, ['sessionDefaultChannelGroup'], { dimensionFilter });
+        rows.push({ dims: [label], sessions: r.reduce((a, x) => a + x.sessions, 0), users: r.reduce((a, x) => a + x.users, 0), cv: r.reduce((a, x) => a + x.cv, 0) });
+    }
+    printRows('経路の3分類（セッション／ユーザー／予約CV）', rows);
+    const byContent = await runReport(token, ['sessionManualAdContent'], { dimensionFilter: aiHackFilter });
+    printRows('AI HACK記事経由: どの記事・位置から（utm_content）', byContent, 30);
+}
 const token = await accessToken();
 console.log(`GA4 property ${PROPERTY} / 直近${days}日 / ランディングページが /blog/ のセッション`);
+await printRouteSummary(token);
 const total = await runReport(token, ['sessionDefaultChannelGroup']);
 printRows('全体: チャネル別（比較用）', total, 10);
 const bySource = await runReport(token, ['sessionSource', 'sessionMedium'], blogLanding);

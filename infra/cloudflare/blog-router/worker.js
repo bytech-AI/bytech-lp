@@ -6,7 +6,7 @@
 //   - 検索→ブログ着地時の紹介元(ref)と最初のパス(landing)を保持し、予約時に GAS→CRM へ渡す
 //   biz.bytech.jp/blog は GTM-KK696RSD で別運用なので触らない。HTML 以外（画像・CSS・JS・feed）も触らない。
 //
-// __SNIPPET__ は scripts/deploy-blog-router.mjs が docs/analytics/blog-head-snippet.html の内容で置き換える。
+// HEAD_SNIPPET のプレースホルダー（下の定数）は、アップロード時に docs/analytics/blog-head-snippet.html の内容で置き換える。
 // ダッシュボードから直接編集せず、このファイルを直して deploy スクリプトで上げること。
 
 const HEAD_SNIPPET = __SNIPPET__;
