@@ -275,8 +275,8 @@ export default function CounselingPage() {
 
       {/* 予約ウィジェット — ネイティブ<script>（next/scriptはNext16でinline評価が壊れ未実行になるため不使用） */}
       <script dangerouslySetInnerHTML={{ __html: `
-/* 流入元メモ（ASP経由の予約をメディア単位で特定するため）: 外部サイトから来た時の紹介元と到着時のクエリをタブ内に保持し、予約・トラッキング時に送る */
-window.btRefInfo=window.btRefInfo||function(){var k='bt_ref_v1',v=null,r=document.referrer||'',q=(location.search||'').slice(1),ext=false;try{v=JSON.parse(sessionStorage.getItem(k)||'null')}catch(e){}try{ext=!!r&&new URL(r).host!==location.host}catch(e){}if(!v||ext){v={ref:r,q:q};try{sessionStorage.setItem(k,JSON.stringify(v))}catch(e){}}return v};window.btRefInfo();
+/* 流入元メモ（ASP経由・検索→ブログ経由の予約を特定するため）: 外部サイトから来た時の紹介元(ref)・到着時のクエリ(q)・セッション最初のパス(landing)をタブ内に保持し、予約・トラッキング時に送る。ブログ→LPは別タブで開くことがある(rel=noopener だと sessionStorage が引き継がれない)ので、localStorage にも30分だけ写しを置き、別タブのLPが内部遷移/直接到着で開かれた時はそれを引き継ぐ */
+window.btRefInfo=window.btRefInfo||function(){var k='bt_ref_v1',t=30*60*1000,v=null,r=document.referrer||'',q=(location.search||'').slice(1),ext=false,now=Date.now();try{v=JSON.parse(sessionStorage.getItem(k)||'null')}catch(e){}try{ext=!!r&&new URL(r).host!==location.host}catch(e){}if(!v&&!ext){try{var c=JSON.parse(localStorage.getItem(k)||'null');if(c&&c.ts&&now-c.ts<t){v={ref:c.ref||'',q:c.q||'',landing:c.landing||''}}}catch(e){}}if(!v||ext){v={ref:r,q:q,landing:location.pathname}}try{sessionStorage.setItem(k,JSON.stringify(v))}catch(e){}try{localStorage.setItem(k,JSON.stringify({ref:v.ref,q:v.q,landing:v.landing,ts:now}))}catch(e){}return v};window.btRefInfo();
 
   const GAS_URL    = 'https://script.google.com/macros/s/AKfycbzFK2HDxL3BwTfK2DBR8flrCIll2lr5ZyOB1W9Vy5s6V5EcAIhNc_plwDu-lFMCU__1fg/exec';
   const SLOTS_URL  = '/api/slots';
@@ -542,6 +542,7 @@ window.btRefInfo=window.btRefInfo||function(){var k='bt_ref_v1',v=null,r=documen
         route_id:ROUTE_ID,
         ref:(window.btRefInfo?window.btRefInfo().ref:''),
         lp_query:(window.btRefInfo?window.btRefInfo().q:''),
+        landing:(window.btRefInfo?(window.btRefInfo().landing||''):''),
         company:document.getElementById('bcCompany').value.trim(),
         department:document.getElementById('bcDept').value.trim(),
         employees:bcRadios.employees,
