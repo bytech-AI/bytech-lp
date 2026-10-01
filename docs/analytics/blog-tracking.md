@@ -23,6 +23,16 @@ Google検索 ─▶ bytech.jp/blog/記事 ─▶ bytech.jp/counseling (or /diagn
   本校と同じセッションで見るには `GTM-K6HH9C2F` も必要。TCRNZFW6 は別プロパティへの送信なので残しても二重計上にはならない。
   不要なら SWELL 側で外す（判断はユーザー）。
 
+## AI HACK（ai-hack.jp）経由の扱い
+
+- AI HACK → bytech.jp のリンクは `addBytechUtm` で `utm_source=ai-hack&utm_medium=referral&utm_campaign=cta-bytech&utm_content=ページ__位置` が付く。
+  ただし `rel="noreferrer"` なので **document.referrer は空**。識別は `ref` ではなく **到着時クエリ（lp_query）** で行う。
+- `btRefInfo` は「到着時にクエリがある」時は新規到着として保存し、localStorage の写しでは上書きしない（AI HACK 到着をブログの写しで潰さないため）。
+- 行き先は3種類。bytech.jp（本校LP、CRM では `gen_organic_cp2`＝オーガニック扱い）、lp.bytech.jp（AI HACK 向けLP、`gen_ai_hack_cp5`）、
+  `*.bytech-ad.com`（広告LP、別計測）。**bytech.jp に着地した AI HACK 経由は CRM のラベル上はオーガニックに混ざる**ので、
+  `crm-inflow-report.mjs` は `acuity_lp_query` の `utm_source` で AI HACK を分類し、`utm_content` でどのページ・位置からかも出す。
+  CRM のラベル自体を「GEN【AI HACK】」にしたい場合は GAS で `utm_source=ai-hack` の時に route_id を差し替える必要がある（CP計上に関わるので要判断）。
+
 ## 1. ブログに入れるコード
 
 `docs/analytics/blog-head-snippet.html` の内容をそのまま入れる。入れ方は2通り。

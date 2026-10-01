@@ -45,9 +45,24 @@ const SNS_HOSTS = [
     ['tiktok', 'TikTok'],
 ];
 
-/** 紹介元URLを「検索:google / SNS:X / 自社内 / 外部:ホスト名 / なし」に分類する */
-function classifyRef(ref) {
-    if (!ref) return 'なし(直接)';
+/** LP到着時のクエリから utm_source 等を取り出す（AI HACK は noreferrer なので ref ではなくここで判別する） */
+function parseQuery(q) {
+    try {
+        return new URLSearchParams(q || '');
+    } catch {
+        return new URLSearchParams();
+    }
+}
+
+/** 紹介元URLを「検索:google / SNS:X / 自社内 / AI HACK / 外部:ホスト名 / なし」に分類する。ref が空なら lp_query の utm_source で補う */
+function classifyRef(ref, lpQuery) {
+    if (!ref) {
+        const src = (parseQuery(lpQuery).get('utm_source') || '').toLowerCase();
+        if (['ai-hack', 'aihack', 'ai_hack'].includes(src)) return 'AI HACK';
+        if (src === 'blog') return '自社ブログ(utm)';
+        if (src) return `utm:${src}`;
+        return 'なし(直接)';
+    }
     let host = '';
     try {
         host = new URL(ref).host.toLowerCase();
@@ -120,8 +135,10 @@ const byRef = new Map();
 const byLanding = new Map();
 const byPair = new Map();
 const byWeekBlog = new Map();
+const byAiHackPage = new Map();
 for (const l of target) {
-    const r = classifyRef(l.acuity_ref);
+    const r = classifyRef(l.acuity_ref, l.acuity_lp_query);
+    if (r === 'AI HACK') tally(byAiHackPage, parseQuery(l.acuity_lp_query).get('utm_content') || '(utm_content なし)');
     const g = classifyLanding(l.acuity_landing);
     tally(byRef, r);
     tally(byLanding, g);
@@ -137,3 +154,4 @@ printTable('流入元(ref)別', byRef);
 printTable('最初のページ(landing)別', byLanding);
 printTable('ref × landing（検索→ブログ→予約 はここで読む）', byPair, 40);
 printTable('ブログ着地の予約数（週別）', byWeekBlog);
+printTable('AI HACK 経由: どのページ・位置から（utm_content）', byAiHackPage);
