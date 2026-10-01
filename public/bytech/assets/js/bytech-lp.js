@@ -1,5 +1,5 @@
-/* 流入元メモ（ASP経由の予約をメディア単位で特定するため）: 外部サイトから来た時の紹介元と到着時のクエリをタブ内に保持し、予約・トラッキング時に送る */
-window.btRefInfo=window.btRefInfo||function(){var k='bt_ref_v1',v=null,r=document.referrer||'',q=(location.search||'').slice(1),ext=false;try{v=JSON.parse(sessionStorage.getItem(k)||'null')}catch(e){}try{ext=!!r&&new URL(r).host!==location.host}catch(e){}if(!v||ext){v={ref:r,q:q};try{sessionStorage.setItem(k,JSON.stringify(v))}catch(e){}}return v};window.btRefInfo();
+/* 流入元メモ（ASP経由・検索→ブログ経由の予約を特定するため）: 外部サイトから来た時の紹介元(ref)・到着時のクエリ(q)・セッション最初のパス(landing)をタブ内に保持し、予約・トラッキング時に送る。ブログ→LPは別タブで開くことがある(rel=noopener だと sessionStorage が引き継がれない)ので、localStorage にも30分だけ写しを置き、別タブのLPが内部遷移/直接到着で開かれた時はそれを引き継ぐ（到着時にクエリ(utm等)が付いている時は新規到着として扱い、写しは使わない。AI HACK等は noreferrer+utm で来るため） */
+window.btRefInfo=window.btRefInfo||function(){var k='bt_ref_v1',t=30*60*1000,v=null,r=document.referrer||'',q=(location.search||'').slice(1),ext=false,now=Date.now();try{v=JSON.parse(sessionStorage.getItem(k)||'null')}catch(e){}try{ext=!!r&&new URL(r).host!==location.host}catch(e){}if(!v&&!ext&&!q){try{var c=JSON.parse(localStorage.getItem(k)||'null');if(c&&c.ts&&now-c.ts<t){v={ref:c.ref||'',q:c.q||'',landing:c.landing||''}}}catch(e){}}if(!v||ext){v={ref:r,q:q,landing:location.pathname}}try{sessionStorage.setItem(k,JSON.stringify(v))}catch(e){}try{localStorage.setItem(k,JSON.stringify({ref:v.ref,q:v.q,landing:v.landing,ts:now}))}catch(e){}return v};window.btRefInfo();
 /* eslint-disable */
 // Extracted from app/bytech/page.tsx inline <Script> blocks.
 // Keep this file dependency-free; it runs after Next hydration starts.
@@ -281,7 +281,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
       const nameVal = (document.getElementById('csName') || {value:''}).value.trim();
       const emailVal = (document.getElementById('csEmail') || {value:''}).value.trim();
       const phoneVal = (document.getElementById('csPhone') || {value:''}).value.trim();
-      const params = new URLSearchParams({ action:'book', started_at:csSelectedStart, name:nameVal, email:emailVal, phone:phoneVal, source:SOURCE, lp_type:LP_TYPE, entry:ENTRY, route_id:ROUTE_ID,ref:(window.btRefInfo?window.btRefInfo().ref:''),lp_query:(window.btRefInfo?window.btRefInfo().q:'') });
+      const params = new URLSearchParams({ action:'book', started_at:csSelectedStart, name:nameVal, email:emailVal, phone:phoneVal, source:SOURCE, lp_type:LP_TYPE, entry:ENTRY, route_id:ROUTE_ID,ref:(window.btRefInfo?window.btRefInfo().ref:''),lp_query:(window.btRefInfo?window.btRefInfo().q:''), landing:(window.btRefInfo?(window.btRefInfo().landing||''):'') });
       const res = await fetch(GAS_URL+'?'+params, { cache:'no-store' });
       const text = await res.text();
       let result; try { result = JSON.parse(text); } catch(e) { throw new Error('Invalid response'); }
