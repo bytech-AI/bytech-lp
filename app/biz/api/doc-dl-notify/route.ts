@@ -3,7 +3,8 @@
 // formrun は Discord 通知も資料別の返信文面も出せないため自前で行う。
 // biz ホストでは proxy が /api/doc-dl-notify を /biz/api/doc-dl-notify へリライトする。
 // env（いずれも未設定ならその処理だけスキップ。リポジトリには含めない）:
-//   DISCORD_DOC_DL_WEBHOOK … Discord webhook URL
+//   DISCORD_DOC_DL_WEBHOOK … Discord webhook URL（資料DLページからの申込み → #資料ダウンロード）
+//   DISCORD_FV_DL_WEBHOOK  … Discord webhook URL（トップFVフォームからの申込み → #FV。未設定なら上に送る）
 //   RESEND_API_KEY         … Resend のAPIキー（bytech.jp のドメイン認証済みであること）
 //   DOC_DL_MAIL_FROM       … 差出人（既定: バイテック法人AI研修 <noreply@bytech.jp>）
 import { NextRequest } from "next/server";
@@ -162,10 +163,17 @@ const ScreeningSchema = z.object({
   summary: z.string().describe("会社について分かったことの1〜2文の要約（日本語）"),
 });
 
+// 自社・グループ会社のドメイン。AI審査は「バイテック」を展開する同業=競合と判定してしまうため審査せず返信する
+const OWN_DOMAINS = ["bytech.jp", "librex.co.jp", "librex.jp"];
+
 async function screenLead(data: Record<string, unknown>): Promise<Screening> {
   const email = clip(data["メールアドレス"]);
   const company = clip(data["企業名"]);
   const emailDomain = (email.split("@")[1] || "").toLowerCase();
+
+  if (OWN_DOMAINS.includes(emailDomain)) {
+    return { verdict: "skipped", reasons: ["自社ドメインのため審査スキップ"] };
+  }
 
   // --- 決定的チェック ---
   if (emailDomain && DISPOSABLE_DOMAINS.includes(emailDomain)) {
@@ -224,8 +232,11 @@ async function screenLead(data: Record<string, unknown>): Promise<Screening> {
 const escapeHtml = (s: string) =>
   s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] as string);
 
-async function notifyDiscord(data: Record<string, unknown>, screening: Screening) {
-  const webhook = process.env.DISCORD_DOC_DL_WEBHOOK;
+// replied: 自動返信を送れたか（review で保留した場合は null）
+async function notifyDiscord(data: Record<string, unknown>, screening: Screening, replied: boolean | null) {
+  // トップFVフォームは別チャンネルへ（フロントが「ページ」に "(トップFVフォーム)" を付けて送る）
+  const isFv = clip(data["ページ"]).includes("トップFVフォーム");
+  const webhook = (isFv && process.env.DISCORD_FV_DL_WEBHOOK) || process.env.DISCORD_DOC_DL_WEBHOOK;
   if (!webhook) return;
   const fields: { name: string; value: string; inline: boolean }[] = NOTIFY_FIELDS.filter(
     ([key]) => clip(data[key]),
@@ -234,12 +245,13 @@ async function notifyDiscord(data: Record<string, unknown>, screening: Screening
     value: clip(data[key]),
     inline: key !== "資料名" && key !== "ページ",
   }));
+  const replyText = replied ? "自動返信済み" : "**自動返信に失敗**（手動で資料をご案内ください）";
   const judge =
     screening.verdict === "auto"
-      ? "✅ 問題なし → 自動返信済み"
+      ? `✅ 問題なし → ${replyText}`
       : screening.verdict === "review"
         ? "⚠️ **要確認 → 自動返信は保留中**（問題なければ手動で資料をご案内ください）"
-        : `➖ AI審査スキップ → 自動返信済み${screening.reasons[0] ? `（${screening.reasons[0]}）` : ""}`;
+        : `➖ AI審査スキップ → ${replyText}${screening.reasons[0] ? `（${screening.reasons[0]}）` : ""}`;
   const parts = [judge];
   if (screening.verdict === "review" && screening.reasons.length) {
     parts.push(...screening.reasons.map((r) => `・${r.slice(0, 180)}`));
@@ -255,8 +267,10 @@ async function notifyDiscord(data: Record<string, unknown>, screening: Screening
           title:
             screening.verdict === "review"
               ? "⚠️ 資料ダウンロード（要確認・返信保留）"
-              : "📥 資料ダウンロードがありました",
-          color: screening.verdict === "review" ? 0xe6a817 : 0x2c5c9c,
+              : replied
+                ? "📥 資料ダウンロードがありました"
+                : "⚠️ 資料ダウンロード（自動返信失敗）",
+          color: screening.verdict === "review" || !replied ? 0xe6a817 : 0x2c5c9c,
           fields,
           timestamp: new Date().toISOString(),
         },
@@ -265,11 +279,12 @@ async function notifyDiscord(data: Record<string, unknown>, screening: Screening
   }).catch(() => {});
 }
 
-async function sendAutoReply(data: Record<string, unknown>) {
+// 自動返信メールを送り、送れたかを返す
+async function sendAutoReply(data: Record<string, unknown>): Promise<boolean> {
   const apiKey = process.env.RESEND_API_KEY;
   const email = clip(data["メールアドレス"]);
   const docs = DOCS[clip(data["資料名"])];
-  if (!apiKey || !docs || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+  if (!apiKey || !docs || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return false;
 
   const name = clip(data["お名前"]);
   const docName = clip(data["資料名"]);
@@ -347,19 +362,30 @@ ${linksText}
 ${SITE}
 ※本メールは資料ダウンロードフォームにご入力いただいた方へ自動送信しています。`;
 
-  await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: { authorization: `Bearer ${apiKey}`, "content-type": "application/json" },
-    body: JSON.stringify({
-      // 差出人ドメインは biz.bytech.jp（2026-09-20 Resend認証済み・トラッキング無効）
-      from: process.env.DOC_DL_MAIL_FROM || "バイテック法人AI研修 <noreply@biz.bytech.jp>",
-      to: [email],
-      reply_to: "customer-success@bytech.jp",
-      subject,
-      html,
-      text,
-    }),
-  }).catch(() => {});
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { authorization: `Bearer ${apiKey}`, "content-type": "application/json" },
+      body: JSON.stringify({
+        // 差出人ドメインは biz.bytech.jp（2026-09-20 Resend認証済み・トラッキング無効）
+        from: process.env.DOC_DL_MAIL_FROM || "バイテック法人AI研修 <noreply@biz.bytech.jp>",
+        to: [email],
+        reply_to: "customer-success@bytech.jp",
+        subject,
+        html,
+        text,
+      }),
+    });
+    // 送信可否をログで追えるようにする（bodyは失敗時のみ。メール本文やアドレス全体は出さない）
+    console.log(
+      "DOC_DL_RESEND",
+      JSON.stringify({ status: res.status, domain: email.split("@")[1] || "", doc: docName, ...(res.ok ? {} : { body: (await res.text()).slice(0, 300) }) }),
+    );
+    return res.ok;
+  } catch (e) {
+    console.log("DOC_DL_RESEND_ERROR", e instanceof Error ? e.message.slice(0, 200) : String(e));
+    return false;
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -368,13 +394,26 @@ export async function POST(req: NextRequest) {
   if (!data || !clip(data["資料名"])) {
     return new Response(null, { status: 204 });
   }
-  // 審査してから分岐。問題なければ通知せず自動返信のみ、疑わしい(review)ときだけ
-  // Discordへ理由付きで通知して返信を保留する（通常DLの記録はformrun管理画面で見る運用）。
-  const screening = await screenLead(data);
-  if (screening.verdict === "review") {
-    await notifyDiscord(data, screening);
-  } else {
-    await sendAutoReply(data);
-  }
+  // 審査してから分岐。問題なければ自動返信、疑わしい(review)ときは返信を保留する。
+  // どちらの場合も全件 Discord へ通知する（審査結果・自動返信の成否つき）。
+  // テスト用バイパス: env DOC_DL_TEST_TOKEN と一致する x-doc-dl-test ヘッダ付きなら審査をスキップして送信
+  // （自社・関係者宛の送達テストはAI審査が「競合」判定で必ず保留になるため）
+  const testToken = process.env.DOC_DL_TEST_TOKEN;
+  const isTest = !!testToken && req.headers.get("x-doc-dl-test") === testToken;
+  const screening: Screening = isTest
+    ? { verdict: "skipped", reasons: ["テストトークンにより審査スキップ"] }
+    : await screenLead(data);
+  console.log(
+    "DOC_DL_SCREENING",
+    JSON.stringify({
+      verdict: screening.verdict,
+      reasons: screening.reasons.slice(0, 3),
+      doc: clip(data["資料名"]),
+      page: clip(data["ページ"]),
+      domain: (clip(data["メールアドレス"]).split("@")[1] || ""),
+    }),
+  );
+  const replied = screening.verdict === "review" ? null : await sendAutoReply(data);
+  await notifyDiscord(data, screening, replied);
   return new Response(null, { status: 204 });
 }
