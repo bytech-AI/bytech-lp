@@ -163,10 +163,17 @@ const ScreeningSchema = z.object({
   summary: z.string().describe("会社について分かったことの1〜2文の要約（日本語）"),
 });
 
+// 自社・グループ会社のドメイン。AI審査は「バイテック」を展開する同業=競合と判定してしまうため審査せず返信する
+const OWN_DOMAINS = ["bytech.jp", "librex.co.jp", "librex.jp"];
+
 async function screenLead(data: Record<string, unknown>): Promise<Screening> {
   const email = clip(data["メールアドレス"]);
   const company = clip(data["企業名"]);
   const emailDomain = (email.split("@")[1] || "").toLowerCase();
+
+  if (OWN_DOMAINS.includes(emailDomain)) {
+    return { verdict: "skipped", reasons: ["自社ドメインのため審査スキップ"] };
+  }
 
   // --- 決定的チェック ---
   if (emailDomain && DISPOSABLE_DOMAINS.includes(emailDomain)) {
