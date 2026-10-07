@@ -285,13 +285,6 @@
   .right-form-fixed .form_slides img:nth-child(2) { left: 17px !important; top: 15px !important; transform: rotate(-1deg) !important; }
   .right-form-fixed .form_slides img:nth-child(3) { left: 34px !important; top: 30px !important; transform: rotate(5deg) !important; }
 }
-/* 未入力の先頭フィールドの枠を点滅させて入力位置を示す（/doc-a と同じ挙動） */
-.right-form-fixed .df-field.df-active .df-input,
-.right-form-fixed .df-field.df-active .df-select,
-.right-form-fixed .df-field.df-active .df-opt { border-width: 2px !important; animation: df-blink 1.2s step-end infinite; }
-.right-form-fixed .df-field.df-active .df-input:focus,
-.right-form-fixed .df-field.df-active .df-select:focus { animation: none !important; }
-@keyframes df-blink { 0% { border-color: #e53935; } 50% { border-color: #d0d5dd; } }
 </style><style>
           .logo-marquee { padding: 28px 0 28px; background: #f5f6f8; overflow: hidden; }
           .logo-marquee__eyebrow { text-align: center; font-size: 18px; letter-spacing: .06em; color: #16202e; font-weight: 700; margin: 0 0 22px; font-family: "Futura","Futura Medium",var(--font-montserrat),sans-serif; }
