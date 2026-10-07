@@ -3052,6 +3052,25 @@ document.querySelectorAll(`.faq__q>div`).forEach(tar => {
 
 <script id="swiper_script-js" src="/geek-static/files/swiper-bundle.min.js"></script>
 <script id="my_script-js" src="/geek-static/files/script.js?v=20260815blog"></script>
+<script>
+/* URL の # (学習サイトからの #counseling など) で直接来たとき、画像の読み込みでページが伸びて着地点がずれるので、読み込み後に合わせ直す。自分でスクロールしたらやめる */
+(function () {
+  var hash = location.hash;
+  if (!hash || hash.length < 2) return;
+  var id;
+  try { id = decodeURIComponent(hash.slice(1)); } catch (e) { return; }
+  var stopped = false;
+  ["wheel", "touchstart", "keydown", "mousedown"].forEach(function (type) {
+    window.addEventListener(type, function () { stopped = true; }, { once: true, passive: true });
+  });
+  function align() {
+    var target = document.getElementById(id);
+    if (target && !stopped) target.scrollIntoView({ block: "start", behavior: "instant" });
+  }
+  function run() { align(); setTimeout(align, 300); setTimeout(align, 1000); setTimeout(align, 2000); }
+  if (document.readyState === "complete") run(); else window.addEventListener("load", run);
+})();
+</script>
 
 
 
