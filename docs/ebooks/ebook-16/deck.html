@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>コンサルティング業のAI活用事例集｜全14スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* 業種別 活用事例集。設計は ebook-04/05 と同系統（四角の角丸なし・円とピルのみ角丸）。
+     ★事例はすべて各社の公開情報にもとづく。数値は出典の表記どおりに記載し、推測で丸めたり
+       脚色したりしないこと。出典はスライド下部に必ず明記する。他社名を出す資料のため、
+       まとめサイトの孫引きは使わず一次情報（プレスリリース・公式サイト）で裏を取る。 */
+  :root {
+    --blue: #2c5c9c; --blue-deep: #1a2e50; --blue-bright: #1a6fb5; --blue-pale: #8fb0d8;
+    --ink: #2a2f3a; --line: #e3e8ef; --amber: #f0b429; --tint: #eef4fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f4f6f8; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; color: var(--ink); padding: 48px 0 96px; }
+  .note { max-width: 1120px; margin: 0 auto 28px; font-size: 13px; font-weight: 700; color: #8a93a3; }
+  .en { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; }
+
+  .deck { display: flex; flex-direction: column; gap: 34px; align-items: center; counter-reset: pg -1; }
+  .slide-shell { width: 1120px; counter-increment: pg; }
+  .slide-shell figcaption { font-size: 12px; font-weight: 700; color: #8a93a3; margin: 8px 2px 0; letter-spacing: .04em; }
+  .slide { width: 1280px; height: 720px; transform: scale(0.875); transform-origin: top left; background: #fff; position: relative; overflow: hidden; }
+  .slide-shell .clip { height: 630px; overflow: hidden; border-radius: 0; box-shadow: 0 2px 10px rgba(26,35,48,.08); }
+
+  /* ===== 共通 ===== */
+  .s-body { position: absolute; inset: 0; padding: 36px 56px; z-index: 1; }
+  .s-eyebrow { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 700; color: var(--blue-pale); letter-spacing: .02em; }
+  .s-eyebrow::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); }
+  .s-logo { position: absolute; top: 38px; right: 56px; height: 30px; }
+  .s-foot { position: absolute; left: 56px; right: 120px; bottom: 14px; font-size: 10px; color: #9aa3b2; line-height: 1.6; z-index: 5; }
+  .s-num { position: absolute; right: 0; bottom: 0; width: 66px; height: 66px; background: var(--blue); border-radius: 66px 0 0 0; color: #fff; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 13px; font-weight: 700; display: flex; align-items: flex-end; justify-content: flex-end; padding: 0 14px 10px 0; z-index: 5; }
+  .s-num::before { content: counter(pg); }
+
+  /* ===== 見出し行（業種バッジ＋要点） ===== */
+  .hd { display: flex; align-items: center; gap: 18px; margin-top: 8px; }
+  .hd .badge { background: var(--blue); color: #fff; font-size: 24px; font-weight: 800; padding: 10px 22px; letter-spacing: .06em; white-space: nowrap; text-align: center; }
+  .hd .badge small { display: block; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; opacity: .8; margin-top: 3px; }
+  .hd .t { font-size: 25px; font-weight: 800; color: #1a2330; line-height: 1.4; letter-spacing: .01em; }
+  .hd .t b { color: var(--blue-bright); }
+
+  /* ===== 事例テーブル ===== */
+  table.cs { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 18px; table-layout: fixed; }
+  .cs th { background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; padding: 10px 14px; text-align: left; letter-spacing: .02em; }
+  .cs th:first-child { text-align: center; }
+  .cs td { font-size: 12.8px; font-weight: 500; color: #4a5568; padding: 13px 14px; border-bottom: 1px solid var(--line); vertical-align: middle; line-height: 1.55; }
+  .cs tr:nth-child(even) td { background: #f7f9fc; }
+  .cs td.no { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; text-align: center; font-weight: 800; color: var(--blue-pale); }
+  /* 社名は他社商標のためロゴを使わず、文字組みだけで見せる */
+  .cs td.co span { display: block; font-size: 14.5px; font-weight: 800; color: #1a2330; line-height: 1.4; }
+  .cs td.ar span { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; padding: 4px 9px; white-space: nowrap; }
+  .cs td.ar svg { flex: 0 0 auto; }
+  .cs td.rs { font-size: 13px; font-weight: 700; color: #1a2330; line-height: 1.5; }
+  .cs td.rs b { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 19px; font-weight: 800; color: var(--blue-bright); padding: 0 1px; }
+
+  /* ===== まとめ帯 ===== */
+  .band { display: flex; align-items: center; gap: 11px; background: var(--tint); border: 1.5px solid var(--blue); padding: 12px 20px; font-size: 13.5px; font-weight: 800; color: var(--blue-deep); margin-top: 12px; }
+  .band::before { content: "✓"; flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+
+
+  /* ===== 個別詳細スライド ===== */
+  .dhd { display: flex; align-items: flex-start; gap: 18px; margin-top: 8px; }
+  .dhd .no { background: var(--blue-deep); color: #fff; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 22px; font-weight: 800; padding: 12px 18px; letter-spacing: .06em; }
+  .dhd .mark { flex: 0 0 auto; width: 46px; height: 46px; background: var(--tint); border: 1.5px solid #cfdcee; color: var(--blue); display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .dhd .mark svg { width: 24px; height: 24px; }
+  .dhd .co { font-size: 25px; font-weight: 800; color: #1a2330; line-height: 1.3; }
+  .dhd .co small { display: block; font-size: 14px; font-weight: 700; color: #6b7789; margin-top: 5px; }
+  .dhd .tags { margin-left: auto; display: flex; gap: 7px; padding-top: 6px; }
+  .dhd .tags span { font-size: 11.5px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; border-radius: 999px; padding: 5px 13px; white-space: nowrap; }
+
+  .dt { display: grid; grid-template-columns: 1.18fr 1fr; gap: 20px; margin-top: 14px; align-items: start; }
+  .sec { border: 1px solid var(--line); }
+  .sec .h { background: #f2f5fa; border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 800; color: var(--blue-deep); padding: 9px 16px; display: flex; align-items: center; gap: 8px; }
+  .sec .h::before { content: ""; width: 5px; height: 15px; background: var(--blue); }
+  .sec .b { padding: 10px 16px 11px; }
+  .sec .i { position: relative; font-size: 12.6px; font-weight: 500; color: #4a5568; line-height: 1.7; padding: 4px 0 4px 15px; }
+  .sec .i::before { content: ""; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-pale); }
+  .sec .i b { color: #1a2330; font-weight: 800; }
+
+  .kpi { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi div { background: var(--tint); border-left: 4px solid var(--blue); padding: 11px 13px; }
+  .kpi .k { font-size: 10.5px; font-weight: 800; color: var(--blue); }
+  .kpi .v { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 24px; font-weight: 800; color: #1a2330; line-height: 1.15; margin-top: 3px; }
+  .kpi .v small { font-family: "Noto Sans JP", sans-serif; font-size: 11px; font-weight: 700; color: #6b7789; margin-left: 2px; }
+  .kpi .n { font-size: 10.5px; font-weight: 600; color: #7a8698; margin-top: 3px; }
+  .trend { margin-top: 10px; background: var(--blue-deep); color: #fff; padding: 12px 15px; display: flex; align-items: center; gap: 12px; }
+  .trend .l { font-size: 11.5px; font-weight: 800; opacity: .85; line-height: 1.5; }
+  .trend .r { margin-left: auto; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 15px; font-weight: 800; white-space: nowrap; }
+  .trend .r b { font-size: 22px; color: #8fd0ff; }
+
+  .learn { margin-top: 12px; border: 1.5px solid var(--blue); }
+  .learn .h { background: var(--blue); color: #fff; font-size: 12.5px; font-weight: 800; padding: 8px 16px; letter-spacing: .02em; }
+  .learn .g { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+  .learn .g div { padding: 9px 16px 10px; border-right: 1px solid var(--line); }
+  .learn .g div:last-child { border-right: none; }
+  .learn .t { font-size: 13px; font-weight: 800; color: var(--blue-deep); }
+  .learn .d { font-size: 11.4px; font-weight: 500; color: #4a5568; line-height: 1.6; margin-top: 3px; }
+
+
+  /* ===== 表紙（白地・左に大見出し／右にイラスト） ===== */
+  .cv { background: #fff; }
+  .cv .t { position: absolute; left: 72px; top: 104px; font-size: 74px; font-weight: 900; color: var(--blue); line-height: 1.34; letter-spacing: .02em; }
+  .cv .sub { position: absolute; left: 75px; top: 316px; font-size: 19px; font-weight: 800; color: #2a2f3a; letter-spacing: .05em; line-height: 1.7; }
+  .cv .meta { position: absolute; left: 75px; top: 392px; font-size: 14px; font-weight: 700; color: #8a93a3; letter-spacing: .06em; }
+  .cv .il { position: absolute; right: 44px; bottom: 74px; width: 560px; }
+  .cv .logo { position: absolute; left: 72px; bottom: 58px; height: 38px; }
+
+  /* ===== 目次 ===== */
+  .ix { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 26px; margin-top: 30px; }
+  .ix a, .ix div { display: flex; align-items: center; gap: 16px; background: #fff; border: 1px solid #d9e1ec; padding: 18px 20px; text-decoration: none; box-shadow: 0 4px 14px rgba(26,35,48,.05); }
+  .ix .n { flex: 0 0 auto; width: 46px; height: 46px; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; }
+  .ix .b { flex: 1; min-width: 0; display: block; }
+  .ix .nm { display: block; font-size: 19px; font-weight: 800; color: #1a2330; line-height: 1.35; }
+  .ix .ds { display: block; font-size: 12px; font-weight: 600; color: #7a8698; margin-top: 4px; line-height: 1.5; }
+  .ix .pg { flex: 0 0 auto; font-size: 12.5px; font-weight: 800; color: var(--blue); }
+  .ix .soon { border-style: dashed; opacity: .62; }
+  .ix .soon .n { background: #b9c4d4; }
+
+
+
+
+  /* ===== 目次（この資料の中身） ===== */
+  .ixh { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
+  .ixh .lb { background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; padding: 7px 16px; letter-spacing: .04em; white-space: nowrap; }
+  .ixh .tx { font-size: 15px; font-weight: 700; color: #4a5568; }
+  .ixh .pg { margin-left: auto; font-size: 13px; font-weight: 800; color: var(--blue); white-space: nowrap; }
+  .ixg { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 26px; margin-top: 14px; }
+  .ixg div { display: flex; align-items: center; gap: 13px; background: #fff; border: 1px solid var(--line); padding: 10px 14px; }
+  .ixg .n { flex: 0 0 auto; width: 30px; height: 30px; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 800; }
+  .ixg .nm { font-size: 14.5px; font-weight: 800; color: #1a2330; }
+  .ixg .ar { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; padding: 3px 8px; margin-left: 8px; white-space: nowrap; }
+  .ixg .pg { margin-left: auto; font-size: 12px; font-weight: 800; color: #8a93a3; white-space: nowrap; }
+
+  /* ===== PDF出力 ===== */
+  @page { size: 1280px 720px; margin: 0; }
+  @media print {
+    body { padding: 0; background: #fff; }
+    * { box-shadow: none !important; }
+    .note { display: none; }
+    .deck { gap: 0; display: block; }
+    .slide-shell { width: 1280px; }
+    .slide-shell figcaption { display: none; }
+    .slide-shell .clip { height: 720px; overflow: hidden; border-radius: 0; box-shadow: none; }
+    .slide { transform: none; border: none; border-radius: 0; }
+    figure.slide-shell { page-break-after: always; break-after: page; margin: 0; }
+    figure.slide-shell:last-child { page-break-after: auto; }
+  }
+  .trend .l { flex: 0 0 150px; }
+  .trend .r { white-space: normal; text-align: right; line-height: 1.35; }
+  .cs td { padding-top: 11px; padding-bottom: 11px; }
+  .cs.cmp td { padding-top: 6px; padding-bottom: 6px; line-height: 1.45; }
+</style>
+</head>
+<body>
+  <p class="note">コンサルティング業のAI活用事例集｜一覧2ページ＋詳細10ページ／事例はすべて各社の公開情報にもとづく</p>
+  <div class="deck">
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide cv">
+        <p class="t">コンサルティング業の<br>AI活用事例集</p>
+        <p class="sub">公開情報でみる、国内コンサルティングファーム10社の取り組み</p>
+        <p class="meta">2026年10月版　｜　バイテック法人AI研修</p>
+        <img class="il" src="assets/cover-illus.png" alt="">
+        <img class="logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+      </div>
+    </div><figcaption>表紙</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">Contents</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd" style="margin-top:4px">
+          <p class="t" style="font-size:27px">目次</p>
+        </div>
+        <div class="ixh"><span class="lb">詳細事例</span><span class="tx">1社1ページ。背景・取り組み・成果・自社への応用まで</span><span class="pg">P.5 - 14</span></div>
+        <div class="ixg"><div><span class="n">01</span><span class="nm">デロイト トーマツ<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg>全社活用</span></span><span class="pg">P.5</span></div><div><span class="n">02</span><span class="nm">野村総合研究所<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg>全社基盤</span></span><span class="pg">P.6</span></div><div><span class="n">03</span><span class="nm">三菱総合研究所<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M9.2 3h5.6M10.3 3v6.2L5 18.4A2 2 0 006.7 21.4h10.6a2 2 0 001.7-3L13.7 9.2V3"/></svg>調査分析</span></span><span class="pg">P.7</span></div><div><span class="n">04</span><span class="nm">船井総研HD<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg>全社活用</span></span><span class="pg">P.8</span></div><div><span class="n">05</span><span class="nm">アクセンチュア<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>社内問合せ</span></span><span class="pg">P.9</span></div><div><span class="n">06</span><span class="nm">あずさ監査法人<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.8C7.9 18.7 5 15.2 5 11V6z"/><path d="M9 11.6l2.1 2.1L15.2 9.6"/></svg>監査業務</span></span><span class="pg">P.10</span></div><div><span class="n">07</span><span class="nm">有限責任監査法人トーマツ<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg>監査業務</span></span><span class="pg">P.11</span></div><div><span class="n">08</span><span class="nm">アットストリームコンサルティング<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg>資料作成</span></span><span class="pg">P.12</span></div><div><span class="n">09</span><span class="nm">アビームコンサルティング<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><rect x="5" y="3" width="14" height="18" rx="0"/><path d="M8 7h8M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h.01M15.5 18h.01"/></svg>社内問合せ</span></span><span class="pg">P.13</span></div><div><span class="n">10</span><span class="nm">大和総研<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>調査・研究</span></span><span class="pg">P.14</span></div></div>
+        <p class="s-foot">本資料は各社が公開している情報をもとにバイテック法人AI研修が編集したものです。掲載している数値はすべて各社の公表値であり、当社による測定値ではありません。掲載企業との取引関係や、各社による推薦を示すものではありません。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>目次</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">コンサルティング業 活用事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd">
+          <span class="badge">コンサルティング業<small>1 / 2</small></span>
+          <p class="t">成果が出ているのは<b>全社員が使える環境を先に整えた会社</b>。<br>削減時間は「月約10万時間」「7万時間」の単位に。</p>
+        </div>
+        <table class="cs">
+          <colgroup><col style="width:40px"><col style="width:176px"><col style="width:112px"><col><col style="width:262px"></colgroup>
+          <tr><th>No.</th><th>企業</th><th>活用領域</th><th>取り組み</th><th>公表されている成果</th></tr>
+          <tr>
+            <td class="no">01</td><td class="co"><span>デロイト トーマツ</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg>全社活用</span></td>
+            <td>自社開発の生成AIツール4種を全社展開し、プロンプト集・必須eラーニングで定着</td>
+            <td class="rs">約<b>12,000人</b>が活用、削減は<b>約10万時間/月</b></td>
+          </tr>
+          <tr>
+            <td class="no">02</td><td class="co"><span>野村総合研究所</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg>全社基盤</span></td>
+            <td>自社データセンターのプライベートLLMを含む社内AI基盤を構築し全社展開</td>
+            <td class="rs"><b>1万人以上</b>が<b>累計1000万回以上</b>利用</td>
+          </tr>
+          <tr>
+            <td class="no">03</td><td class="co"><span>三菱総合研究所</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M9.2 3h5.6M10.3 3v6.2L5 18.4A2 2 0 006.7 21.4h10.6a2 2 0 001.7-3L13.7 9.2V3"/></svg>調査分析</span></td>
+            <td>「シンクタンクDX」で情報収集・分析・文書作成などに生成AIを徹底活用</td>
+            <td class="rs">2025年の業務削減<b>7万時間</b>（計画約4万時間）</td>
+          </tr>
+          <tr>
+            <td class="no">04</td><td class="co"><span>船井総研HD</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg>全社活用</span></td>
+            <td>Gemini for Google Workspaceをグループ全社員に一斉導入し、事例発表会で浸透</td>
+            <td class="rs">約<b>1,500名</b>に導入、利用率<b>97.0%</b></td>
+          </tr>
+          <tr>
+            <td class="no">05</td><td class="co"><span>アクセンチュア</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>社内問合せ</span></td>
+            <td>人事・法務・経費などの社内問い合わせAI「Randy-san」をGPTに刷新</td>
+            <td class="rs">月<b>約7万件</b>に対応、<b>年間約20万時間</b>の工数削減</td>
+          </tr>
+        </table>
+        <div class="band">デロイト トーマツは約12,000人で月約10万時間、三菱総研は計画を上回る7万時間を削減。船井総研は約1,500名で利用率97.0%。ツール配布と研修・事例共有をセットで進めています。</div>
+        <p class="s-foot">出典：各社の公式発表（プレスリリース・ニュースルーム・公式サイト）。デロイト トーマツ（2025.9.3）／野村総合研究所（2026.2.2）／三菱総合研究所（2026.4）／船井総研HD（2026.8.31）／アクセンチュア（2024.4時点）。数値は各社の公表値であり、当社による測定値ではありません。社名・製品名は各社の商標です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>コンサルティング業（1/2）</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">コンサルティング業 活用事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd">
+          <span class="badge">コンサルティング業<small>2 / 2</small></span>
+          <p class="t"><b>監査・資料作成・社内問い合わせ</b>など<br>型のある業務にAIを組み込み、効果を数字で示す</p>
+        </div>
+        <table class="cs">
+          <colgroup><col style="width:40px"><col style="width:176px"><col style="width:112px"><col><col style="width:262px"></colgroup>
+          <tr><th>No.</th><th>企業</th><th>活用領域</th><th>取り組み</th><th>公表されている成果</th></tr>
+          <tr>
+            <td class="no">06</td><td class="co"><span>あずさ監査法人</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.8C7.9 18.7 5 15.2 5 11V6z"/><path d="M9 11.6l2.1 2.1L15.2 9.6"/></svg>監査業務</span></td>
+            <td>社内専用の生成AIチャットや会計・監査特化AI、AIエージェントを監査に導入</td>
+            <td class="rs">生成AIチャット利用<b>7,723,229回</b>（2026年6月期）</td>
+          </tr>
+          <tr>
+            <td class="no">07</td><td class="co"><span>有限責任監査法人トーマツ</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg>監査業務</span></td>
+            <td>独自の生成AIを監査業務に展開し、基準調査や文書作成に活用</td>
+            <td class="rs">生成AI・AIエージェントのアクティブユーザー率<b>93.6%</b></td>
+          </tr>
+          <tr>
+            <td class="no">08</td><td class="co"><span>アットストリームコンサルティング</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg>資料作成</span></td>
+            <td>TISIと共同でシステム企画構想の資料作成を支援するAIエージェントを開発し実案件に適用</td>
+            <td class="rs">論点整理・業務フロー作成などで<b>3～7割</b>削減</td>
+          </tr>
+          <tr>
+            <td class="no">09</td><td class="co"><span>アビームコンサルティング</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><rect x="5" y="3" width="14" height="18" rx="0"/><path d="M8 7h8M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h.01M15.5 18h.01"/></svg>社内問合せ</span></td>
+            <td>経理部門への問い合わせにTeams上の「AIヘルプデスク」を導入し自動回答</td>
+            <td class="rs">問い合わせの<b>8割</b>を自動解決、有人対応は<b>前年比39%</b></td>
+          </tr>
+          <tr>
+            <td class="no">10</td><td class="co"><span>大和総研</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>調査・研究</span></td>
+            <td>定期の調査レポートで、下書きをChatGPT（GPT-4）が作りエコノミストが確認・追記</td>
+            <td class="rs">レポート完成までの時間を<b>約50％</b>削減</td>
+          </tr>
+        </table>
+        <div class="band">トーマツの監査部門はアクティブユーザー率93.6%、アットストリームは企画資料づくりを3～7割削減。AIが下書き・一次回答し、専門家が確認する分担が共通しています。</div>
+        <p class="s-foot">出典：各社の公式発表（プレスリリース・ニュースルーム・公式サイト）。あずさ監査法人（2026.10.8）／トーマツ（2026.10）／アットストリームコンサルティング（2026.7.28）／アビームコンサルティング（2025.9.19）／大和総研（2023.10.24）。数値は各社の公表値であり、当社による測定値ではありません。社名・製品名は各社の商標です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>コンサルティング業（2/2）</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜コンサルティング業</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">01</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg></span>
+          <p class="co">デロイト トーマツ<small>特任チーム主導で、全社展開と定着を同時に推進</small></p>
+          <div class="tags"><span>全社活用</span><span>グループ 約12,000人が活用</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">CxO直下の特任チームが<b>チャットボット型ツールや提案資料の自動作成ツール</b>など4種を自社開発</p><p class="i"><b>約100種類以上のプロンプト集</b>と参加必須のeラーニング、入社者向け研修を導入</p><p class="i">2025年3月から<b>AIエージェントの全社展開</b>を完了し、論点設計やレビューを自動化</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i"><b>トップダウン</b>で迅速に意思決定し、全社展開を進めた</p><p class="i">論点設計・仮説立案など<b>プロフェッショナルワークの型</b>にプロンプトを対応させた</p><p class="i">各組織に<b>スーパーユーザーチーム</b>を置き、業務プロセス自体を組み替えた</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">活用する社職員</p><p class="v">約12,000<small>人</small></p><p class="n">2025年7月時点</p></div><div><p class="k">稼働時間の削減</p><p class="v">約10万<small>時間/月</small></p><p class="n">グループ全体</p></div><div><p class="k">自社開発ツール</p><p class="v">4<small>種類</small></p><p class="n">提案資料作成など</p></div><div><p class="k">プロンプト集</p><p class="v">約100<small>種類以上</small></p><p class="n">業務プロセス別</p></div></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i"><b>AIエージェント</b>の活用で、プロフェッショナルワークの更なる生産性向上を図る計画</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">推進役を1人決める</p><p class="d">経営直下に推進担当を置き、ツール選定と社内ルールを短期間で決める。小規模ほど決裁を速く回せる。</p></div><div><p class="t">型ごとにプロンプト化</p><p class="d">論点整理・仮説出し・提案書骨子など、自社の仕事の型ごとにプロンプトを用意して共有する。</p></div><div><p class="t">部署ごとの相談役</p><p class="d">使いこなしている社員を各チームの相談役にし、質問と事例が社内で回る状態をつくる。</p></div></div>
+        </div>
+        <p class="s-foot">出典：デロイト トーマツ グループ「デロイト トーマツ、生成AI活用で月間約10万時間の稼働時間削減に成功、AIエージェントも全社展開」（2025年9月3日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 01 デロイト トーマツ</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜コンサルティング業</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">02</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg></span>
+          <p class="co">野村総合研究所<small>安心して使える社内基盤が、全社利用の土台に</small></p>
+          <div class="tags"><span>全社基盤</span><span>社員 1万人以上が利用</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">2023年4月頃から生成AIの本格活用を開始し、<b>全社向けの社内AI基盤</b>を構築</p><p class="i"><b>自社DC内のGPU基盤</b>で大人数が使えるサービスを設計</p><p class="i">システム開発の詳細設計〜単体テストを<b>AIエージェントで自動化</b></p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i"><b>ガバナンス体制</b>と利用促進の工夫をセットで整えた</p><p class="i"><b>RAGや提案書生成</b>など主要ユースケースに効果指標を設けた</p><p class="i">セキュリティを担保しつつ<b>GPUを効率活用</b>する設計を検証した</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">利用社員数</p><p class="v">1万<small>人以上</small></p><p class="n">社内AI基盤</p></div><div><p class="k">累計利用回数</p><p class="v">1000万<small>回以上</small></p><p class="n">2023年4月頃〜</p></div><div><p class="k">開発工数削減</p><p class="v">30<small>%</small></p><p class="n">一部の本番開発で確認</p></div></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">「NRIエンタープライズAI駆動開発モデル」で開発工数の大幅な効率化を進める</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">機密の扱いを先に決める</p><p class="d">顧客情報を入れてよいツール・ダメなツールを明文化し、安心して使える環境を最初に用意する。</p></div><div><p class="t">用途ごとに効果を測る</p><p class="d">提案書作成・社内検索など主要用途ごとに、削減時間など簡単な指標を決めて記録する。</p></div><div><p class="t">使われ方を見て改善</p><p class="d">利用回数や質問内容を定期的に見て、よく使われる用途のテンプレートを増やしていく。</p></div></div>
+        </div>
+        <p class="s-foot">出典：野村総合研究所 NRI career「＜イベントレポート・アーカイブ動画公開＞野村総合研究所の社員1万人が活用するセキュアな社内生成AI 環境のつくり方」（2026年2月2日）、同社「統合レポート2026」（2026年8月）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 02 野村総合研究所</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜コンサルティング業</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">03</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M9.2 3h5.6M10.3 3v6.2L5 18.4A2 2 0 006.7 21.4h10.6a2 2 0 001.7-3L13.7 9.2V3"/></svg></span>
+          <p class="co">三菱総合研究所<small>まず社内で徹底活用し、成果を社外サービスへ</small></p>
+          <div class="tags"><span>調査分析・文書作成</span><span>シンクタンクDX</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i"><b>情報収集や分析、プロジェクト管理、文書作成</b>などに生成AIを適用</p><p class="i">まず<b>社内で徹底活用</b>し、その成果を社外サービスに展開する方針</p><p class="i">生成AIの<b>熟練者</b>を育成し、社内での活用を牽引</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">シンクタンクの<b>中核業務</b>（調査・分析・文書化）を対象にした</p><p class="i">年初に<b>削減時間の計画</b>を立て、実績と比べて管理した</p><p class="i">熟練者を<b>想定の約2倍</b>まで増やし、活用の裾野を広げた</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">業務削減（2025年）</p><p class="v">7万<small>時間</small></p><p class="n">計画は約4万時間</p></div><div><p class="k">生成AI熟練者</p><p class="v">約200<small>名</small></p><p class="n">期初想定は約100名</p></div></div><div class="trend"><p class="l">2025年の<br>業務削減時間</p><p class="r">計画 約4万時間 → <b>実績 7万時間</b></p></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">2026年度中に、<b>独自の知財を学習させた生成AI</b>を全社員で利用できる環境を構築予定</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">削減目標を数字で置く</p><p class="d">「年○時間削減」と目標を置き、四半期ごとに実績を集計する。小さな会社でも効果が見えやすい。</p></div><div><p class="t">調査業務から始める</p><p class="d">デスクリサーチ・要約・論点整理など、成果物の型が決まった調査業務から適用する。</p></div><div><p class="t">熟練者を意図して育てる</p><p class="d">使いこなす社員を数名決めて先行させ、社内勉強会で事例を広げる役を任せる。</p></div></div>
+        </div>
+        <p class="s-foot">出典：三菱総合研究所「三菱総研グループレポート2025」（2026年4月発行）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 03 三菱総合研究所</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜コンサルティング業</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">04</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span>
+          <p class="co">船井総研HD<small>一斉導入と全員参加の発表会で、4ヶ月で定着</small></p>
+          <div class="tags"><span>全社活用</span><span>グループ全社員 約1,500名</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">2024年11月、<b>Gemini for Google Workspace</b>を国内グループ全社員に一斉導入</p><p class="i"><b>社長を含む全社員が参加</b>するユースケース発表会やコンテストを実施</p><p class="i">コンサルタントが<b>より高付加価値な業務</b>に集中できる体制をめざす</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">普段使うツールに組み込まれた生成AIを<b>全員一斉</b>に配布した</p><p class="i"><b>社内教育を徹底</b>し、導入から4ヶ月で業務実装まで進めた</p><p class="i">経営トップも参加する<b>発表会・コンテスト</b>で活用事例を共有した</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">一斉導入</p><p class="v">約1,500<small>名</small></p><p class="n">国内グループ全社員</p></div><div><p class="k">Gemini利用率</p><p class="v">97.0<small>%</small></p><p class="n">統合レポートで開示</p></div><div><p class="k">業務実装まで</p><p class="v">4<small>ヶ月</small></p><p class="n">導入からの期間</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">使い慣れた環境に入れる</p><p class="d">既に使っているメールや文書ツールに付属する生成AIなら、追加教育が少なく全員導入しやすい。</p></div><div><p class="t">全員参加の事例発表</p><p class="d">月1回、各自の活用例を5分で発表する場をつくる。経営者自身も発表すると浸透が速い。</p></div><div><p class="t">利用率を毎月見る</p><p class="d">利用率を毎月確認し、使っていない人には個別に用途を一緒に探す。</p></div></div>
+        </div>
+        <p class="s-foot">出典：船井総研ホールディングス「生成AI『Gemini for Google Workspace』をグループ全社員1500名に一斉導入」（2024年11月7日）、同社「統合レポート2026」（2026年8月31日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 04 船井総研HD</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜コンサルティング業</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">05</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span>
+          <p class="co">アクセンチュア<small>社内の「聞く・答える」時間をAIで減らす</small></p>
+          <div class="tags"><span>社内問い合わせ</span><span>月間アクティブ 11,000名以上</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">人事・法務・調達・総務・経費申請・契約の問い合わせに<b>AIチャットボット</b>で対応</p><p class="i">2023年4月にAIエンジンを<b>GPTにアップグレード</b>し、応答範囲を拡大</p><p class="i"><b>6,500人以上</b>が参加するオンラインコミュニティで活用情報を共有</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">2017年からの<b>既存チャットボット</b>を土台に生成AIへ移行した</p><p class="i"><b>FAQ準備の工数</b>も大幅に削減でき、運用負荷が下がった</p><p class="i"><b>質問する社員と回答者の両方</b>の時間削減を効果として捉えた</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">月間アクティブ</p><p class="v">11,000<small>名以上</small></p><p class="n">2024年4月時点</p></div><div><p class="k">問い合わせ対応</p><p class="v">約7万<small>件/月</small></p><p class="n">Randy-san</p></div><div><p class="k">工数削減</p><p class="v">約20万<small>時間/年</small></p><p class="n">社員と回答者の合計</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">社内規程をAIに読ませる</p><p class="d">就業規則・経費精算ルールなどをまとめてAIに参照させ、管理部門への定型質問を減らす。</p></div><div><p class="t">回答者の時間も数える</p><p class="d">質問する側だけでなく、答える管理部門の時間削減も合わせて効果として記録する。</p></div><div><p class="t">社内コミュニティを作る</p><p class="d">チャットに活用事例を共有するチャンネルを作り、うまくいった使い方を流通させる。</p></div></div>
+        </div>
+        <p class="s-foot">出典：アクセンチュア Japan Careers Blog「仕事の進め方を一新！生成AIを社員のパートナーに。生成AIと共に新しい働き方を実現するアクセンチュアの取り組み」（数値は2024年4月時点）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 05 アクセンチュア</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜コンサルティング業</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">06</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.8C7.9 18.7 5 15.2 5 11V6z"/><path d="M9 11.6l2.1 2.1L15.2 9.6"/></svg></span>
+          <p class="co">あずさ監査法人<small>会計・監査特化のAIで、ナレッジ検索とレビューを支援</small></p>
+          <div class="tags"><span>監査業務</span><span>KPMGジャパン</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">社内専用チャット<b>「AZSA Isaac」</b>と会計・監査特化型<b>「Chat KOMEI」</b>を導入</p><p class="i">2025年7月から<b>KPMG Clara AI Agents</b>でデータ集約・レビュー・文書化を支援</p><p class="i">会計基準や内部ガイダンスに基づく<b>ナレッジ検索・要約</b>に活用</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">外部に漏れない<b>クローズドな環境</b>で利用できるようにした</p><p class="i"><b>KPMG内部限定のナレッジ</b>を参照し、監査実務に即した回答にした</p><p class="i">AIの成果物は<b>監査チームが確認・検証</b>し、最終判断は人が担う</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">生成AIチャット利用数</p><p class="v">7,723,229<small>回</small></p><p class="n">2026年6月期・監査外含む</p></div><div><p class="k">Clara利用率</p><p class="v">100<small>%</small></p><p class="n">Clara workflow</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">専門基準をAIに参照させる</p><p class="d">会計基準・税法・社内マニュアルを参照先にしたAIで、調べものの一次回答を任せる。</p></div><div><p class="t">利用回数をKPIにする</p><p class="d">まずは利用回数を毎月集計し、使われ方の伸びを経営指標として見える化する。</p></div><div><p class="t">確認責任は人に残す</p><p class="d">AIの回答は担当者がレビューする前提を明文化し、品質と責任の線引きをはっきりさせる。</p></div></div>
+        </div>
+        <p class="s-foot">出典：あずさ監査法人「AZSA Quality 2026/27 監査品質に関する報告書」（2026年10月8日発行）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 06 あずさ監査法人</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜コンサルティング業</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">07</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg></span>
+          <p class="co">有限責任監査法人トーマツ<small>監査現場の大半が日常的にAIを使う状態へ</small></p>
+          <div class="tags"><span>監査業務</span><span>デロイト トーマツ グループ</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i"><b>トーマツ独自の生成AI</b>を監査業務に展開</p><p class="i">基準や事例の調査、文書作成、<b>壁打ち</b>などに活用</p><p class="i"><b>生成AI・AIエージェント</b>の活用度合いをKPIとして開示</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">監査の<b>高度化・提供価値の向上</b>を目的に位置づけた</p><p class="i">活用状況を<b>アクティブユーザー率</b>で継続的に測定した</p><p class="i">監査事業本部とアシュアランス事業本部で<b>横断的に</b>展開した</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">独自生成AI活用</p><p class="v">約7<small>割</small></p><p class="n">監査業務従事者・2025年報告</p></div><div><p class="k">アクティブユーザー率</p><p class="v">93.6<small>%</small></p><p class="n">2026年5月末</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">壁打ち用途から始める</p><p class="d">論点の整理や反論の洗い出しなど、判断の補助として使う「壁打ち」から始めると抵抗が少ない。</p></div><div><p class="t">アクティブ率で追う</p><p class="d">導入人数ではなく、月に1回以上使った人の割合を追うと定着度がわかる。</p></div><div><p class="t">報告書で外に示す</p><p class="d">AI活用の状況を顧客向け資料で開示すると、品質と効率への取り組みが伝わる。</p></div></div>
+        </div>
+        <p class="s-foot">出典：有限責任監査法人トーマツ「監査品質に関する報告書 2025」（2025年10月）、同「監査品質に関する報告書 2026」（2026年10月）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 07 有限責任監査法人トーマツ</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜コンサルティング業</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">08</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>
+          <p class="co">アットストリームコンサルティング<small>コンサルの成果物づくりをAIエージェントで支援</small></p>
+          <div class="tags"><span>資料作成</span><span>2025年度の複数の実案件</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i"><b>システム企画構想プロセス</b>のアウトプット作成を支援するAIエージェントを開発</p><p class="i"><b>論点整理、課題・要望整理、As-Is業務整理、業務フロー作成</b>に適用</p><p class="i">2025年度に実施した<b>複数の実案件</b>で効果を検証</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">コンサル業務の<b>主要アウトプット</b>に絞って支援対象を決めた</p><p class="i">従来の手作業工数と<b>実績工数の差分</b>で削減率を算出した</p><p class="i">TISIの<b>ノーコード基盤</b>上でAIエージェントを構築した</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">対応時間の削減</p><p class="v">3～7<small>割</small></p><p class="n">実案件の一部事例</p></div><div><p class="k">ドキュメント作成工数</p><p class="v">最大70<small>%削減</small></p><p class="n">システム企画構想</p></div></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">適用領域を拡大し、<b>コンサルティング業務全般</b>を横断的に支援するサービスの構築を進める</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">成果物単位で切り出す</p><p class="d">論点整理表・業務フロー図など、繰り返し作る成果物ごとにAIの下書き手順を作る。</p></div><div><p class="t">手作業工数と比べる</p><p class="d">同じ成果物を手で作った場合の工数を控えておき、AI活用後の実績と比べて効果を示す。</p></div><div><p class="t">実案件で小さく試す</p><p class="d">社内検証で終わらせず、1案件の一工程から実際に使い、効果が出た型を横展開する。</p></div></div>
+        </div>
+        <p class="s-foot">出典：アットストリームコンサルティング／TISI ニュース「生成AIを活用したシステムコンサルティング業務の生産性向上を実案件で確認」（2026年7月28日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 08 アットストリームコンサルティング</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜コンサルティング業</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">09</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><rect x="5" y="3" width="14" height="18" rx="0"/><path d="M8 7h8M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h.01M15.5 18h.01"/></svg></span>
+          <p class="co">アビームコンサルティング<small>管理部門の問い合わせ対応をAIが一次回答</small></p>
+          <div class="tags"><span>社内問い合わせ（経理）</span><span>Teams上のAIヘルプデスク</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">問い合わせの多い<b>経理部門</b>から「AIヘルプデスク」を第1弾として導入</p><p class="i"><b>FAQと社内文書</b>の両方から回答を生成</p><p class="i">社員は<b>Teams上からAIに質問</b>でき、回答待ちの停滞を解消</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i"><b>問い合わせが多い業務</b>から優先して対象にした</p><p class="i">手軽さから<b>潜在的な質問</b>も拾え、件数は2倍以上に増えた</p><p class="i"><b>利用ログを分析</b>して効果と潜在ニーズを把握した</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">自動回答で解決</p><p class="v">8<small>割</small></p><p class="n">問い合わせ全体</p></div><div><p class="k">有人対応</p><p class="v">前年比39<small>%</small></p><p class="n">件数は2倍以上に増加</p></div><div><p class="k">問い合わせ件数</p><p class="v">2倍以上<small></small></p><p class="n">前年比</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">一番多い質問から</p><p class="d">経費精算や勤怠など、管理部門に最も多く来る質問の領域からAI回答を始める。</p></div><div><p class="t">普段のチャットに置く</p><p class="d">社員が毎日使うチャットツールから質問できるようにすると、利用が自然に増える。</p></div><div><p class="t">ログで改善する</p><p class="d">AIが答えられなかった質問を月1回見直し、FAQや規程文書を追加していく。</p></div></div>
+        </div>
+        <p class="s-foot">出典：アビームコンサルティング インサイト「【イベントレポート】AI前提の業務設計で実現する、次世代BPR（業務改革）への挑戦」（2025年9月19日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 09 アビームコンサルティング</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜コンサルティング業</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">10</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span>
+          <p class="co">大和総研<small>下書きはAI、品質担保は専門家が担う分業</small></p>
+          <div class="tags"><span>調査・研究</span><span>大手</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">四半期レポート「大和地域AI指数」の<b>下書き文章</b>をChatGPTが生成</p><p class="i">AIの出力が<b>事実と異ならないか</b>を容易に確認できる仕組みを構築</p><p class="i">社内の<b>AI倫理指針</b>にもとづくシステム構築の第一弾として実施</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">定型の<b>定期レポート</b>（2017年7月から公表）に対象を絞った</p><p class="i">エコノミストの<b>修正・追記</b>を残し、発信情報の品質を確保</p><p class="i">AI倫理指針を先に整え、<b>GPT-4</b>ベースのChatGPTで運用</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">レポート完成時間</p><p class="v">約50<small>％削減</small></p><p class="n">大和地域AI指数</p></div><div><p class="k">AI倫理指針下の構築</p><p class="v">第一弾<small></small></p><p class="n">大和総研AI倫理指針</p></div></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">生成AIを含む最先端のAI技術を積極的に活用し、一層付加価値の高い経済・社会情報の提供に貢献していく</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">定期レポートから</p><p class="d">月次・四半期など型が決まった報告書は、AI下書き化の効果が出やすい最初の対象です。</p></div><div><p class="t">確認の仕組みが先</p><p class="d">出力と元データを突き合わせる手順を決めておくと、専門家の修正が短時間で済みます。</p></div><div><p class="t">空いた時間の使い道</p><p class="d">削減時間を分析の深掘りや新テーマに回す設計まで決めると、提供価値の向上に直結します。</p></div></div>
+        </div>
+        <p class="s-foot">出典：大和総研 ニュースリリース「大和総研、調査レポートの作成に生成AI（ChatGPT）を活用」（2023年10月24日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 10 大和総研</figcaption></figure>
+  </div>
+</body>
+</html>

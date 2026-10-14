@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>卸売・商社のAI活用事例集｜全14スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* 業種別 活用事例集。設計は ebook-04/05 と同系統（四角の角丸なし・円とピルのみ角丸）。
+     ★事例はすべて各社の公開情報にもとづく。数値は出典の表記どおりに記載し、推測で丸めたり
+       脚色したりしないこと。出典はスライド下部に必ず明記する。他社名を出す資料のため、
+       まとめサイトの孫引きは使わず一次情報（プレスリリース・公式サイト）で裏を取る。 */
+  :root {
+    --blue: #2c5c9c; --blue-deep: #1a2e50; --blue-bright: #1a6fb5; --blue-pale: #8fb0d8;
+    --ink: #2a2f3a; --line: #e3e8ef; --amber: #f0b429; --tint: #eef4fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f4f6f8; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; color: var(--ink); padding: 48px 0 96px; }
+  .note { max-width: 1120px; margin: 0 auto 28px; font-size: 13px; font-weight: 700; color: #8a93a3; }
+  .en { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; }
+
+  .deck { display: flex; flex-direction: column; gap: 34px; align-items: center; counter-reset: pg -1; }
+  .slide-shell { width: 1120px; counter-increment: pg; }
+  .slide-shell figcaption { font-size: 12px; font-weight: 700; color: #8a93a3; margin: 8px 2px 0; letter-spacing: .04em; }
+  .slide { width: 1280px; height: 720px; transform: scale(0.875); transform-origin: top left; background: #fff; position: relative; overflow: hidden; }
+  .slide-shell .clip { height: 630px; overflow: hidden; border-radius: 0; box-shadow: 0 2px 10px rgba(26,35,48,.08); }
+
+  /* ===== 共通 ===== */
+  .s-body { position: absolute; inset: 0; padding: 36px 56px; z-index: 1; }
+  .s-eyebrow { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 700; color: var(--blue-pale); letter-spacing: .02em; }
+  .s-eyebrow::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); }
+  .s-logo { position: absolute; top: 38px; right: 56px; height: 30px; }
+  .s-foot { position: absolute; left: 56px; right: 120px; bottom: 14px; font-size: 10px; color: #9aa3b2; line-height: 1.6; z-index: 5; }
+  .s-num { position: absolute; right: 0; bottom: 0; width: 66px; height: 66px; background: var(--blue); border-radius: 66px 0 0 0; color: #fff; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 13px; font-weight: 700; display: flex; align-items: flex-end; justify-content: flex-end; padding: 0 14px 10px 0; z-index: 5; }
+  .s-num::before { content: counter(pg); }
+
+  /* ===== 見出し行（業種バッジ＋要点） ===== */
+  .hd { display: flex; align-items: center; gap: 18px; margin-top: 8px; }
+  .hd .badge { background: var(--blue); color: #fff; font-size: 24px; font-weight: 800; padding: 10px 22px; letter-spacing: .06em; white-space: nowrap; text-align: center; }
+  .hd .badge small { display: block; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; opacity: .8; margin-top: 3px; }
+  .hd .t { font-size: 25px; font-weight: 800; color: #1a2330; line-height: 1.4; letter-spacing: .01em; }
+  .hd .t b { color: var(--blue-bright); }
+
+  /* ===== 事例テーブル ===== */
+  table.cs { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 18px; table-layout: fixed; }
+  .cs th { background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; padding: 10px 14px; text-align: left; letter-spacing: .02em; }
+  .cs th:first-child { text-align: center; }
+  .cs td { font-size: 12.8px; font-weight: 500; color: #4a5568; padding: 13px 14px; border-bottom: 1px solid var(--line); vertical-align: middle; line-height: 1.55; }
+  .cs tr:nth-child(even) td { background: #f7f9fc; }
+  .cs td.no { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; text-align: center; font-weight: 800; color: var(--blue-pale); }
+  /* 社名は他社商標のためロゴを使わず、文字組みだけで見せる */
+  .cs td.co span { display: block; font-size: 14.5px; font-weight: 800; color: #1a2330; line-height: 1.4; }
+  .cs td.ar span { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; padding: 4px 9px; white-space: nowrap; }
+  .cs td.ar svg { flex: 0 0 auto; }
+  .cs td.rs { font-size: 13px; font-weight: 700; color: #1a2330; line-height: 1.5; }
+  .cs td.rs b { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 19px; font-weight: 800; color: var(--blue-bright); padding: 0 1px; }
+
+  /* ===== まとめ帯 ===== */
+  .band { display: flex; align-items: center; gap: 11px; background: var(--tint); border: 1.5px solid var(--blue); padding: 12px 20px; font-size: 13.5px; font-weight: 800; color: var(--blue-deep); margin-top: 12px; }
+  .band::before { content: "✓"; flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+
+
+  /* ===== 個別詳細スライド ===== */
+  .dhd { display: flex; align-items: flex-start; gap: 18px; margin-top: 8px; }
+  .dhd .no { background: var(--blue-deep); color: #fff; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 22px; font-weight: 800; padding: 12px 18px; letter-spacing: .06em; }
+  .dhd .mark { flex: 0 0 auto; width: 46px; height: 46px; background: var(--tint); border: 1.5px solid #cfdcee; color: var(--blue); display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .dhd .mark svg { width: 24px; height: 24px; }
+  .dhd .co { font-size: 25px; font-weight: 800; color: #1a2330; line-height: 1.3; }
+  .dhd .co small { display: block; font-size: 14px; font-weight: 700; color: #6b7789; margin-top: 5px; }
+  .dhd .tags { margin-left: auto; display: flex; gap: 7px; padding-top: 6px; }
+  .dhd .tags span { font-size: 11.5px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; border-radius: 999px; padding: 5px 13px; white-space: nowrap; }
+
+  .dt { display: grid; grid-template-columns: 1.18fr 1fr; gap: 20px; margin-top: 14px; align-items: start; }
+  .sec { border: 1px solid var(--line); }
+  .sec .h { background: #f2f5fa; border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 800; color: var(--blue-deep); padding: 9px 16px; display: flex; align-items: center; gap: 8px; }
+  .sec .h::before { content: ""; width: 5px; height: 15px; background: var(--blue); }
+  .sec .b { padding: 10px 16px 11px; }
+  .sec .i { position: relative; font-size: 12.6px; font-weight: 500; color: #4a5568; line-height: 1.7; padding: 4px 0 4px 15px; }
+  .sec .i::before { content: ""; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-pale); }
+  .sec .i b { color: #1a2330; font-weight: 800; }
+
+  .kpi { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi div { background: var(--tint); border-left: 4px solid var(--blue); padding: 11px 13px; }
+  .kpi .k { font-size: 10.5px; font-weight: 800; color: var(--blue); }
+  .kpi .v { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 24px; font-weight: 800; color: #1a2330; line-height: 1.15; margin-top: 3px; }
+  .kpi .v small { font-family: "Noto Sans JP", sans-serif; font-size: 11px; font-weight: 700; color: #6b7789; margin-left: 2px; }
+  .kpi .n { font-size: 10.5px; font-weight: 600; color: #7a8698; margin-top: 3px; }
+  .trend { margin-top: 10px; background: var(--blue-deep); color: #fff; padding: 12px 15px; display: flex; align-items: center; gap: 12px; }
+  .trend .l { font-size: 11.5px; font-weight: 800; opacity: .85; line-height: 1.5; }
+  .trend .r { margin-left: auto; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 15px; font-weight: 800; white-space: nowrap; }
+  .trend .r b { font-size: 22px; color: #8fd0ff; }
+
+  .learn { margin-top: 12px; border: 1.5px solid var(--blue); }
+  .learn .h { background: var(--blue); color: #fff; font-size: 12.5px; font-weight: 800; padding: 8px 16px; letter-spacing: .02em; }
+  .learn .g { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+  .learn .g div { padding: 9px 16px 10px; border-right: 1px solid var(--line); }
+  .learn .g div:last-child { border-right: none; }
+  .learn .t { font-size: 13px; font-weight: 800; color: var(--blue-deep); }
+  .learn .d { font-size: 11.4px; font-weight: 500; color: #4a5568; line-height: 1.6; margin-top: 3px; }
+
+
+  /* ===== 表紙（白地・左に大見出し／右にイラスト） ===== */
+  .cv { background: #fff; }
+  .cv .t { position: absolute; left: 72px; top: 104px; font-size: 74px; font-weight: 900; color: var(--blue); line-height: 1.34; letter-spacing: .02em; }
+  .cv .sub { position: absolute; left: 75px; top: 316px; font-size: 19px; font-weight: 800; color: #2a2f3a; letter-spacing: .05em; line-height: 1.7; }
+  .cv .meta { position: absolute; left: 75px; top: 392px; font-size: 14px; font-weight: 700; color: #8a93a3; letter-spacing: .06em; }
+  .cv .il { position: absolute; right: 44px; bottom: 74px; width: 560px; }
+  .cv .logo { position: absolute; left: 72px; bottom: 58px; height: 38px; }
+
+  /* ===== 目次 ===== */
+  .ix { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 26px; margin-top: 30px; }
+  .ix a, .ix div { display: flex; align-items: center; gap: 16px; background: #fff; border: 1px solid #d9e1ec; padding: 18px 20px; text-decoration: none; box-shadow: 0 4px 14px rgba(26,35,48,.05); }
+  .ix .n { flex: 0 0 auto; width: 46px; height: 46px; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; }
+  .ix .b { flex: 1; min-width: 0; display: block; }
+  .ix .nm { display: block; font-size: 19px; font-weight: 800; color: #1a2330; line-height: 1.35; }
+  .ix .ds { display: block; font-size: 12px; font-weight: 600; color: #7a8698; margin-top: 4px; line-height: 1.5; }
+  .ix .pg { flex: 0 0 auto; font-size: 12.5px; font-weight: 800; color: var(--blue); }
+  .ix .soon { border-style: dashed; opacity: .62; }
+  .ix .soon .n { background: #b9c4d4; }
+
+
+
+
+  /* ===== 目次（この資料の中身） ===== */
+  .ixh { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
+  .ixh .lb { background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; padding: 7px 16px; letter-spacing: .04em; white-space: nowrap; }
+  .ixh .tx { font-size: 15px; font-weight: 700; color: #4a5568; }
+  .ixh .pg { margin-left: auto; font-size: 13px; font-weight: 800; color: var(--blue); white-space: nowrap; }
+  .ixg { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 26px; margin-top: 14px; }
+  .ixg div { display: flex; align-items: center; gap: 13px; background: #fff; border: 1px solid var(--line); padding: 10px 14px; }
+  .ixg .n { flex: 0 0 auto; width: 30px; height: 30px; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 800; }
+  .ixg .nm { font-size: 14.5px; font-weight: 800; color: #1a2330; }
+  .ixg .ar { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; padding: 3px 8px; margin-left: 8px; white-space: nowrap; }
+  .ixg .pg { margin-left: auto; font-size: 12px; font-weight: 800; color: #8a93a3; white-space: nowrap; }
+
+  /* ===== PDF出力 ===== */
+  @page { size: 1280px 720px; margin: 0; }
+  @media print {
+    body { padding: 0; background: #fff; }
+    * { box-shadow: none !important; }
+    .note { display: none; }
+    .deck { gap: 0; display: block; }
+    .slide-shell { width: 1280px; }
+    .slide-shell figcaption { display: none; }
+    .slide-shell .clip { height: 720px; overflow: hidden; border-radius: 0; box-shadow: none; }
+    .slide { transform: none; border: none; border-radius: 0; }
+    figure.slide-shell { page-break-after: always; break-after: page; margin: 0; }
+    figure.slide-shell:last-child { page-break-after: auto; }
+  }
+  .trend .l { flex: 0 0 150px; }
+  .trend .r { white-space: normal; text-align: right; line-height: 1.35; }
+  .cs td { padding-top: 11px; padding-bottom: 11px; }
+  .cs.cmp td { padding-top: 6px; padding-bottom: 6px; line-height: 1.45; }
+</style>
+</head>
+<body>
+  <p class="note">卸売・商社のAI活用事例集｜一覧2ページ＋詳細10ページ／事例はすべて各社の公開情報にもとづく</p>
+  <div class="deck">
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide cv">
+        <p class="t">卸売・商社の<br>AI活用事例集</p>
+        <p class="sub">公開情報でみる、国内の商社・卸売10社の取り組み</p>
+        <p class="meta">2026年10月版　｜　バイテック法人AI研修</p>
+        <img class="il" src="assets/cover-illus.png" alt="">
+        <img class="logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+      </div>
+    </div><figcaption>表紙</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">Contents</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd" style="margin-top:4px">
+          <p class="t" style="font-size:27px">目次</p>
+        </div>
+        <div class="ixh"><span class="lb">詳細事例</span><span class="tx">1社1ページ。背景・取り組み・成果・自社への応用まで</span><span class="pg">P.5 - 14</span></div>
+        <div class="ixg"><div><span class="n">01</span><span class="nm">伊藤忠商事<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg>全社活用</span></span><span class="pg">P.5</span></div><div><span class="n">02</span><span class="nm">住友商事<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg>全社活用</span></span><span class="pg">P.6</span></div><div><span class="n">03</span><span class="nm">丸紅<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>全社活用</span></span><span class="pg">P.7</span></div><div><span class="n">04</span><span class="nm">豊田通商<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg>社員教育</span></span><span class="pg">P.8</span></div><div><span class="n">05</span><span class="nm">三井物産<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg>人材育成</span></span><span class="pg">P.9</span></div><div><span class="n">06</span><span class="nm">内田洋行<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg>オフィス</span></span><span class="pg">P.10</span></div><div><span class="n">07</span><span class="nm">ミスミ<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>問合せ対応</span></span><span class="pg">P.11</span></div><div><span class="n">08</span><span class="nm">トラスコ中山<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><rect x="5" y="3" width="14" height="18" rx="0"/><path d="M8 7h8M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h.01M15.5 18h.01"/></svg>見積</span></span><span class="pg">P.12</span></div><div><span class="n">09</span><span class="nm">三菱食品<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M2.5 6h11v10h-11zM13.5 10h4l3.5 3.5V16h-7.5"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>受発注</span></span><span class="pg">P.13</span></div><div><span class="n">10</span><span class="nm">ヤマエ久野<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg>需要予測</span></span><span class="pg">P.14</span></div></div>
+        <p class="s-foot">本資料は各社が公開している情報をもとにバイテック法人AI研修が編集したものです。掲載している数値はすべて各社の公表値であり、当社による測定値ではありません。掲載企業との取引関係や、各社による推薦を示すものではありません。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>目次</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">卸売・商社 活用事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd">
+          <span class="badge">卸売・商社<small>1 / 2</small></span>
+          <p class="t">成果が出ているのは<b>全社展開と現場への浸透</b>。<br>使う人を増やし、削減時間を数字で追っている。</p>
+        </div>
+        <table class="cs cmp">
+          <colgroup><col style="width:40px"><col style="width:176px"><col style="width:112px"><col><col style="width:262px"></colgroup>
+          <tr><th>No.</th><th>企業</th><th>活用領域</th><th>取り組み</th><th>公表されている成果</th></tr>
+          <tr>
+            <td class="no">01</td><td class="co"><span>伊藤忠商事</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg>全社活用</span></td>
+            <td>独自の生成AI「I-Colleague」を単体・国内外グループへ展開</td>
+            <td class="rs">生成AIの業務時間削減が<b>年255.1万時間</b>（<b>1,466人分</b>）</td>
+          </tr>
+          <tr>
+            <td class="no">02</td><td class="co"><span>住友商事</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg>全社活用</span></td>
+            <td>Microsoft 365 Copilotをグローバル全役職員に付与し、全社に定着</td>
+            <td class="rs">月間利用率<b>約90％</b>・削減<b>約10,000時間/月</b></td>
+          </tr>
+          <tr>
+            <td class="no">03</td><td class="co"><span>丸紅</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>全社活用</span></td>
+            <td>内製の生成AI基盤「まるちゃ」で、現場が業務別AIエージェントを自作</td>
+            <td class="rs">グループで年換算<b>約170万時間</b>の業務削減</td>
+          </tr>
+          <tr>
+            <td class="no">04</td><td class="co"><span>豊田通商</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg>社員教育</span></td>
+            <td>各部署から選んだ「AIインフルエンサー」で全社のAI活用を後押し</td>
+            <td class="rs">AI活用率<b>67％</b>から<b>90％以上</b>を目指す</td>
+          </tr>
+          <tr>
+            <td class="no">05</td><td class="co"><span>三井物産</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg>人材育成</span></td>
+            <td>DXビジネス人材の認定を広げ、データとAIで経営判断を高度化</td>
+            <td class="rs">DXビジネス人材<b>1,679名</b>（目標<b>1,000名</b>を上回る）</td>
+          </tr>
+          <tr>
+            <td class="no">06</td><td class="co"><span>内田洋行</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg>オフィス</span></td>
+            <td>Microsoft 365 Copilotを約600人に付与し、有志と週1勉強会で定着を推進</td>
+            <td class="rs">月1回以上利用<b>95%</b>・月間<b>38,000回</b>（半年で<b>2倍</b>）</td>
+          </tr>
+        </table>
+        <div class="band">総合商社は「全員が使える環境」を先に整え、推進役（アンバサダー・インフルエンサー）で現場に広げ、削減時間や利用率を年次で開示しています。</div>
+        <p class="s-foot">出典：各社の公式発表（プレスリリース・ニュースルーム・公式サイト）。伊藤忠商事（2026.9）／住友商事（2026.5.27）／丸紅（2026.9）／豊田通商（2026.9）／三井物産（2026.8）／内田洋行（2025.12.25）。数値は各社の公表値であり、当社による測定値ではありません。社名・製品名は各社の商標です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>卸売・商社（1/2）</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">卸売・商社 活用事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd">
+          <span class="badge">卸売・商社<small>2 / 2</small></span>
+          <p class="t">卸の現場では<b>見積・問合せ・発注</b>が<br>AIで「秒単位」「半分の時間」に。</p>
+        </div>
+        <table class="cs">
+          <colgroup><col style="width:40px"><col style="width:176px"><col style="width:112px"><col><col style="width:262px"></colgroup>
+          <tr><th>No.</th><th>企業</th><th>活用領域</th><th>取り組み</th><th>公表されている成果</th></tr>
+          <tr>
+            <td class="no">07</td><td class="co"><span>ミスミ</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>問合せ対応</span></td>
+            <td>技術サポートと注文変更の問い合わせに生成AIチャットボットを導入</td>
+            <td class="rs">回答までの待ち時間を<b>97〜98％削減</b></td>
+          </tr>
+          <tr>
+            <td class="no">08</td><td class="co"><span>トラスコ中山</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><rect x="5" y="3" width="14" height="18" rx="0"/><path d="M8 7h8M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h.01M15.5 18h.01"/></svg>見積</span></td>
+            <td>AI見積システム「即答名人」で、価格と納期を自動で回答</td>
+            <td class="rs">見積を<b>最短5秒</b>で自動回答・自動化率<b>30.5％</b></td>
+          </tr>
+          <tr>
+            <td class="no">09</td><td class="co"><span>三菱食品</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M2.5 6h11v10h-11zM13.5 10h4l3.5 3.5V16h-7.5"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>受発注</span></td>
+            <td>メーカーと発注・物流データを連携し、積載効率を最大化するAI発注モデルを構築</td>
+            <td class="rs">トラック台数<b>約30％削減</b>可能と試算（実証）</td>
+          </tr>
+          <tr>
+            <td class="no">10</td><td class="co"><span>ヤマエ久野</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg>需要予測</span></td>
+            <td>食品卸の汎用倉庫で、AI需要予測による自動発注を導入</td>
+            <td class="rs">熟練者の発注業務時間を<b>約50％削減</b></td>
+          </tr>
+        </table>
+        <div class="band">件数が多く、過去データが残る定型業務ほど効果が出ます。見積・問合せ・発注は、中堅の専門商社・卸でも最初に狙いやすい領域です。</div>
+        <p class="s-foot">出典：各社の公式発表（プレスリリース・ニュースルーム・公式サイト）。ミスミ（2025.8.26）／トラスコ中山（2026.3）／日清食品・三菱食品（2026.5.11）／ヤマエ久野・日立（2024.8.28）。数値は各社の公表値であり、当社による測定値ではありません。社名・製品名は各社の商標です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>卸売・商社（2/2）</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜卸売・商社</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">01</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg></span>
+          <p class="co">伊藤忠商事<small>汎用AIから専門業務・トレードのAI化へ</small></p>
+          <div class="tags"><span>全社活用</span><span>単体約3,500名利用</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">2023年7月に<b>機密情報も扱える専用の生成AI環境</b>を導入</p><p class="i">国内グループ約50社・海外約100拠点向けに<b>専用環境</b>を構築</p><p class="i">契約書・提案書の下書きから<b>市況分析・事業投資・監査</b>へ拡張</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">「生成AIラボ」を早期に立ち上げ、環境整備と同時に進めた</p><p class="i">汎用機能に加えて<b>専門業務支援機能</b>を次々とリリース</p><p class="i">削減効果を<b>「人分／年」</b>に換算して年度ごとに開示</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">業務時間削減</p><p class="v">255.1万<small>時間</small></p><p class="n">2025年度・1,466人分/年</p></div><div><p class="k">利用者（単体）</p><p class="v">約3,500<small>名</small></p><p class="n">統合レポート2026</p></div><div><p class="k">グループ展開</p><p class="v">約50社<small></small></p><p class="n">国内／海外は約100拠点</p></div></div><div class="trend"><p class="l">業務時間の削減効果<br>2024年度→2025年度</p><p class="r">30.9万時間 → <b>255.1</b>万時間</p></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">商談前の分析・提案資料作成から契約情報入力・物流手配・会計計上までを<b>AIエージェントが自律的に実行</b>する、トレード業務の抜本的なAI化を進める</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">削減を人数で示す</p><p class="d">削減時間を「何人分」に換算すると、経営層に効果が伝わり、追加投資の判断もしやすくなる。</p></div><div><p class="t">機密を扱える環境</p><p class="d">取引条件や顧客情報を入れられる環境がないと、商社の実務では使われない。最初に整える。</p></div><div><p class="t">型を横展開</p><p class="d">素材選定など一つの成功事例をひな形にし、他の商材・部署へ広げる。</p></div></div>
+        </div>
+        <p class="s-foot">出典：伊藤忠商事「統合レポート2026」（2026年9月）p.40 ほか、同社サイト「伊藤忠商事のAIX 生成AI」。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 01 伊藤忠商事</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜卸売・商社</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">02</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg></span>
+          <p class="co">住友商事<small>アンバサダーと研修で「当たり前」に</small></p>
+          <div class="tags"><span>全社活用</span><span>約8,500名</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i"><b>Microsoft 365 Copilot</b>をグローバル全役職員に付与</p><p class="i">自ら手を挙げる<b>Copilot Champions（アンバサダー）</b>を約321名任命</p><p class="i">契約書の比較・確認、議事録の要約など<b>日常業務</b>で活用</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">ツール配布より<b>意識改革</b>を重視し「当たり前」を目指した</p><p class="i">社内セミナーを年<b>165回</b>実施し、使い方を継続的に共有</p><p class="i">事業部門でも<b>DXワーキンググループ</b>と段階別研修を実施</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">平均月間利用率</p><p class="v">約90<small>％</small></p><p class="n">2026年3月時点</p></div><div><p class="k">業務削減時間</p><p class="v">約10,000<small>時間/月</small></p><p class="n">利用者アンケート</p></div><div><p class="k">Champions</p><p class="v">約321<small>名</small></p><p class="n">グローバル</p></div><div><p class="k">社内セミナー</p><p class="v">165<small>回</small></p><p class="n">2025年4月〜26年3月</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">推進役を公募する</p><p class="d">情シス任せにせず、使いたい社員を各部署の推進役に。現場目線のコツが広がる。</p></div><div><p class="t">研修は2段階で</p><p class="d">全員必須の基礎研修と、希望者向けの応用研修に分けると、ITが苦手な部署でも定着しやすい。</p></div><div><p class="t">効果はアンケートで</p><p class="d">最初は自己申告の削減時間でよい。定点で測り、経営報告に使う。</p></div></div>
+        </div>
+        <p class="s-foot">出典：住友商事「デジタル・AI白書2025」（2026年5月27日）p.10 ほか、同社オウンドメディア「コスト削減効果は年間約12億。住商の『生成AI活用』最前線」（2025年11月4日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 02 住友商事</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜卸売・商社</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">03</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span>
+          <p class="co">丸紅<small>内製と市民開発で現場が自らAI化</small></p>
+          <div class="tags"><span>全社活用</span><span>登録者23,000人超</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">生成AIエージェント基盤<b>「Marubeni Chatbot（まるちゃ）」</b>を内製</p><p class="i"><b>社内規程の照会・契約書の一次確認</b>・リサーチをAIエージェント化</p><p class="i"><b>現場の市民開発</b>で部門ごとの特化型AIを増やす</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">外部に頼らず<b>内製</b>し、現場の要望に素早く対応</p><p class="i">DX専門会社と連携し<b>350名超の専門人財体制</b>で推進</p><p class="i">グループ会社まで展開し、利用者の裾野を広げた</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">業務削減効果</p><p class="v">約170万<small>時間</small></p><p class="n">グループ全体・年換算</p></div><div><p class="k">登録者</p><p class="v">23,000<small>人超</small></p><p class="n">2026年5月末時点</p></div><div><p class="k">月間アクティブ</p><p class="v">10,000<small>名以上</small></p><p class="n">丸紅グループ</p></div></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">営業から管理業務まで<b>部門・個人ごとに特化型AIエージェント</b>を配置し、投資判断でも成功・失敗事例を学習させたAIの活用を進める</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">現場に作らせる</p><p class="d">ノーコードで部署ごとにAIを作れるようにすると、本部が想定しない用途まで広がる。</p></div><div><p class="t">規程・契約から</p><p class="d">社内規程の問い合わせや契約書の一次チェックは、文書が揃っていて効果が出やすい。</p></div><div><p class="t">失敗事例も資産に</p><p class="d">過去の取引トラブルや失注理由を蓄積し、AIで引き出せるようにする。</p></div></div>
+        </div>
+        <p class="s-foot">出典：丸紅「統合報告書2026」（2026年9月）p.33-34 ほか、丸紅I-DIGIOホールディングス ニュース「丸紅グループ全社展開で実績を積んだ生成AI基盤『まるちゃ』の外部提供を開始」（2026年6月11日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 03 丸紅</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜卸売・商社</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">04</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span>
+          <p class="co">豊田通商<small>推進役150名で「完全AIシフト」へ</small></p>
+          <div class="tags"><span>社員教育</span><span>約150名の推進役</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">各営業本部・部署から<b>約150名の「AIインフルエンサー」</b>を選出</p><p class="i">AI専任の<b>AIタスクフォース</b>を組成し、全社会議体を設置</p><p class="i">社内動画で<b>AIを使った仕事術</b>の番組を制作・発信</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">本部主導の情報発信だけでは<b>現場への浸透に限界</b>があった</p><p class="i">現場目線で使いこなす人を置き、<b>成果を周囲に直接伝える</b></p><p class="i">生成AIと<b>市民開発</b>でアナログ業務のデジタル化を進めた</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">AI活用率</p><p class="v">67<small>％</small></p><p class="n">2026年3月期・全従業員</p></div><div><p class="k">AIインフルエンサー</p><p class="v">約150<small>名</small></p><p class="n">各本部・部署から</p></div><div><p class="k">活用率の目標</p><p class="v">90<small>％以上</small></p><p class="n">2027年3月期・目標</p></div></div><div class="trend"><p class="l">全従業員のAI活用率<br>26年3月期→27年3月期</p><p class="r">67% → <b>90</b>%以上（目標）</p></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">全従業員のAI活用率90％以上と、インパクトの大きい<b>「強いAIユースケース」5件の創出</b>を目指す（2027年3月期）</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">部署に1人の推進役</p><p class="d">各部署に「聞ける人」を置くと、研修後の定着率が上がる。兼務でよい。</p></div><div><p class="t">活用率をKPIに</p><p class="d">まずは使っている人の割合を測る。効果測定はその次の段階でよい。</p></div><div><p class="t">社内で事例を流す</p><p class="d">同じ会社の社員の使い方を短い動画や社内報で共有すると、まねが広がる。</p></div></div>
+        </div>
+        <p class="s-foot">出典：豊田通商「統合報告書2026」（2026年9月）p.56-57「AI戦略」。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 04 豊田通商</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜卸売・商社</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">05</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span>
+          <p class="co">三井物産<small>人材育成を土台にAI活用を広げる</small></p>
+          <div class="tags"><span>人材育成</span><span>200件超のDDM案件</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i"><b>DXビジネス人材認定</b>で国内外の社員を育成</p><p class="i">データとAIで経営判断を支える<b>データドリブン経営（DDM）</b>を推進</p><p class="i">2027年3月期に<b>AI戦略推進ユニット</b>を設立</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">中期経営計画で<b>DX人材育成</b>を重点に位置づけた</p><p class="i">グループ共通基盤にデータとAI・分析案件を集約</p><p class="i">ノウハウを<b>型化・横展開</b>し、組織の枠を越えて活用</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">DXビジネス人材</p><p class="v">1,679<small>名</small></p><p class="n">2026年3月期</p></div><div><p class="k">人材の目標</p><p class="v">1,000<small>名</small></p><p class="n">2026年3月期・目標</p></div><div><p class="k">DDM案件</p><p class="v">200<small>件超</small></p><p class="n">2026年6月末時点</p></div></div><div class="trend"><p class="l">DXビジネス人材数<br>24年3月期→26年3月期</p><p class="r">231名 → <b>1,679</b>名</p></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">タレントマネジメントシステムでDX人材の戦略的配置を進め、<b>データ/AI活用の更なる高度化</b>を図る（中経2029）</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">認定制度をつくる</p><p class="d">社内の「AI活用できる人」を認定し、人数を目標にすると、育成が計画的に進む。</p></div><div><p class="t">人材の配置まで</p><p class="d">育てた人材を営業部門に配置しないと、成果につながらない。</p></div><div><p class="t">データは共通基盤に</p><p class="d">部署ごとのExcelを集約しないと、AIで横断分析ができない。</p></div></div>
+        </div>
+        <p class="s-foot">出典：三井物産「統合報告書2026」（2026年8月）p.41「三井物産のデジタル戦略・施策」・CDIOメッセージ・p.68 人事データ。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 05 三井物産</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜卸売・商社</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">06</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span>
+          <p class="co">内田洋行<small>配って終わりにしない、Copilot定着の1年半</small></p>
+          <div class="tags"><span>オフィス</span><span>大手</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">有償Copilotライセンスを<b>およそ600ユーザー</b>に付与</p><p class="i">毎週<b>15分</b>の「プチ勉強会」を朝<b>9時15分</b>から継続開催</p><p class="i">社内コミュニティで<b>うまくいかない例</b>も共有し有志を巻き込む</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">まず約<b>16%</b>の新しいもの好きから始め、身近な事例を周囲へ広げた</p><p class="i">プロンプト集より<b>対話</b>での使い方を、試行錯誤のデモで伝えた</p><p class="i">社内検索の不満には参照先を絞った<b>エージェント</b>で対応</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">Copilot利用者</p><p class="v">およそ600<small>ユーザー</small></p><p class="n">有償ライセンス</p></div><div><p class="k">月1回以上利用</p><p class="v">95<small>%</small></p><p class="n">アクティブ率</p></div><div><p class="k">月間利用総数</p><p class="v">38,000<small>回</small></p><p class="n">半年前の2倍</p></div><div><p class="k">週3日以上利用</p><p class="v">約4<small>割</small></p><p class="n">利用総数の8割を占める</p></div></div><div class="trend"><p class="l">Copilot<br>ライセンス数</p><p class="r">412 → <b>およそ600</b></p></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">週3日未満の<b>残り6割</b>への継続支援が課題。社内情報検索は参照先を指定した<b>エージェント</b>で精度向上を図る</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">全員配布より先行層</p><p class="d">使いたい人を手挙げで募り、ガイドライン確認・講習受講・上司承認を条件にライセンスを付与する</p></div><div><p class="t">朝15分の定例</p><p class="d">朝会に15分の活用共有を足すだけで、学んだことをその日のうちに試す習慣が作れる</p></div><div><p class="t">検索は範囲を絞る</p><p class="d">商品情報や社内規程は参照先フォルダを決め、Word・PDFで整理してからAIに読ませる</p></div></div>
+        </div>
+        <p class="s-foot">出典：内田洋行 公式サイト ITレポート「Microsoft 365 Copilot 導入・活用推進 大反省会」（2025年12月25日）／同「生成AIの導入で変わる仕事の進め方」（2025年1月10日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 06 内田洋行</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜卸売・商社</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">07</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span>
+          <p class="co">ミスミ<small>3,000万点の技術質問に40秒で回答</small></p>
+          <div class="tags"><span>問合せ対応</span><span>年約10万件</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i"><b>3,000万点以上</b>の商品に関する技術質問に生成AIが回答</p><p class="i">注文の<b>キャンセル・変更・返品</b>の可否も回答</p><p class="i">2024年11月に技術サポートで開始し、2025年8月に本格導入</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">技術サポートだけで<b>国内約10万件/年</b>の問い合わせがあった</p><p class="i">人の回答では<b>平均1時間</b>待たせていた</p><p class="i">定型の確認業務から先に<b>AIへ切り替えた</b></p></div></div></div>
+          <div><div class="kpi"><div><p class="k">技術サポート</p><p class="v">40<small>秒</small></p><p class="n">従来平均1時間・98%削減</p></div><div><p class="k">カスタマー対応</p><p class="v">10<small>秒</small></p><p class="n">従来321秒・97%削減</p></div><div><p class="k">問い合わせ件数</p><p class="v">約10万<small>件/年</small></p><p class="n">技術サポート・国内</p></div></div><div class="trend"><p class="l">技術サポートの<br>平均回答時間</p><p class="r">平均1時間 → 平均<b>40</b>秒</p></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i"><b>納期や出荷・配送状況</b>にも回答できるようにし、<b>チャット上で処理を完結</b>させる</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">よくある質問から</p><p class="d">在庫・納期・型番の照会など、回答が決まっている問い合わせから自動化する。</p></div><div><p class="t">カタログを学習元に</p><p class="d">商品マスタや仕様書を整えることが、回答精度を上げる一番の近道。</p></div><div><p class="t">待ち時間で測る</p><p class="d">削減工数だけでなく、顧客の待ち時間を指標にすると営業価値が伝わる。</p></div></div>
+        </div>
+        <p class="s-foot">出典：ミスミグループ本社 プレスリリース「顧客問い合わせに生成AIを本格導入 回答時間97%削減」（2025年8月26日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 07 ミスミ</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜卸売・商社</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">08</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><rect x="5" y="3" width="14" height="18" rx="0"/><path d="M8 7h8M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h.01M15.5 18h.01"/></svg></span>
+          <p class="co">トラスコ中山<small>1日3.8万行の見積に即答する</small></p>
+          <div class="tags"><span>見積</span><span>年944万行</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">2020年1月に<b>AI見積システム「即答名人」</b>を導入</p><p class="i">受注・見積実績をもとに<b>適正価格を定期的に自動計算</b></p><p class="i"><b>価格と納期</b>を最短5秒で自動回答</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">得意先から<b>1日約3.8万行</b>の見積依頼が届いていた</p><p class="i">従来は担当者が<b>数時間〜1日</b>かけて回答していた</p><p class="i">システム改修と<b>仕入先との連携拡大</b>を続けている</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">見積自動化率</p><p class="v">30.5<small>％</small></p><p class="n">2025年12月末</p></div><div><p class="k">自動回答</p><p class="v">最短5<small>秒</small></p><p class="n">価格と納期</p></div><div><p class="k">見積行数</p><p class="v">約3.8万<small>行/日</small></p><p class="n">年間944万行</p></div></div><div class="trend"><p class="l">見積の<br>回答時間</p><p class="r">数時間〜1日 → 最短<b>5</b>秒</p></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">AI見積システム「即答名人」の<b>利用率を50％に引き上げたい</b>（経営トップのメッセージ）</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">見積実績を資産に</p><p class="d">過去の見積・受注データが残っていれば、価格の自動提示から始められる。</p></div><div><p class="t">定番品から自動化</p><p class="d">全件ではなく、価格が安定している商品から自動回答の対象にする。</p></div><div><p class="t">自動化率を追う</p><p class="d">見積のうち何％を自動で返せたかを毎月測り、対象を少しずつ広げる。</p></div></div>
+        </div>
+        <p class="s-foot">出典：トラスコ中山「解体新書（統合報告書）2026」（2026年3月）p.11-12 ほか。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 08 トラスコ中山</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜卸売・商社</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">09</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M2.5 6h11v10h-11zM13.5 10h4l3.5 3.5V16h-7.5"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></span>
+          <p class="co">三菱食品<small>卸とメーカーのデータ連携で発注最適化</small></p>
+          <div class="tags"><span>受発注</span><span>日清食品と協業</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">日清食品と<b>発注計画・物流実績データ</b>を連携</p><p class="i">トラック1台あたりの<b>積載効率を最大化するAI発注モデル</b>を構築</p><p class="i"><b>特売発注予定データ</b>を事前共有し、在庫調整を効率化</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">各社の個別最適では<b>サプライチェーン全体の最適化</b>が難しい</p><p class="i">2025年10月から<b>3つの実証</b>を進め、定量成果を確認</p><p class="i">成果を踏まえ、両社の協業を<b>本格始動</b></p></div></div></div>
+          <div><div class="kpi"><div><p class="k">トラック台数</p><p class="v">約30<small>％削減</small></p><p class="n">AI発注モデル・試算</p></div><div><p class="k">在庫調整業務</p><p class="v">月約200<small>時間削減</small></p><p class="n">日清食品側・実証</p></div></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">AIで<b>受発注業務や需給バランス調整業務の効率化と自動化</b>を進め、製造・卸売・小売を横断したリアルタイムのデータ連携基盤を検討</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">取引先とデータ共有</p><p class="d">主要仕入先1社と特売計画を共有するだけでも、欠品や在庫調整の手間が減る。</p></div><div><p class="t">発注を積載で最適化</p><p class="d">発注数量をトラック単位で丸めると、物流費の削減に直結する。</p></div><div><p class="t">実証で数字を出す</p><p class="d">数か月の実証で削減時間や台数を試算し、本格導入の判断材料にする。</p></div></div>
+        </div>
+        <p class="s-foot">出典：日清食品・三菱食品 共同ニュースリリース「『商流』と『物流』のデータ連携で商習慣改革に挑戦」（2026年5月11日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 09 三菱食品</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜卸売・商社</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">10</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>
+          <p class="co">ヤマエ久野<small>熟練者の発注を AIが同水準で代替</small></p>
+          <div class="tags"><span>需要予測</span><span>4拠点で稼働</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">日立と協創し<b>AI需要予測型の自動発注システム</b>を2024年4月に稼働</p><p class="i">特売による急な需要増を除外する<b>「スポット特売機能」</b>を実装</p><p class="i">倉庫ごとの最低在庫・発注頻度を<b>自動チューニング</b></p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">熟練者1人が<b>約3,000アイテム</b>の発注に約3時間かけていた</p><p class="i">倉庫の増加で<b>発注担当者の人員不足</b>が課題だった</p><p class="i"><b>欠品・在庫回転は導入前水準を維持</b>したまま時間を短縮</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">発注業務時間</p><p class="v">約50<small>％削減</small></p><p class="n">1人1日あたり</p></div><div><p class="k">適用拠点</p><p class="v">4<small>拠点</small></p><p class="n">汎用倉庫</p></div><div><p class="k">担当アイテム</p><p class="v">約3,000<small>アイテム</small></p><p class="n">1人あたり</p></div></div><div class="trend"><p class="l">1人・1日あたりの<br>発注業務時間</p><p class="r">約3時間 → <b>約1時間半</b></p></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">需要予測の<b>導入拠点数を増やし</b>、発注担当者を集約しながら生産性を高める。入荷回数・仕入数のコントロールで倉庫作業も効率化</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">熟練者の発注を移す</p><p class="d">ベテランの発注ノウハウをAIに置き換えると、属人化と人手不足に同時に効く。</p></div><div><p class="t">特売は別扱いに</p><p class="d">スポット受注をそのまま学習させると予測が乱れる。例外の扱いを先に決める。</p></div><div><p class="t">在庫指標を守る</p><p class="d">時間削減だけでなく、欠品率・在庫回転が悪化していないかを必ず確認する。</p></div></div>
+        </div>
+        <p class="s-foot">出典：ヤマエ久野・日立製作所 共同ニュースリリース「ヤマエ久野と日立が協創、AI需要予測自動発注で作業時間を大幅短縮」（2024年8月28日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 10 ヤマエ久野</figcaption></figure>
+  </div>
+</body>
+</html>

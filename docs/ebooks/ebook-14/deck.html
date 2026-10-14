@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>建設業のAI活用事例集｜全14スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* 業種別 活用事例集。設計は ebook-04/05 と同系統（四角の角丸なし・円とピルのみ角丸）。
+     ★事例はすべて各社の公開情報にもとづく。数値は出典の表記どおりに記載し、推測で丸めたり
+       脚色したりしないこと。出典はスライド下部に必ず明記する。他社名を出す資料のため、
+       まとめサイトの孫引きは使わず一次情報（プレスリリース・公式サイト）で裏を取る。 */
+  :root {
+    --blue: #2c5c9c; --blue-deep: #1a2e50; --blue-bright: #1a6fb5; --blue-pale: #8fb0d8;
+    --ink: #2a2f3a; --line: #e3e8ef; --amber: #f0b429; --tint: #eef4fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f4f6f8; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; color: var(--ink); padding: 48px 0 96px; }
+  .note { max-width: 1120px; margin: 0 auto 28px; font-size: 13px; font-weight: 700; color: #8a93a3; }
+  .en { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; }
+
+  .deck { display: flex; flex-direction: column; gap: 34px; align-items: center; counter-reset: pg -1; }
+  .slide-shell { width: 1120px; counter-increment: pg; }
+  .slide-shell figcaption { font-size: 12px; font-weight: 700; color: #8a93a3; margin: 8px 2px 0; letter-spacing: .04em; }
+  .slide { width: 1280px; height: 720px; transform: scale(0.875); transform-origin: top left; background: #fff; position: relative; overflow: hidden; }
+  .slide-shell .clip { height: 630px; overflow: hidden; border-radius: 0; box-shadow: 0 2px 10px rgba(26,35,48,.08); }
+
+  /* ===== 共通 ===== */
+  .s-body { position: absolute; inset: 0; padding: 36px 56px; z-index: 1; }
+  .s-eyebrow { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 700; color: var(--blue-pale); letter-spacing: .02em; }
+  .s-eyebrow::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); }
+  .s-logo { position: absolute; top: 38px; right: 56px; height: 30px; }
+  .s-foot { position: absolute; left: 56px; right: 120px; bottom: 14px; font-size: 10px; color: #9aa3b2; line-height: 1.6; z-index: 5; }
+  .s-num { position: absolute; right: 0; bottom: 0; width: 66px; height: 66px; background: var(--blue); border-radius: 66px 0 0 0; color: #fff; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 13px; font-weight: 700; display: flex; align-items: flex-end; justify-content: flex-end; padding: 0 14px 10px 0; z-index: 5; }
+  .s-num::before { content: counter(pg); }
+
+  /* ===== 見出し行（業種バッジ＋要点） ===== */
+  .hd { display: flex; align-items: center; gap: 18px; margin-top: 8px; }
+  .hd .badge { background: var(--blue); color: #fff; font-size: 24px; font-weight: 800; padding: 10px 22px; letter-spacing: .06em; white-space: nowrap; text-align: center; }
+  .hd .badge small { display: block; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; opacity: .8; margin-top: 3px; }
+  .hd .t { font-size: 25px; font-weight: 800; color: #1a2330; line-height: 1.4; letter-spacing: .01em; }
+  .hd .t b { color: var(--blue-bright); }
+
+  /* ===== 事例テーブル ===== */
+  table.cs { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 18px; table-layout: fixed; }
+  .cs th { background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; padding: 10px 14px; text-align: left; letter-spacing: .02em; }
+  .cs th:first-child { text-align: center; }
+  .cs td { font-size: 12.8px; font-weight: 500; color: #4a5568; padding: 13px 14px; border-bottom: 1px solid var(--line); vertical-align: middle; line-height: 1.55; }
+  .cs tr:nth-child(even) td { background: #f7f9fc; }
+  .cs td.no { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; text-align: center; font-weight: 800; color: var(--blue-pale); }
+  /* 社名は他社商標のためロゴを使わず、文字組みだけで見せる */
+  .cs td.co span { display: block; font-size: 14.5px; font-weight: 800; color: #1a2330; line-height: 1.4; }
+  .cs td.ar span { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; padding: 4px 9px; white-space: nowrap; }
+  .cs td.ar svg { flex: 0 0 auto; }
+  .cs td.rs { font-size: 13px; font-weight: 700; color: #1a2330; line-height: 1.5; }
+  .cs td.rs b { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 19px; font-weight: 800; color: var(--blue-bright); padding: 0 1px; }
+
+  /* ===== まとめ帯 ===== */
+  .band { display: flex; align-items: center; gap: 11px; background: var(--tint); border: 1.5px solid var(--blue); padding: 12px 20px; font-size: 13.5px; font-weight: 800; color: var(--blue-deep); margin-top: 12px; }
+  .band::before { content: "✓"; flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+
+
+  /* ===== 個別詳細スライド ===== */
+  .dhd { display: flex; align-items: flex-start; gap: 18px; margin-top: 8px; }
+  .dhd .no { background: var(--blue-deep); color: #fff; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 22px; font-weight: 800; padding: 12px 18px; letter-spacing: .06em; }
+  .dhd .mark { flex: 0 0 auto; width: 46px; height: 46px; background: var(--tint); border: 1.5px solid #cfdcee; color: var(--blue); display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .dhd .mark svg { width: 24px; height: 24px; }
+  .dhd .co { font-size: 25px; font-weight: 800; color: #1a2330; line-height: 1.3; }
+  .dhd .co small { display: block; font-size: 14px; font-weight: 700; color: #6b7789; margin-top: 5px; }
+  .dhd .tags { margin-left: auto; display: flex; gap: 7px; padding-top: 6px; }
+  .dhd .tags span { font-size: 11.5px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; border-radius: 999px; padding: 5px 13px; white-space: nowrap; }
+
+  .dt { display: grid; grid-template-columns: 1.18fr 1fr; gap: 20px; margin-top: 14px; align-items: start; }
+  .sec { border: 1px solid var(--line); }
+  .sec .h { background: #f2f5fa; border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 800; color: var(--blue-deep); padding: 9px 16px; display: flex; align-items: center; gap: 8px; }
+  .sec .h::before { content: ""; width: 5px; height: 15px; background: var(--blue); }
+  .sec .b { padding: 10px 16px 11px; }
+  .sec .i { position: relative; font-size: 12.6px; font-weight: 500; color: #4a5568; line-height: 1.7; padding: 4px 0 4px 15px; }
+  .sec .i::before { content: ""; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-pale); }
+  .sec .i b { color: #1a2330; font-weight: 800; }
+
+  .kpi { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi div { background: var(--tint); border-left: 4px solid var(--blue); padding: 11px 13px; }
+  .kpi .k { font-size: 10.5px; font-weight: 800; color: var(--blue); }
+  .kpi .v { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 24px; font-weight: 800; color: #1a2330; line-height: 1.15; margin-top: 3px; }
+  .kpi .v small { font-family: "Noto Sans JP", sans-serif; font-size: 11px; font-weight: 700; color: #6b7789; margin-left: 2px; }
+  .kpi .n { font-size: 10.5px; font-weight: 600; color: #7a8698; margin-top: 3px; }
+  .trend { margin-top: 10px; background: var(--blue-deep); color: #fff; padding: 12px 15px; display: flex; align-items: center; gap: 12px; }
+  .trend .l { font-size: 11.5px; font-weight: 800; opacity: .85; line-height: 1.5; }
+  .trend .r { margin-left: auto; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 15px; font-weight: 800; white-space: nowrap; }
+  .trend .r b { font-size: 22px; color: #8fd0ff; }
+
+  .learn { margin-top: 12px; border: 1.5px solid var(--blue); }
+  .learn .h { background: var(--blue); color: #fff; font-size: 12.5px; font-weight: 800; padding: 8px 16px; letter-spacing: .02em; }
+  .learn .g { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+  .learn .g div { padding: 9px 16px 10px; border-right: 1px solid var(--line); }
+  .learn .g div:last-child { border-right: none; }
+  .learn .t { font-size: 13px; font-weight: 800; color: var(--blue-deep); }
+  .learn .d { font-size: 11.4px; font-weight: 500; color: #4a5568; line-height: 1.6; margin-top: 3px; }
+
+
+  /* ===== 表紙（白地・左に大見出し／右にイラスト） ===== */
+  .cv { background: #fff; }
+  .cv .t { position: absolute; left: 72px; top: 104px; font-size: 74px; font-weight: 900; color: var(--blue); line-height: 1.34; letter-spacing: .02em; }
+  .cv .sub { position: absolute; left: 75px; top: 316px; font-size: 19px; font-weight: 800; color: #2a2f3a; letter-spacing: .05em; line-height: 1.7; }
+  .cv .meta { position: absolute; left: 75px; top: 392px; font-size: 14px; font-weight: 700; color: #8a93a3; letter-spacing: .06em; }
+  .cv .il { position: absolute; right: 44px; bottom: 74px; width: 560px; }
+  .cv .logo { position: absolute; left: 72px; bottom: 58px; height: 38px; }
+
+  /* ===== 目次 ===== */
+  .ix { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 26px; margin-top: 30px; }
+  .ix a, .ix div { display: flex; align-items: center; gap: 16px; background: #fff; border: 1px solid #d9e1ec; padding: 18px 20px; text-decoration: none; box-shadow: 0 4px 14px rgba(26,35,48,.05); }
+  .ix .n { flex: 0 0 auto; width: 46px; height: 46px; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; }
+  .ix .b { flex: 1; min-width: 0; display: block; }
+  .ix .nm { display: block; font-size: 19px; font-weight: 800; color: #1a2330; line-height: 1.35; }
+  .ix .ds { display: block; font-size: 12px; font-weight: 600; color: #7a8698; margin-top: 4px; line-height: 1.5; }
+  .ix .pg { flex: 0 0 auto; font-size: 12.5px; font-weight: 800; color: var(--blue); }
+  .ix .soon { border-style: dashed; opacity: .62; }
+  .ix .soon .n { background: #b9c4d4; }
+
+
+
+
+  /* ===== 目次（この資料の中身） ===== */
+  .ixh { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
+  .ixh .lb { background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; padding: 7px 16px; letter-spacing: .04em; white-space: nowrap; }
+  .ixh .tx { font-size: 15px; font-weight: 700; color: #4a5568; }
+  .ixh .pg { margin-left: auto; font-size: 13px; font-weight: 800; color: var(--blue); white-space: nowrap; }
+  .ixg { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 26px; margin-top: 14px; }
+  .ixg div { display: flex; align-items: center; gap: 13px; background: #fff; border: 1px solid var(--line); padding: 10px 14px; }
+  .ixg .n { flex: 0 0 auto; width: 30px; height: 30px; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 800; }
+  .ixg .nm { font-size: 14.5px; font-weight: 800; color: #1a2330; }
+  .ixg .ar { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; padding: 3px 8px; margin-left: 8px; white-space: nowrap; }
+  .ixg .pg { margin-left: auto; font-size: 12px; font-weight: 800; color: #8a93a3; white-space: nowrap; }
+
+  /* ===== PDF出力 ===== */
+  @page { size: 1280px 720px; margin: 0; }
+  @media print {
+    body { padding: 0; background: #fff; }
+    * { box-shadow: none !important; }
+    .note { display: none; }
+    .deck { gap: 0; display: block; }
+    .slide-shell { width: 1280px; }
+    .slide-shell figcaption { display: none; }
+    .slide-shell .clip { height: 720px; overflow: hidden; border-radius: 0; box-shadow: none; }
+    .slide { transform: none; border: none; border-radius: 0; }
+    figure.slide-shell { page-break-after: always; break-after: page; margin: 0; }
+    figure.slide-shell:last-child { page-break-after: auto; }
+  }
+  .trend .l { flex: 0 0 150px; }
+  .trend .r { white-space: normal; text-align: right; line-height: 1.35; }
+  .cs td { padding-top: 11px; padding-bottom: 11px; }
+  .cs.cmp td { padding-top: 6px; padding-bottom: 6px; line-height: 1.45; }
+</style>
+</head>
+<body>
+  <p class="note">建設業のAI活用事例集｜一覧2ページ＋詳細10ページ／事例はすべて各社の公開情報にもとづく</p>
+  <div class="deck">
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide cv">
+        <p class="t">建設業の<br>AI活用事例集</p>
+        <p class="sub">公開情報でみる、国内建設会社10社の取り組み</p>
+        <p class="meta">2026年10月版　｜　バイテック法人AI研修</p>
+        <img class="il" src="assets/cover-illus.png" alt="">
+        <img class="logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+      </div>
+    </div><figcaption>表紙</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">Contents</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd" style="margin-top:4px">
+          <p class="t" style="font-size:27px">目次</p>
+        </div>
+        <div class="ixh"><span class="lb">詳細事例</span><span class="tx">1社1ページ。背景・取り組み・成果・自社への応用まで</span><span class="pg">P.5 - 14</span></div>
+        <div class="ixg"><div><span class="n">01</span><span class="nm">大成建設<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg>全社活用</span></span><span class="pg">P.5</span></div><div><span class="n">02</span><span class="nm">戸田建設<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg>ナレッジ</span></span><span class="pg">P.6</span></div><div><span class="n">03</span><span class="nm">大林組<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>設計</span></span><span class="pg">P.7</span></div><div><span class="n">04</span><span class="nm">安藤ハザマ<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><rect x="5" y="3" width="14" height="18" rx="0"/><path d="M8 7h8M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h.01M15.5 18h.01"/></svg>設計</span></span><span class="pg">P.8</span></div><div><span class="n">05</span><span class="nm">日本コムシス<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>全社活用</span></span><span class="pg">P.9</span></div><div><span class="n">06</span><span class="nm">鹿島建設<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg>施工管理</span></span><span class="pg">P.10</span></div><div><span class="n">07</span><span class="nm">長谷工コーポレーション<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 17h18M5 17a7 7 0 0114 0"/><path d="M10 10V6h4v4"/><path d="M4 20h16"/></svg>安全管理</span></span><span class="pg">P.11</span></div><div><span class="n">08</span><span class="nm">五洋建設<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M2.5 6h11v10h-11zM13.5 10h4l3.5 3.5V16h-7.5"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>技能伝承</span></span><span class="pg">P.12</span></div><div><span class="n">09</span><span class="nm">前田建設工業<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg>技能伝承</span></span><span class="pg">P.13</span></div><div><span class="n">10</span><span class="nm">建設技術研究所<span class="ar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.8C7.9 18.7 5 15.2 5 11V6z"/><path d="M9 11.6l2.1 2.1L15.2 9.6"/></svg>維持管理</span></span><span class="pg">P.14</span></div></div>
+        <p class="s-foot">本資料は各社が公開している情報をもとにバイテック法人AI研修が編集したものです。掲載している数値はすべて各社の公表値であり、当社による測定値ではありません。掲載企業との取引関係や、各社による推薦を示すものではありません。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>目次</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">建設業 活用事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd">
+          <span class="badge">建設業<small>1 / 2</small></span>
+          <p class="t">成果が出ているのは<b>「調べる・書く・設計する」</b>時間。<br>自社の知見をAIに渡した会社が伸びている。</p>
+        </div>
+        <table class="cs">
+          <colgroup><col style="width:40px"><col style="width:176px"><col style="width:112px"><col><col style="width:262px"></colgroup>
+          <tr><th>No.</th><th>企業</th><th>活用領域</th><th>取り組み</th><th>公表されている成果</th></tr>
+          <tr>
+            <td class="no">01</td><td class="co"><span>大成建設</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg>全社活用</span></td>
+            <td>OpenAIと連携しChatGPT Enterpriseで人財育成。250名から1,000名体制へ拡大</td>
+            <td class="rs">1人あたり週平均<b>5.48</b>時間の業務削減</td>
+          </tr>
+          <tr>
+            <td class="no">02</td><td class="co"><span>戸田建設</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg>ナレッジ</span></td>
+            <td>内製の生成AI基盤「Toda-AI-Portal」を全社展開。社内の知見を根拠付きで引き出す</td>
+            <td class="rs">利用者<b>3,000</b>名以上。文書検索は約5分→約<b>30</b>秒</td>
+          </tr>
+          <tr>
+            <td class="no">03</td><td class="co"><span>大林組</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>設計</span></td>
+            <td>設計初期の法令調査・要件整理に生成AIを適用。社内の法令解釈の知見も組み込み</td>
+            <td class="rs">法令調査・要件整理の時間を約<b>67</b>%短縮</td>
+          </tr>
+          <tr>
+            <td class="no">04</td><td class="co"><span>安藤ハザマ</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><rect x="5" y="3" width="14" height="18" rx="0"/><path d="M8 7h8M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h.01M15.5 18h.01"/></svg>設計</span></td>
+            <td>AIとRPAで柱・梁の仮定断面を自動算出する構造設計支援「BROWNIE」を社内標準化</td>
+            <td class="rs">基本設計の初期検討などの作業時間を平均約<b>50</b>%削減</td>
+          </tr>
+          <tr>
+            <td class="no">05</td><td class="co"><span>日本コムシス</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>全社活用</span></td>
+            <td>法人向け生成AIを全社展開し、RAGの「問合せAI」で社内問い合わせ対応を効率化</td>
+            <td class="rs">アクティブ率<b>76%</b>・問合せ件数<b>約20%削減</b></td>
+          </tr>
+        </table>
+        <div class="band">生成AIの全社展開と設計支援AIで、上流業務の時間を短縮。共通点は、自社の過去データやノウハウをAIに参照させ、使う人を育てていることです。</div>
+        <p class="s-foot">出典：各社の公式発表（プレスリリース・ニュースルーム・公式サイト）。大成建設（2025.11.17）／戸田建設（2026.5.18）／大林組（2026.8.19）／安藤ハザマ（2026.3.19）／日本コムシス（2025.6.20）。数値は各社の公表値であり、当社による測定値ではありません。社名・製品名は各社の商標です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>建設業（1/2）</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">建設業 活用事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd">
+          <span class="badge">建設業<small>2 / 2</small></span>
+          <p class="t">現場では<b>熟練者の目と勘</b>をAIが支える。<br>検査・安全・操作の「差」を小さくする。</p>
+        </div>
+        <table class="cs">
+          <colgroup><col style="width:40px"><col style="width:176px"><col style="width:112px"><col><col style="width:262px"></colgroup>
+          <tr><th>No.</th><th>企業</th><th>活用領域</th><th>取り組み</th><th>公表されている成果</th></tr>
+          <tr>
+            <td class="no">06</td><td class="co"><span>鹿島建設</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg>施工管理</span></td>
+            <td>ステレオカメラとAIで鉄筋を自動計測する「移動式AI配筋検査システム」を開発・適用</td>
+            <td class="rs">発注者の立会検査時間を約<b>70</b>%削減</td>
+          </tr>
+          <tr>
+            <td class="no">07</td><td class="co"><span>長谷工コーポレーション</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 17h18M5 17a7 7 0 0114 0"/><path d="M10 10V6h4v4"/><path d="M4 20h16"/></svg>安全管理</span></td>
+            <td>作業内容と現場写真から生成AIが想定リスクと対策を示す「ゲンバノメ」をDifyで開発</td>
+            <td class="rs">首都圏のすべての建設現場（<b>129</b>カ所）に採用</td>
+          </tr>
+          <tr>
+            <td class="no">08</td><td class="co"><span>五洋建設</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M2.5 6h11v10h-11zM13.5 10h4l3.5 3.5V16h-7.5"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>技能伝承</span></td>
+            <td>ライト工業と共同で、AIが削孔位置を推定し最適な操作を示すガイダンスシステムを開発</td>
+            <td class="rs">最大ズレ量を約<b>55</b>%低減、作業時間を約<b>20</b>%削減</td>
+          </tr>
+          <tr>
+            <td class="no">09</td><td class="co"><span>前田建設工業</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg>技能伝承</span></td>
+            <td>シールド工事の切羽圧を約10秒先まで予測し、操作タイミングを提示するAIを開発</td>
+            <td class="rs">AIの予測は約<b>90</b>%で熟練技術者と一致</td>
+          </tr>
+          <tr>
+            <td class="no">10</td><td class="co"><span>建設技術研究所</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.8C7.9 18.7 5 15.2 5 11V6z"/><path d="M9 11.6l2.1 2.1L15.2 9.6"/></svg>維持管理</span></td>
+            <td>ドローンの自動飛行とAIによる土砂流出の検出を組み合わせ、砂防などの巡視・点検を支援</td>
+            <td class="rs">巡視・点検を2時間程度から<b>30</b>分程度に短縮</td>
+          </tr>
+        </table>
+        <div class="band">現場系は画像AI・予測AIが中心で、成果は「待ち時間」「見落とし」「経験差」の削減に表れています。10社とも課題を1つに絞り、効果を数字で測っています。</div>
+        <p class="s-foot">出典：各社の公式発表（プレスリリース・ニュースルーム・公式サイト）。鹿島（2026.9.11）／長谷工コーポレーション（2025.9.9）／五洋建設（2026.1.16）／前田建設工業（2026.5.27）／建設技術研究所（2025.10.15）。数値は各社の公表値であり、当社による測定値ではありません。社名・製品名は各社の商標です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>建設業（2/2）</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜建設業</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">01</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span>
+          <p class="co">大成建設<small>ツールより先に「使いこなす人」を育てた</small></p>
+          <div class="tags"><span>全社活用</span><span>育成対象 1,000名体制</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">OpenAIと連携し<b>ChatGPT Enterprise</b>で人財育成と業務改革の全社プロジェクト</p><p class="i">基礎から応用までの<b>体系的な研修</b>に、集合研修・ワークショップ・事例発表会</p><p class="i">社員が業務に合わせた<b>カスタムGPT</b>を構築。施工計画書の自動生成システムも開発</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">スキル習得だけでなく<b>業務でいかに活かすか</b>を重視</p><p class="i">OpenAI Japanの<b>伴走支援</b>で、各自が自分の業務用GPTを構築</p><p class="i">250名から始め、<b>段階的に対象を拡大</b>（同年8月に1,000名体制）</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">週あたり削減時間</p><p class="v">5.48<small>時間</small></p><p class="n">1人あたり週平均</p></div><div><p class="k">年間の削減時間</p><p class="v">6.6<small>万時間</small></p><p class="n">250名換算</p></div><div><p class="k">活用意欲</p><p class="v">4.51<small>点</small></p><p class="n">5点満点・アンケート</p></div><div><p class="k">施工計画書作成</p><p class="v">約85<small>%削減</small></p><p class="n">従来比（別システム）</p></div></div><div class="trend"><p class="l">育成プログラムの<br>対象人数</p><p class="r">250名 → <b>1,000</b>名</p></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">1,000名規模の育成を基盤に、ChatGPT Enterpriseを<b>順次全社員へ展開</b>予定</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">小さく始めて広げる</p><p class="d">部署横断で先行メンバーを作り、成果を見せてから対象を広げる。</p></div><div><p class="t">研修と実務をつなぐ</p><p class="d">研修のゴールを「自分の業務用GPTを1つ作る」までに置く。</p></div><div><p class="t">効果を時間で測る</p><p class="d">開始3か月で週あたりの削減時間をアンケートで集め、経営に報告する。</p></div></div>
+        </div>
+        <p class="s-foot">出典：大成建設 リリース「建設業界最大規模の生成AIプロジェクトが始動」（2025年11月17日）、「最新生成AIを活用した土木工事の『全体施工計画書作成支援システム』を開発」（2025年11月28日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 01 大成建設</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜建設業</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">02</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg></span>
+          <p class="co">戸田建設<small>汎用AIで届かない部分を、自社の知見で埋めた</small></p>
+          <div class="tags"><span>ナレッジ</span><span>利用者 3,000名以上</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">施工技術資料や工事実績など<b>社内の知見をAIと連携</b>した基盤を内製</p><p class="i">全社員のAI活用の<b>入口を一本化</b>し、セキュリティとガバナンスを担保</p><p class="i">BIMソフト上で動く生成AIプラグイン<b>Revit-AI-Assistant</b>も完全内製</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">汎用AIだけでは難しいと判断し<b>自社の業務・知見に即した基盤</b>を構築</p><p class="i">AI基本方針の策定、<b>GenAI推進課</b>の新設など全社標準化の施策と並行</p><p class="i">活用事例の共有と<b>研修コンテンツのアーカイブ</b>でリテラシーを底上げ</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">基盤の利用者</p><p class="v">3,000<small>名以上</small></p><p class="n">2026年4月時点</p></div><div><p class="k">社内文書の検索</p><p class="v">約30<small>秒</small></p><p class="n">従来は約5分</p></div></div><div class="trend"><p class="l">社内ドキュメントの<br>検索時間</p><p class="r">約5分 → 約<b>30</b>秒</p></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">MCP等も活用し、<b>社内外システムやAIエージェントとの連携</b>を強化</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">入口を1つにする</p><p class="d">社員が使うAIの窓口を一本化し、ルールと利用状況をまとめて管理する。</p></div><div><p class="t">まず探す時間を減らす</p><p class="d">社内規程や過去資料の検索から始めると、効果が見えやすく定着も早い。</p></div><div><p class="t">根拠を必ず示す</p><p class="d">回答に元資料のリンクを付け、最終確認・判断は人が行う運用にする。</p></div></div>
+        </div>
+        <p class="s-foot">出典：戸田建設 新着情報「戸田建設、内製した生成AI基盤『Toda-AI-Portal™』を本格展開へ」（2026年5月18日）ほか同社発表。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 02 戸田建設</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜建設業</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">03</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span>
+          <p class="co">大林組<small>設計者が一番時間を取られる業務から着手</small></p>
+          <div class="tags"><span>設計</span><span>設計部門の実務者で検証</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">設計初期の<b>法令調査・要件整理</b>に外部の生成AIサービス（Tektome）を活用</p><p class="i">関連法令や設計要件の<b>抽出・整理</b>と、留意点の可視化</p><p class="i">過去の<b>法令解釈や設計検証の知見</b>をAIエージェント基盤に組み込み</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">社内の意識調査で<b>最も時間を要する業務</b>に挙がった領域を選んだ</p><p class="i">確認すべき論点を<b>根拠資料とともに</b>参照できる仕組みにした</p><p class="i">法令確認部門との<b>認識共有</b>が進み、手戻りの抑制につながった</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">法令調査・要件整理</p><p class="v">約67<small>%短縮</small></p><p class="n">実務者での検証</p></div><div><p class="k">法令等の確認時間</p><p class="v">1.4<small>時間/週/人</small></p><p class="n">従来は平均4.3時間</p></div><div><p class="k">効果を実感</p><p class="v">100<small>%</small></p><p class="n">論点整理・確認観点</p></div></div><div class="trend"><p class="l">法令・条例等の<br>確認時間（週/人）</p><p class="r">4.3時間 → <b>1.4</b>時間</p></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">設計プロセスでの生成AI活用を<b>さらに深化</b>させ、設計者が創造的な業務に注力できる環境へ</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">時間調査から始める</p><p class="d">社内アンケートで最も時間を食う業務を特定し、そこにAIを当てる。</p></div><div><p class="t">社内の判断事例を入れる</p><p class="d">過去の解釈や指摘事項を整理してAIに参照させ、回答の質を上げる。</p></div><div><p class="t">前後で時間を測る</p><p class="d">週あたりの作業時間を導入前後で比べ、効果を数字で示す。</p></div></div>
+        </div>
+        <p class="s-foot">出典：大林組 ニュース「大林組 設計初期段階の法令調査・要件整理業務を効率化」（2026年8月19日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 03 大林組</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜建設業</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">04</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><rect x="5" y="3" width="14" height="18" rx="0"/><path d="M8 7h8M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h.01M15.5 18h.01"/></svg></span>
+          <p class="co">安藤ハザマ<small>改良を重ね、構造設計者の8割が使う標準に</small></p>
+          <div class="tags"><span>設計</span><span>社内利用者率 80%</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">AIとRPAで<b>柱・梁の仮定断面を自動算出</b>し、基本設計を効率化</p><p class="i">AIが構造計算モデルの<b>部材を自動でグルーピング</b>し、手作業の試行錯誤を削減</p><p class="i">構造設計部門の<b>標準システム</b>として、多様な構造・架構形式に対応</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">試運用から<b>構造設計者の意見を反映</b>して改良を重ねた</p><p class="i">開発初期から設計者への<b>展開・教育</b>を速やかに実施</p><p class="i"><b>経験によらず</b>熟練者と同等の成果を出せる設計環境を目指した</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">社内利用者率</p><p class="v">80<small>%</small></p><p class="n">2026年2月現在</p></div><div><p class="k">適用可能案件での採用</p><p class="v">90<small>%</small></p><p class="n">全案件のうち</p></div><div><p class="k">初期検討などの作業時間</p><p class="v">平均約50<small>%削減</small></p><p class="n">アンケート結果</p></div></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">さらなる自動化・高速化を進め、<b>若手技術者の教育ツール</b>としても活用</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">使う人を開発に巻き込む</p><p class="d">現場の設計者の意見を短いサイクルで反映し、使われる道具にする。</p></div><div><p class="t">利用率を追う</p><p class="d">「作った」で終わらせず、対象者の何割が使っているかを指標にする。</p></div><div><p class="t">熟練の手順を形にする</p><p class="d">ベテランの判断手順をルール化し、若手の教材としても活用する。</p></div></div>
+        </div>
+        <p class="s-foot">出典：安藤ハザマ リリース「AIを活用した構造設計支援システム『BROWNIE』を社内標準システムへ」（2026年3月19日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 04 安藤ハザマ</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜建設業</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">05</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span>
+          <p class="co">日本コムシス<small>使われる生成AIを、推進組織で仕組みにする</small></p>
+          <div class="tags"><span>全社活用</span><span>通信・電気設備工事大手</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">2023年12月、セキュリティを強化した<b>法人向け生成AI</b>の活用を開始</p><p class="i">2024年12月、<b>RAG</b>を使った社内問い合わせ用「<b>問合せAI</b>」を導入</p><p class="i">2025年、RAG作成・活用相談を担う<b>『生成AIセンタ』</b>を設置</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i"><b>利用促進活動</b>で、他社平均（約40〜50%）を上回る利用率を実現</p><p class="i">調査・文書作成・要約など、<b>日常業務の幅広い用途</b>で活用</p><p class="i">社内ドキュメントを<b>AIが読みやすい形に変換</b>するノウハウを蓄積</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">ユーザー数</p><p class="v">933<small>名</small></p><p class="n">2025年6月時点</p></div><div><p class="k">アクティブ率</p><p class="v">76<small>%</small></p><p class="n">他社平均 約40〜50%</p></div><div><p class="k">問合せ件数</p><p class="v">約20<small>%削減</small></p><p class="n">サポートデスク対応分</p></div></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">生成AIセンタでRAGの業務実装を進め、業務効率化に加えて<b>技術継承</b>の推進をめざす</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">利用率を追う</p><p class="d">導入人数より「実際に使っている人の割合」をKPIにし、利用促進の施策を回す。</p></div><div><p class="t">社内問合せから</p><p class="d">規程やシステムの質問対応はRAGの効果が出やすく、削減件数でも測りやすい。</p></div><div><p class="t">推進役を置く</p><p class="d">少人数でもAI推進担当を決め、文書整備と活用相談をまとめて引き受ける。</p></div></div>
+        </div>
+        <p class="s-foot">出典：日本コムシス株式会社 ニュース「DX化による生産性向上に向けて『生成AIセンタ』を設置しました」（2025年6月20日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 05 日本コムシス</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜建設業</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">06</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg></span>
+          <p class="co">鹿島建設<small>検査の「待ち」と「手間」をAIで縮めた</small></p>
+          <div class="tags"><span>施工管理</span><span>可搬型は採用300社以上</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">AIの画像処理で<b>鉄筋の本数・径・間隔を自動計測</b>する配筋検査を発展</p><p class="i">2台のステレオカメラを<b>門型移動装置</b>に固定し、長大な鉄筋籠全体を連続撮影</p><p class="i">組立の進捗に合わせて<b>段階的に検査</b>し、検査待ちによる工程遅延を防止</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">従来の可搬型システム（<b>採用実績300社以上</b>）を土台に発展させた</p><p class="i">国交省の<b>鉄筋出来形計測の実施要領（案）</b>に沿った活用が広がっていた</p><p class="i">検査関係者が<b>鉄筋籠の上を歩く必要がなくなり</b>、安全性も向上</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">立会検査時間</p><p class="v">約70<small>%削減</small></p><p class="n">従来の検査方法と比較</p></div><div><p class="k">1基あたりの検査</p><p class="v">約100<small>分</small></p><p class="n">従来は約300分</p></div></div><div class="trend"><p class="l">鉄筋籠1基あたりの<br>立会検査時間</p><p class="r">約300分 → 約<b>100</b>分</p></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">AI技術を<b>様々な施工管理業務</b>に活用し、さらなる省力化・省人化を実現</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">待ち時間に注目</p><p class="d">作業そのものより、検査や確認の待ちで止まっている工程を洗い出す。</p></div><div><p class="t">実績ある道具を使う</p><p class="d">実績のある検査ツールを、自社現場の条件に合わせて組み合わせる。</p></div><div><p class="t">発注者と効果を共有</p><p class="d">立会時間の短縮は発注者の負担減にもなり、採用の後押しになる。</p></div></div>
+        </div>
+        <p class="s-foot">出典：鹿島 プレスリリース「移動式AI配筋検査システムを開発」（2026年9月11日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 06 鹿島建設</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜建設業</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">07</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 17h18M5 17a7 7 0 0114 0"/><path d="M10 10V6h4v4"/><path d="M4 20h16"/></svg></span>
+          <p class="co">長谷工コーポレーション<small>危険予測の「経験差」を生成AIで埋める</small></p>
+          <div class="tags"><span>安全管理</span><span>首都圏 全129現場</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">工種・作業内容・天候・気温と<b>現場写真</b>を入力するだけでリスクを提示</p><p class="i">熱中症や足場の不安定性など<b>想定リスクと対策</b>を具体的に表示</p><p class="i">オープンソースのAI開発基盤<b>Dify</b>上で開発し、PC・スマホで利用</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">試行段階で<b>過去の災害事例の写真</b>をもとにプロンプトを調整</p><p class="i">若手とAIのリスク列挙を比べ、<b>新たな気付きを与える効果</b>を確認</p><p class="i">経験差による<b>危険の見落とし</b>という課題に的を絞った</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">採用現場</p><p class="v">129<small>カ所</small></p><p class="n">2025年8月現在・首都圏</p></div><div><p class="k">設計の入力・図面チェック</p><p class="v">50<small>%削減</small></p><p class="n">目標・別の研究開発</p></div></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">精度を高めつつ、<b>近畿圏・東海圏</b>の建設現場へ利用を拡大</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">ノーコード基盤で試す</p><p class="d">Difyのような開発基盤なら、社内で小さく作って現場で試せる。</p></div><div><p class="t">過去の災害事例を使う</p><p class="d">自社のヒヤリハットや災害写真で指示文を調整し、精度を上げる。</p></div><div><p class="t">若手と比べて検証</p><p class="d">AIの指摘と若手の気づきを並べ、どこで役立つかを確かめる。</p></div></div>
+        </div>
+        <p class="s-foot">出典：長谷工コーポレーション ニュースリリース「生成AIで施工管理者の危険予測を支援」（2025年9月9日）、「言語指示による自動設計に向け新しいLLM-AIシステムの研究開発に着手」（2024年7月31日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 07 長谷工コーポレーション</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜建設業</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">08</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M2.5 6h11v10h-11zM13.5 10h4l3.5 3.5V16h-7.5"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></span>
+          <p class="co">五洋建設<small>熟練オペレータの腕を「ガイダンス」に変えた</small></p>
+          <div class="tags"><span>技能伝承</span><span>学習データ 2,000m以上</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">ディープラーニングで<b>現在の削孔位置をリアルタイム推定</b></p><p class="i">設計ラインとのズレから<b>最適な操作量</b>を算定し、オペレータに提示</p><p class="i">3次元可視化ツール<b>Gi-CIM</b>と連携し、遠隔からも進捗を確認</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">これまでに蓄積した<b>2,000m以上の削孔データ</b>を学習</p><p class="i">最適な操作量の提示で<b>オペレータの判断時間</b>を短縮</p><p class="i">経験の浅いオペレータが<b>実施工と同程度の32m</b>を削孔して効果を確認</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">最大ズレ量</p><p class="v">約55<small>%低減</small></p><p class="n">ガイダンス無しと比較</p></div><div><p class="k">削孔作業時間</p><p class="v">約20<small>%削減</small></p><p class="n">現地実証実験</p></div><div><p class="k">学習データ</p><p class="v">2,000<small>m以上</small></p><p class="n">蓄積した削孔データ</p></div></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">削孔データの収集とAI学習を進め、<b>位置推定精度の一層の向上</b>を図る</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">熟練者の記録を残す</p><p class="d">ベテランの操作記録や判断の履歴を、今のうちにデータとして蓄積する。</p></div><div><p class="t">代替より支援</p><p class="d">AIに任せきりにせず、若手の判断を後押しするガイドとして使う。</p></div><div><p class="t">若手で効果を測る</p><p class="d">経験の浅い人が使ったときの差で測ると、展開の説得力が増す。</p></div></div>
+        </div>
+        <p class="s-foot">出典：五洋建設 What's New「熟練技能を継承する『曲がり削孔AIガイダンスシステム』を開発」（2026年1月16日・ライト工業と共同発表）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 08 五洋建設</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜建設業</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">09</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>
+          <p class="co">前田建設工業<small>熟練者の「先読み」をデータで再現する</small></p>
+          <div class="tags"><span>技能伝承</span><span>特徴量 約3,000個</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">データ基盤<b>MAIOSS-Ⅱ</b>のセンサーデータと操作履歴をAIが学習</p><p class="i"><b>約10秒先の切羽圧</b>を予測し、適切な操作タイミングを事前に提示</p><p class="i">地表面の沈下や隆起など<b>周辺環境への影響を抑制</b></p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">時系列データを<b>約3,000個の特徴量</b>で数値化して予測</p><p class="i">自社の<b>実現場で検証</b>し、実用レベルの有効性を確認</p><p class="i">共通のデータ基盤を使うため<b>現場への水平展開が容易</b></p></div></div></div>
+          <div><div class="kpi"><div><p class="k">熟練者との一致</p><p class="v">約90<small>%</small></p><p class="n">実現場での検証</p></div><div><p class="k">予測の先読み</p><p class="v">約10<small>秒先</small></p><p class="n">切羽圧を予測</p></div><div><p class="k">特徴量</p><p class="v">約3,000<small>個</small></p><p class="n">時系列データを数値化</p></div></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">「逸脱予兆の警報」から、逸脱を防ぐ<b>「操作ガイド機能」</b>へ進化させる</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">データ形式をそろえる</p><p class="d">現場ごとにバラバラに記録せず、同じ形式でデータを貯める仕組みを先に作る。</p></div><div><p class="t">熟練者と比べて評価</p><p class="d">AIの判断が熟練者とどれだけ一致するかを、導入判断の物差しにする。</p></div><div><p class="t">警報から始める</p><p class="d">いきなり自動化せず、まず注意を促す機能から現場に入れる。</p></div></div>
+        </div>
+        <p class="s-foot">出典：前田建設工業 ニュース「AIでシールド工事の切羽圧を10秒先まで予想する『切羽圧制御支援システム』を開発」（2026年5月27日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 09 前田建設工業</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">詳細事例｜建設業</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">10</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.8C7.9 18.7 5 15.2 5 11V6z"/><path d="M9 11.6l2.1 2.1L15.2 9.6"/></svg></span>
+          <p class="co">建設技術研究所<small>「映像を見続ける」仕事をAIが肩代わり</small></p>
+          <div class="tags"><span>維持管理</span><span>建設コンサルタント</span></div>
+        </div>
+        <div class="dt">
+          <div><div class="sec"><p class="h">取り組み</p><div class="b"><p class="i">ドローンの<b>自律飛行・動画撮影・AIによる災害検知</b>を一連の仕組みに</p><p class="i">砂防現場で<b>AI画像解析</b>により土砂流出箇所を検出</p><p class="i">現場参集・確認・判断という<b>巡視の一連の作業</b>を支援</p></div></div><div class="sec" style="margin-top:12px"><p class="h">成果が出た理由</p><div class="b"><p class="i">管理者がモニタに<b>張り付きで映像を見続ける</b>手間に着目</p><p class="i">実証実験で<b>予め設定した箇所をすべて発見</b></p><p class="i">過去の災害映像を<b>AI検知の基礎情報</b>として蓄積し、精度向上を図る</p></div></div></div>
+          <div><div class="kpi"><div><p class="k">巡視・点検時間</p><p class="v">30<small>分程度</small></p><p class="n">通常は2時間程度</p></div><div><p class="k">流出土砂量の計測</p><p class="v">誤差3<small>%程度</small></p><p class="n">参考値</p></div></div><div class="trend"><p class="l">実証渓流の<br>巡視・点検時間</p><p class="r">2時間程度 → <b>30</b>分程度</p></div><div class="sec" style="margin-top:12px"><p class="h">この先の目標</p><div class="b"><p class="i">多数の映像を蓄積し、<b>多種多様な災害対応</b>へ適用を広げる</p></div></div></div>
+        </div>
+        <div class="learn">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><p class="t">見張り業務を探す</p><p class="d">映像やデータを人が見続けている業務は、AIに置き換えやすい候補。</p></div><div><p class="t">効果が出る現場で試す</p><p class="d">対象箇所が多く時間がかかる現場から始めると、効果が見えやすい。</p></div><div><p class="t">過去データを貯める</p><p class="d">災害や不具合の画像を整理して残し、AIの精度向上に使う。</p></div></div>
+        </div>
+        <p class="s-foot">出典：建設技術研究所 お知らせ「ドローンとAIを組み合わせて河川、ダム、砂防等の点検支援を容易にします。」（2025年10月15日）。数値は各社の公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 10 建設技術研究所</figcaption></figure>
+  </div>
+</body>
+</html>

@@ -182,6 +182,56 @@ const STATIC_DOCS: { category: string; doc: DocItem }[] = [
       href: "/doc-n",
     },
   },
+  {
+    category: "業種別事例集",
+    doc: {
+      title: "建設業のAI活用事例集",
+      points: ["国内建設会社10社の取り組みと公表されている成果", "1社1ページの詳細事例（取り組み・成果が出た理由・自社への応用）", "すべて公開情報ベース・出典明記"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-14-cover.webp?v=20261014",
+      href: "/doc-o",
+    },
+  },
+  {
+    category: "業種別事例集",
+    doc: {
+      title: "医療・介護のAI活用事例集",
+      points: ["病院・介護事業者10法人の取り組みと公表されている成果", "1法人1ページの詳細事例（取り組み・成果が出た理由・自社への応用）", "すべて公開情報ベース・出典明記"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-15-cover.webp?v=20261014",
+      href: "/doc-p",
+    },
+  },
+  {
+    category: "業種別事例集",
+    doc: {
+      title: "人材業界のAI活用事例集",
+      points: ["国内人材サービス10社の取り組みと公表されている成果", "1社1ページの詳細事例（取り組み・成果が出た理由・自社への応用）", "すべて公開情報ベース・出典明記"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-17-cover.webp?v=20261014",
+      href: "/doc-r",
+    },
+  },
+  {
+    category: "業種別事例集",
+    doc: {
+      title: "卸売・商社のAI活用事例集",
+      points: ["国内の商社・卸売10社の取り組みと公表されている成果", "1社1ページの詳細事例（取り組み・成果が出た理由・自社への応用）", "すべて公開情報ベース・出典明記"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-18-cover.webp?v=20261014",
+      href: "/doc-s",
+    },
+  },
+  {
+    category: "業種別事例集",
+    doc: {
+      title: "コンサルティング業のAI活用事例集",
+      points: ["国内コンサルティングファーム10社の取り組みと公表されている成果", "1社1ページの詳細事例（取り組み・成果が出た理由・自社への応用）", "すべて公開情報ベース・出典明記"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-16-cover.webp?v=20261014",
+      href: "/doc-q",
+    },
+  },
 ];
 
 // CMSにヒーローが無いときのフォールバック：3点セットDL訴求（/doc-a）。
