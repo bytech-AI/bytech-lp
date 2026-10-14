@@ -148,6 +148,27 @@ const DOCS: Record<string, { intro: string; items: { title: string; view: string
       { title: "コンサルティング業のAI活用事例集", view: `${SITE}/documents/ebook-16`, pdf: `${SITE}/assets/docs/ebook-16.pdf` },
     ],
   },
+  "生成AI 社内ガイドライン＆リスク対策ガイド": {
+    intro:
+      "生成AIの社内ルールづくりに役立つ資料です。実際に起きた事故3事例と、ガイドラインを整えた企業・自治体7事例を1件1ページで解説し、規程に入れる10項目と条文ひな形、運用チェックリストをまとめています。",
+    items: [
+      { title: "生成AI 社内ガイドライン＆リスク対策ガイド", view: `${SITE}/documents/ebook-19`, pdf: `${SITE}/assets/docs/ebook-19.pdf` },
+    ],
+  },
+  "法人向け 生成AIツール比較ガイド": {
+    intro:
+      "ChatGPT・Gemini・Microsoft 365 Copilot・Claudeを、料金、セキュリティ・データの扱い、管理機能、用途別の得意分野で比較した資料です。導入企業8社の選定理由と成果も1社1ページで掲載しています。",
+    items: [
+      { title: "法人向け 生成AIツール比較ガイド", view: `${SITE}/documents/ebook-20`, pdf: `${SITE}/assets/docs/ebook-20.pdf` },
+    ],
+  },
+  "AI人材育成計画の立て方": {
+    intro:
+      "AI人材の育成計画を立てるための実務ガイドです。計画づくりの4ステップと3層の人材モデル、育成に取り組む企業8社の事例を1社1ページで解説し、層別カリキュラム例・年間計画・KPI・計画シートのひな形をまとめています。",
+    items: [
+      { title: "AI人材育成計画の立て方", view: `${SITE}/documents/ebook-21`, pdf: `${SITE}/assets/docs/ebook-21.pdf` },
+    ],
+  },
 };
 DOCS["お役立ち資料3点セット"] = {
   intro:

@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI人材育成計画の立て方｜全24スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* 業種別 活用事例集。設計は ebook-04/05 と同系統（四角の角丸なし・円とピルのみ角丸）。
+     ★事例はすべて各社の公開情報にもとづく。数値は出典の表記どおりに記載し、推測で丸めたり
+       脚色したりしないこと。出典はスライド下部に必ず明記する。他社名を出す資料のため、
+       まとめサイトの孫引きは使わず一次情報（プレスリリース・公式サイト）で裏を取る。 */
+  :root {
+    --blue: #2c5c9c; --blue-deep: #1a2e50; --blue-bright: #1a6fb5; --blue-pale: #8fb0d8;
+    --ink: #2a2f3a; --line: #e3e8ef; --amber: #f0b429; --tint: #eef4fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f4f6f8; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; color: var(--ink); padding: 48px 0 96px; }
+  .note { max-width: 1120px; margin: 0 auto 28px; font-size: 13px; font-weight: 700; color: #8a93a3; }
+  .en { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; }
+
+  .deck { display: flex; flex-direction: column; gap: 34px; align-items: center; counter-reset: pg -1; }
+  .slide-shell { width: 1120px; counter-increment: pg; }
+  .slide-shell figcaption { font-size: 12px; font-weight: 700; color: #8a93a3; margin: 8px 2px 0; letter-spacing: .04em; }
+  .slide { width: 1280px; height: 720px; transform: scale(0.875); transform-origin: top left; background: #fff; position: relative; overflow: hidden; }
+  .slide-shell .clip { height: 630px; overflow: hidden; border-radius: 0; box-shadow: 0 2px 10px rgba(26,35,48,.08); }
+
+  /* ===== 共通 ===== */
+  .s-body { position: absolute; inset: 0; padding: 36px 56px; z-index: 1; }
+  .s-eyebrow { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 700; color: var(--blue-pale); letter-spacing: .02em; }
+  .s-eyebrow::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); }
+  .s-logo { position: absolute; top: 38px; right: 56px; height: 30px; }
+  .s-foot { position: absolute; left: 56px; right: 120px; bottom: 14px; font-size: 10px; color: #9aa3b2; line-height: 1.6; z-index: 5; }
+  .s-num { position: absolute; right: 0; bottom: 0; width: 66px; height: 66px; background: var(--blue); border-radius: 66px 0 0 0; color: #fff; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 13px; font-weight: 700; display: flex; align-items: flex-end; justify-content: flex-end; padding: 0 14px 10px 0; z-index: 5; }
+  .s-num::before { content: counter(pg); }
+
+  /* ===== 見出し行（業種バッジ＋要点） ===== */
+  .hd { display: flex; align-items: center; gap: 18px; margin-top: 8px; }
+  .hd .badge { background: var(--blue); color: #fff; font-size: 24px; font-weight: 800; padding: 10px 22px; letter-spacing: .06em; white-space: nowrap; text-align: center; }
+  .hd .badge small { display: block; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; opacity: .8; margin-top: 3px; }
+  .hd .t { font-size: 25px; font-weight: 800; color: #1a2330; line-height: 1.4; letter-spacing: .01em; }
+  .hd .t b { color: var(--blue-bright); }
+
+  /* ===== 事例テーブル ===== */
+  table.cs { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 18px; table-layout: fixed; }
+  .cs th { background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; padding: 10px 14px; text-align: left; letter-spacing: .02em; }
+  .cs th:first-child { text-align: center; }
+  .cs td { font-size: 12.8px; font-weight: 500; color: #4a5568; padding: 13px 14px; border-bottom: 1px solid var(--line); vertical-align: middle; line-height: 1.55; }
+  .cs tr:nth-child(even) td { background: #f7f9fc; }
+  .cs td.no { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; text-align: center; font-weight: 800; color: var(--blue-pale); }
+  /* 社名は他社商標のためロゴを使わず、文字組みだけで見せる */
+  .cs td.co span { display: block; font-size: 14.5px; font-weight: 800; color: #1a2330; line-height: 1.4; }
+  .cs td.ar span { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; padding: 4px 9px; white-space: nowrap; }
+  .cs td.ar svg { flex: 0 0 auto; }
+  .cs td.rs { font-size: 13px; font-weight: 700; color: #1a2330; line-height: 1.5; }
+  .cs td.rs b { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 19px; font-weight: 800; color: var(--blue-bright); padding: 0 1px; }
+
+  /* ===== まとめ帯 ===== */
+  .band { display: flex; align-items: center; gap: 11px; background: var(--tint); border: 1.5px solid var(--blue); padding: 12px 20px; font-size: 13.5px; font-weight: 800; color: var(--blue-deep); margin-top: 12px; }
+  .band::before { content: "✓"; flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+
+
+  /* ===== 個別詳細スライド ===== */
+  .dhd { display: flex; align-items: flex-start; gap: 18px; margin-top: 8px; }
+  .dhd .no { background: var(--blue-deep); color: #fff; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 22px; font-weight: 800; padding: 12px 18px; letter-spacing: .06em; }
+  .dhd .mark { flex: 0 0 auto; width: 46px; height: 46px; background: var(--tint); border: 1.5px solid #cfdcee; color: var(--blue); display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .dhd .mark svg { width: 24px; height: 24px; }
+  .dhd .co { font-size: 25px; font-weight: 800; color: #1a2330; line-height: 1.3; }
+  .dhd .co small { display: block; font-size: 14px; font-weight: 700; color: #6b7789; margin-top: 5px; }
+  .dhd .tags { margin-left: auto; display: flex; gap: 7px; padding-top: 6px; }
+  .dhd .tags span { font-size: 11.5px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; border-radius: 999px; padding: 5px 13px; white-space: nowrap; }
+
+  .dt { display: grid; grid-template-columns: 1.18fr 1fr; gap: 20px; margin-top: 14px; align-items: start; }
+  .sec { border: 1px solid var(--line); }
+  .sec .h { background: #f2f5fa; border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 800; color: var(--blue-deep); padding: 9px 16px; display: flex; align-items: center; gap: 8px; }
+  .sec .h::before { content: ""; width: 5px; height: 15px; background: var(--blue); }
+  .sec .b { padding: 10px 16px 11px; }
+  .sec .i { position: relative; font-size: 12.6px; font-weight: 500; color: #4a5568; line-height: 1.7; padding: 4px 0 4px 15px; }
+  .sec .i::before { content: ""; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-pale); }
+  .sec .i b { color: #1a2330; font-weight: 800; }
+
+  .kpi { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi div { background: var(--tint); border-left: 4px solid var(--blue); padding: 11px 13px; }
+  .kpi .k { font-size: 10.5px; font-weight: 800; color: var(--blue); }
+  .kpi .v { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 24px; font-weight: 800; color: #1a2330; line-height: 1.15; margin-top: 3px; }
+  .kpi .v small { font-family: "Noto Sans JP", sans-serif; font-size: 11px; font-weight: 700; color: #6b7789; margin-left: 2px; }
+  .kpi .n { font-size: 10.5px; font-weight: 600; color: #7a8698; margin-top: 3px; }
+  .trend { margin-top: 10px; background: var(--blue-deep); color: #fff; padding: 12px 15px; display: flex; align-items: center; gap: 12px; }
+  .trend .l { font-size: 11.5px; font-weight: 800; opacity: .85; line-height: 1.5; }
+  .trend .r { margin-left: auto; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 15px; font-weight: 800; white-space: nowrap; }
+  .trend .r b { font-size: 22px; color: #8fd0ff; }
+
+  .learn { margin-top: 12px; border: 1.5px solid var(--blue); }
+  .learn .h { background: var(--blue); color: #fff; font-size: 12.5px; font-weight: 800; padding: 8px 16px; letter-spacing: .02em; }
+  .learn .g { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+  .learn .g div { padding: 9px 16px 10px; border-right: 1px solid var(--line); }
+  .learn .g div:last-child { border-right: none; }
+  .learn .t { font-size: 13px; font-weight: 800; color: var(--blue-deep); }
+  .learn .d { font-size: 11.4px; font-weight: 500; color: #4a5568; line-height: 1.6; margin-top: 3px; }
+
+
+  /* ===== 表紙（白地・左に大見出し／右にイラスト） ===== */
+  .cv { background: #fff; }
+  .cv .t { position: absolute; left: 72px; top: 104px; font-size: 74px; font-weight: 900; color: var(--blue); line-height: 1.34; letter-spacing: .02em; }
+  .cv .sub { position: absolute; left: 75px; top: 316px; font-size: 19px; font-weight: 800; color: #2a2f3a; letter-spacing: .05em; line-height: 1.7; }
+  .cv .meta { position: absolute; left: 75px; top: 392px; font-size: 14px; font-weight: 700; color: #8a93a3; letter-spacing: .06em; }
+  .cv .il { position: absolute; right: 44px; bottom: 74px; width: 560px; }
+  .cv .logo { position: absolute; left: 72px; bottom: 58px; height: 38px; }
+
+  /* ===== 目次 ===== */
+  .ix { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 26px; margin-top: 30px; }
+  .ix a, .ix div { display: flex; align-items: center; gap: 16px; background: #fff; border: 1px solid #d9e1ec; padding: 18px 20px; text-decoration: none; box-shadow: 0 4px 14px rgba(26,35,48,.05); }
+  .ix .n { flex: 0 0 auto; width: 46px; height: 46px; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; }
+  .ix .b { flex: 1; min-width: 0; display: block; }
+  .ix .nm { display: block; font-size: 19px; font-weight: 800; color: #1a2330; line-height: 1.35; }
+  .ix .ds { display: block; font-size: 12px; font-weight: 600; color: #7a8698; margin-top: 4px; line-height: 1.5; }
+  .ix .pg { flex: 0 0 auto; font-size: 12.5px; font-weight: 800; color: var(--blue); }
+  .ix .soon { border-style: dashed; opacity: .62; }
+  .ix .soon .n { background: #b9c4d4; }
+
+
+
+
+  /* ===== 目次（この資料の中身） ===== */
+  .ixh { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
+  .ixh .lb { background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; padding: 7px 16px; letter-spacing: .04em; white-space: nowrap; }
+  .ixh .tx { font-size: 15px; font-weight: 700; color: #4a5568; }
+  .ixh .pg { margin-left: auto; font-size: 13px; font-weight: 800; color: var(--blue); white-space: nowrap; }
+  .ixg { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 26px; margin-top: 14px; }
+  .ixg div { display: flex; align-items: center; gap: 13px; background: #fff; border: 1px solid var(--line); padding: 10px 14px; }
+  .ixg .n { flex: 0 0 auto; width: 30px; height: 30px; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 800; }
+  .ixg .nm { font-size: 14.5px; font-weight: 800; color: #1a2330; }
+  .ixg .ar { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; padding: 3px 8px; margin-left: 8px; white-space: nowrap; }
+  .ixg .pg { margin-left: auto; font-size: 12px; font-weight: 800; color: #8a93a3; white-space: nowrap; }
+
+  /* ===== PDF出力 ===== */
+  @page { size: 1280px 720px; margin: 0; }
+  @media print {
+    body { padding: 0; background: #fff; }
+    * { box-shadow: none !important; }
+    .note { display: none; }
+    .deck { gap: 0; display: block; }
+    .slide-shell { width: 1280px; }
+    .slide-shell figcaption { display: none; }
+    .slide-shell .clip { height: 720px; overflow: hidden; border-radius: 0; box-shadow: none; }
+    .slide { transform: none; border: none; border-radius: 0; }
+    figure.slide-shell { page-break-after: always; break-after: page; margin: 0; }
+    figure.slide-shell:last-child { page-break-after: auto; }
+  }
+
+  /* ===== 表紙（ノウハウ形式） ===== */
+  .blue-bg { background: linear-gradient(135deg, #1c3a6b 0%, var(--blue) 46%, #3a76c4 100%); color: #fff; }
+  .waves { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .kcover .badge-row { position: absolute; top: 66px; left: 64px; display: flex; align-items: center; gap: 16px; }
+  .kcover .badge { background: var(--amber); color: #4a3605; font-size: 16px; font-weight: 800; padding: 10px 18px; border-radius: 8px; }
+  .kcover .badge-note { font-size: 20px; font-weight: 700; padding-bottom: 12px; border-bottom: 2px solid rgba(255,255,255,.85); letter-spacing: .04em; }
+  .kcover .sub { position: absolute; left: 66px; top: 236px; font-size: 23px; font-weight: 700; letter-spacing: .04em; }
+  .kcover .title { position: absolute; left: 62px; top: 288px; font-size: 68px; font-weight: 800; letter-spacing: .04em; line-height: 1.28; }
+  .kcover .title small { display: block; margin-top: 10px; font-size: 34px; font-weight: 800; }
+  .kcover .pills { position: absolute; right: 64px; top: 250px; display: grid; gap: 12px; }
+  .kcover .pills span { border: 1.5px solid rgba(255,255,255,.75); border-radius: 999px; padding: 7px 22px; font-size: 14px; font-weight: 800; text-align: center; background: rgba(255,255,255,.08); }
+  .kcover .date { position: absolute; left: 66px; top: 590px; font-size: 15px; font-weight: 600; letter-spacing: .18em; opacity: .8; }
+  .kcover .logo { position: absolute; right: 64px; bottom: 48px; height: 44px; }
+  /* ===== 縦方向をページいっぱいに使う ===== */
+  .s-body.fl { display: flex; flex-direction: column; padding-bottom: 62px; }
+  .s-body.fl > .grow { flex: 1 1 auto; min-height: 0; }
+  .s-body.fl > .band { flex: 0 0 auto; }
+  .cards.grow > div { display: flex; flex-direction: column; justify-content: flex-start; padding: 30px 28px; }
+  .cards.grow .ic { width: 58px; height: 58px; } .cards.grow .ic svg { width: 28px; height: 28px; }
+  .cards.grow .t { margin-top: 18px; font-size: 20px; } .cards.grow .d { margin-top: 12px; font-size: 14.5px; line-height: 1.95; }
+  .cards.grow .g { align-self: flex-start; margin-top: auto; font-size: 12px; padding: 5px 14px; }
+  .steps.grow { grid-auto-rows: 1fr; }
+  .tpl.grow { grid-auto-rows: 1fr; }
+  .chk.grow > div { display: flex; flex-direction: column; } .chk.grow .ci { flex: 1 1 0; display: flex; align-items: center; }
+  .chk.grow .ci::before { top: 50%; transform: translateY(-50%); }
+  .toc.grow { grid-auto-rows: 1fr; } .toc.grow > div { border-bottom: 1px solid var(--line); }
+  table.grow { height: 100%; }
+  .nts.grow { align-content: space-evenly; }
+  /* ===== 事例ページ（メリハリ版） ===== */
+  .vpt { margin-top: 10px; display: flex; align-items: center; gap: 14px; background: linear-gradient(90deg, #eaf2fc, #f6f9fd); border-left: 6px solid var(--blue-bright); padding: 9px 18px; }
+  .vpt p { font-size: 18px; font-weight: 900; color: var(--blue-deep); letter-spacing: .02em; }
+  .vpt .q { color: var(--blue-bright); display: flex; }
+  .vpt.red { background: linear-gradient(90deg, #fdecea, #fef7f6); border-left-color: #d6453d; } .vpt.red p { color: #7a1f1a; } .vpt.red .q { color: #d6453d; }
+  .vdt { display: grid; grid-template-columns: 1.15fr 1fr; gap: 18px; margin-top: 10px; align-items: start; }
+  .vdt + .learn { margin-top: 10px; }
+  .vsec + .vsec { margin-top: 10px; }
+  .vsec .vh { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 900; color: var(--blue-deep); padding-bottom: 6px; border-bottom: 2px solid var(--line); }
+  .vsec .vi { width: 24px; height: 24px; border-radius: 50%; background: var(--blue-deep); color: #fff; display: flex; align-items: center; justify-content: center; }
+  .vsec .vb { padding-top: 6px; }
+  .vsec .vb .i { position: relative; padding: 3px 0 3px 16px; font-size: 12.8px; font-weight: 500; color: #3a4252; line-height: 1.55; }
+  .vsec .vb .i::before { content: ""; position: absolute; left: 2px; top: 12px; width: 6px; height: 6px; background: var(--blue-bright); }
+  .vsec .vb b, .vpt b { color: #1a2330; background: linear-gradient(transparent 58%, #ffe27a 58%); font-weight: 800; }
+  .vsec.sm { margin-top: 8px; background: #f7f9fc; padding: 10px 12px; } .vsec.sm .vh { border-bottom-color: #e3e9f2; }
+  .vk { background: #fff; border: 1.5px solid var(--line); padding: 8px 14px; margin-bottom: 8px; }
+  .vk .k { font-size: 11.5px; font-weight: 800; color: var(--blue); }
+  .vk .n { font-size: 10.5px; font-weight: 600; color: #7a8698; margin-top: 2px; }
+  .vk.hero { background: var(--blue-deep); border: 0; color: #fff; padding: 14px 18px; }
+  .vk.hero .k { color: #a9c8f0; } .vk.hero .n { color: #c3d3ea; }
+  .vk.hero .v { font-size: 40px; font-weight: 900; line-height: 1.1; margin-top: 4px; } .vk.hero .v small { font-size: 16px; margin-left: 4px; }
+  .vk.hero.red { background: #7a1f1a; }
+  .vk.donut { display: flex; align-items: center; gap: 16px; } .vk.donut .k { font-size: 14px; }
+  .vk .dn { position: relative; width: 92px; height: 92px; flex: 0 0 auto; }
+  .vk .dn span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 900; color: #1a2330; }
+  .vk .dn small { font-size: 11px; }
+  .vk.chart .br { display: grid; grid-template-columns: 26px 1fr 96px; align-items: center; gap: 8px; margin-top: 6px; }
+  .vk.chart .bl { font-size: 11px; font-weight: 800; color: #7a8698; }
+  .vk.chart .bt { height: 16px; background: #f0f3f8; display: block; } .vk.chart .bt span { display: block; height: 100%; }
+  .vk.chart .bv { font-size: 14px; font-weight: 800; color: #5a6578; text-align: right; } .vk.chart .bv.hi { font-size: 18px; color: #1a2330; }
+  .vk.chart .bv small { font-size: 10.5px; margin-left: 2px; }
+  .vt { display: grid; gap: 8px; } .vt.c1 { grid-template-columns: 1fr; } .vt.c2 { grid-template-columns: 1fr 1fr; } .vt.c3 { grid-template-columns: 1fr 1fr 1fr; }
+  .vt > div { background: var(--tint); border-top: 3px solid var(--blue-bright); padding: 9px 12px; }
+  .vt .k { font-size: 11px; font-weight: 800; color: var(--blue); }
+  .vt .v { font-size: 22px; font-weight: 900; color: #1a2330; line-height: 1.2; margin-top: 2px; } .vt .v small { font-size: 11px; margin-left: 2px; color: #6b7789; }
+  .vt .n { font-size: 10px; font-weight: 600; color: #7a8698; margin-top: 2px; }
+  .learn .g > div { display: flex; gap: 10px; align-items: flex-start; padding-top: 7px; padding-bottom: 8px; }
+  .learn .ln { flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%; background: var(--amber); color: #4a3605; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .learn.red { border-color: #d6453d; } .learn.red .h { background: #d6453d; }
+  /* 事例ページも縦をページいっぱいに使う（下に余白を残さない） */
+  .s-body.fl > .dhd { flex: 0 0 auto; }
+  .vdt.grow { align-items: stretch; margin-top: 12px; }
+  .vdt.grow > .vl, .vdt.grow > .vr { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+  .vdt.grow > .vl { justify-content: space-between; }
+  .vdt.grow .vsec + .vsec { margin-top: 0; }
+  .vdt.grow .vsec { flex: 1 1 auto; display: flex; flex-direction: column; }
+  .vdt.grow .vsec .vb { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-evenly; }
+  .vdt.grow > .vr > * { flex: 1 1 auto; margin-bottom: 0; display: flex; flex-direction: column; justify-content: center; }
+  .vdt.grow > .vr > .vk.donut { flex-direction: row; justify-content: flex-start; }
+  .vdt.grow > .vr > .vt { display: grid; }
+  .vdt.grow > .vr > .vt > div { display: flex; flex-direction: column; justify-content: center; }
+  .vdt.grow > .vr > .vsec.sm { justify-content: flex-start; }
+  .vdt.measure > div > *, .vdt.measure .vb { flex: none !important; }
+  .s-body.fl > .learn { flex: 0 0 auto; margin-top: 14px; }
+  .vl.roomy .vsec .vb .i { font-size: 14px; line-height: 1.7; } .vl.roomy .vsec .vh { font-size: 15.5px; }
+  .learn .g > div { padding-top: 12px; padding-bottom: 13px; }
+  /* ツールのロゴ */
+  .cards .ic.lg { width: auto; height: 64px; border-radius: 0; background: none; gap: 10px; justify-content: flex-start; }
+  .cards .ic.lg img { height: 56px; width: 56px; object-fit: contain; }
+  .dhd .mark.lg { background: #fff; } .dhd .mark.lg img { width: 30px; height: 30px; object-fit: contain; }
+  /* ===== ノウハウ系の追加スライド型 ===== */
+  .kh { margin-top: 8px; }
+  .kh .t { font-size: 25px; font-weight: 900; color: #1a2330; line-height: 1.4; letter-spacing: .01em; }
+  .kh .t b { color: var(--blue-bright); }
+  .kh .l { margin-top: 8px; font-size: 13.5px; font-weight: 600; color: #5a6578; line-height: 1.7; }
+  .ld { margin-top: 18px; display: grid; gap: 10px; }
+  .ld .p { font-size: 14px; font-weight: 500; color: #3a4252; line-height: 1.85; }
+  .ld .p b { color: #1a2330; }
+  .cards { display: grid; gap: 16px; margin-top: 22px; }
+  .cards.c2 { grid-template-columns: 1fr 1fr; } .cards.c3 { grid-template-columns: 1fr 1fr 1fr; } .cards.c4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .cards.c6 { grid-template-columns: 1fr 1fr 1fr; }
+  .cards > div { border: 1.5px solid var(--line); border-top: 4px solid var(--blue); padding: 16px 18px 18px; background: #fff; }
+  .cards .ic { width: 40px; height: 40px; border-radius: 50%; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; }
+  .cards .t { margin-top: 10px; font-size: 16px; font-weight: 900; color: var(--blue-deep); line-height: 1.4; }
+  .cards .d { margin-top: 7px; font-size: 12.5px; font-weight: 500; color: #4a5568; line-height: 1.75; }
+  .cards .d b { color: #1a2330; }
+  .cards .g { margin-top: 10px; display: inline-block; background: var(--tint); color: var(--blue); font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 999px; }
+  .steps { margin-top: 20px; display: grid; gap: 10px; }
+  .steps > div { display: flex; align-items: center; gap: 16px; border: 1.5px solid var(--line); padding: 12px 18px; }
+  .steps .n { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: var(--blue-deep); color: #fff; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+  .steps .t { font-size: 15.5px; font-weight: 900; color: #1a2330; } .steps .t b { color: var(--blue-bright); }
+  .steps .d { margin-top: 3px; font-size: 12.5px; font-weight: 500; color: #5a6578; line-height: 1.6; }
+  .steps .sd { margin-left: auto; flex: 0 0 300px; font-size: 12px; font-weight: 700; color: var(--blue); background: var(--tint); padding: 8px 12px; line-height: 1.55; }
+  .ch { background: linear-gradient(135deg, #1a2e50 0%, #2c5c9c 70%, #3f7fc6 100%); }
+  .chp { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; text-align: center; }
+  .chp .s-logo { position: absolute; top: 38px; right: 56px; height: 30px; }
+  .chp .no { width: 92px; height: 92px; border: 2px solid rgba(255,255,255,.85); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 800; }
+  .chp .t { margin-top: 30px; font-size: 40px; font-weight: 900; letter-spacing: .04em; }
+  .chp .d { margin-top: 12px; font-size: 16px; font-weight: 700; opacity: .85; }
+  .chp .s-num { background: rgba(255,255,255,.18); }
+  table.kt td { font-size: 12.5px; } table.kt td.kc { font-weight: 800; color: #1a2330; background: var(--tint); }
+  table.kt td b { color: var(--blue-bright); }
+  .tpl { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px 20px; }
+  .tpl > div { border-left: 4px solid var(--blue); background: #f7f9fc; padding: 16px 20px; min-height: 118px; }
+  .tpl .at { font-size: 15px; font-weight: 900; color: var(--blue-deep); }
+  .tpl .al { margin-top: 7px; font-size: 13.5px; font-weight: 500; color: #3a4252; line-height: 1.8; }
+  .chk { margin-top: 16px; display: grid; gap: 16px; } .chk.c2 { grid-template-columns: 1fr 1fr; } .chk.c3 { grid-template-columns: 1fr 1fr 1fr; }
+  .chk > div { border: 1.5px solid var(--line); }
+  .chk .gh { background: var(--blue-deep); color: #fff; font-size: 15px; font-weight: 800; padding: 13px 16px; display: flex; align-items: center; gap: 9px; }
+  .chk .gh span { width: 20px; height: 20px; border-radius: 50%; background: #fff; color: var(--blue-deep); font-size: 11px; display: flex; align-items: center; justify-content: center; }
+  .chk .ci { position: relative; padding: 24px 16px 24px 42px; font-size: 14.5px; font-weight: 600; color: #3a4252; border-bottom: 1px solid var(--line); line-height: 1.5; }
+  .chk .ci:last-child { border-bottom: 0; }
+  .chk .ci::before { content: ""; position: absolute; left: 16px; top: 27px; width: 13px; height: 13px; border: 1.6px solid var(--blue); }
+  .ctab { margin-top: 20px; background: linear-gradient(90deg, #1a2e50, #2c5c9c); color: #fff; padding: 20px 26px; display: flex; align-items: center; gap: 20px; }
+  .ctab .t { font-size: 19px; font-weight: 900; } .ctab .d { margin-top: 5px; font-size: 12.5px; font-weight: 600; opacity: .85; line-height: 1.6; }
+  .ctab .bt { margin-left: auto; flex: 0 0 auto; background: #fff; color: var(--blue-deep); font-size: 14px; font-weight: 900; padding: 12px 24px; border-radius: 999px; }
+  .nts { margin-top: 24px; display: grid; gap: 16px; }
+  .nts .nt { position: relative; padding-left: 22px; font-size: 14px; font-weight: 500; color: #3a4252; line-height: 1.7; }
+  .nts .nt::before { content: "※"; position: absolute; left: 0; color: var(--blue-pale); }
+  .toc { margin-top: 22px; display: grid; gap: 12px; }
+  .toc > div { display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--line); padding: 14px 4px; }
+  .toc .n { font-size: 15px; font-weight: 800; color: var(--blue); width: 30px; }
+  .toc .nm { font-size: 18px; font-weight: 800; color: #1a2330; } .toc .nm small { margin-left: 14px; font-size: 12.5px; font-weight: 600; color: #7a8698; }
+  .toc .pg { margin-left: auto; font-size: 13px; font-weight: 700; color: #7a8698; }
+  .trend .l { flex: 0 0 150px; }
+  .trend .r { white-space: normal; text-align: right; line-height: 1.35; }
+  .cs td { padding-top: 11px; padding-bottom: 11px; }
+  .cs.cmp td { padding-top: 6px; padding-bottom: 6px; line-height: 1.45; }
+  /* 余白が出やすいページを埋める：通常の表は行を高く、カードは文字を大きく */
+  /* 行数が多めの表（10行前後）：詰めすぎず、ページを埋める中間の行高 */
+  table.kt.mid td { padding-top: 15px; padding-bottom: 15px; font-size: 14px; line-height: 1.6; }
+  table.kt.mid th { padding-top: 12px; padding-bottom: 12px; font-size: 14px; }
+  table.kt:not(.cmp):not(.mid) td { padding-top: 17px; padding-bottom: 17px; font-size: 13.5px; line-height: 1.65; }
+  .cards > div { padding: 22px 22px 24px; }
+  .cards .t { font-size: 17px; } .cards .d { font-size: 13.5px; line-height: 1.85; }
+  .ctab { margin-top: 28px; padding: 26px 30px; }
+  .steps > div { padding: 16px 20px; } .steps .t { font-size: 16.5px; } .steps .d { font-size: 13.5px; }
+</style>
+</head>
+<body>
+  <p class="note">AI人材育成計画の立て方｜全24スライド／事例・数値は各社・各機関の公開情報にもとづく</p>
+  <div class="deck">
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide blue-bg kcover">
+        <svg class="waves" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <path d="M700,-80 C980,60 820,300 1120,380 C1320,433 1360,560 1280,760 L1380,760 L1380,-80 Z" fill="rgba(255,255,255,0.07)"/>
+          <path d="M880,-120 C1150,40 980,260 1240,330 L1340,330 L1340,-120 Z" fill="rgba(90,160,230,0.28)"/>
+          <path d="M-80,560 C240,480 420,660 760,600 C1040,551 1180,640 1300,760 L-80,760 Z" fill="rgba(20,40,80,0.22)"/>
+          <path d="M-80,640 C300,560 560,720 900,660 C1120,621 1240,690 1310,760 L-80,760 Z" fill="rgba(90,160,230,0.18)"/>
+        </svg>
+        <div class="badge-row"><span class="badge">お役立ち資料</span><span class="badge-note">バイテック法人AI研修</span></div>
+        <p class="sub">リスキリング実務ガイド｜企業8社の事例と計画シートつき</p>
+        <h1 class="title">AI人材<br>育成計画の立て方</h1>
+        <div class="pills"><span>4ステップ</span><span>企業事例8社</span><span>計画シートつき</span></div>
+        <p class="date">UPDATE 2026.10</p>
+        <img class="logo" src="assets/biz-logo-w.svg" alt="byTech BUSINESS">
+      </div>
+    </div><figcaption>表紙</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">Contents</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd" style="margin-top:4px"><p class="t" style="font-size:27px">目次</p></div>
+        <div class="grow toc"><div><span class="n">01</span><span class="nm">単発研修で終わる3つの失敗<small>なぜ計画が必要か</small></span><span class="pg">P.2</span></div><div><span class="n">02</span><span class="nm">計画づくりの4ステップ<small>現状把握・人材像・育成・定着</small></span><span class="pg">P.3 - 5</span></div><div><span class="n">03</span><span class="nm">育成に取り組む企業の事例<small>8社を1社1ページで</small></span><span class="pg">P.6 - 15</span></div><div><span class="n">04</span><span class="nm">カリキュラム・年間計画・KPI<small>事例の共通点から設計する</small></span><span class="pg">P.16 - 19</span></div><div><span class="n">05</span><span class="nm">予算・助成金と計画シート<small>そのまま使える計画書のひな形</small></span><span class="pg">P.20 - 21</span></div></div>
+        <p class="s-foot">本資料の事例は各社の公式発表・統合報告書等にもとづきバイテック法人AI研修が編集したものです。掲載企業との取引関係や推薦を示すものではありません。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>目次</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">なぜ育成計画が必要か</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">研修を<b>1回やって終わり</b>にすると、<br>3か月後には元の働き方に戻ってしまう。</p><p class="l">AI研修の相談で多いのは「研修はやったが使われていない」という声です。原因は研修の質より、計画のなさにあります。</p></div>
+        <div class="grow cards c3"><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span><p class="t">ゴールが決まっていない</p><p class="d">「AIを使えるように」だけでは、<b>誰が・どの業務で・どこまで</b>できればよいかが分からず、研修後に何も変わりません。</p><p class="g">→ 人材像を決める（P.5）</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p class="t">全員に同じ内容</p><p class="d">全社員と推進役と開発人材では、必要なスキルが違います。<b>層を分けない研修</b>は、誰にとっても中途半端になります。</p><p class="g">→ 層別カリキュラム（P.17）</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span><p class="t">効果を測っていない</p><p class="d">利用率や削減時間を追わないと、経営に成果を説明できず、<b>次の予算</b>がつきません。</p><p class="g">→ KPI設計（P.19）</p></div></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>単発研修で終わる3つの失敗</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">計画づくりの全体像</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">AI人材育成計画は<b>4つのステップ</b>で立てる</p></div>
+        <div class="grow steps"><div><span class="n">01</span><div><p class="t">現状を把握する</p><p class="d">AIの利用状況とスキルの現在地を測り、どこから始めるかを決める</p></div><p class="sd">簡易アセスメント（P.4）</p></div><div><span class="n">02</span><div><p class="t">目標の人材像を決める</p><p class="d">全社員・推進リーダー・開発人材の<b>3層</b>で、何人をどのレベルにするかを決める</p></div><p class="sd">3層モデル（P.5）／事例（P.7〜15）</p></div><div><span class="n">03</span><div><p class="t">育成プログラムを組む</p><p class="d">層ごとのカリキュラム、研修形式、年間スケジュールを設計する</p></div><p class="sd">カリキュラム例・年間計画（P.17〜18）</p></div><div><span class="n">04</span><div><p class="t">定着させ、効果を測る</p><p class="d">利用率・削減時間・活用事例数を追い、計画を見直す</p></div><p class="sd">KPI（P.19）／予算と助成金（P.20）</p></div></div><div class="band">事例の8社はいずれも、人数やレベルの目標を数字で置き、層ごとに育成の中身を変えています。</div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>計画づくりの4ステップ</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">ステップ1｜現状把握</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">まず<b>5つの観点</b>で、自社の現在地を測る</p></div>
+        <table class="grow cs kt tall">
+          <colgroup><col style="width:170px"><col><col style="width:290px"></colgroup>
+          <tr><th>観点</th><th>確認すること</th><th>測り方の例</th></tr>
+          <tr><td class="kc">利用状況</td><td>業務でAIを使っている人の割合、使っている業務の種類</td><td>法人プランの利用ログ／社内アンケート</td></tr>
+          <tr><td class="kc">基礎知識</td><td>AIの仕組み・得意不得意・リスク（情報漏洩・誤情報・著作権）を理解しているか</td><td>10〜20問の理解度テスト</td></tr>
+          <tr><td class="kc">業務への応用</td><td>自分の業務の中で、AIに任せられる作業を挙げられるか</td><td>「AIに任せたい業務」を3つ書くワーク</td></tr>
+          <tr><td class="kc">推進できる人</td><td>部署で使い方を教えたり、活用例を広げたりできる人がいるか</td><td>部署ごとの推進役候補の洗い出し</td></tr>
+          <tr><td class="kc">環境・ルール</td><td>安全に使えるツールと社内ルールが整っているか</td><td>「社内ガイドライン＆リスク対策ガイド」のチェックリスト</td></tr>
+        </table><div class="band">経済産業省・IPAの「DXリテラシー標準（DSS-L）」は、全社員に求める知識とマインドの整理に使えます。測った結果は、ステップ2の人数目標の土台になります。</div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>現状把握のアセスメント</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">ステップ2｜目標の人材像</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">人材像は<b>3層</b>で決める。層ごとに人数の目標を置く。</p></div>
+        <table class="grow cs kt tall">
+          <colgroup><col style="width:170px"><col><col style="width:200px"><col style="width:230px"></colgroup>
+          <tr><th>層</th><th>期待する役割</th><th>人数の目安（当社の見解）</th><th>デジタルスキル標準との対応</th></tr>
+          <tr><td class="kc">全社員（活用層）</td><td>日常業務でAIを安全に使い、自分の作業時間を減らせる</td><td>全員</td><td>DXリテラシー標準（DSS-L）</td></tr>
+          <tr><td class="kc">推進リーダー</td><td>部署の業務をAI前提で見直し、使い方を広める。現場の相談役</td><td>各部署1〜2名（全体の5〜10％）</td><td>DX推進スキル標準（DSS-P）ビジネスアーキテクト等</td></tr>
+          <tr><td class="kc">開発・専門人材</td><td>社内データとつないだ仕組み（エージェント・RAG等）を作り、運用する</td><td>数名〜（規模に応じて）</td><td>DSS-P データサイエンティスト／ソフトウェアエンジニア等</td></tr>
+        </table><div class="band">JR東日本は3層で約25,000人／約5,000人／約200人、東京海上は4層で役割を定義しています（P.14、P.12）。まず推進リーダーの人数から決めると、計画が回り始めます。</div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>目標の人材像（3層モデル）</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide ch">
+        <div class="chp">
+          <img class="s-logo" src="assets/biz-logo-w.svg" alt="byTech BUSINESS">
+          <span class="no">03</span>
+          <p class="t">育成に取り組む企業の事例</p>
+          <p class="d">8社の層の分け方・プログラム・成果</p>
+          <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>章扉 育成事例</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">育成事例 一覧</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">成果を出している企業は、<b>人数の目標</b>と<b>層の分け方</b>を先に決めている。</p></div>
+        <table class="grow cs cmp">
+          <colgroup><col style="width:40px"><col style="width:176px"><col style="width:120px"><col><col style="width:262px"></colgroup>
+          <tr><th>No.</th><th>企業</th><th>特徴</th><th>取り組み</th><th>公表されている成果・目標</th></tr>
+          <tr>
+            <td class="no">01</td><td class="co"><span>ソフトバンク</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>全社育成</span></td>
+            <td>全社員に「1人100個のAIエージェント作成」をミッション化し、学習と実践を同時に回した</td>
+            <td class="rs">2カ月半で<b>250万超</b>のエージェント、AI資格<b>2,000名以上</b></td>
+          </tr>
+          <tr>
+            <td class="no">02</td><td class="co"><span>LINEヤフー</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.8C7.9 18.7 5 15.2 5 11V6z"/><path d="M9 11.6l2.1 2.1L15.2 9.6"/></svg>利用条件</span></td>
+            <td>全従業員約1.1万人に必須eラーニングと試験合格を課し、生成AI活用を義務化した</td>
+            <td class="rs">社内の業務効率化PJ<b>35件以上</b>が進行</td>
+          </tr>
+          <tr>
+            <td class="no">03</td><td class="co"><span>旭化成</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M9.2 3h5.6M10.3 3v6.2L5 18.4A2 2 0 006.7 21.4h10.6a2 2 0 001.7-3L13.7 9.2V3"/></svg>認定制度</span></td>
+            <td>5段階の「DXオープンバッジ」で全社員の学びを認定し、上位層を専門人財として管理した</td>
+            <td class="rs">デジタルプロ人財 目標2,500名→<b>3,157名</b></td>
+          </tr>
+          <tr>
+            <td class="no">04</td><td class="co"><span>ダイキン工業</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 21h18V10.2l-6 3.9v-3.9l-6 3.9V6.6H3z"/><path d="M7 21v-3.4M12 21v-3.4M17 21v-3.4"/></svg>社内大学</span></td>
+            <td>社内大学「ダイキン情報技術大学」で既存社員と新入社員を3つのAI人材像に沿って育成した</td>
+            <td class="rs"><b>1,500名</b>の育成計画を2023年度末に達成</td>
+          </tr>
+          <tr>
+            <td class="no">05</td><td class="co"><span>東京海上</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg>4層育成</span></td>
+            <td>DXリーダー／DXコア／DXドライバー／全社員の4層で役割を定義し、層別に研修を設計した</td>
+            <td class="rs">DXコア受講者 累計<b>2,180名</b>(2025年度)</td>
+          </tr>
+          <tr>
+            <td class="no">06</td><td class="co"><span>日立製作所</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg>AI人財</span></td>
+            <td>全従業員へのAIリテラシー教育と、AIプロフェッショナル人財の数値目標を中期計画KPIに置いた</td>
+            <td class="rs">AIプロ人財 <b>39,000人</b>(目標50,000人)</td>
+          </tr>
+          <tr>
+            <td class="no">07</td><td class="co"><span>JR東日本</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M2.5 6h11v10h-11zM13.5 10h4l3.5 3.5V16h-7.5"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>3層目標</span></td>
+            <td>ベーシック／ミドル／エキスパートの3層で人数目標を置き、職場ごとの推進役が教える体制にした</td>
+            <td class="rs">2027年度末に<b>約25,000人</b>のベーシック人材を育成へ</td>
+          </tr>
+          <tr>
+            <td class="no">08</td><td class="co"><span>富士フイルム</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg>3類型</span></td>
+            <td>DX人材を3類型で整理し、デジタルスキル標準(DSS-P)でスキルを可視化して配置と育成に使った</td>
+            <td class="rs">生成AIで業務時間<b>約40万時間/年</b>削減見込み</td>
+          </tr>
+        </table>
+        <p class="s-foot">出典：各社・各機関の公式発表。ソフトバンク SoftBank News／LINEヤフー プレスリリース(2025年7月14日)：全従業員を対象に生成AI活用の義務化を前提とした新しい働き方を開始／旭化成／ダイキン工業 テクノロジー・イノベーションセンター特集／東京海上ホールディングス／日立製作所／東日本旅客鉄道 プレスリリース／富士フイルムホールディングス。数値は公表値であり、当社による測定値ではありません。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>育成事例 一覧</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">育成事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">01</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span>
+          <p class="co">ソフトバンク<small>通信｜大企業</small></p>
+          <div class="tags"><span>通信</span><span>大企業</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>層の分け方・対象</p><div class="vb"><p class="i"><b>全社員</b>：1人100個のAIエージェント作成に参加</p><p class="i"><b>資格取得層</b>：AI関連資格の保有者が全社員の約13％</p><p class="i"><b>転身層</b>：<b>1,000名以上</b>がリスキルを経てAI・クラウド領域へ</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>育成プログラム</p><div class="vb"><p class="i">3本柱：AI利活用基盤の整備／学習プログラム／活用促進施策</p><p class="i">期間は2025年6月〜8月末の<b>約2カ月半</b></p><p class="i">eラーニング＋エージェント作成セミナー＋部門別の支援で伴走</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">AIエージェント</p><p class="v">250万<small>超</small></p><p class="n">開始から約2カ月半で</p></div><div class="vt c3"><div><p class="k">理解が深まった</p><p class="v">約9割<small></small></p><p class="n">回答者9,207名の調査</p></div><div><p class="k">AI関連資格取得</p><p class="v">2,000<small>名以上</small></p><p class="n">ソフトバンク社員</p></div><div><p class="k">新領域へ挑戦</p><p class="v">1,000<small>名以上</small></p><p class="n">AI・クラウド領域</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">数値ミッション化</p><p class="d">「1人○個作る」と行動量で目標化すると、座学だけより定着が速い。中堅なら1人10個からで十分</p></div></div><div><span class="ln">2</span><div><p class="t">期間を区切る</p><p class="d">2〜3カ月の集中期間を設け、全社イベント化する。だらだら続けるより熱量が保てる</p></div></div><div><span class="ln">3</span><div><p class="t">資格と異動を接続</p><p class="d">学んだ人が新しい役割に就ける出口を用意すると、リスキリングが本人の得になる</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：ソフトバンク株式会社 SoftBank News「わずか2カ月半で250万超のAIエージェントを作成。全社員が身につけた“AIを使うチカラ”」(2025年12月4日)／同「GenAI HR Awards 2025」グランプリ受賞記事(2025年10月30日)。数値は各社の公表値（目標値を含む）であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 01 ソフトバンク</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">育成事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">02</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.8C7.9 18.7 5 15.2 5 11V6z"/><path d="M9 11.6l2.1 2.1L15.2 9.6"/></svg></span>
+          <p class="co">LINEヤフー<small>IT・インターネット｜大企業</small></p>
+          <div class="tags"><span>IT・インターネット</span><span>大企業</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>層の分け方・対象</p><div class="vb"><p class="i"><b>全従業員 約11,000人</b>：必須研修＋試験合格で利用可</p><p class="i"><b>生成AI活用推進者</b>：全部署に設置済み</p><p class="i"><b>業務効率化PJ</b>：社内で35件以上が進行</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>育成プログラム</p><div class="vb"><p class="i">リスク管理・プロンプト技術の<b>必須eラーニング</b></p><p class="i"><b>試験合格</b>を生成AIの利用条件に設定</p><p class="i">2025年6月から全従業員にChatGPT Enterpriseを付与</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">対象人数</p><p class="v">約11,000<small>人</small></p><p class="n">全従業員</p></div><div class="vt c2"><div><p class="k">生産性</p><p class="v">2<small>倍</small></p><p class="n">今後3年間の目標</p></div><div><p class="k">社内効率化PJ</p><p class="v">35<small>件以上</small></p><p class="n">2025年7月時点</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">研修を利用条件に</p><p class="d">「研修＋小テスト合格で利用解禁」にすると、リスク教育が形骸化しにくい</p></div></div><div><span class="ln">2</span><div><p class="t">業務ルールで縛る</p><p class="d">「まずAIに聞く」「資料はAIで骨子から」など具体ルールに落とすと活用が習慣化する</p></div></div><div><span class="ln">3</span><div><p class="t">各部署に推進者</p><p class="d">部署ごとに推進役を1名置く。中堅企業でも兼務で始められ、相談窓口になる</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：LINEヤフー株式会社 プレスリリース(2025年7月14日)：全従業員を対象に生成AI活用の義務化を前提とした新しい働き方を開始。数値は各社の公表値（目標値を含む）であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 02 LINEヤフー</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">育成事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">03</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M9.2 3h5.6M10.3 3v6.2L5 18.4A2 2 0 006.7 21.4h10.6a2 2 0 001.7-3L13.7 9.2V3"/></svg></span>
+          <p class="co">旭化成<small>化学・素材｜大企業</small></p>
+          <div class="tags"><span>化学・素材</span><span>大企業</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>層の分け方・対象</p><div class="vb"><p class="i"><b>Lv1-2 デジタル入門人材</b>：新人・過年度生向け</p><p class="i"><b>Lv3 デジタル活用人材</b>：全員の期待到達点</p><p class="i"><b>Lv4-5 デジタルプロ人材</b>：業務変革〜変革リーダー</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>育成プログラム</p><div class="vb"><p class="i">Knowledge〜Thought Leaderの<b>5段階</b>オープンバッジ</p><p class="i">2023年10月に<b>生成AIコース</b>を新設、11言語で展開</p><p class="i">取得後はコミュニティ運営で実践・活用につなげる</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">Lv1受講者数</p><p class="v">27,938<small>人</small></p><p class="n">2023年11月末時点</p></div><div class="vt c2"><div><p class="k">Lv3受講者数</p><p class="v">16,991<small>人</small></p><p class="n">2023年11月末時点</p></div><div><p class="k">デジタルプロ人財</p><p class="v">3,157<small>名</small></p><p class="n">2024年度(目標2,500名)</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">到達点を1つ決める</p><p class="d">「全員がLv3」のように全社共通のゴールを1段だけ決めると、研修設計がぶれない</p></div></div><div><span class="ln">2</span><div><p class="t">上位層は名簿管理</p><p class="d">上級者をタレント情報に登録し、配置・アサインに使う。認定を処遇と結ぶのが肝</p></div></div><div><span class="ln">3</span><div><p class="t">教材は随時更新</p><p class="d">生成AIのような新技術は単発講座で素早く追加する。体系全体の作り直しは不要</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：旭化成株式会社「DX戦略説明会 デジタル人材の強化とビジネス変革」資料(2023年12月7日)／「旭化成レポート2025」。数値は各社の公表値（目標値を含む）であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 03 旭化成</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">育成事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">04</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 21h18V10.2l-6 3.9v-3.9l-6 3.9V6.6H3z"/><path d="M7 21v-3.4M12 21v-3.4M17 21v-3.4"/></svg></span>
+          <p class="co">ダイキン工業<small>製造（空調）｜大企業</small></p>
+          <div class="tags"><span>製造（空調）</span><span>大企業</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>層の分け方・対象</p><div class="vb"><p class="i"><b>AI活用人材</b>：既存の業務部門メンバーが自部門の課題を解決</p><p class="i"><b>AI技術開発人材</b>：新入社員を一から育成</p><p class="i"><b>システム開発人材</b>：既存エンジニアにクラウド・AIを教育</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>育成プログラム</p><div class="vb"><p class="i">2017年12月設立、大阪大学と連携し講義・テーマ指導</p><p class="i">新入社員を毎年<b>100名規模</b>、1人<b>2年間</b>の専門教育</p><p class="i">カリキュラムは毎年、新設・改廃を行いながら展開</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">育成実績</p><p class="v">1,500<small>名</small></p><p class="n">2023年度末に計画達成</p></div><div class="vt c2"><div><p class="k">育成目標</p><p class="v">2,000<small>名</small></p><p class="n">2025年度末までの計画</p></div><div><p class="k">新入社員受入</p><p class="v">100<small>名規模/年</small></p><p class="n">教育期間は2年間</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">人材像を3つに絞る</p><p class="d">「使う・解く・作る」の3類型に絞ると、研修メニューと対象者が決めやすい</p></div></div><div><span class="ln">2</span><div><p class="t">既存社員を主役に</p><p class="d">中堅企業は新卒2年間の専任教育は難しい。業務部門の既存社員の課題解決型から始める</p></div></div><div><span class="ln">3</span><div><p class="t">外部と組む</p><p class="d">大学や研修会社と連携し講師・テーマ指導を外部化すれば、少人数の事務局でも回る</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：ダイキン工業株式会社 テクノロジー・イノベーションセンター特集「デジタル時代における製造業の変革～ダイキン情報技術大学におけるAI人材の育成と卒業生の活躍～」(2025年1月15日)。数値は各社の公表値（目標値を含む）であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 04 ダイキン工業</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">育成事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">05</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span>
+          <p class="co">東京海上<small>損害保険｜大企業</small></p>
+          <div class="tags"><span>損害保険</span><span>大企業</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>層の分け方・対象</p><div class="vb"><p class="i"><b>DXリーダー</b>：経営層・部店長が変革を主導</p><p class="i"><b>DXコア／DXドライバー</b>：企画開発担当と各組織の推進役</p><p class="i"><b>全社員</b>：AI・DXリテラシー研修、ITパスポート取得を推奨</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>育成プログラム</p><div class="vb"><p class="i"><b>Data Science Hill Climb</b>：延べ250時間超の専門人材育成</p><p class="i">ビジネスアーキテクト講座：DX/AIビジネス/AI知財 各約15.5〜18.5h</p><p class="i">第一線部店長向けのDXリーダー研修を新設</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">DXコア受講者</p><p class="v">2,180<small>名</small></p><p class="n">累計・2025年度</p></div><div class="vt c2"><div><p class="k">同 前年度</p><p class="v">1,886<small>名</small></p><p class="n">累計・2024年度</p></div><div><p class="k">Hill Climb受講</p><p class="v">100<small>名以上</small></p><p class="n">グループ従業員(2024年4月)</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">管理職層を独立</p><p class="d">全社員研修とは別に部店長向けを用意する。管理職が使わないと現場は動かない</p></div></div><div><span class="ln">2</span><div><p class="t">推進役を任命制に</p><p class="d">各組織の「ドライバー」を任命要件付きで指名すると、責任と育成対象が明確になる</p></div></div><div><span class="ln">3</span><div><p class="t">累計人数で追う</p><p class="d">中核層は受講者数の累計をKPIにすると、年次の進捗を経営に示しやすい</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：東京海上ホールディングス株式会社「Human Capital Report 2026（人的資本レポート）」主な人事施策⑦デジタル・ケイパビリティの向上／同ニュースリリース(2024年4月22日)。数値は各社の公表値（目標値を含む）であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 05 東京海上</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">育成事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">06</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg></span>
+          <p class="co">日立製作所<small>電機・IT｜大企業</small></p>
+          <div class="tags"><span>電機・IT</span><span>大企業</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>層の分け方・対象</p><div class="vb"><p class="i"><b>全従業員</b>：AI活用基礎と倫理・責任の教育</p><p class="i"><b>AIプロフェッショナル人財</b>：社内育成修了や認定資格で計上</p><p class="i"><b>パイロット層 約2,000人</b>：業務影響とスキルギャップを把握</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>育成プログラム</p><div class="vb"><p class="i">2025年度はリテラシー研修を<b>約16万人</b>に展開</p><p class="i">AIプロ人財は社内プログラム修了・ベンダー資格等の累計</p><p class="i">2026年度は人財部門からAIエージェント実証を開始</p></div></div></div>
+          <div class="vr"><div class="vk donut"><div class="dn"><svg width="92" height="92" viewBox="0 0 92 92"><circle cx="46" cy="46" r="34" fill="none" stroke="#e6edf6" stroke-width="12"/><circle cx="46" cy="46" r="34" fill="none" stroke="#1a6fb5" stroke-width="12" stroke-dasharray="177.31148936860794 213.62830044410595" transform="rotate(-90 46 46)"/></svg><span>83<small>%</small></span></div><div><p class="k">リテラシー研修（以上）</p><p class="n">約16万人中の修了率</p></div></div><div class="vt c2"><div><p class="k">AIプロ人財</p><p class="v">39,000<small>人</small></p><p class="n">2025年度実績</p></div><div><p class="k">AIプロ人財</p><p class="v">50,000<small>人</small></p><p class="n">2027年度目標</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">専門人材を定義</p><p class="d">「研修修了か資格取得」など計上ルールを先に決めると、人数目標が意味を持つ</p></div></div><div><span class="ln">2</span><div><p class="t">修了率を追う</p><p class="d">全員研修は「実施」でなく修了率をKPIにする。8割超えを最初の目安にできる</p></div></div><div><span class="ln">3</span><div><p class="t">小さく試す</p><p class="d">全社展開の前に一部門で試行し、業務影響とスキル不足を測ってから計画を固める</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：株式会社日立製作所「日立 統合報告書 2026」。数値は各社の公表値（目標値を含む）であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 06 日立製作所</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">育成事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">07</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M2.5 6h11v10h-11zM13.5 10h4l3.5 3.5V16h-7.5"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></span>
+          <p class="co">JR東日本<small>鉄道・運輸｜大企業</small></p>
+          <div class="tags"><span>鉄道・運輸</span><span>大企業</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>層の分け方・対象</p><div class="vb"><p class="i"><b>ベーシック 約25,000人</b>：ツールでデータ処理・資料作成</p><p class="i"><b>ミドル 約5,000人</b>：デジタルで業務課題を解決</p><p class="i"><b>エキスパート 約200人</b>：DX戦略を策定・実施</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>育成プログラム</p><div class="vb"><p class="i"><b>DXプロ</b>(各機関・約40名)がハンズオン講師を担当</p><p class="i"><b>DX推進エバンジェリスト</b>(各箇所・約1,300名)が勉強会</p><p class="i">JEIS大学：公募社員がシステム会社へ2年間程度出向</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">ベーシック人材</p><p class="v">約25,000<small>人</small></p><p class="n">2027年度末累計の目標</p></div><div class="vt c3"><div><p class="k">ミドル人材</p><p class="v">約5,000<small>人</small></p><p class="n">2027年度末累計の目標</p></div><div><p class="k">エキスパート</p><p class="v">約200<small>人</small></p><p class="n">2027年度末累計の目標</p></div><div><p class="k">DXアワード応募</p><p class="v">344<small>件</small></p><p class="n">2024年度・7件表彰</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">ピラミッドで目標</p><p class="d">基礎:中級:上級を約125:25:1で置いている。中堅企業でも比率は応用できる</p></div></div><div><span class="ln">2</span><div><p class="t">教える人を育てる</p><p class="d">現場の推進役を講師にすると、外部研修より業務に即した学びになる</p></div></div><div><span class="ln">3</span><div><p class="t">表彰で見える化</p><p class="d">事例を表彰・展示する場を年1回つくると、ボトムアップの改善が集まる</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：東日本旅客鉄道株式会社 プレスリリース「DX推進に向けた多様なデジタル人材を育成します」(2023年12月5日)／「DX REPORT 2025」。数値は各社の公表値（目標値を含む）であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 07 JR東日本</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">育成事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">08</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>
+          <p class="co">富士フイルム<small>精密・ヘルスケア｜大企業</small></p>
+          <div class="tags"><span>精密・ヘルスケア</span><span>大企業</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>層の分け方・対象</p><div class="vb"><p class="i"><b>DX活用人材</b>：全社員が対象、ツール・データで業務効率化</p><p class="i"><b>IT専門人材</b>：IT部門が先端技術で事業DXを支える</p><p class="i"><b>ハイブリッド人材</b>：事業部門から選抜したDX推進リーダー</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>育成プログラム</p><div class="vb"><p class="i">DX基礎知識教育→データ活用研修→ハンズオンの段階体系</p><p class="i">上位層はビジネスアーキテクト／デザイナー育成ブートキャンプ</p><p class="i"><b>DSS-P</b>で個人スキルを可視化し、配置・育成計画に反映</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">AIChat展開</p><p class="v">約7万<small>人</small></p><p class="n">グローバル・MAU2.1万人</p></div><div class="vt c3"><div><p class="k">時間削減見込み</p><p class="v">約40万<small>時間/年</small></p><p class="n">2025年6月実績より試算</p></div><div><p class="k">AIエージェント</p><p class="v">1,000<small>件超</small></p><p class="n">従業員が作成し稼働中</p></div><div><p class="k">生成AI勉強会</p><p class="v">1万<small>人以上</small></p><p class="n">2023年から延べ参加</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">国の標準を借りる</p><p class="d">スキル定義を自作せずDSSを使えば、評価項目づくりの工数を大きく減らせる</p></div></div><div><span class="ln">2</span><div><p class="t">選抜層は事業部から</p><p class="d">推進リーダーはIT部門でなく事業部門から選ぶ。業務を知る人が変革を引っ張る</p></div></div><div><span class="ln">3</span><div><p class="t">効果は時間で示す</p><p class="d">利用者数に加え削減時間を試算して公表すると、経営の継続投資を得やすい</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：富士フイルムホールディングス株式会社「富士フイルムグループが取り組むDX」2025年度DX記者説明会資料(2025年9月10日)。数値は各社の公表値（目標値を含む）であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 08 富士フイルム</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">事例から見る共通点</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">8社に共通する<b>3つの設計</b></p></div>
+        <div class="grow cards c3"><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span><p class="t">人数とレベルを数字で置く</p><p class="d">日立（AIプロ人財 5万人目標）、JR東日本（3層の人数目標）、旭化成（デジタルプロ人財 2,500名目標）は、<b>中期計画のKPI</b>として育成人数を管理しています。</p><p class="g">P.13・P.14・P.10</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p class="t">層ごとに中身を変える</p><p class="d">東京海上は4層、JR東日本は3層、ダイキンは3つの人材像で、<b>層ごとに研修の内容と深さ</b>を変えています。</p><p class="g">P.12・P.14・P.11</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span><p class="t">学んだらすぐ使わせる</p><p class="d">ソフトバンクは「1人100個のエージェント作成」、LINEヤフーは「研修合格を利用条件に」。<b>学習と実務を同時に回す</b>仕掛けで定着させています。</p><p class="g">P.8・P.9</p></div></div><div class="band">共通するのは「研修を企画すること」ではなく、「人材像と人数を決めて、そこから研修を逆算すること」です。</div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>事例から見る共通点</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">ステップ3｜育成プログラム</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">層別の<b>カリキュラム例</b>（当社の標準的な設計）</p></div>
+        <table class="grow cs kt tall">
+          <colgroup><col style="width:160px"><col><col style="width:150px"><col style="width:200px"></colgroup>
+          <tr><th>層</th><th>学ぶ内容</th><th>時間の目安</th><th>形式</th></tr>
+          <tr><td class="kc">全社員</td><td>AIの基本と社内ルール／文章作成・要約・調べ物の型／自分の業務での活用演習</td><td>6〜10時間</td><td>eラーニング＋ハンズオン</td></tr>
+          <tr><td class="kc">推進リーダー</td><td>業務の棚卸しとAI化の設計／プロンプトの型づくり／部署での展開方法／効果測定</td><td>20〜40時間</td><td>ハンズオン＋ワークショップ</td></tr>
+          <tr><td class="kc">開発・専門人材</td><td>社内データ連携（RAG）／AIエージェント・ワークフロー（Dify・Copilot Studio等）／運用とセキュリティ</td><td>40〜100時間</td><td>ハンズオン＋実案件の伴走</td></tr>
+        </table><div class="band">研修形式ごとの特徴と費用感は、「AI研修タイプ 比較ガイド」で詳しく比較しています。時間の目安は当社の標準的な設計例です。</div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>層別カリキュラム例</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">ステップ3｜年間計画</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t"><b>12か月</b>の年間計画の例</p></div>
+        <div class="grow steps"><div><span class="n">01</span><div><p class="t">1〜2か月目｜準備</p><p class="d">アセスメント、社内ルールと環境の整備、推進リーダーの選定</p></div><p class="sd">成果物：育成計画書・ガイドライン</p></div><div><span class="n">02</span><div><p class="t">3〜4か月目｜推進リーダー育成</p><p class="d">推進リーダーが先に学び、自部署で試行。成功例を3つ作る</p></div><p class="sd">KPI：試行部署の利用率</p></div><div><span class="n">03</span><div><p class="t">5〜8か月目｜全社展開</p><p class="d">全社員研修を部署ごとに実施。推進リーダーが現場でフォロー</p></div><p class="sd">KPI：全社の月間利用率</p></div><div><span class="n">04</span><div><p class="t">9〜12か月目｜定着と高度化</p><p class="d">活用事例の共有会、開発人材の育成、次年度計画への反映</p></div><p class="sd">KPI：削減時間・事例数</p></div></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>年間計画の例</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">ステップ4｜定着と評価</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">効果は<b>3段階のKPI</b>で追う</p></div>
+        <table class="grow cs kt tall">
+          <colgroup><col style="width:150px"><col style="width:230px"><col><col style="width:220px"></colgroup>
+          <tr><th>段階</th><th>指標</th><th>測り方</th><th>事例での例</th></tr>
+          <tr><td class="kc">学んだか</td><td>研修の受講率・合格率</td><td>研修管理の記録／理解度テスト</td><td>LINEヤフー：必須研修の受講</td></tr>
+          <tr><td class="kc">使っているか</td><td>月間利用率、1人あたり利用回数</td><td>法人プランの利用ログ</td><td>富士フイルム：約7万人に展開</td></tr>
+          <tr><td class="kc">成果が出たか</td><td>削減時間、活用事例数、作ったエージェント数</td><td>アンケート＋ログ／事例の登録</td><td>ソフトバンク：250万超のエージェント</td></tr>
+          <tr><td class="kc">人材が育ったか</td><td>層ごとの育成人数、資格取得者数</td><td>認定制度・資格の記録</td><td>日立：AIプロ人財の人数をKPIに</td></tr>
+        </table>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>KPIの設計</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">予算と助成金</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">研修費は<b>人材開発支援助成金</b>で実質負担を下げられる</p><p class="l">厚生労働省「人材開発支援助成金（事業展開等リスキリング支援コース）」は、DX等に伴う訓練の経費と訓練中の賃金の一部を助成します。</p></div>
+        <div class="grow cards c3"><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M6 3l6 8 6-8M12 11v10M7.5 13h9M7.5 16.5h9"/></svg></span><p class="t">経費助成 最大75％</p><p class="d">研修経費の助成率は<b>中小企業75％</b>、大企業60％。受講者1人あたりの限度額は実訓練時間により変わります。</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><rect x="5" y="3" width="14" height="18" rx="0"/><path d="M8 7h8M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h.01M15.5 18h.01"/></svg></span><p class="t">賃金助成 1時間1,000円</p><p class="d">訓練中の賃金を1人1時間あたり<b>中小企業1,000円</b>（大企業500円）助成。eラーニング等は対象外です。</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><rect x="4" y="4" width="16" height="16"/><path d="M8.5 12.2l2.5 2.5 4.8-5"/></svg></span><p class="t">要件と手続き</p><p class="d">1コースの実訓練時間が<b>10時間以上</b>。計画届は訓練開始日の<b>6か月前〜1か月前</b>に労働局へ提出します。</p></div></div><div class="band">詳しい要件・試算・申請の流れは「助成金活用ガイド」にまとめています。支給の可否・金額は管轄労働局の審査で決まります。</div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>予算と助成金</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">計画シート</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t"><b>AI人材育成計画シート</b>（ひな形）</p><p class="l">［　］を埋めると、社内向けの育成計画書の骨子になります。</p></div>
+        <div class="grow tpl"><div><p class="at">1. 目的</p><div class="ab"><p class="al">［業務名］の作業時間を［○％］減らし、［新しい取り組み］に時間を回す</p></div></div><div><p class="at">2. 現状（アセスメント結果）</p><div class="ab"><p class="al">月間利用率［○％］／推進役候補［○名］／ルール・環境［整備済・未整備］</p></div></div><div><p class="at">3. 目標の人材像と人数</p><div class="ab"><p class="al">全社員［○名］、推進リーダー［○名］、開発・専門人材［○名］を［○年○月］までに育成</p></div></div><div><p class="at">4. カリキュラムと形式</p><div class="ab"><p class="al">全社員［○時間・形式］／推進リーダー［○時間・形式］／開発人材［○時間・形式］</p></div></div><div><p class="at">5. スケジュール</p><div class="ab"><p class="al">準備［○月］→推進リーダー育成［○月］→全社展開［○月］→定着・高度化［○月］</p></div></div><div><p class="at">6. 推進体制</p><div class="ab"><p class="al">責任者［役職］、事務局［部署］、各部署の推進リーダー、相談窓口［部署］</p></div></div><div><p class="at">7. KPI</p><div class="ab"><p class="al">受講率［○％］、月間利用率［○％］、削減時間［○時間/月］、活用事例［○件］</p></div></div><div><p class="at">8. 予算と助成金</p><div class="ab"><p class="al">研修費［○円］、助成金の見込み［○円］、実質負担［○円］</p></div></div></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>育成計画シート（ひな形）</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">Contact</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">育成計画づくりから、<b>研修・定着</b>まで。</p><p class="l">バイテック法人AI研修では、アセスメントから層別の研修、助成金の活用までを一貫してご支援します。</p></div>
+        <div class="grow cards c3"><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg></span><p class="t">現状のアセスメント</p><p class="d">利用状況とスキルの現在地を整理し、どの層から始めるかをご提案します。</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p class="t">層別のハンズオン研修</p><p class="d">全社員・推進リーダー・開発人材それぞれに、<b>実務を題材にした研修</b>を設計します。</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M6 3l6 8 6-8M12 11v10M7.5 13h9M7.5 16.5h9"/></svg></span><p class="t">助成金の活用サポート</p><p class="d">人材開発支援助成金の対象となる研修設計と、計画届に必要な情報をご提供します。</p></div></div>
+        <div class="ctab"><div><p class="t">まずは無料個別相談で、育成のゴールをお聞かせください</p><p class="d">オンライン・約60分。計画シートの埋め方から、研修内容・助成金の見込みまでご案内します。</p></div><span class="bt">無料個別相談を予約する ›</span></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>ご相談</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">Notes</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd" style="margin-top:4px"><p class="t" style="font-size:27px">ご留意事項・出典</p></div><div class="grow nts"><p class="nt">本資料の事例は、各社の公式発表（プレスリリース・統合報告書・人的資本レポート・公式サイト等）にもとづいて当社が編集したものです。掲載企業との取引関係や、各社による推薦を示すものではありません。</p><p class="nt">掲載している数値は各社の公表値（目標値を含む）であり、当社による測定値ではありません。</p><p class="nt">3層モデルの人数の目安、カリキュラム例の時間、年間計画の例、「取り入れるなら」は当社の見解・標準的な設計例です。</p><p class="nt">デジタルスキル標準は経済産業省・独立行政法人情報処理推進機構（IPA）が公表しています（2026年4月にver.2.0を公表）。最新版はIPAのWebサイトでご確認ください。</p><p class="nt">助成金の内容は、厚生労働省「人材開発支援助成金（事業展開等リスキリング支援コース）」の公表資料にもとづきます。制度は改定されることがあります。支給の可否・金額は管轄労働局の審査で決まります。</p><p class="nt">社名・製品名は各社の商標または登録商標です。本資料の内容の無断転載・再配布はご遠慮ください。　発行：バイテック法人AI研修（2026年10月版）</p></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>ご留意事項・出典</figcaption></figure>
+  </div>
+<script>
+  // 事例ページ：補足の節（.vsec.sm）を、左右の列の高さが揃う方へ移す
+  document.querySelectorAll(".vdt").forEach(function (d) {
+    var l = d.querySelector(".vl"), r = d.querySelector(".vr"), sm = l.querySelectorAll(".vsec.sm");
+    if (!sm.length) return;
+    function need(c) { var n = 0; Array.prototype.forEach.call(c.children, function (e) { n += e.scrollHeight + 10; }); return n; }
+    var sh = 0; sm.forEach(function (e) { sh += e.scrollHeight + 10; });
+    d.classList.add("measure");
+    var L = need(l), R = need(r);
+    if (Math.max(L - sh, R + sh) < Math.max(L, R)) sm.forEach(function (e) { r.appendChild(e); });
+    d.classList.remove("measure");
+  });
+  // 事例ページ：列に余裕があるときは本文を一段大きくする（下に余白を残さない）
+  document.querySelectorAll(".vdt").forEach(function (d) {
+    [d.querySelector(".vl"), d.querySelector(".vr")].forEach(function (col) {
+      d.classList.add("measure"); var need = 0; Array.prototype.forEach.call(col.children, function (e) { need += e.scrollHeight; }); d.classList.remove("measure");
+      if (col.clientHeight - need > 90) col.classList.add("roomy");
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+{
+  "accessed": "2026-10-14",
+  "method_note": "全ページを2026-10-14に公式サイトから取得（openai.com/chatgpt.comはWebFetchが403のためヘッドレスChromeで描画して読取）。価格はページ表示どおり、推測なし。",
+  "tools": [
+    {
+      "tool": "ChatGPT",
+      "vendor": "OpenAI",
+      "plans": [
+        {"name": "ChatGPT Business", "price": "¥3,050/ユーザー/月（年額課金）／¥3,850/ユーザー/月（月額課金）", "billing": "年払い/月払い", "min_seats": "2名以上", "notes": "税込/税別の明記なし。上限超はクレジット追加購入可。Dot等一部はBusiness Premium。ISO認証・SCIM・データレジデンシーはBusiness対象外（比較表で「いいえ」）", "url": "https://chatgpt.com/ja-JP/pricing/", "accessed": "2026-10-14"},
+        {"name": "ChatGPT Enterprise", "price": "要問い合わせ（カスタム価格設定。クレジットベース/トークンベースの料金体系）", "billing": "年払い（年間プラン）", "min_seats": "企業向けプランはユーザー2名から（FAQ）", "notes": "請求書払い・ボリューム割引・SLA・24/365優先サポート", "url": "https://chatgpt.com/ja-JP/pricing/", "accessed": "2026-10-14"}
+      ],
+      "training_on_data": "Business/Enterprise ともに「デフォルトではビジネスデータを学習に使用しません」（料金ページ）。プライバシーページ:「デフォルトでは、お客様のビジネスデータをモデルの学習に使用することはありません」。明示的にデータ共有へ同意した場合は学習に使われ得る。アプリ（コネクタ）経由データもデフォルトで学習に不使用。",
+      "admin": [
+        "SAML SSO・MFA・管理コンソール・ドメイン認証・一元請求（Business/Enterprise）",
+        "利用状況分析・予算/支出管理（Business）",
+        "SCIM・RBAC・EKM（エンタープライズキー管理）・IP許可リスト・Compliance APIログ・グローバル管理コンソール・コネクターレジストリ（Enterpriseのみ）",
+        "データ保持期間をワークスペース管理者が設定可（Business/Enterprise）。削除会話は原則30日以内に消去"
+      ],
+      "security": [
+        "SOC 2 Type 2（Business/Enterprise）",
+        "ISO 27001/27017/27018/27701（Enterpriseのみ。Businessは比較表で「いいえ」）",
+        "通信TLS 1.2・保存時AES-256暗号化"
+      ],
+      "residency": "Enterpriseのみ：米国・EU・英国・日本・カナダ・韓国・シンガポール・インド・豪州・UAEの10地域でデータレジデンシー対応（Businessは非対応）",
+      "strengths": [
+        "M365/Google Drive/Slack等に接続",
+        "ワークスペースエージェントとCodexを同梱",
+        "Excel/Word/PPT/スプレッドシート拡張",
+        "Enterpriseは日本リージョン保存に対応"
+      ],
+      "cautions": [
+        "Businessは月払いだと¥3,850に上がる",
+        "SCIM・ISO・国内保存はEnterpriseのみ"
+      ],
+      "best_for": "部門横断で汎用AIを素早く全社展開したい企業",
+      "context_window_note": "Business: Instant 54K / 推論256K、Enterprise: Instant 128K / 推論256K（料金ページ比較表）",
+      "urls": [
+        "https://chatgpt.com/ja-JP/pricing/",
+        "https://openai.com/ja-JP/enterprise-privacy/"
+      ]
+    },
+    {
+      "tool": "Gemini",
+      "vendor": "Google",
+      "plans": [
+        {"name": "Google Workspace Business Starter（Gemini同梱・機能制限あり）", "price": "¥800/ユーザー/月（年間プラン）／¥950（フレキシブル=年間プランOFF時）", "billing": "年払い/月払い（請求は月単位）", "min_seats": "下限記載なし・最大300ユーザー", "notes": "税別。Gemini は Gmail・Vids・Geminiアプリ（基本アクセス）。Docs/Sheets/Slides/Drive/Meet/Chat の Gemini は非対応。新規顧客向け期間限定割引表示あり（3か月50%オフ等）", "url": "https://workspace.google.com/intl/ja/pricing.html", "accessed": "2026-10-14"},
+        {"name": "Google Workspace Business Standard", "price": "¥1,600/ユーザー/月（年間プラン）／¥1,900（フレキシブル）", "billing": "年払い/月払い", "min_seats": "下限記載なし・最大300ユーザー", "notes": "税別。Gmail/ドキュメント/スプレッドシート/スライド/ドライブ/Meet/Chat の Gemini、Gemini Notebook、最上位モデルへのアクセス", "url": "https://workspace.google.com/intl/ja/pricing.html", "accessed": "2026-10-14"},
+        {"name": "Google Workspace Business Plus", "price": "¥2,500/ユーザー/月（年間プラン）／¥3,000（フレキシブル）", "billing": "年払い/月払い", "min_seats": "下限記載なし・最大300ユーザー", "notes": "税別。Standard＋Vault（保持・電子情報開示）、高度なエンドポイント管理", "url": "https://workspace.google.com/intl/ja/pricing.html", "accessed": "2026-10-14"},
+        {"name": "Google Workspace Enterprise", "price": "要問い合わせ", "billing": "要問い合わせ", "min_seats": "ユーザー数の上限・下限なし", "notes": "DLP・コンテキストアウェアアクセス・Enterprise Data Regions・Assured Controls", "url": "https://workspace.google.com/intl/ja/pricing.html", "accessed": "2026-10-14"},
+        {"name": "Gemini Enterprise app - Business エディション（Workspace外の単体エージェント基盤）", "price": "$21～/シート/月", "billing": "記載なし", "min_seats": "最大300名までのチーム向け（30日無料トライアル）", "notes": "M365/Workspace/HubSpot/Notion等コネクタ、Workflow Builder、Deep Research。Standard/Plus/Frontlineエディションは要問い合わせ", "url": "https://cloud.google.com/gemini-enterprise/business?hl=ja", "accessed": "2026-10-14"}
+      ],
+      "training_on_data": "Workspace:「お客様のデータは、人間によってレビューされることも、許可なくお客様のドメイン外で生成AIモデルのトレーニングに使用されることもありません」。Gemini Enterprise:「データを管理するのはお客様であり、Google がトレーニングに使用することはない」。",
+      "admin": [
+        "Gemini は既存のWorkspace権限・DLP・IRM・クライアントサイド暗号化を継承",
+        "Vault でデータ保持・アーカイブ・検索（Business Plus以上）",
+        "DLP・コンテキストアウェアアクセス・Data Regions（Enterprise）",
+        "Gemini Enterprise Businessは基本的な管理（メンバー/コネクタ/共有/請求）"
+      ],
+      "security": [
+        "ISO 42001・BSI C5・FedRAMP High 等の認証（Gemini）",
+        "HIPAA要件対応を支援",
+        "間接プロンプトインジェクション対策"
+      ],
+      "residency": "Gemini in Workspace のデータ処理は米国またはEUに限定可能。ローカルデータストレージで任意の国に独立コピー保存可。データ保存場所の制御はEnterprise Data Regions（Enterpriseプラン）。日本リージョン限定処理の記載なし。",
+      "strengths": [
+        "Gmail/ドキュメント/Meetに標準搭載",
+        "Workspace料金内でAIが使える",
+        "既存の共有権限・DLPをそのまま適用",
+        "Gem/Notebookで社内専用AIを作成"
+      ],
+      "cautions": [
+        "Starterはドキュメント等でGemini不可",
+        "Business系は最大300ユーザーまで"
+      ],
+      "best_for": "既にGoogle Workspaceを使う中小企業",
+      "urls": [
+        "https://workspace.google.com/intl/ja/pricing.html",
+        "https://workspace.google.com/intl/ja/security/ai-privacy/",
+        "https://cloud.google.com/gemini-enterprise?hl=ja",
+        "https://cloud.google.com/gemini-enterprise/business?hl=ja",
+        "https://docs.cloud.google.com/gemini/enterprise/docs/editions?hl=ja"
+      ]
+    },
+    {
+      "tool": "Microsoft 365 Copilot",
+      "vendor": "Microsoft",
+      "plans": [
+        {"name": "Microsoft 365 Copilot（エンタープライズ向けアドオン）", "price": "¥4,497/ユーザー/月相当（年払い）／月々払い ¥4,722（年間契約）", "billing": "年払い/月払い（いずれも年間契約）", "min_seats": "記載なし", "notes": "消費税別。条件を満たすMicrosoft 365プランのライセンスが別途必要", "url": "https://www.microsoft.com/ja-jp/microsoft-365/copilot/enterprise", "accessed": "2026-10-14"},
+        {"name": "Microsoft 365 Copilot Business（一般法人向けアドオン）", "price": "通常¥3,148→キャンペーン¥2,698/ユーザー/月相当（年払い）／¥3,778（月額サブスクリプション）", "billing": "年払い/月払い", "min_seats": "最大300ユーザーまで", "notes": "消費税別。割引は2026/7/1～12/31、初年度のみ、既存M365顧客のみ。対象M365ビジネスプランが別途必要", "url": "https://www.microsoft.com/ja-jp/microsoft-365/copilot/pricing", "accessed": "2026-10-14"},
+        {"name": "Microsoft 365 Business Standard + Copilot Business（セット）", "price": "¥3,523/ユーザー/月相当（年払い）／¥4,228（月額）", "billing": "年払い/月払い", "min_seats": "最大300ユーザー", "notes": "消費税別", "url": "https://www.microsoft.com/ja-jp/microsoft-365/copilot/pricing", "accessed": "2026-10-14"},
+        {"name": "Microsoft 365 Business Premium + Copilot Business（セット）", "price": "¥4,797/ユーザー/月相当（年払い）／¥5,756（月額）", "billing": "年払い/月払い", "min_seats": "最大300ユーザー", "notes": "消費税別。Entra ID・Intune・Defender・Purview込み", "url": "https://www.microsoft.com/ja-jp/microsoft-365/copilot/pricing", "accessed": "2026-10-14"},
+        {"name": "Microsoft 365 Copilot Chat", "price": "追加費用なし（対象M365プラン利用者）", "billing": "-", "min_seats": "-", "notes": "Web典拠型AIチャット＋Copilot in Outlook等。カスタムエージェントは従量課金。Work IQ・Teams内Copilot・既成エージェントはCopilotライセンスが必要", "url": "https://www.microsoft.com/ja-jp/microsoft-365/copilot/pricing", "accessed": "2026-10-14"}
+      ],
+      "training_on_data": "「Microsoft Graph 経由でアクセスされるプロンプト、応答、データは…基礎 LLM のトレーニングには使用されません」。Copilot Chat も「プロンプトと応答は…基礎モデルのトレーニングには使用されません」（エンタープライズデータ保護 EDP）。",
+      "admin": [
+        "プロンプト/応答を監査・電子情報開示用にテナント（Exchange）へ記録",
+        "Microsoft Purview でCopilotチャットの保持ポリシー設定・コンテンツ検索",
+        "既存のM365アクセス許可・秘密度ラベル/IRMを尊重",
+        "Copilot分析・SharePoint高度な管理で利用状況/ROI測定"
+      ],
+      "security": [
+        "GDPR・ISO 27001・ISO/IEC 27018・HIPAA・ISO 42001への準拠を明記",
+        "EUデータ境界（EUDB）対応（Anthropicモデルは現在EUDB対象外）"
+      ],
+      "residency": "製品条件のデータ所在地コミットメント対象（2024/3/1～）。Advanced Data Residency（ADR）・Multi-Geoで所在地コミットメントあり。EU外顧客のクエリは米国・EU・その他リージョンで処理され得る。",
+      "strengths": [
+        "Word/Excel/PPT/Teams内で直接使える",
+        "メール・会議・ファイル横断のWork IQ",
+        "100以上のコネクタで業務データ検索",
+        "Copilot Chatは追加費用なしで開始可"
+      ],
+      "cautions": [
+        "M365ライセンスが別途必要",
+        "年間契約前提・Business版は300人上限"
+      ],
+      "best_for": "Microsoft 365中心で業務している企業",
+      "urls": [
+        "https://www.microsoft.com/ja-jp/microsoft-365/copilot/pricing",
+        "https://www.microsoft.com/ja-jp/microsoft-365/copilot/enterprise",
+        "https://www.microsoft.com/ja-jp/microsoft-365/copilot/business",
+        "https://learn.microsoft.com/ja-jp/copilot/microsoft-365/microsoft-365-copilot-privacy",
+        "https://learn.microsoft.com/ja-jp/copilot/privacy-and-protections"
+      ]
+    },
+    {
+      "tool": "Claude",
+      "vendor": "Anthropic",
+      "plans": [
+        {"name": "Claude Team（スタンダードシート）", "price": "US$22/シート/月（年払い）／US$27.50（月払い）", "billing": "年払い/月払い", "min_seats": "2〜150名のチーム向け", "notes": "表示価格は税別（「表示価格には該当する税金は含まれていません」）。最大$500/月のプールAPIクレジット", "url": "https://claude.com/ja-jp/pricing", "accessed": "2026-10-14"},
+        {"name": "Claude Team（プレミアムシート）", "price": "US$110/シート/月（年払い）／US$137.50（月払い）", "billing": "年払い/月払い", "min_seats": "2〜150名", "notes": "スタンダードシートの5倍の使用量。シートタイプ混在可", "url": "https://claude.com/ja-jp/pricing", "accessed": "2026-10-14"},
+        {"name": "Claude Enterprise（セルフサービス）", "price": "料金ページ: US$20/シート/月（年払い）＋APIレートでの使用量課金／Enterpriseページ: $22/シート/月（年間一括請求）＋API料金の使用量課金", "billing": "年払い", "min_seats": "最低20シート（Enterpriseページ記載）", "notes": "公式2ページで席料金の表記が$20と$22で不一致→要確認。税別", "url": "https://claude.com/ja-jp/pricing ; https://claude.com/solutions/enterprise", "accessed": "2026-10-14"},
+        {"name": "Claude Enterprise（営業担当経由）", "price": "要問い合わせ", "billing": "年払い（請求書払い可）", "min_seats": "要問い合わせ", "notes": "AWS Marketplace・コンサルテーション・トライアルあり", "url": "https://claude.com/ja-jp/pricing", "accessed": "2026-10-14"}
+      ],
+      "training_on_data": "全ビジネスプランで「モデルのトレーニング：デフォルトではなし」。Enterpriseページ:「デフォルトでは、お客様のプロンプト、データ、結果は当社のモデルのトレーニングには使用されません」。",
+      "admin": [
+        "SSO・ドメイン確認・一元請求・使用状況分析・コネクタ管理（Team以上）",
+        "SCIM・RBAC・監査ログ・ドメインキャプチャ（Enterpriseのみ）",
+        "Compliance API・OpenTelemetry監視・カスタムデータ保持（Enterpriseのみ）",
+        "IPアローリスト・ネットワークレベルのアクセス制御（Enterprise）"
+      ],
+      "security": [
+        "SOC 2・ISO 27001・GDPR・CCPAに準拠（Enterpriseページ）",
+        "HIPAA対応オプション（EnterpriseでBAA締結）",
+        "顧客管理の暗号化キー（Enterprise）"
+      ],
+      "residency": "Enterpriseで「米国のみの推論」オプション。日本などその他地域のデータレジデンシーの記載なし。",
+      "strengths": [
+        "最大100万トークンの長文コンテキスト",
+        "Claude Code/Coworkを1シートで利用",
+        "Claude for Microsoft 365・Outlook連携",
+        "コネクタとスキルで社内業務に適応"
+      ],
+      "cautions": [
+        "料金はUSD建てで為替の影響を受ける",
+        "SCIM・監査ログはEnterpriseのみ"
+      ],
+      "best_for": "長文資料分析や開発・業務自動化を重視する企業",
+      "urls": [
+        "https://claude.com/ja-jp/pricing",
+        "https://claude.com/solutions/enterprise"
+      ]
+    }
+  ]
+}
