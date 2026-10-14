@@ -1,0 +1,471 @@
+[
+ {
+  "name": "パナソニック コネクト",
+  "kind": "企業",
+  "area": "製造・IT",
+  "icon": "factory",
+  "list_action": "禁止より先に安全な社内AI環境を全社員へ。入力の二次利用なし・一定期間で消去",
+  "list_result_html": "25年度 <b>78.8万時間</b>削減（総労働時間の<b>3.4%</b>）",
+  "tagline": "「使わせない」より「安全に使わせる」",
+  "tags": [
+   "企業/全社展開",
+   "国内約1.18万人"
+  ],
+  "rules_ng_html": [
+   "社外の生成AIではなく、社内ConnectAI（旧ConnectGPT）に利用を集約",
+   "入力した情報は<b>2次利用しない</b>・一定期間で消去する設計"
+  ],
+  "rules_ok_html": [
+   "国内全社員が社内イントラからいつでも質問・作成に利用可",
+   "引用元表示で回答の真偽を社員自身が確認できる"
+  ],
+  "governance_html": [
+   "利用画面に「使用に際しての注意喚起」を明記",
+   "導入目標に<b>シャドーAI利用リスク軽減</b>を掲げ毎年実績を公表",
+   "社外秘の品質管理文書等へ対象を段階拡大"
+  ],
+  "kpis": [
+   {
+    "label": "年間削減時間",
+    "value": "78.8万",
+    "unit": "時間",
+    "note": "2025年度"
+   },
+   {
+    "label": "利用回数",
+    "value": "361万",
+    "unit": "回",
+    "note": "2025年度"
+   },
+   {
+    "label": "1回の削減",
+    "value": "33",
+    "unit": "分",
+    "note": "2025年度平均"
+   },
+   {
+    "label": "情報漏洩・著作権",
+    "value": "問題発生せず",
+    "unit": "",
+    "note": "導入後16か月"
+   }
+  ],
+  "learn": [
+   {
+    "title": "禁止より受け皿",
+    "desc": "一律禁止は私用AIへの抜け道を生む。まず入力が学習されない公式環境を用意するのが先。"
+   },
+   {
+    "title": "画面で注意喚起",
+    "desc": "規程を読ませるより、毎回目に入る利用画面に注意文を置く方が中堅企業でも効く。"
+   },
+   {
+    "title": "効果を毎年公表",
+    "desc": "削減時間を測って社内外に出すと、ルール順守と活用の両方の動機づけになる。"
+   }
+  ],
+  "source_full": "パナソニック コネクト「AIアシスタントサービス『ConnectGPT』導入」（2023年3月）、「生成AI導入1年の実績と今後の活用構想」（2024年6月）、「AI活用で総労働時間の3.4％削減」（2026年7月）",
+  "urls": [
+   "https://news.panasonic.com/jp/topics/205071",
+   "https://news.panasonic.com/jp/press/jn240625-1",
+   "https://news.panasonic.com/jp/press/jn260729-1"
+  ]
+ },
+ {
+  "name": "NEC",
+  "kind": "企業",
+  "area": "IT・全社",
+  "icon": "shield",
+  "list_action": "機密区分ごとに入力可否を定義し、同意・申請者のみ利用可。入出力を全ログ化",
+  "list_result_html": "資料作成時間<b>50%</b>削減・議事録<b>30分→約5分</b>",
+  "tagline": "機密区分で「入れてよい情報」を線引き",
+  "tags": [
+   "企業/IT",
+   "国内グループ約8万人"
+  ],
+  "rules_ng_html": [
+   "最高機密・極秘・秘密事項（個人情報）は<b>利用不可</b>",
+   "社内規程（企業秘密管理規程等）と基本方針の遵守が前提"
+  ],
+  "rules_ok_html": [
+   "秘密事項（個人情報除く）・社外秘は<b>社内NGSに限り利用可</b>",
+   "出力の品質チェックとリスク考慮の上で業務に使用"
+  ],
+  "governance_html": [
+   "ルールに<b>同意し利用申請</b>した従業員のみ利用可",
+   "入出力をすべて<b>監査可能な形でロギング</b>",
+   "CIO/CISO直下に「生成AI変革オフィス」設置"
+  ],
+  "kpis": [
+   {
+    "label": "利用者数",
+    "value": "約2.5万",
+    "unit": "人",
+    "note": "2023年8月発表"
+   },
+   {
+    "label": "1日の活用",
+    "value": "約1万",
+    "unit": "回",
+    "note": "2023年8月発表"
+   },
+   {
+    "label": "資料作成時間",
+    "value": "50",
+    "unit": "%削減",
+    "note": "2023年8月発表"
+   },
+   {
+    "label": "議事録作成",
+    "value": "30→約5",
+    "unit": "分",
+    "note": "平均・23年8月発表"
+   }
+  ],
+  "learn": [
+   {
+    "title": "既存の機密区分を流用",
+    "desc": "新ルールを作らず、既存の情報区分表に「生成AIに入力可/不可」列を足すだけで運用できる。"
+   },
+   {
+    "title": "同意を利用条件に",
+    "desc": "ID発行時にルール同意を必須にすれば、周知の証跡と抑止効果を同時に得られる。"
+   },
+   {
+    "title": "ログは保険",
+    "desc": "入出力ログを残せば、トラブル時に使い方を追跡でき、過度な禁止を避けられる。"
+   }
+  ],
+  "source_full": "NEC技報「生成AIの社内活用を進めるNEC Generative AI Service（NGS）」（Vol.75 No.2）、NECプレスリリース（2023年8月30日）",
+  "urls": [
+   "https://jpn.nec.com/techrep/journal/g23/n02/230208.html",
+   "https://jpn.nec.com/techrep/journal/g23/n02/pdf/230208.pdf",
+   "https://jpn.nec.com/press/202308/20230830_01.html"
+  ]
+ },
+ {
+  "name": "LINEヤフー",
+  "kind": "企業",
+  "area": "IT",
+  "icon": "chat",
+  "list_action": "eラーニング＋テスト合格を利用条件に、業務別の「AI活用ルール」で活用を義務化",
+  "list_result_html": "必須研修の受講率<b>96%</b>（2026年5月時点）",
+  "tagline": "「テスト合格者だけが使える」を徹底",
+  "tags": [
+   "企業/IT",
+   "全従業員約1.1万人"
+  ],
+  "rules_ng_html": [
+   "<b>試験合格</b>が生成AIの利用条件（未受講者は使えない）",
+   "ゼロベースの資料作成は行わず、まずAIでアウトライン作成"
+  ],
+  "rules_ok_html": [
+   "社内規則の検索は独自RAGツール「SeekAI」を利用",
+   "社内会議の議事録作成は<b>全てAI</b>で実施",
+   "全従業員にChatGPT Enterpriseを付与（2025年6月〜）"
+  ],
+  "governance_html": [
+   "2023年10月に<b>AI倫理ガバナンス部門</b>を創設",
+   "AIガバナンスガイドラインを刷新し推奨事項を整理",
+   "研修は概ね<b>半年ごとの再受講</b>が必須"
+  ],
+  "kpis": [
+   {
+    "label": "必須研修受講率",
+    "value": "96",
+    "unit": "%",
+    "note": "2026年5月時点"
+   },
+   {
+    "label": "対象従業員",
+    "value": "約11,000",
+    "unit": "人",
+    "note": "2025年7月発表"
+   },
+   {
+    "label": "生産性目標",
+    "value": "2",
+    "unit": "倍",
+    "note": "目標・3年間で"
+   }
+  ],
+  "learn": [
+   {
+    "title": "受講を利用条件に",
+    "desc": "「研修とテストに通った人だけアカウント発行」にすると、周知漏れが構造的になくなる。"
+   },
+   {
+    "title": "禁止でなく作法",
+    "desc": "「議事録はAIで」「資料はAIで骨子から」など、業務別の使い方ルールが定着を早める。"
+   },
+   {
+    "title": "半年で再受講",
+    "desc": "技術もリスクも半年で変わる前提で、再受講とルール改定の周期を最初から決めておく。"
+   }
+  ],
+  "source_full": "LINEヤフー「全従業員約11,000人を対象に『生成AI活用の義務化』を前提とした新しい働き方を開始」（2025年7月）、「責任あるAIへの取り組み」ほか",
+  "urls": [
+   "https://www.lycorp.co.jp/ja/news/release/018121/",
+   "https://www.lycorp.co.jp/ja/sustainability/esg/social/responsible-ai/",
+   "https://www.lycorp.co.jp/ja/story/20260220/ai_policy.html"
+  ]
+ },
+ {
+  "name": "日立製作所",
+  "kind": "企業",
+  "area": "全社規程",
+  "icon": "gear",
+  "list_action": "専門家を集めたCoEが業務利用ガイドラインを発行し、社員向け相談窓口も設置",
+  "list_result_html": "ガイドライン第一版を<b>2023年4月末</b>発行・継続更新",
+  "tagline": "ルール作りを専門チームの仕事にする",
+  "tags": [
+   "企業/製造・IT",
+   "グループ32万人"
+  ],
+  "rules_ng_html": [
+   "生成AI利用の多様なリスクを複合的に考慮した<b>業務利用ガイドライン</b>を策定",
+   "プライバシー保護・AI倫理の既存規定を生成AIにも適用"
+  ],
+  "rules_ok_html": [
+   "Azure OpenAI等の社内環境「Generative AIアシスタントツール」で利用",
+   "議事録の自動生成やローコード化など業務効率化に活用"
+  ],
+  "governance_html": [
+   "IT・セキュリティ・法務・品証・知財等を集めた<b>Generative AIセンター</b>",
+   "ガイドラインで扱えない問い合わせは<b>社員向け相談窓口</b>で対応",
+   "業界動向を踏まえ<b>継続的にアップデート</b>"
+  ],
+  "kpis": [
+   {
+    "label": "利用推進対象",
+    "value": "32",
+    "unit": "万人",
+    "note": "日立グループ"
+   },
+   {
+    "label": "AI倫理評価",
+    "value": "500件以上",
+    "unit": "",
+    "note": "2年間・AI全般"
+   }
+  ],
+  "learn": [
+   {
+    "title": "横断チームを先に",
+    "desc": "情シス・法務・総務を兼務で集めた小さな窓口チームでも、ルールの判断は格段に速くなる。"
+   },
+   {
+    "title": "「第一版」で出す",
+    "desc": "完璧を待たず第一版として早く出し、更新する前提を明記すると現場の混乱を防げる。"
+   },
+   {
+    "title": "相談窓口を併設",
+    "desc": "ガイドラインに書き切れない判断は窓口へ。質問ログが次版改定の材料になる。"
+   }
+  ],
+  "source_full": "日立製作所 ニュースリリース「新組織『Generative AIセンター』により、生成AIの社内外での利活用を推進し…」（2023年5月）",
+  "urls": [
+   "https://www.hitachi.co.jp/New/cnews/month/2023/05/0515.html",
+   "https://www.hitachi.co.jp/New/cnews/month/2023/05/0515.pdf"
+  ]
+ },
+ {
+  "name": "東京都",
+  "kind": "自治体",
+  "area": "自治体",
+  "icon": "doc",
+  "list_action": "許可ツールのみ利用可・私物端末禁止。4つのチェックポイントで入力・確認・明記を規定",
+  "list_result_html": "約束事＋<b>4</b>つのチェックポイントに集約",
+  "tagline": "守るべき点を「4つ」に絞って全職員へ",
+  "tags": [
+   "自治体/都道府県",
+   "都庁全職員"
+  ],
+  "rules_ng_html": [
+   "許可されていない生成AIの業務利用・<b>私物端末</b>での利用は禁止（懲戒対象の場合あり）",
+   "他の著作物に似せるプロンプト等による著作権侵害に注意"
+  ],
+  "rules_ok_html": [
+   "庁内共通ツールでは<b>機密性Aまで</b>の情報の取扱いを認める",
+   "対外利用時は「生成AIにより作成」等と<b>明記</b>"
+  ],
+  "governance_html": [
+   "新規AIサービス導入は<b>AIワンストップ相談窓口</b>へ",
+   "回答の根拠・裏付けを必ず確認し、必要に応じ複数職員でチェック",
+   "手引きは知見を踏まえ<b>適宜見直し</b>予定"
+  ],
+  "kpis": [
+   {
+    "label": "チェックポイント",
+    "value": "4",
+    "unit": "点",
+    "note": "生成AI利用の手引き"
+   },
+   {
+    "label": "都立AI利用者",
+    "value": "約16",
+    "unit": "万人",
+    "note": "教員・児童生徒"
+   }
+  ],
+  "learn": [
+   {
+    "title": "ルールは4つまで",
+    "desc": "現場が覚えられる数に絞る。機密・根拠確認・著作権・AI明記の4点は中堅企業でもそのまま使える。"
+   },
+   {
+    "title": "ツールで線を引く",
+    "desc": "「許可ツール以外は禁止、許可ツールなら機密も可」と環境で区切ると判断が迷わない。"
+   },
+   {
+    "title": "罰則も明記",
+    "desc": "私物端末・無許可ツールの扱いを就業規則と結びつけて書くと抑止力が上がる。"
+   }
+  ],
+  "source_full": "東京都デジタルサービス局「東京都AI導入・活用ガイドラインに基づく生成AI利用の手引き Version 1.0」（2026年3月）、「東京都AI導入･活用ガイドライン」（2026年3月）",
+  "urls": [
+   "https://www.digitalservice.metro.tokyo.lg.jp/documents/d/digitalservice/ai_guideline_03",
+   "https://www.digitalservice.metro.tokyo.lg.jp/ict/pdf/ai_guideline.pdf",
+   "https://www.metro.tokyo.lg.jp/information/press/2026/03/2026033059"
+  ]
+ },
+ {
+  "name": "デジタル庁",
+  "kind": "公的機関",
+  "area": "中央省庁",
+  "icon": "search",
+  "list_action": "各府省にAI統括責任者（CAIO）を置き、利用ルールひな形・高リスク判定・調達チェックを整備",
+  "list_result_html": "職員の約<b>8割</b>が3か月で延べ<b>6万5,000回</b>以上利用",
+  "tagline": "推進とリスク管理を「表裏一体」で",
+  "tags": [
+   "公的機関/政府",
+   "職員約1,200人"
+  ],
+  "rules_ng_html": [
+   "約款型クラウドサービスは原則として<b>要機密情報を扱えない</b>",
+   "利用目的の範囲外での利用は不可"
+  ],
+  "rules_ok_html": [
+   "庁内環境「源内」は<b>機密性2情報</b>まで入力可能",
+   "出力の正確性・根拠を確認し、問題点は加除修正の上で利用"
+  ],
+  "governance_html": [
+   "各府省の<b>CAIO</b>がルールを策定・周知しリスク管理を総括",
+   "リスクケースは各府省窓口へ迅速に報告",
+   "2.0版で改定（2026年9月施行）"
+  ],
+  "kpis": [
+   {
+    "label": "利用職員",
+    "value": "約950",
+    "unit": "人",
+    "note": "約1,200人中・3か月"
+   },
+   {
+    "label": "利用回数",
+    "value": "6万5,000",
+    "unit": "回以上",
+    "note": "2025年5〜7月"
+   },
+   {
+    "label": "1人平均",
+    "value": "70",
+    "unit": "回",
+    "note": "同期間"
+   },
+   {
+    "label": "政府展開",
+    "value": "約18万",
+    "unit": "人",
+    "note": "2026年5月〜実証"
+   }
+  ],
+  "learn": [
+   {
+    "title": "責任者を1人決める",
+    "desc": "CAIOに倣い、AI利用ルールの最終判断者を役員か部長級で1人明確にする。"
+   },
+   {
+    "title": "ひな形から作る",
+    "desc": "政府の利用ルールひな形の構成（利用前・入力・生成物・問い合わせ先）は社内規程の骨格に流用できる。"
+   },
+   {
+    "title": "管理職から使う",
+    "desc": "課長級の半数が利用ゼロだった教訓。管理職の率先利用を仕組みに入れる。"
+   }
+  ],
+  "source_full": "デジタル庁「行政の進化と革新のための生成AIの調達・利活用に係るガイドライン（第2.0版）」（2026年6月）、「デジタル庁職員による生成AIの利用実績」（2025年8月）ほか",
+  "urls": [
+   "https://www.digital.go.jp/news/decb64eb-f26e-41cb-8d37-f3dd173108b8",
+   "https://www.digital.go.jp/assets/contents/node/information/field_ref_resources/decb64eb-f26e-41cb-8d37-f3dd173108b8/f8e1c3b8/20260612_resources_standard_guidelines_guideline_03.pdf",
+   "https://www.digital.go.jp/assets/contents/node/information/field_ref_resources/08ded405-ca03-48c7-9b92-6b8878854a74/5147384f/20250829_news_ai_usage_report_01.pdf",
+   "https://www.digital.go.jp/assets/contents/node/information/field_ref_resources/fc155eba-e83d-4ecf-9c6a-a3c855e2e7b3/d0d53b25/20260528_news_genai_outline_01.pdf"
+  ]
+ },
+ {
+  "name": "横須賀市",
+  "kind": "自治体",
+  "area": "自治体",
+  "icon": "people",
+  "list_action": "機密・個人情報は扱わない運用で全庁実証。アンケートで課題を把握し研修へ反映",
+  "list_result_html": "利用者率<b>50%</b>・<b>8割以上</b>が効率向上と回答",
+  "tagline": "小さく始めて、測って、教える",
+  "tags": [
+   "自治体/市",
+   "職員約3,800人"
+  ],
+  "rules_ng_html": [
+   "<b>機密情報や個人情報は取り扱わない</b>運用",
+   "入力情報が二次利用されない方式でのみ利用"
+  ],
+  "rules_ok_html": [
+   "普段使うチャットツール上で文章作成・要約・誤字チェック・アイデア出し",
+   "プレスリリースもChatGPTで下案を作り職員が校正"
+  ],
+  "governance_html": [
+   "中間・最終の<b>2回のアンケート</b>で利用実態を把握",
+   "不向きな「検索用途」が約3割→<b>スキル強化プログラム</b>へ",
+   "外部AI戦略アドバイザーを配置"
+  ],
+  "kpis": [
+   {
+    "label": "利用者率",
+    "value": "50",
+    "unit": "%",
+    "note": "1,913/3,828人"
+   },
+   {
+    "label": "話しかけ数",
+    "value": "25,897",
+    "unit": "件",
+    "note": "41日間"
+   },
+   {
+    "label": "効率向上と回答",
+    "value": "8割以上",
+    "unit": "",
+    "note": "最終アンケート"
+   }
+  ],
+  "learn": [
+   {
+    "title": "まず1か月の試行",
+    "desc": "全社導入前に1か月の試行期間を置き、利用率とアンケートで効果と誤用を可視化する。"
+   },
+   {
+    "title": "誤用は研修で直す",
+    "desc": "「検索に使う」等の誤用は禁止より研修で。実態データが研修内容を決める。"
+   },
+   {
+    "title": "いつものツールに",
+    "desc": "新ツールを増やさず、既存のチャットに組み込むと利用のハードルが下がる。"
+   }
+  ],
+  "source_full": "横須賀市「自治体初！横須賀市役所でChatGPTの全庁的な活用実証を開始」（2023年4月）、「ChatGPTの全庁的な活用実証の結果報告と今後の展開」「ChatGPT活用実証結果報告」（2023年6月）",
+  "urls": [
+   "https://www.city.yokosuka.kanagawa.jp/0835/nagekomi/documents/yokosuka-chatgpt.pdf",
+   "https://www.city.yokosuka.kanagawa.jp/0835/nagekomi/documents/yokosuka-chatgpt-2.pdf",
+   "https://www.city.yokosuka.kanagawa.jp/0835/nagekomi/documents/yokosuka-chatgpt-2-houkoku.pdf"
+  ]
+ }
+]

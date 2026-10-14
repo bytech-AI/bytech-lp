@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>法人向け 生成AIツール比較ガイド｜全23スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* 業種別 活用事例集。設計は ebook-04/05 と同系統（四角の角丸なし・円とピルのみ角丸）。
+     ★事例はすべて各社の公開情報にもとづく。数値は出典の表記どおりに記載し、推測で丸めたり
+       脚色したりしないこと。出典はスライド下部に必ず明記する。他社名を出す資料のため、
+       まとめサイトの孫引きは使わず一次情報（プレスリリース・公式サイト）で裏を取る。 */
+  :root {
+    --blue: #2c5c9c; --blue-deep: #1a2e50; --blue-bright: #1a6fb5; --blue-pale: #8fb0d8;
+    --ink: #2a2f3a; --line: #e3e8ef; --amber: #f0b429; --tint: #eef4fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f4f6f8; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; color: var(--ink); padding: 48px 0 96px; }
+  .note { max-width: 1120px; margin: 0 auto 28px; font-size: 13px; font-weight: 700; color: #8a93a3; }
+  .en { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; }
+
+  .deck { display: flex; flex-direction: column; gap: 34px; align-items: center; counter-reset: pg -1; }
+  .slide-shell { width: 1120px; counter-increment: pg; }
+  .slide-shell figcaption { font-size: 12px; font-weight: 700; color: #8a93a3; margin: 8px 2px 0; letter-spacing: .04em; }
+  .slide { width: 1280px; height: 720px; transform: scale(0.875); transform-origin: top left; background: #fff; position: relative; overflow: hidden; }
+  .slide-shell .clip { height: 630px; overflow: hidden; border-radius: 0; box-shadow: 0 2px 10px rgba(26,35,48,.08); }
+
+  /* ===== 共通 ===== */
+  .s-body { position: absolute; inset: 0; padding: 36px 56px; z-index: 1; }
+  .s-eyebrow { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 700; color: var(--blue-pale); letter-spacing: .02em; }
+  .s-eyebrow::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); }
+  .s-logo { position: absolute; top: 38px; right: 56px; height: 30px; }
+  .s-foot { position: absolute; left: 56px; right: 120px; bottom: 14px; font-size: 10px; color: #9aa3b2; line-height: 1.6; z-index: 5; }
+  .s-num { position: absolute; right: 0; bottom: 0; width: 66px; height: 66px; background: var(--blue); border-radius: 66px 0 0 0; color: #fff; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 13px; font-weight: 700; display: flex; align-items: flex-end; justify-content: flex-end; padding: 0 14px 10px 0; z-index: 5; }
+  .s-num::before { content: counter(pg); }
+
+  /* ===== 見出し行（業種バッジ＋要点） ===== */
+  .hd { display: flex; align-items: center; gap: 18px; margin-top: 8px; }
+  .hd .badge { background: var(--blue); color: #fff; font-size: 24px; font-weight: 800; padding: 10px 22px; letter-spacing: .06em; white-space: nowrap; text-align: center; }
+  .hd .badge small { display: block; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; opacity: .8; margin-top: 3px; }
+  .hd .t { font-size: 25px; font-weight: 800; color: #1a2330; line-height: 1.4; letter-spacing: .01em; }
+  .hd .t b { color: var(--blue-bright); }
+
+  /* ===== 事例テーブル ===== */
+  table.cs { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 18px; table-layout: fixed; }
+  .cs th { background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; padding: 10px 14px; text-align: left; letter-spacing: .02em; }
+  .cs th:first-child { text-align: center; }
+  .cs td { font-size: 12.8px; font-weight: 500; color: #4a5568; padding: 13px 14px; border-bottom: 1px solid var(--line); vertical-align: middle; line-height: 1.55; }
+  .cs tr:nth-child(even) td { background: #f7f9fc; }
+  .cs td.no { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; text-align: center; font-weight: 800; color: var(--blue-pale); }
+  /* 社名は他社商標のためロゴを使わず、文字組みだけで見せる */
+  .cs td.co span { display: block; font-size: 14.5px; font-weight: 800; color: #1a2330; line-height: 1.4; }
+  .cs td.ar span { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; padding: 4px 9px; white-space: nowrap; }
+  .cs td.ar svg { flex: 0 0 auto; }
+  .cs td.rs { font-size: 13px; font-weight: 700; color: #1a2330; line-height: 1.5; }
+  .cs td.rs b { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 19px; font-weight: 800; color: var(--blue-bright); padding: 0 1px; }
+
+  /* ===== まとめ帯 ===== */
+  .band { display: flex; align-items: center; gap: 11px; background: var(--tint); border: 1.5px solid var(--blue); padding: 12px 20px; font-size: 13.5px; font-weight: 800; color: var(--blue-deep); margin-top: 12px; }
+  .band::before { content: "✓"; flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+
+
+  /* ===== 個別詳細スライド ===== */
+  .dhd { display: flex; align-items: flex-start; gap: 18px; margin-top: 8px; }
+  .dhd .no { background: var(--blue-deep); color: #fff; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 22px; font-weight: 800; padding: 12px 18px; letter-spacing: .06em; }
+  .dhd .mark { flex: 0 0 auto; width: 46px; height: 46px; background: var(--tint); border: 1.5px solid #cfdcee; color: var(--blue); display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .dhd .mark svg { width: 24px; height: 24px; }
+  .dhd .co { font-size: 25px; font-weight: 800; color: #1a2330; line-height: 1.3; }
+  .dhd .co small { display: block; font-size: 14px; font-weight: 700; color: #6b7789; margin-top: 5px; }
+  .dhd .tags { margin-left: auto; display: flex; gap: 7px; padding-top: 6px; }
+  .dhd .tags span { font-size: 11.5px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; border-radius: 999px; padding: 5px 13px; white-space: nowrap; }
+
+  .dt { display: grid; grid-template-columns: 1.18fr 1fr; gap: 20px; margin-top: 14px; align-items: start; }
+  .sec { border: 1px solid var(--line); }
+  .sec .h { background: #f2f5fa; border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 800; color: var(--blue-deep); padding: 9px 16px; display: flex; align-items: center; gap: 8px; }
+  .sec .h::before { content: ""; width: 5px; height: 15px; background: var(--blue); }
+  .sec .b { padding: 10px 16px 11px; }
+  .sec .i { position: relative; font-size: 12.6px; font-weight: 500; color: #4a5568; line-height: 1.7; padding: 4px 0 4px 15px; }
+  .sec .i::before { content: ""; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-pale); }
+  .sec .i b { color: #1a2330; font-weight: 800; }
+
+  .kpi { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi div { background: var(--tint); border-left: 4px solid var(--blue); padding: 11px 13px; }
+  .kpi .k { font-size: 10.5px; font-weight: 800; color: var(--blue); }
+  .kpi .v { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 24px; font-weight: 800; color: #1a2330; line-height: 1.15; margin-top: 3px; }
+  .kpi .v small { font-family: "Noto Sans JP", sans-serif; font-size: 11px; font-weight: 700; color: #6b7789; margin-left: 2px; }
+  .kpi .n { font-size: 10.5px; font-weight: 600; color: #7a8698; margin-top: 3px; }
+  .trend { margin-top: 10px; background: var(--blue-deep); color: #fff; padding: 12px 15px; display: flex; align-items: center; gap: 12px; }
+  .trend .l { font-size: 11.5px; font-weight: 800; opacity: .85; line-height: 1.5; }
+  .trend .r { margin-left: auto; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 15px; font-weight: 800; white-space: nowrap; }
+  .trend .r b { font-size: 22px; color: #8fd0ff; }
+
+  .learn { margin-top: 12px; border: 1.5px solid var(--blue); }
+  .learn .h { background: var(--blue); color: #fff; font-size: 12.5px; font-weight: 800; padding: 8px 16px; letter-spacing: .02em; }
+  .learn .g { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+  .learn .g div { padding: 9px 16px 10px; border-right: 1px solid var(--line); }
+  .learn .g div:last-child { border-right: none; }
+  .learn .t { font-size: 13px; font-weight: 800; color: var(--blue-deep); }
+  .learn .d { font-size: 11.4px; font-weight: 500; color: #4a5568; line-height: 1.6; margin-top: 3px; }
+
+
+  /* ===== 表紙（白地・左に大見出し／右にイラスト） ===== */
+  .cv { background: #fff; }
+  .cv .t { position: absolute; left: 72px; top: 104px; font-size: 74px; font-weight: 900; color: var(--blue); line-height: 1.34; letter-spacing: .02em; }
+  .cv .sub { position: absolute; left: 75px; top: 316px; font-size: 19px; font-weight: 800; color: #2a2f3a; letter-spacing: .05em; line-height: 1.7; }
+  .cv .meta { position: absolute; left: 75px; top: 392px; font-size: 14px; font-weight: 700; color: #8a93a3; letter-spacing: .06em; }
+  .cv .il { position: absolute; right: 44px; bottom: 74px; width: 560px; }
+  .cv .logo { position: absolute; left: 72px; bottom: 58px; height: 38px; }
+
+  /* ===== 目次 ===== */
+  .ix { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 26px; margin-top: 30px; }
+  .ix a, .ix div { display: flex; align-items: center; gap: 16px; background: #fff; border: 1px solid #d9e1ec; padding: 18px 20px; text-decoration: none; box-shadow: 0 4px 14px rgba(26,35,48,.05); }
+  .ix .n { flex: 0 0 auto; width: 46px; height: 46px; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; }
+  .ix .b { flex: 1; min-width: 0; display: block; }
+  .ix .nm { display: block; font-size: 19px; font-weight: 800; color: #1a2330; line-height: 1.35; }
+  .ix .ds { display: block; font-size: 12px; font-weight: 600; color: #7a8698; margin-top: 4px; line-height: 1.5; }
+  .ix .pg { flex: 0 0 auto; font-size: 12.5px; font-weight: 800; color: var(--blue); }
+  .ix .soon { border-style: dashed; opacity: .62; }
+  .ix .soon .n { background: #b9c4d4; }
+
+
+
+
+  /* ===== 目次（この資料の中身） ===== */
+  .ixh { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
+  .ixh .lb { background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; padding: 7px 16px; letter-spacing: .04em; white-space: nowrap; }
+  .ixh .tx { font-size: 15px; font-weight: 700; color: #4a5568; }
+  .ixh .pg { margin-left: auto; font-size: 13px; font-weight: 800; color: var(--blue); white-space: nowrap; }
+  .ixg { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 26px; margin-top: 14px; }
+  .ixg div { display: flex; align-items: center; gap: 13px; background: #fff; border: 1px solid var(--line); padding: 10px 14px; }
+  .ixg .n { flex: 0 0 auto; width: 30px; height: 30px; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 800; }
+  .ixg .nm { font-size: 14.5px; font-weight: 800; color: #1a2330; }
+  .ixg .ar { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; padding: 3px 8px; margin-left: 8px; white-space: nowrap; }
+  .ixg .pg { margin-left: auto; font-size: 12px; font-weight: 800; color: #8a93a3; white-space: nowrap; }
+
+  /* ===== PDF出力 ===== */
+  @page { size: 1280px 720px; margin: 0; }
+  @media print {
+    body { padding: 0; background: #fff; }
+    * { box-shadow: none !important; }
+    .note { display: none; }
+    .deck { gap: 0; display: block; }
+    .slide-shell { width: 1280px; }
+    .slide-shell figcaption { display: none; }
+    .slide-shell .clip { height: 720px; overflow: hidden; border-radius: 0; box-shadow: none; }
+    .slide { transform: none; border: none; border-radius: 0; }
+    figure.slide-shell { page-break-after: always; break-after: page; margin: 0; }
+    figure.slide-shell:last-child { page-break-after: auto; }
+  }
+
+  /* ===== 表紙（ノウハウ形式） ===== */
+  .blue-bg { background: linear-gradient(135deg, #1c3a6b 0%, var(--blue) 46%, #3a76c4 100%); color: #fff; }
+  .waves { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .kcover .badge-row { position: absolute; top: 66px; left: 64px; display: flex; align-items: center; gap: 16px; }
+  .kcover .badge { background: var(--amber); color: #4a3605; font-size: 16px; font-weight: 800; padding: 10px 18px; border-radius: 8px; }
+  .kcover .badge-note { font-size: 20px; font-weight: 700; padding-bottom: 12px; border-bottom: 2px solid rgba(255,255,255,.85); letter-spacing: .04em; }
+  .kcover .sub { position: absolute; left: 66px; top: 236px; font-size: 23px; font-weight: 700; letter-spacing: .04em; }
+  .kcover .title { position: absolute; left: 62px; top: 288px; font-size: 68px; font-weight: 800; letter-spacing: .04em; line-height: 1.28; }
+  .kcover .title small { display: block; margin-top: 10px; font-size: 34px; font-weight: 800; }
+  .kcover .pills { position: absolute; right: 64px; top: 250px; display: grid; gap: 12px; }
+  .kcover .pills span { border: 1.5px solid rgba(255,255,255,.75); border-radius: 999px; padding: 7px 22px; font-size: 14px; font-weight: 800; text-align: center; background: rgba(255,255,255,.08); }
+  .kcover .date { position: absolute; left: 66px; top: 590px; font-size: 15px; font-weight: 600; letter-spacing: .18em; opacity: .8; }
+  .kcover .logo { position: absolute; right: 64px; bottom: 48px; height: 44px; }
+  /* ===== 縦方向をページいっぱいに使う ===== */
+  .s-body.fl { display: flex; flex-direction: column; padding-bottom: 62px; }
+  .s-body.fl > .grow { flex: 1 1 auto; min-height: 0; }
+  .s-body.fl > .band { flex: 0 0 auto; }
+  .cards.grow > div { display: flex; flex-direction: column; justify-content: flex-start; padding: 30px 28px; }
+  .cards.grow .ic { width: 58px; height: 58px; } .cards.grow .ic svg { width: 28px; height: 28px; }
+  .cards.grow .t { margin-top: 18px; font-size: 20px; } .cards.grow .d { margin-top: 12px; font-size: 14.5px; line-height: 1.95; }
+  .cards.grow .g { align-self: flex-start; margin-top: auto; font-size: 12px; padding: 5px 14px; }
+  .steps.grow { grid-auto-rows: 1fr; }
+  .tpl.grow { grid-auto-rows: 1fr; }
+  .chk.grow > div { display: flex; flex-direction: column; } .chk.grow .ci { flex: 1 1 0; display: flex; align-items: center; }
+  .chk.grow .ci::before { top: 50%; transform: translateY(-50%); }
+  .toc.grow { grid-auto-rows: 1fr; } .toc.grow > div { border-bottom: 1px solid var(--line); }
+  table.grow { height: 100%; }
+  .nts.grow { align-content: space-evenly; }
+  /* ===== 事例ページ（メリハリ版） ===== */
+  .vpt { margin-top: 10px; display: flex; align-items: center; gap: 14px; background: linear-gradient(90deg, #eaf2fc, #f6f9fd); border-left: 6px solid var(--blue-bright); padding: 9px 18px; }
+  .vpt p { font-size: 18px; font-weight: 900; color: var(--blue-deep); letter-spacing: .02em; }
+  .vpt .q { color: var(--blue-bright); display: flex; }
+  .vpt.red { background: linear-gradient(90deg, #fdecea, #fef7f6); border-left-color: #d6453d; } .vpt.red p { color: #7a1f1a; } .vpt.red .q { color: #d6453d; }
+  .vdt { display: grid; grid-template-columns: 1.15fr 1fr; gap: 18px; margin-top: 10px; align-items: start; }
+  .vdt + .learn { margin-top: 10px; }
+  .vsec + .vsec { margin-top: 10px; }
+  .vsec .vh { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 900; color: var(--blue-deep); padding-bottom: 6px; border-bottom: 2px solid var(--line); }
+  .vsec .vi { width: 24px; height: 24px; border-radius: 50%; background: var(--blue-deep); color: #fff; display: flex; align-items: center; justify-content: center; }
+  .vsec .vb { padding-top: 6px; }
+  .vsec .vb .i { position: relative; padding: 3px 0 3px 16px; font-size: 12.8px; font-weight: 500; color: #3a4252; line-height: 1.55; }
+  .vsec .vb .i::before { content: ""; position: absolute; left: 2px; top: 12px; width: 6px; height: 6px; background: var(--blue-bright); }
+  .vsec .vb b, .vpt b { color: #1a2330; background: linear-gradient(transparent 58%, #ffe27a 58%); font-weight: 800; }
+  .vsec.sm { margin-top: 8px; background: #f7f9fc; padding: 10px 12px; } .vsec.sm .vh { border-bottom-color: #e3e9f2; }
+  .vk { background: #fff; border: 1.5px solid var(--line); padding: 8px 14px; margin-bottom: 8px; }
+  .vk .k { font-size: 11.5px; font-weight: 800; color: var(--blue); }
+  .vk .n { font-size: 10.5px; font-weight: 600; color: #7a8698; margin-top: 2px; }
+  .vk.hero { background: var(--blue-deep); border: 0; color: #fff; padding: 14px 18px; }
+  .vk.hero .k { color: #a9c8f0; } .vk.hero .n { color: #c3d3ea; }
+  .vk.hero .v { font-size: 40px; font-weight: 900; line-height: 1.1; margin-top: 4px; } .vk.hero .v small { font-size: 16px; margin-left: 4px; }
+  .vk.hero.red { background: #7a1f1a; }
+  .vk.donut { display: flex; align-items: center; gap: 16px; } .vk.donut .k { font-size: 14px; }
+  .vk .dn { position: relative; width: 92px; height: 92px; flex: 0 0 auto; }
+  .vk .dn span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 900; color: #1a2330; }
+  .vk .dn small { font-size: 11px; }
+  .vk.chart .br { display: grid; grid-template-columns: 26px 1fr 96px; align-items: center; gap: 8px; margin-top: 6px; }
+  .vk.chart .bl { font-size: 11px; font-weight: 800; color: #7a8698; }
+  .vk.chart .bt { height: 16px; background: #f0f3f8; display: block; } .vk.chart .bt span { display: block; height: 100%; }
+  .vk.chart .bv { font-size: 14px; font-weight: 800; color: #5a6578; text-align: right; } .vk.chart .bv.hi { font-size: 18px; color: #1a2330; }
+  .vk.chart .bv small { font-size: 10.5px; margin-left: 2px; }
+  .vt { display: grid; gap: 8px; } .vt.c1 { grid-template-columns: 1fr; } .vt.c2 { grid-template-columns: 1fr 1fr; } .vt.c3 { grid-template-columns: 1fr 1fr 1fr; }
+  .vt > div { background: var(--tint); border-top: 3px solid var(--blue-bright); padding: 9px 12px; }
+  .vt .k { font-size: 11px; font-weight: 800; color: var(--blue); }
+  .vt .v { font-size: 22px; font-weight: 900; color: #1a2330; line-height: 1.2; margin-top: 2px; } .vt .v small { font-size: 11px; margin-left: 2px; color: #6b7789; }
+  .vt .n { font-size: 10px; font-weight: 600; color: #7a8698; margin-top: 2px; }
+  .learn .g > div { display: flex; gap: 10px; align-items: flex-start; padding-top: 7px; padding-bottom: 8px; }
+  .learn .ln { flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%; background: var(--amber); color: #4a3605; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .learn.red { border-color: #d6453d; } .learn.red .h { background: #d6453d; }
+  /* 事例ページも縦をページいっぱいに使う（下に余白を残さない） */
+  .s-body.fl > .dhd { flex: 0 0 auto; }
+  .vdt.grow { align-items: stretch; margin-top: 12px; }
+  .vdt.grow > .vl, .vdt.grow > .vr { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+  .vdt.grow > .vl { justify-content: space-between; }
+  .vdt.grow .vsec + .vsec { margin-top: 0; }
+  .vdt.grow .vsec { flex: 1 1 auto; display: flex; flex-direction: column; }
+  .vdt.grow .vsec .vb { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-evenly; }
+  .vdt.grow > .vr > * { flex: 1 1 auto; margin-bottom: 0; display: flex; flex-direction: column; justify-content: center; }
+  .vdt.grow > .vr > .vk.donut { flex-direction: row; justify-content: flex-start; }
+  .vdt.grow > .vr > .vt { display: grid; }
+  .vdt.grow > .vr > .vt > div { display: flex; flex-direction: column; justify-content: center; }
+  .vdt.grow > .vr > .vsec.sm { justify-content: flex-start; }
+  .vdt.measure > div > *, .vdt.measure .vb { flex: none !important; }
+  .s-body.fl > .learn { flex: 0 0 auto; margin-top: 14px; }
+  .vl.roomy .vsec .vb .i { font-size: 14px; line-height: 1.7; } .vl.roomy .vsec .vh { font-size: 15.5px; }
+  .learn .g > div { padding-top: 12px; padding-bottom: 13px; }
+  /* ツールのロゴ */
+  .cards .ic.lg { width: auto; height: 64px; border-radius: 0; background: none; gap: 10px; justify-content: flex-start; }
+  .cards .ic.lg img { height: 56px; width: 56px; object-fit: contain; }
+  .dhd .mark.lg { background: #fff; } .dhd .mark.lg img { width: 30px; height: 30px; object-fit: contain; }
+  /* ===== ノウハウ系の追加スライド型 ===== */
+  .kh { margin-top: 8px; }
+  .kh .t { font-size: 25px; font-weight: 900; color: #1a2330; line-height: 1.4; letter-spacing: .01em; }
+  .kh .t b { color: var(--blue-bright); }
+  .kh .l { margin-top: 8px; font-size: 13.5px; font-weight: 600; color: #5a6578; line-height: 1.7; }
+  .ld { margin-top: 18px; display: grid; gap: 10px; }
+  .ld .p { font-size: 14px; font-weight: 500; color: #3a4252; line-height: 1.85; }
+  .ld .p b { color: #1a2330; }
+  .cards { display: grid; gap: 16px; margin-top: 22px; }
+  .cards.c2 { grid-template-columns: 1fr 1fr; } .cards.c3 { grid-template-columns: 1fr 1fr 1fr; } .cards.c4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .cards.c6 { grid-template-columns: 1fr 1fr 1fr; }
+  .cards > div { border: 1.5px solid var(--line); border-top: 4px solid var(--blue); padding: 16px 18px 18px; background: #fff; }
+  .cards .ic { width: 40px; height: 40px; border-radius: 50%; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; }
+  .cards .t { margin-top: 10px; font-size: 16px; font-weight: 900; color: var(--blue-deep); line-height: 1.4; }
+  .cards .d { margin-top: 7px; font-size: 12.5px; font-weight: 500; color: #4a5568; line-height: 1.75; }
+  .cards .d b { color: #1a2330; }
+  .cards .g { margin-top: 10px; display: inline-block; background: var(--tint); color: var(--blue); font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 999px; }
+  .steps { margin-top: 20px; display: grid; gap: 10px; }
+  .steps > div { display: flex; align-items: center; gap: 16px; border: 1.5px solid var(--line); padding: 12px 18px; }
+  .steps .n { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: var(--blue-deep); color: #fff; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+  .steps .t { font-size: 15.5px; font-weight: 900; color: #1a2330; } .steps .t b { color: var(--blue-bright); }
+  .steps .d { margin-top: 3px; font-size: 12.5px; font-weight: 500; color: #5a6578; line-height: 1.6; }
+  .steps .sd { margin-left: auto; flex: 0 0 300px; font-size: 12px; font-weight: 700; color: var(--blue); background: var(--tint); padding: 8px 12px; line-height: 1.55; }
+  .ch { background: linear-gradient(135deg, #1a2e50 0%, #2c5c9c 70%, #3f7fc6 100%); }
+  .chp { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; text-align: center; }
+  .chp .s-logo { position: absolute; top: 38px; right: 56px; height: 30px; }
+  .chp .no { width: 92px; height: 92px; border: 2px solid rgba(255,255,255,.85); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 800; }
+  .chp .t { margin-top: 30px; font-size: 40px; font-weight: 900; letter-spacing: .04em; }
+  .chp .d { margin-top: 12px; font-size: 16px; font-weight: 700; opacity: .85; }
+  .chp .s-num { background: rgba(255,255,255,.18); }
+  table.kt td { font-size: 12.5px; } table.kt td.kc { font-weight: 800; color: #1a2330; background: var(--tint); }
+  table.kt td b { color: var(--blue-bright); }
+  .tpl { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px 20px; }
+  .tpl > div { border-left: 4px solid var(--blue); background: #f7f9fc; padding: 16px 20px; min-height: 118px; }
+  .tpl .at { font-size: 15px; font-weight: 900; color: var(--blue-deep); }
+  .tpl .al { margin-top: 7px; font-size: 13.5px; font-weight: 500; color: #3a4252; line-height: 1.8; }
+  .chk { margin-top: 16px; display: grid; gap: 16px; } .chk.c2 { grid-template-columns: 1fr 1fr; } .chk.c3 { grid-template-columns: 1fr 1fr 1fr; }
+  .chk > div { border: 1.5px solid var(--line); }
+  .chk .gh { background: var(--blue-deep); color: #fff; font-size: 15px; font-weight: 800; padding: 13px 16px; display: flex; align-items: center; gap: 9px; }
+  .chk .gh span { width: 20px; height: 20px; border-radius: 50%; background: #fff; color: var(--blue-deep); font-size: 11px; display: flex; align-items: center; justify-content: center; }
+  .chk .ci { position: relative; padding: 24px 16px 24px 42px; font-size: 14.5px; font-weight: 600; color: #3a4252; border-bottom: 1px solid var(--line); line-height: 1.5; }
+  .chk .ci:last-child { border-bottom: 0; }
+  .chk .ci::before { content: ""; position: absolute; left: 16px; top: 27px; width: 13px; height: 13px; border: 1.6px solid var(--blue); }
+  .ctab { margin-top: 20px; background: linear-gradient(90deg, #1a2e50, #2c5c9c); color: #fff; padding: 20px 26px; display: flex; align-items: center; gap: 20px; }
+  .ctab .t { font-size: 19px; font-weight: 900; } .ctab .d { margin-top: 5px; font-size: 12.5px; font-weight: 600; opacity: .85; line-height: 1.6; }
+  .ctab .bt { margin-left: auto; flex: 0 0 auto; background: #fff; color: var(--blue-deep); font-size: 14px; font-weight: 900; padding: 12px 24px; border-radius: 999px; }
+  .nts { margin-top: 24px; display: grid; gap: 16px; }
+  .nts .nt { position: relative; padding-left: 22px; font-size: 14px; font-weight: 500; color: #3a4252; line-height: 1.7; }
+  .nts .nt::before { content: "※"; position: absolute; left: 0; color: var(--blue-pale); }
+  .toc { margin-top: 22px; display: grid; gap: 12px; }
+  .toc > div { display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--line); padding: 14px 4px; }
+  .toc .n { font-size: 15px; font-weight: 800; color: var(--blue); width: 30px; }
+  .toc .nm { font-size: 18px; font-weight: 800; color: #1a2330; } .toc .nm small { margin-left: 14px; font-size: 12.5px; font-weight: 600; color: #7a8698; }
+  .toc .pg { margin-left: auto; font-size: 13px; font-weight: 700; color: #7a8698; }
+  .trend .l { flex: 0 0 150px; }
+  .trend .r { white-space: normal; text-align: right; line-height: 1.35; }
+  .cs td { padding-top: 11px; padding-bottom: 11px; }
+  .cs.cmp td { padding-top: 6px; padding-bottom: 6px; line-height: 1.45; }
+  /* 余白が出やすいページを埋める：通常の表は行を高く、カードは文字を大きく */
+  /* 行数が多めの表（10行前後）：詰めすぎず、ページを埋める中間の行高 */
+  table.kt.mid td { padding-top: 15px; padding-bottom: 15px; font-size: 14px; line-height: 1.6; }
+  table.kt.mid th { padding-top: 12px; padding-bottom: 12px; font-size: 14px; }
+  table.kt:not(.cmp):not(.mid) td { padding-top: 17px; padding-bottom: 17px; font-size: 13.5px; line-height: 1.65; }
+  .cards > div { padding: 22px 22px 24px; }
+  .cards .t { font-size: 17px; } .cards .d { font-size: 13.5px; line-height: 1.85; }
+  .ctab { margin-top: 28px; padding: 26px 30px; }
+  .steps > div { padding: 16px 20px; } .steps .t { font-size: 16.5px; } .steps .d { font-size: 13.5px; }
+</style>
+</head>
+<body>
+  <p class="note">法人向け 生成AIツール比較ガイド｜全23スライド／事例・数値は各社・各機関の公開情報にもとづく</p>
+  <div class="deck">
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide blue-bg kcover">
+        <svg class="waves" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <path d="M700,-80 C980,60 820,300 1120,380 C1320,433 1360,560 1280,760 L1380,760 L1380,-80 Z" fill="rgba(255,255,255,0.07)"/>
+          <path d="M880,-120 C1150,40 980,260 1240,330 L1340,330 L1340,-120 Z" fill="rgba(90,160,230,0.28)"/>
+          <path d="M-80,560 C240,480 420,660 760,600 C1040,551 1180,640 1300,760 L-80,760 Z" fill="rgba(20,40,80,0.22)"/>
+          <path d="M-80,640 C300,560 560,720 900,660 C1120,621 1240,690 1310,760 L-80,760 Z" fill="rgba(90,160,230,0.18)"/>
+        </svg>
+        <div class="badge-row"><span class="badge">お役立ち資料</span><span class="badge-note">バイテック法人AI研修</span></div>
+        <p class="sub">ChatGPT・Gemini・Copilot・Claude を料金・セキュリティ・事例で比較</p>
+        <h1 class="title">法人向け<br>生成AIツール比較ガイド</h1>
+        <div class="pills"><span>料金・プラン比較</span><span>セキュリティ比較</span><span>導入事例8社</span></div>
+        <p class="date">UPDATE 2026.10</p>
+        <img class="logo" src="assets/biz-logo-w.svg" alt="byTech BUSINESS">
+      </div>
+    </div><figcaption>表紙</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">Contents</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd" style="margin-top:4px"><p class="t" style="font-size:27px">目次</p></div>
+        <div class="grow toc"><div><span class="n">01</span><span class="nm">結論サマリーと選ぶときの5つの観点<small>まず全体像</small></span><span class="pg">P.2 - 3</span></div><div><span class="n">02</span><span class="nm">4ツールの比較<small>料金・データの扱い・管理機能・費用試算</small></span><span class="pg">P.4 - 6</span></div><div><span class="n">03</span><span class="nm">導入企業の事例<small>ツールごとに2社、選んだ理由と成果</small></span><span class="pg">P.7 - 16</span></div><div><span class="n">04</span><span class="nm">選び方の傾向と使い分け<small>事例から見る判断のポイント</small></span><span class="pg">P.17 - 19</span></div><div><span class="n">05</span><span class="nm">導入後に差がつくのは「使い方」<small>定着のための研修</small></span><span class="pg">P.20 - 21</span></div></div>
+        <p class="s-foot">本資料の料金・機能は各社公式ページ（2026年10月14日時点）にもとづきます。事例は各社の公式発表にもとづき当社が編集したもので、掲載企業との取引関係や推薦を示すものではありません。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>目次</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">結論サマリー</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">迷ったら、<b>今使っている業務ツール</b>から選ぶのが近道。</p><p class="l">4つとも、法人プランでは入力データを学習に使わないと公式に明記しています。差が出るのは「どの業務ツールの中で使えるか」と「管理機能・料金体系」です。</p></div>
+        <div class="grow cards c3"><div><span class="ic lg"><img src="assets/logo-copilot.png" alt=""></span><p class="t">Microsoft 365 中心なら</p><p class="d"><b>Microsoft 365 Copilot</b>。Word・Excel・PowerPoint・Teams の中で、社内のメールやファイルを踏まえて使えます。</p><p class="g">P.13・P.14 の事例</p></div><div><span class="ic lg"><img src="assets/logo-gemini.png" alt=""></span><p class="t">Google Workspace 中心なら</p><p class="d"><b>Gemini</b>。Workspaceの料金にAIが含まれ、Gmail・ドキュメント・Meetで標準的に使えます。</p><p class="g">P.11・P.12 の事例</p></div><div><span class="ic lg"><img src="assets/logo-chatgpt.png" alt=""><img src="assets/logo-claude.png" alt=""></span><p class="t">まず全社で汎用的に使うなら</p><p class="d"><b>ChatGPT</b>。業務ツールを問わず使え、部門横断の展開が速い。長文の資料分析や開発・業務の自動化を重視するなら<b>Claude</b>も候補です。</p><p class="g">P.9・P.10／P.15・P.16 の事例</p></div></div><div class="band">1本に絞らず「全社はAで、開発部門はB」と組み合わせる企業も増えています（P.18）。</div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>結論サマリー</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">選ぶときの観点</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">ツール選定で確認する<b>5つの観点</b></p></div>
+        <table class="grow cs kt tall">
+          <colgroup><col style="width:200px"><col><col style="width:320px"></colgroup>
+          <tr><th>観点</th><th>確認すること</th><th>差が出やすいポイント</th></tr>
+          <tr><td class="kc">今使っている業務ツール</td><td>メール・文書・会議をどのサービスで行っているか</td><td>Microsoft 365 なら Copilot、Google Workspace なら Gemini が組み込みで使える</td></tr>
+          <tr><td class="kc">セキュリティ・データの扱い</td><td>学習に使われないか、保存地域、ログの取得</td><td>日本でのデータ保存や監査ログは上位プランに限られることが多い</td></tr>
+          <tr><td class="kc">管理機能</td><td>SSO、アカウント自動連携（SCIM）、利用状況の分析</td><td>SCIM・監査ログは Enterprise 系のみのツールが多い</td></tr>
+          <tr><td class="kc">料金体系</td><td>1人あたり月額、最低人数、上限人数、別途必要なライセンス</td><td>Copilot は Microsoft 365 の契約が別途必要。Claude は米ドル建て</td></tr>
+          <tr><td class="kc">得意な使い方</td><td>文書作成、データ分析、長文読解、開発、社内データ連携</td><td>長文・開発は Claude、Office 文書は Copilot など得意分野に差</td></tr>
+        </table>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>選ぶときの5つの観点</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">4ツール比較</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">4ツールの<b>法人プランと料金</b></p><p class="l">1ユーザーあたり月額（2026年10月14日時点、各社公式ページ）。年払い／月払いで価格が異なります。</p></div>
+        <table class="grow cs kt mid tall">
+          <colgroup><col style="width:175px"><col style="width:250px"><col><col style="width:210px"></colgroup>
+          <tr><th>ツール</th><th>主な法人プラン</th><th>料金（1ユーザー／月）</th><th>人数の条件</th></tr>
+          <tr><td class="kc">ChatGPT</td><td>Business／Enterprise</td><td>Business：<b>¥3,050</b>（年払い）・¥3,850（月払い）／Enterprise：要問い合わせ</td><td>2名以上</td></tr>
+          <tr><td class="kc">Gemini</td><td>Google Workspace Business Standard／Plus／Enterprise</td><td>Standard：<b>¥1,600</b>（年間プラン）・Plus：¥2,500／Enterprise：要問い合わせ（税別・Workspace利用料込み）</td><td>Business系は最大300名</td></tr>
+          <tr><td class="kc">Microsoft 365 Copilot</td><td>Copilot Business（一般法人）／Copilot（エンタープライズ）</td><td>Business：<b>¥3,148</b>（年払い）／エンタープライズ：<b>¥4,497</b>（年払い）（税別・M365ライセンスが別途必要）</td><td>Business は最大300名</td></tr>
+          <tr><td class="kc">Claude</td><td>Team／Enterprise</td><td>Team スタンダード：<b>US$22</b>（年払い）・US$27.50（月払い）／Enterprise：要問い合わせ（席料金＋利用量課金）</td><td>Team は2〜150名</td></tr>
+        </table>
+        <p class="s-foot">料金は各社公式ページの表記（2026年10月14日閲覧）。キャンペーン価格は除いています。Microsoft 365 Copilot Chat は対象の Microsoft 365 プラン利用者なら追加費用なしで利用可能。最新の料金は各社公式ページでご確認ください。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>4ツール比較表（料金・プラン）</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">4ツール比較</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t"><b>セキュリティとデータの扱い</b>の比較</p></div>
+        <table class="grow cs kt mid tall">
+          <colgroup><col style="width:175px"><col style="width:270px"><col style="width:260px"><col></colgroup>
+          <tr><th>ツール</th><th>入力データの学習利用</th><th>データの保存地域</th><th>主な管理機能</th></tr>
+          <tr><td class="kc">ChatGPT</td><td>法人プランは<b>デフォルトで学習に使用しない</b></td><td>Enterprise は日本を含む10地域から選択可（Business は非対応）</td><td>SSO・利用分析（Business）／SCIM・監査用API・暗号鍵管理（Enterprise）</td></tr>
+          <tr><td class="kc">Gemini</td><td>許可なくドメイン外の<b>学習に使用しない</b></td><td>米国またはEUに処理を限定可。保存場所の制御は Enterprise プラン</td><td>既存のWorkspace権限・DLPを継承／Vault（Business Plus以上）</td></tr>
+          <tr><td class="kc">Microsoft 365 Copilot</td><td>プロンプト・応答・データは<b>基盤モデルの学習に使用しない</b></td><td>データ所在地のコミットメントあり（Advanced Data Residency 等）</td><td>既存のアクセス権・秘密度ラベルを尊重／Purview で監査・保持</td></tr>
+          <tr><td class="kc">Claude</td><td>ビジネスプランは<b>デフォルトで学習に使用しない</b></td><td>Enterprise で「米国のみの推論」オプション</td><td>SSO・利用分析（Team）／SCIM・監査ログ・データ保持設定（Enterprise）</td></tr>
+        </table>
+        <p class="s-foot">各社公式ページ（プライバシー・トラストセンター・製品ページ、2026年10月14日閲覧）の記載を要約。認証・機能はプランにより異なります。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>セキュリティ・データの扱い比較</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">費用の試算</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t"><b>50人・100人・300人</b>で導入した場合の月額（試算）</p></div>
+        <table class="grow cs kt tall">
+          <colgroup><col style="width:240px"><col><col><col><col style="width:260px"></colgroup>
+          <tr><th>ツール（試算に使ったプラン）</th><th>50人</th><th>100人</th><th>300人</th><th>別途必要なもの</th></tr>
+          <tr><td class="kc">ChatGPT Business（年払い ¥3,050）</td><td><b>¥152,500</b></td><td><b>¥305,000</b></td><td><b>¥915,000</b></td><td>なし</td></tr>
+          <tr><td class="kc">Gemini（Workspace Business Standard 年間 ¥1,600）</td><td><b>¥80,000</b></td><td><b>¥160,000</b></td><td><b>¥480,000</b></td><td>なし（Workspace利用料込み）</td></tr>
+          <tr><td class="kc">Microsoft 365 Copilot Business（年払い ¥3,148）</td><td><b>¥157,400</b></td><td><b>¥314,800</b></td><td><b>¥944,400</b></td><td>Microsoft 365 のライセンス</td></tr>
+          <tr><td class="kc">Claude Team スタンダード（年払い US$22）</td><td><b>US$1,100</b></td><td><b>US$2,200</b></td><td>Team は150名まで（Enterprise は要問い合わせ）</td><td>為替の影響</td></tr>
+        </table><div class="band">試算は公式の表示単価×人数の概算（税・キャンペーン・既存契約は考慮していません）。Gemini は Workspace 自体の料金を含むため、他ツールと単純比較はできません。</div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>料金シミュレーション</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide ch">
+        <div class="chp">
+          <img class="s-logo" src="assets/biz-logo-w.svg" alt="byTech BUSINESS">
+          <span class="no">03</span>
+          <p class="t">導入企業の事例</p>
+          <p class="d">ツールごとに2社。選んだ理由・展開・成果</p>
+          <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>章扉 導入事例</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">導入事例 一覧</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">決め手は<b>既存の業務環境</b>と<b>セキュリティ</b>。成果は「定着させる仕組み」で差がつく。</p></div>
+        <table class="grow cs cmp">
+          <colgroup><col style="width:40px"><col style="width:176px"><col style="width:120px"><col><col style="width:262px"></colgroup>
+          <tr><th>No.</th><th>企業</th><th>ツール</th><th>取り組み</th><th>公表されている成果</th></tr>
+          <tr>
+            <td class="no">01</td><td class="co"><span>MIXI</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>ChatGPT</span></td>
+            <td>ChatGPT Enterpriseを約2,000名の全従業員に導入し、研修とAIアンバサダーで定着</td>
+            <td class="rs">3か月でWAU<b>80%</b>・月約<b>17,600時間</b>削減見込み</td>
+          </tr>
+          <tr>
+            <td class="no">02</td><td class="co"><span>三井不動産</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg>ChatGPT</span></td>
+            <td>ChatGPT Enterpriseを約2,000人の全社員に展開し、全85部門に150名のAI推進リーダーを設置</td>
+            <td class="rs">約3か月で<b>約500件</b>のカスタムGPTが運用中</td>
+          </tr>
+          <tr>
+            <td class="no">03</td><td class="co"><span>Ｓｋｙ</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg>Gemini</span></td>
+            <td>内製AI「SKYAI」から「Gemini Enterprise」へ全面移行し、全社で段階導入</td>
+            <td class="rs">5か月で社内AIエージェント<b>2万個</b>超・定着率<b>98%</b></td>
+          </tr>
+          <tr>
+            <td class="no">04</td><td class="co"><span>みんなの銀行</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.8C7.9 18.7 5 15.2 5 11V6z"/><path d="M9 11.6l2.1 2.1L15.2 9.6"/></svg>Gemini</span></td>
+            <td>AML業務でGeminiの効果を確認後、Gemini Enterpriseを全従業員に導入</td>
+            <td class="rs">一部工程<b>7時間→5分</b>・対象業務<b>約47%</b>削減</td>
+          </tr>
+          <tr>
+            <td class="no">05</td><td class="co"><span>参天製薬</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M9.2 3h5.6M10.3 3v6.2L5 18.4A2 2 0 006.7 21.4h10.6a2 2 0 001.7-3L13.7 9.2V3"/></svg>Copilot</span></td>
+            <td>先行導入で効果を検証後、Microsoft 365 Copilotをグローバル全従業員に展開</td>
+            <td class="rs">先行導入で1人あたり年間<b>約70時間</b>の業務削減</td>
+          </tr>
+          <tr>
+            <td class="no">06</td><td class="co"><span>JCB</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg>Copilot</span></td>
+            <td>Office製品との親和性でCopilotを選定し、440→1,600ライセンスへ段階拡大</td>
+            <td class="rs">月間平均利用率<b>83%</b>・1人月<b>約6時間</b>効率化</td>
+          </tr>
+          <tr>
+            <td class="no">07</td><td class="co"><span>NEC</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg>Claude</span></td>
+            <td>Anthropicと戦略的協業を結び、NECグループ約3万人の従業員を対象にClaudeを導入</td>
+            <td class="rs">国内企業最大規模<b>約3万人</b>のAIネイティブ体制へ</td>
+          </tr>
+          <tr>
+            <td class="no">08</td><td class="co"><span>エクスペリサス</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Claude</span></td>
+            <td>社員・業務委託計59名にClaude Codeを全社導入し、業務スキルを全社共有</td>
+            <td class="rs">スキル<b>743件</b>登録・非エンジニアの<b>69%</b>が時間半減</td>
+          </tr>
+        </table>
+        <p class="s-foot">出典：各社の公式発表（プレスリリース・公式サイト・統合報告書）ほか。出典の詳細は各事例ページに記載しています。数値は各社の公表値であり、当社による測定値ではありません。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>導入事例 一覧</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">導入事例｜ChatGPT</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">01</span>
+          <span class="mark lg"><img src="assets/logo-chatgpt.png" alt=""></span>
+          <p class="co">MIXI<small>ChatGPT Enterprise｜全従業員 約2,000名</small></p>
+          <div class="tags"><span>ChatGPT Enterprise</span><span>全従業員 約2,000名</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>選んだ理由・比較した候補</p><div class="vb"><p class="i">役員は導入を単なる効率化でなく、創造的な仕事に集中するための「インフラ整備」と位置づけ</p><p class="i">機密情報ラベルに応じた入力ルールを社内ガイドラインで徹底した上で全社に展開</p><p class="i">他ツールとの比較経緯は非公表。ChatGPT Enterpriseに加え複数の生成AIツールを併用</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>展開・定着の取り組み</p><div class="vb"><p class="i">OpenAIとともに全従業員向け「ChatGPT 101トレーニング」を実施</p><p class="i">新卒向けワークショップ、エンジニア向けAgents SDKハッカソンを開催</p><p class="i">各部門にAIアンバサダーを配置し、活用事例を毎月報告</p></div></div></div>
+          <div class="vr"><div class="vk donut"><div class="dn"><svg width="92" height="92" viewBox="0 0 92 92"><circle cx="46" cy="46" r="34" fill="none" stroke="#e6edf6" stroke-width="12"/><circle cx="46" cy="46" r="34" fill="none" stroke="#1a6fb5" stroke-width="12" stroke-dasharray="170.90264035528475 213.62830044410595" transform="rotate(-90 46 46)"/></svg><span>80<small>%</small></span></div><div><p class="k">WAU</p><p class="n">導入から3か月未満</p></div></div><div class="vt c3"><div><p class="k">カスタムGPT</p><p class="v">1,800<small>個以上</small></p><p class="n">社員が自発的に作成</p></div><div><p class="k">業務時間削減</p><p class="v">約17,600<small>時間/月</small></p><p class="n">アンケートからの推計</p></div><div><p class="k">生産性向上の実感</p><p class="v">99<small>%</small></p><p class="n">利用者アンケート</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">選ぶとき・入れるときのポイント（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">まず週次利用率を追う</p><p class="d">席数より「毎週使う人の割合」を最初のKPIに。MIXIは3か月でWAU80%を作ってから成果を測った。</p></div></div><div><span class="ln">2</span><div><p class="t">社員を作る側に</p><p class="d">カスタムGPTを社員自身が作れる状態が定着の鍵。非エンジニアの自作を後押しする研修を用意する。</p></div></div><div><span class="ln">3</span><div><p class="t">削減時間は推計と明示</p><p class="d">アンケート由来の削減時間は推計値。社内報告では算出方法と回答数を必ず併記する。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：株式会社MIXI プレスリリース「MIXI、ChatGPT Enterpriseの全社活用で月間約17,600時間を削減」（2025年8月21日）。数値は公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 01 MIXI</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">導入事例｜ChatGPT</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">02</span>
+          <span class="mark lg"><img src="assets/logo-chatgpt.png" alt=""></span>
+          <p class="co">三井不動産<small>ChatGPT Enterprise｜全社員 約2,000人</small></p>
+          <div class="tags"><span>ChatGPT Enterprise</span><span>全社員 約2,000人</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>選んだ理由・比較した候補</p><div class="vb"><p class="i">業務利用に必要なセキュリティとプライバシーを備えた企業向け生成AIである点</p><p class="i">部門のルールやマニュアルを組み込んだ社内専用アシスタントをノーコードで作成・共有できる点</p><p class="i">社員の企画力を高め付加価値創出につなげる狙い。比較候補の記載はなし</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>展開・定着の取り組み</p><div class="vb"><p class="i">全社85部門から約150名の「AI推進リーダー」を選び、11月に対面研修</p><p class="i">全社員対象のChatGPT Enterprise研修を実施し、延べ1,300人が参加</p><p class="i">Azure上の内製環境で「社長AIエージェント」など独自AIも並行開発</p></div></div></div>
+          <div class="vr"><div class="vk donut"><div class="dn"><svg width="92" height="92" viewBox="0 0 92 92"><circle cx="46" cy="46" r="34" fill="none" stroke="#e6edf6" stroke-width="12"/><circle cx="46" cy="46" r="34" fill="none" stroke="#1a6fb5" stroke-width="12" stroke-dasharray="21.362830044410593 213.62830044410595" transform="rotate(-90 46 46)"/></svg><span>10<small>%</small></span></div><div><p class="k">業務削減時間（以上）</p><p class="n">今後の目標値</p></div></div><div class="vt c3"><div><p class="k">展開人数</p><p class="v">約2,000<small>人</small></p><p class="n">全社員</p></div><div><p class="k">カスタムGPT</p><p class="v">約500<small>件</small></p><p class="n">利用開始から約3か月</p></div><div><p class="k">研修参加者</p><p class="v">1,300<small>人</small></p><p class="n">延べ人数</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">選ぶとき・入れるときのポイント（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">全部門に旗振り役</p><p class="d">全部門に推進役を置くと、ユースケース発掘と効果測定が現場で回る。人数より配置の網羅性が大事。</p></div></div><div><span class="ln">2</span><div><p class="t">汎用ツールと内製の分担</p><p class="d">日常業務はChatGPT、自社特化は内製AIと役割を分ける。1つのツールで全部を賄おうとしない。</p></div></div><div><span class="ln">3</span><div><p class="t">目標は率で置く</p><p class="d">「業務削減時間10%以上」のように率で目標を置くと、規模の違う部門同士でも比べやすい。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：三井不動産株式会社 ニュースリリース「社長AIエージェントなど独自AI開発と、全部門で150名のAI推進リーダーを設置 ChatGPT Enterpriseの全社員導入等で業務削減時間10％以上を目指す」（2025年12月23日）。数値は公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 02 三井不動産</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">導入事例｜Gemini</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">03</span>
+          <span class="mark lg"><img src="assets/logo-gemini.png" alt=""></span>
+          <p class="co">Ｓｋｙ<small>Gemini Enterprise｜4,000ライセンス</small></p>
+          <div class="tags"><span>Gemini Enterprise</span><span>4,000ライセンス</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>選んだ理由・比較した候補</p><div class="vb"><p class="i">内製AI「SKYAI」は技術進化に追随するための開発・維持コストが課題だった</p><p class="i">標準化された外部サービスへ移し、エンジニアを付加価値の高いコア業務に集中させる</p><p class="i">社内の機密データがAI学習に使われないセキュアな利用環境を確保できる点</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>展開・定着の取り組み</p><div class="vb"><p class="i">2023年から200以上の業務システムのデータを統合し、AI活用の前提を整備</p><p class="i">定期ワークショップでエージェント作成まで体験させ、営業・管理部門にも展開</p><p class="i">AIマスター認定と最優秀賞300万円の「AIエージェント祭り」で利益貢献を表彰</p></div></div></div>
+          <div class="vr"><div class="vk donut"><div class="dn"><svg width="92" height="92" viewBox="0 0 92 92"><circle cx="46" cy="46" r="34" fill="none" stroke="#e6edf6" stroke-width="12"/><circle cx="46" cy="46" r="34" fill="none" stroke="#1a6fb5" stroke-width="12" stroke-dasharray="209.3557344352238 213.62830044410595" transform="rotate(-90 46 46)"/></svg><span>98<small>%</small></span></div><div><p class="k">移行後の定着率</p><p class="n">内製AIからの移行後</p></div></div><div class="vk chart"><p class="k">AIへのリクエスト</p><div class="br"><span class="bl">前</span><span class="bt"><span style="width:33.33333333333333%;background:#b9c7da"></span></span><span class="bv">1<small>回/日</small></span></div><div class="br"><span class="bl">後</span><span class="bt"><span style="width:100%;background:#1a6fb5"></span></span><span class="bv hi">3<small>回/日</small></span></div><p class="n">移行後に倍増</p></div><div class="vt c2"><div><p class="k">社内AIエージェント</p><p class="v">2万<small>個超</small></p><p class="n">導入から5か月間</p></div><div><p class="k">導入ライセンス</p><p class="v">4,000<small></small></p><p class="n">希望する社員に展開</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">選ぶとき・入れるときのポイント（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">データ整備が先</p><p class="d">Skyは先に社内データを統合していたから展開が速かった。導入前に参照させるデータの置き場を整える。</p></div></div><div><span class="ln">2</span><div><p class="t">内製を手放す判断</p><p class="d">自社開発AIは進化への追随コストが重い。汎用基盤に移し、人は業務特化の工夫に回すのが合理的。</p></div></div><div><span class="ln">3</span><div><p class="t">効率化の次を評価</p><p class="d">作成数の次は「利益にどう効いたか」で表彰する。評価軸を段階的に引き上げる設計が定着を後押しする。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：Ｓｋｙ株式会社 ニュース「Ｓｋｙ株式会社が「Gemini™ Enterprise app」導入5か月間で2万個超の社内AIエージェントを創出」（2026年9月24日）ほか。数値は公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 03 Ｓｋｙ</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">導入事例｜Gemini</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">04</span>
+          <span class="mark lg"><img src="assets/logo-gemini.png" alt=""></span>
+          <p class="co">みんなの銀行<small>Gemini Enterprise｜全従業員</small></p>
+          <div class="tags"><span>Gemini Enterprise</span><span>全従業員</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>選んだ理由・比較した候補</p><div class="vb"><p class="i">口座数・取引件数の増加でAML金融犯罪対策の事務負担が増大していた</p><p class="i">先行プロジェクトでGeminiのコーディング支援が成果を出し、全社展開を決めた</p><p class="i">独自AIエージェントの社内活用を標準化する狙い。比較候補の記載はなし</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>展開・定着の取り組み</p><div class="vb"><p class="i">プログラミング未経験の行員がGeminiの支援でVBAやPythonを内製</p><p class="i">集計表作成・帳票出力などの工程をRPA等と組み合わせてワンクリック化</p><p class="i">成功体験を一部業務に留めず全社カルチャーにするため全従業員へ展開</p></div></div></div>
+          <div class="vr"><div class="vk chart"><p class="k">一部工程の作業</p><div class="br"><span class="bl">前</span><span class="bt"><span style="width:100%;background:#b9c7da"></span></span><span class="bv">7<small></small></span></div><div class="br"><span class="bl">後</span><span class="bt"><span style="width:71.42857142857143%;background:#1a6fb5"></span></span><span class="bv hi">5<small></small></span></div><p class="n">2025年12月時点</p></div><div class="vk donut"><div class="dn"><svg width="92" height="92" viewBox="0 0 92 92"><circle cx="46" cy="46" r="34" fill="none" stroke="#e6edf6" stroke-width="12"/><circle cx="46" cy="46" r="34" fill="none" stroke="#1a6fb5" stroke-width="12" stroke-dasharray="100.4053012087298 213.62830044410595" transform="rotate(-90 46 46)"/></svg><span>47<small>%</small></span></div><div><p class="k">対象業務の作業時間（削減）</p><p class="n">実績値・推計値で比較</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">選ぶとき・入れるときのポイント（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">1業務で勝ってから</p><p class="d">負担の大きい1業務で数字を出してから全社へ。稟議でも現場の説得でも最も効く材料になる。</p></div></div><div><span class="ln">2</span><div><p class="t">非エンジニアの内製</p><p class="d">AIのコーディング支援で現場がマクロやスクリプトを自作できる。チャット用途だけで評価しない。</p></div></div><div><span class="ln">3</span><div><p class="t">既存の自動化とつなぐ</p><p class="d">生成AI単体よりRPA等と組み合わせると効果が跳ねる。工程全体を設計し直す視点を持つ。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：株式会社みんなの銀行 プレスリリース「AIとの協業で7時間の作業を5分に短縮、Google Cloud の Gemini Enterprise を導入へ」（2026年4月28日）。数値は公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 04 みんなの銀行</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">導入事例｜Copilot</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">05</span>
+          <span class="mark lg"><img src="assets/logo-copilot.png" alt=""></span>
+          <p class="co">参天製薬<small>Microsoft 365 Copilot｜グローバル全従業員</small></p>
+          <div class="tags"><span>Microsoft 365 Copilot</span><span>グローバル全従業員</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>選んだ理由・比較した候補</p><div class="vb"><p class="i">2024年4月から一部従業員に先行導入し、効果を検証した上で全社展開を決定</p><p class="i">研究開発で文献・規制情報などのWeb検索や社内情報検索の効率化に有効だった</p><p class="i">効率化に加え、仕事の質の向上や新たな価値創造も期待できると判断</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>展開・定着の取り組み</p><div class="vb"><p class="i">第1段階として社内向け生成AI「Santen AI Chat」を先に全社展開</p><p class="i">Copilotの全社展開を生成AI活用の4つの枠組みの第2段階と位置づけ</p><p class="i">今後はAIエージェントや特定業務に特化したモデルを職種別に実装</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">業務削減</p><p class="v">約70<small>時間/年・人</small></p><p class="n">先行導入での検証結果</p></div><div class="vt c1"><div><p class="k">全社展開</p><p class="v">2025年10月<small></small></p><p class="n">国内（同社発表）</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">選ぶとき・入れるときのポイント（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">検証してから全社へ</p><p class="d">一部で約1年半検証し、1人あたり削減時間を出してから全社へ。投資判断の根拠が明確になる。</p></div></div><div><span class="ln">2</span><div><p class="t">Office中心なら有利</p><p class="d">日常業務がOutlookやTeams中心なら、同じ画面で使えるCopilotは定着コストが低い。</p></div></div><div><span class="ln">3</span><div><p class="t">段階の地図を示す</p><p class="d">社内チャット→Copilot→エージェントと段階を示すと、ツールごとの役割が社内に伝わりやすい。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：参天製薬株式会社 ニュースリリース「生成AIツール「Microsoft 365 Copilot」をグローバル全社に導入 従業員一人ひとりの生産性・創造性を向上し持続的成長を加速」（2025年10月1日）。数値は公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 05 参天製薬</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">導入事例｜Copilot</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">06</span>
+          <span class="mark lg"><img src="assets/logo-copilot.png" alt=""></span>
+          <p class="co">JCB<small>Microsoft 365 Copilot｜1,600ライセンス</small></p>
+          <div class="tags"><span>Microsoft 365 Copilot</span><span>1,600ライセンス</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>選んだ理由・比較した候補</p><div class="vb"><p class="i">社内でMicrosoft 365・Office製品を活発に使っており、多くの社員がすぐ使える</p><p class="i">その親和性から「数ある生成AIツールの中で」Copilotを選んだと明言</p><p class="i">実証実験で月間7,500時間以上の削減効果を確認し、本格活用を判断</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>展開・定着の取り組み</p><div class="vb"><p class="i">約70部署に440ライセンスで実証し、1,000→1,600へ段階的に拡大</p><p class="i">利用開始前に研修動画とガイドラインのクイズ受講を必須化</p><p class="i">社長が月例の管理職会議で活用を呼びかけ、毎週Teamsで活用Tipsを発信</p></div></div></div>
+          <div class="vr"><div class="vk donut"><div class="dn"><svg width="92" height="92" viewBox="0 0 92 92"><circle cx="46" cy="46" r="34" fill="none" stroke="#e6edf6" stroke-width="12"/><circle cx="46" cy="46" r="34" fill="none" stroke="#1a6fb5" stroke-width="12" stroke-dasharray="177.31148936860794 213.62830044410595" transform="rotate(-90 46 46)"/></svg><span>83<small>%</small></span></div><div><p class="k">月間平均利用率</p><p class="n">2025年3月時点</p></div></div><div class="vt c2"><div><p class="k">実証の削減効果</p><p class="v">7,500<small>時間/月以上</small></p><p class="n">1人月約5時間以上</p></div><div><p class="k">業務効率化</p><p class="v">約6<small>時間/月・人</small></p><p class="n">上位5用途・ベンダー事例</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">選ぶとき・入れるときのポイント（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">利用条件に研修を</p><p class="d">ライセンス付与の前に研修とルール確認を必須にすると、安全面の不安と使い方の差を同時に減らせる。</p></div></div><div><span class="ln">2</span><div><p class="t">経営の声かけを続ける</p><p class="d">JCBは社長の呼びかけと週次Tipsを継続した。利用率は仕組みより発信の継続で決まる面が大きい。</p></div></div><div><span class="ln">3</span><div><p class="t">席は段階で増やす</p><p class="d">Copilotは1席ごとの課金。部署を広く薄く試し、効果が出た層から席を増やすと無駄が出にくい。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：株式会社ジェーシービー プレスリリース「JCB、Copilot for Microsoft 365 の社内活用を本格化 ～生成 AI を使った生産性・創造性向上への挑戦～」（2024年5月17日）／Microsoft顧客事例「JCB boosts work efficiency with adoption of Microsoft 365 Copilot」。数値は公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 06 JCB</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">導入事例｜Claude</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">07</span>
+          <span class="mark lg"><img src="assets/logo-claude.png" alt=""></span>
+          <p class="co">NEC<small>Claude／Claude Code／Cowork｜約3万人</small></p>
+          <div class="tags"><span>Claude／Claude Code／Cowork</span><span>約3万人</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>選んだ理由・比較した候補</p><div class="vb"><p class="i">開発の高度化を検討する中で、Claudeが安全面でも安定面でも相当優れていると評価</p><p class="i">エンタープライズ中心の展開と、処理能力・高品質・安全安心に提供できる点</p><p class="i">業種別AIの共同開発とBluStellarへのClaude展開を迅速に実現するため</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>展開・定着の取り組み</p><div class="vb"><p class="i">2026年6月からNECグループ内へのClaude展開を開始</p><p class="i">Anthropicの技術支援とトレーニングを受け、社内にCoEを設立</p><p class="i">「クライアントゼロ」として社内業務でClaude Coworkの活用を推進</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">導入対象</p><p class="v">約3万<small>人</small></p><p class="n">NECグループ従業員</p></div><div class="vt c1"><div><p class="k">社内展開開始</p><p class="v">2026年6月<small></small></p><p class="n">NEC Stories記載</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">選ぶとき・入れるときのポイント（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">自社を最初の顧客に</p><p class="d">支援側の企業は自社導入の知見がそのまま商品になる。社内展開と外販をセットで設計する。</p></div></div><div><span class="ln">2</span><div><p class="t">開発職から全社へ</p><p class="d">Claudeはコーディングで効果を示しやすい。開発部門で実績を作り、Cowork等で事務職へ広げる。</p></div></div><div><span class="ln">3</span><div><p class="t">ベンダー支援を契約に</p><p class="d">大規模導入では研修・技術支援を契約に含め、社内CoEを立てて自走できる体制を早めに作る。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：日本電気株式会社 プレスリリース「NEC、Anthropic とエンタープライズAI分野を中心に戦略的協業を開始」（2026年4月23日）／NEC Stories「「最強のClaude集団」が創るAIの未来 AnthropicとNECが協業」（2026年7月16日）。数値は公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 07 NEC</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">導入事例｜Claude</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">08</span>
+          <span class="mark lg"><img src="assets/logo-claude.png" alt=""></span>
+          <p class="co">エクスペリサス<small>Claude Code｜59名（全社）</small></p>
+          <div class="tags"><span>Claude Code</span><span>59名（全社）</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>選んだ理由・比較した候補</p><div class="vb"><p class="i">リサーチ・資料作成・データ加工など、システム化しにくい小さな業務が全社に点在</p><p class="i">業務ごとに専用システムを入れず、社員がAIに手順を教えて全社共有する方式を採用</p><p class="i">他ツールとの比較・選定経緯の記載はなし</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>展開・定着の取り組み</p><div class="vb"><p class="i">経営陣を含む全員を研修対象にし、端末設定・認証・セキュリティを共通整備</p><p class="i">うまくいった手順を「スキル」として登録・検索できる共有基盤を構築</p><p class="i">デザインシステムをAIが参照できる形に整え、ブランド規定を自動適用</p></div></div></div>
+          <div class="vr"><div class="vk donut"><div class="dn"><svg width="92" height="92" viewBox="0 0 92 92"><circle cx="46" cy="46" r="34" fill="none" stroke="#e6edf6" stroke-width="12"/><circle cx="46" cy="46" r="34" fill="none" stroke="#1a6fb5" stroke-width="12" stroke-dasharray="113.22299923537615 213.62830044410595" transform="rotate(-90 46 46)"/></svg><span>53<small>%</small></span></div><div><p class="k">非エンジニア日常活用</p><p class="n">研修後アンケート</p></div></div><div class="vt c3"><div><p class="k">登録スキル</p><p class="v">743<small>件</small></p><p class="n">45名が登録・8月末</p></div><div><p class="k">業務別エージェント</p><p class="v">127<small>体</small></p><p class="n">2026年8月末時点</p></div><div><p class="k">時間が半分以下</p><p class="v">69<small>%</small></p><p class="n">日常活用の非エンジニア</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">選ぶとき・入れるときのポイント（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">個人技を仕組みに</p><p class="d">良い手順を個人に留めず「スキル」として共有すると、習熟度の差が成果の差になりにくい。</p></div></div><div><span class="ln">2</span><div><p class="t">中小企業ほど効く</p><p class="d">専用システム化しにくい細かな業務が多い会社ほど、汎用エージェントの費用対効果が出やすい。</p></div></div><div><span class="ln">3</span><div><p class="t">社内ルールもAIに渡す</p><p class="d">ブランド規定や社内ルールをAIが読める形に整えると、非専門職の成果物の手戻りが減る。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：エクスペリサス株式会社 プレスリリース「エクスペリサス、Claude Codeを全社導入、社員作成の業務スキル700件超を社内共有」（2026年9月3日）。数値は公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 08 エクスペリサス</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">選び方の傾向</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">事例から見える<b>3つの傾向</b></p></div>
+        <div class="grow cards c3"><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg></span><p class="t">既存の業務環境に合わせる</p><p class="d">Microsoft 365 の企業は Copilot、Google Workspace の企業は Gemini を選ぶ例が多く、<b>メールやファイルを横断して使える</b>ことが決め手になっています。</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><rect x="5" y="10.5" width="14" height="10"/><path d="M8 10.5V7.5a4 4 0 018 0v3"/></svg></span><p class="t">セキュリティは前提条件</p><p class="d">どの事例も、学習に使われないこと・アクセス権の継承・ログの取得を<b>最初の確認事項</b>にしています。</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p class="t">定着の仕組みで差がつく</p><p class="d">同じツールでも成果は、研修・推進役・活用事例の共有といった<b>定着の仕組み</b>があるかで大きく変わります。</p></div></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>事例から見る選び方の傾向</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">使い分け</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">1本に絞らず、<b>組み合わせる</b>という選択肢</p></div>
+        <table class="grow cs kt tall">
+          <colgroup><col style="width:260px"><col><col style="width:300px"></colgroup>
+          <tr><th>組み合わせの例</th><th>考え方</th><th>注意点</th></tr>
+          <tr><td class="kc">全社：Copilot ／ 開発部門：Claude</td><td>日常の文書・会議は Office の中で、長文分析や開発は得意なツールで</td><td>ライセンスの二重払いになる人を最小限にする</td></tr>
+          <tr><td class="kc">全社：Gemini ／ 企画部門：ChatGPT</td><td>Workspace の料金内で全員が使い、高度な用途だけ追加</td><td>使ってよいツールを社内ガイドラインで明記する</td></tr>
+          <tr><td class="kc">全社：ChatGPT ／ 一部：Copilot Chat</td><td>汎用AIを全社展開し、Microsoft 365 内の作業は無償の Copilot Chat で</td><td>データの扱い・ログ取得の条件をツールごとに確認</td></tr>
+        </table><div class="band">どの組み合わせでも、社内ガイドラインで「業務で使ってよいツール」を決めておくことが前提です（「社内ガイドライン＆リスク対策ガイド」参照）。</div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>組み合わせて使う</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">用途別の得意・不得意</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t"><b>用途別</b>に見た、各ツールの得意分野</p></div>
+        <table class="grow cs kt tall">
+          <colgroup><col style="width:200px"><col><col><col><col></colgroup>
+          <tr><th>用途</th><th>ChatGPT</th><th>Gemini</th><th>Microsoft 365 Copilot</th><th>Claude</th></tr>
+          <tr><td class="kc">文書・メール作成</td><td><b>◎</b> 汎用的に強い</td><td><b>◎</b> Gmail・ドキュメント内で</td><td><b>◎</b> Word・Outlook内で</td><td><b>◎</b> 長い文書も一貫して</td></tr>
+          <tr><td class="kc">会議の要約</td><td>○ 文字起こしを貼り付け</td><td><b>◎</b> Meet と連携</td><td><b>◎</b> Teams と連携</td><td>○ 文字起こしを貼り付け</td></tr>
+          <tr><td class="kc">表計算・データ分析</td><td><b>◎</b> ファイルを分析</td><td>○ スプレッドシート内で</td><td><b>◎</b> Excel 内で</td><td><b>◎</b> ファイルを分析</td></tr>
+          <tr><td class="kc">長文資料の読み込み</td><td>○</td><td>○</td><td>○ 社内ファイルを横断</td><td><b>◎</b> 長いコンテキストに対応</td></tr>
+          <tr><td class="kc">開発・業務の自動化</td><td><b>◎</b> Codex 等</td><td>○</td><td>○ Copilot Studio 等</td><td><b>◎</b> Claude Code 等</td></tr>
+        </table><div class="band">◎○は各社公式ページの機能説明にもとづく当社の整理です。実際の向き不向きは業務内容で変わるため、無料トライアル等で試すことをおすすめします。</div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>用途別の得意・不得意</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">導入後に差がつくのは「使い方」</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">どのツールを選んでも、成果を分けるのは<b>使い方の教育</b></p><p class="l">事例の企業はいずれも、ツールの配布と同時に研修や推進役の育成を行っています。バイテック法人AI研修では、各ツールに対応したコースをご用意しています。</p></div>
+        <div class="grow cards c3"><div><span class="ic lg"><img src="assets/logo-chatgpt.png" alt=""><img src="assets/logo-gemini.png" alt=""></span><p class="t">ChatGPT研修・Gemini研修</p><p class="d">全社員が業務で使える「型」を、実務を題材にしたハンズオンで身につけます。</p></div><div><span class="ic lg"><img src="assets/logo-copilot.png" alt=""></span><p class="t">Copilot研修・Copilot Studio研修</p><p class="d">Word・Excel・Teams での活用から、社内向けエージェントづくりまで。</p></div><div><span class="ic lg"><img src="assets/logo-claude.png" alt=""></span><p class="t">Claude研修・Claude Code研修</p><p class="d">長文資料の分析や、業務の自動化・開発への活用を学びます。</p></div></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>導入後に差がつくのは使い方</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">Contact</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">ツール選びから、<b>全社定着</b>まで。</p><p class="l">どのツールが自社に合うか、導入後にどう定着させるか。無料個別相談で一緒に整理します。</p></div>
+        <div class="grow cards c3"><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg></span><p class="t">ツール選定のご相談</p><p class="d">今の業務環境とセキュリティ要件から、合うツールと組み合わせを整理します。</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p class="t">ツール別のハンズオン研修</p><p class="d">選んだツールに合わせて、全社員・推進役向けの研修を設計します。</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M6 3l6 8 6-8M12 11v10M7.5 13h9M7.5 16.5h9"/></svg></span><p class="t">助成金の活用サポート</p><p class="d">人材開発支援助成金の対象となる研修設計で、実質負担を抑えます。</p></div></div>
+        <div class="ctab"><div><p class="t">まずは無料個別相談で、今の業務環境をお聞かせください</p><p class="d">オンライン・約60分。ツール選定の考え方と、導入後の研修・助成金の活用方法をご案内します。</p></div><span class="bt">無料個別相談を予約する ›</span></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>ご相談</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">Notes</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd" style="margin-top:4px"><p class="t" style="font-size:27px">ご留意事項・出典</p></div><div class="grow nts"><p class="nt">料金・プラン・機能・データの扱いは、各社公式ページ（OpenAI、Google、Microsoft、Anthropic）の記載にもとづきます（2026年10月14日時点）。料金は予告なく変更されることがあります。導入前に必ず各社公式ページでご確認ください。</p><p class="nt">表示価格の税込・税別は各社の表記に従います（Google・Microsoft・Anthropic は税別、OpenAI は表記なし）。Claude の料金は米ドル建てです。キャンペーン価格は除いています。</p><p class="nt">料金シミュレーションは公式の表示単価に人数を掛けた概算で、実際の契約金額を保証するものではありません。</p><p class="nt">導入事例は各社の公式発表にもとづいて当社が編集したものです。掲載企業との取引関係や、各社・各ツール提供元による推薦を示すものではありません。数値は各社の公表値です。</p><p class="nt">用途別の◎○、「選ぶとき・入れるときのポイント」は当社の見解です。</p><p class="nt">ChatGPT は OpenAI、Gemini・Google Workspace は Google、Microsoft 365 Copilot は Microsoft、Claude は Anthropic の商標または登録商標です。本資料の無断転載・再配布はご遠慮ください。　発行：バイテック法人AI研修（2026年10月版）</p></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>ご留意事項・出典</figcaption></figure>
+  </div>
+<script>
+  // 事例ページ：補足の節（.vsec.sm）を、左右の列の高さが揃う方へ移す
+  document.querySelectorAll(".vdt").forEach(function (d) {
+    var l = d.querySelector(".vl"), r = d.querySelector(".vr"), sm = l.querySelectorAll(".vsec.sm");
+    if (!sm.length) return;
+    function need(c) { var n = 0; Array.prototype.forEach.call(c.children, function (e) { n += e.scrollHeight + 10; }); return n; }
+    var sh = 0; sm.forEach(function (e) { sh += e.scrollHeight + 10; });
+    d.classList.add("measure");
+    var L = need(l), R = need(r);
+    if (Math.max(L - sh, R + sh) < Math.max(L, R)) sm.forEach(function (e) { r.appendChild(e); });
+    d.classList.remove("measure");
+  });
+  // 事例ページ：列に余裕があるときは本文を一段大きくする（下に余白を残さない）
+  document.querySelectorAll(".vdt").forEach(function (d) {
+    [d.querySelector(".vl"), d.querySelector(".vr")].forEach(function (col) {
+      d.classList.add("measure"); var need = 0; Array.prototype.forEach.call(col.children, function (e) { need += e.scrollHeight; }); d.classList.remove("measure");
+      if (col.clientHeight - need > 90) col.classList.add("roomy");
+    });
+  });
+</script>
+</body>
+</html>

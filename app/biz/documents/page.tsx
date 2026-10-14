@@ -83,6 +83,36 @@ const STATIC_DOCS: { category: string; doc: DocItem }[] = [
     },
   },
   {
+    category: "AI活用ノウハウ",
+    doc: {
+      title: "生成AI 社内ガイドライン＆リスク対策ガイド",
+      points: ["実際に起きた事故3事例（情報漏洩・著作権・誤情報）", "ルールを整えた企業・自治体7事例を1件1ページで", "規程に入れる10項目と、そのまま使える条文ひな形"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-19-cover.webp?v=20261014c",
+      href: "/doc-t",
+    },
+  },
+  {
+    category: "AI活用ノウハウ",
+    doc: {
+      title: "法人向け 生成AIツール比較ガイド",
+      points: ["ChatGPT・Gemini・Copilot・Claudeの料金とプラン", "セキュリティ・データの扱い・管理機能の比較", "導入企業8社の選定理由と成果を1社1ページで"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-20-cover.webp?v=20261014c",
+      href: "/doc-u",
+    },
+  },
+  {
+    category: "AI活用ノウハウ",
+    doc: {
+      title: "AI人材育成計画の立て方",
+      points: ["計画づくりの4ステップと3層の人材モデル", "育成に取り組む企業8社を1社1ページで", "層別カリキュラム・年間計画・KPI・計画シート"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-21-cover.webp?v=20261014c",
+      href: "/doc-v",
+    },
+  },
+  {
     category: "サービス概要",
     doc: {
       title: "AI研修タイプ 比較ガイド",

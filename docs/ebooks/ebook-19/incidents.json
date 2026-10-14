@@ -1,0 +1,181 @@
+{
+  "incidents": [
+    {
+      "type": "情報漏洩",
+      "title": "社外秘コードをChatGPTに入力、全社で利用制限",
+      "who": "サムスン電子（韓国）",
+      "when": "2023.4",
+      "what_happened_html": [
+        "半導体部門の技術者が<b>社外秘のソースコード</b>をChatGPTに入力し修正を依頼",
+        "<b>会議の内容</b>を入力して議事録を作らせた例も報じられた",
+        "社内で<b>少なくとも3件</b>の機密情報の入力が確認された（2023年4月）"
+      ],
+      "impact_html": [
+        "2023年5月、社用PCでの<b>生成AI利用を一時的に制限</b>すると社内通知",
+        "違反は<b>解雇を含む懲戒処分</b>の対象になり得ると従業員に警告",
+        "外部サーバーに保存されたデータは<b>回収・削除が難しい</b>と懸念を表明"
+      ],
+      "cause_html": [
+        "社員が個人の判断で<b>業務データを外部AIに入力</b>できる状態だった（一般的教訓）",
+        "入力内容が<b>サービス提供者のサーバーに保存される</b>ことへの認識不足（一般的教訓）"
+      ],
+      "prevent": [
+        {"title": "入力NG情報の明文化", "desc": "ソースコード・議事録・顧客情報など入力禁止の情報を具体例付きでルール化する"},
+        {"title": "学習されない環境に限定", "desc": "入力データが学習に使われない法人プランやAPI経由の環境に利用を限定する"},
+        {"title": "研修と相談窓口", "desc": "全社員に入力ルール研修を行い、迷ったときの相談先を明確にしておく"}
+      ],
+      "kpis": [
+        {"label": "機密情報の入力", "value": "3", "unit": "件", "note": "2023年4月に社内で確認"},
+        {"label": "リスクを懸念", "value": "65", "unit": "%", "note": "社内調査の回答者"}
+      ],
+      "source_full": "Bloomberg（2023年5月2日）、NBC News（2023年5月2日）、Fortune（2023年5月2日）",
+      "urls": [
+        "https://www.bloomberg.com/news/articles/2023-05-02/samsung-bans-chatgpt-and-other-generative-ai-use-by-staff-after-leak",
+        "https://www.nbcnews.com/tech/tech-news/samsung-bans-use-chatgpt-employees-misuse-chatbot-rcna82407",
+        "https://fortune.com/2023/05/02/samsung-bans-employee-use-chatgpt-data-leak",
+        "https://www.cnbc.com/2023/05/02/samsung-bans-use-of-ai-like-chatgpt-for-staff-after-misuse-of-chatbot.html"
+      ]
+    },
+    {
+      "type": "著作権",
+      "title": "大手紙3社が生成AI検索を著作権侵害で提訴",
+      "who": "読売新聞社・日本経済新聞社・朝日新聞社／米Perplexity（日本）",
+      "when": "2025.8",
+      "what_happened_html": [
+        "読売新聞の3本社が<b>2025年8月7日</b>、米Perplexityを東京地裁に提訴",
+        "AI検索の回答で<b>記事を無断で複製・送信</b>したと主張（複製権・公衆送信権）",
+        "日経・朝日も<b>8月26日</b>に共同提訴。記事と異なる<b>虚偽表示</b>も問題視"
+      ],
+      "impact_html": [
+        "読売は差し止めと<b>約21億6800万円</b>、日経・朝日は<b>各22億円</b>の賠償を請求",
+        "Perplexityは管轄や請求の特定不足を理由に<b>争う姿勢</b>（2026年5月に初弁論）",
+        "日経・朝日は社名付きの誤った表示で<b>新聞社の信用が毀損</b>されたと主張"
+      ],
+      "cause_html": [
+        "読売側は2025年2〜6月に<b>約11万9千件</b>の記事へのアクセスがあったと主張",
+        "日経・朝日側は<b>robots.txtによる拒否</b>を無視して記事を取得したと主張",
+        "いずれも原告側の主張で、<b>裁判は係争中</b>（判決は出ていない）"
+      ],
+      "prevent": [
+        {"title": "公開前の類似チェック", "desc": "AI生成の文章・画像が既存の記事や作品に酷似していないか公開前に確認する"},
+        {"title": "出典を原文で確認", "desc": "AIが示す出典は必ず開き、要約や引用が原文と一致するか人が確かめる"},
+        {"title": "権利面でツールを選ぶ", "desc": "データ取得・学習の方針や補償条項を確認したうえで利用サービスを選定する"}
+      ],
+      "kpis": [
+        {"label": "読売の請求額", "value": "約21.68", "unit": "億円", "note": "差し止め＋損害賠償"},
+        {"label": "日経・朝日の請求", "value": "各22", "unit": "億円", "note": "損害賠償請求額"}
+      ],
+      "source_full": "INTERNET Watch／Impress Watch（2025年8月）、共同通信配信（秋田魁新報 2026年5月26日）、Bloomberg Law（2025年8月26日）、Nieman Lab（2025年8月）",
+      "urls": [
+        "https://www.watch.impress.co.jp/docs/news/2037798.html",
+        "https://www.sakigake.jp/news/article/20260526CO0113/",
+        "https://www.sakigake.jp/news/article/20260514CO0070/",
+        "https://news.bloomberglaw.com/tech-and-telecom-law/top-japan-news-outlets-sue-perplexity-for-copyright-violations",
+        "https://www.niemanlab.org/2025/08/japans-largest-newspaper-yomiuri-shimbun-sues-perplexity-for-copyright-violations/",
+        "https://www.gamebusiness.jp/article/2025/08/26/24938.html"
+      ]
+    },
+    {
+      "type": "誤情報",
+      "title": "AIで作った政府報告書に架空の出典、一部返金",
+      "who": "デロイト・オーストラリア／豪州 雇用・職場関係省（豪州）",
+      "when": "2025.10",
+      "what_happened_html": [
+        "福祉制度のIT審査報告書（契約<b>約44万豪ドル</b>）を2025年7月に省が公表",
+        "<b>実在しない論文</b>の参照や<b>連邦裁判所判決の捏造引用</b>が見つかった",
+        "10月の修正版で、作成に<b>Azure OpenAI（生成AI）</b>を使ったと開示"
+      ],
+      "impact_html": [
+        "デロイトは契約の<b>最終支払い分を返金</b>することで省と合意",
+        "省によると返金額は<b>9.7万豪ドル超</b>（契約額の4分の1未満）",
+        "上院議員が<b>全額返金</b>を求めるなど、社会的な批判が広がった"
+      ],
+      "cause_html": [
+        "外部の大学研究者が指摘するまで<b>架空の出典が見過ごされた</b>",
+        "生成AIの出力について<b>引用・出典の照合が不十分</b>だった（一般的教訓）"
+      ],
+      "prevent": [
+        {"title": "出典を全件照合", "desc": "引用・参考文献・数値はAI任せにせず、原典を開いて1件ずつ確認する"},
+        {"title": "AI利用範囲の明示", "desc": "顧客向けの成果物ではAIを使った範囲を明記し、契約でも取り決めておく"},
+        {"title": "第三者レビュー", "desc": "AIが下書きした文書は作成者以外が確認してから社外に出す運用にする"}
+      ],
+      "kpis": [
+        {"label": "契約額", "value": "約44万", "unit": "豪ドル", "note": "報告書作成の対価"},
+        {"label": "返金額", "value": "9.7万超", "unit": "豪ドル", "note": "同省の説明"}
+      ],
+      "source_full": "AP通信（2025年10月7日）、CFO Dive（2025年10月21日・同省広報の説明）",
+      "urls": [
+        "https://ny1.com/nyc/all-boroughs/ap-top-news/2025/10/07/deloitte-to-partially-refund-australian-government-for-report-with-apparent-ai-generated-errors",
+        "https://www.bnnbloomberg.ca/business/artificial-intelligence/2025/10/07/deloitte-to-partially-refund-australian-government-for-report-with-apparent-ai-generated-errors/",
+        "https://www.cfodive.com/news/deloitte-refunds-60k-report-ai-errors-australian-government-accounting/"
+      ]
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "AI事業者ガイドライン（第1.2版）",
+      "issuer": "総務省・経済産業省",
+      "date": "2026.3.31",
+      "points": [
+        "AIの開発者・提供者・利用者の3主体ごとに必要な取組を整理した統一指針",
+        "人間中心・安全性・公平性・プライバシー保護などの共通指針を全主体に求める",
+        "危害の大きさと発生確率に応じて対策を決める「リスクベース」の考え方",
+        "利用者には適正利用、個人情報等の不適切入力の防止、関係者への説明を求める",
+        "第1.2版でAIエージェントのリスクや人間の関与（HITL）の考え方を追記"
+      ],
+      "url": "https://www.meti.go.jp/shingikai/mono_info_service/ai_shakai_jisso/20240419_report.html"
+    },
+    {
+      "name": "AIと著作権に関する考え方について",
+      "issuer": "文化庁（文化審議会著作権分科会法制度小委員会）",
+      "date": "2024.3.15",
+      "points": [
+        "「開発・学習段階」と「生成・利用段階」を分けて著作権の扱いを考える",
+        "生成物の侵害判断は通常の著作物と同じく「類似性」と「依拠性」で行う",
+        "既存作品を入力したり作品名を指示した生成は、依拠性が認められやすい",
+        "簡単な指示だけの生成物は著作物になりにくく、人の創作的寄与が鍵",
+        "2024.7.31公表の「チェックリスト＆ガイダンス」で実務対応を整理"
+      ],
+      "url": "https://www.bunka.go.jp/seisaku/bunkashingikai/chosakuken/pdf/94037901_01.pdf"
+    },
+    {
+      "name": "生成AIサービスの利用に関する注意喚起等",
+      "issuer": "個人情報保護委員会",
+      "date": "2023.6.2",
+      "points": [
+        "個人情報を入力するときは、特定した利用目的の範囲内か十分に確認する",
+        "本人同意なく個人データを入力し、応答以外に使われると法違反の可能性",
+        "入力前に、提供事業者がそのデータを機械学習に使わないこと等を確認する",
+        "応答には不正確な個人情報が含まれるリスクがあり、判断は慎重に",
+        "利用規約・プライバシーポリシーを確認したうえで利用を判断する"
+      ],
+      "url": "https://www.ppc.go.jp/news/careful_information/230602_AI_utilize_alert/"
+    },
+    {
+      "name": "行政の進化と革新のための生成AIの調達・利活用に係るガイドライン（DS-920）",
+      "issuer": "デジタル庁",
+      "date": "2025.5.27",
+      "points": [
+        "政府向けだが「利活用の促進」と「リスク管理」を表裏一体で進める考え方",
+        "組織ごとにAI統括責任者（CAIO）を置き、ガバナンス体制を整える",
+        "高リスクの利用ケースを判定し、該当する場合は追加の対策を講じる",
+        "調達・契約時にデータの取扱いや学習利用などの要件を確認する",
+        "2026.6.12に改訂版を公表し、用語定義などを更新"
+      ],
+      "url": "https://www.digital.go.jp/news/3579c42d-b11c-4756-b66e-3d3e35175623"
+    },
+    {
+      "name": "生成AIの利用ガイドライン（第1.1版・ひな形）",
+      "issuer": "一般社団法人日本ディープラーニング協会（JDLA）",
+      "date": "2023.10",
+      "points": [
+        "社内で使ってよい生成AIと用途を定める雛形。自社用に加筆修正して使う前提",
+        "個人情報や他社から預かった秘密情報、自社機密などの入力に注意を促す",
+        "生成物には虚偽が含まれ得るため、根拠や裏付けを確認してから使う",
+        "生成物の利用が既存の著作権・商標等を侵害し得る点に注意する",
+        "生成物に著作権が発生しない可能性やAI利用の明示にも留意する"
+      ],
+      "url": "https://www.jdla.org/document/#ai-guideline"
+    }
+  ]
+}

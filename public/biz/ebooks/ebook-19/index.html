@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>生成AI 社内ガイドライン＆リスク対策ガイド｜全25スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* 業種別 活用事例集。設計は ebook-04/05 と同系統（四角の角丸なし・円とピルのみ角丸）。
+     ★事例はすべて各社の公開情報にもとづく。数値は出典の表記どおりに記載し、推測で丸めたり
+       脚色したりしないこと。出典はスライド下部に必ず明記する。他社名を出す資料のため、
+       まとめサイトの孫引きは使わず一次情報（プレスリリース・公式サイト）で裏を取る。 */
+  :root {
+    --blue: #2c5c9c; --blue-deep: #1a2e50; --blue-bright: #1a6fb5; --blue-pale: #8fb0d8;
+    --ink: #2a2f3a; --line: #e3e8ef; --amber: #f0b429; --tint: #eef4fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f4f6f8; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; color: var(--ink); padding: 48px 0 96px; }
+  .note { max-width: 1120px; margin: 0 auto 28px; font-size: 13px; font-weight: 700; color: #8a93a3; }
+  .en { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; }
+
+  .deck { display: flex; flex-direction: column; gap: 34px; align-items: center; counter-reset: pg -1; }
+  .slide-shell { width: 1120px; counter-increment: pg; }
+  .slide-shell figcaption { font-size: 12px; font-weight: 700; color: #8a93a3; margin: 8px 2px 0; letter-spacing: .04em; }
+  .slide { width: 1280px; height: 720px; transform: scale(0.875); transform-origin: top left; background: #fff; position: relative; overflow: hidden; }
+  .slide-shell .clip { height: 630px; overflow: hidden; border-radius: 0; box-shadow: 0 2px 10px rgba(26,35,48,.08); }
+
+  /* ===== 共通 ===== */
+  .s-body { position: absolute; inset: 0; padding: 36px 56px; z-index: 1; }
+  .s-eyebrow { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 700; color: var(--blue-pale); letter-spacing: .02em; }
+  .s-eyebrow::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); }
+  .s-logo { position: absolute; top: 38px; right: 56px; height: 30px; }
+  .s-foot { position: absolute; left: 56px; right: 120px; bottom: 14px; font-size: 10px; color: #9aa3b2; line-height: 1.6; z-index: 5; }
+  .s-num { position: absolute; right: 0; bottom: 0; width: 66px; height: 66px; background: var(--blue); border-radius: 66px 0 0 0; color: #fff; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 13px; font-weight: 700; display: flex; align-items: flex-end; justify-content: flex-end; padding: 0 14px 10px 0; z-index: 5; }
+  .s-num::before { content: counter(pg); }
+
+  /* ===== 見出し行（業種バッジ＋要点） ===== */
+  .hd { display: flex; align-items: center; gap: 18px; margin-top: 8px; }
+  .hd .badge { background: var(--blue); color: #fff; font-size: 24px; font-weight: 800; padding: 10px 22px; letter-spacing: .06em; white-space: nowrap; text-align: center; }
+  .hd .badge small { display: block; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; opacity: .8; margin-top: 3px; }
+  .hd .t { font-size: 25px; font-weight: 800; color: #1a2330; line-height: 1.4; letter-spacing: .01em; }
+  .hd .t b { color: var(--blue-bright); }
+
+  /* ===== 事例テーブル ===== */
+  table.cs { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 18px; table-layout: fixed; }
+  .cs th { background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; padding: 10px 14px; text-align: left; letter-spacing: .02em; }
+  .cs th:first-child { text-align: center; }
+  .cs td { font-size: 12.8px; font-weight: 500; color: #4a5568; padding: 13px 14px; border-bottom: 1px solid var(--line); vertical-align: middle; line-height: 1.55; }
+  .cs tr:nth-child(even) td { background: #f7f9fc; }
+  .cs td.no { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; text-align: center; font-weight: 800; color: var(--blue-pale); }
+  /* 社名は他社商標のためロゴを使わず、文字組みだけで見せる */
+  .cs td.co span { display: block; font-size: 14.5px; font-weight: 800; color: #1a2330; line-height: 1.4; }
+  .cs td.ar span { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; padding: 4px 9px; white-space: nowrap; }
+  .cs td.ar svg { flex: 0 0 auto; }
+  .cs td.rs { font-size: 13px; font-weight: 700; color: #1a2330; line-height: 1.5; }
+  .cs td.rs b { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 19px; font-weight: 800; color: var(--blue-bright); padding: 0 1px; }
+
+  /* ===== まとめ帯 ===== */
+  .band { display: flex; align-items: center; gap: 11px; background: var(--tint); border: 1.5px solid var(--blue); padding: 12px 20px; font-size: 13.5px; font-weight: 800; color: var(--blue-deep); margin-top: 12px; }
+  .band::before { content: "✓"; flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+
+
+  /* ===== 個別詳細スライド ===== */
+  .dhd { display: flex; align-items: flex-start; gap: 18px; margin-top: 8px; }
+  .dhd .no { background: var(--blue-deep); color: #fff; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 22px; font-weight: 800; padding: 12px 18px; letter-spacing: .06em; }
+  .dhd .mark { flex: 0 0 auto; width: 46px; height: 46px; background: var(--tint); border: 1.5px solid #cfdcee; color: var(--blue); display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .dhd .mark svg { width: 24px; height: 24px; }
+  .dhd .co { font-size: 25px; font-weight: 800; color: #1a2330; line-height: 1.3; }
+  .dhd .co small { display: block; font-size: 14px; font-weight: 700; color: #6b7789; margin-top: 5px; }
+  .dhd .tags { margin-left: auto; display: flex; gap: 7px; padding-top: 6px; }
+  .dhd .tags span { font-size: 11.5px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; border-radius: 999px; padding: 5px 13px; white-space: nowrap; }
+
+  .dt { display: grid; grid-template-columns: 1.18fr 1fr; gap: 20px; margin-top: 14px; align-items: start; }
+  .sec { border: 1px solid var(--line); }
+  .sec .h { background: #f2f5fa; border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 800; color: var(--blue-deep); padding: 9px 16px; display: flex; align-items: center; gap: 8px; }
+  .sec .h::before { content: ""; width: 5px; height: 15px; background: var(--blue); }
+  .sec .b { padding: 10px 16px 11px; }
+  .sec .i { position: relative; font-size: 12.6px; font-weight: 500; color: #4a5568; line-height: 1.7; padding: 4px 0 4px 15px; }
+  .sec .i::before { content: ""; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-pale); }
+  .sec .i b { color: #1a2330; font-weight: 800; }
+
+  .kpi { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi div { background: var(--tint); border-left: 4px solid var(--blue); padding: 11px 13px; }
+  .kpi .k { font-size: 10.5px; font-weight: 800; color: var(--blue); }
+  .kpi .v { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 24px; font-weight: 800; color: #1a2330; line-height: 1.15; margin-top: 3px; }
+  .kpi .v small { font-family: "Noto Sans JP", sans-serif; font-size: 11px; font-weight: 700; color: #6b7789; margin-left: 2px; }
+  .kpi .n { font-size: 10.5px; font-weight: 600; color: #7a8698; margin-top: 3px; }
+  .trend { margin-top: 10px; background: var(--blue-deep); color: #fff; padding: 12px 15px; display: flex; align-items: center; gap: 12px; }
+  .trend .l { font-size: 11.5px; font-weight: 800; opacity: .85; line-height: 1.5; }
+  .trend .r { margin-left: auto; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 15px; font-weight: 800; white-space: nowrap; }
+  .trend .r b { font-size: 22px; color: #8fd0ff; }
+
+  .learn { margin-top: 12px; border: 1.5px solid var(--blue); }
+  .learn .h { background: var(--blue); color: #fff; font-size: 12.5px; font-weight: 800; padding: 8px 16px; letter-spacing: .02em; }
+  .learn .g { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+  .learn .g div { padding: 9px 16px 10px; border-right: 1px solid var(--line); }
+  .learn .g div:last-child { border-right: none; }
+  .learn .t { font-size: 13px; font-weight: 800; color: var(--blue-deep); }
+  .learn .d { font-size: 11.4px; font-weight: 500; color: #4a5568; line-height: 1.6; margin-top: 3px; }
+
+
+  /* ===== 表紙（白地・左に大見出し／右にイラスト） ===== */
+  .cv { background: #fff; }
+  .cv .t { position: absolute; left: 72px; top: 104px; font-size: 74px; font-weight: 900; color: var(--blue); line-height: 1.34; letter-spacing: .02em; }
+  .cv .sub { position: absolute; left: 75px; top: 316px; font-size: 19px; font-weight: 800; color: #2a2f3a; letter-spacing: .05em; line-height: 1.7; }
+  .cv .meta { position: absolute; left: 75px; top: 392px; font-size: 14px; font-weight: 700; color: #8a93a3; letter-spacing: .06em; }
+  .cv .il { position: absolute; right: 44px; bottom: 74px; width: 560px; }
+  .cv .logo { position: absolute; left: 72px; bottom: 58px; height: 38px; }
+
+  /* ===== 目次 ===== */
+  .ix { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 26px; margin-top: 30px; }
+  .ix a, .ix div { display: flex; align-items: center; gap: 16px; background: #fff; border: 1px solid #d9e1ec; padding: 18px 20px; text-decoration: none; box-shadow: 0 4px 14px rgba(26,35,48,.05); }
+  .ix .n { flex: 0 0 auto; width: 46px; height: 46px; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; }
+  .ix .b { flex: 1; min-width: 0; display: block; }
+  .ix .nm { display: block; font-size: 19px; font-weight: 800; color: #1a2330; line-height: 1.35; }
+  .ix .ds { display: block; font-size: 12px; font-weight: 600; color: #7a8698; margin-top: 4px; line-height: 1.5; }
+  .ix .pg { flex: 0 0 auto; font-size: 12.5px; font-weight: 800; color: var(--blue); }
+  .ix .soon { border-style: dashed; opacity: .62; }
+  .ix .soon .n { background: #b9c4d4; }
+
+
+
+
+  /* ===== 目次（この資料の中身） ===== */
+  .ixh { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
+  .ixh .lb { background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; padding: 7px 16px; letter-spacing: .04em; white-space: nowrap; }
+  .ixh .tx { font-size: 15px; font-weight: 700; color: #4a5568; }
+  .ixh .pg { margin-left: auto; font-size: 13px; font-weight: 800; color: var(--blue); white-space: nowrap; }
+  .ixg { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 26px; margin-top: 14px; }
+  .ixg div { display: flex; align-items: center; gap: 13px; background: #fff; border: 1px solid var(--line); padding: 10px 14px; }
+  .ixg .n { flex: 0 0 auto; width: 30px; height: 30px; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 800; }
+  .ixg .nm { font-size: 14.5px; font-weight: 800; color: #1a2330; }
+  .ixg .ar { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; padding: 3px 8px; margin-left: 8px; white-space: nowrap; }
+  .ixg .pg { margin-left: auto; font-size: 12px; font-weight: 800; color: #8a93a3; white-space: nowrap; }
+
+  /* ===== PDF出力 ===== */
+  @page { size: 1280px 720px; margin: 0; }
+  @media print {
+    body { padding: 0; background: #fff; }
+    * { box-shadow: none !important; }
+    .note { display: none; }
+    .deck { gap: 0; display: block; }
+    .slide-shell { width: 1280px; }
+    .slide-shell figcaption { display: none; }
+    .slide-shell .clip { height: 720px; overflow: hidden; border-radius: 0; box-shadow: none; }
+    .slide { transform: none; border: none; border-radius: 0; }
+    figure.slide-shell { page-break-after: always; break-after: page; margin: 0; }
+    figure.slide-shell:last-child { page-break-after: auto; }
+  }
+
+  /* ===== 表紙（ノウハウ形式） ===== */
+  .blue-bg { background: linear-gradient(135deg, #1c3a6b 0%, var(--blue) 46%, #3a76c4 100%); color: #fff; }
+  .waves { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .kcover .badge-row { position: absolute; top: 66px; left: 64px; display: flex; align-items: center; gap: 16px; }
+  .kcover .badge { background: var(--amber); color: #4a3605; font-size: 16px; font-weight: 800; padding: 10px 18px; border-radius: 8px; }
+  .kcover .badge-note { font-size: 20px; font-weight: 700; padding-bottom: 12px; border-bottom: 2px solid rgba(255,255,255,.85); letter-spacing: .04em; }
+  .kcover .sub { position: absolute; left: 66px; top: 236px; font-size: 23px; font-weight: 700; letter-spacing: .04em; }
+  .kcover .title { position: absolute; left: 62px; top: 288px; font-size: 68px; font-weight: 800; letter-spacing: .04em; line-height: 1.28; }
+  .kcover .title small { display: block; margin-top: 10px; font-size: 34px; font-weight: 800; }
+  .kcover .pills { position: absolute; right: 64px; top: 250px; display: grid; gap: 12px; }
+  .kcover .pills span { border: 1.5px solid rgba(255,255,255,.75); border-radius: 999px; padding: 7px 22px; font-size: 14px; font-weight: 800; text-align: center; background: rgba(255,255,255,.08); }
+  .kcover .date { position: absolute; left: 66px; top: 590px; font-size: 15px; font-weight: 600; letter-spacing: .18em; opacity: .8; }
+  .kcover .logo { position: absolute; right: 64px; bottom: 48px; height: 44px; }
+  /* ===== 縦方向をページいっぱいに使う ===== */
+  .s-body.fl { display: flex; flex-direction: column; padding-bottom: 62px; }
+  .s-body.fl > .grow { flex: 1 1 auto; min-height: 0; }
+  .s-body.fl > .band { flex: 0 0 auto; }
+  .cards.grow > div { display: flex; flex-direction: column; justify-content: flex-start; padding: 30px 28px; }
+  .cards.grow .ic { width: 58px; height: 58px; } .cards.grow .ic svg { width: 28px; height: 28px; }
+  .cards.grow .t { margin-top: 18px; font-size: 20px; } .cards.grow .d { margin-top: 12px; font-size: 14.5px; line-height: 1.95; }
+  .cards.grow .g { align-self: flex-start; margin-top: auto; font-size: 12px; padding: 5px 14px; }
+  .steps.grow { grid-auto-rows: 1fr; }
+  .tpl.grow { grid-auto-rows: 1fr; }
+  .chk.grow > div { display: flex; flex-direction: column; } .chk.grow .ci { flex: 1 1 0; display: flex; align-items: center; }
+  .chk.grow .ci::before { top: 50%; transform: translateY(-50%); }
+  .toc.grow { grid-auto-rows: 1fr; } .toc.grow > div { border-bottom: 1px solid var(--line); }
+  table.grow { height: 100%; }
+  .nts.grow { align-content: space-evenly; }
+  /* ===== 事例ページ（メリハリ版） ===== */
+  .vpt { margin-top: 10px; display: flex; align-items: center; gap: 14px; background: linear-gradient(90deg, #eaf2fc, #f6f9fd); border-left: 6px solid var(--blue-bright); padding: 9px 18px; }
+  .vpt p { font-size: 18px; font-weight: 900; color: var(--blue-deep); letter-spacing: .02em; }
+  .vpt .q { color: var(--blue-bright); display: flex; }
+  .vpt.red { background: linear-gradient(90deg, #fdecea, #fef7f6); border-left-color: #d6453d; } .vpt.red p { color: #7a1f1a; } .vpt.red .q { color: #d6453d; }
+  .vdt { display: grid; grid-template-columns: 1.15fr 1fr; gap: 18px; margin-top: 10px; align-items: start; }
+  .vdt + .learn { margin-top: 10px; }
+  .vsec + .vsec { margin-top: 10px; }
+  .vsec .vh { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 900; color: var(--blue-deep); padding-bottom: 6px; border-bottom: 2px solid var(--line); }
+  .vsec .vi { width: 24px; height: 24px; border-radius: 50%; background: var(--blue-deep); color: #fff; display: flex; align-items: center; justify-content: center; }
+  .vsec .vb { padding-top: 6px; }
+  .vsec .vb .i { position: relative; padding: 3px 0 3px 16px; font-size: 12.8px; font-weight: 500; color: #3a4252; line-height: 1.55; }
+  .vsec .vb .i::before { content: ""; position: absolute; left: 2px; top: 12px; width: 6px; height: 6px; background: var(--blue-bright); }
+  .vsec .vb b, .vpt b { color: #1a2330; background: linear-gradient(transparent 58%, #ffe27a 58%); font-weight: 800; }
+  .vsec.sm { margin-top: 8px; background: #f7f9fc; padding: 10px 12px; } .vsec.sm .vh { border-bottom-color: #e3e9f2; }
+  .vk { background: #fff; border: 1.5px solid var(--line); padding: 8px 14px; margin-bottom: 8px; }
+  .vk .k { font-size: 11.5px; font-weight: 800; color: var(--blue); }
+  .vk .n { font-size: 10.5px; font-weight: 600; color: #7a8698; margin-top: 2px; }
+  .vk.hero { background: var(--blue-deep); border: 0; color: #fff; padding: 14px 18px; }
+  .vk.hero .k { color: #a9c8f0; } .vk.hero .n { color: #c3d3ea; }
+  .vk.hero .v { font-size: 40px; font-weight: 900; line-height: 1.1; margin-top: 4px; } .vk.hero .v small { font-size: 16px; margin-left: 4px; }
+  .vk.hero.red { background: #7a1f1a; }
+  .vk.donut { display: flex; align-items: center; gap: 16px; } .vk.donut .k { font-size: 14px; }
+  .vk .dn { position: relative; width: 92px; height: 92px; flex: 0 0 auto; }
+  .vk .dn span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 900; color: #1a2330; }
+  .vk .dn small { font-size: 11px; }
+  .vk.chart .br { display: grid; grid-template-columns: 26px 1fr 96px; align-items: center; gap: 8px; margin-top: 6px; }
+  .vk.chart .bl { font-size: 11px; font-weight: 800; color: #7a8698; }
+  .vk.chart .bt { height: 16px; background: #f0f3f8; display: block; } .vk.chart .bt span { display: block; height: 100%; }
+  .vk.chart .bv { font-size: 14px; font-weight: 800; color: #5a6578; text-align: right; } .vk.chart .bv.hi { font-size: 18px; color: #1a2330; }
+  .vk.chart .bv small { font-size: 10.5px; margin-left: 2px; }
+  .vt { display: grid; gap: 8px; } .vt.c1 { grid-template-columns: 1fr; } .vt.c2 { grid-template-columns: 1fr 1fr; } .vt.c3 { grid-template-columns: 1fr 1fr 1fr; }
+  .vt > div { background: var(--tint); border-top: 3px solid var(--blue-bright); padding: 9px 12px; }
+  .vt .k { font-size: 11px; font-weight: 800; color: var(--blue); }
+  .vt .v { font-size: 22px; font-weight: 900; color: #1a2330; line-height: 1.2; margin-top: 2px; } .vt .v small { font-size: 11px; margin-left: 2px; color: #6b7789; }
+  .vt .n { font-size: 10px; font-weight: 600; color: #7a8698; margin-top: 2px; }
+  .learn .g > div { display: flex; gap: 10px; align-items: flex-start; padding-top: 7px; padding-bottom: 8px; }
+  .learn .ln { flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%; background: var(--amber); color: #4a3605; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .learn.red { border-color: #d6453d; } .learn.red .h { background: #d6453d; }
+  /* 事例ページも縦をページいっぱいに使う（下に余白を残さない） */
+  .s-body.fl > .dhd { flex: 0 0 auto; }
+  .vdt.grow { align-items: stretch; margin-top: 12px; }
+  .vdt.grow > .vl, .vdt.grow > .vr { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+  .vdt.grow > .vl { justify-content: space-between; }
+  .vdt.grow .vsec + .vsec { margin-top: 0; }
+  .vdt.grow .vsec { flex: 1 1 auto; display: flex; flex-direction: column; }
+  .vdt.grow .vsec .vb { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-evenly; }
+  .vdt.grow > .vr > * { flex: 1 1 auto; margin-bottom: 0; display: flex; flex-direction: column; justify-content: center; }
+  .vdt.grow > .vr > .vk.donut { flex-direction: row; justify-content: flex-start; }
+  .vdt.grow > .vr > .vt { display: grid; }
+  .vdt.grow > .vr > .vt > div { display: flex; flex-direction: column; justify-content: center; }
+  .vdt.grow > .vr > .vsec.sm { justify-content: flex-start; }
+  .vdt.measure > div > *, .vdt.measure .vb { flex: none !important; }
+  .s-body.fl > .learn { flex: 0 0 auto; margin-top: 14px; }
+  .vl.roomy .vsec .vb .i { font-size: 14px; line-height: 1.7; } .vl.roomy .vsec .vh { font-size: 15.5px; }
+  .learn .g > div { padding-top: 12px; padding-bottom: 13px; }
+  /* ===== ノウハウ系の追加スライド型 ===== */
+  .kh { margin-top: 8px; }
+  .kh .t { font-size: 25px; font-weight: 900; color: #1a2330; line-height: 1.4; letter-spacing: .01em; }
+  .kh .t b { color: var(--blue-bright); }
+  .kh .l { margin-top: 8px; font-size: 13.5px; font-weight: 600; color: #5a6578; line-height: 1.7; }
+  .ld { margin-top: 18px; display: grid; gap: 10px; }
+  .ld .p { font-size: 14px; font-weight: 500; color: #3a4252; line-height: 1.85; }
+  .ld .p b { color: #1a2330; }
+  .cards { display: grid; gap: 16px; margin-top: 22px; }
+  .cards.c2 { grid-template-columns: 1fr 1fr; } .cards.c3 { grid-template-columns: 1fr 1fr 1fr; } .cards.c4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .cards.c6 { grid-template-columns: 1fr 1fr 1fr; }
+  .cards > div { border: 1.5px solid var(--line); border-top: 4px solid var(--blue); padding: 16px 18px 18px; background: #fff; }
+  .cards .ic { width: 40px; height: 40px; border-radius: 50%; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; }
+  .cards .t { margin-top: 10px; font-size: 16px; font-weight: 900; color: var(--blue-deep); line-height: 1.4; }
+  .cards .d { margin-top: 7px; font-size: 12.5px; font-weight: 500; color: #4a5568; line-height: 1.75; }
+  .cards .d b { color: #1a2330; }
+  .cards .g { margin-top: 10px; display: inline-block; background: var(--tint); color: var(--blue); font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 999px; }
+  .steps { margin-top: 20px; display: grid; gap: 10px; }
+  .steps > div { display: flex; align-items: center; gap: 16px; border: 1.5px solid var(--line); padding: 12px 18px; }
+  .steps .n { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: var(--blue-deep); color: #fff; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+  .steps .t { font-size: 15.5px; font-weight: 900; color: #1a2330; } .steps .t b { color: var(--blue-bright); }
+  .steps .d { margin-top: 3px; font-size: 12.5px; font-weight: 500; color: #5a6578; line-height: 1.6; }
+  .steps .sd { margin-left: auto; flex: 0 0 300px; font-size: 12px; font-weight: 700; color: var(--blue); background: var(--tint); padding: 8px 12px; line-height: 1.55; }
+  .ch { background: linear-gradient(135deg, #1a2e50 0%, #2c5c9c 70%, #3f7fc6 100%); }
+  .chp { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; text-align: center; }
+  .chp .s-logo { position: absolute; top: 38px; right: 56px; height: 30px; }
+  .chp .no { width: 92px; height: 92px; border: 2px solid rgba(255,255,255,.85); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 800; }
+  .chp .t { margin-top: 30px; font-size: 40px; font-weight: 900; letter-spacing: .04em; }
+  .chp .d { margin-top: 12px; font-size: 16px; font-weight: 700; opacity: .85; }
+  .chp .s-num { background: rgba(255,255,255,.18); }
+  table.kt td { font-size: 12.5px; } table.kt td.kc { font-weight: 800; color: #1a2330; background: var(--tint); }
+  table.kt td b { color: var(--blue-bright); }
+  .tpl { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px 20px; }
+  .tpl > div { border-left: 4px solid var(--blue); background: #f7f9fc; padding: 16px 20px; min-height: 118px; }
+  .tpl .at { font-size: 15px; font-weight: 900; color: var(--blue-deep); }
+  .tpl .al { margin-top: 7px; font-size: 13.5px; font-weight: 500; color: #3a4252; line-height: 1.8; }
+  .chk { margin-top: 16px; display: grid; gap: 16px; } .chk.c2 { grid-template-columns: 1fr 1fr; } .chk.c3 { grid-template-columns: 1fr 1fr 1fr; }
+  .chk > div { border: 1.5px solid var(--line); }
+  .chk .gh { background: var(--blue-deep); color: #fff; font-size: 15px; font-weight: 800; padding: 13px 16px; display: flex; align-items: center; gap: 9px; }
+  .chk .gh span { width: 20px; height: 20px; border-radius: 50%; background: #fff; color: var(--blue-deep); font-size: 11px; display: flex; align-items: center; justify-content: center; }
+  .chk .ci { position: relative; padding: 24px 16px 24px 42px; font-size: 14.5px; font-weight: 600; color: #3a4252; border-bottom: 1px solid var(--line); line-height: 1.5; }
+  .chk .ci:last-child { border-bottom: 0; }
+  .chk .ci::before { content: ""; position: absolute; left: 16px; top: 27px; width: 13px; height: 13px; border: 1.6px solid var(--blue); }
+  .ctab { margin-top: 20px; background: linear-gradient(90deg, #1a2e50, #2c5c9c); color: #fff; padding: 20px 26px; display: flex; align-items: center; gap: 20px; }
+  .ctab .t { font-size: 19px; font-weight: 900; } .ctab .d { margin-top: 5px; font-size: 12.5px; font-weight: 600; opacity: .85; line-height: 1.6; }
+  .ctab .bt { margin-left: auto; flex: 0 0 auto; background: #fff; color: var(--blue-deep); font-size: 14px; font-weight: 900; padding: 12px 24px; border-radius: 999px; }
+  .nts { margin-top: 24px; display: grid; gap: 16px; }
+  .nts .nt { position: relative; padding-left: 22px; font-size: 14px; font-weight: 500; color: #3a4252; line-height: 1.7; }
+  .nts .nt::before { content: "※"; position: absolute; left: 0; color: var(--blue-pale); }
+  .toc { margin-top: 22px; display: grid; gap: 12px; }
+  .toc > div { display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--line); padding: 14px 4px; }
+  .toc .n { font-size: 15px; font-weight: 800; color: var(--blue); width: 30px; }
+  .toc .nm { font-size: 18px; font-weight: 800; color: #1a2330; } .toc .nm small { margin-left: 14px; font-size: 12.5px; font-weight: 600; color: #7a8698; }
+  .toc .pg { margin-left: auto; font-size: 13px; font-weight: 700; color: #7a8698; }
+  .trend .l { flex: 0 0 150px; }
+  .trend .r { white-space: normal; text-align: right; line-height: 1.35; }
+  .cs td { padding-top: 11px; padding-bottom: 11px; }
+  .cs.cmp td { padding-top: 6px; padding-bottom: 6px; line-height: 1.45; }
+  /* 余白が出やすいページを埋める：通常の表は行を高く、カードは文字を大きく */
+  /* 行数が多めの表（10行前後）：詰めすぎず、ページを埋める中間の行高 */
+  table.kt.mid td { padding-top: 15px; padding-bottom: 15px; font-size: 14px; line-height: 1.6; }
+  table.kt.mid th { padding-top: 12px; padding-bottom: 12px; font-size: 14px; }
+  table.kt:not(.cmp):not(.mid) td { padding-top: 17px; padding-bottom: 17px; font-size: 13.5px; line-height: 1.65; }
+  .cards > div { padding: 22px 22px 24px; }
+  .cards .t { font-size: 17px; } .cards .d { font-size: 13.5px; line-height: 1.85; }
+  .ctab { margin-top: 28px; padding: 26px 30px; }
+  .steps > div { padding: 16px 20px; } .steps .t { font-size: 16.5px; } .steps .d { font-size: 13.5px; }
+</style>
+
+<style id="ebook-embed-overrides">
+  body { padding: 0 !important; background: #e9edf3 !important; }
+  .note { display: none !important; }
+  .deck { gap: 16px !important; }
+  .slide-shell { width: 1280px !important; }
+  .slide-shell figcaption { display: none !important; }
+  .slide-shell .clip { height: 720px !important; border-radius: 0 !important; box-shadow: none !important; }
+  .slide { transform: none !important; border: none !important; border-radius: 0 !important; }
+</style>
+</head>
+<body>
+  <p class="note">生成AI 社内ガイドライン＆リスク対策ガイド｜全25スライド／事例・数値は各社・各機関の公開情報にもとづく</p>
+  <div class="deck">
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide blue-bg kcover">
+        <svg class="waves" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <path d="M700,-80 C980,60 820,300 1120,380 C1320,433 1360,560 1280,760 L1380,760 L1380,-80 Z" fill="rgba(255,255,255,0.07)"/>
+          <path d="M880,-120 C1150,40 980,260 1240,330 L1340,330 L1340,-120 Z" fill="rgba(90,160,230,0.28)"/>
+          <path d="M-80,560 C240,480 420,660 760,600 C1040,551 1180,640 1300,760 L-80,760 Z" fill="rgba(20,40,80,0.22)"/>
+          <path d="M-80,640 C300,560 560,720 900,660 C1120,621 1240,690 1310,760 L-80,760 Z" fill="rgba(90,160,230,0.18)"/>
+        </svg>
+        <div class="badge-row"><span class="badge">お役立ち資料</span><span class="badge-note">バイテック法人AI研修</span></div>
+        <p class="sub">実際の事故3事例と、ルールを整えた企業・自治体7事例</p>
+        <h1 class="title">生成AI 社内ガイドライン<br><small>＆リスク対策ガイド</small></h1>
+        <div class="pills"><span>事故事例3件</span><span>ガイドライン事例7件</span><span>条文ひな形つき</span></div>
+        <p class="date">UPDATE 2026.10</p>
+        <img class="logo" src="/biz/ebooks/ebook-19/assets/biz-logo-w.svg" alt="byTech BUSINESS">
+      </div>
+    </div><figcaption>表紙</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">Contents</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd" style="margin-top:4px"><p class="t" style="font-size:27px">目次</p></div>
+        <div class="grow toc"><div><span class="n">01</span><span class="nm">なぜ今ルールが必要か<small>シャドーAIと3つの事故</small></span><span class="pg">P.2 - 3</span></div><div><span class="n">02</span><span class="nm">実際に起きたこと<small>情報漏洩・著作権・誤情報の3事例</small></span><span class="pg">P.4 - 7</span></div><div><span class="n">03</span><span class="nm">ルールを整えた企業・自治体<small>公開ガイドライン7事例</small></span><span class="pg">P.8 - 16</span></div><div><span class="n">04</span><span class="nm">規程に入れる10項目と条文ひな形<small>そのまま自社用に直せる文例</small></span><span class="pg">P.17 - 20</span></div><div><span class="n">05</span><span class="nm">運用チェックリストと公的指針<small>作って終わりにしないために</small></span><span class="pg">P.21 - 22</span></div></div>
+        <p class="s-foot">本資料の事例は各社・各機関の公式発表および主要報道にもとづきバイテック法人AI研修が編集したものです。掲載企業・機関との取引関係や推薦を示すものではありません。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>目次</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">なぜ今ルールが必要か</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">禁止しても、AIは<b>使われる</b>。<br>だから「使ってよい形」を先に決める。</p><p class="l">ルールがないまま放置すると、社員は個人のアカウントで業務データを入力し始めます（シャドーAI）。事故の多くは、この「見えない利用」から起きています。</p></div>
+        <div class="grow cards c3"><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M12 3.5l9.5 16.5h-19z"/><path d="M12 10v4.5M12 17.2h.01"/></svg></span><p class="t">禁止は抜け道を生む</p><p class="d">一律禁止にしても便利さは知られています。<b>個人アカウントでの利用</b>が増え、会社は何が入力されたか把握できなくなります。</p><p class="g">シャドーAI</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><rect x="5" y="10.5" width="14" height="10"/><path d="M8 10.5V7.5a4 4 0 018 0v3"/></svg></span><p class="t">事故は入力と出力で起きる</p><p class="d"><b>入力</b>では機密・個人情報の漏洩、<b>出力</b>では著作権侵害と誤情報。リスクの場所が分かれば対策は打てます。</p><p class="g">P.4 - 7 の事例</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span><p class="t">ルールは活用のアクセル</p><p class="d">何を入れてよいかが決まると、社員は<b>迷わず使える</b>ようになります。ルール整備が早い組織ほど利用率が伸びています。</p><p class="g">P.8 - 16 の事例</p></div></div><div class="band">ガイドラインの目的は「止めること」ではなく、「安全に使える範囲を明確にして、使ってもらうこと」です。</div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>なぜ今ルールが必要か</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">主なリスクと対策</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">押さえるべきリスクは<b>6つ</b>。どれも「ルール＋環境＋教育」で減らせる。</p></div>
+        <table class="grow cs kt tall">
+          <colgroup><col style="width:150px"><col><col style="width:300px"><col style="width:190px"></colgroup>
+          <tr><th>リスク</th><th>起きること</th><th>主な対策</th><th>関連する公的指針</th></tr>
+          <tr><td class="kc">情報漏洩</td><td>機密情報や顧客データを外部サービスに入力し、管理できない場所に残る</td><td>入力禁止情報の明文化／<b>学習に使われない法人プラン</b>に限定</td><td>個人情報保護委員会 注意喚起</td></tr>
+          <tr><td class="kc">個人情報</td><td>本人の同意や利用目的の範囲を超えて個人データを入力してしまう</td><td>利用目的の確認／入力前のマスキング</td><td>個人情報保護委員会 注意喚起</td></tr>
+          <tr><td class="kc">著作権・権利侵害</td><td>生成物が既存の作品に似ていて、権利侵害を指摘される</td><td>公開前の<b>類似チェック</b>／作品名を指示した生成の禁止</td><td>文化庁「AIと著作権に関する考え方」</td></tr>
+          <tr><td class="kc">誤情報</td><td>もっともらしい誤り（ハルシネーション）をそのまま外部に出す</td><td><b>人による確認</b>の義務化／出典を原文で照合</td><td>AI事業者ガイドライン</td></tr>
+          <tr><td class="kc">偏り・不適切表現</td><td>差別的・不公平な表現や判断が混ざる</td><td>用途の制限（採用・評価など）／複数人のレビュー</td><td>AI事業者ガイドライン</td></tr>
+          <tr><td class="kc">なりすまし・悪用</td><td>AIで作った偽の文書・音声・画像による詐欺や信用毀損</td><td>AI利用の明示／社外向け発信の承認フロー</td><td>AI事業者ガイドライン</td></tr>
+        </table>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>主なリスク一覧</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide ch">
+        <div class="chp">
+          <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo-w.svg" alt="byTech BUSINESS">
+          <span class="no">01</span>
+          <p class="t">実際に起きたこと</p>
+          <p class="d">情報漏洩・著作権・誤情報の3事例</p>
+          <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>章扉 実際に起きたこと</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">実際に起きたこと｜情報漏洩</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">A</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><rect x="5" y="10.5" width="14" height="10"/><path d="M8 10.5V7.5a4 4 0 018 0v3"/></svg></span>
+          <p class="co">社外秘コードをChatGPTに入力、全社で利用制限<small>サムスン電子（韓国）（2023年4月）</small></p>
+          <div class="tags"><span>情報漏洩</span><span>2023年4月</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M12 3.5l9.5 16.5h-19z"/><path d="M12 10v4.5M12 17.2h.01"/></svg></span>何が起きたか</p><div class="vb"><p class="i">半導体部門の技術者が<b>社外秘のソースコード</b>をChatGPTに入力し修正を依頼</p><p class="i"><b>会議の内容</b>を入力して議事録を作らせた例も報じられた</p><p class="i">社内で<b>少なくとも3件</b>の機密情報の入力が確認された（2023年4月）</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>その後の影響</p><div class="vb"><p class="i">2023年5月、社用PCでの<b>生成AI利用を一時的に制限</b>すると社内通知</p><p class="i">違反は<b>解雇を含む懲戒処分</b>の対象になり得ると従業員に警告</p><p class="i">外部サーバーに保存されたデータは<b>回収・削除が難しい</b>と懸念を表明</p></div></div><div class="vsec sm"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg></span>なぜ起きたか</p><div class="vb"><p class="i">社員が個人の判断で<b>業務データを外部AIに入力</b>できる状態だった（一般的教訓）</p><p class="i">入力内容が<b>サービス提供者のサーバーに保存される</b>ことへの認識不足（一般的教訓）</p></div></div></div>
+          <div class="vr"><div class="vk donut"><div class="dn"><svg width="92" height="92" viewBox="0 0 92 92"><circle cx="46" cy="46" r="34" fill="none" stroke="#e6edf6" stroke-width="12"/><circle cx="46" cy="46" r="34" fill="none" stroke="#d6453d" stroke-width="12" stroke-dasharray="138.85839528866887 213.62830044410595" transform="rotate(-90 46 46)"/></svg><span>65<small>%</small></span></div><div><p class="k">リスクを懸念</p><p class="n">社内調査の回答者</p></div></div><div class="vt c1"><div><p class="k">機密情報の入力</p><p class="v">3<small>件</small></p><p class="n">2023年4月に社内で確認</p></div></div></div>
+        </div>
+        <div class="learn red">
+          <p class="h">自社で防ぐには（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">入力NG情報の明文化</p><p class="d">ソースコード・議事録・顧客情報など入力禁止の情報を具体例付きでルール化する</p></div></div><div><span class="ln">2</span><div><p class="t">学習されない環境に限定</p><p class="d">入力データが学習に使われない法人プランやAPI経由の環境に利用を限定する</p></div></div><div><span class="ln">3</span><div><p class="t">研修と相談窓口</p><p class="d">全社員に入力ルール研修を行い、迷ったときの相談先を明確にしておく</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：Bloomberg（2023年5月2日）、NBC News（2023年5月2日）、Fortune（2023年5月2日）。記載は報道・公式発表の範囲に限ります。係争中の事案は判決が出ていません。「自社で防ぐには」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 A 社外秘コードをChatGPTに入力、全社で利用制限</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">実際に起きたこと｜著作権</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">B</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M12 3v18M5 21h14M5 7h14"/><path d="M5 7l-3 7a3 3 0 006 0zM19 7l-3 7a3 3 0 006 0z"/></svg></span>
+          <p class="co">大手紙3社が生成AI検索を著作権侵害で提訴<small>読売新聞社・日本経済新聞社・朝日新聞社／米Perplexity（日本）（2025年8月）</small></p>
+          <div class="tags"><span>著作権</span><span>2025年8月</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M12 3.5l9.5 16.5h-19z"/><path d="M12 10v4.5M12 17.2h.01"/></svg></span>何が起きたか</p><div class="vb"><p class="i">読売新聞の3本社が<b>2025年8月7日</b>、米Perplexityを東京地裁に提訴</p><p class="i">AI検索の回答で<b>記事を無断で複製・送信</b>したと主張（複製権・公衆送信権）</p><p class="i">日経・朝日も<b>8月26日</b>に共同提訴。記事と異なる<b>虚偽表示</b>も問題視</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>その後の影響</p><div class="vb"><p class="i">読売は差し止めと<b>約21億6800万円</b>、日経・朝日は<b>各22億円</b>の賠償を請求</p><p class="i">Perplexityは管轄や請求の特定不足を理由に<b>争う姿勢</b>（2026年5月に初弁論）</p><p class="i">日経・朝日は社名付きの誤った表示で<b>新聞社の信用が毀損</b>されたと主張</p></div></div><div class="vsec sm"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg></span>なぜ起きたか</p><div class="vb"><p class="i">読売側は2025年2〜6月に<b>約11万9千件</b>の記事へのアクセスがあったと主張</p><p class="i">日経・朝日側は<b>robots.txtによる拒否</b>を無視して記事を取得したと主張</p><p class="i">いずれも原告側の主張で、<b>裁判は係争中</b>（判決は出ていない）</p></div></div></div>
+          <div class="vr"><div class="vk hero red"><p class="k">読売の請求額</p><p class="v">約21.68<small>億円</small></p><p class="n">差し止め＋損害賠償</p></div><div class="vt c1"><div><p class="k">日経・朝日の請求</p><p class="v">各22<small>億円</small></p><p class="n">損害賠償請求額</p></div></div></div>
+        </div>
+        <div class="learn red">
+          <p class="h">自社で防ぐには（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">公開前の類似チェック</p><p class="d">AI生成の文章・画像が既存の記事や作品に酷似していないか公開前に確認する</p></div></div><div><span class="ln">2</span><div><p class="t">出典を原文で確認</p><p class="d">AIが示す出典は必ず開き、要約や引用が原文と一致するか人が確かめる</p></div></div><div><span class="ln">3</span><div><p class="t">権利面でツールを選ぶ</p><p class="d">データ取得・学習の方針や補償条項を確認したうえで利用サービスを選定する</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：INTERNET Watch／Impress Watch（2025年8月）、共同通信配信（秋田魁新報 2026年5月26日）、Bloomberg Law（2025年8月26日）、Nieman Lab（2025年8月）。記載は報道・公式発表の範囲に限ります。係争中の事案は判決が出ていません。「自社で防ぐには」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 B 大手紙3社が生成AI検索を著作権侵害で提訴</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">実際に起きたこと｜誤情報</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">C</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M12 3.5l9.5 16.5h-19z"/><path d="M12 10v4.5M12 17.2h.01"/></svg></span>
+          <p class="co">AIで作った政府報告書に架空の出典、一部返金<small>デロイト・オーストラリア／豪州 雇用・職場関係省（豪州）（2025年10月）</small></p>
+          <div class="tags"><span>誤情報</span><span>2025年10月</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M12 3.5l9.5 16.5h-19z"/><path d="M12 10v4.5M12 17.2h.01"/></svg></span>何が起きたか</p><div class="vb"><p class="i">福祉制度のIT審査報告書（契約<b>約44万豪ドル</b>）を2025年7月に省が公表</p><p class="i"><b>実在しない論文</b>の参照や<b>連邦裁判所判決の捏造引用</b>が見つかった</p><p class="i">10月の修正版で、作成に<b>Azure OpenAI（生成AI）</b>を使ったと開示</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>その後の影響</p><div class="vb"><p class="i">デロイトは契約の<b>最終支払い分を返金</b>することで省と合意</p><p class="i">省によると返金額は<b>9.7万豪ドル超</b>（契約額の4分の1未満）</p><p class="i">上院議員が<b>全額返金</b>を求めるなど、社会的な批判が広がった</p></div></div><div class="vsec sm"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg></span>なぜ起きたか</p><div class="vb"><p class="i">外部の大学研究者が指摘するまで<b>架空の出典が見過ごされた</b></p><p class="i">生成AIの出力について<b>引用・出典の照合が不十分</b>だった（一般的教訓）</p></div></div></div>
+          <div class="vr"><div class="vk hero red"><p class="k">契約額</p><p class="v">約44万<small>豪ドル</small></p><p class="n">報告書作成の対価</p></div><div class="vt c1"><div><p class="k">返金額</p><p class="v">9.7万超<small>豪ドル</small></p><p class="n">同省の説明</p></div></div></div>
+        </div>
+        <div class="learn red">
+          <p class="h">自社で防ぐには（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">出典を全件照合</p><p class="d">引用・参考文献・数値はAI任せにせず、原典を開いて1件ずつ確認する</p></div></div><div><span class="ln">2</span><div><p class="t">AI利用範囲の明示</p><p class="d">顧客向けの成果物ではAIを使った範囲を明記し、契約でも取り決めておく</p></div></div><div><span class="ln">3</span><div><p class="t">第三者レビュー</p><p class="d">AIが下書きした文書は作成者以外が確認してから社外に出す運用にする</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：AP通信（2025年10月7日）、CFO Dive（2025年10月21日・同省広報の説明）。記載は報道・公式発表の範囲に限ります。係争中の事案は判決が出ていません。「自社で防ぐには」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 C AIで作った政府報告書に架空の出典、一部返金</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide ch">
+        <div class="chp">
+          <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo-w.svg" alt="byTech BUSINESS">
+          <span class="no">02</span>
+          <p class="t">ルールを整えた企業・自治体</p>
+          <p class="d">公開されているガイドライン7事例</p>
+          <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>章扉 ガイドライン事例</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">ガイドライン事例 一覧</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">共通点は、<b>禁止より先に「安全に使える環境」</b>を用意したこと。<br>ルールと研修をセットにした組織ほど、利用が定着している。</p></div>
+        <table class="grow cs cmp">
+          <colgroup><col style="width:40px"><col style="width:176px"><col style="width:120px"><col><col style="width:262px"></colgroup>
+          <tr><th>No.</th><th>企業・自治体</th><th>区分</th><th>取り組み</th><th>公表されている内容・成果</th></tr>
+          <tr>
+            <td class="no">01</td><td class="co"><span>パナソニック コネクト</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 21h18V10.2l-6 3.9v-3.9l-6 3.9V6.6H3z"/><path d="M7 21v-3.4M12 21v-3.4M17 21v-3.4"/></svg>製造・IT</span></td>
+            <td>禁止より先に安全な社内AI環境を全社員へ。入力の二次利用なし・一定期間で消去</td>
+            <td class="rs">25年度 <b>78.8万時間</b>削減（総労働時間の<b>3.4%</b>）</td>
+          </tr>
+          <tr>
+            <td class="no">02</td><td class="co"><span>NEC</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.8C7.9 18.7 5 15.2 5 11V6z"/><path d="M9 11.6l2.1 2.1L15.2 9.6"/></svg>IT・全社</span></td>
+            <td>機密区分ごとに入力可否を定義し、同意・申請者のみ利用可。入出力を全ログ化</td>
+            <td class="rs">資料作成時間<b>50%</b>削減・議事録<b>30分→約5分</b></td>
+          </tr>
+          <tr>
+            <td class="no">03</td><td class="co"><span>LINEヤフー</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>IT</span></td>
+            <td>eラーニング＋テスト合格を利用条件に、業務別の「AI活用ルール」で活用を義務化</td>
+            <td class="rs">必須研修の受講率<b>96%</b>（2026年5月時点）</td>
+          </tr>
+          <tr>
+            <td class="no">04</td><td class="co"><span>日立製作所</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg>全社規程</span></td>
+            <td>専門家を集めたCoEが業務利用ガイドラインを発行し、社員向け相談窓口も設置</td>
+            <td class="rs">ガイドライン第一版を<b>2023年4月末</b>発行・継続更新</td>
+          </tr>
+          <tr>
+            <td class="no">05</td><td class="co"><span>東京都</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>自治体</span></td>
+            <td>許可ツールのみ利用可・私物端末禁止。4つのチェックポイントで入力・確認・明記を規定</td>
+            <td class="rs">約束事＋<b>4</b>つのチェックポイントに集約</td>
+          </tr>
+          <tr>
+            <td class="no">06</td><td class="co"><span>デジタル庁</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg>中央省庁</span></td>
+            <td>各府省にAI統括責任者（CAIO）を置き、利用ルールひな形・高リスク判定・調達チェックを整備</td>
+            <td class="rs">職員の約<b>8割</b>が3か月で延べ<b>6万5,000回</b>以上利用</td>
+          </tr>
+          <tr>
+            <td class="no">07</td><td class="co"><span>横須賀市</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg>自治体</span></td>
+            <td>機密・個人情報は扱わない運用で全庁実証。アンケートで課題を把握し研修へ反映</td>
+            <td class="rs">利用者率<b>50%</b>・<b>8割以上</b>が効率向上と回答</td>
+          </tr>
+        </table>
+        <p class="s-foot">出典：各社・各機関の公式発表。パナソニック コネクト／NEC技報／LINEヤフー／日立製作所 ニュースリリース／東京都デジタルサービス局／デジタル庁／横須賀市。数値は公表値であり、当社による測定値ではありません。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>ガイドライン事例 一覧</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">ガイドライン事例｜企業</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">01</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 21h18V10.2l-6 3.9v-3.9l-6 3.9V6.6H3z"/><path d="M7 21v-3.4M12 21v-3.4M17 21v-3.4"/></svg></span>
+          <p class="co">パナソニック コネクト<small>企業/全社展開｜国内約1.18万人</small></p>
+          <div class="tags"><span>企業/全社展開</span><span>国内約1.18万人</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>禁止・入力してはいけないもの</p><div class="vb"><p class="i">社外の生成AIではなく、社内ConnectAI（旧ConnectGPT）に利用を集約</p><p class="i">入力した情報は<b>2次利用しない</b>・一定期間で消去する設計</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>許可・推奨していること</p><div class="vb"><p class="i">国内全社員が社内イントラからいつでも質問・作成に利用可</p><p class="i">引用元表示で回答の真偽を社員自身が確認できる</p></div></div><div class="vsec sm"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg></span>体制・運用・見直し</p><div class="vb"><p class="i">利用画面に「使用に際しての注意喚起」を明記</p><p class="i">導入目標に<b>シャドーAI利用リスク軽減</b>を掲げ毎年実績を公表</p><p class="i">社外秘の品質管理文書等へ対象を段階拡大</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">年間削減時間</p><p class="v">78.8万<small>時間</small></p><p class="n">2025年度</p></div><div class="vt c3"><div><p class="k">利用回数</p><p class="v">361万<small>回</small></p><p class="n">2025年度</p></div><div><p class="k">1回の削減</p><p class="v">33<small>分</small></p><p class="n">2025年度平均</p></div><div><p class="k">情報漏洩・著作権</p><p class="v">問題発生せず<small></small></p><p class="n">導入後16か月</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">禁止より受け皿</p><p class="d">一律禁止は私用AIへの抜け道を生む。まず入力が学習されない公式環境を用意するのが先。</p></div></div><div><span class="ln">2</span><div><p class="t">画面で注意喚起</p><p class="d">規程を読ませるより、毎回目に入る利用画面に注意文を置く方が中堅企業でも効く。</p></div></div><div><span class="ln">3</span><div><p class="t">効果を毎年公表</p><p class="d">削減時間を測って社内外に出すと、ルール順守と活用の両方の動機づけになる。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：パナソニック コネクト「AIアシスタントサービス『ConnectGPT』導入」（2023年3月）、「生成AI導入1年の実績と今後の活用構想」（2024年6月）、「AI活用で総労働時間の3.4％削減」（2026年7月）。数値は公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 01 パナソニック コネクト</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">ガイドライン事例｜企業</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">02</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.8C7.9 18.7 5 15.2 5 11V6z"/><path d="M9 11.6l2.1 2.1L15.2 9.6"/></svg></span>
+          <p class="co">NEC<small>企業/IT｜国内グループ約8万人</small></p>
+          <div class="tags"><span>企業/IT</span><span>国内グループ約8万人</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>禁止・入力してはいけないもの</p><div class="vb"><p class="i">最高機密・極秘・秘密事項（個人情報）は<b>利用不可</b></p><p class="i">社内規程（企業秘密管理規程等）と基本方針の遵守が前提</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>許可・推奨していること</p><div class="vb"><p class="i">秘密事項（個人情報除く）・社外秘は<b>社内NGSに限り利用可</b></p><p class="i">出力の品質チェックとリスク考慮の上で業務に使用</p></div></div><div class="vsec sm"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg></span>体制・運用・見直し</p><div class="vb"><p class="i">ルールに<b>同意し利用申請</b>した従業員のみ利用可</p><p class="i">入出力をすべて<b>監査可能な形でロギング</b></p><p class="i">CIO/CISO直下に「生成AI変革オフィス」設置</p></div></div></div>
+          <div class="vr"><div class="vk donut"><div class="dn"><svg width="92" height="92" viewBox="0 0 92 92"><circle cx="46" cy="46" r="34" fill="none" stroke="#e6edf6" stroke-width="12"/><circle cx="46" cy="46" r="34" fill="none" stroke="#1a6fb5" stroke-width="12" stroke-dasharray="106.81415022205297 213.62830044410595" transform="rotate(-90 46 46)"/></svg><span>50<small>%</small></span></div><div><p class="k">資料作成時間（削減）</p><p class="n">2023年8月発表</p></div></div><div class="vk chart"><p class="k">議事録作成</p><div class="br"><span class="bl">前</span><span class="bt"><span style="width:100%;background:#b9c7da"></span></span><span class="bv">30<small>分</small></span></div><div class="br"><span class="bl">後</span><span class="bt"><span style="width:16.666666666666664%;background:#1a6fb5"></span></span><span class="bv hi">5<small>分</small></span></div><p class="n">平均・23年8月発表</p></div><div class="vt c2"><div><p class="k">利用者数</p><p class="v">約2.5万<small>人</small></p><p class="n">2023年8月発表</p></div><div><p class="k">1日の活用</p><p class="v">約1万<small>回</small></p><p class="n">2023年8月発表</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">既存の機密区分を流用</p><p class="d">新ルールを作らず、既存の情報区分表に「生成AIに入力可/不可」列を足すだけで運用できる。</p></div></div><div><span class="ln">2</span><div><p class="t">同意を利用条件に</p><p class="d">ID発行時にルール同意を必須にすれば、周知の証跡と抑止効果を同時に得られる。</p></div></div><div><span class="ln">3</span><div><p class="t">ログは保険</p><p class="d">入出力ログを残せば、トラブル時に使い方を追跡でき、過度な禁止を避けられる。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：NEC技報「生成AIの社内活用を進めるNEC Generative AI Service（NGS）」（Vol.75 No.2）、NECプレスリリース（2023年8月30日）。数値は公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 02 NEC</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">ガイドライン事例｜企業</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">03</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span>
+          <p class="co">LINEヤフー<small>企業/IT｜全従業員約1.1万人</small></p>
+          <div class="tags"><span>企業/IT</span><span>全従業員約1.1万人</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>禁止・入力してはいけないもの</p><div class="vb"><p class="i"><b>試験合格</b>が生成AIの利用条件（未受講者は使えない）</p><p class="i">ゼロベースの資料作成は行わず、まずAIでアウトライン作成</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>許可・推奨していること</p><div class="vb"><p class="i">社内規則の検索は独自RAGツール「SeekAI」を利用</p><p class="i">社内会議の議事録作成は<b>全てAI</b>で実施</p><p class="i">全従業員にChatGPT Enterpriseを付与（2025年6月〜）</p></div></div><div class="vsec sm"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg></span>体制・運用・見直し</p><div class="vb"><p class="i">2023年10月に<b>AI倫理ガバナンス部門</b>を創設</p><p class="i">AIガバナンスガイドラインを刷新し推奨事項を整理</p><p class="i">研修は概ね<b>半年ごとの再受講</b>が必須</p></div></div></div>
+          <div class="vr"><div class="vk donut"><div class="dn"><svg width="92" height="92" viewBox="0 0 92 92"><circle cx="46" cy="46" r="34" fill="none" stroke="#e6edf6" stroke-width="12"/><circle cx="46" cy="46" r="34" fill="none" stroke="#1a6fb5" stroke-width="12" stroke-dasharray="205.08316842634173 213.62830044410595" transform="rotate(-90 46 46)"/></svg><span>96<small>%</small></span></div><div><p class="k">必須研修受講率</p><p class="n">2026年5月時点</p></div></div><div class="vt c2"><div><p class="k">対象従業員</p><p class="v">約11,000<small>人</small></p><p class="n">2025年7月発表</p></div><div><p class="k">生産性目標</p><p class="v">2<small>倍</small></p><p class="n">目標・3年間で</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">受講を利用条件に</p><p class="d">「研修とテストに通った人だけアカウント発行」にすると、周知漏れが構造的になくなる。</p></div></div><div><span class="ln">2</span><div><p class="t">禁止でなく作法</p><p class="d">「議事録はAIで」「資料はAIで骨子から」など、業務別の使い方ルールが定着を早める。</p></div></div><div><span class="ln">3</span><div><p class="t">半年で再受講</p><p class="d">技術もリスクも半年で変わる前提で、再受講とルール改定の周期を最初から決めておく。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：LINEヤフー「全従業員約11,000人を対象に『生成AI活用の義務化』を前提とした新しい働き方を開始」（2025年7月）、「責任あるAIへの取り組み」ほか。数値は公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 03 LINEヤフー</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">ガイドライン事例｜企業</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">04</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg></span>
+          <p class="co">日立製作所<small>企業/製造・IT｜グループ32万人</small></p>
+          <div class="tags"><span>企業/製造・IT</span><span>グループ32万人</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>禁止・入力してはいけないもの</p><div class="vb"><p class="i">生成AI利用の多様なリスクを複合的に考慮した<b>業務利用ガイドライン</b>を策定</p><p class="i">プライバシー保護・AI倫理の既存規定を生成AIにも適用</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>許可・推奨していること</p><div class="vb"><p class="i">Azure OpenAI等の社内環境「Generative AIアシスタントツール」で利用</p><p class="i">議事録の自動生成やローコード化など業務効率化に活用</p></div></div><div class="vsec sm"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg></span>体制・運用・見直し</p><div class="vb"><p class="i">IT・セキュリティ・法務・品証・知財等を集めた<b>Generative AIセンター</b></p><p class="i">ガイドラインで扱えない問い合わせは<b>社員向け相談窓口</b>で対応</p><p class="i">業界動向を踏まえ<b>継続的にアップデート</b></p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">利用推進対象</p><p class="v">32<small>万人</small></p><p class="n">日立グループ</p></div><div class="vt c1"><div><p class="k">AI倫理評価</p><p class="v">500件以上<small></small></p><p class="n">2年間・AI全般</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">横断チームを先に</p><p class="d">情シス・法務・総務を兼務で集めた小さな窓口チームでも、ルールの判断は格段に速くなる。</p></div></div><div><span class="ln">2</span><div><p class="t">「第一版」で出す</p><p class="d">完璧を待たず第一版として早く出し、更新する前提を明記すると現場の混乱を防げる。</p></div></div><div><span class="ln">3</span><div><p class="t">相談窓口を併設</p><p class="d">ガイドラインに書き切れない判断は窓口へ。質問ログが次版改定の材料になる。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：日立製作所 ニュースリリース「新組織『Generative AIセンター』により、生成AIの社内外での利活用を推進し…」（2023年5月）。数値は公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 04 日立製作所</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">ガイドライン事例｜自治体</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">05</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span>
+          <p class="co">東京都<small>自治体/都道府県｜都庁全職員</small></p>
+          <div class="tags"><span>自治体/都道府県</span><span>都庁全職員</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>禁止・入力してはいけないもの</p><div class="vb"><p class="i">許可されていない生成AIの業務利用・<b>私物端末</b>での利用は禁止（懲戒対象の場合あり）</p><p class="i">他の著作物に似せるプロンプト等による著作権侵害に注意</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>許可・推奨していること</p><div class="vb"><p class="i">庁内共通ツールでは<b>機密性Aまで</b>の情報の取扱いを認める</p><p class="i">対外利用時は「生成AIにより作成」等と<b>明記</b></p></div></div><div class="vsec sm"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg></span>体制・運用・見直し</p><div class="vb"><p class="i">新規AIサービス導入は<b>AIワンストップ相談窓口</b>へ</p><p class="i">回答の根拠・裏付けを必ず確認し、必要に応じ複数職員でチェック</p><p class="i">手引きは知見を踏まえ<b>適宜見直し</b>予定</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">チェックポイント</p><p class="v">4<small>点</small></p><p class="n">生成AI利用の手引き</p></div><div class="vt c1"><div><p class="k">都立AI利用者</p><p class="v">約16<small>万人</small></p><p class="n">教員・児童生徒</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">ルールは4つまで</p><p class="d">現場が覚えられる数に絞る。機密・根拠確認・著作権・AI明記の4点は中堅企業でもそのまま使える。</p></div></div><div><span class="ln">2</span><div><p class="t">ツールで線を引く</p><p class="d">「許可ツール以外は禁止、許可ツールなら機密も可」と環境で区切ると判断が迷わない。</p></div></div><div><span class="ln">3</span><div><p class="t">罰則も明記</p><p class="d">私物端末・無許可ツールの扱いを就業規則と結びつけて書くと抑止力が上がる。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：東京都デジタルサービス局「東京都AI導入・活用ガイドラインに基づく生成AI利用の手引き Version 1.0」（2026年3月）、「東京都AI導入･活用ガイドライン」（2026年3月）。数値は公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 05 東京都</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">ガイドライン事例｜公的機関</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">06</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg></span>
+          <p class="co">デジタル庁<small>公的機関/政府｜職員約1,200人</small></p>
+          <div class="tags"><span>公的機関/政府</span><span>職員約1,200人</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>禁止・入力してはいけないもの</p><div class="vb"><p class="i">約款型クラウドサービスは原則として<b>要機密情報を扱えない</b></p><p class="i">利用目的の範囲外での利用は不可</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>許可・推奨していること</p><div class="vb"><p class="i">庁内環境「源内」は<b>機密性2情報</b>まで入力可能</p><p class="i">出力の正確性・根拠を確認し、問題点は加除修正の上で利用</p></div></div><div class="vsec sm"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg></span>体制・運用・見直し</p><div class="vb"><p class="i">各府省の<b>CAIO</b>がルールを策定・周知しリスク管理を総括</p><p class="i">リスクケースは各府省窓口へ迅速に報告</p><p class="i">2.0版で改定（2026年9月施行）</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">利用職員</p><p class="v">約950<small>人</small></p><p class="n">約1,200人中・3か月</p></div><div class="vt c3"><div><p class="k">利用回数</p><p class="v">6万5,000<small>回以上</small></p><p class="n">2025年5〜7月</p></div><div><p class="k">1人平均</p><p class="v">70<small>回</small></p><p class="n">同期間</p></div><div><p class="k">政府展開</p><p class="v">約18万<small>人</small></p><p class="n">2026年5月〜実証</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">責任者を1人決める</p><p class="d">CAIOに倣い、AI利用ルールの最終判断者を役員か部長級で1人明確にする。</p></div></div><div><span class="ln">2</span><div><p class="t">ひな形から作る</p><p class="d">政府の利用ルールひな形の構成（利用前・入力・生成物・問い合わせ先）は社内規程の骨格に流用できる。</p></div></div><div><span class="ln">3</span><div><p class="t">管理職から使う</p><p class="d">課長級の半数が利用ゼロだった教訓。管理職の率先利用を仕組みに入れる。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：デジタル庁「行政の進化と革新のための生成AIの調達・利活用に係るガイドライン（第2.0版）」（2026年6月）、「デジタル庁職員による生成AIの利用実績」（2025年8月）ほか。数値は公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 06 デジタル庁</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">ガイドライン事例｜自治体</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">07</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span>
+          <p class="co">横須賀市<small>自治体/市｜職員約3,800人</small></p>
+          <div class="tags"><span>自治体/市</span><span>職員約3,800人</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>禁止・入力してはいけないもの</p><div class="vb"><p class="i"><b>機密情報や個人情報は取り扱わない</b>運用</p><p class="i">入力情報が二次利用されない方式でのみ利用</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>許可・推奨していること</p><div class="vb"><p class="i">普段使うチャットツール上で文章作成・要約・誤字チェック・アイデア出し</p><p class="i">プレスリリースもChatGPTで下案を作り職員が校正</p></div></div><div class="vsec sm"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg></span>体制・運用・見直し</p><div class="vb"><p class="i">中間・最終の<b>2回のアンケート</b>で利用実態を把握</p><p class="i">不向きな「検索用途」が約3割→<b>スキル強化プログラム</b>へ</p><p class="i">外部AI戦略アドバイザーを配置</p></div></div></div>
+          <div class="vr"><div class="vk donut"><div class="dn"><svg width="92" height="92" viewBox="0 0 92 92"><circle cx="46" cy="46" r="34" fill="none" stroke="#e6edf6" stroke-width="12"/><circle cx="46" cy="46" r="34" fill="none" stroke="#1a6fb5" stroke-width="12" stroke-dasharray="106.81415022205297 213.62830044410595" transform="rotate(-90 46 46)"/></svg><span>50<small>%</small></span></div><div><p class="k">利用者率</p><p class="n">1,913/3,828人</p></div></div><div class="vt c2"><div><p class="k">話しかけ数</p><p class="v">25,897<small>件</small></p><p class="n">41日間</p></div><div><p class="k">効率向上と回答</p><p class="v">8割以上<small></small></p><p class="n">最終アンケート</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">自社に置き換えるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">まず1か月の試行</p><p class="d">全社導入前に1か月の試行期間を置き、利用率とアンケートで効果と誤用を可視化する。</p></div></div><div><span class="ln">2</span><div><p class="t">誤用は研修で直す</p><p class="d">「検索に使う」等の誤用は禁止より研修で。実態データが研修内容を決める。</p></div></div><div><span class="ln">3</span><div><p class="t">いつものツールに</p><p class="d">新ツールを増やさず、既存のチャットに組み込むと利用のハードルが下がる。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：横須賀市「自治体初！横須賀市役所でChatGPTの全庁的な活用実証を開始」（2023年4月）、「ChatGPTの全庁的な活用実証の結果報告と今後の展開」「ChatGPT活用実証結果報告」（2023年6月）。数値は公表値であり、当社による測定値ではありません。「自社に置き換えるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 07 横須賀市</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">ガイドラインのつくり方</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">社内ガイドラインに入れる<b>10項目</b>。事例の共通項から整理しました。</p></div>
+        <table class="grow cs kt mid">
+          <colgroup><col style="width:40px"><col style="width:190px"><col><col style="width:250px"></colgroup>
+          <tr><th>No.</th><th>項目</th><th>決めること</th><th>事例での例</th></tr>
+          <tr><td class="kc">01</td><td>目的</td><td>何のために使うのか（業務効率化・品質向上など）。禁止のためでなく活用のための規程と明記</td><td>LINEヤフー：活用を前提にした働き方</td></tr>
+          <tr><td class="kc">02</td><td>適用範囲</td><td>対象者（役員・社員・派遣・委託先）と対象業務</td><td>東京都：都の全職員</td></tr>
+          <tr><td class="kc">03</td><td>利用できるツール</td><td>会社が許可したサービス・プランだけを使う。個人アカウントの業務利用は禁止</td><td>東京都：許可ツールのみ</td></tr>
+          <tr><td class="kc">04</td><td>入力してはいけない情報</td><td>機密区分ごとに入力の可否を決め、具体例を示す</td><td>NEC：機密区分ごとに定義</td></tr>
+          <tr><td class="kc">05</td><td>個人情報の扱い</td><td>利用目的の範囲内か、学習に使われない設定かを確認</td><td>個人情報保護委員会 注意喚起</td></tr>
+          <tr><td class="kc">06</td><td>生成物の確認</td><td>事実・数値・出典は人が確認してから使う</td><td>東京都：4つのチェックポイント</td></tr>
+          <tr><td class="kc">07</td><td>権利への配慮</td><td>既存作品の模倣を避け、公開前に類似を確認</td><td>文化庁「考え方」</td></tr>
+          <tr><td class="kc">08</td><td>社外への公開・提出</td><td>外部に出す成果物の承認とAI利用の明示</td><td>デジタル庁：高リスク判定</td></tr>
+          <tr><td class="kc">09</td><td>管理体制・相談窓口</td><td>責任者、相談先、インシデント時の報告ルート</td><td>日立：CoEと相談窓口</td></tr>
+          <tr><td class="kc">10</td><td>教育と見直し</td><td>研修の受講を利用条件にし、定期的に規程を更新</td><td>LINEヤフー：研修合格が利用条件</td></tr>
+        </table>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>規程に入れる10項目</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">条文ひな形 1/3</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t"><b>条文ひな形</b>｜総則と管理体制</p><p class="l">［　］内を自社の内容に置き換えてお使いください。</p></div>
+        <div class="grow tpl"><div><p class="at">第1条（目的）</p><div class="ab"><p class="al">本規程は、当社の業務における生成AIの適切かつ積極的な利用を促進し、情報漏洩・権利侵害・誤情報等のリスクを防止することを目的とする。</p></div></div><div><p class="at">第2条（適用範囲）</p><div class="ab"><p class="al">本規程は、当社の役員・従業員・派遣社員および［業務委託先］が当社業務で生成AIを利用する場合に適用する。</p></div></div><div><p class="at">第3条（定義）</p><div class="ab"><p class="al">「生成AI」とは、文章・画像・音声・プログラム等を生成するAIサービスをいう。「入力」とは、生成AIに送信するすべての情報をいう。</p></div></div><div><p class="at">第4条（利用できるサービス）</p><div class="ab"><p class="al">業務で利用できる生成AIは、［情報システム部門］が許可したサービス・契約プランに限る。個人アカウントでの業務利用は禁止する。</p></div></div><div><p class="at">第5条（利用の申請）</p><div class="ab"><p class="al">利用者は所定の研修を受講したうえで［申請手続］を行い、承認を得てから利用する。</p></div></div><div><p class="at">第6条（管理体制）</p><div class="ab"><p class="al">生成AIの利用に関する責任者として［AI推進責任者］を置き、相談窓口を［部署名］に設ける。</p></div></div></div>
+        <p class="s-foot">条文例は一般的なひな形です。自社の就業規則・情報セキュリティ規程と整合させ、必要に応じて専門家にご確認ください。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>条文ひな形 1/3（総則・体制）</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">条文ひな形 2/3</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t"><b>条文ひな形</b>｜入力と生成物の扱い</p></div>
+        <div class="grow tpl"><div><p class="at">第7条（入力してはならない情報）</p><div class="ab"><p class="al">次の情報は入力してはならない。①［極秘・社外秘］に区分された情報 ②顧客・取引先から預かった秘密情報 ③未公表の決算・人事情報 ④パスワード等の認証情報</p></div></div><div><p class="at">第8条（個人情報）</p><div class="ab"><p class="al">個人情報は、利用目的の範囲内であり、かつ入力データが学習に利用されない環境である場合に限り、必要最小限で入力できる。</p></div></div><div><p class="at">第9条（生成物の確認）</p><div class="ab"><p class="al">利用者は、生成物に含まれる事実・数値・出典を自ら確認したうえで業務に用いる。確認の責任は利用者が負う。</p></div></div><div><p class="at">第10条（他者の権利）</p><div class="ab"><p class="al">既存の著作物・商標・人物を模倣する目的で生成AIを用いてはならない。社外に公開する生成物は類似の有無を確認する。</p></div></div><div><p class="at">第11条（社外への公開・提出）</p><div class="ab"><p class="al">生成物を顧客提出物・広告・公式発信に用いる場合は、［所属長］の承認を得る。</p></div></div><div><p class="at">第12条（AI利用の明示）</p><div class="ab"><p class="al">社外向けの成果物で生成AIを用いた場合は、必要に応じてその旨を明示する。</p></div></div></div>
+        <p class="s-foot">条文例は一般的なひな形です。自社の就業規則・情報セキュリティ規程と整合させ、必要に応じて専門家にご確認ください。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>条文ひな形 2/3（入力と生成物）</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">条文ひな形 3/3</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t"><b>条文ひな形</b>｜運用・違反時の対応・見直し</p></div>
+        <div class="grow tpl"><div><p class="at">第13条（記録）</p><div class="ab"><p class="al">会社は、業務で利用する生成AIの入出力の記録を［期間］保存し、必要に応じて確認できるものとする。</p></div></div><div><p class="at">第14条（教育）</p><div class="ab"><p class="al">会社は、利用者に対し入力ルール・確認手順・活用方法に関する研修を［年1回以上］実施する。</p></div></div><div><p class="at">第15条（相談）</p><div class="ab"><p class="al">入力してよいか判断に迷う場合、利用者は入力前に相談窓口へ相談する。</p></div></div><div><p class="at">第16条（インシデント報告）</p><div class="ab"><p class="al">禁止情報を入力した、または生成物による問題が判明した場合は、直ちに［報告先］へ報告する。</p></div></div><div><p class="at">第17条（違反時の対応）</p><div class="ab"><p class="al">本規程に違反した場合、会社は利用停止その他の措置を講じ、就業規則に基づき対応する。</p></div></div><div><p class="at">第18条（見直し）</p><div class="ab"><p class="al">本規程は、技術・法令・社内の利用状況の変化に応じて［半年ごと］に見直す。</p></div></div></div>
+        <p class="s-foot">条文例は一般的なひな形です。自社の就業規則・情報セキュリティ規程と整合させ、必要に応じて専門家にご確認ください。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>条文ひな形 3/3（運用・違反・見直し）</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">運用チェックリスト</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">作って終わりにしないための<b>18項目</b></p></div>
+        <div class="grow chk c3"><div><p class="gh"><span>A</span>ルール</p><p class="ci">許可するツール・プランを決めた</p><p class="ci">入力禁止情報を具体例つきで示した</p><p class="ci">生成物の確認手順を決めた</p><p class="ci">社外公開時の承認フローを決めた</p><p class="ci">違反・事故時の報告ルートを決めた</p><p class="ci">見直しの時期と担当を決めた</p></div><div><p class="gh"><span>B</span>環境</p><p class="ci">学習に使われない法人プランを契約した</p><p class="ci">個人アカウントの業務利用を止めた</p><p class="ci">SSOなどでアカウントを管理している</p><p class="ci">入出力ログを保存・確認できる</p><p class="ci">社内情報を安全に参照できる仕組みがある</p><p class="ci">利用状況（利用率）を把握できる</p></div><div><p class="gh"><span>C</span>教育・定着</p><p class="ci">全員がルール研修を受講した</p><p class="ci">受講を利用の条件にしている</p><p class="ci">部門ごとの活用例を共有している</p><p class="ci">迷ったときの相談窓口がある</p><p class="ci">推進役（各部署の担当）がいる</p><p class="ci">成果（削減時間など）を定期的に報告している</p></div></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>運用チェックリスト</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">公的な指針</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">ガイドラインづくりで参照したい<b>公的な指針</b></p></div>
+        <table class="grow cs kt mid tall">
+          <colgroup><col style="width:270px"><col style="width:150px"><col></colgroup>
+          <tr><th>指針</th><th>発行</th><th>社内ルールに取り込むポイント</th></tr>
+          <tr><td class="kc">AI事業者ガイドライン</td><td>総務省・経済産業省</td><td>AIの「利用者」としての責務（適正な利用、個人情報等の不適切な入力の防止、関係者への説明）。リスクの大きさに応じて対策を決める考え方</td></tr>
+          <tr><td class="kc">AIと著作権に関する考え方について</td><td>文化庁（2024年3月）</td><td>生成物の侵害判断は通常の著作物と同じく「類似性」と「依拠性」。既存作品を入力・指名した生成は依拠性が認められやすい</td></tr>
+          <tr><td class="kc">生成AIサービスの利用に関する注意喚起等</td><td>個人情報保護委員会（2023年6月）</td><td>個人情報は利用目的の範囲内か確認し、入力データが機械学習に使われないことを確認してから入力する</td></tr>
+          <tr><td class="kc">生成AIの調達・利活用に係るガイドライン（DS-920）</td><td>デジタル庁（2025年5月）</td><td>利活用の促進とリスク管理を一体で進める。AI統括責任者の設置、高リスク利用の判定、調達時のデータ取扱いの確認</td></tr>
+          <tr><td class="kc">生成AIの利用ガイドライン（ひな形）</td><td>日本ディープラーニング協会</td><td>社内ルールのひな形。入力情報への注意、生成物の裏付け確認、権利侵害への注意を自社用に加筆して使う</td></tr>
+        </table>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>押さえておきたい公的な指針</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">Contact</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">ルールを<b>決める</b>から、<b>使いこなす</b>まで。</p><p class="l">ガイドラインは、社員が内容を理解して使えるようになって初めて機能します。バイテック法人AI研修では、ルールの定着と活用を研修でご支援します。</p></div>
+        <div class="grow cards c3"><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span><p class="t">ガイドライン整備のご相談</p><p class="d">本資料のひな形を自社に当てはめるときの考え方を、無料個別相談でご案内します。</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p class="t">全社員向けリテラシー研修</p><p class="d">入力ルール・確認手順を、実際の業務を題材に<b>ハンズオン</b>で身につけます。</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span><p class="t">推進担当者の育成</p><p class="d">各部署の推進役が、活用例の共有やルールの見直しを回せるように育成します。</p></div></div>
+        <div class="ctab"><div><p class="t">まずは無料個別相談で、自社の現状をお聞かせください</p><p class="d">オンライン・約60分。ガイドラインの状況に合わせて、研修内容と助成金の活用方法をご提案します。</p></div><span class="bt">無料個別相談を予約する ›</span></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>ご相談</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">Notes</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-19/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd" style="margin-top:4px"><p class="t" style="font-size:27px">ご留意事項・出典</p></div><div class="grow nts"><p class="nt">本資料の事例は、各社・各機関の公式発表（プレスリリース・公式サイト・公表資料）および主要報道にもとづいて当社が編集したものです。掲載企業・機関との取引関係や、各社による推薦を示すものではありません。</p><p class="nt">掲載している数値はすべて各社・各機関の公表値であり、当社による測定値ではありません。係争中の事案については判決が出ておらず、記載は当事者の主張および報道の範囲に限ります。</p><p class="nt">「自社に置き換えるなら」「自社で防ぐには」および条文ひな形は当社の見解・一般的な例です。法的助言ではありません。導入にあたっては自社の規程と整合させ、必要に応じて弁護士等の専門家にご確認ください。</p><p class="nt">公的な指針は改定されることがあります。最新版は各発行元のWebサイトでご確認ください（総務省・経済産業省、文化庁、個人情報保護委員会、デジタル庁、日本ディープラーニング協会）。</p><p class="nt">社名・製品名・サービス名は各社の商標または登録商標です。</p><p class="nt">本資料の内容の無断転載・再配布はご遠慮ください。　発行：バイテック法人AI研修（2026年10月版）</p></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>ご留意事項・出典</figcaption></figure>
+  </div>
+<script>
+  // 事例ページ：補足の節（.vsec.sm）を、左右の列の高さが揃う方へ移す
+  document.querySelectorAll(".vdt").forEach(function (d) {
+    var l = d.querySelector(".vl"), r = d.querySelector(".vr"), sm = l.querySelectorAll(".vsec.sm");
+    if (!sm.length) return;
+    function need(c) { var n = 0; Array.prototype.forEach.call(c.children, function (e) { n += e.scrollHeight + 10; }); return n; }
+    var sh = 0; sm.forEach(function (e) { sh += e.scrollHeight + 10; });
+    d.classList.add("measure");
+    var L = need(l), R = need(r);
+    if (Math.max(L - sh, R + sh) < Math.max(L, R)) sm.forEach(function (e) { r.appendChild(e); });
+    d.classList.remove("measure");
+  });
+  // 事例ページ：列に余裕があるときは本文を一段大きくする（下に余白を残さない）
+  document.querySelectorAll(".vdt").forEach(function (d) {
+    [d.querySelector(".vl"), d.querySelector(".vr")].forEach(function (col) {
+      d.classList.add("measure"); var need = 0; Array.prototype.forEach.call(col.children, function (e) { need += e.scrollHeight; }); d.classList.remove("measure");
+      if (col.clientHeight - need > 90) col.classList.add("roomy");
+    });
+  });
+</script>
+</body>
+</html>
