@@ -310,7 +310,7 @@ const course: CourseData = {
     primary: [
       { name: "2ヶ月プラン", amount: "228,000", unit: "円（税込）" },
       { name: "4ヶ月プラン", amount: "348,000", unit: "円（税込）" },
-      { name: "6ヶ月プラン", amount: "438,000", unit: "円（税込）" },
+      { name: "6ヶ月プラン", amount: "398,000", unit: "円（税込）" },
     ],
   },
   faqs: [
