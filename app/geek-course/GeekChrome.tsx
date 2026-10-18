@@ -6,7 +6,10 @@
 // スタイルは geek の既存CSS（common/header/footer）をそのまま読み込んで当てる。
 
 type NavChild = { href: string; label: string; desc: string; thumb: string };
-type NavItem = { href: string; ja: string; en: string; external?: boolean; sub?: NavChild[] };
+type NavItem = { href: string; ja: string; en: string; external?: boolean; sub?: NavChild[]; footerOnly?: boolean };
+
+// ヘッダー（PC・ドロワー・追従）に出す項目。footerOnly はフッターだけに出す
+const HEADER_NAV = (): NavItem[] => NAV.filter((n) => !n.footerOnly);
 
 function SubMenuLink({ c }: { c: NavChild }) {
   return (
@@ -39,7 +42,7 @@ const NAV: NavItem[] = [
   { href: "/#price", ja: "料金", en: "Price" },
   { href: "/#results", ja: "受講生実績", en: "Results" },
   { href: "/#voice", ja: "受講生の声", en: "Voice" },
-  { href: "/record", ja: "ClaudeCode実録", en: "Record" },
+  { href: "/record", ja: "ClaudeCode実録", en: "Record", footerOnly: true },
   { href: "/#faq", ja: "よくある質問", en: "FAQ" },
   { href: "/#blog", ja: "記事一覧", en: "Articles" },
   { href: "/skills", ja: "おすすめSkills", en: "Skills" },
@@ -68,7 +71,7 @@ export function GeekStyles() {
       {/* 英字見出し用の Outfit（ヘッダーのPROBLEM/COURSE等） */}
       <link rel="stylesheet" href="/geek-static/files/css2(1)" />
       <link rel="stylesheet" href="/geek-static/files/common.css?v=20260815com4" />
-      <link rel="stylesheet" href="/geek-static/files/header.css?v=20260815nav" />
+      <link rel="stylesheet" href="/geek-static/files/header.css?v=20261018t" />
       <link rel="stylesheet" href="/geek-static/files/footer.css?v=20260902a" />
     </>
   );
@@ -91,7 +94,7 @@ export function GeekHeader({ withFixed = true }: { withFixed?: boolean }) {
           </div>
           <nav className="header__nav">
             <ul className="header__menu">
-              {NAV.map((n) => (
+              {HEADER_NAV().map((n) => (
                 <li key={n.href} className={n.sub ? "has-sub" : undefined}>
                   <a href={n.href} {...(n.external ? { target: "_blank", rel: "noopener" } : {})}>
                     <span className="header__menu-ja">{n.ja}</span>
@@ -108,7 +111,7 @@ export function GeekHeader({ withFixed = true }: { withFixed?: boolean }) {
               ))}
             </ul>
             <div className="header__reserve">
-              <a href="/#counseling">無料カウンセリング予約</a>
+              <a href="/#counseling"><span className="header__free" aria-hidden="true">無料</span><span className="u-vh">無料</span>カウンセリング予約</a>
             </div>
           </nav>
           {/* drawer-menu */}
@@ -120,7 +123,7 @@ export function GeekHeader({ withFixed = true }: { withFixed?: boolean }) {
           </div>
           <div className="drawer-content">
             <ul className="drawer-menu">
-              {NAV.map((n) => (
+              {HEADER_NAV().map((n) => (
                 <li key={n.href}>
                   <a href={n.href} {...(n.external ? { target: "_blank", rel: "noopener" } : {})}>{n.ja}</a>
                   {n.sub && (
@@ -148,7 +151,7 @@ export function GeekHeader({ withFixed = true }: { withFixed?: boolean }) {
           </div>
           <nav className="header__nav">
             <ul className="header__menu">
-              {NAV.map((n) => (
+              {HEADER_NAV().map((n) => (
                 <li key={n.href} className={n.sub ? "has-sub" : undefined}>
                   <a href={n.href} {...(n.external ? { target: "_blank", rel: "noopener" } : {})}>
                     <span className="header__menu-ja">{n.ja}</span>
@@ -165,7 +168,7 @@ export function GeekHeader({ withFixed = true }: { withFixed?: boolean }) {
               ))}
             </ul>
             <div className="header__reserve">
-              <a href="/#counseling">カウンセリング予約</a>
+              <a href="/#counseling"><span className="header__free" aria-hidden="true">無料</span><span className="u-vh">無料</span>カウンセリング予約</a>
             </div>
           </nav>
         </div>

@@ -1,0 +1,402 @@
+/* =========================================================
+   GEEK テーマ: 電脳HUD（攻殻機動隊風のトーン）
+   色は GEEK のまま（ティール #00AC9B / #4fd8c8・オレンジ #FF3410・ネイビー #071a3a）
+   既存CSSの後に読み込んで「質感」だけを上書きする。レイアウトは変えない。
+   ========================================================= */
+:root {
+  --gits-teal: #00AC9B;
+  --gits-cyan: #4fd8c8;
+  --gits-orange: #FF3410;
+  --gits-navy: #071a3a;
+  --gits-deep: #04122b;
+  --gits-line: rgba(0, 172, 155, .07);
+  --gits-mono: "Share Tech Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+::selection { background: var(--gits-teal); color: #fff; }
+
+/* ---- 背景: 薄い方眼（電脳空間のグリッド） ---- */
+/* 「なぜ今、Claude Codeを学ぶべきか？」（section.about）は元の写真背景を活かすので対象外 */
+.values, .features, .g2c-course, .g2p-price,
+.g2flow-flow, .flow, .faq, .g2skl {
+  background-image:
+    linear-gradient(var(--gits-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--gits-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: center top;
+}
+
+/* ---- セクション英字ラベル → 端末の見出し ---- */
+.c-sec-ttl__en, .g2a-kicker {
+  font-family: var(--gits-mono) !important;
+  font-weight: 400 !important;
+  text-transform: uppercase;
+  letter-spacing: .22em !important;
+  color: var(--gits-teal);
+}
+.c-sec-ttl__en::after, .g2a-kicker::after {
+  content: "_";
+  margin-left: .15em;
+  color: var(--gits-orange);
+  animation: gitsBlink 1.1s steps(1) infinite;
+}
+.gits-idx { color: var(--gits-orange); margin-right: .6em; }
+.gits-idx::after { content: " //"; color: rgba(0, 172, 155, .55); }
+@keyframes gitsBlink { 50% { opacity: 0; } }
+
+/* 見出し: 下に計測目盛り（色収差の影は視認性を下げるので使わない） */
+.c-sec-ttl::after {
+  content: "";
+  display: block;
+  width: 168px;
+  height: 7px;
+  margin: .9em auto 0;
+  background:
+    linear-gradient(var(--gits-orange), var(--gits-orange)) left bottom / 100% 1px no-repeat,
+    repeating-linear-gradient(90deg, var(--gits-orange) 0 1px, transparent 1px 12px) left bottom / 100% 5px no-repeat;
+}
+
+/* ---- カード: 四隅のHUDブラケット（JSで .gits-hud を差し込む） ---- */
+.gits-hud {
+  --c: var(--gits-teal);
+  --s: 14px;
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--c), var(--c)) left top / var(--s) 2px no-repeat,
+    linear-gradient(var(--c), var(--c)) left top / 2px var(--s) no-repeat,
+    linear-gradient(var(--c), var(--c)) right top / var(--s) 2px no-repeat,
+    linear-gradient(var(--c), var(--c)) right top / 2px var(--s) no-repeat,
+    linear-gradient(var(--c), var(--c)) left bottom / var(--s) 2px no-repeat,
+    linear-gradient(var(--c), var(--c)) left bottom / 2px var(--s) no-repeat,
+    linear-gradient(var(--c), var(--c)) right bottom / var(--s) 2px no-repeat,
+    linear-gradient(var(--c), var(--c)) right bottom / 2px var(--s) no-repeat;
+  opacity: .85;
+  transition: --s .2s ease, opacity .2s ease;
+}
+.gits-hud--rec { --c: var(--gits-orange); }
+.gits-hud-host:hover > .gits-hud { opacity: 1; --s: 22px; }
+@property --s { syntax: "<length>"; inherits: true; initial-value: 14px; }
+
+/* ---- 暗転セクション: 受講生の実績・フッター → 深いネイビーの電脳空間 ---- */
+#results.case {
+  background-color: var(--gits-deep) !important;
+  /* 上端は斜めの飾り（::before・無地のネイビー）と継ぎ目なくつなげるため、光は内側に置き上端では 0 にする */
+  background-image:
+    radial-gradient(ellipse 55% 38% at 50% 48%, rgba(0, 172, 155, .2), transparent 100%),
+    linear-gradient(rgba(79, 216, 200, .07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79, 216, 200, .07) 1px, transparent 1px) !important;
+  background-size: auto, 48px 48px, 48px 48px !important;
+}
+footer {
+  background-color: var(--gits-deep) !important;
+  background-image:
+    linear-gradient(rgba(79, 216, 200, .06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79, 216, 200, .06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  border-top: 1px solid rgba(79, 216, 200, .35);
+}
+
+/* 「できること」「記事」も暗転させ、明るい面と交互のリズムにする（実録は直前の「できること」と被るので薄いグレー） */
+.skills, .g2blog {
+  background-color: var(--gits-deep) !important;
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(0, 172, 155, .2), transparent 55%),
+    linear-gradient(rgba(79, 216, 200, .07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79, 216, 200, .07) 1px, transparent 1px) !important;
+  background-size: auto, 48px 48px, 48px 48px !important;
+  color: #fff;
+}
+.skills .c-sec-ttl__ja, .g2blog .c-sec-ttl__ja { color: #fff; }
+.g2blog-lead { color: rgba(255, 255, 255, .78) !important; }
+.g2blog .swiper-pagination-bullet, .skills .swiper-pagination-bullet { background: rgba(255, 255, 255, .45); }
+.g2blog .swiper-pagination-bullet-active, .skills .swiper-pagination-bullet-active { background: var(--gits-cyan); }
+.g2blog-more a { background: transparent !important; color: var(--gits-cyan) !important; border-color: var(--gits-cyan) !important; }
+.g2blog-more a:hover { background: rgba(79, 216, 200, .12) !important; }
+
+/* ティール地のセクションには走査線 */
+.g2com, .review {
+  position: relative;
+}
+.g2com::after, .review::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, .045) 0 1px, transparent 1px 4px);
+}
+
+/* ---- FV: 走査線＋HUDの読み出し ---- */
+.fv { position: relative; }
+.fv::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(0deg, rgba(7, 26, 58, .05) 0 1px, transparent 1px 3px),
+    linear-gradient(180deg, transparent 70%, rgba(4, 18, 43, .18));
+}
+.gits-readout {
+  position: absolute;
+  z-index: 2;
+  right: min(4vw, 56px);
+  top: min(9vw, 128px);
+  padding: 10px 14px 10px 16px;
+  border-left: 2px solid var(--gits-teal);
+  background: rgba(4, 18, 43, .55);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: var(--gits-cyan);
+  font: 12px/1.75 var(--gits-mono);
+  letter-spacing: .12em;
+  pointer-events: none;
+}
+.gits-readout b { color: #fff; font-weight: 400; }
+.gits-readout i { font-style: normal; color: var(--gits-orange); animation: gitsBlink 1.1s steps(1) infinite; }
+
+/* ---- 画面左端の常駐HUD（スクロール量）: 元のFV「SCROLL DOWN」の代わり。PC広め画面のみ ---- */
+.gits-side {
+  position: fixed;
+  top: 50%;
+  left: 18px;
+  z-index: 1400;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  color: rgba(0, 172, 155, .85);
+  font: 11px/1 var(--gits-mono);
+  letter-spacing: .28em;
+  pointer-events: none;
+  display: none;
+}
+.gits-side::before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 64px;
+  margin-bottom: 12px;
+  background: linear-gradient(var(--gits-teal), transparent);
+}
+.gits-side b { color: var(--gits-orange); font-weight: 400; }
+@media (min-width: 1200px) { .gits-side { display: block; } }
+.fv-scroll { display: none !important; }
+
+/* ---- ヘッダー: 英字サブラベルを端末書体に・下端に発光ライン ---- */
+.header__menu-en { font-family: var(--gits-mono) !important; letter-spacing: .14em !important; }
+.header__content.fixed { box-shadow: 0 8px 28px rgba(7, 26, 58, .08), inset 0 -1px 0 rgba(0, 172, 155, .45) !important; }
+
+/* ---- サブボタン（〜を見る）: 角を落とした端末風 ---- */
+.g2rec-more-btn, .g2skl-more a, .g2blog-more a {
+  border-radius: 2px !important;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+/* ---- FAQ のQマーク・ステップ番号などを端末書体に ---- */
+.cta__btn-sub, .g2p-badge, .flow__num, .g2flow-num { font-family: var(--gits-mono); letter-spacing: .08em; }
+
+/* スクロールバー */
+html { scrollbar-color: var(--gits-teal) transparent; }
+
+@media (max-width: 767px) {
+  .gits-readout { display: none; }
+  .c-sec-ttl::after { width: 120px; }
+  .values, .features, .g2c-course, .g2p-price,
+  .g2flow-flow, .flow, .faq, .g2skl { background-size: 32px 32px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .c-sec-ttl__en::after, .g2a-kicker::after, .gits-readout i { animation: none; }
+}
+
+/* 暗転セクション内の強調色は明るいティールに（暗い背景での可読性） */
+.skills .c-sec-ttl__ja span, .g2blog .c-sec-ttl__ja span { color: var(--gits-cyan) !important; }
+.g2com .gits-idx { color: #fff; }
+
+/* ページ側の `.body span/div/p { font-family: Noto Sans JP !important }` より強くするため .body を前置 */
+.body .c-sec-ttl__en, .body .g2a-kicker, .body .gits-idx,
+.body .gits-readout, .body .gits-readout *, .body .gits-side, .body .gits-side *,
+.body .header__menu-en, .body .cta__btn-sub { font-family: var(--gits-mono) !important; }
+
+/* 元デザインのラベル左のオレンジ横棒は使わない（番号＋カーソルで代替） */
+.c-sec-ttl__en::before, .g2a-kicker::before { display: none !important; }
+.body .c-sec-ttl__en, .body .g2a-kicker { padding-left: 0 !important; }
+
+/* 受講生の実績の上にある斜めの飾り（元は灰色の画像）を、セクションと同じネイビー方眼に置き換える。
+   下端（::after）は同じ画像を180度回転して使っているので、同じ指定で上下反転した形になる。
+   形は元画像 bg_diagonal-cross02-top.png を計測: 灰色 = 左上(0,0)→右(100%,96.5%) より下 / ティール三角 = (76.2%,73.6%)(100%,55%)(100%,96.5%) */
+#results.case::before, #results.case::after {
+  background-color: var(--gits-deep) !important;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpolygon points='76.2,73.6 100,55 100,96.5' fill='%2304AF95'/%3E%3C/svg%3E"),
+    linear-gradient(rgba(79, 216, 200, .07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79, 216, 200, .07) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 48px 48px, 48px 48px !important;
+  background-position: 0 0, 0 calc(100% + 1px), 0 0 !important;
+  background-repeat: no-repeat, repeat, repeat !important;
+  clip-path: polygon(0 0, 76.2% 73.6%, 100% 55%, 100% 100%, 0 100%);
+}
+/* 受講生の実績は見出し下の目盛り線なし */
+#results .c-sec-ttl::after { display: none; }
+
+/* 「なぜ今、Claude Codeを学ぶべきか？」は c-sec-ttl__en が日本語の大見出しを兼ねているので、元の書式のまま（番号・カーソルも付けない） */
+.body .about .c-sec-ttl__en {
+  font-family: "Noto Sans JP", sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: .04em !important;
+  text-transform: none;
+}
+.about .c-sec-ttl__en::after, .about .c-sec-ttl__en .gits-idx { display: none; }
+
+/* 下端は180度回転しているため、方眼の基準を右下に取り、セクション高さの余り（JSで --gits-res-mod）だけずらして線を揃える */
+#results.case::after { background-position: 0 0, 100% calc(100% + var(--gits-res-mod, 0px)), 100% 0 !important; }
+
+/* ---- お悩みセクションのペルソナ別タブ: 端末のタブ風（ネイビー地・番号・角落とし／選択中はティール＋オレンジの上辺） ---- */
+.gp__tabs { counter-reset: gp; }
+.body .gp__tab {
+  counter-increment: gp;
+  position: relative;
+  border-radius: 0 !important;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+  background: var(--gits-deep) !important;
+  background-image: linear-gradient(rgba(79, 216, 200, .08) 1px, transparent 1px) !important;
+  background-size: 100% 6px !important;
+  color: rgba(255, 255, 255, .72) !important;
+  box-shadow: inset 0 2px 0 rgba(79, 216, 200, .45);
+  transition: background-color .2s, color .2s;
+}
+.body .gp__tab::before {
+  content: counter(gp, decimal-leading-zero) " //";
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--gits-mono) !important;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: .2em;
+  color: var(--gits-cyan);
+}
+.body .gp__tab:hover { background-color: #0b2246 !important; color: #fff !important; }
+.body .gp__tab[aria-selected="true"] {
+  background: var(--gits-teal) !important;
+  background-image: none !important;
+  color: #fff !important;
+  box-shadow: inset 0 3px 0 var(--gits-orange);
+}
+.body .gp__tab[aria-selected="true"]::before { content: "> " counter(gp, decimal-leading-zero) " //"; color: #fff; }
+@media (max-width: 767px) {
+  .body .gp__tab { clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%); }
+  .body .gp__tab::before { font-size: 9px; letter-spacing: .12em; margin-bottom: 2px; }
+}
+/* ティール地のセクションでは区切りの // をオレンジに（ティールだと背景に溶けるため） */
+.g2com .gits-idx::after, .review .gits-idx::after { color: var(--gits-orange); }
+/* ペルソナタブの番号表示は使わない（デザインのみ） */
+.body .gp__tab::before, .body .gp__tab[aria-selected="true"]::before { content: none; display: none; }
+
+/* Claude Code実録: 薄いグレー地＋方眼（暗い「できること」との境目をはっきりさせる） */
+.g2rec-record {
+  background-color: #eef2f3 !important;
+  background-image:
+    linear-gradient(var(--gits-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--gits-line) 1px, transparent 1px) !important;
+  background-size: 48px 48px !important;
+}
+.g2rec-record .g2rec-pickup { background-color: #fff !important; box-shadow: 0 10px 30px rgba(7, 26, 58, .06); }
+
+/* ---- ユーザー事例（.gr）: HUDのトンマナに合わせる ---- */
+.body .gr-ttl__en { font-family: var(--gits-mono) !important; font-weight: 400; letter-spacing: .24em; text-transform: uppercase; }
+.gr-box { border-radius: 4px; }
+/* 角を落としたパネル */
+.gr-prof, .gr-ba__item, .dg, .gr-flow, .gr-kpi div, .gc-card {
+  border-radius: 2px !important;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+}
+.gr-prof { box-shadow: inset 0 2px 0 var(--gits-teal); }
+.gr-ba__item--before { box-shadow: inset 0 2px 0 #8a9694; }
+.body .gr-ba__lb, .body .gr-prof__term, .body .gc-tag {
+  border-radius: 0 !important;
+  font-family: var(--gits-mono) !important;
+  font-weight: 400 !important;
+  letter-spacing: .16em !important;
+  text-transform: uppercase;
+}
+.gr-ba__lb::before { content: "["; margin-right: .3em; opacity: .6; }
+.gr-ba__lb::after { content: "]"; margin-left: .3em; opacity: .6; }
+/* 図解のエリアは薄い方眼 */
+.dg, .gr-flow {
+  background-color: #f4f7f7 !important;
+  background-image:
+    linear-gradient(rgba(0, 172, 155, .07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 172, 155, .07) 1px, transparent 1px) !important;
+  background-size: 24px 24px !important;
+}
+.gr-sys { border-radius: 4px !important; background: var(--gits-deep) !important; }
+.gr-card { border-radius: 2px !important; }
+/* 小見出し「こんな仕組みを作りました」: 横棒 → 端末の // */
+.gr-label::before {
+  content: "//" !important;
+  width: auto !important;
+  height: auto !important;
+  border-radius: 0 !important;
+  background: none !important;
+  color: var(--gits-orange);
+  font-family: var(--gits-mono);
+  letter-spacing: 0;
+}
+/* 数値カード: 数字は元の太い書体のまま（等幅だと細くて読みにくい） */
+.gr-kpi div { background: #eef7f6 !important; box-shadow: inset 0 2px 0 var(--gits-teal); }
+
+/* PC: 左の職種タブ列（背景は元の薄いティールのまま）。選択中は左のオレンジ線、アイコンは角を落とした四角 */
+@media (min-width: 768px) {
+  .gr-tab { border-radius: 0 !important; }
+  .gr-tab[aria-selected="true"] { box-shadow: inset 4px 0 0 var(--gits-orange) !important; }
+  .gr-tab__av {
+    border-radius: 0 !important;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+    border: 1px solid rgba(0, 172, 155, .45) !important;
+  }
+}
+/* おすすめプランは「オススメ」バッジと四隅のブラケットが重なるので出さない */
+.g2p-card-rec > .gits-hud { display: none; }
+
+/* ---- FV見出しの帯: HUDのラベル・パネル風（角落とし＋ティールの縁＋走査線） ---- */
+.body .fv__copy-sub {
+  position: relative;
+  padding-left: 1.6em !important;
+  padding-right: 1.4em !important;
+  background: var(--gits-deep) !important;
+  clip-path: polygon(0 0, calc(100% - .7em) 0, 100% .7em, 100% 100%, 0 100%);
+  box-shadow: inset 3px 0 0 var(--gits-orange);
+}
+.fv__copy-sub::before {
+  content: "";
+  position: absolute;
+  left: .7em;
+  top: 50%;
+  width: .38em;
+  height: .38em;
+  background: var(--gits-cyan);
+  transform: translateY(-50%);
+  animation: gitsBlink 1.1s steps(1) infinite;
+}
+@media (prefers-reduced-motion: reduce) { .fv__copy-sub::before { animation: none; } }
+/* Claude のブランドカラー（FVの「ClaudeCode」と同じ #D97757） */
+.u-claude { color: #D97757 !important; }
+/* 料金の割引吹き出し（50,000円OFF）は黒地に白文字 */
+.g2p-off { background: #131313 !important; color: #fff !important; }
+.g2p-off::after { border-color: #131313 transparent transparent !important; }
+
+/* 料金の数字: 値段表示でよく使われる細長のサンセリフ（Oswald）で視認性を上げる */
+/* ページ内<style>の .body .g2p-was s / .g2p-off b（Futura指定）より後勝ちさせるため #price を前置 */
+.body #price .g2p-amount, .body #price .g2p-was s, .body #price .g2p-off b, .body #price .g2p-discount strong {
+  font-family: "Oswald", "Bebas Neue", "DIN Alternate", "Roboto Condensed", sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: .01em !important;
+  font-feature-settings: "tnum" 1;
+}
+.body #price .g2p-amount em, .body #price .g2p-was s em { font-family: "Noto Sans JP", sans-serif !important; font-weight: 800 !important; }
+.body .g2p-amount.g2p-now { font-size: 54px; line-height: 1.05; }
+@media (max-width: 767px) { .body .g2p-amount.g2p-now { font-size: 46px; } }
+/* 吹き出しは「OFF」も含めて同じ数字用フォントに（円は和文フォントに自動フォールバック） */
+.body #price .g2p-off { font-family: "Oswald", "Noto Sans JP", sans-serif !important; font-weight: 600 !important; letter-spacing: .04em; }
+.body #price .g2p-off b { font-size: 22px; }

@@ -170,6 +170,8 @@ export function proxy(request: NextRequest) {
       '/record': '/geek-record-static/index.html',
       // おすすめSkills 一覧（個別ページは下の SKILL_SLUGS で捌く）
       '/skills': '/geek-skills-static/index.html',
+      // バイテックGEEKとは（LLMO向けの概要ページ）
+      '/about': '/geek-about-static/index.html',
     }
     // clean URL → 実体ファイルへ内部リライト（URLは綺麗なまま）
     if (geekLegal[normalizedPath]) {
@@ -200,6 +202,7 @@ export function proxy(request: NextRequest) {
       '/geek-specified_commercial-static/index.html': '/specified_commercial',
       '/geek-record-static/index.html': '/record',
       '/geek-skills-static/index.html': '/skills',
+      '/geek-about-static/index.html': '/about',
     }
     if (uglyToClean[pathname]) {
       return NextResponse.redirect(new URL(uglyToClean[pathname], request.url), 301)
