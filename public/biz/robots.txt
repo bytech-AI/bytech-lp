@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://biz.bytech.jp/sitemap.xml
+Sitemap: https://biz.bytech.jp/blog/sitemap.xml
