@@ -173,5 +173,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <footer>
   <p>&copy; 株式会社AI棒 All rights reserved.</p>
 </footer>
+<script>
+/* AI HACK 経由の予約を AI HACK に知らせる（AI HACK 側で送客の成果として数えるため）。
+   到着時のクエリ（bt_ref_v1）に utm_source=ai-hack があるときだけ、そのクエリを送る。予約者の情報は送らない。
+   再読み込みで二重に数えないよう、送ったらタブ内に印を残す */
+(function(){try{var v=JSON.parse(sessionStorage.getItem('bt_ref_v1')||'null');if(!v||!/(^|&)utm_source=ai-hack(&|$)/.test(v.q||'')||sessionStorage.getItem('aihack_cv_sent'))return;sessionStorage.setItem('aihack_cv_sent','1');navigator.sendBeacon('https://ai-hack.jp/api/cta-cv',JSON.stringify({q:v.q}))}catch(e){}})();
+</script>
 </body>
 </html>
