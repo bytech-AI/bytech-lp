@@ -367,31 +367,6 @@ export function CourseLp({ data }: { data: CourseData }) {
           </div>
         </section>
 
-        {/* 研修受講後の姿（ワイヤー） */}
-        <section className="ct-wire ct-wire--alt" id="after" hidden>
-          <div className="ct-wire__inner">
-            <span className="ct-wire__flag">WIRE / 研修受講後の姿</span>
-            <p className="ct-wire__eyebrow">AFTER_</p>
-            <h2 className="ct-wire__title">研修を受けると、こう変わる</h2>
-            <p className="ct-wire__lead">Before → After で受講後の状態を見せるブロック。（ダミー）</p>
-            <div className="ct-ba">
-              <div className="ct-card">
-                <span className="ct-card__label">Before</span>
-                <div className="ct-ph ct-ph--line" />
-                <div className="ct-ph ct-ph--line" />
-                <div className="ct-ph ct-ph--line is-50" />
-              </div>
-              <div className="ct-ba__arrow" aria-hidden="true">→</div>
-              <div className="ct-card">
-                <span className="ct-card__label">After</span>
-                <div className="ct-ph ct-ph--line" />
-                <div className="ct-ph ct-ph--line" />
-                <div className="ct-ph ct-ph--line is-50" />
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* おすすめの組織・チーム */}
         <section className="ct-rec" id="recommend">
           <div className="ct-rec__head">
@@ -574,7 +549,7 @@ export function CourseLp({ data }: { data: CourseData }) {
               </h2>
               <p className="ct-ringi__lead">
                 研修導入の意思決定に必要な提案資料を無料でお渡しします。課題やゴールから逆算した内容で、
-                社内承認をスムーズに進められます。（内容はダミー）
+                社内承認をスムーズに進められます。
               </p>
               <ul className="ct-ringi__points">
                 <li>費用対効果・導入効果を整理した提案パート</li>
