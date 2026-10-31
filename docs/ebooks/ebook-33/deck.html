@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Copilot Studio活用事例集｜全31スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* 業種別 活用事例集。設計は ebook-04/05 と同系統（四角の角丸なし・円とピルのみ角丸）。
+     ★事例はすべて各社の公開情報にもとづく。数値は出典の表記どおりに記載し、推測で丸めたり
+       脚色したりしないこと。出典はスライド下部に必ず明記する。他社名を出す資料のため、
+       まとめサイトの孫引きは使わず一次情報（プレスリリース・公式サイト）で裏を取る。 */
+  :root {
+    --blue: #2c5c9c; --blue-deep: #1a2e50; --blue-bright: #1a6fb5; --blue-pale: #8fb0d8;
+    --ink: #2a2f3a; --line: #e3e8ef; --amber: #f0b429; --tint: #eef4fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f4f6f8; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; color: var(--ink); padding: 48px 0 96px; }
+  .note { max-width: 1120px; margin: 0 auto 28px; font-size: 13px; font-weight: 700; color: #8a93a3; }
+  .en { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; }
+
+  .deck { display: flex; flex-direction: column; gap: 34px; align-items: center; counter-reset: pg -1; }
+  .slide-shell { width: 1120px; counter-increment: pg; }
+  .slide-shell figcaption { font-size: 12px; font-weight: 700; color: #8a93a3; margin: 8px 2px 0; letter-spacing: .04em; }
+  .slide { width: 1280px; height: 720px; transform: scale(0.875); transform-origin: top left; background: #fff; position: relative; overflow: hidden; }
+  .slide-shell .clip { height: 630px; overflow: hidden; border-radius: 0; box-shadow: 0 2px 10px rgba(26,35,48,.08); }
+
+  /* ===== 共通 ===== */
+  .s-body { position: absolute; inset: 0; padding: 36px 56px; z-index: 1; }
+  .s-eyebrow { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 700; color: var(--blue-pale); letter-spacing: .02em; }
+  .s-eyebrow::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); }
+  .s-logo { position: absolute; top: 38px; right: 56px; height: 30px; }
+  .s-foot { position: absolute; left: 56px; right: 120px; bottom: 14px; font-size: 10px; color: #9aa3b2; line-height: 1.6; z-index: 5; }
+  .s-num { position: absolute; right: 0; bottom: 0; width: 66px; height: 66px; background: var(--blue); border-radius: 66px 0 0 0; color: #fff; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 13px; font-weight: 700; display: flex; align-items: flex-end; justify-content: flex-end; padding: 0 14px 10px 0; z-index: 5; }
+  .s-num::before { content: counter(pg); }
+
+  /* ===== 見出し行（業種バッジ＋要点） ===== */
+  .hd { display: flex; align-items: center; gap: 18px; margin-top: 8px; }
+  .hd .badge { background: var(--blue); color: #fff; font-size: 24px; font-weight: 800; padding: 10px 22px; letter-spacing: .06em; white-space: nowrap; text-align: center; }
+  .hd .badge small { display: block; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; opacity: .8; margin-top: 3px; }
+  .hd .t { font-size: 25px; font-weight: 800; color: #1a2330; line-height: 1.4; letter-spacing: .01em; }
+  .hd .t b { color: var(--blue-bright); }
+
+  /* ===== 事例テーブル ===== */
+  table.cs { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 18px; table-layout: fixed; }
+  .cs th { background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; padding: 10px 14px; text-align: left; letter-spacing: .02em; }
+  .cs th:first-child { text-align: center; }
+  .cs td { font-size: 12.8px; font-weight: 500; color: #4a5568; padding: 13px 14px; border-bottom: 1px solid var(--line); vertical-align: middle; line-height: 1.55; }
+  .cs tr:nth-child(even) td { background: #f7f9fc; }
+  .cs td.no { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; text-align: center; font-weight: 800; color: var(--blue-pale); }
+  /* 社名は他社商標のためロゴを使わず、文字組みだけで見せる */
+  .cs td.co span { display: block; font-size: 14.5px; font-weight: 800; color: #1a2330; line-height: 1.4; }
+  .cs td.ar span { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; padding: 4px 9px; white-space: nowrap; }
+  .cs td.ar svg { flex: 0 0 auto; }
+  .cs td.rs { font-size: 13px; font-weight: 700; color: #1a2330; line-height: 1.5; }
+  .cs td.rs b { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 19px; font-weight: 800; color: var(--blue-bright); padding: 0 1px; }
+
+  /* ===== まとめ帯 ===== */
+  .band { display: flex; align-items: center; gap: 11px; background: var(--tint); border: 1.5px solid var(--blue); padding: 12px 20px; font-size: 13.5px; font-weight: 800; color: var(--blue-deep); margin-top: 12px; }
+  .band::before { content: "✓"; flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+
+
+  /* ===== 個別詳細スライド ===== */
+  .dhd { display: flex; align-items: flex-start; gap: 18px; margin-top: 8px; }
+  .dhd .no { background: var(--blue-deep); color: #fff; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 22px; font-weight: 800; padding: 12px 18px; letter-spacing: .06em; }
+  .dhd .mark { flex: 0 0 auto; width: 46px; height: 46px; background: var(--tint); border: 1.5px solid #cfdcee; color: var(--blue); display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .dhd .mark svg { width: 24px; height: 24px; }
+  .dhd .co { font-size: 25px; font-weight: 800; color: #1a2330; line-height: 1.3; }
+  .dhd .co small { display: block; font-size: 14px; font-weight: 700; color: #6b7789; margin-top: 5px; }
+  .dhd .tags { margin-left: auto; display: flex; gap: 7px; padding-top: 6px; }
+  .dhd .tags span { font-size: 11.5px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; border-radius: 999px; padding: 5px 13px; white-space: nowrap; }
+
+  .dt { display: grid; grid-template-columns: 1.18fr 1fr; gap: 20px; margin-top: 14px; align-items: start; }
+  .sec { border: 1px solid var(--line); }
+  .sec .h { background: #f2f5fa; border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 800; color: var(--blue-deep); padding: 9px 16px; display: flex; align-items: center; gap: 8px; }
+  .sec .h::before { content: ""; width: 5px; height: 15px; background: var(--blue); }
+  .sec .b { padding: 10px 16px 11px; }
+  .sec .i { position: relative; font-size: 12.6px; font-weight: 500; color: #4a5568; line-height: 1.7; padding: 4px 0 4px 15px; }
+  .sec .i::before { content: ""; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-pale); }
+  .sec .i b { color: #1a2330; font-weight: 800; }
+
+  .kpi { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi div { background: var(--tint); border-left: 4px solid var(--blue); padding: 11px 13px; }
+  .kpi .k { font-size: 10.5px; font-weight: 800; color: var(--blue); }
+  .kpi .v { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 24px; font-weight: 800; color: #1a2330; line-height: 1.15; margin-top: 3px; }
+  .kpi .v small { font-family: "Noto Sans JP", sans-serif; font-size: 11px; font-weight: 700; color: #6b7789; margin-left: 2px; }
+  .kpi .n { font-size: 10.5px; font-weight: 600; color: #7a8698; margin-top: 3px; }
+  .trend { margin-top: 10px; background: var(--blue-deep); color: #fff; padding: 12px 15px; display: flex; align-items: center; gap: 12px; }
+  .trend .l { font-size: 11.5px; font-weight: 800; opacity: .85; line-height: 1.5; }
+  .trend .r { margin-left: auto; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 15px; font-weight: 800; white-space: nowrap; }
+  .trend .r b { font-size: 22px; color: #8fd0ff; }
+
+  .learn { margin-top: 12px; border: 1.5px solid var(--blue); }
+  .learn .h { background: var(--blue); color: #fff; font-size: 12.5px; font-weight: 800; padding: 8px 16px; letter-spacing: .02em; }
+  .learn .g { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+  .learn .g div { padding: 9px 16px 10px; border-right: 1px solid var(--line); }
+  .learn .g div:last-child { border-right: none; }
+  .learn .t { font-size: 13px; font-weight: 800; color: var(--blue-deep); }
+  .learn .d { font-size: 11.4px; font-weight: 500; color: #4a5568; line-height: 1.6; margin-top: 3px; }
+
+
+  /* ===== 表紙（白地・左に大見出し／右にイラスト） ===== */
+  .cv { background: #fff; }
+  .cv .t { position: absolute; left: 72px; top: 104px; font-size: 74px; font-weight: 900; color: var(--blue); line-height: 1.34; letter-spacing: .02em; }
+  .cv .sub { position: absolute; left: 75px; top: 316px; font-size: 19px; font-weight: 800; color: #2a2f3a; letter-spacing: .05em; line-height: 1.7; }
+  .cv .meta { position: absolute; left: 75px; top: 392px; font-size: 14px; font-weight: 700; color: #8a93a3; letter-spacing: .06em; }
+  .cv .il { position: absolute; right: 44px; bottom: 74px; width: 560px; }
+  .cv .logo { position: absolute; left: 72px; bottom: 58px; height: 38px; }
+
+  /* ===== 目次 ===== */
+  .ix { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 26px; margin-top: 30px; }
+  .ix a, .ix div { display: flex; align-items: center; gap: 16px; background: #fff; border: 1px solid #d9e1ec; padding: 18px 20px; text-decoration: none; box-shadow: 0 4px 14px rgba(26,35,48,.05); }
+  .ix .n { flex: 0 0 auto; width: 46px; height: 46px; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; }
+  .ix .b { flex: 1; min-width: 0; display: block; }
+  .ix .nm { display: block; font-size: 19px; font-weight: 800; color: #1a2330; line-height: 1.35; }
+  .ix .ds { display: block; font-size: 12px; font-weight: 600; color: #7a8698; margin-top: 4px; line-height: 1.5; }
+  .ix .pg { flex: 0 0 auto; font-size: 12.5px; font-weight: 800; color: var(--blue); }
+  .ix .soon { border-style: dashed; opacity: .62; }
+  .ix .soon .n { background: #b9c4d4; }
+
+
+
+
+  /* ===== 目次（この資料の中身） ===== */
+  .ixh { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
+  .ixh .lb { background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; padding: 7px 16px; letter-spacing: .04em; white-space: nowrap; }
+  .ixh .tx { font-size: 15px; font-weight: 700; color: #4a5568; }
+  .ixh .pg { margin-left: auto; font-size: 13px; font-weight: 800; color: var(--blue); white-space: nowrap; }
+  .ixg { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 26px; margin-top: 14px; }
+  .ixg div { display: flex; align-items: center; gap: 13px; background: #fff; border: 1px solid var(--line); padding: 10px 14px; }
+  .ixg .n { flex: 0 0 auto; width: 30px; height: 30px; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 800; }
+  .ixg .nm { font-size: 14.5px; font-weight: 800; color: #1a2330; }
+  .ixg .ar { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; padding: 3px 8px; margin-left: 8px; white-space: nowrap; }
+  .ixg .pg { margin-left: auto; font-size: 12px; font-weight: 800; color: #8a93a3; white-space: nowrap; }
+
+  /* ===== PDF出力 ===== */
+  @page { size: 1280px 720px; margin: 0; }
+  @media print {
+    body { padding: 0; background: #fff; }
+    * { box-shadow: none !important; }
+    .note { display: none; }
+    .deck { gap: 0; display: block; }
+    .slide-shell { width: 1280px; }
+    .slide-shell figcaption { display: none; }
+    .slide-shell .clip { height: 720px; overflow: hidden; border-radius: 0; box-shadow: none; }
+    .slide { transform: none; border: none; border-radius: 0; }
+    figure.slide-shell { page-break-after: always; break-after: page; margin: 0; }
+    figure.slide-shell:last-child { page-break-after: auto; }
+  }
+
+  /* ===== 表紙（ノウハウ形式） ===== */
+  .blue-bg { background: linear-gradient(135deg, #1c3a6b 0%, var(--blue) 46%, #3a76c4 100%); color: #fff; }
+  .waves { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .kcover .badge-row { position: absolute; top: 66px; left: 64px; display: flex; align-items: center; gap: 16px; }
+  .kcover .badge { background: var(--amber); color: #4a3605; font-size: 16px; font-weight: 800; padding: 10px 18px; border-radius: 8px; }
+  .kcover .badge-note { font-size: 20px; font-weight: 700; padding-bottom: 12px; border-bottom: 2px solid rgba(255,255,255,.85); letter-spacing: .04em; }
+  .kcover .sub { position: absolute; left: 66px; top: 236px; font-size: 23px; font-weight: 700; letter-spacing: .04em; }
+  .kcover .title { position: absolute; left: 62px; top: 288px; font-size: 68px; font-weight: 800; letter-spacing: .04em; line-height: 1.28; }
+  .kcover .title small { display: block; margin-top: 10px; font-size: 34px; font-weight: 800; }
+  .kcover .pills { position: absolute; right: 64px; top: 250px; display: grid; gap: 12px; }
+  .kcover .pills span { border: 1.5px solid rgba(255,255,255,.75); border-radius: 999px; padding: 7px 22px; font-size: 14px; font-weight: 800; text-align: center; background: rgba(255,255,255,.08); }
+  .kcover .date { position: absolute; left: 66px; top: 590px; font-size: 15px; font-weight: 600; letter-spacing: .18em; opacity: .8; }
+  .kcover .logo { position: absolute; right: 64px; bottom: 48px; height: 44px; }
+  /* ===== 縦方向をページいっぱいに使う ===== */
+  .s-body.fl { display: flex; flex-direction: column; padding-bottom: 62px; }
+  .s-body.fl > .grow { flex: 1 1 auto; min-height: 0; }
+  .s-body.fl > .band { flex: 0 0 auto; }
+  .cards.grow > div { display: flex; flex-direction: column; justify-content: flex-start; padding: 30px 28px; }
+  .cards.grow .ic { width: 58px; height: 58px; } .cards.grow .ic svg { width: 28px; height: 28px; }
+  .cards.grow .t { margin-top: 18px; font-size: 20px; } .cards.grow .d { margin-top: 12px; font-size: 14.5px; line-height: 1.95; }
+  .cards.grow .g { align-self: flex-start; margin-top: auto; font-size: 12px; padding: 5px 14px; }
+  .steps.grow { grid-auto-rows: 1fr; }
+  .tpl.grow { grid-auto-rows: 1fr; }
+  .chk.grow > div { display: flex; flex-direction: column; } .chk.grow .ci { flex: 1 1 0; display: flex; align-items: center; }
+  .chk.grow .ci::before { top: 50%; transform: translateY(-50%); }
+  .toc.grow { grid-auto-rows: 1fr; } .toc.grow > div { border-bottom: 1px solid var(--line); }
+  table.grow { height: 100%; }
+  .nts.grow { align-content: space-evenly; }
+  /* ===== 事例ページ（メリハリ版） ===== */
+  .vpt { margin-top: 10px; display: flex; align-items: center; gap: 14px; background: linear-gradient(90deg, #eaf2fc, #f6f9fd); border-left: 6px solid var(--blue-bright); padding: 9px 18px; }
+  .vpt p { font-size: 18px; font-weight: 900; color: var(--blue-deep); letter-spacing: .02em; }
+  .vpt .q { color: var(--blue-bright); display: flex; }
+  .vpt.red { background: linear-gradient(90deg, #fdecea, #fef7f6); border-left-color: #d6453d; } .vpt.red p { color: #7a1f1a; } .vpt.red .q { color: #d6453d; }
+  .vdt { display: grid; grid-template-columns: 1.15fr 1fr; gap: 18px; margin-top: 10px; align-items: start; }
+  .vdt + .learn { margin-top: 10px; }
+  .vsec + .vsec { margin-top: 10px; }
+  .vsec .vh { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 900; color: var(--blue-deep); padding-bottom: 6px; border-bottom: 2px solid var(--line); }
+  .vsec .vi { width: 24px; height: 24px; border-radius: 50%; background: var(--blue-deep); color: #fff; display: flex; align-items: center; justify-content: center; }
+  .vsec .vb { padding-top: 6px; }
+  .vsec .vb .i { position: relative; padding: 3px 0 3px 16px; font-size: 12.8px; font-weight: 500; color: #3a4252; line-height: 1.55; }
+  .vsec .vb .i::before { content: ""; position: absolute; left: 2px; top: 12px; width: 6px; height: 6px; background: var(--blue-bright); }
+  .vsec .vb b, .vpt b { color: #1a2330; background: linear-gradient(transparent 58%, #ffe27a 58%); font-weight: 800; }
+  .vsec.sm { margin-top: 8px; background: #f7f9fc; padding: 10px 12px; } .vsec.sm .vh { border-bottom-color: #e3e9f2; }
+  .vk { background: #fff; border: 1.5px solid var(--line); padding: 8px 14px; margin-bottom: 8px; }
+  .vk .k { font-size: 11.5px; font-weight: 800; color: var(--blue); }
+  .vk .n { font-size: 10.5px; font-weight: 600; color: #7a8698; margin-top: 2px; }
+  .vk.hero { background: var(--blue-deep); border: 0; color: #fff; padding: 14px 18px; }
+  .vk.hero .k { color: #a9c8f0; } .vk.hero .n { color: #c3d3ea; }
+  .vk.hero .v { font-size: 40px; font-weight: 900; line-height: 1.1; margin-top: 4px; } .vk.hero .v small { font-size: 16px; margin-left: 4px; }
+  .vk.hero.red { background: #7a1f1a; }
+  .vk.donut { display: flex; align-items: center; gap: 16px; } .vk.donut .k { font-size: 14px; }
+  .vk .dn { position: relative; width: 92px; height: 92px; flex: 0 0 auto; }
+  .vk .dn span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 900; color: #1a2330; }
+  .vk .dn small { font-size: 11px; }
+  .vk.chart .br { display: grid; grid-template-columns: 26px 1fr 96px; align-items: center; gap: 8px; margin-top: 6px; }
+  .vk.chart .bl { font-size: 11px; font-weight: 800; color: #7a8698; }
+  .vk.chart .bt { height: 16px; background: #f0f3f8; display: block; } .vk.chart .bt span { display: block; height: 100%; }
+  .vk.chart .bv { font-size: 14px; font-weight: 800; color: #5a6578; text-align: right; } .vk.chart .bv.hi { font-size: 18px; color: #1a2330; }
+  .vk.chart .bv small { font-size: 10.5px; margin-left: 2px; }
+  .vt { display: grid; gap: 8px; } .vt.c1 { grid-template-columns: 1fr; } .vt.c2 { grid-template-columns: 1fr 1fr; } .vt.c3 { grid-template-columns: 1fr 1fr 1fr; }
+  .vt > div { background: var(--tint); border-top: 3px solid var(--blue-bright); padding: 9px 12px; }
+  .vt .k { font-size: 11px; font-weight: 800; color: var(--blue); }
+  .vt .v { font-size: 22px; font-weight: 900; color: #1a2330; line-height: 1.2; margin-top: 2px; } .vt .v small { font-size: 11px; margin-left: 2px; color: #6b7789; }
+  .vt .n { font-size: 10px; font-weight: 600; color: #7a8698; margin-top: 2px; }
+  .learn .g > div { display: flex; gap: 10px; align-items: flex-start; padding-top: 7px; padding-bottom: 8px; }
+  .learn .ln { flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%; background: var(--amber); color: #4a3605; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .learn.red { border-color: #d6453d; } .learn.red .h { background: #d6453d; }
+  /* 事例ページも縦をページいっぱいに使う（下に余白を残さない） */
+  .s-body.fl > .dhd { flex: 0 0 auto; }
+  .vdt.grow { align-items: stretch; margin-top: 12px; }
+  .vdt.grow > .vl, .vdt.grow > .vr { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+  .vdt.grow > .vl { justify-content: space-between; }
+  .vdt.grow .vsec + .vsec { margin-top: 0; }
+  .vdt.grow .vsec { flex: 1 1 auto; display: flex; flex-direction: column; }
+  .vdt.grow .vsec .vb { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-evenly; }
+  .vdt.grow > .vr > * { flex: 1 1 auto; margin-bottom: 0; display: flex; flex-direction: column; justify-content: center; }
+  .vdt.grow > .vr > .vk.donut { flex-direction: row; justify-content: flex-start; }
+  .vdt.grow > .vr > .vt { display: grid; }
+  .vdt.grow > .vr > .vt > div { display: flex; flex-direction: column; justify-content: center; }
+  .vdt.grow > .vr > .vsec.sm { justify-content: flex-start; }
+  .vdt.measure > div > *, .vdt.measure .vb { flex: none !important; }
+  .s-body.fl > .learn { flex: 0 0 auto; margin-top: 14px; }
+  .vl.roomy .vsec .vb .i { font-size: 14px; line-height: 1.7; } .vl.roomy .vsec .vh { font-size: 15.5px; }
+  .learn .g > div { padding-top: 12px; padding-bottom: 13px; }
+  /* ツールのロゴ */
+  .cards .ic.lg { width: auto; height: 64px; border-radius: 0; background: none; gap: 10px; justify-content: flex-start; }
+  .cards .ic.lg img { height: 56px; width: 56px; object-fit: contain; }
+  .dhd .mark.lg { background: #fff; } .dhd .mark.lg img { width: 30px; height: 30px; object-fit: contain; }
+  /* ===== ノウハウ系の追加スライド型 ===== */
+  .kh { margin-top: 8px; }
+  .kh .t { font-size: 25px; font-weight: 900; color: #1a2330; line-height: 1.4; letter-spacing: .01em; }
+  .kh .t b { color: var(--blue-bright); }
+  .kh .l { margin-top: 8px; font-size: 13.5px; font-weight: 600; color: #5a6578; line-height: 1.7; }
+  .ld { margin-top: 18px; display: grid; gap: 10px; }
+  .ld .p { font-size: 14px; font-weight: 500; color: #3a4252; line-height: 1.85; }
+  .ld .p b { color: #1a2330; }
+  .cards { display: grid; gap: 16px; margin-top: 22px; }
+  .cards.c2 { grid-template-columns: 1fr 1fr; } .cards.c3 { grid-template-columns: 1fr 1fr 1fr; } .cards.c4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .cards.c6 { grid-template-columns: 1fr 1fr 1fr; }
+  .cards > div { border: 1.5px solid var(--line); border-top: 4px solid var(--blue); padding: 16px 18px 18px; background: #fff; }
+  .cards .ic { width: 40px; height: 40px; border-radius: 50%; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; }
+  .cards .t { margin-top: 10px; font-size: 16px; font-weight: 900; color: var(--blue-deep); line-height: 1.4; }
+  .cards .d { margin-top: 7px; font-size: 12.5px; font-weight: 500; color: #4a5568; line-height: 1.75; }
+  .cards .d b { color: #1a2330; }
+  .cards .g { margin-top: 10px; display: inline-block; background: var(--tint); color: var(--blue); font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 999px; }
+  .steps { margin-top: 20px; display: grid; gap: 10px; }
+  .steps > div { display: flex; align-items: center; gap: 16px; border: 1.5px solid var(--line); padding: 12px 18px; }
+  .steps .n { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: var(--blue-deep); color: #fff; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+  .steps .t { font-size: 15.5px; font-weight: 900; color: #1a2330; } .steps .t b { color: var(--blue-bright); }
+  .steps .d { margin-top: 3px; font-size: 12.5px; font-weight: 500; color: #5a6578; line-height: 1.6; }
+  .steps .sd { margin-left: auto; flex: 0 0 300px; font-size: 12px; font-weight: 700; color: var(--blue); background: var(--tint); padding: 8px 12px; line-height: 1.55; }
+  .ch { background: linear-gradient(135deg, #1a2e50 0%, #2c5c9c 70%, #3f7fc6 100%); }
+  .chp { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; text-align: center; }
+  .chp .s-logo { position: absolute; top: 38px; right: 56px; height: 30px; }
+  .chp .no { width: 92px; height: 92px; border: 2px solid rgba(255,255,255,.85); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 800; }
+  .chp .t { margin-top: 30px; font-size: 40px; font-weight: 900; letter-spacing: .04em; }
+  .chp .d { margin-top: 12px; font-size: 16px; font-weight: 700; opacity: .85; }
+  .chp .s-num { background: rgba(255,255,255,.18); }
+  table.kt td { font-size: 12.5px; } table.kt td.kc { font-weight: 800; color: #1a2330; background: var(--tint); }
+  table.kt td b { color: var(--blue-bright); }
+  .tpl { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px 20px; }
+  .tpl > div { border-left: 4px solid var(--blue); background: #f7f9fc; padding: 16px 20px; min-height: 118px; }
+  .tpl .at { font-size: 15px; font-weight: 900; color: var(--blue-deep); }
+  .tpl .al { margin-top: 7px; font-size: 13.5px; font-weight: 500; color: #3a4252; line-height: 1.8; }
+  .chk { margin-top: 16px; display: grid; gap: 16px; } .chk.c2 { grid-template-columns: 1fr 1fr; } .chk.c3 { grid-template-columns: 1fr 1fr 1fr; }
+  .chk > div { border: 1.5px solid var(--line); }
+  .chk .gh { background: var(--blue-deep); color: #fff; font-size: 15px; font-weight: 800; padding: 13px 16px; display: flex; align-items: center; gap: 9px; }
+  .chk .gh span { width: 20px; height: 20px; border-radius: 50%; background: #fff; color: var(--blue-deep); font-size: 11px; display: flex; align-items: center; justify-content: center; }
+  .chk .ci { position: relative; padding: 24px 16px 24px 42px; font-size: 14.5px; font-weight: 600; color: #3a4252; border-bottom: 1px solid var(--line); line-height: 1.5; }
+  .chk .ci:last-child { border-bottom: 0; }
+  .chk .ci::before { content: ""; position: absolute; left: 16px; top: 27px; width: 13px; height: 13px; border: 1.6px solid var(--blue); }
+  .ctab { margin-top: 20px; background: linear-gradient(90deg, #1a2e50, #2c5c9c); color: #fff; padding: 20px 26px; display: flex; align-items: center; gap: 20px; }
+  .ctab .t { font-size: 19px; font-weight: 900; } .ctab .d { margin-top: 5px; font-size: 12.5px; font-weight: 600; opacity: .85; line-height: 1.6; }
+  .ctab .bt { margin-left: auto; flex: 0 0 auto; background: #fff; color: var(--blue-deep); font-size: 14px; font-weight: 900; padding: 12px 24px; border-radius: 999px; }
+  .nts { margin-top: 24px; display: grid; gap: 16px; }
+  .nts .nt { position: relative; padding-left: 22px; font-size: 14px; font-weight: 500; color: #3a4252; line-height: 1.7; }
+  .nts .nt::before { content: "※"; position: absolute; left: 0; color: var(--blue-pale); }
+  .toc { margin-top: 22px; display: grid; gap: 12px; }
+  .toc > div { display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--line); padding: 14px 4px; }
+  .toc .n { font-size: 15px; font-weight: 800; color: var(--blue); width: 30px; }
+  .toc .nm { font-size: 18px; font-weight: 800; color: #1a2330; } .toc .nm small { margin-left: 14px; font-size: 12.5px; font-weight: 600; color: #7a8698; }
+  .toc .pg { margin-left: auto; font-size: 13px; font-weight: 700; color: #7a8698; }
+  .trend .l { flex: 0 0 150px; }
+  .trend .r { white-space: normal; text-align: right; line-height: 1.35; }
+  .cs td { padding-top: 11px; padding-bottom: 11px; }
+  .cs.cmp td { padding-top: 6px; padding-bottom: 6px; line-height: 1.45; }
+  /* 余白が出やすいページを埋める：通常の表は行を高く、カードは文字を大きく */
+  /* 行数が多めの表（10行前後）：詰めすぎず、ページを埋める中間の行高 */
+  table.kt.mid td { padding-top: 15px; padding-bottom: 15px; font-size: 14px; line-height: 1.6; }
+  table.kt.mid th { padding-top: 12px; padding-bottom: 12px; font-size: 14px; }
+  table.kt:not(.cmp):not(.mid) td { padding-top: 17px; padding-bottom: 17px; font-size: 13.5px; line-height: 1.65; }
+  .cards > div { padding: 22px 22px 24px; }
+  .cards .t { font-size: 17px; } .cards .d { font-size: 13.5px; line-height: 1.85; }
+  .ctab { margin-top: 28px; padding: 26px 30px; }
+  .steps > div { padding: 16px 20px; } .steps .t { font-size: 16.5px; } .steps .d { font-size: 13.5px; }
+  /* ===== 部門別の活用アイデア集 ===== */
+  .st { display: inline-block; font-size: 12px; font-weight: 800; padding: 4px 11px; border-radius: 999px; white-space: nowrap; }
+  .st.s1 { background: var(--amber); color: #4a3605; } .st.s2 { background: #dbe8f7; color: var(--blue-deep); } .st.s3 { background: var(--blue-deep); color: #fff; }
+  .ld { display: inline-flex; gap: 4px; align-items: center; }
+  .ld i { width: 10px; height: 10px; border-radius: 50%; background: #dfe5ee; } .ld i.on { background: var(--blue-bright); }
+  .imap { margin-top: 16px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .imap > div { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+  .imap .ph { background: var(--blue-deep); color: #fff; font-size: 16px; font-weight: 800; text-align: center; padding: 13px 18px 13px 8px; clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%); }
+  .imap .ii { flex: 1 1 0; border: 1.5px solid var(--line); border-top: 3px solid var(--blue); padding: 13px 14px; display: flex; flex-direction: column; background: #fff; }
+  .imap .ii .n { font-size: 15px; font-weight: 900; color: var(--blue-bright); }
+  .imap .ii .t { margin-top: 4px; font-size: 16px; font-weight: 900; color: #1a2330; line-height: 1.45; }
+  .imap .ii .m { margin-top: auto; padding-top: 8px; display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+  .irm { margin-top: 18px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .irm > div { border: 1.5px solid var(--line); display: flex; flex-direction: column; }
+  .irm .ph { padding: 15px 18px; font-size: 20px; font-weight: 900; display: flex; align-items: center; gap: 12px; }
+  .irm .ph span { font-size: 12px; font-weight: 800; letter-spacing: .08em; }
+  .irm .c1 .ph { background: var(--amber); color: #4a3605; } .irm .c2 .ph { background: #dbe8f7; color: var(--blue-deep); } .irm .c3 .ph { background: var(--blue-deep); color: #fff; }
+  .irm .d { padding: 15px 18px 0; font-size: 14px; font-weight: 500; color: #4a5568; line-height: 1.75; }
+  .irm .ls { padding: 12px 18px; flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-evenly; gap: 6px; }
+  .irm .ls p { font-size: 15.5px; font-weight: 800; color: #1a2330; padding: 7px 0; border-bottom: 1px solid var(--line); }
+  .irm .ls p:last-child { border-bottom: 0; }
+  .irm .ls.many { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; align-content: space-evenly; } .irm .ls.many p { font-size: 14.5px; padding: 8px 0; }
+  .irm .nx { margin: 0 18px 16px; padding: 11px 14px; background: var(--tint); font-size: 13px; font-weight: 600; color: #3a4252; line-height: 1.65; }
+  .irm .nx b { display: block; font-size: 12px; font-weight: 800; color: var(--blue); }
+  .ihd { margin-top: 8px; display: flex; align-items: center; gap: 16px; }
+  .ihd .no { flex: 0 0 auto; background: var(--blue-deep); color: #fff; font-size: 24px; font-weight: 800; padding: 9px 16px; }
+  .ihd .t { font-size: 26px; font-weight: 900; color: #1a2330; line-height: 1.3; }
+  .ihd .d { margin-top: 2px; font-size: 14px; font-weight: 700; color: #5a6578; }
+  .ihd .m { margin-left: auto; margin-right: 150px; display: flex; align-items: center; gap: 10px; }
+  .ihd .lb { margin-left: 6px; font-size: 12px; font-weight: 700; color: #6b7789; white-space: nowrap; }
+  .iba { margin-top: 8px; display: grid; grid-template-columns: 1fr 30px 1.16fr 228px; align-items: center; gap: 8px; }
+  .iba > div { align-self: stretch; padding: 12px 18px; display: flex; flex-direction: column; justify-content: center; }
+  .iba .bf { background: #f1f3f7; } .iba .af { background: var(--tint); border-left: 5px solid var(--blue-bright); }
+  .iba .k { font-size: 13px; font-weight: 800; color: #6b7789; } .iba .af .k { color: var(--blue-bright); }
+  .iba .v { margin-top: 4px; font-size: 17px; font-weight: 800; color: #1a2330; line-height: 1.55; } .iba .bf .v { color: #4a5568; font-weight: 700; }
+  .iba .ar { justify-self: center; width: 0; height: 0; border-left: 18px solid var(--blue-bright); border-top: 15px solid transparent; border-bottom: 15px solid transparent; }
+  .iba .il { width: 228px; height: 158px; object-fit: contain; }
+  .ifl { margin-top: 8px; }
+  .ifl .pd { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 800; color: var(--blue-deep); }
+  .ifl .pd b { margin-right: 4px; } .ifl .pd span { background: #fff; border: 1.5px solid #cfdcee; color: var(--blue); font-size: 13px; font-weight: 800; padding: 3px 12px; border-radius: 999px; }
+  .ifl .pd em { margin-left: auto; display: flex; align-items: center; gap: 6px; font-style: normal; font-size: 12.5px; font-weight: 700; color: #5a6578; }
+  .ifl .pd em i { width: 13px; height: 13px; } .ifl .pd em i.h { background: var(--amber); } .ifl .pd em i.a { margin-left: 10px; background: var(--blue); }
+  .ifl .fw { margin-top: 7px; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 4px; }
+  .ifl .fw > div { padding: 8px 28px 8px 13px; min-height: 72px; display: flex; align-items: center; gap: 10px; clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%); }
+  .ifl .fw > .a { background: var(--blue); color: #fff; } .ifl .fw > .h { background: #fde9b4; color: #3a2c05; }
+  .ifl .fw .n { flex: 0 0 auto; width: 32px; height: 32px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; }
+  .ifl .fw > .a .n { color: var(--blue); } .ifl .fw > .h .n { color: #a8780a; }
+  .ifl .fw p { font-size: 14.5px; font-weight: 800; line-height: 1.4; }
+  .ifl .fw small { display: block; font-size: 11.5px; font-weight: 800; opacity: .8; }
+  .igr { margin-top: 10px; display: grid; grid-template-columns: 1.08fr 1fr; gap: 12px; }
+  .igr .rows { display: grid; grid-auto-rows: 1fr; gap: 5px; min-height: 0; }
+  .igr .rows > div { display: grid; grid-template-columns: 124px 1fr; align-items: stretch; border: 1.5px solid var(--line); }
+  .igr .rows .h { display: flex; align-items: center; padding: 4px 11px; background: var(--tint); font-size: 13.5px; font-weight: 900; color: var(--blue-deep); }
+  .igr .rows .v { display: flex; align-items: center; padding: 4px 12px; font-size: 14px; font-weight: 700; color: #3a4252; line-height: 1.45; }
+  .igr .fs { display: flex; flex-direction: column; background: #fff9e8; border: 1.5px solid #f2d98d; padding: 9px 16px; min-height: 0; }
+  .igr .fs .h { font-size: 14px; font-weight: 900; color: #7a5a06; padding-bottom: 5px; border-bottom: 2px solid #f2d98d; }
+  .igr .fs .b { flex: 1 1 auto; display: flex; align-items: center; padding-top: 4px; font-size: 14.5px; font-weight: 600; color: #3a3320; line-height: 1.6; }
+  .cards .ex { display: block; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 14.5px; font-weight: 700; color: #3a4252; line-height: 1.9; }
+  table.kt b.big { font-size: 21px; font-weight: 900; }
+  /* 図解 */
+  .kcover .pills.row { right: auto; left: 66px; top: 500px; display: flex; }
+  .kcover.pan.teal { --pn: #e3f4f0; background: linear-gradient(135deg, #0a4f54 0%, #0f8078 100%) !important; }
+  .kcover.pan.violet { --pn: #ece8f8; background: linear-gradient(135deg, #2e2466 0%, #5a3fb0 100%) !important; }
+  .kcover.pan.amber { --pn: #fbeee2; background: linear-gradient(135deg, #7a2c10 0%, #c9601f 100%) !important; }
+  .kcover.pan.rose { --pn: #fbe9f1; background: linear-gradient(135deg, #6e1a44 0%, #b83a76 100%) !important; }
+  .kcover.pan .sub { font-size: 20px; }
+  .kcover.pan .cvil { width: 500px; right: 0; top: 0; height: 600px; border-radius: 0; background: var(--pn); }
+  .kcover.pan .cvil img { width: 464px; height: 400px; mix-blend-mode: multiply; }
+  .cvil { position: absolute; right: 44px; top: 96px; width: 450px; height: 450px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; }
+  .cvil img { width: 372px; height: 372px; object-fit: contain; }
+  .cards .cil { display: block; height: 182px; width: 100%; object-fit: contain; flex: 0 0 auto; }
+  .cards.grow:has(.cil) > div { padding: 12px 24px 14px; }
+  .cards:has(.cil) .t { margin-top: 8px; } .cards:has(.cil) .d { margin-top: 6px; font-size: 13.5px; line-height: 1.7; } .cards:has(.cil) .ex { margin-top: 9px; padding-top: 8px; font-size: 14px; line-height: 1.65; }
+  .cards:has(.cil) .g { margin-top: 8px; }
+  .imap .ii .n { display: flex; align-items: center; justify-content: space-between; }
+  .iar { margin-top: 14px; display: grid; grid-template-columns: repeat(3, 1fr); background: linear-gradient(90deg, #f7d778, #5a93d3 55%, #1a2e50); clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 50%, calc(100% - 22px) 100%, 0 100%); }
+  .iar span { padding: 8px 18px; font-size: 13.5px; font-weight: 800; color: #fff; text-align: center; } .iar span:first-child { color: #4a3605; }
+  .iar + .irm { margin-top: 12px; }
+  .istk { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .istk .pl { flex: 1 1 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; min-height: 0; }
+  .istk .pl > div { position: relative; border: 1.5px solid var(--line); border-top: 5px solid var(--blue); padding: 16px 20px; display: flex; flex-direction: column; }
+  .istk .ic { width: 50px; height: 50px; border-radius: 50%; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; }
+  .istk .pl .ic { position: absolute; top: 16px; right: 18px; }
+  .istk .ro { font-size: 13px; font-weight: 800; color: var(--blue-bright); }
+  .istk .t { margin-top: 3px; font-size: 21px; font-weight: 900; color: var(--blue-deep); line-height: 1.3; }
+  .istk .il { flex: 1 1 0; min-height: 0; width: 100%; object-fit: contain; margin: 8px 0; }
+  .istk .pl .d { margin-top: 10px; font-size: 14.5px; font-weight: 600; color: #4a5568; line-height: 1.75; }
+  .istk .d b { color: #1a2330; }
+  .istk .ex { margin-top: auto; background: var(--tint); padding: 10px 14px; font-size: 14px; font-weight: 800; color: #1a2330; line-height: 1.55; }
+  .istk .ex b { display: block; font-size: 12px; color: var(--blue); }
+  .istk .fd { flex: 0 0 auto; background: var(--blue-deep); color: #fff; padding: 15px 24px; display: flex; align-items: center; gap: 18px; }
+  .istk .fd .ic { flex: 0 0 auto; background: #fff; } .istk .fd .ro { color: #a9c8f0; } .istk .fd .t { color: #fff; white-space: nowrap; }
+  .istk .fd .d { margin-left: 26px; font-size: 14.5px; font-weight: 600; line-height: 1.7; color: #dbe6f4; } .istk .fd .d b { color: #fff; }
+  .inum { margin-top: 16px; display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 12px; }
+  .inum > div { border: 1.5px solid var(--line); border-top: 4px solid var(--blue); padding: 11px 16px; display: flex; flex-direction: column; min-height: 0; }
+  .inum .co { font-size: 15.5px; font-weight: 900; color: #1a2330; line-height: 1.35; }
+  .inum .ac { margin-top: 3px; font-size: 13.5px; font-weight: 600; color: #5a6578; line-height: 1.45; }
+  .inum .v { margin-top: 8px; font-size: 15px; font-weight: 800; color: #5a6578; } .inum .v b { font-size: 46px; font-weight: 900; color: var(--blue-bright); line-height: 1.15; margin: 0 3px; }
+  .inum .bs { margin-top: 4px; } .inum .bs p { display: grid; grid-template-columns: 36px 1fr 52px; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: #5a6578; }
+  .inum .bs i { height: 9px; background: #eef1f6; display: block; } .inum .bs u { display: block; height: 100%; background: #b9c7da; } .inum .bs u.on { background: var(--blue-bright); }
+  .inum .n { margin-top: auto; padding-top: 6px; font-size: 13px; font-weight: 600; color: #6b7789; line-height: 1.5; }
+  .inum.tall > div { display: flex; flex-direction: column; }
+  .inum.tall .bs { flex: 1; display: flex; flex-direction: column; justify-content: space-evenly; margin: 14px 0; }
+  .inum.tall .bs p { grid-template-columns: 44px 1fr 72px; font-size: 15px; font-weight: 700; }
+  .inum.tall .bs p span:last-child { font-size: 17px; text-align: right; }
+  .inum.tall .bs i { height: 30px; }
+  .inum.tall .bs u { height: 100%; }
+  .ifm { margin-top: 14px; display: flex; align-items: stretch; gap: 8px; }
+  .ifm > div { flex: 1 1 0; background: var(--tint); padding: 10px 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; }
+  .ifm .k { font-size: 12.5px; font-weight: 800; color: var(--blue); }
+  .ifm .v { margin-top: 2px; font-size: 25px; font-weight: 900; color: #1a2330; line-height: 1.2; } .ifm .v small { margin-left: 2px; font-size: 12px; font-weight: 800; color: #5a6578; }
+  .ifm .tt { flex: 1.3 1 0; background: var(--blue-deep); } .ifm .tt .k { color: #a9c8f0; } .ifm .tt .v { color: #fff; } .ifm .tt .v small { color: #dbe6f4; }
+  .ifm .op { align-self: center; font-size: 25px; font-weight: 900; color: var(--blue); }
+  .ifb { margin-top: 14px; display: grid; grid-template-columns: 1.15fr 1fr; gap: 14px; }
+  .ifb .bc { border: 1.5px solid var(--line); padding: 14px 18px; display: flex; flex-direction: column; justify-content: space-between; }
+  .ifb .h { font-size: 15px; font-weight: 900; color: var(--blue-deep); }
+  .ifb .br { display: grid; grid-template-columns: 66px 1fr; align-items: center; gap: 8px; }
+  .ifb .br .l { font-size: 13px; font-weight: 800; color: #3a4252; }
+  .ifb .tr { display: flex; height: 50px; }
+  .ifb .tr span { display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #fff; text-align: center; line-height: 1.25; border-right: 2px solid #fff; }
+  .ifb .tr .gr { background: #93a3b8; } .ifb .tr .bl { background: var(--blue); } .ifb .tr .am { background: var(--amber); color: #4a3605; } .ifb .tr .am2 { background: #f7d778; color: #4a3605; }
+  .ifb .n { font-size: 12.5px; font-weight: 600; color: #5a6578; line-height: 1.6; }
+  .ifb .mt, .imx .ck { display: grid; grid-auto-rows: 1fr; gap: 9px; min-height: 0; }
+  .ifb .mt > div, .imx .ck > div { border: 1.5px solid var(--line); padding: 9px 14px; display: flex; align-items: center; gap: 12px; }
+  .ifb .ic, .imx .ic { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; }
+  .ifb .t, .imx .ck .t { font-size: 15px; font-weight: 900; color: var(--blue-deep); }
+  .ifb .mt .d, .imx .ck .d { margin-top: 1px; font-size: 12.8px; font-weight: 600; color: #4a5568; line-height: 1.5; }
+  .imx { margin-top: 14px; display: grid; grid-template-columns: 1.45fr 1fr; gap: 16px; }
+  .imx table { width: 100%; height: 100%; border-collapse: collapse; }
+  .imx th { background: var(--blue-deep); color: #fff; font-size: 11.5px; font-weight: 800; padding: 6px 3px; line-height: 1.25; vertical-align: middle; }
+  .imx td { border-bottom: 1px solid var(--line); text-align: center; padding: 3px; }
+  .imx tr:nth-child(odd) td { background: #f7f9fc; }
+  .imx td.k { text-align: left; font-size: 13px; font-weight: 800; color: #1a2330; white-space: nowrap; padding-left: 10px; } .imx td.k b { margin-right: 8px; color: var(--blue-bright); }
+  .imx td i { display: inline-block; width: 15px; height: 15px; border-radius: 50%; background: var(--blue-bright); vertical-align: middle; }
+  .ilad { margin-top: 16px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; align-items: end; }
+  .ilad > div { position: relative; display: flex; flex-direction: column; padding: 16px 18px 14px; color: #fff; }
+  .ilad .c1 { height: 76%; background: #5a93d3; } .ilad .c2 { height: 84%; background: var(--blue); } .ilad .c3 { height: 92%; background: #24497e; } .ilad .c4 { height: 100%; background: var(--blue-deep); }
+  .ilad .n { font-size: 14px; font-weight: 900; opacity: .8; }
+  .ilad .ic { position: absolute; top: 14px; right: 14px; width: 44px; height: 44px; border-radius: 50%; background: #fff; color: var(--blue); display: flex; align-items: center; justify-content: center; }
+  .ilad .t { margin-top: 12px; font-size: 21px; font-weight: 900; }
+  .ilad .d { margin-top: 8px; font-size: 14.5px; font-weight: 600; line-height: 1.7; }
+  .ilad .eg { margin-top: 12px; padding: 9px 12px; border: 1.5px solid rgba(255,255,255,.55); font-size: 13.5px; font-weight: 700; line-height: 1.6; }
+  .ilad .nx { margin-top: auto; background: #fff; color: #1a2330; padding: 9px 12px; font-size: 13px; font-weight: 700; line-height: 1.5; }
+  .ilad .nx b { display: block; font-size: 11.5px; font-weight: 800; color: var(--blue); }
+  .icase { margin-top: 10px; margin-right: 60px; font-size: 13px; font-weight: 600; color: #4a5568; line-height: 1.5; }
+  .icase b { margin-right: 10px; font-size: 13px; font-weight: 800; color: var(--blue); }
+</style>
+</head>
+<body>
+  <p class="note">Copilot Studio活用事例集｜全31スライド／事例・数値は各社・各機関の公開情報にもとづく</p>
+  <div class="deck">
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide blue-bg kcover pan violet">
+        <svg class="waves" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <path d="M700,-80 C980,60 820,300 1120,380 C1320,433 1360,560 1280,760 L1380,760 L1380,-80 Z" fill="rgba(255,255,255,0.07)"/>
+          <path d="M880,-120 C1150,40 980,260 1240,330 L1340,330 L1340,-120 Z" fill="rgba(90,160,230,0.28)"/>
+          <path d="M-80,560 C240,480 420,660 760,600 C1040,551 1180,640 1300,760 L-80,760 Z" fill="rgba(20,40,80,0.22)"/>
+          <path d="M-80,640 C300,560 560,720 900,660 C1120,621 1240,690 1310,760 L-80,760 Z" fill="rgba(90,160,230,0.18)"/>
+        </svg>
+        <div class="badge-row"><span class="badge">お役立ち資料</span><span class="badge-note">バイテック法人AI研修</span></div>
+        <p class="sub">Copilot Studioの公開事例を、数字の根拠とあわせて読む</p>
+        <h1 class="title">Copilot Studio<br>活用事例集</h1>
+        <div class="pills row"><span>公開事例16件</span><span>数字の読み方つき</span><span>自己解決率の測り方</span></div>
+        <div class="cvil"><img src="assets/illus/cover-book.webp" alt=""></div>
+        <p class="date">UPDATE 2026.10</p>
+        <img class="logo" src="assets/biz-logo-w.svg" alt="byTech BUSINESS">
+      </div>
+    </div><figcaption>表紙</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">Contents</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd" style="margin-top:4px"><p class="t" style="font-size:27px">目次</p></div>
+        <div class="grow toc"><div><span class="n">01</span><span class="nm">数字の読み方<small>16件の数字は、強さが違う</small></span><span class="pg">P.2</span></div><div><span class="n">02</span><span class="nm">何に使い、どう進めたか<small>使い方の分類と、共通する進め方</small></span><span class="pg">P.3 - 5</span></div><div><span class="n">03</span><span class="nm">国内の事例<small>5件</small></span><span class="pg">P.6 - 12</span></div><div><span class="n">04</span><span class="nm">海外の事例<small>11件</small></span><span class="pg">P.13 - 26</span></div><div><span class="n">05</span><span class="nm">自社で始めるには<small>進め方と効果の測り方</small></span><span class="pg">P.27 - 28</span></div></div>
+        <p class="s-foot">掲載の16件は、公式発表の原文を2026年10月に確認したものです。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>目次</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">数字の読み方</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">16件の数字は、<b>強さが違う</b>。まず根拠の種類を見る</p><p class="l">同じ「削減」でも、測り方によって意味が変わります。本資料では、各事例の数字に性質を付けています。</p></div>
+        <table class="grow cs kt mid tall">
+          <colgroup><col style="width:170px"><col style="width:270px"><col style="width:420px"><col></colgroup>
+          <tr><th>数字の性質</th><th>どんな数字か</th><th>該当する事例</th><th>読むときの注意</th></tr>
+          <tr><td class="kc">実測</td><td>システムの記録や集計に基づく値</td><td>府中市、Virgin Money、Rabobank</td><td>集計の期間と対象を確認する</td></tr>
+          <tr><td class="kc">見込み・試算</td><td>仮定や初期の結果から見込んだ値</td><td>SCSK、Dow、McKinsey & Company</td><td>実績として扱わない</td></tr>
+          <tr><td class="kc">目標</td><td>組織が掲げた目標</td><td>Nsure.com</td><td>達成した値ではない</td></tr>
+          <tr><td class="kc">算定方法の記載なし</td><td>公表はあるが、測り方の記載がない</td><td>OBC、コニカミノルタ、PG&E、Pets at Home、Cineplex</td><td>参考値にとどめる</td></tr>
+          <tr><td class="kc">規模・件数</td><td>人数、件数、作成数など</td><td>ABN AMRO Bank、Holland America Line</td><td>効果の値ではない。進め方を参考にする</td></tr>
+          <tr><td class="kc">定性</td><td>数値の公表がない</td><td>りそなグループ、Amgen</td><td>取り組みの内容を参考にする</td></tr>
+        </table>
+        <p class="s-foot">数字の性質は、原文の記載をもとに当社が分類したものです。数値は各組織の公表値であり、当社による測定値ではありません。測定の条件が違うため、数字どうしの比較や合算はできません。出典は各事例のページに記載しています。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>数字の性質</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">使い方の全体像</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">入口は<b>問い合わせと検索</b>。慣れると処理の実行まで広がる</p><p class="l">16件の使い方を5つに分けました。下に行くほど、接続や権限の設計が必要になります。</p></div>
+        <table class="grow cs kt mid tall">
+          <colgroup><col style="width:150px"><col style="width:540px"><col></colgroup>
+          <tr><th>使い方</th><th>具体例</th><th>主な事例</th></tr>
+          <tr><td class="kc">FAQ・問い合わせ</td><td>社内のFAQボット、照会業務の支援、市サイトの案内</td><td>コニカミノルタ、りそなグループ、府中市</td></tr>
+          <tr><td class="kc">社内検索</td><td>サポート用ナレッジの検索、研究開発資料への質問</td><td>OBC、Amgen</td></tr>
+          <tr><td class="kc">文書の確認</td><td>提案書のレビュー、輸送請求書と契約の差異検出</td><td>SCSK、Dow</td></tr>
+          <tr><td class="kc">顧客対応</td><td>銀行の問い合わせ、Webの案内役、カード送付の通知</td><td>Rabobank、ABN AMRO Bank、Holland America Line、Virgin Money</td></tr>
+          <tr><td class="kc">基幹・RPA連携</td><td>SAPの解除申請、返金処理の起動、不正調査の情報収集</td><td>PG&E、Cineplex、Pets at Home</td></tr>
+        </table>
+        <p class="s-foot">分類は原文の記載をもとに当社が整理したものです。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>何に使われているか</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">共通する進め方</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">成果に近づくための<b>3つの設計</b></p><p class="l">公開事例から読み取れる共通点です（当社の整理）。</p></div>
+        <div class="grow cards c3"><div><img class="cil" src="assets/illus/step-small.webp" alt=""><p class="t">対象を絞って作る</p><p class="d">最初から何でも答えさせず、目的と範囲を決めています。<span class="ex">りそなグループ：照会業務に絞る<br>Cineplex：返金対応に絞る<br>Holland America Line：Webの案内役</span></p></div><div><img class="cil" src="assets/illus/step-measure.webp" alt=""><p class="t">公開前に試し、段階的に広げる</p><p class="d">代表的な質問で確かめ、公開範囲を少しずつ広げています。<span class="ex">府中市：職員約350名で1,000件ほどのテスト<br>Holland America Line：5→50→100%<br>McKinsey：パイロットで検証</span></p></div><div><img class="cil" src="assets/illus/step-learn.webp" alt=""><p class="t">人に渡す経路を残す</p><p class="d">すべてをAIで完結させず、有人対応と組み合わせています。<span class="ex">Rabobank：チャットの62%が有人転送なし<br>コニカミノルタ：AIと有人で分担</span></p></div></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>共通する進め方</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">数字で見る</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">公開範囲と応答の変化を、<b>数字で見る</b></p><p class="l">3組織の例です。棒の長さは各カードの中でのみ比べてください。</p></div>
+        <div class="grow inum tall"><div><p class="co">Holland America Line</p><p class="ac">Webの案内役を段階公開</p><p class="v"><b>100</b>%まで公開</p><div class="bs"><p><span>最初</span><i><u class="" style="width:5%"></u></i><span>5%</span></p><p><span>次</span><i><u class="on" style="width:50%"></u></i><span>50%</span></p><p><span>全体</span><i><u class="on" style="width:100%"></u></i><span>100%</span></p></div><p class="n">社内検証後の公開比率です。効果の削減率は公表されていません</p></div><div><p class="co">Cineplex</p><p class="ac">返金対応の時間（1件）</p><p class="v">通常<b>30</b>秒</p><div class="bs"><p><span>導入前</span><i><u class="" style="width:100%"></u></i><span>5〜15分</span></p><p><span>導入後</span><i><u class="on" style="width:3.3333333333333335%"></u></i><span>30秒</span></p></div><p class="n">棒は導入前の上限15分で描いています。算定方法の記載はありません</p></div><div><p class="co">Virgin Money</p><p class="ac">カード送付の通知への対応</p><p class="v"><b>97</b>%が完了</p><div class="bs"><p><span>反応</span><i><u class="" style="width:55.670103092783506%"></u></i><span>約54%</span></p><p><span>完了</span><i><u class="on" style="width:100%"></u></i><span>97%</span></p></div><p class="n">97%は通知に反応した顧客のうち、手続を完了した割合です</p></div></div>
+        <p class="s-foot">数値は各組織の公表値であり、当社による測定値ではありません。測定の条件が違うため、数字どうしの比較や合算はできません。出典は各事例のページに記載しています。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>数字で見る</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide ch">
+        <div class="chp">
+          <img class="s-logo" src="assets/biz-logo-w.svg" alt="byTech BUSINESS">
+          <span class="no">01</span>
+          <p class="t">国内の事例</p>
+          <p class="d">5件の取り組みと、公表された数字</p>
+          <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>章扉 国内の事例</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">国内の事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">国内は<b>社内の問い合わせと検索</b>から</p><p class="l">数字の性質を左から3列目に示しています。数字どうしは比較できません。</p></div>
+        <table class="grow cs">
+          <colgroup><col style="width:40px"><col style="width:176px"><col style="width:120px"><col><col style="width:262px"></colgroup>
+          <tr><th>No.</th><th>組織</th><th>数字の性質</th><th>取り組み</th><th>公表された数字</th></tr>
+          <tr>
+            <td class="no">01</td><td class="co"><span>SCSK</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>見込み</span></td>
+            <td>提案書レビューなど3業務のエージェントを開発</td>
+            <td class="rs">約3カ月で<b>3件</b>開発（期待値107.3分/日）</td>
+          </tr>
+          <tr>
+            <td class="no">02</td><td class="co"><span>オービックビジネスコンサルタント（OBC）</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg>算定法なし</span></td>
+            <td>サポート用ナレッジ検索をCopilot Studioで内製</td>
+            <td class="rs">既存比<b>1/2程度</b>の運用コスト削減（発言）</td>
+          </tr>
+          <tr>
+            <td class="no">03</td><td class="co"><span>りそなグループ</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>定性</span></td>
+            <td>照会業務のAIエージェントを4領域で構築</td>
+            <td class="rs"><b>4領域</b>で構築、定量効果は公表なし</td>
+          </tr>
+          <tr>
+            <td class="no">04</td><td class="co"><span>府中市</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg>実測</span></td>
+            <td>市サイトの検索ボットをCopilot Studioで内製</td>
+            <td class="rs">正答率<b>90%</b>（公開前の職員テスト後）</td>
+          </tr>
+          <tr>
+            <td class="no">05</td><td class="co"><span>コニカミノルタ</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>算定法なし</span></td>
+            <td>FAQボットをCopilot Studioで再構築</td>
+            <td class="rs">半年で<b>3.6人月</b>削減（算定方法の記載なし）</td>
+          </tr>
+        </table>
+        <p class="s-foot">数値は各組織の公表値であり、当社による測定値ではありません。測定の条件が違うため、数字どうしの比較や合算はできません。出典は各事例のページに記載しています。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>国内の事例の一覧</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">国内の事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">01</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span>
+          <p class="co">SCSK<small>ITサービス｜M365 Copilot約7,000ライセンスで試行</small></p>
+          <div class="tags"><span>ITサービス</span><span>M365 Copilot約7,000ライセンスで試行</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>作ったもの</p><div class="vb"><p class="i"><b>提案書レビュー</b>用。セルフ・上長・壁打ちの3目的で構成</p><p class="i"><b>メンバーからの情報共有</b>を支援するエージェント</p><p class="i"><b>メンバーの活動把握</b>を支援し、管理職の業務効率化にも対応</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>進め方</p><div class="vb"><p class="i"><b>10余りのユースケース</b>から3つを選び、約3カ月で作成</p><p class="i"><b>マイクロソフトの助言</b>で、提案書レビューをフェーズ別に構成</p><p class="i"><b>現場の反応</b>で課題が見えたエージェントもあり、失敗も蓄積</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">開発したエージェント</p><p class="v">3<small>件</small></p><p class="n">約3カ月で開発・2025年9月公表</p></div><div class="vt c3"><div><p class="k">候補のユースケース</p><p class="v">10余り<small></small></p><p class="n">複数部署と連携して整理</p></div><div><p class="k">削減時間合計（期待値）</p><p class="v">107.3<small>分/日</small></p><p class="n">部内アンケート・初期の期待削減効果</p></div><div><p class="k">定性評価平均</p><p class="v">1.75<small>/最大3</small></p><p class="n">同アンケート・アイデア創出と品質向上</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">候補から絞り込む</p><p class="d">複数部署で業務の候補を洗い出し、負荷の高い層に効く数件へ絞ってから開発を始める。</p></div></div><div><span class="ln">2</span><div><p class="t">目的別に分けて作る</p><p class="d">レビューなら自己確認・上長確認・壁打ちのように、用途ごとに分けて期待する出力に近づける。</p></div></div><div><span class="ln">3</span><div><p class="t">失敗も記録して直す</p><p class="d">成果が出たものと課題が出たものを分けて記録し、業務の進め方の見直しにつなげていく。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：Microsoft「Copilot エージェントによる自社業務課題解決と外販サービス化を推進。Microsoft 365 Copilot の全社導入に舵を切ったSCSK の AI 活用」（2025年9月3日）。数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 01 SCSK</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">国内の事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">02</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg></span>
+          <p class="co">オービックビジネスコンサルタント（OBC）<small>業務ソフト｜従業員1,000-9,999人・社内で内製</small></p>
+          <div class="tags"><span>業務ソフト</span><span>従業員1,000-9,999人・社内で内製</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>作ったもの</p><div class="vb"><p class="i"><b>サポート担当者</b>が必要な情報へたどり着くためのエージェント</p><p class="i"><b>トピックとフロー処理</b>を組み合わせてナレッジを抽出</p><p class="i"><b>エージェントビルダー</b>で、回答文に成形するツールも内製</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>進め方</p><div class="vb"><p class="i"><b>既存AIサービス</b>の運用コストの高さを受け、同等品の内製に着手</p><p class="i"><b>約半年</b>かけて開発とチューニングを行い、既存から移行</p><p class="i"><b>AI開発の知見がなかった担当者</b>を中心に、手探りで開発</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">運用コスト削減</p><p class="v">1/2<small>程度</small></p><p class="n">既存ツール比・担当者の発言</p></div><div class="vt c2"><div><p class="k">開発・調整の期間</p><p class="v">約半年<small></small></p><p class="n">開発とチューニング</p></div><div><p class="k">全社のM365 Copilot</p><p class="v">1,115<small>ライセンス</small></p><p class="n">2026年2月・Studioの成果ではない</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">運用費で比べ直す</p><p class="d">外部のAIサービスの運用費が重いなら、同じ範囲を内製した場合の費用と比べて判断する。</p></div></div><div><span class="ln">2</span><div><p class="t">同じ機能から置換</p><p class="d">基本機能は既存のまま基盤だけを移すと、費用と使い勝手の差を比べやすく判断もしやすい。</p></div></div><div><span class="ln">3</span><div><p class="t">未経験者を担当に</p><p class="d">AI開発の経験がない社員でも担当に置き、半年ほどの期間を見込んで調整しながら育てる。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：Microsoft「Microsoft 365 Copilot の全社展開と Copilot Studio による内製開発で、AI 活用を当たり前とする企業文化を醸成する OBC の取り組み」（2026年4月6日）。数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 02 オービックビジネスコンサルタント（OBC）</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">国内の事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">03</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span>
+          <p class="co">りそなグループ<small>金融｜従業員10,000人以上</small></p>
+          <div class="tags"><span>金融</span><span>従業員10,000人以上</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>作ったもの</p><div class="vb"><p class="i"><b>iDeCo</b>の掛金上限や加入資格などの確認を代行する営業店向けAI</p><p class="i"><b>融資</b>の規則照会向け。カテゴリーを細分化して精度向上を図る</p><p class="i"><b>住宅ローン・企業年金</b>の照会向けにも構築を進行</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>進め方</p><div class="vb"><p class="i"><b>IT企画部と業務部門</b>が週1回集まり、進捗と課題を共有</p><p class="i">ハルシネーションを受け<b>ナレッジ構造を見直し</b>、質問をツリー化</p><p class="i"><b>全問い合わせのAI単体解決は難しい</b>と判断し、Q&amp;A検索を併設</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">構築領域</p><p class="v">4<small>領域</small></p><p class="n">融資・住宅ローン・企業年金・iDeCo</p></div><div class="vt c2"><div><p class="k">iDeCo・融資のリリース</p><p class="v">2025年11月<small></small></p><p class="n">削減効果の定量値は公表なし</p></div><div><p class="k">プロジェクトの定例</p><p class="v">週1<small>回</small></p><p class="n">IT企画部と参加部門で実施</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">照会業務から着手</p><p class="d">効果が見えやすい照会業務を選び、問い合わせの多さに悩む部門へ声をかけて着手する。</p></div></div><div><span class="ln">2</span><div><p class="t">質問を選択式にする</p><p class="d">複雑なルールは知識を分割し、利用者が選びながら質問を絞れる形にして誤答を抑える。</p></div></div><div><span class="ln">3</span><div><p class="t">人への経路を残す</p><p class="d">AIで解けない場合の検索手段と担当者への連絡先を用意し、任せる範囲を段階的に広げる。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：Microsoft「コーポレート トランスフォーメーションに取り組むりそなグループ。Copilot Studio を活用した AI エージェントで、人と AI が協働する価値創造型の働き方へ」（2026年7月6日）。数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 03 りそなグループ</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">国内の事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">04</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg></span>
+          <p class="co">府中市<small>自治体｜人口26万人超</small></p>
+          <div class="tags"><span>自治体</span><span>人口26万人超</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>作ったもの</p><div class="vb"><p class="i"><b>AIサイト内検索ボット</b>。市民の自由な質問文から回答を提示</p><p class="i"><b>1万ページ以上</b>の市サイトの更新を、FAQ作成なしで反映</p><p class="i"><b>「ふくろう」</b>。例規や庁内SharePointの一部を参照する職員用</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>進め方</p><div class="vb"><p class="i"><b>情報戦略課と秘書広報課</b>が連携し、2か月弱で開発</p><p class="i"><b>約350名の職員</b>が1,000件ほど質問し、公開前に誤答を確認</p><p class="i">誤答の基になった<b>市サイトの文言</b>を担当部署と相談して修正</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">正答率</p><p class="v">90<small>%</small></p><p class="n">公開前の職員テストを経た値</p></div><div class="vt c3"><div><p class="k">公開前テストの質問</p><p class="v">1,000<small>件ほど</small></p><p class="n">職員約350名が参加</p></div><div><p class="k">検索ボットの開発期間</p><p class="v">2<small>か月弱</small></p><p class="n">日本マイクロソフトの支援あり</p></div><div><p class="k">対象の市サイト</p><p class="v">1<small>万ページ以上</small></p><p class="n">2025年6月4日に一般公開</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">公開前に社内で試す</p><p class="d">公開前に多くの社員に質問してもらい、重要な質問の誤答を洗い出してから公開を判断する。</p></div></div><div><span class="ln">2</span><div><p class="t">元の文章から直す</p><p class="d">誤答の原因を探り、参照先の文章を誤解のない表現へ直すと、人にも伝わりやすくなる。</p></div></div><div><span class="ln">3</span><div><p class="t">意見を集めて改善</p><p class="d">回答画面にアンケートを付けて利用者の意見を集め、公開後も文章と回答を見直し続ける。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：Microsoft「市民に “伝わる” 情報提供へ。府中市は、市民への情報提供・発信の強化・改善に向けた生成 AI チャットボットを Copilot Studio を活用して内製」（2025年8月21日）。数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 04 府中市</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">国内の事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">05</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span>
+          <p class="co">コニカミノルタ<small>製造｜利用者約1万人（国内グループ）</small></p>
+          <div class="tags"><span>製造</span><span>利用者約1万人（国内グループ）</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>作ったもの</p><div class="vb"><p class="i"><b>新「リテラ」</b>。社内ITサービスの問い合わせにTeamsで回答するAI</p><p class="i"><b>既存のFAQと手順書</b>を直接参照し、文章を生成して回答</p><p class="i">回答できない時は<b>有人窓口へのメール</b>を自動作成して連携</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>進め方</p><div class="vb"><p class="i"><b>Q&amp;A Makerの終了</b>を機に、廃止か再構築かを検討し再構築</p><p class="i"><b>Power Automate</b>でFAQをDataverseへ日次自動反映</p><p class="i"><b>Power BI</b>で質問と回答、満足度を可視化し、情報を補充</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">有人対応の工数削減</p><p class="v">3.6<small>人月</small></p><p class="n">導入後半年・算定方法の記載なし</p></div><div class="vt c3"><div><p class="k">対応した質問</p><p class="v">約2,500<small>件</small></p><p class="n">導入後半年間</p></div><div><p class="k">AIが対応した割合</p><p class="v">23<small>%</small></p><p class="n">2025年5月・リテラ180件</p></div><div><p class="k">IT部門のメンテナンス負荷</p><p class="v">50<small>%削減</small></p><p class="n">部署による・Power Automate連携含む</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">終了時こそ見直す</p><p class="d">既存ツールの終了時に、廃止と再構築の両方を検討し、利用者の需要を確かめて決める。</p></div></div><div><span class="ln">2</span><div><p class="t">既存FAQを活かす</p><p class="d">回答専用のデータを別に作らず、今ある社内のFAQや手順書を参照先にして二重管理を避ける。</p></div></div><div><span class="ln">3</span><div><p class="t">未回答の質問を見る</p><p class="d">回答できなかった質問を定期的に確認し、不足している情報を足して回答の範囲を広げる。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：Microsoft Dynamics ブログ「コニカミノルタ様の Copilot Studio × Power Platform で実現する1万人利用社内ヘルプデスク改革: 半年で約3.6人月工数削減」（2025年12月23日）／コムチュア「Copilot Studioで利用者1万人規模の社内ヘルプデスクを改革 - コニカミノルタ株式会社様 -」（公開日の記載なし）。数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 05 コニカミノルタ</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide ch">
+        <div class="chp">
+          <img class="s-logo" src="assets/biz-logo-w.svg" alt="byTech BUSINESS">
+          <span class="no">02</span>
+          <p class="t">海外の事例</p>
+          <p class="d">11件の取り組みと、公表された数字</p>
+          <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>章扉 海外の事例</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">海外の事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">海外は<b>顧客対応と基幹連携</b>まで広がる</p><p class="l">数字の性質を左から3列目に示しています。数字どうしは比較できません。</p></div>
+        <table class="grow cs cmp">
+          <colgroup><col style="width:40px"><col style="width:176px"><col style="width:120px"><col><col style="width:262px"></colgroup>
+          <tr><th>No.</th><th>組織</th><th>数字の性質</th><th>取り組み</th><th>公表された数字</th></tr>
+          <tr>
+            <td class="no">06</td><td class="co"><span>PG&amp;E（Pacific Gas and Electric）</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg>算定法なし</span></td>
+            <td>社内ヘルプデスクBotでSAP解除申請を自動化</td>
+            <td class="rs">SAP解除のみで<b>840時間／年</b>削減（RPA併用）</td>
+          </tr>
+          <tr>
+            <td class="no">07</td><td class="co"><span>Nsure.com</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>目標</span></td>
+            <td>顧客対応のCopilotで支払い・更新の照会を支援</td>
+            <td class="rs">自動対応は<b>最大90%</b>が目標（実績でない）</td>
+          </tr>
+          <tr>
+            <td class="no">08</td><td class="co"><span>Amgen</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg>定性</span></td>
+            <td>研究開発の資料に質問できるエージェントを構築</td>
+            <td class="rs">開発は<b>約6週間</b>（効果の数値は記載なし）</td>
+          </tr>
+          <tr>
+            <td class="no">09</td><td class="co"><span>Dow</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>見込み</span></td>
+            <td>輸送請求書のPDFを処理し契約との差異を検出</td>
+            <td class="rs">初年度に<b>数百万ドル</b>の削減見込み（実績でない）</td>
+          </tr>
+          <tr>
+            <td class="no">10</td><td class="co"><span>ABN AMRO Bank</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg>規模・件数</span></td>
+            <td>顧客向け・行員向けチャットボットを移行</td>
+            <td class="rs">年<b>350万件超</b>の顧客会話を支援（件数）</td>
+          </tr>
+          <tr>
+            <td class="no">11</td><td class="co"><span>Virgin Money</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg>実測</span></td>
+            <td>カード送付の通知と住所確認を自動化</td>
+            <td class="rs">反応した顧客の<b>97%</b>が手続を完了（反応は約54%）</td>
+          </tr>
+        </table>
+        <p class="s-foot">数値は各組織の公表値であり、当社による測定値ではありません。測定の条件が違うため、数字どうしの比較や合算はできません。出典は各事例のページに記載しています。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>海外の事例の一覧</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">海外の事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">06</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg></span>
+          <p class="co">PG&amp;E（Pacific Gas and Electric）<small>エネルギー｜ヘルプデスク需要の25〜40%に対応</small></p>
+          <div class="tags"><span>エネルギー</span><span>ヘルプデスク需要の25〜40%に対応</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>作ったもの</p><div class="vb"><p class="i">社員の質問に答えるヘルプデスクBot<b>Peggy</b></p><p class="i"><b>SAPアカウント解除</b>の申請を最初から最後まで自動化</p><p class="i">Citrix初回ログインを質問形式で<b>手順とリンク</b>で案内</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>進め方</p><div class="vb"><p class="i">前身の<b>Power Virtual Agents</b>で構築し機能を追加</p><p class="i">初期の成功を受け<b>Power AutomateのRPA</b>を連携</p><p class="i">3人が率いる<b>CoE</b>が開発者を育成しガバナンスを担当</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">SAP解除の削減時間</p><p class="v">840<small>時間／年</small></p><p class="n">SAP解除のみ・2023年公表・算定記載なし</p></div><div class="vt c3"><div><p class="k">Peggyが担う需要</p><p class="v">25〜40<small>%</small></p><p class="n">ヘルプデスク需要・2023〜24年公表</p></div><div><p class="k">Peggyの節約額</p><p class="v">110万<small>ドル超／年</small></p><p class="n">2023年12月公表・算定方法の記載なし</p></div><div><p class="k">全施策の合計削減</p><p class="v">527,000<small>時間弱／年</small></p><p class="n">315超の施策の合算・Bot単体でない</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">回答から処理へ広げる</p><p class="d">まず質問への回答で定着させ、次に定型の処理を自動化すると段階的に効果を広げやすい。</p></div></div><div><span class="ln">2</span><div><p class="t">件数の多い手続を狙う</p><p class="d">年4,200件超の解除依頼のように、件数が多く手順が同じ手続は自動化の候補にしやすい。</p></div></div><div><span class="ln">3</span><div><p class="t">推進役を少人数で置く</p><p class="d">少人数の推進チームが育成と統制を担うと、現場の開発を止めずに安全面を保ちやすい。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：Microsoft「Improving customer and employee experiences with Microsoft Copilot Studio」（2024/07/01）、Microsoft「Pacific Gas &amp; Electric saves millions each year by automating business processes with Power Platform」（2023/12/04）、Microsoft「PG&amp;E saves over 38 million dollars from Power Platform solutions and a Center of Excellence」（2023/04/04）。数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。840時間と25〜40%はPower AutomateのRPAとの併用による成果で、Copilot Studio単体の数値ではありません。527,000時間は315超のローコード施策の合算です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 06 PG&amp;E（Pacific Gas and Electric）</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">海外の事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">07</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span>
+          <p class="co">Nsure.com<small>保険｜従業員900人</small></p>
+          <div class="tags"><span>保険</span><span>従業員900人</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>作ったもの</p><div class="vb"><p class="i">他社製チャットボットを<b>Friendly John</b>に置き換え</p><p class="i"><b>支払い・更新確認・割引依頼</b>などの顧客対応を支援</p><p class="i">テキストに加え<b>音声応答</b>と時間外対応を提供</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>進め方</p><div class="vb"><p class="i"><b>Microsoft Fabric</b>のデータを参照する構成で構築</p><p class="i">5年超の<b>Power Platform</b>活用を経て導入</p><p class="i">Power Platformは提携先Netwiseが初期構築し<b>社内</b>へ移管</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">自動対応の目標</p><p class="v">最大90<small>%</small></p><p class="n">目標・2024年7月公表・達成は未確認</p></div><div class="vt c2"><div><p class="k">当時の対応割合</p><p class="v">約60<small>%</small></p><p class="n">2024年1月の幹部発言・算定記載なし</p></div><div><p class="k">顧客とのやり取り</p><p class="v">100,000<small>件超／月</small></p><p class="n">生成AI活用前・担当100人超・通話等</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">現状と目標を分ける</p><p class="d">今できる割合と次の目標を分けて示すと、経営層への説明と進捗の確認がしやすくなる。</p></div></div><div><span class="ln">2</span><div><p class="t">対象の手続を絞る</p><p class="d">支払いや更新など件数が多く定型の問い合わせに絞ると、最初の対象を決めやすくなる。</p></div></div><div><span class="ln">3</span><div><p class="t">時間外から提供する</p><p class="d">担当者が不在の時間帯の窓口として使うと、既存の体制を変えずに試す範囲を設定できる。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：Microsoft「Improving customer and employee experiences with Microsoft Copilot Studio」（2024/07/01）、Microsoft「Digital insurance agency, Nsure.com, reduces manual processing time by 60% using generative AI and Power Automate」（2024/01/25）。数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。90%は目標で、達成した実績ではありません。同社の顧客事例の見出しにある「60%」は手作業時間の削減率で、Power Automateの生成AI機能による別の成果です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 07 Nsure.com</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">海外の事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">08</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/></svg></span>
+          <p class="co">Amgen<small>製薬・バイオ｜研究開発部門で利用</small></p>
+          <div class="tags"><span>製薬・バイオ</span><span>研究開発部門で利用</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>作ったもの</p><div class="vb"><p class="i">知識基盤Catalystに組み込む<b>Catalyst Copilot</b></p><p class="i">教訓・記事・発表資料に<b>自然言語</b>で質問して回答</p><p class="i">必要な<b>情報と人</b>にたどり着くまでの探索を支援</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>進め方</p><div class="vb"><p class="i">先に<b>知識の整理</b>を済ませ、その上にAIを追加</p><p class="i">知識管理チームと技術チームが<b>約6週間</b>で構築</p><p class="i">質問の入力から<b>意図</b>を把握し、資料の整備に反映</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">開発期間</p><p class="v">約6<small>週間</small></p><p class="n">構築の期間・2025年4月公表</p></div><div class="vt c2"><div><p class="k">導入前の資料探し</p><p class="v">数時間〜数日<small></small></p><p class="n">担当幹部の発言・計測値ではない</p></div><div><p class="k">効果の数値</p><p class="v">記載なし<small></small></p><p class="n">短縮時間や工数の数値は原文になし</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">先に資料を整理する</p><p class="d">資料の分類と整理を先に済ませてからAIを載せると、回答の土台を確保した状態で始められる。</p></div></div><div><span class="ln">2</span><div><p class="t">探す時間を指標にする</p><p class="d">必要な資料や担当者にたどり着く時間を導入前に測っておくと、効果を比較しやすくなる。</p></div></div><div><span class="ln">3</span><div><p class="t">質問の内容を活用する</p><p class="d">社員が入力した質問を見れば何を探しているかが分かり、不足する資料の整備に回せる。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：Microsoft「Amgen builds agent in 6 weeks with Copilot Studio to help accelerate R&amp;D」（2025/04/30）。数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。6週間は開発期間であり、創薬期間の短縮量ではありません。効果は定性的な記述のみです。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 08 Amgen</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">海外の事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">09</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span>
+          <p class="co">Dow<small>化学｜全従業員の20%がCopilotを利用</small></p>
+          <div class="tags"><span>化学</span><span>全従業員の20%がCopilotを利用</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>作ったもの</p><div class="vb"><p class="i">対話型エージェントが<b>運賃請求書</b>を分析し差異を指摘</p><p class="i">Copilot Studio製の<b>自律型</b>がメールのPDF請求書を処理</p><p class="i">不一致を検出し修正へ回す処理を<b>24時間</b>実行</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>進め方</p><div class="vb"><p class="i">Microsoft 365 Copilotを<b>数百人</b>で開始し順次拡大</p><p class="i">運賃と請求額を<b>契約条件</b>と照合する業務から着手</p><p class="i">社員への<b>教育</b>を強化し活用の幅を広げる方針</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">初年度の輸送費削減</p><p class="v">数百万<small>ドル</small></p><p class="n">見込み・実績でない・2024年11月公表</p></div><div class="vt c2"><div><p class="k">年間の運賃支出</p><p class="v">数十億<small>ドル超</small></p><p class="n">担当幹部の発言・削減の対象領域</p></div><div><p class="k">Copilotの利用範囲</p><p class="v">20<small>%</small></p><p class="n">全従業員比・2024年11月公表時点</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">照合の基準を明確に</p><p class="d">契約単価のように照合先がはっきりした書類から始めると、差異の判定を設計しやすい。</p></div></div><div><span class="ln">2</span><div><p class="t">修正は人が判断する</p><p class="d">AIは不一致の検出と回付までとし、修正は担当者が判断する流れにすると運用しやすい。</p></div></div><div><span class="ln">3</span><div><p class="t">見込みの根拠を残す</p><p class="d">削減額は見込みと実績を分けて記録すると、導入後に効果を検証して説明しやすくなる。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：Microsoft「Dow reimagines productivity and supply chain efficiency with Microsoft 365 Copilot」（2024/11/19）。数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。数百万ドルは同社の見込みで、確定した削減額ではありません。Microsoft 365 Copilotとエージェントの取り組みを含み、Copilot Studio単体の成果ではありません。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 09 Dow</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">海外の事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">10</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21"/></svg></span>
+          <p class="co">ABN AMRO Bank<small>金融｜従業員22,000人超</small></p>
+          <div class="tags"><span>金融</span><span>従業員22,000人超</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>作ったもの</p><div class="vb"><p class="i">顧客向け<b>Anna</b>：テキストと音声の両方で対応</p><p class="i">行員向け<b>Abby</b>：ITヘルプデスクや施設の問い合わせ</p><p class="i">音声IVRが内容を理解し<b>担当部署へ振り分け</b></p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>進め方</p><div class="vb"><p class="i">2023年末の<b>RFP</b>を経てCopilot Studioを選定</p><p class="i">CISOチームと<b>3か月</b>のセキュリティ審査を実施</p><p class="i">MicrosoftとCapgeminiと協働し<b>6か月</b>で移行完了</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">Annaの顧客会話</p><p class="v">350万<small>件超／年</small></p><p class="n">テキスト200万超・音声150万</p></div><div class="vt c2"><div><p class="k">移行期間</p><p class="v">6<small>か月</small></p><p class="n">2024年12月公表・Capgemini等と協働</p></div><div><p class="k">意図認識の精度向上</p><p class="v">7<small>%</small></p><p class="n">オランダ語・Azure AI CLU統合時</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">審査の時間を見込む</p><p class="d">顧客向けに使うなら、情報システムや安全管理の審査期間を最初から計画に入れておく。</p></div></div><div><span class="ln">2</span><div><p class="t">社内向けも同時に検討</p><p class="d">顧客向けと社員向けを同じ基盤に載せると、運用の知見を両方の窓口で共有しやすくなる。</p></div></div><div><span class="ln">3</span><div><p class="t">日本語で精度を確認</p><p class="d">言語によって認識精度は変わるため、日本語の問い合わせで意図の判定を検証しておく。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：Microsoft「ABN AMRO Bank migrates to Microsoft Copilot Studio to support over 3.5 million customer conversations」（2024/12/03）。数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。350万件超は対応した会話の件数で、削減時間や自己解決の件数ではありません。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 10 ABN AMRO Bank</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">海外の事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">11</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span>
+          <p class="co">Virgin Money<small>金融｜個人・法人の顧客660万</small></p>
+          <div class="tags"><span>金融</span><span>個人・法人の顧客660万</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>作ったもの</p><div class="vb"><p class="i">新カードの送付前に<b>Redi</b>が通知し住所を確認</p><p class="i">複数の仮想アシスタントを<b>1つ</b>に統合</p><p class="i">定型依頼を処理し複雑な件は<b>担当者へ引き継ぎ</b></p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>進め方</p><div class="vb"><p class="i"><b>Power Automate</b>の機能を理由にCopilot Studioを選定</p><p class="i">初回の接点で解決する<b>方針</b>に沿って設計</p><p class="i">Rediから得る<b>インサイト</b>で顧客体験を改善</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">通知への反応率</p><p class="v">約54<small>%</small></p><p class="n">カード送付の通知・2025年7月公表</p></div><div class="vt c2"><div><p class="k">反応者の完了率</p><p class="v">97<small>%</small></p><p class="n">反応した顧客が母数・全問合せでない</p></div><div><p class="k">顧客数</p><p class="v">660万<small></small></p><p class="n">個人・法人の合計・2025年7月公表</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">完了の条件を決める</p><p class="d">住所確認の完了のように終点を具体的に決めると、手続が最後まで進んだかを測定できる。</p></div></div><div><span class="ln">2</span><div><p class="t">反応と完了を分ける</p><p class="d">反応した割合と完了した割合を別に測ると、通知と手続のどちらを直すべきかが分かる。</p></div></div><div><span class="ln">3</span><div><p class="t">待たず先に連絡する</p><p class="d">問い合わせを待たず対象者へ先に通知する使い方は、社内外の定型の確認業務に応用しやすい。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：Microsoft「Virgin Money modernises banking with Microsoft Copilot Studio」（2025/07/23）。数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。97%はカード送付の通知に反応した顧客の完了率で、全問い合わせの自己解決率ではありません。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 11 Virgin Money</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">海外の事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">海外は<b>顧客対応と基幹連携</b>まで広がる</p><p class="l">数字の性質を左から3列目に示しています。数字どうしは比較できません。</p></div>
+        <table class="grow cs">
+          <colgroup><col style="width:40px"><col style="width:176px"><col style="width:120px"><col><col style="width:262px"></colgroup>
+          <tr><th>No.</th><th>組織</th><th>数字の性質</th><th>取り組み</th><th>公表された数字</th></tr>
+          <tr>
+            <td class="no">12</td><td class="co"><span>Holland America Line</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>規模・件数</span></td>
+            <td>Webの案内役Annaを段階公開</td>
+            <td class="rs"><b>週数千件</b>の会話に対応（削減率は記載なし）</td>
+          </tr>
+          <tr>
+            <td class="no">13</td><td class="co"><span>McKinsey &amp; Company</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg>見込み</span></td>
+            <td>顧客受入れ業務のエージェントをパイロット検証</td>
+            <td class="rs"><b>90%</b>短縮の可能性（パイロット）</td>
+          </tr>
+          <tr>
+            <td class="no">14</td><td class="co"><span>Pets at Home</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.8C7.9 18.7 5 15.2 5 11V6z"/><path d="M9 11.6l2.1 2.1L15.2 9.6"/></svg>算定法なし</span></td>
+            <td>不正調査の情報収集と分析をエージェント化</td>
+            <td class="rs"><b>10倍</b>速く特定、処理件数<b>20倍</b>（算定方法の記載なし）</td>
+          </tr>
+          <tr>
+            <td class="no">15</td><td class="co"><span>Rabobank</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>実測</span></td>
+            <td>音声1体・テキスト2体の顧客対応エージェントを運用</td>
+            <td class="rs">チャットの<b>62%</b>が有人転送なし</td>
+          </tr>
+          <tr>
+            <td class="no">16</td><td class="co"><span>Cineplex（返金対応）</span></td><td class="ar"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg>算定法なし</span></td>
+            <td>返金種別を判別しRPA処理を起動するコパイロット</td>
+            <td class="rs">対応<b>5〜15分→通常30秒</b>（5か月で5,000超）</td>
+          </tr>
+        </table>
+        <p class="s-foot">数値は各組織の公表値であり、当社による測定値ではありません。測定の条件が違うため、数字どうしの比較や合算はできません。出典は各事例のページに記載しています。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>海外の事例の一覧</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">海外の事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">12</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span>
+          <p class="co">Holland America Line<small>旅行・クルーズ｜10,000人以上・全顧客に公開</small></p>
+          <div class="tags"><span>旅行・クルーズ</span><span>10,000人以上・全顧客に公開</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>作ったもの</p><div class="vb"><p class="i">Webの案内役<b>Anna</b>。新規客・既存客・旅行アドバイザーを支援</p><p class="i"><b>新規予約</b>、既存予約への追加、一般質問の3場面に対応</p><p class="i"><b>CRMと予約システム</b>に接続し、Web情報はBing APIで参照</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>進め方</p><div class="vb"><p class="i"><b>MVPを3か月</b>で構築し、まず米国で稼働</p><p class="i">窓口担当→全社員→顧客<b>5%→50%→100%</b>の順に公開</p><p class="i">会話ログを分析し、<b>未回答の話題</b>を内容更新に反映</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">会話数</p><p class="v">数千<small>件／週</small></p><p class="n">2025年4月公表。概数のみ記載</p></div><div class="vt c2"><div><p class="k">MVPの構築期間</p><p class="v">3<small>か月</small></p><p class="n">2025年4月公表。初回リリース</p></div><div><p class="k">公開比率の推移</p><p class="v">5→50→100<small>%</small></p><p class="n">Web訪問客が対象。段階公開</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">社内から順に公開</p><p class="d">まず窓口担当と社員に使わせ、その後に顧客の一部へ広げる。誤回答の影響を抑えながら改善できる。</p></div></div><div><span class="ln">2</span><div><p class="t">未回答の質問を見る</p><p class="d">答えられなかった質問を話題ごとに整理し、更新の優先順位を決める。改善の手戻りを減らせる。</p></div></div><div><span class="ln">3</span><div><p class="t">場面を三つに絞る</p><p class="d">初版は新規予約、追加購入、一般質問のように対象場面を絞る。短期間で公開まで進めやすくなる。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：Microsoft「Holland America Line sees signs of more informed purchasing with Copilot Studio agent」（2025年4月25日）。数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 12 Holland America Line</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">海外の事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">13</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span>
+          <p class="co">McKinsey &amp; Company<small>コンサルティング｜パイロット段階</small></p>
+          <div class="tags"><span>コンサルティング</span><span>パイロット段階</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>作ったもの</p><div class="vb"><p class="i"><b>新規顧客の受入れ</b>を早めるエージェント</p><p class="i"><b>適切な専門能力の特定</b>やチーム編成を自動化</p><p class="i">質問とフォロー依頼の<b>窓口を一本化</b></p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>進め方</p><div class="vb"><p class="i">Microsoftと<b>協業</b>して開発</p><p class="i">自社と顧客向けの<b>AI変革プレイブック</b>の一環</p><p class="i"><b>自社向けパイロット</b>で効果を検証</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">リードタイム短縮の可能性</p><p class="v">90<small>%</small></p><p class="n">2024年公表のパイロット値。本番実績でない</p></div><div class="vt c1"><div><p class="k">事務作業削減の可能性</p><p class="v">30<small>%</small></p><p class="n">2024年公表のパイロット値。本番実績でない</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">一連の流れで見直す</p><p class="d">情報収集、担当割当、確認依頼を別々に扱わず、一つの流れとして見直す。効果が見えやすくなる。</p></div></div><div><span class="ln">2</span><div><p class="t">窓口を一つにまとめる</p><p class="d">質問と依頼の窓口を一つのエージェントに集める。問い合わせ先を探す手間を減らす設計を試せる。</p></div></div><div><span class="ln">3</span><div><p class="t">試験結果と分けて示す</p><p class="d">パイロットの数値は可能性として扱い、本番運用の実績とは分けて社内に報告し、判断を誤らない。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：Microsoft「Unlocking autonomous agent capabilities with Microsoft Copilot Studio」（2024年10月21日）。数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 13 McKinsey &amp; Company</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">海外の事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">14</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.8C7.9 18.7 5 15.2 5 11V6z"/><path d="M9 11.6l2.1 2.1L15.2 9.6"/></svg></span>
+          <p class="co">Pets at Home<small>小売・ペットケア｜約450店舗・不正対策チームで利用</small></p>
+          <div class="tags"><span>小売・ペットケア</span><span>約450店舗・不正対策チームで利用</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>作ったもの</p><div class="vb"><p class="i"><b>疑わしい取引</b>を特定するエージェント</p><p class="i">関連情報を集めて分析し、<b>不正調査の担当者に共有</b></p><p class="i">同じ写真の<b>使い回し</b>や商品の問題の把握にも活用</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>進め方</p><div class="vb"><p class="i"><b>不正対策チーム</b>と連携して開発</p><p class="i"><b>判断は人</b>が担い、エージェントは調査を補助</p><p class="i">Azureで<b>データ基盤を統合</b>した後にAI活用へ</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">作業時間（従来20〜30分）</p><p class="v">数<small>秒</small></p><p class="n">2025年1月公表。比較条件の記載なし</p></div><div class="vt c3"><div><p class="k">不正の特定速度</p><p class="v">10<small>倍</small></p><p class="n">2025年1月公表。算定方法の記載なし</p></div><div><p class="k">1日の処理件数</p><p class="v">20<small>倍</small></p><p class="n">2025年1月公表。算定方法の記載なし</p></div><div><p class="k">期待される年間削減</p><p class="v">7<small>桁</small></p><p class="n">見込み。通貨の記載なし・追加開発が前提</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">最終判断は人に残す</p><p class="d">収集と分析は任せ、顧客への対応判断は担当者が行う。誤判定で正当な顧客を傷つけない設計にする。</p></div></div><div><span class="ln">2</span><div><p class="t">調査準備から任せる</p><p class="d">不正判定そのものでなく、情報収集と整理を先に任せる。時間のかかる手作業を減らしやすい。</p></div></div><div><span class="ln">3</span><div><p class="t">先にデータをつなぐ</p><p class="d">部門ごとに分かれたデータを一か所に集めてから着手する。エージェントの分析範囲が広がりやすい。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：Microsoft「The value of AI: How Microsoft’s customers and partners are creating differentiated AI solutions to reinvent how they do business today」（2025年1月28日）、Microsoft Source EMEA「With Copilot agents, Pets at Home unleashes an AI revolution」（2024年10月21日）。数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 14 Pets at Home</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">海外の事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">15</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span>
+          <p class="co">Rabobank<small>金融｜音声1体＋テキスト2体で運用</small></p>
+          <div class="tags"><span>金融</span><span>音声1体＋テキスト2体で運用</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>作ったもの</p><div class="vb"><p class="i"><b>音声1体・テキスト2体</b>の計3エージェントを構築</p><p class="i">音声は意図を認識し、<b>適切な有人窓口</b>へ転送</p><p class="i">テキストは<b>カード停止</b>など手続きを完結。300〜400トピック</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>進め方</p><div class="vb"><p class="i">別基盤から移行。テキスト系は<b>3か月</b>で構築・公開</p><p class="i">規制対応で<b>標準の生成AI機能は未採用</b>。Azure側で代替</p><p class="i">匿名化した<b>実際の会話</b>で、本番前に意図認識を検証</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">チャットの自己解決率</p><p class="v">62<small>%</small></p><p class="n">2025年8月更新。有人転送なし・チャットのみ</p></div><div class="vt c3"><div><p class="k">通話の有人転送なし</p><p class="v">40〜50<small>%</small></p><p class="n">2022年公表・PVA時点。62%と別指標</p></div><div><p class="k">1日の通話</p><p class="v">20,000<small>件</small></p><p class="n">2025年8月更新のMicrosoft Learn</p></div><div><p class="k">1日のチャット</p><p class="v">7,000<small>件</small></p><p class="n">2025年8月更新のMicrosoft Learn</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">有人転送を先に設計</p><p class="d">答えられない問い合わせの行き先を先に決める。誤った窓口への転送を防ぐ仕組みが要となる。</p></div></div><div><span class="ln">2</span><div><p class="t">本物の質問で試す</p><p class="d">実際の質問を匿名化して検証データにする。変更の効果を公開前に確かめられ、品質を保ちやすい。</p></div></div><div><span class="ln">3</span><div><p class="t">規制に合う形を選ぶ</p><p class="d">標準機能が社内基準に合わない場合は、承認を得やすい構成を検討する。利用を諦めずに済む。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：Microsoft Learn「Rabobank embraces conversational banking with Copilot Studio」（2025年8月11日更新）、Microsoft「Rabobank streamlines complex process from three weeks to three minutes using Microsoft Power Platform」（2022年11月30日）。数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 15 Rabobank</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">海外の事例</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="dhd">
+          <span class="no">16</span>
+          <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg></span>
+          <p class="co">Cineplex（返金対応）<small>映画館・娯楽｜10,000人以上の組織</small></p>
+          <div class="tags"><span>映画館・娯楽</span><span>10,000人以上の組織</span></div>
+        </div>
+        <div class="grow vdt">
+          <div class="vl"><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span>作ったもの</p><div class="vb"><p class="i">担当者が<b>予約IDと日付</b>を入力するコパイロット</p><p class="i">AIモデルが<b>返金種別</b>を判別し、適切な処理を起動</p><p class="i"><b>デスクトップフロー</b>がServiceNow等の基幹と連携</p></div></div><div class="vsec"><p class="vh"><span class="vi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span>進め方</p><div class="vb"><p class="i">まず<b>特定の返金種別</b>を自動化し、他の種別へ拡張</p><p class="i">既存の<b>Power Automateフロー</b>をCopilot Studioに統合</p><p class="i">全社の<b>自動化CoE</b>で100人超の開発者を支援</p></div></div></div>
+          <div class="vr"><div class="vk hero blue"><p class="k">導入後の対応時間</p><p class="v">30<small>秒／件</small></p><p class="n">2024年3月公表。通常値で、1分未満</p></div><div class="vt c2"><div><p class="k">導入前の対応時間</p><p class="v">5〜15<small>分／件</small></p><p class="n">2024年3月公表。1件あたり</p></div><div><p class="k">処理した返金依頼</p><p class="v">5,000超<small>件</small></p><p class="n">2024年3月公表。5か月間の累計</p></div></div></div>
+        </div>
+        <div class="learn blue">
+          <p class="h">中堅企業が取り入れるなら（当社の見解）</p>
+          <div class="g"><div><span class="ln">1</span><div><p class="t">一種類から始める</p><p class="d">返金など件数の多い業務の一種類を自動化し、動いてから別の種類へ広げる。失敗の影響を抑えられる。</p></div></div><div><span class="ln">2</span><div><p class="t">既存フローを生かす</p><p class="d">すでに動く自動化を作り直さず、会話の入口だけを足す。現場の入力項目を最小限にできる。</p></div></div><div><span class="ln">3</span><div><p class="t">権限と例外を決める</p><p class="d">返金のように金銭が動く処理は、実行権限と例外時の扱いを公開前に決める。事故を防ぎやすい。</p></div></div></div>
+        </div>
+        <p class="s-foot">出典：Microsoft「Cineplex saves 30,000 hours a year with Power Platform and generative AI」（2024年3月26日）。数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>詳細事例 16 Cineplex（返金対応）</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">自社で始めるには</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">16件から学ぶ、<b>4つのステップ</b></p></div>
+        <div class="grow steps"><div><span class="n">01</span><div><p class="t">対象の業務を1つ決める</p><p class="d">問い合わせの多い領域を選び、答える範囲を決める</p></div><p class="sd">りそなグループ</p></div><div><span class="n">02</span><div><p class="t">知識と権限を整える</p><p class="d">最新の資料を選び、責任者と更新の手順を決める</p></div><p class="sd">OBC、コニカミノルタ</p></div><div><span class="n">03</span><div><p class="t">公開前に試す</p><p class="d">代表的な質問と例外で確かめ、少人数から公開する</p></div><p class="sd">府中市、Holland America Line</p></div><div><span class="n">04</span><div><p class="t">測って広げる</p><p class="d">自己解決率と有人対応の量を見て、次の業務へ広げる</p></div><p class="sd">Rabobank</p></div></div><div class="band">ステップの整理は当社の見解です。右列は参考になる事例を示しています。</div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>始め方</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">効果の測り方</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">会話の数ではなく、<b>人の手なしで完了した割合</b>を測る</p><p class="l">下の数字はすべて、計算の仕方を示すための仮の数字です。</p></div>
+        <div class="ifm"><div class=""><p class="k">人の手なしで完了</p><p class="v">600<small>件</small></p></div><span class="op">÷</span><div class=""><p class="k">対象の問い合わせ</p><p class="v">1,000<small>件</small></p></div><span class="op">=</span><div class="tt"><p class="k">自己解決率</p><p class="v">60<small>%</small></p></div></div>
+        <div class="grow ifb">
+          <div class="bc"><p class="h">1,000件の内訳を分けて記録する</p><div class="br"><span class="l">内訳</span><div class="tr"><span class="bl" style="width:60%">完了 600件</span><span class="am" style="width:10%">再問合せ</span><span class="gr" style="width:30%">有人 300件</span></div></div><p class="n">再度問い合わせた件数は、解決に数えません。</p></div>
+          <div class="mt"><div><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><rect x="4" y="4" width="16" height="16"/><path d="M8.5 12.2l2.5 2.5 4.8-5"/></svg></span><div><p class="t">自己解決率</p><p class="d">完了の定義を決め、失敗や途中離脱も含めて数えます。</p></div></div><div><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><div><p class="t">有人対応の工数</p><p class="d">問い合わせの数ではなく、人がかけた時間を見ます。</p></div></div><div><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.8C7.9 18.7 5 15.2 5 11V6z"/><path d="M9 11.6l2.1 2.1L15.2 9.6"/></svg></span><div><p class="t">品質</p><p class="d">誤回答と回答できなかった質問を記録します。</p></div></div></div>
+        </div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>効果の測り方</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">Contact</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">どの業務から始めるか、<b>一緒に整理</b>します。</p><p class="l">バイテック法人AI研修では、Copilotの業務活用から、Copilot Studioによるエージェントの内製、Power Automateによる業務の自動化までを研修でご支援します。</p></div>
+        <div class="grow cards c3"><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span><p class="t">Copilot研修</p><p class="d">会議・メール・資料作成など、<b>日々の業務での使い方</b>を実際の操作に沿って学びます。</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span><p class="t">Copilot Studio研修</p><p class="d">社内データやPower Automateと連携する<b>エージェントの構築と運用</b>を学びます。</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M6 3l6 8 6-8M12 11v10M7.5 13h9M7.5 16.5h9"/></svg></span><p class="t">助成金の活用サポート</p><p class="d">人材開発支援助成金の対象となる研修の設計と、必要な情報をご案内します。<span class="ex">支給の可否は管轄労働局の審査で決まります</span></p></div></div>
+        <div class="ctab"><div><p class="t">まずは無料個別相談で、自社の課題をお聞かせください</p><p class="d">オンライン・約60分。どの業務から始めるか、研修内容と助成金の見込みまでご案内します。</p></div><span class="bt">無料個別相談を予約する ›</span></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>ご相談</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">Notes</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd" style="margin-top:4px"><p class="t" style="font-size:27px">ご留意事項・出典</p></div><div class="grow nts"><p class="nt">掲載事例の数値は各組織の公表値であり、当社による測定値ではありません。測定の条件が異なるため、数字どうしの比較や合算はできません。</p><p class="nt">「中堅企業が取り入れるなら」、数字の性質の分類、共通点、ステップの整理は当社の見解です。効果を保証するものではありません。</p><p class="nt">掲載組織との取引関係や、各組織による推薦を示すものではありません。出典は各事例のページに記載しています。2026年10月に確認しました。</p><p class="nt">製品の機能や名称は記事の公開時点のものです。Microsoft 365 Copilotは現在、Microsoft Copilotに改称されています。契約やテナントの設定によって条件が異なります。</p><p class="nt">社名・製品名は各社の商標または登録商標です。本資料はMicrosoftの公式資料ではありません。本資料の内容の無断転載・再配布はご遠慮ください。　発行：バイテック法人AI研修（2026年10月版）</p></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>ご留意事項・出典</figcaption></figure>
+  </div>
+<script>
+  // 事例ページ：補足の節（.vsec.sm）を、左右の列の高さが揃う方へ移す
+  document.querySelectorAll(".vdt").forEach(function (d) {
+    var l = d.querySelector(".vl"), r = d.querySelector(".vr"), sm = l.querySelectorAll(".vsec.sm");
+    if (!sm.length) return;
+    function need(c) { var n = 0; Array.prototype.forEach.call(c.children, function (e) { n += e.scrollHeight + 10; }); return n; }
+    var sh = 0; sm.forEach(function (e) { sh += e.scrollHeight + 10; });
+    d.classList.add("measure");
+    var L = need(l), R = need(r);
+    if (Math.max(L - sh, R + sh) < Math.max(L, R)) sm.forEach(function (e) { r.appendChild(e); });
+    d.classList.remove("measure");
+  });
+  // 事例ページ：列に余裕があるときは本文を一段大きくする（下に余白を残さない）
+  document.querySelectorAll(".vdt").forEach(function (d) {
+    [d.querySelector(".vl"), d.querySelector(".vr")].forEach(function (col) {
+      d.classList.add("measure"); var need = 0; Array.prototype.forEach.call(col.children, function (e) { need += e.scrollHeight; }); d.classList.remove("measure");
+      if (col.clientHeight - need > 90) col.classList.add("roomy");
+    });
+  });
+</script>
+</body>
+</html>

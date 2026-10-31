@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Copilot導入の進め方と最初に選ぶ業務8選｜全19スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* 業種別 活用事例集。設計は ebook-04/05 と同系統（四角の角丸なし・円とピルのみ角丸）。
+     ★事例はすべて各社の公開情報にもとづく。数値は出典の表記どおりに記載し、推測で丸めたり
+       脚色したりしないこと。出典はスライド下部に必ず明記する。他社名を出す資料のため、
+       まとめサイトの孫引きは使わず一次情報（プレスリリース・公式サイト）で裏を取る。 */
+  :root {
+    --blue: #2c5c9c; --blue-deep: #1a2e50; --blue-bright: #1a6fb5; --blue-pale: #8fb0d8;
+    --ink: #2a2f3a; --line: #e3e8ef; --amber: #f0b429; --tint: #eef4fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f4f6f8; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; color: var(--ink); padding: 48px 0 96px; }
+  .note { max-width: 1120px; margin: 0 auto 28px; font-size: 13px; font-weight: 700; color: #8a93a3; }
+  .en { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; }
+
+  .deck { display: flex; flex-direction: column; gap: 34px; align-items: center; counter-reset: pg -1; }
+  .slide-shell { width: 1120px; counter-increment: pg; }
+  .slide-shell figcaption { font-size: 12px; font-weight: 700; color: #8a93a3; margin: 8px 2px 0; letter-spacing: .04em; }
+  .slide { width: 1280px; height: 720px; transform: scale(0.875); transform-origin: top left; background: #fff; position: relative; overflow: hidden; }
+  .slide-shell .clip { height: 630px; overflow: hidden; border-radius: 0; box-shadow: 0 2px 10px rgba(26,35,48,.08); }
+
+  /* ===== 共通 ===== */
+  .s-body { position: absolute; inset: 0; padding: 36px 56px; z-index: 1; }
+  .s-eyebrow { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 700; color: var(--blue-pale); letter-spacing: .02em; }
+  .s-eyebrow::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); }
+  .s-logo { position: absolute; top: 38px; right: 56px; height: 30px; }
+  .s-foot { position: absolute; left: 56px; right: 120px; bottom: 14px; font-size: 10px; color: #9aa3b2; line-height: 1.6; z-index: 5; }
+  .s-num { position: absolute; right: 0; bottom: 0; width: 66px; height: 66px; background: var(--blue); border-radius: 66px 0 0 0; color: #fff; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 13px; font-weight: 700; display: flex; align-items: flex-end; justify-content: flex-end; padding: 0 14px 10px 0; z-index: 5; }
+  .s-num::before { content: counter(pg); }
+
+  /* ===== 見出し行（業種バッジ＋要点） ===== */
+  .hd { display: flex; align-items: center; gap: 18px; margin-top: 8px; }
+  .hd .badge { background: var(--blue); color: #fff; font-size: 24px; font-weight: 800; padding: 10px 22px; letter-spacing: .06em; white-space: nowrap; text-align: center; }
+  .hd .badge small { display: block; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; opacity: .8; margin-top: 3px; }
+  .hd .t { font-size: 25px; font-weight: 800; color: #1a2330; line-height: 1.4; letter-spacing: .01em; }
+  .hd .t b { color: var(--blue-bright); }
+
+  /* ===== 事例テーブル ===== */
+  table.cs { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 18px; table-layout: fixed; }
+  .cs th { background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; padding: 10px 14px; text-align: left; letter-spacing: .02em; }
+  .cs th:first-child { text-align: center; }
+  .cs td { font-size: 12.8px; font-weight: 500; color: #4a5568; padding: 13px 14px; border-bottom: 1px solid var(--line); vertical-align: middle; line-height: 1.55; }
+  .cs tr:nth-child(even) td { background: #f7f9fc; }
+  .cs td.no { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; text-align: center; font-weight: 800; color: var(--blue-pale); }
+  /* 社名は他社商標のためロゴを使わず、文字組みだけで見せる */
+  .cs td.co span { display: block; font-size: 14.5px; font-weight: 800; color: #1a2330; line-height: 1.4; }
+  .cs td.ar span { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; padding: 4px 9px; white-space: nowrap; }
+  .cs td.ar svg { flex: 0 0 auto; }
+  .cs td.rs { font-size: 13px; font-weight: 700; color: #1a2330; line-height: 1.5; }
+  .cs td.rs b { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 19px; font-weight: 800; color: var(--blue-bright); padding: 0 1px; }
+
+  /* ===== まとめ帯 ===== */
+  .band { display: flex; align-items: center; gap: 11px; background: var(--tint); border: 1.5px solid var(--blue); padding: 12px 20px; font-size: 13.5px; font-weight: 800; color: var(--blue-deep); margin-top: 12px; }
+  .band::before { content: "✓"; flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+
+
+  /* ===== 個別詳細スライド ===== */
+  .dhd { display: flex; align-items: flex-start; gap: 18px; margin-top: 8px; }
+  .dhd .no { background: var(--blue-deep); color: #fff; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 22px; font-weight: 800; padding: 12px 18px; letter-spacing: .06em; }
+  .dhd .mark { flex: 0 0 auto; width: 46px; height: 46px; background: var(--tint); border: 1.5px solid #cfdcee; color: var(--blue); display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .dhd .mark svg { width: 24px; height: 24px; }
+  .dhd .co { font-size: 25px; font-weight: 800; color: #1a2330; line-height: 1.3; }
+  .dhd .co small { display: block; font-size: 14px; font-weight: 700; color: #6b7789; margin-top: 5px; }
+  .dhd .tags { margin-left: auto; display: flex; gap: 7px; padding-top: 6px; }
+  .dhd .tags span { font-size: 11.5px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; border-radius: 999px; padding: 5px 13px; white-space: nowrap; }
+
+  .dt { display: grid; grid-template-columns: 1.18fr 1fr; gap: 20px; margin-top: 14px; align-items: start; }
+  .sec { border: 1px solid var(--line); }
+  .sec .h { background: #f2f5fa; border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 800; color: var(--blue-deep); padding: 9px 16px; display: flex; align-items: center; gap: 8px; }
+  .sec .h::before { content: ""; width: 5px; height: 15px; background: var(--blue); }
+  .sec .b { padding: 10px 16px 11px; }
+  .sec .i { position: relative; font-size: 12.6px; font-weight: 500; color: #4a5568; line-height: 1.7; padding: 4px 0 4px 15px; }
+  .sec .i::before { content: ""; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-pale); }
+  .sec .i b { color: #1a2330; font-weight: 800; }
+
+  .kpi { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi div { background: var(--tint); border-left: 4px solid var(--blue); padding: 11px 13px; }
+  .kpi .k { font-size: 10.5px; font-weight: 800; color: var(--blue); }
+  .kpi .v { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 24px; font-weight: 800; color: #1a2330; line-height: 1.15; margin-top: 3px; }
+  .kpi .v small { font-family: "Noto Sans JP", sans-serif; font-size: 11px; font-weight: 700; color: #6b7789; margin-left: 2px; }
+  .kpi .n { font-size: 10.5px; font-weight: 600; color: #7a8698; margin-top: 3px; }
+  .trend { margin-top: 10px; background: var(--blue-deep); color: #fff; padding: 12px 15px; display: flex; align-items: center; gap: 12px; }
+  .trend .l { font-size: 11.5px; font-weight: 800; opacity: .85; line-height: 1.5; }
+  .trend .r { margin-left: auto; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 15px; font-weight: 800; white-space: nowrap; }
+  .trend .r b { font-size: 22px; color: #8fd0ff; }
+
+  .learn { margin-top: 12px; border: 1.5px solid var(--blue); }
+  .learn .h { background: var(--blue); color: #fff; font-size: 12.5px; font-weight: 800; padding: 8px 16px; letter-spacing: .02em; }
+  .learn .g { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+  .learn .g div { padding: 9px 16px 10px; border-right: 1px solid var(--line); }
+  .learn .g div:last-child { border-right: none; }
+  .learn .t { font-size: 13px; font-weight: 800; color: var(--blue-deep); }
+  .learn .d { font-size: 11.4px; font-weight: 500; color: #4a5568; line-height: 1.6; margin-top: 3px; }
+
+
+  /* ===== 表紙（白地・左に大見出し／右にイラスト） ===== */
+  .cv { background: #fff; }
+  .cv .t { position: absolute; left: 72px; top: 104px; font-size: 74px; font-weight: 900; color: var(--blue); line-height: 1.34; letter-spacing: .02em; }
+  .cv .sub { position: absolute; left: 75px; top: 316px; font-size: 19px; font-weight: 800; color: #2a2f3a; letter-spacing: .05em; line-height: 1.7; }
+  .cv .meta { position: absolute; left: 75px; top: 392px; font-size: 14px; font-weight: 700; color: #8a93a3; letter-spacing: .06em; }
+  .cv .il { position: absolute; right: 44px; bottom: 74px; width: 560px; }
+  .cv .logo { position: absolute; left: 72px; bottom: 58px; height: 38px; }
+
+  /* ===== 目次 ===== */
+  .ix { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 26px; margin-top: 30px; }
+  .ix a, .ix div { display: flex; align-items: center; gap: 16px; background: #fff; border: 1px solid #d9e1ec; padding: 18px 20px; text-decoration: none; box-shadow: 0 4px 14px rgba(26,35,48,.05); }
+  .ix .n { flex: 0 0 auto; width: 46px; height: 46px; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; }
+  .ix .b { flex: 1; min-width: 0; display: block; }
+  .ix .nm { display: block; font-size: 19px; font-weight: 800; color: #1a2330; line-height: 1.35; }
+  .ix .ds { display: block; font-size: 12px; font-weight: 600; color: #7a8698; margin-top: 4px; line-height: 1.5; }
+  .ix .pg { flex: 0 0 auto; font-size: 12.5px; font-weight: 800; color: var(--blue); }
+  .ix .soon { border-style: dashed; opacity: .62; }
+  .ix .soon .n { background: #b9c4d4; }
+
+
+
+
+  /* ===== 目次（この資料の中身） ===== */
+  .ixh { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
+  .ixh .lb { background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; padding: 7px 16px; letter-spacing: .04em; white-space: nowrap; }
+  .ixh .tx { font-size: 15px; font-weight: 700; color: #4a5568; }
+  .ixh .pg { margin-left: auto; font-size: 13px; font-weight: 800; color: var(--blue); white-space: nowrap; }
+  .ixg { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 26px; margin-top: 14px; }
+  .ixg div { display: flex; align-items: center; gap: 13px; background: #fff; border: 1px solid var(--line); padding: 10px 14px; }
+  .ixg .n { flex: 0 0 auto; width: 30px; height: 30px; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 800; }
+  .ixg .nm { font-size: 14.5px; font-weight: 800; color: #1a2330; }
+  .ixg .ar { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; padding: 3px 8px; margin-left: 8px; white-space: nowrap; }
+  .ixg .pg { margin-left: auto; font-size: 12px; font-weight: 800; color: #8a93a3; white-space: nowrap; }
+
+  /* ===== PDF出力 ===== */
+  @page { size: 1280px 720px; margin: 0; }
+  @media print {
+    body { padding: 0; background: #fff; }
+    * { box-shadow: none !important; }
+    .note { display: none; }
+    .deck { gap: 0; display: block; }
+    .slide-shell { width: 1280px; }
+    .slide-shell figcaption { display: none; }
+    .slide-shell .clip { height: 720px; overflow: hidden; border-radius: 0; box-shadow: none; }
+    .slide { transform: none; border: none; border-radius: 0; }
+    figure.slide-shell { page-break-after: always; break-after: page; margin: 0; }
+    figure.slide-shell:last-child { page-break-after: auto; }
+  }
+
+  /* ===== 表紙（ノウハウ形式） ===== */
+  .blue-bg { background: linear-gradient(135deg, #1c3a6b 0%, var(--blue) 46%, #3a76c4 100%); color: #fff; }
+  .waves { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .kcover .badge-row { position: absolute; top: 66px; left: 64px; display: flex; align-items: center; gap: 16px; }
+  .kcover .badge { background: var(--amber); color: #4a3605; font-size: 16px; font-weight: 800; padding: 10px 18px; border-radius: 8px; }
+  .kcover .badge-note { font-size: 20px; font-weight: 700; padding-bottom: 12px; border-bottom: 2px solid rgba(255,255,255,.85); letter-spacing: .04em; }
+  .kcover .sub { position: absolute; left: 66px; top: 236px; font-size: 23px; font-weight: 700; letter-spacing: .04em; }
+  .kcover .title { position: absolute; left: 62px; top: 288px; font-size: 68px; font-weight: 800; letter-spacing: .04em; line-height: 1.28; }
+  .kcover .title small { display: block; margin-top: 10px; font-size: 34px; font-weight: 800; }
+  .kcover .pills { position: absolute; right: 64px; top: 250px; display: grid; gap: 12px; }
+  .kcover .pills span { border: 1.5px solid rgba(255,255,255,.75); border-radius: 999px; padding: 7px 22px; font-size: 14px; font-weight: 800; text-align: center; background: rgba(255,255,255,.08); }
+  .kcover .date { position: absolute; left: 66px; top: 590px; font-size: 15px; font-weight: 600; letter-spacing: .18em; opacity: .8; }
+  .kcover .logo { position: absolute; right: 64px; bottom: 48px; height: 44px; }
+  /* ===== 縦方向をページいっぱいに使う ===== */
+  .s-body.fl { display: flex; flex-direction: column; padding-bottom: 62px; }
+  .s-body.fl > .grow { flex: 1 1 auto; min-height: 0; }
+  .s-body.fl > .band { flex: 0 0 auto; }
+  .cards.grow > div { display: flex; flex-direction: column; justify-content: flex-start; padding: 30px 28px; }
+  .cards.grow .ic { width: 58px; height: 58px; } .cards.grow .ic svg { width: 28px; height: 28px; }
+  .cards.grow .t { margin-top: 18px; font-size: 20px; } .cards.grow .d { margin-top: 12px; font-size: 14.5px; line-height: 1.95; }
+  .cards.grow .g { align-self: flex-start; margin-top: auto; font-size: 12px; padding: 5px 14px; }
+  .steps.grow { grid-auto-rows: 1fr; }
+  .tpl.grow { grid-auto-rows: 1fr; }
+  .chk.grow > div { display: flex; flex-direction: column; } .chk.grow .ci { flex: 1 1 0; display: flex; align-items: center; }
+  .chk.grow .ci::before { top: 50%; transform: translateY(-50%); }
+  .toc.grow { grid-auto-rows: 1fr; } .toc.grow > div { border-bottom: 1px solid var(--line); }
+  table.grow { height: 100%; }
+  .nts.grow { align-content: space-evenly; }
+  /* ===== 事例ページ（メリハリ版） ===== */
+  .vpt { margin-top: 10px; display: flex; align-items: center; gap: 14px; background: linear-gradient(90deg, #eaf2fc, #f6f9fd); border-left: 6px solid var(--blue-bright); padding: 9px 18px; }
+  .vpt p { font-size: 18px; font-weight: 900; color: var(--blue-deep); letter-spacing: .02em; }
+  .vpt .q { color: var(--blue-bright); display: flex; }
+  .vpt.red { background: linear-gradient(90deg, #fdecea, #fef7f6); border-left-color: #d6453d; } .vpt.red p { color: #7a1f1a; } .vpt.red .q { color: #d6453d; }
+  .vdt { display: grid; grid-template-columns: 1.15fr 1fr; gap: 18px; margin-top: 10px; align-items: start; }
+  .vdt + .learn { margin-top: 10px; }
+  .vsec + .vsec { margin-top: 10px; }
+  .vsec .vh { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 900; color: var(--blue-deep); padding-bottom: 6px; border-bottom: 2px solid var(--line); }
+  .vsec .vi { width: 24px; height: 24px; border-radius: 50%; background: var(--blue-deep); color: #fff; display: flex; align-items: center; justify-content: center; }
+  .vsec .vb { padding-top: 6px; }
+  .vsec .vb .i { position: relative; padding: 3px 0 3px 16px; font-size: 12.8px; font-weight: 500; color: #3a4252; line-height: 1.55; }
+  .vsec .vb .i::before { content: ""; position: absolute; left: 2px; top: 12px; width: 6px; height: 6px; background: var(--blue-bright); }
+  .vsec .vb b, .vpt b { color: #1a2330; background: linear-gradient(transparent 58%, #ffe27a 58%); font-weight: 800; }
+  .vsec.sm { margin-top: 8px; background: #f7f9fc; padding: 10px 12px; } .vsec.sm .vh { border-bottom-color: #e3e9f2; }
+  .vk { background: #fff; border: 1.5px solid var(--line); padding: 8px 14px; margin-bottom: 8px; }
+  .vk .k { font-size: 11.5px; font-weight: 800; color: var(--blue); }
+  .vk .n { font-size: 10.5px; font-weight: 600; color: #7a8698; margin-top: 2px; }
+  .vk.hero { background: var(--blue-deep); border: 0; color: #fff; padding: 14px 18px; }
+  .vk.hero .k { color: #a9c8f0; } .vk.hero .n { color: #c3d3ea; }
+  .vk.hero .v { font-size: 40px; font-weight: 900; line-height: 1.1; margin-top: 4px; } .vk.hero .v small { font-size: 16px; margin-left: 4px; }
+  .vk.hero.red { background: #7a1f1a; }
+  .vk.donut { display: flex; align-items: center; gap: 16px; } .vk.donut .k { font-size: 14px; }
+  .vk .dn { position: relative; width: 92px; height: 92px; flex: 0 0 auto; }
+  .vk .dn span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 900; color: #1a2330; }
+  .vk .dn small { font-size: 11px; }
+  .vk.chart .br { display: grid; grid-template-columns: 26px 1fr 96px; align-items: center; gap: 8px; margin-top: 6px; }
+  .vk.chart .bl { font-size: 11px; font-weight: 800; color: #7a8698; }
+  .vk.chart .bt { height: 16px; background: #f0f3f8; display: block; } .vk.chart .bt span { display: block; height: 100%; }
+  .vk.chart .bv { font-size: 14px; font-weight: 800; color: #5a6578; text-align: right; } .vk.chart .bv.hi { font-size: 18px; color: #1a2330; }
+  .vk.chart .bv small { font-size: 10.5px; margin-left: 2px; }
+  .vt { display: grid; gap: 8px; } .vt.c1 { grid-template-columns: 1fr; } .vt.c2 { grid-template-columns: 1fr 1fr; } .vt.c3 { grid-template-columns: 1fr 1fr 1fr; }
+  .vt > div { background: var(--tint); border-top: 3px solid var(--blue-bright); padding: 9px 12px; }
+  .vt .k { font-size: 11px; font-weight: 800; color: var(--blue); }
+  .vt .v { font-size: 22px; font-weight: 900; color: #1a2330; line-height: 1.2; margin-top: 2px; } .vt .v small { font-size: 11px; margin-left: 2px; color: #6b7789; }
+  .vt .n { font-size: 10px; font-weight: 600; color: #7a8698; margin-top: 2px; }
+  .learn .g > div { display: flex; gap: 10px; align-items: flex-start; padding-top: 7px; padding-bottom: 8px; }
+  .learn .ln { flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%; background: var(--amber); color: #4a3605; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .learn.red { border-color: #d6453d; } .learn.red .h { background: #d6453d; }
+  /* 事例ページも縦をページいっぱいに使う（下に余白を残さない） */
+  .s-body.fl > .dhd { flex: 0 0 auto; }
+  .vdt.grow { align-items: stretch; margin-top: 12px; }
+  .vdt.grow > .vl, .vdt.grow > .vr { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+  .vdt.grow > .vl { justify-content: space-between; }
+  .vdt.grow .vsec + .vsec { margin-top: 0; }
+  .vdt.grow .vsec { flex: 1 1 auto; display: flex; flex-direction: column; }
+  .vdt.grow .vsec .vb { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-evenly; }
+  .vdt.grow > .vr > * { flex: 1 1 auto; margin-bottom: 0; display: flex; flex-direction: column; justify-content: center; }
+  .vdt.grow > .vr > .vk.donut { flex-direction: row; justify-content: flex-start; }
+  .vdt.grow > .vr > .vt { display: grid; }
+  .vdt.grow > .vr > .vt > div { display: flex; flex-direction: column; justify-content: center; }
+  .vdt.grow > .vr > .vsec.sm { justify-content: flex-start; }
+  .vdt.measure > div > *, .vdt.measure .vb { flex: none !important; }
+  .s-body.fl > .learn { flex: 0 0 auto; margin-top: 14px; }
+  .vl.roomy .vsec .vb .i { font-size: 14px; line-height: 1.7; } .vl.roomy .vsec .vh { font-size: 15.5px; }
+  .learn .g > div { padding-top: 12px; padding-bottom: 13px; }
+  /* ツールのロゴ */
+  .cards .ic.lg { width: auto; height: 64px; border-radius: 0; background: none; gap: 10px; justify-content: flex-start; }
+  .cards .ic.lg img { height: 56px; width: 56px; object-fit: contain; }
+  .dhd .mark.lg { background: #fff; } .dhd .mark.lg img { width: 30px; height: 30px; object-fit: contain; }
+  /* ===== ノウハウ系の追加スライド型 ===== */
+  .kh { margin-top: 8px; }
+  .kh .t { font-size: 25px; font-weight: 900; color: #1a2330; line-height: 1.4; letter-spacing: .01em; }
+  .kh .t b { color: var(--blue-bright); }
+  .kh .l { margin-top: 8px; font-size: 13.5px; font-weight: 600; color: #5a6578; line-height: 1.7; }
+  .ld { margin-top: 18px; display: grid; gap: 10px; }
+  .ld .p { font-size: 14px; font-weight: 500; color: #3a4252; line-height: 1.85; }
+  .ld .p b { color: #1a2330; }
+  .cards { display: grid; gap: 16px; margin-top: 22px; }
+  .cards.c2 { grid-template-columns: 1fr 1fr; } .cards.c3 { grid-template-columns: 1fr 1fr 1fr; } .cards.c4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .cards.c6 { grid-template-columns: 1fr 1fr 1fr; }
+  .cards > div { border: 1.5px solid var(--line); border-top: 4px solid var(--blue); padding: 16px 18px 18px; background: #fff; }
+  .cards .ic { width: 40px; height: 40px; border-radius: 50%; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; }
+  .cards .t { margin-top: 10px; font-size: 16px; font-weight: 900; color: var(--blue-deep); line-height: 1.4; }
+  .cards .d { margin-top: 7px; font-size: 12.5px; font-weight: 500; color: #4a5568; line-height: 1.75; }
+  .cards .d b { color: #1a2330; }
+  .cards .g { margin-top: 10px; display: inline-block; background: var(--tint); color: var(--blue); font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 999px; }
+  .steps { margin-top: 20px; display: grid; gap: 10px; }
+  .steps > div { display: flex; align-items: center; gap: 16px; border: 1.5px solid var(--line); padding: 12px 18px; }
+  .steps .n { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: var(--blue-deep); color: #fff; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+  .steps .t { font-size: 15.5px; font-weight: 900; color: #1a2330; } .steps .t b { color: var(--blue-bright); }
+  .steps .d { margin-top: 3px; font-size: 12.5px; font-weight: 500; color: #5a6578; line-height: 1.6; }
+  .steps .sd { margin-left: auto; flex: 0 0 300px; font-size: 12px; font-weight: 700; color: var(--blue); background: var(--tint); padding: 8px 12px; line-height: 1.55; }
+  .ch { background: linear-gradient(135deg, #1a2e50 0%, #2c5c9c 70%, #3f7fc6 100%); }
+  .chp { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; text-align: center; }
+  .chp .s-logo { position: absolute; top: 38px; right: 56px; height: 30px; }
+  .chp .no { width: 92px; height: 92px; border: 2px solid rgba(255,255,255,.85); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 800; }
+  .chp .t { margin-top: 30px; font-size: 40px; font-weight: 900; letter-spacing: .04em; }
+  .chp .d { margin-top: 12px; font-size: 16px; font-weight: 700; opacity: .85; }
+  .chp .s-num { background: rgba(255,255,255,.18); }
+  table.kt td { font-size: 12.5px; } table.kt td.kc { font-weight: 800; color: #1a2330; background: var(--tint); }
+  table.kt td b { color: var(--blue-bright); }
+  .tpl { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px 20px; }
+  .tpl > div { border-left: 4px solid var(--blue); background: #f7f9fc; padding: 16px 20px; min-height: 118px; }
+  .tpl .at { font-size: 15px; font-weight: 900; color: var(--blue-deep); }
+  .tpl .al { margin-top: 7px; font-size: 13.5px; font-weight: 500; color: #3a4252; line-height: 1.8; }
+  .chk { margin-top: 16px; display: grid; gap: 16px; } .chk.c2 { grid-template-columns: 1fr 1fr; } .chk.c3 { grid-template-columns: 1fr 1fr 1fr; }
+  .chk > div { border: 1.5px solid var(--line); }
+  .chk .gh { background: var(--blue-deep); color: #fff; font-size: 15px; font-weight: 800; padding: 13px 16px; display: flex; align-items: center; gap: 9px; }
+  .chk .gh span { width: 20px; height: 20px; border-radius: 50%; background: #fff; color: var(--blue-deep); font-size: 11px; display: flex; align-items: center; justify-content: center; }
+  .chk .ci { position: relative; padding: 24px 16px 24px 42px; font-size: 14.5px; font-weight: 600; color: #3a4252; border-bottom: 1px solid var(--line); line-height: 1.5; }
+  .chk .ci:last-child { border-bottom: 0; }
+  .chk .ci::before { content: ""; position: absolute; left: 16px; top: 27px; width: 13px; height: 13px; border: 1.6px solid var(--blue); }
+  .ctab { margin-top: 20px; background: linear-gradient(90deg, #1a2e50, #2c5c9c); color: #fff; padding: 20px 26px; display: flex; align-items: center; gap: 20px; }
+  .ctab .t { font-size: 19px; font-weight: 900; } .ctab .d { margin-top: 5px; font-size: 12.5px; font-weight: 600; opacity: .85; line-height: 1.6; }
+  .ctab .bt { margin-left: auto; flex: 0 0 auto; background: #fff; color: var(--blue-deep); font-size: 14px; font-weight: 900; padding: 12px 24px; border-radius: 999px; }
+  .nts { margin-top: 24px; display: grid; gap: 16px; }
+  .nts .nt { position: relative; padding-left: 22px; font-size: 14px; font-weight: 500; color: #3a4252; line-height: 1.7; }
+  .nts .nt::before { content: "※"; position: absolute; left: 0; color: var(--blue-pale); }
+  .toc { margin-top: 22px; display: grid; gap: 12px; }
+  .toc > div { display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--line); padding: 14px 4px; }
+  .toc .n { font-size: 15px; font-weight: 800; color: var(--blue); width: 30px; }
+  .toc .nm { font-size: 18px; font-weight: 800; color: #1a2330; } .toc .nm small { margin-left: 14px; font-size: 12.5px; font-weight: 600; color: #7a8698; }
+  .toc .pg { margin-left: auto; font-size: 13px; font-weight: 700; color: #7a8698; }
+  .trend .l { flex: 0 0 150px; }
+  .trend .r { white-space: normal; text-align: right; line-height: 1.35; }
+  .cs td { padding-top: 11px; padding-bottom: 11px; }
+  .cs.cmp td { padding-top: 6px; padding-bottom: 6px; line-height: 1.45; }
+  /* 余白が出やすいページを埋める：通常の表は行を高く、カードは文字を大きく */
+  /* 行数が多めの表（10行前後）：詰めすぎず、ページを埋める中間の行高 */
+  table.kt.mid td { padding-top: 15px; padding-bottom: 15px; font-size: 14px; line-height: 1.6; }
+  table.kt.mid th { padding-top: 12px; padding-bottom: 12px; font-size: 14px; }
+  table.kt:not(.cmp):not(.mid) td { padding-top: 17px; padding-bottom: 17px; font-size: 13.5px; line-height: 1.65; }
+  .cards > div { padding: 22px 22px 24px; }
+  .cards .t { font-size: 17px; } .cards .d { font-size: 13.5px; line-height: 1.85; }
+  .ctab { margin-top: 28px; padding: 26px 30px; }
+  .steps > div { padding: 16px 20px; } .steps .t { font-size: 16.5px; } .steps .d { font-size: 13.5px; }
+  /* ===== 部門別の活用アイデア集 ===== */
+  .st { display: inline-block; font-size: 12px; font-weight: 800; padding: 4px 11px; border-radius: 999px; white-space: nowrap; }
+  .st.s1 { background: var(--amber); color: #4a3605; } .st.s2 { background: #dbe8f7; color: var(--blue-deep); } .st.s3 { background: var(--blue-deep); color: #fff; }
+  .ld { display: inline-flex; gap: 4px; align-items: center; }
+  .ld i { width: 10px; height: 10px; border-radius: 50%; background: #dfe5ee; } .ld i.on { background: var(--blue-bright); }
+  .imap { margin-top: 16px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .imap > div { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+  .imap .ph { background: var(--blue-deep); color: #fff; font-size: 16px; font-weight: 800; text-align: center; padding: 13px 18px 13px 8px; clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%); }
+  .imap .ii { flex: 1 1 0; border: 1.5px solid var(--line); border-top: 3px solid var(--blue); padding: 13px 14px; display: flex; flex-direction: column; background: #fff; }
+  .imap .ii .n { font-size: 15px; font-weight: 900; color: var(--blue-bright); }
+  .imap .ii .t { margin-top: 4px; font-size: 16px; font-weight: 900; color: #1a2330; line-height: 1.45; }
+  .imap .ii .m { margin-top: auto; padding-top: 8px; display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+  .irm { margin-top: 18px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .irm > div { border: 1.5px solid var(--line); display: flex; flex-direction: column; }
+  .irm .ph { padding: 15px 18px; font-size: 20px; font-weight: 900; display: flex; align-items: center; gap: 12px; }
+  .irm .ph span { font-size: 12px; font-weight: 800; letter-spacing: .08em; }
+  .irm .c1 .ph { background: var(--amber); color: #4a3605; } .irm .c2 .ph { background: #dbe8f7; color: var(--blue-deep); } .irm .c3 .ph { background: var(--blue-deep); color: #fff; }
+  .irm .d { padding: 15px 18px 0; font-size: 14px; font-weight: 500; color: #4a5568; line-height: 1.75; }
+  .irm .ls { padding: 12px 18px; flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-evenly; gap: 6px; }
+  .irm .ls p { font-size: 15.5px; font-weight: 800; color: #1a2330; padding: 7px 0; border-bottom: 1px solid var(--line); }
+  .irm .ls p:last-child { border-bottom: 0; }
+  .irm .ls.many { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; align-content: space-evenly; } .irm .ls.many p { font-size: 14.5px; padding: 8px 0; }
+  .irm .nx { margin: 0 18px 16px; padding: 11px 14px; background: var(--tint); font-size: 13px; font-weight: 600; color: #3a4252; line-height: 1.65; }
+  .irm .nx b { display: block; font-size: 12px; font-weight: 800; color: var(--blue); }
+  .ihd { margin-top: 8px; display: flex; align-items: center; gap: 16px; }
+  .ihd .no { flex: 0 0 auto; background: var(--blue-deep); color: #fff; font-size: 24px; font-weight: 800; padding: 9px 16px; }
+  .ihd .t { font-size: 26px; font-weight: 900; color: #1a2330; line-height: 1.3; }
+  .ihd .d { margin-top: 2px; font-size: 14px; font-weight: 700; color: #5a6578; }
+  .ihd .m { margin-left: auto; margin-right: 150px; display: flex; align-items: center; gap: 10px; }
+  .ihd .lb { margin-left: 6px; font-size: 12px; font-weight: 700; color: #6b7789; white-space: nowrap; }
+  .iba { margin-top: 8px; display: grid; grid-template-columns: 1fr 30px 1.16fr 228px; align-items: center; gap: 8px; }
+  .iba > div { align-self: stretch; padding: 12px 18px; display: flex; flex-direction: column; justify-content: center; }
+  .iba .bf { background: #f1f3f7; } .iba .af { background: var(--tint); border-left: 5px solid var(--blue-bright); }
+  .iba .k { font-size: 13px; font-weight: 800; color: #6b7789; } .iba .af .k { color: var(--blue-bright); }
+  .iba .v { margin-top: 4px; font-size: 17px; font-weight: 800; color: #1a2330; line-height: 1.55; } .iba .bf .v { color: #4a5568; font-weight: 700; }
+  .iba .ar { justify-self: center; width: 0; height: 0; border-left: 18px solid var(--blue-bright); border-top: 15px solid transparent; border-bottom: 15px solid transparent; }
+  .iba .il { width: 228px; height: 158px; object-fit: contain; }
+  .ifl { margin-top: 8px; }
+  .ifl .pd { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 800; color: var(--blue-deep); }
+  .ifl .pd b { margin-right: 4px; } .ifl .pd span { background: #fff; border: 1.5px solid #cfdcee; color: var(--blue); font-size: 13px; font-weight: 800; padding: 3px 12px; border-radius: 999px; }
+  .ifl .pd em { margin-left: auto; display: flex; align-items: center; gap: 6px; font-style: normal; font-size: 12.5px; font-weight: 700; color: #5a6578; }
+  .ifl .pd em i { width: 13px; height: 13px; } .ifl .pd em i.h { background: var(--amber); } .ifl .pd em i.a { margin-left: 10px; background: var(--blue); }
+  .ifl .fw { margin-top: 7px; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 4px; }
+  .ifl .fw > div { padding: 8px 28px 8px 13px; min-height: 72px; display: flex; align-items: center; gap: 10px; clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%); }
+  .ifl .fw > .a { background: var(--blue); color: #fff; } .ifl .fw > .h { background: #fde9b4; color: #3a2c05; }
+  .ifl .fw .n { flex: 0 0 auto; width: 32px; height: 32px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; }
+  .ifl .fw > .a .n { color: var(--blue); } .ifl .fw > .h .n { color: #a8780a; }
+  .ifl .fw p { font-size: 14.5px; font-weight: 800; line-height: 1.4; }
+  .ifl .fw small { display: block; font-size: 11.5px; font-weight: 800; opacity: .8; }
+  .igr { margin-top: 10px; display: grid; grid-template-columns: 1.08fr 1fr; gap: 12px; }
+  .igr .rows { display: grid; grid-auto-rows: 1fr; gap: 5px; min-height: 0; }
+  .igr .rows > div { display: grid; grid-template-columns: 124px 1fr; align-items: stretch; border: 1.5px solid var(--line); }
+  .igr .rows .h { display: flex; align-items: center; padding: 4px 11px; background: var(--tint); font-size: 13.5px; font-weight: 900; color: var(--blue-deep); }
+  .igr .rows .v { display: flex; align-items: center; padding: 4px 12px; font-size: 14px; font-weight: 700; color: #3a4252; line-height: 1.45; }
+  .igr .fs { display: flex; flex-direction: column; background: #fff9e8; border: 1.5px solid #f2d98d; padding: 9px 16px; min-height: 0; }
+  .igr .fs .h { font-size: 14px; font-weight: 900; color: #7a5a06; padding-bottom: 5px; border-bottom: 2px solid #f2d98d; }
+  .igr .fs .b { flex: 1 1 auto; display: flex; align-items: center; padding-top: 4px; font-size: 14.5px; font-weight: 600; color: #3a3320; line-height: 1.6; }
+  .cards .ex { display: block; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 14.5px; font-weight: 700; color: #3a4252; line-height: 1.9; }
+  table.kt b.big { font-size: 21px; font-weight: 900; }
+  /* 図解 */
+  .kcover .pills.row { right: auto; left: 66px; top: 500px; display: flex; }
+  .kcover.pan.teal { --pn: #e3f4f0; background: linear-gradient(135deg, #0a4f54 0%, #0f8078 100%) !important; }
+  .kcover.pan.violet { --pn: #ece8f8; background: linear-gradient(135deg, #2e2466 0%, #5a3fb0 100%) !important; }
+  .kcover.pan.amber { --pn: #fbeee2; background: linear-gradient(135deg, #7a2c10 0%, #c9601f 100%) !important; }
+  .kcover.pan.rose { --pn: #fbe9f1; background: linear-gradient(135deg, #6e1a44 0%, #b83a76 100%) !important; }
+  .kcover.pan .sub { font-size: 20px; }
+  .kcover.pan .cvil { width: 500px; right: 0; top: 0; height: 600px; border-radius: 0; background: var(--pn); }
+  .kcover.pan .cvil img { width: 464px; height: 400px; mix-blend-mode: multiply; }
+  .cvil { position: absolute; right: 44px; top: 96px; width: 450px; height: 450px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; }
+  .cvil img { width: 372px; height: 372px; object-fit: contain; }
+  .cards .cil { display: block; height: 182px; width: 100%; object-fit: contain; flex: 0 0 auto; }
+  .cards.grow:has(.cil) > div { padding: 12px 24px 14px; }
+  .cards:has(.cil) .t { margin-top: 8px; } .cards:has(.cil) .d { margin-top: 6px; font-size: 13.5px; line-height: 1.7; } .cards:has(.cil) .ex { margin-top: 9px; padding-top: 8px; font-size: 14px; line-height: 1.65; }
+  .cards:has(.cil) .g { margin-top: 8px; }
+  .imap .ii .n { display: flex; align-items: center; justify-content: space-between; }
+  .iar { margin-top: 14px; display: grid; grid-template-columns: repeat(3, 1fr); background: linear-gradient(90deg, #f7d778, #5a93d3 55%, #1a2e50); clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 50%, calc(100% - 22px) 100%, 0 100%); }
+  .iar span { padding: 8px 18px; font-size: 13.5px; font-weight: 800; color: #fff; text-align: center; } .iar span:first-child { color: #4a3605; }
+  .iar + .irm { margin-top: 12px; }
+  .istk { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .istk .pl { flex: 1 1 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; min-height: 0; }
+  .istk .pl > div { position: relative; border: 1.5px solid var(--line); border-top: 5px solid var(--blue); padding: 16px 20px; display: flex; flex-direction: column; }
+  .istk .ic { width: 50px; height: 50px; border-radius: 50%; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; }
+  .istk .pl .ic { position: absolute; top: 16px; right: 18px; }
+  .istk .ro { font-size: 13px; font-weight: 800; color: var(--blue-bright); }
+  .istk .t { margin-top: 3px; font-size: 21px; font-weight: 900; color: var(--blue-deep); line-height: 1.3; }
+  .istk .il { flex: 1 1 0; min-height: 0; width: 100%; object-fit: contain; margin: 8px 0; }
+  .istk .pl .d { margin-top: 10px; font-size: 14.5px; font-weight: 600; color: #4a5568; line-height: 1.75; }
+  .istk .d b { color: #1a2330; }
+  .istk .ex { margin-top: auto; background: var(--tint); padding: 10px 14px; font-size: 14px; font-weight: 800; color: #1a2330; line-height: 1.55; }
+  .istk .ex b { display: block; font-size: 12px; color: var(--blue); }
+  .istk .fd { flex: 0 0 auto; background: var(--blue-deep); color: #fff; padding: 15px 24px; display: flex; align-items: center; gap: 18px; }
+  .istk .fd .ic { flex: 0 0 auto; background: #fff; } .istk .fd .ro { color: #a9c8f0; } .istk .fd .t { color: #fff; white-space: nowrap; }
+  .istk .fd .d { margin-left: 26px; font-size: 14.5px; font-weight: 600; line-height: 1.7; color: #dbe6f4; } .istk .fd .d b { color: #fff; }
+  .inum { margin-top: 16px; display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 12px; }
+  .inum > div { border: 1.5px solid var(--line); border-top: 4px solid var(--blue); padding: 11px 16px; display: flex; flex-direction: column; min-height: 0; }
+  .inum .co { font-size: 15.5px; font-weight: 900; color: #1a2330; line-height: 1.35; }
+  .inum .ac { margin-top: 3px; font-size: 13.5px; font-weight: 600; color: #5a6578; line-height: 1.45; }
+  .inum .v { margin-top: 8px; font-size: 15px; font-weight: 800; color: #5a6578; } .inum .v b { font-size: 46px; font-weight: 900; color: var(--blue-bright); line-height: 1.15; margin: 0 3px; }
+  .inum .bs { margin-top: 4px; } .inum .bs p { display: grid; grid-template-columns: 36px 1fr 52px; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: #5a6578; }
+  .inum .bs i { height: 9px; background: #eef1f6; display: block; } .inum .bs u { display: block; height: 100%; background: #b9c7da; } .inum .bs u.on { background: var(--blue-bright); }
+  .inum .n { margin-top: auto; padding-top: 6px; font-size: 13px; font-weight: 600; color: #6b7789; line-height: 1.5; }
+  .inum.tall > div { display: flex; flex-direction: column; }
+  .inum.tall .bs { flex: 1; display: flex; flex-direction: column; justify-content: space-evenly; margin: 14px 0; }
+  .inum.tall .bs p { grid-template-columns: 44px 1fr 72px; font-size: 15px; font-weight: 700; }
+  .inum.tall .bs p span:last-child { font-size: 17px; text-align: right; }
+  .inum.tall .bs i { height: 30px; }
+  .inum.tall .bs u { height: 100%; }
+  .ifm { margin-top: 14px; display: flex; align-items: stretch; gap: 8px; }
+  .ifm > div { flex: 1 1 0; background: var(--tint); padding: 10px 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; }
+  .ifm .k { font-size: 12.5px; font-weight: 800; color: var(--blue); }
+  .ifm .v { margin-top: 2px; font-size: 25px; font-weight: 900; color: #1a2330; line-height: 1.2; } .ifm .v small { margin-left: 2px; font-size: 12px; font-weight: 800; color: #5a6578; }
+  .ifm .tt { flex: 1.3 1 0; background: var(--blue-deep); } .ifm .tt .k { color: #a9c8f0; } .ifm .tt .v { color: #fff; } .ifm .tt .v small { color: #dbe6f4; }
+  .ifm .op { align-self: center; font-size: 25px; font-weight: 900; color: var(--blue); }
+  .ifb { margin-top: 14px; display: grid; grid-template-columns: 1.15fr 1fr; gap: 14px; }
+  .ifb .bc { border: 1.5px solid var(--line); padding: 14px 18px; display: flex; flex-direction: column; justify-content: space-between; }
+  .ifb .h { font-size: 15px; font-weight: 900; color: var(--blue-deep); }
+  .ifb .br { display: grid; grid-template-columns: 66px 1fr; align-items: center; gap: 8px; }
+  .ifb .br .l { font-size: 13px; font-weight: 800; color: #3a4252; }
+  .ifb .tr { display: flex; height: 50px; }
+  .ifb .tr span { display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #fff; text-align: center; line-height: 1.25; border-right: 2px solid #fff; }
+  .ifb .tr .gr { background: #93a3b8; } .ifb .tr .bl { background: var(--blue); } .ifb .tr .am { background: var(--amber); color: #4a3605; } .ifb .tr .am2 { background: #f7d778; color: #4a3605; }
+  .ifb .n { font-size: 12.5px; font-weight: 600; color: #5a6578; line-height: 1.6; }
+  .ifb .mt, .imx .ck { display: grid; grid-auto-rows: 1fr; gap: 9px; min-height: 0; }
+  .ifb .mt > div, .imx .ck > div { border: 1.5px solid var(--line); padding: 9px 14px; display: flex; align-items: center; gap: 12px; }
+  .ifb .ic, .imx .ic { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; }
+  .ifb .t, .imx .ck .t { font-size: 15px; font-weight: 900; color: var(--blue-deep); }
+  .ifb .mt .d, .imx .ck .d { margin-top: 1px; font-size: 12.8px; font-weight: 600; color: #4a5568; line-height: 1.5; }
+  .imx { margin-top: 14px; display: grid; grid-template-columns: 1.45fr 1fr; gap: 16px; }
+  .imx table { width: 100%; height: 100%; border-collapse: collapse; }
+  .imx th { background: var(--blue-deep); color: #fff; font-size: 11.5px; font-weight: 800; padding: 6px 3px; line-height: 1.25; vertical-align: middle; }
+  .imx td { border-bottom: 1px solid var(--line); text-align: center; padding: 3px; }
+  .imx tr:nth-child(odd) td { background: #f7f9fc; }
+  .imx td.k { text-align: left; font-size: 13px; font-weight: 800; color: #1a2330; white-space: nowrap; padding-left: 10px; } .imx td.k b { margin-right: 8px; color: var(--blue-bright); }
+  .imx td i { display: inline-block; width: 15px; height: 15px; border-radius: 50%; background: var(--blue-bright); vertical-align: middle; }
+  .ilad { margin-top: 16px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; align-items: end; }
+  .ilad > div { position: relative; display: flex; flex-direction: column; padding: 16px 18px 14px; color: #fff; }
+  .ilad .c1 { height: 76%; background: #5a93d3; } .ilad .c2 { height: 84%; background: var(--blue); } .ilad .c3 { height: 92%; background: #24497e; } .ilad .c4 { height: 100%; background: var(--blue-deep); }
+  .ilad .n { font-size: 14px; font-weight: 900; opacity: .8; }
+  .ilad .ic { position: absolute; top: 14px; right: 14px; width: 44px; height: 44px; border-radius: 50%; background: #fff; color: var(--blue); display: flex; align-items: center; justify-content: center; }
+  .ilad .t { margin-top: 12px; font-size: 21px; font-weight: 900; }
+  .ilad .d { margin-top: 8px; font-size: 14.5px; font-weight: 600; line-height: 1.7; }
+  .ilad .eg { margin-top: 12px; padding: 9px 12px; border: 1.5px solid rgba(255,255,255,.55); font-size: 13.5px; font-weight: 700; line-height: 1.6; }
+  .ilad .nx { margin-top: auto; background: #fff; color: #1a2330; padding: 9px 12px; font-size: 13px; font-weight: 700; line-height: 1.5; }
+  .ilad .nx b { display: block; font-size: 11.5px; font-weight: 800; color: var(--blue); }
+  .icase { margin-top: 10px; margin-right: 60px; font-size: 13px; font-weight: 600; color: #4a5568; line-height: 1.5; }
+  .icase b { margin-right: 10px; font-size: 13px; font-weight: 800; color: var(--blue); }
+</style>
+
+<style id="ebook-embed-overrides">
+  body { padding: 0 !important; background: #e9edf3 !important; }
+  .note { display: none !important; }
+  .deck { gap: 16px !important; }
+  .slide-shell { width: 1280px !important; }
+  .slide-shell figcaption { display: none !important; }
+  .slide-shell .clip { height: 720px !important; border-radius: 0 !important; box-shadow: none !important; }
+  .slide { transform: none !important; border: none !important; border-radius: 0 !important; }
+</style>
+</head>
+<body>
+  <p class="note">Copilot導入の進め方と最初に選ぶ業務8選｜全19スライド／事例・数値は各社・各機関の公開情報にもとづく</p>
+  <div class="deck">
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide blue-bg kcover pan rose">
+        <svg class="waves" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <path d="M700,-80 C980,60 820,300 1120,380 C1320,433 1360,560 1280,760 L1380,760 L1380,-80 Z" fill="rgba(255,255,255,0.07)"/>
+          <path d="M880,-120 C1150,40 980,260 1240,330 L1340,330 L1340,-120 Z" fill="rgba(90,160,230,0.28)"/>
+          <path d="M-80,560 C240,480 420,660 760,600 C1040,551 1180,640 1300,760 L-80,760 Z" fill="rgba(20,40,80,0.22)"/>
+          <path d="M-80,640 C300,560 560,720 900,660 C1120,621 1240,690 1310,760 L-80,760 Z" fill="rgba(90,160,230,0.18)"/>
+        </svg>
+        <div class="badge-row"><span class="badge">お役立ち資料</span><span class="badge-note">バイテック法人AI研修</span></div>
+        <p class="sub">どの業務から、どの順番で始めるかを整理する</p>
+        <h1 class="title"><small style="margin:-8px 0 0;line-height:1.15;font-size:32px">Copilot導入の進め方と</small>最初に選ぶ<br>業務8選</h1>
+        <div class="pills row"><span>導入の4段階</span><span>最初に選ぶ8業務</span><span>事前確認15項目</span></div>
+        <div class="cvil"><img src="/biz/ebooks/ebook-35/assets/illus/cover-book.webp" alt=""></div>
+        <p class="date">UPDATE 2026.10</p>
+        <img class="logo" src="/biz/ebooks/ebook-35/assets/biz-logo-w.svg" alt="byTech BUSINESS">
+      </div>
+    </div><figcaption>表紙</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">Contents</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-35/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd" style="margin-top:4px"><p class="t" style="font-size:27px">目次</p></div>
+        <div class="grow toc"><div><span class="n">01</span><span class="nm">進め方の全体像<small>4つの段階と、次へ進む判断</small></span><span class="pg">P.2 - 3</span></div><div><span class="n">02</span><span class="nm">業務の選び方<small>3つの基準と8つの業務</small></span><span class="pg">P.4 - 5</span></div><div><span class="n">03</span><span class="nm">最初に選ぶ8業務<small>使い方、流れ、確認すること</small></span><span class="pg">P.6 - 14</span></div><div><span class="n">04</span><span class="nm">効果の測り方と事前確認<small>計算の仕方と15項目</small></span><span class="pg">P.15 - 16</span></div></div>
+        <p class="s-foot">活用アイデアは当社の設計案で、導入実績ではありません。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>目次</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">進め方の全体像</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-35/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">導入は<b>4つの段階</b>で進める</p></div>
+        <div class="grow steps"><div><span class="n">01</span><div><p class="t">業務を選ぶ</p><p class="d">件数、手作業の時間、待ち時間、不備を記録し、標準化できる部分を選ぶ</p></div><p class="sd">業務担当・業務責任者</p></div><div><span class="n">02</span><div><p class="t">小さく試す</p><p class="d">限定した業務と利用者で試し、正解と失敗例を確認する</p></div><p class="sd">業務担当・IT</p></div><div><span class="n">03</span><div><p class="t">業務をつなぐ</p><p class="d">Copilot Studio、帳票のAI、基幹連携を足し、例外・権限・監視を運用する</p></div><p class="sd">業務責任者・IT・管理者</p></div><div><span class="n">04</span><div><p class="t">横展開する</p><p class="d">フロー、知識、研修の共通部分を再利用し、部門ごとの効果を確認する</p></div><p class="sd">現場推進者・IT・管理者</p></div></div><div class="band">右列は主な担当です。段階の整理は当社の見解で、自社の契約、業務量、データの状態に合わせて見直してください。</div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>4つの段階</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">進め方の全体像</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-35/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t"><b>進む判断</b>を先に決めておく</p><p class="l">各段階の対象と、次へ進んでよいと判断する条件です。</p></div>
+        <table class="grow cs kt mid tall">
+          <colgroup><col style="width:140px"><col style="width:200px"><col style="width:430px"><col></colgroup>
+          <tr><th>段階</th><th>対象</th><th>すること</th><th>進む判断</th></tr>
+          <tr><td class="kc">業務を選ぶ</td><td>反復する作業</td><td>件数、手作業の時間、待ち時間、不備を記録する</td><td>効果と元の作業量を説明できる</td></tr>
+          <tr><td class="kc">小さく試す</td><td>限定した業務・利用者</td><td>既存のMicrosoft 365、Copilot、標準のフローで試す</td><td>確認と修正を含めても便益があり、品質も満たす</td></tr>
+          <tr><td class="kc">業務をつなぐ</td><td>部門の標準プロセス</td><td>Copilot Studio、帳票のAI、基幹APIを足す</td><td>未処理や手戻りを追跡でき、運用担当が決まる</td></tr>
+          <tr><td class="kc">横展開する</td><td>他部門・拠点</td><td>共通部分を再利用し、部門ごとの効果を確認する</td><td>利用が定着し、保守と費用を含めた効果が続く</td></tr>
+        </table>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>次の段階へ進む判断</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">業務の選び方</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-35/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">最初の業務を選ぶ<b>3つの基準</b></p><p class="l">8つの業務に共通する基準です。自社の業務を当てはめて、候補を絞ります。</p></div>
+        <div class="grow cards c3"><div><img class="cil" src="/biz/ebooks/ebook-35/assets/illus/step-small.webp" alt=""><p class="t">何度も繰り返す</p><p class="d">部門を問わず、毎週のように発生する作業から選びます。<span class="ex">例：議事メモ、メールの要約</span></p></div><div><img class="cil" src="/biz/ebooks/ebook-35/assets/illus/step-learn.webp" alt=""><p class="t">手順や基準が決まっている</p><p class="d">確認の観点や承認の規則を、言葉にできる業務を選びます。<span class="ex">例：受付・承認、提案書のレビュー</span></p></div><div><img class="cil" src="/biz/ebooks/ebook-35/assets/illus/step-measure.webp" alt=""><p class="t">資料の範囲を絞れる</p><p class="d">読ませる資料が決まっていて、結果を確かめやすい業務を選びます。<span class="ex">例：部門のFAQ、規程の検索</span></p></div></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>業務の選び方</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">業務の選び方</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-35/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">先に検討したい<b>8つの業務</b></p><p class="l">選ぶ理由、必要な準備、検証する指標を一覧にしました。</p></div>
+        <table class="grow cs kt cmp">
+          <colgroup><col style="width:190px"><col style="width:400px"><col style="width:320px"><col></colgroup>
+          <tr><th>業務</th><th>選ぶ理由</th><th>必要な準備</th><th>検証する指標</th></tr>
+          <tr><td class="kc">議事メモ・会議引継ぎ</td><td>標準機能で始めやすく、部門を問わず繰り返す</td><td>文字起こし、関連資料、共有のルール</td><td>完成までの時間、修正率</td></tr>
+          <tr><td class="kc">メール要約・初稿</td><td>読む・書く仕事の頻度が高い</td><td>メール、文書、テンプレート</td><td>読解・返信の時間、書き直し</td></tr>
+          <tr><td class="kc">受付・承認・督促</td><td>手順が明確で、転記や確認をまとめて改善できる</td><td>申請、対象者、承認の規則</td><td>処理日数、転記の時間、不備</td></tr>
+          <tr><td class="kc">部門FAQ・規程検索</td><td>問い合わせの内容と回答の文書を絞れる</td><td>最新のFAQ・規程、引用元</td><td>自己解決率、有人対応の工数</td></tr>
+          <tr><td class="kc">提案書レビュー</td><td>確認の観点を再利用できる</td><td>提案書、評価基準、実績</td><td>レビューの時間、差し戻し率</td></tr>
+          <tr><td class="kc">請求書の受付・照合</td><td>件数が多い組織では手作業が大きい</td><td>帳票、契約、取引先マスタ</td><td>入力の時間、精度、例外率</td></tr>
+          <tr><td class="kc">入社・研修手続</td><td>複数の部署への依頼をまとめられる</td><td>人事の確定情報、タスク</td><td>準備の完了率、運営の時間</td></tr>
+          <tr><td class="kc">現場進捗報告</td><td>現場の入力から転記・共有までを省ける</td><td>工程、場所、担当、現場の端末</td><td>集計の時間、更新の遅れ</td></tr>
+        </table>
+        <p class="s-foot">8業務は当社の調査による候補で、効果を保証するものではありません。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>先に検討する8業務</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide ch">
+        <div class="chp">
+          <img class="s-logo" src="/biz/ebooks/ebook-35/assets/biz-logo-w.svg" alt="byTech BUSINESS">
+          <span class="no">03</span>
+          <p class="t">最初に選ぶ8業務</p>
+          <p class="d">使い方、流れ、確認すること</p>
+          <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>章扉 最初に選ぶ8業務</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">最初に選ぶ業務</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-35/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="ihd"><span class="no">01</span><div class="nm"><p class="t">会議の議事メモ</p><p class="d">録画を見直さず、決定事項と担当・期限を先に出す</p></div><p class="m"><span class="st s1">まず試す</span><span class="lb">導入の負荷</span><span class="ld" aria-label="負荷1"><i class="on"></i><i></i><i></i></span></p></div>
+        <div class="iba"><div class="bf"><p class="k">いま</p><p class="v">録画を見直し、手作業で要約している</p></div><span class="ar"></span><div class="af"><p class="k">こう変える</p><p class="v">Teamsの記録から決定事項・論点・担当・期限を抽出し、参加者が確定する</p></div><img class="il" src="/biz/ebooks/ebook-35/assets/illus/pick01.webp" alt=""></div>
+        <div class="ifl"><p class="pd"><b>使う製品</b><span>Teams</span><span>Microsoft 365 Copilot</span><em><i class="h"></i>人の作業<i class="a"></i>AI・自動化</em></p><div class="fw"><div class="h"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p><small>人</small>会議の記録を用意する</p></div><div class="a"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span><p><small>Copilot</small>決定事項と論点を抽出する</p></div><div class="a"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span><p><small>Copilot</small>担当と期限を整理する</p></div><div class="h"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p><small>人</small>参加者が内容を確定する</p></div></div></div>
+        <div class="grow igr">
+          <div class="rows"><div><p class="h">必要なデータ</p><p class="v">会議の文字起こし／関連資料</p></div><div><p class="h">測る指標</p><p class="v">議事メモの作成時間／修正率</p></div><div><p class="h">始める前の確認</p><p class="v">会議ポリシー／記録の保存・共有／話者識別</p></div></div>
+          <div class="fs"><p class="h">指示文の例</p><p class="b">この会議の記録から、決定事項・論点・担当者・期限を表に整理してください。記録で確認できない項目は空欄にし、該当する発言も示してください。</p></div>
+        </div>
+        
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>活用アイデア 01 会議の議事メモ</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">最初に選ぶ業務</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-35/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="ihd"><span class="no">02</span><div class="nm"><p class="t">メールの要約・返信下書き</p><p class="d">長い往復を読み直さず、経緯と依頼から返信を始める</p></div><p class="m"><span class="st s1">まず試す</span><span class="lb">導入の負荷</span><span class="ld" aria-label="負荷1"><i class="on"></i><i></i><i></i></span></p></div>
+        <div class="iba"><div class="bf"><p class="k">いま</p><p class="v">長い往復メールを読んで返信している</p></div><span class="ar"></span><div class="af"><p class="k">こう変える</p><p class="v">スレッドの経緯と依頼を整理し、返信案を人が確認して送信する</p></div><img class="il" src="/biz/ebooks/ebook-35/assets/illus/pick02.webp" alt=""></div>
+        <div class="ifl"><p class="pd"><b>使う製品</b><span>Outlook</span><span>Copilot</span><em><i class="h"></i>人の作業<i class="a"></i>AI・自動化</em></p><div class="fw"><div class="h"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p><small>人</small>対象のスレッドを開く</p></div><div class="a"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span><p><small>Copilot</small>経緯と依頼を整理する</p></div><div class="a"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span><p><small>Copilot</small>返信案を作る</p></div><div class="h"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p><small>人</small>人が確認して送信する</p></div></div></div>
+        <div class="grow igr">
+          <div class="rows"><div><p class="h">必要なデータ</p><p class="v">メール／予定表</p></div><div><p class="h">測る指標</p><p class="v">読解・返信の時間／書き直し率</p></div><div><p class="h">始める前の確認</p><p class="v">利用環境のCopilot区分／対応するOutlook</p></div></div>
+          <div class="fs"><p class="h">指示文の例</p><p class="b">このメールスレッドの経緯と依頼事項を整理し、返信案を作ってください。期限と数字は、本文の該当箇所も示してください。</p></div>
+        </div>
+        
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>活用アイデア 02 メールの要約・返信下書き</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">最初に選ぶ業務</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-35/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="ihd"><span class="no">03</span><div class="nm"><p class="t">申請・承認と結果通知</p><p class="d">紙とメールの回覧を、承認の流れと証跡に置き換える</p></div><p class="m"><span class="st s1">まず試す</span><span class="lb">導入の負荷</span><span class="ld" aria-label="負荷2"><i class="on"></i><i class="on"></i><i></i></span></p></div>
+        <div class="iba"><div class="bf"><p class="k">いま</p><p class="v">紙・メールで回覧し、手で督促している</p></div><span class="ar"></span><div class="af"><p class="k">こう変える</p><p class="v">申請を登録し、金額・種別で承認者を決めて、結果と証跡を保存する</p></div><img class="il" src="/biz/ebooks/ebook-35/assets/illus/pick03.webp" alt=""></div>
+        <div class="ifl"><p class="pd"><b>使う製品</b><span>Forms</span><span>Power Automate</span><span>Teams</span><span>SharePoint</span><em><i class="h"></i>人の作業<i class="a"></i>AI・自動化</em></p><div class="fw"><div class="h"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p><small>人</small>申請を入力する</p></div><div class="a"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg></span><p><small>フロー</small>金額・種別で承認者を決める</p></div><div class="h"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p><small>人</small>承認者が内容を判断する</p></div><div class="a"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg></span><p><small>フロー</small>結果を通知し証跡を保存する</p></div></div></div>
+        <div class="grow igr">
+          <div class="rows"><div><p class="h">必要なデータ</p><p class="v">申請／承認者マスタ</p></div><div><p class="h">測る指標</p><p class="v">処理日数／督促回数</p></div><div><p class="h">始める前の確認</p><p class="v">代理承認／差戻し／期限超過</p></div></div>
+          <div class="fs"><p class="h">最初の一歩</p><p class="b">申請の種類ごとに、金額と種別で承認者を決める表を作ります。代理承認・差戻し・期限超過の扱いも書き出します。</p></div>
+        </div>
+        <p class="icase"><b>近い領域の公開事例</b>聖徳大学附属取手聖徳女子中高：出張・休暇の申請をTeamsとPower Appsで電子化（約2時間の作業が数分に）</p>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>活用アイデア 03 申請・承認と結果通知</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">最初に選ぶ業務</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-35/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="ihd"><span class="no">04</span><div class="nm"><p class="t">規程・マニュアル検索</p><p class="d">担当部署に聞く前に、最新の規程と引用箇所で確認する</p></div><p class="m"><span class="st s1">まず試す</span><span class="lb">導入の負荷</span><span class="ld" aria-label="負荷2"><i class="on"></i><i class="on"></i><i></i></span></p></div>
+        <div class="iba"><div class="bf"><p class="k">いま</p><p class="v">担当部署へ都度問い合わせている</p></div><span class="ar"></span><div class="af"><p class="k">こう変える</p><p class="v">質問に最新の規程と引用箇所を返し、曖昧な条件は確認質問をする</p></div><img class="il" src="/biz/ebooks/ebook-35/assets/illus/pick04.webp" alt=""></div>
+        <div class="ifl"><p class="pd"><b>使う製品</b><span>Copilot Studio</span><span>SharePoint</span><span>Teams</span><em><i class="h"></i>人の作業<i class="a"></i>AI・自動化</em></p><div class="fw"><div class="h"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p><small>人</small>文書責任者が規程を整備する</p></div><div class="a"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span><p><small>エージェント</small>曖昧な条件を確認する</p></div><div class="a"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span><p><small>エージェント</small>最新の規程と引用箇所を返す</p></div><div class="h"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p><small>人</small>回答不能は担当者が対応する</p></div></div></div>
+        <div class="grow igr">
+          <div class="rows"><div><p class="h">必要なデータ</p><p class="v">規程／FAQ／申請リンク</p></div><div><p class="h">測る指標</p><p class="v">検索時間／自己解決率</p></div><div><p class="h">始める前の確認</p><p class="v">文書責任者／版管理／権限／回答不能時の経路</p></div></div>
+          <div class="fs"><p class="h">質問の例</p><p class="b">育児休業の申請手続きを教えてください。該当する規程の条文と、申請先のリンクも示してください。</p></div>
+        </div>
+        <p class="icase"><b>近い領域の公開事例</b>オービックビジネスコンサルタント：サポート担当者向けの知識検索を内製。社内規程の事例ではありません</p>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>活用アイデア 04 規程・マニュアル検索</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">最初に選ぶ業務</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-35/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="ihd"><span class="no">05</span><div class="nm"><p class="t">提案書のレビュー</p><p class="d">上長の前に、評価基準で抜けと不整合をつぶす</p></div><p class="m"><span class="st s1">まず試す</span><span class="lb">導入の負荷</span><span class="ld" aria-label="負荷2"><i class="on"></i><i class="on"></i><i></i></span></p></div>
+        <div class="iba"><div class="bf"><p class="k">いま</p><p class="v">上長が全項目を手で確認している</p></div><span class="ar"></span><div class="af"><p class="k">こう変える</p><p class="v">評価基準に沿って抜け・不整合・説明不足を示し、担当と上長が修正する</p></div><img class="il" src="/biz/ebooks/ebook-35/assets/illus/pick05.webp" alt=""></div>
+        <div class="ifl"><p class="pd"><b>使う製品</b><span>Copilot Studio</span><span>Microsoft 365 Copilot</span><em><i class="h"></i>人の作業<i class="a"></i>AI・自動化</em></p><div class="fw"><div class="h"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p><small>人</small>評価基準を登録する</p></div><div class="h"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p><small>人</small>提案書を渡す</p></div><div class="a"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span><p><small>エージェント</small>抜け・不整合を指摘する</p></div><div class="h"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p><small>人</small>担当と上長が修正する</p></div></div></div>
+        <div class="grow igr">
+          <div class="rows"><div><p class="h">必要なデータ</p><p class="v">提案書／評価基準／FAQ</p></div><div><p class="h">測る指標</p><p class="v">レビューの時間／指摘漏れ／差し戻しの率</p></div><div><p class="h">始める前の確認</p><p class="v">自己点検と上長評価の観点を分ける／評価セットで精度を検証する</p></div></div>
+          <div class="fs"><p class="h">最初の一歩</p><p class="b">上長が毎回指摘している点を10項目書き出し、自己点検の評価基準にします。まずはCopilotにこの基準を渡して試し、効果が見えてからエージェントにします。</p></div>
+        </div>
+        <p class="icase"><b>近い領域の公開事例</b>SCSK：提案書レビューを含む3つのエージェントを約3か月で開発。セルフレビュー、上長レビュー、壁打ちで目的別に構成</p>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>活用アイデア 05 提案書のレビュー</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">最初に選ぶ業務</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-35/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="ihd"><span class="no">06</span><div class="nm"><p class="t">請求書の受付・抽出</p><p class="d">添付の保存と手入力を、確認だけにする</p></div><p class="m"><span class="st s1">まず試す</span><span class="lb">導入の負荷</span><span class="ld" aria-label="負荷3"><i class="on"></i><i class="on"></i><i class="on"></i></span></p></div>
+        <div class="iba"><div class="bf"><p class="k">いま</p><p class="v">添付を保存し、請求書の内容を手で入力している</p></div><span class="ar"></span><div class="af"><p class="k">こう変える</p><p class="v">メール受信からPDF保存・項目抽出・重複と必須項目の確認までを連携する</p></div><img class="il" src="/biz/ebooks/ebook-35/assets/illus/pick06.webp" alt=""></div>
+        <div class="ifl"><p class="pd"><b>使う製品</b><span>Power Automate</span><span>AI Builder</span><span>SharePoint</span><em><i class="h"></i>人の作業<i class="a"></i>AI・自動化</em></p><div class="fw"><div class="a"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg></span><p><small>フロー</small>受信メールのPDFを保存する</p></div><div class="a"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg></span><p><small>AI Builder</small>請求書の項目を抽出する</p></div><div class="a"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg></span><p><small>フロー</small>重複と必須項目を調べる</p></div><div class="h"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p><small>人</small>担当者が確認して確定する</p></div></div></div>
+        <div class="grow igr">
+          <div class="rows"><div><p class="h">必要なデータ</p><p class="v">請求書／取引先マスタ</p></div><div><p class="h">測る指標</p><p class="v">入力時間／読取の正答率／重複率</p></div><div><p class="h">始める前の確認</p><p class="v">帳票の様式／抽出の信頼度／確認担当／AI費用</p></div></div>
+          <div class="fs"><p class="h">最初の一歩</p><p class="b">取引の多い取引先1社の請求書で読み取りを試し、どの項目で誤りが出るかを記録します。確認担当と信頼度の基準は、その結果から決めます。</p></div>
+        </div>
+        <p class="icase"><b>近い領域の公開事例</b>Komatsu Australia：請求書の手作業の修正をRPA化。1仕入先だけで年300時間の削減（2021年公表）</p>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>活用アイデア 06 請求書の受付・抽出</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">最初に選ぶ業務</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-35/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="ihd"><span class="no">07</span><div class="nm"><p class="t">入社手続のタスク配布</p><p class="d">部署ごとの個別依頼を、1回の登録にまとめる</p></div><p class="m"><span class="st s1">まず試す</span><span class="lb">導入の負荷</span><span class="ld" aria-label="負荷2"><i class="on"></i><i class="on"></i><i></i></span></p></div>
+        <div class="iba"><div class="bf"><p class="k">いま</p><p class="v">入社のたびに複数の部署へ個別に依頼している</p></div><span class="ar"></span><div class="af"><p class="k">こう変える</p><p class="v">入社登録を起点にIT・総務・教育へタスクと期限を配り、進捗を集約する</p></div><img class="il" src="/biz/ebooks/ebook-35/assets/illus/pick07.webp" alt=""></div>
+        <div class="ifl"><p class="pd"><b>使う製品</b><span>Lists</span><span>Power Automate</span><span>Teams</span><span>Planner</span><em><i class="h"></i>人の作業<i class="a"></i>AI・自動化</em></p><div class="fw"><div class="h"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p><small>人</small>入社情報を登録する</p></div><div class="a"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg></span><p><small>フロー</small>各部署へタスクを配る</p></div><div class="a"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg></span><p><small>フロー</small>進捗を集約する</p></div><div class="h"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p><small>人</small>未完了を確認して対応する</p></div></div></div>
+        <div class="grow igr">
+          <div class="rows"><div><p class="h">必要なデータ</p><p class="v">入社日／所属／役割／必要物品</p></div><div><p class="h">測る指標</p><p class="v">準備完了率／手続時間</p></div><div><p class="h">始める前の確認</p><p class="v">個人情報の最小化／変更・取消／担当の設計</p></div></div>
+          <div class="fs"><p class="h">最初の一歩</p><p class="b">入社1件分の準備を、部署・作業・期限で書き出します。各部署に渡す個人情報は必要な項目だけに絞り、入社の変更や取消の扱いも決めます。</p></div>
+        </div>
+        <p class="icase"><b>近い領域の公開事例</b>Games Global：入社時に部門・部署・役割に応じてアプリの権限を自動で割り当て（複数の自動化施策の一部）</p>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>活用アイデア 07 入社手続のタスク配布</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">最初に選ぶ業務</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-35/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="ihd"><span class="no">08</span><div class="nm"><p class="t">現場の工程完了報告</p><p class="d">紙の記入と転記をやめ、現場から直接報告する</p></div><p class="m"><span class="st s1">まず試す</span><span class="lb">導入の負荷</span><span class="ld" aria-label="負荷2"><i class="on"></i><i class="on"></i><i></i></span></p></div>
+        <div class="iba"><div class="bf"><p class="k">いま</p><p class="v">紙に記入した報告を、事務員が転記している</p></div><span class="ar"></span><div class="af"><p class="k">こう変える</p><p class="v">スマホで工程を選んで送信し、台帳への反映と関係者への通知まで進める</p></div><img class="il" src="/biz/ebooks/ebook-35/assets/illus/pick08.webp" alt=""></div>
+        <div class="ifl"><p class="pd"><b>使う製品</b><span>Forms</span><span>Power Automate</span><span>SharePoint</span><span>Teams</span><em><i class="h"></i>人の作業<i class="a"></i>AI・自動化</em></p><div class="fw"><div class="h"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p><small>人</small>スマホで工程を選んで送信</p></div><div class="a"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg></span><p><small>フロー</small>台帳へ反映する</p></div><div class="a"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg></span><p><small>フロー</small>関係者へ通知する</p></div><div class="h"><span class="n"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><p><small>人</small>管理者が進捗を確認する</p></div></div></div>
+        <div class="grow igr">
+          <div class="rows"><div><p class="h">必要なデータ</p><p class="v">工程／場所／担当／時刻</p></div><div><p class="h">測る指標</p><p class="v">転記の時間／進捗の更新遅延</p></div><div><p class="h">始める前の確認</p><p class="v">現場の端末／圏外時の運用／協力会社の入力権限</p></div></div>
+          <div class="fs"><p class="h">最初の一歩</p><p class="b">1つの現場で、工程・場所・担当を選ぶだけの入力画面を作ります。圏外になる場所と協力会社の入力方法は、試す前に確認します。</p></div>
+        </div>
+        <p class="icase"><b>近い領域の公開事例</b>鹿島建設：スマホで送信した工程を管理表へ自動反映し、協力会社の職方と共有（削減時間の数値は未公表）</p>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>活用アイデア 08 現場の工程完了報告</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">効果の測り方</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-35/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">「作る時間」ではなく、<b>完成して使えるまで</b>の時間を測る</p><p class="l">下の数字はすべて、計算の仕方を示すための仮の数字です。</p></div>
+        <div class="ifm"><div class=""><p class="k">実行件数</p><p class="v">30<small>件／月</small></p></div><span class="op">×</span><span class="op">（</span><div class=""><p class="k">導入前の手作業</p><p class="v">60<small>分／件</small></p></div><span class="op">−</span><div class=""><p class="k">導入後の手作業</p><p class="v">20<small>分／件</small></p></div><span class="op">）</span><span class="op">−</span><div class=""><p class="k">保守・学習</p><p class="v">3<small>時間／月</small></p></div><span class="op">=</span><div class="tt"><p class="k">実現した削減工数</p><p class="v">17<small>時間／月</small></p></div></div>
+        <div class="grow ifb">
+          <div class="bc"><p class="h">導入後の時間には、確認と修正も含める</p><div class="br"><span class="l">導入前</span><div class="tr"><span class="gr" style="width:100%">人が作成 60分</span></div></div><div class="br"><span class="l">導入後</span><div class="tr"><span class="bl" style="width:8.333333333333332%">指示</span><span class="am" style="width:16.666666666666664%">確認</span><span class="am2" style="width:8.333333333333332%">修正</span></div></div><p class="n">導入後の20分は、AIへの指示5分、確認10分、修正5分の例です。待ち時間の短縮とは分けて記録します。</p></div>
+          <div class="mt"><div><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><div><p class="t">利用・定着</p><p class="d">対象者のうち、実務で使っている人の割合を見ます。利用回数だけでは改善を説明できません。</p></div></div><div><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><rect x="4" y="4" width="16" height="16"/><path d="M8.5 12.2l2.5 2.5 4.8-5"/></svg></span><div><p class="t">品質</p><p class="d">誤登録、手戻り、差し戻しの数を見ます。時間が減っても、訂正が増えていないかを確認します。</p></div></div><div><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M3 17.2l6-6 4 4 7.2-8"/><path d="M20.8 7.2v-4h-4"/></svg></span><div><p class="t">再配分した成果</p><p class="d">短縮した時間を何に使ったかを見ます。業務の結果まで記録します。</p></div></div></div>
+        </div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>効果の測り方</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">始める前の確認</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-35/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">試す前にそろえたい<b>15項目</b></p></div>
+        <div class="grow chk c3"><div><p class="gh"><span>A</span>業務</p><p class="ci">対象の業務を1つに絞った</p><p class="ci">月の件数と手作業の時間を記録した</p><p class="ci">業務の責任者を決めた</p><p class="ci">正解の例と失敗の例を集めた</p><p class="ci">進む判断の条件を決めた</p></div><div><p class="gh"><span>B</span>データ・権限</p><p class="ci">読ませる資料の最新版を確認した</p><p class="ci">資料の責任者と更新の手順を決めた</p><p class="ci">SharePointなどの過剰な共有を見直した</p><p class="ci">入力してよい情報の範囲を決めた</p><p class="ci">出力を人が確認する手順を決めた</p></div><div><p class="gh"><span>C</span>契約・運用</p><p class="ci">自社の契約で使える機能を確認した</p><p class="ci">利用者を決めて研修を用意した</p><p class="ci">フローやエージェントの所有者を決めた</p><p class="ci">副担当と変更の手順を決めた</p><p class="ci">効果を記録する形式を決めた</p></div></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>始める前の確認</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">Contact</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-35/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">どの業務から始めるか、<b>一緒に整理</b>します。</p><p class="l">バイテック法人AI研修では、Copilotの業務活用から、Copilot Studioによるエージェントの内製、Power Automateによる業務の自動化までを研修でご支援します。</p></div>
+        <div class="grow cards c3"><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span><p class="t">Copilot研修</p><p class="d">会議・メール・資料作成など、<b>日々の業務での使い方</b>を実際の操作に沿って学びます。</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span><p class="t">Copilot Studio研修</p><p class="d">社内データやPower Automateと連携する<b>エージェントの構築と運用</b>を学びます。</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M6 3l6 8 6-8M12 11v10M7.5 13h9M7.5 16.5h9"/></svg></span><p class="t">助成金の活用サポート</p><p class="d">人材開発支援助成金の対象となる研修の設計と、必要な情報をご案内します。<span class="ex">支給の可否は管轄労働局の審査で決まります</span></p></div></div>
+        <div class="ctab"><div><p class="t">まずは無料個別相談で、自社の課題をお聞かせください</p><p class="d">オンライン・約60分。どの業務から始めるか、研修内容と助成金の見込みまでご案内します。</p></div><span class="bt">無料個別相談を予約する ›</span></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>ご相談</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">Notes</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-35/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd" style="margin-top:4px"><p class="t" style="font-size:27px">ご留意事項・出典</p></div><div class="grow nts"><p class="nt">活用アイデアは当社の設計案で、導入実績ではありません。掲載の公開事例は近い領域の参考で、同じ機能の導入を示すものではありません。</p><p class="nt">効果の数字は計算の仕方を示す仮の数字です。効果を保証するものではありません。</p><p class="nt">製品の機能や条件は2026年10月時点の公式資料にもとづきます。契約やテナントの設定によって異なります。Microsoft 365 Copilotは現在、Microsoft Copilotに改称されています。公開事例や一部の公式資料には旧称が残っています。</p><p class="nt">難易度や段階は相対的な目安です。自社の契約、業務量、データの状態に合わせて見直してください。</p><p class="nt">社名・製品名は各社の商標または登録商標です。本資料はMicrosoftの公式資料ではありません。本資料の内容の無断転載・再配布はご遠慮ください。　発行：バイテック法人AI研修（2026年10月版）</p></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>ご留意事項・出典</figcaption></figure>
+  </div>
+<script>
+  // 事例ページ：補足の節（.vsec.sm）を、左右の列の高さが揃う方へ移す
+  document.querySelectorAll(".vdt").forEach(function (d) {
+    var l = d.querySelector(".vl"), r = d.querySelector(".vr"), sm = l.querySelectorAll(".vsec.sm");
+    if (!sm.length) return;
+    function need(c) { var n = 0; Array.prototype.forEach.call(c.children, function (e) { n += e.scrollHeight + 10; }); return n; }
+    var sh = 0; sm.forEach(function (e) { sh += e.scrollHeight + 10; });
+    d.classList.add("measure");
+    var L = need(l), R = need(r);
+    if (Math.max(L - sh, R + sh) < Math.max(L, R)) sm.forEach(function (e) { r.appendChild(e); });
+    d.classList.remove("measure");
+  });
+  // 事例ページ：列に余裕があるときは本文を一段大きくする（下に余白を残さない）
+  document.querySelectorAll(".vdt").forEach(function (d) {
+    [d.querySelector(".vl"), d.querySelector(".vr")].forEach(function (col) {
+      d.classList.add("measure"); var need = 0; Array.prototype.forEach.call(col.children, function (e) { need += e.scrollHeight; }); d.classList.remove("measure");
+      if (col.clientHeight - need > 90) col.classList.add("roomy");
+    });
+  });
+</script>
+</body>
+</html>

@@ -169,6 +169,118 @@ const DOCS: Record<string, { intro: string; items: { title: string; view: string
       { title: "AI人材育成計画の立て方", view: `${SITE}/documents/ebook-21`, pdf: `${SITE}/assets/docs/ebook-21.pdf` },
     ],
   },
+  "営業のAI・自動化アイデア10選": {
+    intro:
+      "営業の業務でMicrosoft 365 Copilot・Copilot Studio・Power Automateをどう使うかを、10のアイデアにまとめた資料です。始める順番、必要な製品、近い領域の公開事例6社、効果の測り方も掲載しています。",
+    items: [
+      { title: "営業のAI・自動化アイデア10選", view: `${SITE}/documents/ebook-22`, pdf: `${SITE}/assets/docs/ebook-22.pdf` },
+    ],
+  },
+  "総務のAI・自動化アイデア10選": {
+    intro:
+      "総務の業務でMicrosoft 365 Copilot・Copilot Studio・Power Automateをどう使うかを、10のアイデアにまとめた資料です。始める順番、必要な製品、近い領域の公開事例6社、効果の測り方も掲載しています。",
+    items: [
+      { title: "総務のAI・自動化アイデア10選", view: `${SITE}/documents/ebook-23`, pdf: `${SITE}/assets/docs/ebook-23.pdf` },
+    ],
+  },
+  "人事のAI・自動化アイデア10選": {
+    intro:
+      "人事の業務でMicrosoft 365 Copilot・Copilot Studio・Power Automateをどう使うかを、10のアイデアにまとめた資料です。始める順番、必要な製品、近い領域の公開事例6社、効果の測り方も掲載しています。",
+    items: [
+      { title: "人事のAI・自動化アイデア10選", view: `${SITE}/documents/ebook-25`, pdf: `${SITE}/assets/docs/ebook-25.pdf` },
+    ],
+  },
+  "マーケティング・広報のAI・自動化アイデア10選": {
+    intro:
+      "マーケティング・広報の業務でMicrosoft 365 Copilot・Copilot Studio・Power Automateをどう使うかを、10のアイデアにまとめた資料です。始める順番、必要な製品、近い領域の公開事例6社、効果の測り方も掲載しています。",
+    items: [
+      { title: "マーケティング・広報のAI・自動化アイデア10選", view: `${SITE}/documents/ebook-24`, pdf: `${SITE}/assets/docs/ebook-24.pdf` },
+    ],
+  },
+  "経理・財務のAI・自動化アイデア10選": {
+    intro:
+      "経理・財務の業務でMicrosoft 365 Copilot・Copilot Studio・Power Automateをどう使うかを、10のアイデアにまとめた資料です。始める順番、必要な製品、近い領域の公開事例6社、効果の測り方も掲載しています。",
+    items: [
+      { title: "経理・財務のAI・自動化アイデア10選", view: `${SITE}/documents/ebook-26`, pdf: `${SITE}/assets/docs/ebook-26.pdf` },
+    ],
+  },
+  "調達・法務のAI・自動化アイデア10選": {
+    intro:
+      "調達・法務の業務でMicrosoft 365 Copilot・Copilot Studio・Power Automateをどう使うかを、10のアイデアにまとめた資料です。始める順番、必要な製品、近い領域の公開事例6社、効果の測り方も掲載しています。",
+    items: [
+      { title: "調達・法務のAI・自動化アイデア10選", view: `${SITE}/documents/ebook-27`, pdf: `${SITE}/assets/docs/ebook-27.pdf` },
+    ],
+  },
+  "情報システムのAI・自動化アイデア10選": {
+    intro:
+      "情報システムの業務でMicrosoft 365 Copilot・Copilot Studio・Power Automateをどう使うかを、10のアイデアにまとめた資料です。始める順番、必要な製品、近い領域の公開事例6社、効果の測り方も掲載しています。",
+    items: [
+      { title: "情報システムのAI・自動化アイデア10選", view: `${SITE}/documents/ebook-28`, pdf: `${SITE}/assets/docs/ebook-28.pdf` },
+    ],
+  },
+  "製造・建設・物流のAI・自動化アイデア10選": {
+    intro:
+      "製造・建設・物流の業務でMicrosoft 365 Copilot・Copilot Studio・Power Automateをどう使うかを、10のアイデアにまとめた資料です。始める順番、必要な製品、近い領域の公開事例6社、効果の測り方も掲載しています。",
+    items: [
+      { title: "製造・建設・物流のAI・自動化アイデア10選", view: `${SITE}/documents/ebook-29`, pdf: `${SITE}/assets/docs/ebook-29.pdf` },
+    ],
+  },
+  "顧客サポートのAI・自動化アイデア10選": {
+    intro:
+      "顧客サポートの業務でMicrosoft 365 Copilot・Copilot Studio・Power Automateをどう使うかを、10のアイデアにまとめた資料です。始める順番、必要な製品、近い領域の公開事例6社、効果の測り方も掲載しています。",
+    items: [
+      { title: "顧客サポートのAI・自動化アイデア10選", view: `${SITE}/documents/ebook-30`, pdf: `${SITE}/assets/docs/ebook-30.pdf` },
+    ],
+  },
+  "経営企画のAI・自動化アイデア10選": {
+    intro:
+      "経営企画の業務でMicrosoft 365 Copilot・Copilot Studio・Power Automateをどう使うかを、10のアイデアにまとめた資料です。始める順番、必要な製品、近い領域の公開事例6社、効果の測り方も掲載しています。",
+    items: [
+      { title: "経営企画のAI・自動化アイデア10選", view: `${SITE}/documents/ebook-31`, pdf: `${SITE}/assets/docs/ebook-31.pdf` },
+    ],
+  },
+  "Copilot活用事例集": {
+    intro:
+      "Microsoft 365 Copilotの公開事例18件を、数字の根拠とあわせてまとめた資料です。国内6件、海外8件、英国の公的機関4件の取り組みと、定着に向けた進め方、効果の測り方を掲載しています。",
+    items: [
+      { title: "Copilot活用事例集", view: `${SITE}/documents/ebook-32`, pdf: `${SITE}/assets/docs/ebook-32.pdf` },
+    ],
+  },
+  "Copilot Studio活用事例集": {
+    intro:
+      "Copilot Studioの公開事例16件を、数字の根拠とあわせてまとめた資料です。国内5件、海外11件の取り組みと、共通する進め方、自己解決率の測り方を掲載しています。",
+    items: [
+      { title: "Copilot Studio活用事例集", view: `${SITE}/documents/ebook-33`, pdf: `${SITE}/assets/docs/ebook-33.pdf` },
+    ],
+  },
+  "Power Automate活用事例集": {
+    intro:
+      "Power AutomateとTeamsなど標準機能の公開事例16件を、数字の根拠とあわせてまとめた資料です。国内5件、海外7件、標準機能4件の取り組みと、削減工数の測り方を掲載しています。",
+    items: [
+      { title: "Power Automate活用事例集", view: `${SITE}/documents/ebook-34`, pdf: `${SITE}/assets/docs/ebook-34.pdf` },
+    ],
+  },
+  "Copilot導入の進め方と最初に選ぶ業務8選": {
+    intro:
+      "Copilotの導入を、どの業務から、どの順番で進めるかを整理した資料です。導入の4段階、最初に選ぶ8業務、効果の測り方、始める前の確認15項目を掲載しています。",
+    items: [
+      { title: "Copilot導入の進め方と最初に選ぶ業務8選", view: `${SITE}/documents/ebook-35`, pdf: `${SITE}/assets/docs/ebook-35.pdf` },
+    ],
+  },
+  "製品の使い分けとライセンス確認ガイド": {
+    intro:
+      "Copilot・Copilot Studio・Power Automateの選び方と、導入時に確認するライセンスと課金の条件を整理した資料です。データと運用の確認点、契約前に確かめる15項目を掲載しています。",
+    items: [
+      { title: "製品の使い分けとライセンス確認ガイド", view: `${SITE}/documents/ebook-36`, pdf: `${SITE}/assets/docs/ebook-36.pdf` },
+    ],
+  },
+  "Copilot効果測定ガイド": {
+    intro:
+      "公開された5つの評価の読み方と、自社で記録する8つの指標、削減工数の計算の仕方、記録シート、報告前の確認12項目をまとめた資料です。",
+    items: [
+      { title: "Copilot効果測定ガイド", view: `${SITE}/documents/ebook-37`, pdf: `${SITE}/assets/docs/ebook-37.pdf` },
+    ],
+  },
 };
 DOCS["お役立ち資料3点セット"] = {
   intro:

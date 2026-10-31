@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 640px; height: 996px; background: transparent; }
+  .bk { position: relative; width: 640px; height: 996px; border-radius: 18px; overflow: hidden; font-family: "Noto Sans JP", sans-serif; }
+  /* dark */
+  .dark { background: #0f2240; color: #fff; }
+  .dark .stripe { position: absolute; right: -120px; top: 120px; width: 520px; height: 70px; background: #f0b429; transform: rotate(-28deg); opacity: .95; }
+  .dark .stripe.b { top: 210px; right: -170px; background: #d6453d; height: 26px; }
+  .dark .tag { position: absolute; left: 48px; top: 54px; font-size: 15px; font-weight: 800; letter-spacing: .12em; color: #f0b429; }
+  .dark .tag::before { content: "■ "; }
+  .dark .ttl { position: absolute; left: 46px; top: 330px; right: 40px; font-size: 62px; font-weight: 900; line-height: 1.2; }
+  .dark .ttl em { font-style: normal; background: linear-gradient(transparent 62%, #d6453d 62%); }
+  .dark .ttl small { display: block; margin-top: 12px; font-size: 36px; color: #c9d8ee; }
+  .dark .lead { position: absolute; left: 48px; top: 270px; font-size: 20px; font-weight: 800; color: #f0b429; }
+  .dark .il { position: absolute; right: 30px; bottom: 150px; width: 300px; height: 300px; object-fit: contain; }
+  .dark .list { position: absolute; left: 48px; bottom: 190px; display: grid; gap: 12px; }
+  .dark .list span { font-size: 18px; font-weight: 800; border-left: 4px solid #f0b429; padding-left: 12px; }
+  .dark .ft { position: absolute; left: 0; right: 0; bottom: 0; height: 110px; border-top: 1px solid rgba(255,255,255,.2); display: flex; align-items: center; justify-content: space-between; padding: 0 48px; }
+  .dark .ft p { font-size: 15px; font-weight: 700; color: #c9d8ee; } .dark .ft img { height: 34px; }
+  /* grid */
+  .grid { background: #fff; }
+  .grid .top { position: absolute; left: 0; right: 0; top: 0; height: 330px; padding: 54px 48px 0; }
+  .grid .lead { font-size: 18px; font-weight: 800; color: #2b5fcf; letter-spacing: .04em; }
+  .grid .ttl { margin-top: 14px; font-size: 56px; font-weight: 900; color: #1a2330; line-height: 1.22; }
+  .grid .ttl em { font-style: normal; color: #2b5fcf; }
+  .grid .tiles { position: absolute; left: 48px; right: 48px; top: 360px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid .tiles div { background: #f2f6fc; border-radius: 16px; height: 190px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+  .grid .tiles img { width: 92px; height: 92px; object-fit: contain; }
+  .grid .tiles p { font-size: 17px; font-weight: 800; color: #1a2330; }
+  .grid .vs { position: absolute; left: 50%; top: 545px; transform: translate(-50%, -50%); width: 64px; height: 64px; border-radius: 50%; background: #f0b429; color: #1a2330; font-size: 20px; font-weight: 900; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 6px #fff; }
+  .grid .ft { position: absolute; left: 48px; right: 48px; bottom: 44px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .grid .ft span { background: #1a2e50; color: #fff; font-size: 15px; font-weight: 800; padding: 9px 18px; border-radius: 999px; }
+  /* split */
+  .split { background: #eaf3fb; }
+  .split .top { position: absolute; left: 0; right: 0; top: 0; height: 430px; background: linear-gradient(160deg, #1f6fc4, #2b5fcf 60%, #3a4fb8); color: #fff; padding: 56px 48px 0; clip-path: polygon(0 0, 100% 0, 100% 86%, 0 100%); }
+  .split .lead { display: inline-block; font-size: 16px; font-weight: 800; border: 1.5px solid rgba(255,255,255,.8); border-radius: 999px; padding: 6px 18px; }
+  .split .ttl { margin-top: 22px; font-size: 60px; font-weight: 900; line-height: 1.2; }
+  .split .ttl em { font-style: normal; color: #ffd75a; }
+  .split .il { position: absolute; left: 50%; bottom: 150px; transform: translateX(-50%); width: 430px; height: 410px; object-fit: cover; border-radius: 50%; border: 8px solid #fff; box-shadow: 0 10px 30px rgba(20,40,80,.15); }
+  .split .il.ct { object-fit: contain; background: #fff; padding: 34px; }
+  .split .steps { position: absolute; left: 32px; right: 32px; bottom: 44px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .split .steps div { background: #fff; border-radius: 12px; padding: 10px 6px; text-align: center; box-shadow: 0 4px 12px rgba(20,40,80,.08); }
+  .split .steps b { display: block; font-size: 11px; font-weight: 900; color: #2b5fcf; letter-spacing: .1em; }
+  .split .steps span { display: block; margin-top: 3px; font-size: 14px; font-weight: 800; color: #1a2330; }
+</style></head><body><div class="bk split"><div class="top"><p class="lead">部門別 活用アイデア集</p><p class="ttl"><em>製造・建設・物流</em>の<br>AI・自動化<br>アイデア10選</p></div>
+  <img class="il ct" src="assets/illus/cover.webp" alt="">
+  <div class="steps"><div><b>STEP 1</b><span>選ぶ</span></div><div><b>STEP 2</b><span>試す</span></div><div><b>STEP 3</b><span>つなぐ</span></div><div><b>STEP 4</b><span>広げる</span></div></div></div></body></html>
