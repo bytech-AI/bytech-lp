@@ -3890,41 +3890,76 @@ document.querySelectorAll(`.faq__q>div`).forEach(tar => {
         .gift-list{margin:14px 0 0;padding:12px 16px;border-radius:12px;background:#f5f8f8;list-style:none;text-align:left;font-size:13px;font-weight:700;line-height:1.9}
         .gift-list li::before{content:"✓ ";color:#00AC9B}
         .gift-modal .gift-btn{margin-top:18px;padding:14px 16px;font-size:16px}
+        .gift-modal__box{padding-top:0}
+        .gift-banner{position:relative;overflow:hidden;aspect-ratio:1024/688;margin:0 -28px;background:#04121f;border-radius:20px 20px 0 0;color:#fff;text-align:left}
+        .gift-banner__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+        .gift-banner__body{position:absolute;inset:0;display:flex;flex-direction:column;align-items:flex-start;padding:18px 20px}
+        .gift-banner__tag{padding:3px 10px;border-radius:9999px;background:#00AC9B;color:#fff;font-size:11px;font-weight:800;line-height:1.5}
+        .gift-banner__logo{display:inline-flex;align-items:center;gap:6px;margin-top:12px;color:#fff;font-size:18px;font-weight:700;letter-spacing:-.01em;line-height:1}
+        .gift-banner__logo img{width:22px;height:22px}
+        .gift-banner__ttl{display:flex;flex-direction:column;margin:8px 0 0;font-size:16px;font-weight:800;line-height:1.25}
+        .gift-banner__ttl b{color:#4fd8c8;font-size:clamp(56px,17vw,72px);font-weight:900;letter-spacing:-.01em;line-height:1.02;text-shadow:0 2px 14px rgba(0,20,40,.6)}
+        .gift-banner__ttl small{margin-left:2px;font-size:.42em}
+        .gift-banner__sub{font-size:15px}
+        .gift-slide{padding:0 0 16px;overflow:hidden}
+        .gift-slide .gift-banner{margin:0;border-radius:16px 16px 0 0}
+        .gift-slide .gift-banner__body{padding:14px 16px}
+        .gift-slide .gift-banner__logo{margin-top:9px;font-size:15px}
+        .gift-slide .gift-banner__logo img{width:18px;height:18px}
+        .gift-slide .gift-banner__ttl{margin-top:5px;font-size:13px}
+        .gift-slide .gift-banner__ttl b{font-size:46px}
+        .gift-slide .gift-banner__sub{font-size:12px}
+        .gift-slide .gift-btn{margin:14px 16px 0;font-size:15px!important}
+        .gift-slide .gift-close{z-index:2;top:8px;right:8px;background:rgba(255,255,255,.9);color:#071a3a}
+        .gift-modal .gift-close{z-index:2;top:10px;right:10px;background:rgba(255,255,255,.9);color:#071a3a}
+        .gift-btn--arrow{position:relative;padding:12px 44px 13px 16px!important;font-size:clamp(14px,4vw,16px)!important;white-space:nowrap}
+        .gift-btn--arrow small{font-size:10px}
+        .gift-btn--arrow i{position:absolute;top:50%;right:10px;display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:#fff;transform:translateY(-50%)}
+        .gift-btn--arrow svg{width:16px;height:16px;fill:none;stroke:#FF3410;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
         .gift-later{margin-top:10px;border:0;background:transparent;color:#64748b;font:inherit;font-size:13px;text-decoration:underline;cursor:pointer}
         @media (max-width:767px){
-            .gift-slide{left:12px;right:12px;bottom:calc(84px + env(safe-area-inset-bottom,0px));width:auto;max-width:none;padding:16px 16px 14px}
+            .gift-slide{display:none}
+            .gift-banner{margin:0 -20px}
+            .gift-list{font-size:clamp(11px,3.3vw,13px)}
             .gift-head{margin-top:8px}
             .gift-icon{width:44px;height:44px;font-size:24px}
             .gift-ttl{font-size:15px}
             .gift-txt{display:none}
             .gift-btn{margin-top:12px;padding:10px 14px;font-size:14px}
-            .gift-modal__box{padding:28px 20px 20px}
+            .gift-modal__box{padding:0 20px 20px}
             .gift-modal .gift-ttl{font-size:19px}
         }
         @media (prefers-reduced-motion:reduce){.gift-slide,.gift-modal,.gift-modal__box{transition:none}}
     </style>
     <aside class="gift-slide" id="giftSlide" aria-label="無料カウンセリング参加特典" aria-hidden="true">
         <button type="button" class="gift-close" data-gift-close aria-label="閉じる">×</button>
-        <span class="gift-badge">無料カウンセリング参加特典</span>
-        <div class="gift-head">
-            <span class="gift-icon" aria-hidden="true">🎁</span>
-            <p class="gift-ttl"><span class="gift-ttl__sub">ビジネス・副業で使える</span><em>Claude Skills 110選</em><span class="gift-nw">をプレゼント</span></p>
+        <div class="gift-banner">
+            <img class="gift-banner__bg" src="/geek-assets/gift-skills-bg.webp" width="1024" height="688" alt="" loading="lazy">
+            <div class="gift-banner__body">
+                <span class="gift-banner__tag">無料カウンセリング参加特典</span>
+                <span class="gift-banner__logo"><img src="/geek-assets/claude-logo.svg" width="22" height="22" alt="">Claude Code</span>
+                <p class="gift-banner__ttl"><span>Claude Skills</span><b>110<small>選</small></b><span class="gift-banner__sub">をプレゼント</span></p>
+            </div>
         </div>
-        <p class="gift-txt">仕事の6部門と副業の5ジャンルで、明日から使えるSkillを厳選。カウンセリング参加者全員にお渡しします。</p>
-        <a href="#counseling" class="gift-btn" data-gift-cta="slide"><small>完全無料・オンライン ／ 所要60分</small>予約して特典を受け取る</a>
+        <a href="#counseling" class="gift-btn gift-btn--arrow" data-gift-cta="slide"><small>完全無料 ／ 簡単30秒で予約完了</small>予約して特典を受け取る<i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8.5 7H17v8.5"/></svg></i></a>
     </aside>
     <div class="gift-modal" id="giftModal" role="dialog" aria-modal="true" aria-labelledby="giftModalTtl" aria-hidden="true">
         <div class="gift-modal__box" tabindex="-1">
             <button type="button" class="gift-close" data-gift-close aria-label="閉じる">×</button>
-            <span class="gift-badge">ちょっと待ってください！</span>
-            <span class="gift-icon" aria-hidden="true">🎁</span>
-            <p class="gift-ttl" id="giftModalTtl"><span class="gift-ttl__sub">無料カウンセリングのご予約で</span><em>Claude Skills 110選</em><br class="sp">をプレゼント</p>
+            <div class="gift-banner">
+                <img class="gift-banner__bg" src="/geek-assets/gift-skills-bg.webp" width="1024" height="688" alt="" loading="lazy">
+                <div class="gift-banner__body">
+                    <span class="gift-banner__tag">無料カウンセリング参加特典</span>
+                    <span class="gift-banner__logo"><img src="/geek-assets/claude-logo.svg" width="22" height="22" alt="">Claude Code</span>
+                    <p class="gift-banner__ttl" id="giftModalTtl"><span>Claude Skills</span><b>110<small>選</small></b><span class="gift-banner__sub">をプレゼント</span></p>
+                </div>
+            </div>
             <ul class="gift-list">
                 <li>ビジネス編：経理・営業・マーケなど6部門</li>
                 <li>副業編：デザイン・動画・広告など5ジャンル</li>
                 <li>各10個ずつ厳選・入れ方と注意点つき</li>
             </ul>
-            <a href="#counseling" class="gift-btn" data-gift-cta="exit"><small>完全無料・オンライン ／ 簡単30秒で予約完了</small>予約して特典を受け取る</a>
+            <a href="#counseling" class="gift-btn gift-btn--arrow" data-gift-cta="exit"><small>完全無料 ／ 簡単30秒で予約完了</small>予約して特典を受け取る<i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8.5 7H17v8.5"/></svg></i></a>
             <button type="button" class="gift-later" data-gift-close>今回は見送る</button>
         </div>
     </div>
@@ -3947,11 +3982,13 @@ document.querySelectorAll(`.faq__q>div`).forEach(tar => {
             slide.setAttribute('aria-hidden', on ? 'false' : 'true');
         }
         function showSlide() {
+            // SPは下からのポップアップを出さず、モーダルだけ
+            if (window.matchMedia('(max-width: 767px)').matches) { openModal(); return; }
             if (suppressed || slideShown || formInView || modal.classList.contains('is-visible')) return;
             slideShown = true; setSlide(true); track('gift_popup_show', { gift_popup: 'slide' });
         }
         function openModal() {
-            if (suppressed || modalShown || formInView) return;
+            if (suppressed || modalShown || formInView || document.querySelector('dialog[open]')) return;
             modalShown = true; sess('geekGiftModal', '1');
             setSlide(false);
             modal.classList.add('is-visible'); modal.setAttribute('aria-hidden', 'false');
@@ -4147,4 +4184,4 @@ document.querySelectorAll('.cs-input').forEach(function(input){input.addEventLis
   upd();
 })();
 </script>
-</body></html>
+<script>window.BT_APP_NAV={"items":[{"id":"top","label":"ホーム","icon":"home"},{"id":"course","label":"コース","icon":"book"},{"camp":true},{"id":"voice","label":"受講生の声","icon":"chat"},{"id":"price","label":"料金","icon":"yen"}],"startAfter":"#quick-reserve","endAt":"#faq","offset":70,"theme":{"--bn-accent":"#00ac9b","--bn-y":"#ff6a2b","--bn-z":"1400","--bn-btn":"linear-gradient(90deg,#ff5a2a,#ff3410)","--bn-btn-fg":"#fff","--bn-btn-shadow":"rgba(255,52,16,.35)","--bn-tag":"#00ac9b","--bn-tag-fg":"#fff","--bn-num":"#4fd8c8"},"css":".bn-nav{background:linear-gradient(135deg,rgba(255,255,255,.66),rgba(255,255,255,.46) 45%,rgba(255,255,255,.6))}.sp-fixcta{bottom:calc(70px + env(safe-area-inset-bottom,0px));padding:0 12px;opacity:0;visibility:hidden;transform:translateY(16px);transition:opacity .25s,transform .25s,visibility .25s}.sp-fixcta.is-visible{opacity:1;visibility:visible;transform:none}.sp-fixcta .cta__btn.cta2{padding:0;font-size:14px}.sp-fixcta .cta2__bubble,.sp-fixcta .cta2__free{display:none}.sp-fixcta .cta2__in{padding-top:0;animation:none}.sp-fixcta .cta2__body{min-height:40px;padding:0 34px}.sp-fixcta .cta2__main{font-size:14px}footer{padding-bottom:calc(122px + env(safe-area-inset-bottom,0px))}","campaign":{"amount":50000,"plans":"全プラン対象","period":"11/1(日)〜11/30(月)","periodLong":"2026年11月1日〜11月30日","end":"2026-11-30T23:59:59+09:00","bg":"/geek-assets/campaign-bg-2026-11.webp","cta":{"label":"無料カウンセリングを予約する","href":"#counseling"},"planId":"price"},"menu":{"trigger":".drawer-icon","logo":"/geek-assets/geek_logo_w2.svg","links":[{"label":"コース","en":"COURSE","href":"#course"},{"label":"料金","en":"PRICE","href":"#price"},{"label":"受講生実績","en":"RESULTS","href":"#results"},{"label":"受講生の声","en":"VOICE","href":"#voice"},{"label":"よくある質問","en":"FAQ","href":"#faq"},{"label":"記事一覧","en":"ARTICLES","href":"#blog"}],"coursesTitle":"もっと見る","coursesEn":"MORE","courses":[{"label":"Claude Code エンジニアコース","href":"/engineer-course"},{"label":"おすすめSkills","href":"/skills"}],"cta":{"sub":"完全無料・オンライン ／ 所要60分","label":"無料カウンセリングを予約する","href":"#counseling"},"sub":[{"label":"バイテックAIスクール","href":"https://bytech.jp/?utm_source=geek&utm_medium=referral&utm_campaign=geek_menu"},{"label":"法人AI研修","href":"https://biz.bytech.jp/"},{"label":"BLOG","href":"https://bytech.jp/blog"}],"css":".bn-menu{--bn-m-bg:radial-gradient(90% 50% at 100% 0,rgba(0,172,155,.62),transparent 70%),radial-gradient(80% 45% at 0 100%,rgba(255,52,16,.2),transparent 70%),#071a3a;--bn-m-head:#071a3a;--bn-m-num:#4fd8c8;--bn-m-go:#4fd8c8;--bn-m-cta:linear-gradient(90deg,#ff5a2a,#ff3410);--bn-m-cta-fg:#fff;--bn-m-cta-glow:rgba(255,52,16,.34);--bn-m-cta-arrow:#ff3410}.bn-m__logo{height:30px}.bn-m__list a{min-height:54px}"}}</script><script src="/_shared/app-nav.js?v=20261101" defer></script></body></html>
