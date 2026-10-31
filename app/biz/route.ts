@@ -3,6 +3,7 @@ import { join } from "node:path";
 import { getNews, newsPath } from "@/lib/microcms";
 import { COURSES } from "./_course/courses";
 import { getAllSeminars } from "./seminars/data";
+import { BIZ_SOURCE_SCRIPT } from "./_lib/sourceScript";
 export const runtime = "nodejs";
 export const revalidate = 300;
 
@@ -235,6 +236,8 @@ export async function GET() {
   );
   // 日本語ページなので言語をjaに（静的書き出しの既定enを修正）。
   html = html.replace('<html lang="en"', '<html lang="ja"');
+  // トップはlayoutを通らないので、資料DLの流入元メモをここで入れる。
+  html = html.replace("</head>", () => `<script>${BIZ_SOURCE_SCRIPT}</script></head>`);
   html = html.replaceAll(
     "/biz/assets/css/style.css",
     "/biz/assets/css/style.css?v=20260927",
