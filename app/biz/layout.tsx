@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./news/news.css";
+import { BIZ_SOURCE_SCRIPT } from "./_lib/sourceScript";
 
 const montserrat = localFont({
   src: [
@@ -146,6 +147,8 @@ export default function BizLayout({
   if('requestIdleCallback' in w){w.requestIdleCallback(loadGTM,{timeout:5000});}else{setTimeout(loadGTM,4000);}
 })(window,document);` }} />
       {/* End Google Tag Manager */}
+      {/* 資料DLの流入元メモ（next/scriptはNext16でinline評価が壊れるためネイティブ<script>） */}
+      <script dangerouslySetInnerHTML={{ __html: BIZ_SOURCE_SCRIPT }} />
       {children}
     </div>
   );

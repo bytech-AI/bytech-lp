@@ -556,6 +556,7 @@ export default function DocDownloadPage({ title, covers, desc, items, docName, c
             var form=document.querySelector('form.formrun');
             var val=function(n){var e=form&&form.querySelector('[name="'+n+'"]:checked,[name="'+n+'"]');return e?e.value:'';};
             var payload={'資料名':${JSON.stringify(docName)},'お名前':val('お名前'),'企業名':val('企業名'),'役職':val('役職'),'研修導入予定':val('研修導入予定'),'メールアドレス':val('メールアドレス'),'電話番号':val('電話番号'),'ページ':location.pathname};
+            if(window.btBizSource)Object.assign(payload,window.btBizSource());
             var body=new Blob([JSON.stringify(payload)],{type:'application/json'});
             if(!(navigator.sendBeacon&&navigator.sendBeacon('/api/doc-dl-notify',body)))
               fetch('/api/doc-dl-notify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload),keepalive:true}).catch(function(){});

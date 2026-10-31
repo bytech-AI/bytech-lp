@@ -189,6 +189,8 @@ const NOTIFY_FIELDS = [
   ["メールアドレス", "メール"],
   ["電話番号", "電話"],
   ["ページ", "ページ"],
+  ["流入元", "🔎 流入元"],
+  ["着地ページ", "着地ページ"],
 ] as const;
 
 const clip = (v: unknown) => String(v ?? "").slice(0, 200).trim();
@@ -299,7 +301,7 @@ async function notifyDiscord(data: Record<string, unknown>, screening: Screening
   ).map(([key, name]) => ({
     name,
     value: clip(data[key]),
-    inline: key !== "資料名" && key !== "ページ",
+    inline: !["資料名", "ページ", "流入元", "着地ページ"].includes(key),
   }));
   const replyText = replied ? "自動返信済み" : "**自動返信に失敗**（手動で資料をご案内ください）";
   const judge =
@@ -466,6 +468,7 @@ export async function POST(req: NextRequest) {
       reasons: screening.reasons.slice(0, 3),
       doc: clip(data["資料名"]),
       page: clip(data["ページ"]),
+      source: clip(data["流入元"]),
       domain: (clip(data["メールアドレス"]).split("@")[1] || ""),
     }),
   );
