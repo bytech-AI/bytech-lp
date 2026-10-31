@@ -102,21 +102,27 @@ const vizKpis = (kpis, tone) => {
   if (!kpis || !kpis.length) return "";
   const out = [];
   const tiles = [];
-  for (const k of kpis) {
+  // hero:true の指標を主役に固定する（%の指標がドーナツで先に立つのを防ぐ）
+  const forced = kpis.find((k) => k.hero);
+  for (const k of kpis.filter((x) => x !== forced)) {
     const v = String(k.value);
     const arrow = v.split(/→|->/);
     if (arrow.length === 2 && num(arrow[0]) !== null && num(arrow[1]) !== null) {
       out.push(`<div class="vk chart"><p class="k">${esc(k.label)}</p>${bars(num(arrow[0]), num(arrow[1]), "前", "後", k.unit, tone)}<p class="n">${esc(k.note)}</p></div>`);
-    } else if (/%|％/.test(k.unit + v) && num(v) !== null && num(v) <= 100 && out.filter((x) => x.includes("donut")).length < 1) {
+    } else if (/%|％/.test(k.unit + v) && num(v) !== null && num(v) <= 100 && !forced && out.filter((x) => x.includes("donut")).length < 1) {
       const rest = (k.unit || "").replace(/^[%％]/, "");
       out.push(`<div class="vk donut"><div class="dn">${donut(num(v), tone)}<span>${esc(String(num(v)))}<small>%</small></span></div><div><p class="k">${esc(k.label)}${rest ? `（${esc(rest)}）` : ""}</p><p class="n">${esc(k.note)}</p></div></div>`);
     } else tiles.push(k);
   }
-  const hero = tiles.length && !out.length ? tiles.shift() : null;
+  const hero = forced || (tiles.length && !out.length ? tiles.shift() : null);
   const heroHtml = hero ? `<div class="vk hero ${tone}"><p class="k">${esc(hero.label)}</p><p class="v">${esc(hero.value)}<small>${esc(hero.unit)}</small></p><p class="n">${esc(hero.note)}</p></div>` : "";
   const tileHtml = tiles.length ? `<div class="vt c${Math.min(tiles.length, 3)}">${tiles.slice(0, 3).map((k) => `<div><p class="k">${esc(k.label)}</p><p class="v">${esc(k.value)}<small>${esc(k.unit)}</small></p><p class="n">${esc(k.note)}</p></div>`).join("")}</div>` : "";
   return heroHtml + out.join("") + tileHtml;
 };
+
+// 活用アイデアの着手段階と、導入の負荷（1〜3）の表示
+const STAGE = { 1: "まず試す", 2: "部門で広げる", 3: "基幹とつなぐ" };
+const loadDots = (n) => `<span class="ld" aria-label="負荷${n}">${[1, 2, 3].map((i) => `<i${i <= n ? ' class="on"' : ""}></i>`).join("")}</span>`;
 
 // 事例の通し番号（caselist / case で共有）
 let caseNo = 0;
@@ -134,10 +140,11 @@ const R = {
         <div class="badge-row"><span class="badge">お役立ち資料</span><span class="badge-note">バイテック法人AI研修</span></div>
         <p class="sub">${esc(spec.cover_sub || spec.subtitle)}</p>
         <h1 class="title">${spec.cover_title_html}</h1>
-        ${spec.cover_pills ? `<div class="pills">${spec.cover_pills.map((t) => `<span>${esc(t)}</span>`).join("")}</div>` : ""}
+        ${spec.cover_pills ? `<div class="pills${spec.cover_illus ? " row" : ""}">${spec.cover_pills.map((t) => `<span>${esc(t)}</span>`).join("")}</div>` : ""}
+        ${spec.cover_illus ? `<div class="cvil"><img src="${spec.cover_illus}" alt=""></div>` : ""}
         <p class="date">UPDATE 2026.10</p>
         <img class="logo" src="assets/biz-logo-w.svg" alt="byTech BUSINESS">`,
-      "slide blue-bg kcover"
+      `slide blue-bg kcover${spec.cover_theme ? ` ${spec.cover_theme}` : ""}`
     ),
   toc: (s) =>
     shell(
@@ -160,7 +167,7 @@ const R = {
         s.eyebrow,
         `${head(s.title_html, s.lead)}
         <div class="grow cards c${s.cards.length}">${s.cards
-          .map((c) => `<div><span class="ic${c.logos ? " lg" : ""}">${c.logos ? c.logos.map((l) => `<img src="${l}" alt="">`).join("") : icon(c.icon, 22)}</span><p class="t">${esc(c.title)}</p><p class="d">${c.desc}</p>${c.tag ? `<p class="g">${esc(c.tag)}</p>` : ""}</div>`)
+          .map((c) => `<div>${c.illus ? `<img class="cil" src="${c.illus}" alt="">` : `<span class="ic${c.logos ? " lg" : ""}">${c.logos ? c.logos.map((l) => `<img src="${l}" alt="">`).join("") : icon(c.icon, 22)}</span>`}<p class="t">${esc(c.title)}</p><p class="d">${c.desc}</p>${c.tag ? `<p class="g">${esc(c.tag)}</p>` : ""}</div>`)
           .join("")}</div>${s.band ? `<div class="band">${s.band}</div>` : ""}`,
         s.foot
       )
@@ -295,6 +302,147 @@ ${s.rows
           .map((c) => `<div><span class="ic">${icon(c.icon, 22)}</span><p class="t">${esc(c.title)}</p><p class="d">${c.desc}</p></div>`)
           .join("")}</div>
         <div class="ctab"><div><p class="t">${esc(s.cta_title)}</p><p class="d">${esc(s.cta_desc)}</p></div><span class="bt">${esc(s.cta_button || "無料個別相談を予約する")} ›</span></div>`,
+        s.foot
+      )
+    ),
+  // 部門別の活用アイデア集：業務の流れに10件を並べた全体マップ
+  ideamap: (s) =>
+    shell(
+      s.caption || s.eyebrow,
+      body(
+        s.eyebrow,
+        `${head(s.title_html, s.lead)}
+        <div class="grow imap">${s.phases
+          .map(
+            (p) => `<div><p class="ph">${esc(p.title)}</p>${p.ideas
+              .map((i) => `<div class="ii"><span class="n">${esc(i.no)}${icon(i.icon, 19, 2)}</span><p class="t">${esc(i.name)}</p><p class="m"><span class="st s${i.stage}">${esc(STAGE[i.stage])}</span>${loadDots(i.load)}</p></div>`)
+              .join("")}</div>`
+          )
+          .join("")}</div>${s.band ? `<div class="band">${s.band}</div>` : ""}`,
+        s.foot
+      )
+    ),
+  // 部門別の活用アイデア集：着手の順番（3段階）
+  roadmap: (s) =>
+    shell(
+      s.caption || s.eyebrow,
+      body(
+        s.eyebrow,
+        `${head(s.title_html, s.lead)}
+        ${s.arrow ? `<div class="iar" style="grid-template-columns:repeat(${s.arrow.length},1fr)">${s.arrow.map((a) => `<span>${esc(a)}</span>`).join("")}</div>` : ""}
+        <div class="grow irm" style="grid-template-columns:repeat(${s.stages.length},1fr)">${s.stages
+          .map(
+            (g, i) => `<div class="c${g.stage ?? i + 1}"><p class="ph"><span>STEP ${i + 1}</span>${esc(STAGE[g.stage ?? i + 1])}</p><p class="d">${g.desc}</p><div class="ls${g.ideas.length > 5 ? " many" : ""}">${g.ideas.map((t) => `<p>${esc(t)}</p>`).join("")}</div><p class="nx"><b>次へ進む目安</b>${g.next}</p></div>`
+          )
+          .join("")}</div>${s.band ? `<div class="band">${s.band}</div>` : ""}`,
+        s.foot
+      )
+    ),
+  // 部門別の活用アイデア集：1アイデア1ページ
+  idea: (s) =>
+    shell(
+      `活用アイデア ${s.no} ${s.name}`,
+      body(
+        s.eyebrow,
+        `        <div class="ihd"><span class="no">${esc(s.no)}</span><div class="nm"><p class="t">${esc(s.name)}</p><p class="d">${esc(s.tagline)}</p></div><p class="m"><span class="st s${s.stage}">${esc(STAGE[s.stage])}</span><span class="lb">導入の負荷</span>${loadDots(s.load)}</p></div>
+        <div class="iba"><div class="bf"><p class="k">いま</p><p class="v">${s.before}</p></div><span class="ar"></span><div class="af"><p class="k">こう変える</p><p class="v">${s.after}</p></div><img class="il" src="${s.illus}" alt=""></div>
+        <div class="ifl"><p class="pd"><b>使う製品</b>${s.products.map((p) => `<span>${esc(p)}</span>`).join("")}<em><i class="h"></i>人の作業<i class="a"></i>AI・自動化</em></p><div class="fw">${s.flow
+          .map(([who, text]) => {
+            const human = who === "人";
+            return `<div class="${human ? "h" : "a"}"><span class="n">${icon(human ? "people" : who === "フロー" || who === "AI Builder" ? "gear" : "chat", 16, 2)}</span><p><small>${esc(who)}</small>${text}</p></div>`;
+          })
+          .join("")}</div></div>
+        <div class="grow igr">
+          <div class="rows">${[["必要なデータ", s.data], ["測る指標", s.kpi], ["始める前の確認", s.check]]
+            .map(([h, arr]) => `<div><p class="h">${esc(h)}</p><p class="v">${arr.map(esc).join("／")}</p></div>`)
+            .join("")}</div>
+          <div class="fs"><p class="h">${esc(s.first_title)}</p><p class="b">${s.first}</p></div>
+        </div>
+        ${s.case ? `<p class="icase"><b>近い領域の公開事例</b>${s.case}</p>` : ""}`,
+        s.foot
+      )
+    ),
+  // 製品の関係図：土台の上に3つの製品が載る
+  stack: (s) =>
+    shell(
+      s.caption || s.eyebrow,
+      body(
+        s.eyebrow,
+        `${head(s.title_html, s.lead)}
+        <div class="grow istk">
+          <div class="pl">${s.pillars
+            .map((p) => `<div><span class="ic">${icon(p.icon, 26)}</span><p class="ro">${esc(p.role)}</p><p class="t">${esc(p.title)}</p><p class="d">${p.desc}</p>${p.illus ? `<img class="il" src="${p.illus}" alt="">` : ""}<p class="ex"><b>${esc(s.ex_label || "営業では")}</b>${esc(p.example)}</p></div>`)
+            .join("")}</div>
+          <div class="fd"><span class="ic">${icon(s.base.icon, 26)}</span><div><p class="ro">${esc(s.base.role)}</p><p class="t">${esc(s.base.title)}</p></div><p class="d">${s.base.desc}</p></div>
+        </div>`,
+        s.foot
+      )
+    ),
+  // 公開事例：数字を主役にしたカード
+  numcards: (s) =>
+    shell(
+      s.caption || s.eyebrow,
+      body(
+        s.eyebrow,
+        `${head(s.title_html, s.lead)}
+        <div class="grow inum${s.tall ? " tall" : ""}">${s.items
+          .map((c) => {
+            const mx = c.bars ? Math.max(...c.bars.map((b) => b.v)) : 0;
+            return `<div><p class="co">${esc(c.name)}</p><p class="ac">${esc(c.action)}</p><p class="v">${esc(c.pre || "")}<b>${esc(c.value)}</b>${esc(c.unit)}</p>${
+              c.bars ? `<div class="bs">${c.bars.map((b, i) => `<p><span>${esc(b.l)}</span><i><u class="${i ? "on" : ""}" style="width:${(b.v / mx) * 100}%"></u></i><span>${esc(b.t)}</span></p>`).join("")}</div>` : ""
+            }<p class="n">${esc(c.note)}</p></div>`;
+          })
+          .join("")}</div>`,
+        s.foot
+      )
+    ),
+  // 効果測定：計算式と、導入後の時間の内訳
+  formula: (s) => {
+    const mx = Math.max(...s.bars.map((b) => b.parts.reduce((n, p) => n + p.v, 0)));
+    return shell(
+      s.caption || s.eyebrow,
+      body(
+        s.eyebrow,
+        `${head(s.title_html, s.lead)}
+        <div class="ifm">${s.formula
+          .map((x) => (x.op ? `<span class="op">${esc(x.op)}</span>` : `<div class="${x.total ? "tt" : ""}"><p class="k">${esc(x.label)}</p><p class="v">${esc(x.value)}<small>${esc(x.unit)}</small></p></div>`))
+          .join("")}</div>
+        <div class="grow ifb">
+          <div class="bc"><p class="h">${esc(s.bars_title)}</p>${s.bars
+            .map((b) => `<div class="br"><span class="l">${esc(b.label)}</span><div class="tr">${b.parts.map((p) => `<span class="${p.tone}" style="width:${(p.v / mx) * 100}%">${esc(p.t)}</span>`).join("")}</div></div>`)
+            .join("")}<p class="n">${s.bars_note}</p></div>
+          <div class="mt">${s.metrics.map((m) => `<div><span class="ic">${icon(m.icon, 20)}</span><div><p class="t">${esc(m.title)}</p><p class="d">${m.desc}</p></div></div>`).join("")}</div>
+        </div>`,
+        s.foot
+      )
+    );
+  },
+  // 導入前の確認：アイデア×製品の対応表＋確認項目
+  matrix: (s) =>
+    shell(
+      s.caption || s.eyebrow,
+      body(
+        s.eyebrow,
+        `${head(s.title_html, s.lead)}
+        <div class="grow imx">
+          <table><tr><th></th>${s.columns.map((c) => `<th>${c}</th>`).join("")}</tr>${s.rows
+            .map((r) => `<tr><td class="k"><b>${esc(r.no)}</b>${esc(r.name)}</td>${s.columns.map((_, i) => `<td>${r.on.includes(i) ? "<i></i>" : ""}</td>`).join("")}</tr>`)
+            .join("")}</table>
+          <div class="ck">${s.checks.map((c) => `<div><span class="ic">${icon(c.icon, 20)}</span><div><p class="t">${esc(c.title)}</p><p class="d">${c.desc}</p></div></div>`).join("")}</div>
+        </div>`,
+        s.foot
+      )
+    ),
+  // 進め方：右へ上がっていく階段
+  ladder: (s) =>
+    shell(
+      s.caption || s.eyebrow,
+      body(
+        s.eyebrow,
+        `${head(s.title_html, s.lead)}
+        <div class="grow ilad">${s.steps
+          .map((st, i) => `<div class="c${i + 1}"><p class="n">${String(i + 1).padStart(2, "0")}</p><span class="ic">${icon(st.icon, 24)}</span><p class="t">${esc(st.title)}</p><p class="d">${st.desc}</p>${st.example ? `<p class="eg">${esc(st.example)}</p>` : ""}<p class="nx"><b>次へ進む目安</b>${st.side}</p></div>`)
+          .join("")}</div>`,
         s.foot
       )
     ),
@@ -469,6 +617,152 @@ const css = `
   .cards .t { font-size: 17px; } .cards .d { font-size: 13.5px; line-height: 1.85; }
   .ctab { margin-top: 28px; padding: 26px 30px; }
   .steps > div { padding: 16px 20px; } .steps .t { font-size: 16.5px; } .steps .d { font-size: 13.5px; }
+  /* ===== 部門別の活用アイデア集 ===== */
+  .st { display: inline-block; font-size: 12px; font-weight: 800; padding: 4px 11px; border-radius: 999px; white-space: nowrap; }
+  .st.s1 { background: var(--amber); color: #4a3605; } .st.s2 { background: #dbe8f7; color: var(--blue-deep); } .st.s3 { background: var(--blue-deep); color: #fff; }
+  .ld { display: inline-flex; gap: 4px; align-items: center; }
+  .ld i { width: 10px; height: 10px; border-radius: 50%; background: #dfe5ee; } .ld i.on { background: var(--blue-bright); }
+  .imap { margin-top: 16px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .imap > div { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+  .imap .ph { background: var(--blue-deep); color: #fff; font-size: 16px; font-weight: 800; text-align: center; padding: 13px 18px 13px 8px; clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%); }
+  .imap .ii { flex: 1 1 0; border: 1.5px solid var(--line); border-top: 3px solid var(--blue); padding: 13px 14px; display: flex; flex-direction: column; background: #fff; }
+  .imap .ii .n { font-size: 15px; font-weight: 900; color: var(--blue-bright); }
+  .imap .ii .t { margin-top: 4px; font-size: 16px; font-weight: 900; color: #1a2330; line-height: 1.45; }
+  .imap .ii .m { margin-top: auto; padding-top: 8px; display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+  .irm { margin-top: 18px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .irm > div { border: 1.5px solid var(--line); display: flex; flex-direction: column; }
+  .irm .ph { padding: 15px 18px; font-size: 20px; font-weight: 900; display: flex; align-items: center; gap: 12px; }
+  .irm .ph span { font-size: 12px; font-weight: 800; letter-spacing: .08em; }
+  .irm .c1 .ph { background: var(--amber); color: #4a3605; } .irm .c2 .ph { background: #dbe8f7; color: var(--blue-deep); } .irm .c3 .ph { background: var(--blue-deep); color: #fff; }
+  .irm .d { padding: 15px 18px 0; font-size: 14px; font-weight: 500; color: #4a5568; line-height: 1.75; }
+  .irm .ls { padding: 12px 18px; flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-evenly; gap: 6px; }
+  .irm .ls p { font-size: 15.5px; font-weight: 800; color: #1a2330; padding: 7px 0; border-bottom: 1px solid var(--line); }
+  .irm .ls p:last-child { border-bottom: 0; }
+  .irm .ls.many { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; align-content: space-evenly; } .irm .ls.many p { font-size: 14.5px; padding: 8px 0; }
+  .irm .nx { margin: 0 18px 16px; padding: 11px 14px; background: var(--tint); font-size: 13px; font-weight: 600; color: #3a4252; line-height: 1.65; }
+  .irm .nx b { display: block; font-size: 12px; font-weight: 800; color: var(--blue); }
+  .ihd { margin-top: 8px; display: flex; align-items: center; gap: 16px; }
+  .ihd .no { flex: 0 0 auto; background: var(--blue-deep); color: #fff; font-size: 24px; font-weight: 800; padding: 9px 16px; }
+  .ihd .t { font-size: 26px; font-weight: 900; color: #1a2330; line-height: 1.3; }
+  .ihd .d { margin-top: 2px; font-size: 14px; font-weight: 700; color: #5a6578; }
+  .ihd .m { margin-left: auto; margin-right: 150px; display: flex; align-items: center; gap: 10px; }
+  .ihd .lb { margin-left: 6px; font-size: 12px; font-weight: 700; color: #6b7789; white-space: nowrap; }
+  .iba { margin-top: 8px; display: grid; grid-template-columns: 1fr 30px 1.16fr 228px; align-items: center; gap: 8px; }
+  .iba > div { align-self: stretch; padding: 12px 18px; display: flex; flex-direction: column; justify-content: center; }
+  .iba .bf { background: #f1f3f7; } .iba .af { background: var(--tint); border-left: 5px solid var(--blue-bright); }
+  .iba .k { font-size: 13px; font-weight: 800; color: #6b7789; } .iba .af .k { color: var(--blue-bright); }
+  .iba .v { margin-top: 4px; font-size: 17px; font-weight: 800; color: #1a2330; line-height: 1.55; } .iba .bf .v { color: #4a5568; font-weight: 700; }
+  .iba .ar { justify-self: center; width: 0; height: 0; border-left: 18px solid var(--blue-bright); border-top: 15px solid transparent; border-bottom: 15px solid transparent; }
+  .iba .il { width: 228px; height: 158px; object-fit: contain; }
+  .ifl { margin-top: 8px; }
+  .ifl .pd { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 800; color: var(--blue-deep); }
+  .ifl .pd b { margin-right: 4px; } .ifl .pd span { background: #fff; border: 1.5px solid #cfdcee; color: var(--blue); font-size: 13px; font-weight: 800; padding: 3px 12px; border-radius: 999px; }
+  .ifl .pd em { margin-left: auto; display: flex; align-items: center; gap: 6px; font-style: normal; font-size: 12.5px; font-weight: 700; color: #5a6578; }
+  .ifl .pd em i { width: 13px; height: 13px; } .ifl .pd em i.h { background: var(--amber); } .ifl .pd em i.a { margin-left: 10px; background: var(--blue); }
+  .ifl .fw { margin-top: 7px; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 4px; }
+  .ifl .fw > div { padding: 8px 28px 8px 13px; min-height: 72px; display: flex; align-items: center; gap: 10px; clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%); }
+  .ifl .fw > .a { background: var(--blue); color: #fff; } .ifl .fw > .h { background: #fde9b4; color: #3a2c05; }
+  .ifl .fw .n { flex: 0 0 auto; width: 32px; height: 32px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; }
+  .ifl .fw > .a .n { color: var(--blue); } .ifl .fw > .h .n { color: #a8780a; }
+  .ifl .fw p { font-size: 14.5px; font-weight: 800; line-height: 1.4; }
+  .ifl .fw small { display: block; font-size: 11.5px; font-weight: 800; opacity: .8; }
+  .igr { margin-top: 10px; display: grid; grid-template-columns: 1.08fr 1fr; gap: 12px; }
+  .igr .rows { display: grid; grid-auto-rows: 1fr; gap: 5px; min-height: 0; }
+  .igr .rows > div { display: grid; grid-template-columns: 124px 1fr; align-items: stretch; border: 1.5px solid var(--line); }
+  .igr .rows .h { display: flex; align-items: center; padding: 4px 11px; background: var(--tint); font-size: 13.5px; font-weight: 900; color: var(--blue-deep); }
+  .igr .rows .v { display: flex; align-items: center; padding: 4px 12px; font-size: 14px; font-weight: 700; color: #3a4252; line-height: 1.45; }
+  .igr .fs { display: flex; flex-direction: column; background: #fff9e8; border: 1.5px solid #f2d98d; padding: 9px 16px; min-height: 0; }
+  .igr .fs .h { font-size: 14px; font-weight: 900; color: #7a5a06; padding-bottom: 5px; border-bottom: 2px solid #f2d98d; }
+  .igr .fs .b { flex: 1 1 auto; display: flex; align-items: center; padding-top: 4px; font-size: 14.5px; font-weight: 600; color: #3a3320; line-height: 1.6; }
+  .cards .ex { display: block; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 14.5px; font-weight: 700; color: #3a4252; line-height: 1.9; }
+  table.kt b.big { font-size: 21px; font-weight: 900; }
+  /* 図解 */
+  .kcover .pills.row { right: auto; left: 66px; top: 500px; display: flex; }
+  .kcover.pan.teal { --pn: #e3f4f0; background: linear-gradient(135deg, #0a4f54 0%, #0f8078 100%) !important; }
+  .kcover.pan.violet { --pn: #ece8f8; background: linear-gradient(135deg, #2e2466 0%, #5a3fb0 100%) !important; }
+  .kcover.pan.amber { --pn: #fbeee2; background: linear-gradient(135deg, #7a2c10 0%, #c9601f 100%) !important; }
+  .kcover.pan.rose { --pn: #fbe9f1; background: linear-gradient(135deg, #6e1a44 0%, #b83a76 100%) !important; }
+  .kcover.pan .sub { font-size: 20px; }
+  .kcover.pan .cvil { width: 500px; right: 0; top: 0; height: 600px; border-radius: 0; background: var(--pn); }
+  .kcover.pan .cvil img { width: 464px; height: 400px; mix-blend-mode: multiply; }
+  .cvil { position: absolute; right: 44px; top: 96px; width: 450px; height: 450px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; }
+  .cvil img { width: 372px; height: 372px; object-fit: contain; }
+  .cards .cil { display: block; height: 182px; width: 100%; object-fit: contain; flex: 0 0 auto; }
+  .cards.grow:has(.cil) > div { padding: 12px 24px 14px; }
+  .cards:has(.cil) .t { margin-top: 8px; } .cards:has(.cil) .d { margin-top: 6px; font-size: 13.5px; line-height: 1.7; } .cards:has(.cil) .ex { margin-top: 9px; padding-top: 8px; font-size: 14px; line-height: 1.65; }
+  .cards:has(.cil) .g { margin-top: 8px; }
+  .imap .ii .n { display: flex; align-items: center; justify-content: space-between; }
+  .iar { margin-top: 14px; display: grid; grid-template-columns: repeat(3, 1fr); background: linear-gradient(90deg, #f7d778, #5a93d3 55%, #1a2e50); clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 50%, calc(100% - 22px) 100%, 0 100%); }
+  .iar span { padding: 8px 18px; font-size: 13.5px; font-weight: 800; color: #fff; text-align: center; } .iar span:first-child { color: #4a3605; }
+  .iar + .irm { margin-top: 12px; }
+  .istk { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .istk .pl { flex: 1 1 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; min-height: 0; }
+  .istk .pl > div { position: relative; border: 1.5px solid var(--line); border-top: 5px solid var(--blue); padding: 16px 20px; display: flex; flex-direction: column; }
+  .istk .ic { width: 50px; height: 50px; border-radius: 50%; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; }
+  .istk .pl .ic { position: absolute; top: 16px; right: 18px; }
+  .istk .ro { font-size: 13px; font-weight: 800; color: var(--blue-bright); }
+  .istk .t { margin-top: 3px; font-size: 21px; font-weight: 900; color: var(--blue-deep); line-height: 1.3; }
+  .istk .il { flex: 1 1 0; min-height: 0; width: 100%; object-fit: contain; margin: 8px 0; }
+  .istk .pl .d { margin-top: 10px; font-size: 14.5px; font-weight: 600; color: #4a5568; line-height: 1.75; }
+  .istk .d b { color: #1a2330; }
+  .istk .ex { margin-top: auto; background: var(--tint); padding: 10px 14px; font-size: 14px; font-weight: 800; color: #1a2330; line-height: 1.55; }
+  .istk .ex b { display: block; font-size: 12px; color: var(--blue); }
+  .istk .fd { flex: 0 0 auto; background: var(--blue-deep); color: #fff; padding: 15px 24px; display: flex; align-items: center; gap: 18px; }
+  .istk .fd .ic { flex: 0 0 auto; background: #fff; } .istk .fd .ro { color: #a9c8f0; } .istk .fd .t { color: #fff; white-space: nowrap; }
+  .istk .fd .d { margin-left: 26px; font-size: 14.5px; font-weight: 600; line-height: 1.7; color: #dbe6f4; } .istk .fd .d b { color: #fff; }
+  .inum { margin-top: 16px; display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 12px; }
+  .inum > div { border: 1.5px solid var(--line); border-top: 4px solid var(--blue); padding: 11px 16px; display: flex; flex-direction: column; min-height: 0; }
+  .inum .co { font-size: 15.5px; font-weight: 900; color: #1a2330; line-height: 1.35; }
+  .inum .ac { margin-top: 3px; font-size: 13.5px; font-weight: 600; color: #5a6578; line-height: 1.45; }
+  .inum .v { margin-top: 8px; font-size: 15px; font-weight: 800; color: #5a6578; } .inum .v b { font-size: 46px; font-weight: 900; color: var(--blue-bright); line-height: 1.15; margin: 0 3px; }
+  .inum .bs { margin-top: 4px; } .inum .bs p { display: grid; grid-template-columns: 36px 1fr 52px; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: #5a6578; }
+  .inum .bs i { height: 9px; background: #eef1f6; display: block; } .inum .bs u { display: block; height: 100%; background: #b9c7da; } .inum .bs u.on { background: var(--blue-bright); }
+  .inum .n { margin-top: auto; padding-top: 6px; font-size: 13px; font-weight: 600; color: #6b7789; line-height: 1.5; }
+  .inum.tall > div { display: flex; flex-direction: column; }
+  .inum.tall .bs { flex: 1; display: flex; flex-direction: column; justify-content: space-evenly; margin: 14px 0; }
+  .inum.tall .bs p { grid-template-columns: 44px 1fr 72px; font-size: 15px; font-weight: 700; }
+  .inum.tall .bs p span:last-child { font-size: 17px; text-align: right; }
+  .inum.tall .bs i { height: 30px; }
+  .inum.tall .bs u { height: 100%; }
+  .ifm { margin-top: 14px; display: flex; align-items: stretch; gap: 8px; }
+  .ifm > div { flex: 1 1 0; background: var(--tint); padding: 10px 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; }
+  .ifm .k { font-size: 12.5px; font-weight: 800; color: var(--blue); }
+  .ifm .v { margin-top: 2px; font-size: 25px; font-weight: 900; color: #1a2330; line-height: 1.2; } .ifm .v small { margin-left: 2px; font-size: 12px; font-weight: 800; color: #5a6578; }
+  .ifm .tt { flex: 1.3 1 0; background: var(--blue-deep); } .ifm .tt .k { color: #a9c8f0; } .ifm .tt .v { color: #fff; } .ifm .tt .v small { color: #dbe6f4; }
+  .ifm .op { align-self: center; font-size: 25px; font-weight: 900; color: var(--blue); }
+  .ifb { margin-top: 14px; display: grid; grid-template-columns: 1.15fr 1fr; gap: 14px; }
+  .ifb .bc { border: 1.5px solid var(--line); padding: 14px 18px; display: flex; flex-direction: column; justify-content: space-between; }
+  .ifb .h { font-size: 15px; font-weight: 900; color: var(--blue-deep); }
+  .ifb .br { display: grid; grid-template-columns: 66px 1fr; align-items: center; gap: 8px; }
+  .ifb .br .l { font-size: 13px; font-weight: 800; color: #3a4252; }
+  .ifb .tr { display: flex; height: 50px; }
+  .ifb .tr span { display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #fff; text-align: center; line-height: 1.25; border-right: 2px solid #fff; }
+  .ifb .tr .gr { background: #93a3b8; } .ifb .tr .bl { background: var(--blue); } .ifb .tr .am { background: var(--amber); color: #4a3605; } .ifb .tr .am2 { background: #f7d778; color: #4a3605; }
+  .ifb .n { font-size: 12.5px; font-weight: 600; color: #5a6578; line-height: 1.6; }
+  .ifb .mt, .imx .ck { display: grid; grid-auto-rows: 1fr; gap: 9px; min-height: 0; }
+  .ifb .mt > div, .imx .ck > div { border: 1.5px solid var(--line); padding: 9px 14px; display: flex; align-items: center; gap: 12px; }
+  .ifb .ic, .imx .ic { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; }
+  .ifb .t, .imx .ck .t { font-size: 15px; font-weight: 900; color: var(--blue-deep); }
+  .ifb .mt .d, .imx .ck .d { margin-top: 1px; font-size: 12.8px; font-weight: 600; color: #4a5568; line-height: 1.5; }
+  .imx { margin-top: 14px; display: grid; grid-template-columns: 1.45fr 1fr; gap: 16px; }
+  .imx table { width: 100%; height: 100%; border-collapse: collapse; }
+  .imx th { background: var(--blue-deep); color: #fff; font-size: 11.5px; font-weight: 800; padding: 6px 3px; line-height: 1.25; vertical-align: middle; }
+  .imx td { border-bottom: 1px solid var(--line); text-align: center; padding: 3px; }
+  .imx tr:nth-child(odd) td { background: #f7f9fc; }
+  .imx td.k { text-align: left; font-size: 13px; font-weight: 800; color: #1a2330; white-space: nowrap; padding-left: 10px; } .imx td.k b { margin-right: 8px; color: var(--blue-bright); }
+  .imx td i { display: inline-block; width: 15px; height: 15px; border-radius: 50%; background: var(--blue-bright); vertical-align: middle; }
+  .ilad { margin-top: 16px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; align-items: end; }
+  .ilad > div { position: relative; display: flex; flex-direction: column; padding: 16px 18px 14px; color: #fff; }
+  .ilad .c1 { height: 76%; background: #5a93d3; } .ilad .c2 { height: 84%; background: var(--blue); } .ilad .c3 { height: 92%; background: #24497e; } .ilad .c4 { height: 100%; background: var(--blue-deep); }
+  .ilad .n { font-size: 14px; font-weight: 900; opacity: .8; }
+  .ilad .ic { position: absolute; top: 14px; right: 14px; width: 44px; height: 44px; border-radius: 50%; background: #fff; color: var(--blue); display: flex; align-items: center; justify-content: center; }
+  .ilad .t { margin-top: 12px; font-size: 21px; font-weight: 900; }
+  .ilad .d { margin-top: 8px; font-size: 14.5px; font-weight: 600; line-height: 1.7; }
+  .ilad .eg { margin-top: 12px; padding: 9px 12px; border: 1.5px solid rgba(255,255,255,.55); font-size: 13.5px; font-weight: 700; line-height: 1.6; }
+  .ilad .nx { margin-top: auto; background: #fff; color: #1a2330; padding: 9px 12px; font-size: 13px; font-weight: 700; line-height: 1.5; }
+  .ilad .nx b { display: block; font-size: 11.5px; font-weight: 800; color: var(--blue); }
+  .icase { margin-top: 10px; margin-right: 60px; font-size: 13px; font-weight: 600; color: #4a5568; line-height: 1.5; }
+  .icase b { margin-right: 10px; font-size: 13px; font-weight: 800; color: var(--blue); }
 `;
 const headHtml = tpl
   .slice(0, tpl.indexOf("<body>"))
@@ -552,14 +846,37 @@ const head2 = `<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
   .split .lead { display: inline-block; font-size: 16px; font-weight: 800; border: 1.5px solid rgba(255,255,255,.8); border-radius: 999px; padding: 6px 18px; }
   .split .ttl { margin-top: 22px; font-size: 60px; font-weight: 900; line-height: 1.2; }
   .split .ttl em { font-style: normal; color: #ffd75a; }
+  /* 製品別事例集：濃色の見出し＋淡色の面に大きなイラスト＋黄色の帯。他カテゴリと被らないよう製品ごとに色を変える */
+  .bk.stat { background: var(--c3); color: #fff; }
+  .stat .top { position: absolute; top: 0; left: 0; right: 0; height: 336px; padding: 50px 46px 0; background: linear-gradient(120deg, var(--c1), var(--c2)); clip-path: ellipse(92% 100% at 50% 0); }
+  .stat .eb { font-size: 16px; font-weight: 800; letter-spacing: .08em; }
+  .stat .nm { margin-top: 12px; font-size: 88px; font-weight: 900; line-height: 1.05; color: #ffd75a; white-space: nowrap; }
+  .stat .tt { margin-top: 2px; font-size: 50px; font-weight: 900; line-height: 1.2; }
+  .stat .il { position: absolute; left: 16px; right: 16px; width: 608px; top: 330px; height: 426px; object-fit: contain; mix-blend-mode: multiply; }
+  .stat .ft { position: absolute; left: 0; right: 0; bottom: 0; height: 216px; padding: 0 44px; background: #ffd75a; color: var(--c1); display: flex; flex-direction: column; justify-content: center; }
+  .stat .big { display: flex; align-items: baseline; gap: 10px; font-size: 32px; font-weight: 900; }
+  .stat .big b { font-size: 92px; line-height: 1; letter-spacing: -.01em; }
+  .stat .seg { margin-top: 12px; display: flex; gap: 8px; }
+  .stat .seg div { flex: 1; padding: 7px 0; text-align: center; background: var(--c1); color: #fff; font-size: 17px; font-weight: 800; white-space: nowrap; }
+  .stat .note { margin-top: 10px; font-size: 14px; font-weight: 800; }
   .split .il { position: absolute; left: 50%; bottom: 150px; transform: translateX(-50%); width: 430px; height: 410px; object-fit: cover; border-radius: 50%; border: 8px solid #fff; box-shadow: 0 10px 30px rgba(20,40,80,.15); }
+  .split .il.ct { object-fit: contain; background: #fff; padding: 34px; }
   .split .steps { position: absolute; left: 32px; right: 32px; bottom: 44px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
   .split .steps div { background: #fff; border-radius: 12px; padding: 10px 6px; text-align: center; box-shadow: 0 4px 12px rgba(20,40,80,.08); }
   .split .steps b { display: block; font-size: 11px; font-weight: 900; color: #2b5fcf; letter-spacing: .1em; }
   .split .steps span { display: block; margin-top: 3px; font-size: 14px; font-weight: 800; color: #1a2330; }
 </style></head><body>`;
 let inner = "";
-if (bk.layout === "dark") {
+if (bk.layout === "stat") {
+  // 表紙の幅に1行で収まるよう、長い製品名は文字を小さくする
+  const nameSize = Math.min(88, Math.floor(540 / [...bk.name].reduce((w, c) => w + (c.charCodeAt(0) < 128 ? 0.58 : 1), 0)));
+  inner = `<div class="bk stat" style="--c1:${bk.colors[0]};--c2:${bk.colors[1]};--c3:${bk.colors[2]}">
+  <div class="top"><p class="eb">${esc(bk.tag)}</p><p class="nm" style="font-size:${nameSize}px">${esc(bk.name)}</p><p class="tt">${esc(bk.ttl)}</p></div>
+  <img class="il" src="${bk.illus}" alt="">
+  <div class="ft"><div class="big">${esc(bk.pre)}<b>${esc(bk.count)}</b>${esc(bk.unit)}</div>
+  <div class="seg">${bk.segments.map((s) => `<div>${esc(s.text ?? `${s.label} ${s.n}${bk.unit}`)}</div>`).join("")}</div>
+  <p class="note">全${spec.slides.length + 1}ページ・${esc(bk.foot)}</p></div></div>`;
+} else if (bk.layout === "dark") {
   inner = `<div class="bk dark"><div class="stripe"></div><div class="stripe b"></div>
   <p class="tag">${esc(bk.tag || "AI活用ノウハウ")}</p>
   <p class="lead">${esc(bk.lead || "")}</p>
@@ -574,7 +891,7 @@ if (bk.layout === "dark") {
   <div class="ft">${(bk.points || []).map((t) => `<span>${esc(t)}</span>`).join("")}</div></div>`;
 } else {
   inner = `<div class="bk split"><div class="top"><p class="lead">${esc(bk.lead || "")}</p><p class="ttl">${bk.title_html}</p></div>
-  <img class="il" src="${bk.illus || "assets/book-illus.jpg"}" alt="">
+  <img class="il${bk.illus_contain ? " ct" : ""}" src="${bk.illus || "assets/book-illus.jpg"}" alt="">
   <div class="steps">${(bk.steps || []).map((t, i) => `<div><b>STEP ${i + 1}</b><span>${esc(t)}</span></div>`).join("")}</div></div>`;
 }
 writeFileSync(join(dir, "cover.html"), `${head2}${inner}</body></html>`);

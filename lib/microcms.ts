@@ -110,6 +110,9 @@ export const CATEGORY_EN: Record<string, string> = {
   AI活用ノウハウ: "Knowledge",
   研修コース紹介: "Course",
   業種別事例集: "Cases",
+  "部門別 Copilot活用アイデア": "Ideas",
+  "製品別 活用事例集": "By Product",
+  "Copilot導入ガイド": "Guide",
 };
 
 export function docCategory(doc: MicroCmsDocument): string {

@@ -1,0 +1,173 @@
+[
+ {
+  "theme": "M365の既存機能",
+  "can": "Teams、SharePoint、Lists、Forms、Bookings等で入力・予約を電子化",
+  "check": "契約ごとのアプリ利用権、Teamsの有無、現場・外部利用者の条件",
+  "note": "既存契約の利用権を確認。M365のすべてのプランに全機能があるわけではない。",
+  "url": "https://learn.microsoft.com/en-us/microsoft-365/bookings/bookings-overview",
+  "status": "修正",
+  "change": "元URL(Scenario Library)はAI活用シナリオ集で各アプリの利用権の記載がないため、対象プランを列挙するBookings公式ページへ差し替え。Teamsを含まない契約の存在はcopilot-license-optionsで確認。Listsと現場・外部利用者の条件はプラン別に未照合。"
+ },
+ {
+  "theme": "Copilot Chatの区分",
+  "can": "Web調査、文章生成、アップロード資料の処理などから着手",
+  "check": "Copilot Chat(Basic)／M365 Copilot(Basic)／有償の別、テナント設定、対象データ",
+  "note": "Outlook内では対応する組織情報を参照する機能がある。全M365の広い組織横断検索とは範囲が異なる。",
+  "url": "https://learn.microsoft.com/en-us/copilot/overview",
+  "status": "修正",
+  "change": "「Basic／有償」の2区分を3区分に修正。公式の表示区分はCopilot Chat(Basic)、Microsoft 365 Copilot(Basic、アプリ内は標準アクセス)、Microsoft 365 Copilot(Premium/Pro、追加ライセンス)。"
+ },
+ {
+  "theme": "Microsoft Copilot（旧Microsoft 365 Copilot）",
+  "can": "会議・メール・ファイルをまたぐ情報整理とOfficeでの支援",
+  "check": "追加ライセンス、前提M365契約、300人以下はBusiness版、クライアント、利用ポリシー",
+  "note": "公式名はMicrosoft Copilotへ変更。E7は同梱。デバイス単位ライセンスは対象外。事例は当時の製品名を維持。",
+  "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/copilot-license-options",
+  "status": "修正",
+  "change": "公式の改称を反映（Microsoft 365 Copilot→Microsoft Copilot、microsoft-copilot-requirementsに明記）。ただしCopilot Studio等の文書には旧名が残る。Copilot Business(300ユーザーまで)、E7同梱、デバイス単位ライセンス対象外を追記。元URLはChat概要のためライセンス一覧へ変更。"
+ },
+ {
+  "theme": "簡易知識エージェント",
+  "can": "Agent Builder等で限定した資料から知識回答",
+  "check": "簡易機能で足りるか、データ・権限・公開範囲、未割当者の社内データ参照は従量課金",
+  "note": "東京建物の約500体は主にAgent Builder。Copilot Studioで作成した数としては扱わない。",
+  "url": "https://www.microsoft.com/ja-jp/customers/story/26555-tokyo-tatemono-microsoft-365",
+  "status": "修正",
+  "change": "事例の記述は一致。課金条件を追記: Copilot Chatのみの利用者は共有テナントデータ(SharePoint、コネクタ)参照がCopilot Credits従量課金（https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/cost-considerations）。"
+ },
+ {
+  "theme": "Copilot Studio",
+  "can": "対話・知識・業務ツール・フローを組み合わせる",
+  "check": "作成者権限、環境、ハーネス（実行方式）、接続、公開先、実行者のID",
+  "note": "方式で機能と課金が変わる。自然言語で作成できても接続・例外・テスト・運用の設計は必要。プレビューは本番対象と区別。",
+  "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-what-is-copilot-studio",
+  "status": "修正",
+  "change": "ハーネス3種（GitHub Copilot、Customer Conversation、標準）の選択が機能と課金に影響する点を追記。"
+ },
+ {
+  "theme": "Studioの利用料金",
+  "can": "Copilot Creditsによる容量・従量課金等を使う",
+  "check": "利用チャネル、実行主体、エージェントの方式、利用量",
+  "note": "有償Copilot利用者の認証済み社内利用は条件付きで無課金。自律実行等は課金。GitHub Copilot方式は作成時から課金。",
+  "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/requirements-messages-management",
+  "status": "修正",
+  "change": "GitHub Copilotハーネスは標準方式と課金が別で、作成・テスト段階から課金される点を追記（https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/billing-credit-overview）。無課金は標準方式の表の条件で、公正利用上限あり、Computer-Using Agentsは対象外。元の記述に誤りはなし。"
+ },
+ {
+  "theme": "Studio試用版",
+  "can": "作成してテストチャットで動作を確認",
+  "check": "公開権と本番用の課金・ライセンス設定",
+  "note": "試用版での作成・テストと、本番への公開は別条件。",
+  "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/billing-licensing",
+  "status": "一致",
+  "change": "修正なし。公式は試用ライセンスでは公開不可と明記。"
+ },
+ {
+  "theme": "Power Automate標準連携",
+  "can": "Forms・SharePoint・Teams等を使うクラウドフロー",
+  "check": "各コネクタの標準／Premium区分、実行タイプ",
+  "note": "標準コネクタのみならM365の権利で実装できる範囲がある。AI・SQL・HTTP・カスタム等を含む場合は別途確認。",
+  "url": "https://learn.microsoft.com/en-us/power-platform/admin/power-automate-licensing/faqs",
+  "status": "一致",
+  "change": "修正なし。"
+ },
+ {
+  "theme": "Premium・基幹連携",
+  "can": "SQL、ERP、カスタムAPI等へ接続",
+  "check": "自動／定期／手動トリガー、所有者・実行者・Process契約",
+  "note": "追加ライセンスが必要になりうる。自動・定期と手動で適用者が異なる。単一の共有アカウントで人数分の権利を代用しない。",
+  "url": "https://learn.microsoft.com/en-us/power-platform/admin/power-automate-licensing/faqs",
+  "status": "一致",
+  "change": "修正なし。自動・定期は所有者、手動は実行者全員がPremium、または当該フローにProcess。共有アカウント1本のPremiumは公式がマルチプレキシングと明記。"
+ },
+ {
+  "theme": "有人・無人RPA",
+  "can": "APIがない既存画面を操作",
+  "check": "Premium／Process等、マシン、資格情報、実行同時数",
+  "note": "個人のWindows内試行と、共有・クラウド起動・無人運用の利用権を区別。UI変更の保守負担を見積もる。",
+  "url": "https://learn.microsoft.com/en-us/power-platform/admin/power-automate-licensing/faqs",
+  "status": "一致",
+  "change": "修正なし。Processはフローとマシンのみの権利で、RPA開発者にはPremiumが別途必要。UI保守の記述は運用上の助言。"
+ },
+ {
+  "theme": "AI Builder・文書処理",
+  "can": "PDFや画像の項目を抽出",
+  "check": "課金はCopilot Credits中心。帳票形式、必須項目・型・重複、低信頼結果の確認工数",
+  "note": "2026年11月1日以降の新規・更新ライセンスに付属クレジットなし。Premium要否は公式2ページが矛盾し要確認。",
+  "url": "https://learn.microsoft.com/en-us/ai-builder/administer-licensing",
+  "status": "修正",
+  "change": "元URLは2021年のブログで現行の課金を確認できないため差し替え。AI Builderクレジットの段階的終了を反映（新規顧客はCopilot Credits購入）。未解決: administer-licensingは「AI Builderアクションを含むフローはPremium」、credit-managementは「Premiumフローにならない」と記載が矛盾。"
+ },
+ {
+  "theme": "Studioとフローの接続",
+  "can": "エージェントからフローをツールとして呼び出す",
+  "check": "対応トリガー・応答、公開、接続、呼出者の認証",
+  "note": "既存フローはエージェント用トリガー・応答への変更が必要。同期応答、100秒以内、ソリューション内が条件。課金区分も確認。",
+  "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/flow-modify-use-with-agent",
+  "status": "修正",
+  "change": "「そのまま呼べるとは限らない」を具体条件へ修正。元URLは概要の目次ページのため要件記載ページへ変更。Power AutomateのクラウドフローはPower Automateライセンス、エージェントフローはCopilot Creditsで課金が別。"
+ },
+ {
+  "theme": "知識の鮮度と構造",
+  "can": "SharePoint、Dataverse、Web等を知識ソースにする",
+  "check": "対応ソース、認証、サイズ・更新・接続条件",
+  "note": "資料の責任者・適用日・対象者を持たせる。複雑な規程は分割・条件確認・Q&A検索を併用。",
+  "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-copilot-studio",
+  "status": "一致",
+  "change": "修正なし。表記のみ Q\\&A→Q&A。補足の設計指針は公式の記載ではなく運用上の助言。"
+ },
+ {
+  "theme": "組織データのアクセス",
+  "can": "既存の閲覧権限に基づいて回答する",
+  "check": "SharePoint等の過剰共有、ラベル、外部共有",
+  "note": "Microsoft Copilotのプロンプト・応答・Graph参照データは基盤モデル学習に不使用。過剰共有の修正は必要。外部は別途確認。",
+  "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/microsoft-365-copilot-privacy",
+  "status": "修正",
+  "change": "製品名のみ現行名へ修正。内容は一致。公式は少なくとも閲覧権限を持つデータだけを表示すると記載。"
+ },
+ {
+  "theme": "取引を伴う操作",
+  "can": "承認・登録・変更などの業務を実行する",
+  "check": "呼出者と接続先の権限、確認、監査・再実行",
+  "note": "回答用と操作用の経路を設計し、確定値・承認・重複防止・失敗時の処理を定める。",
+  "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-flow",
+  "status": "一致",
+  "change": "修正なし。補足の設計指針は公式の記載ではなく運用上の助言。"
+ },
+ {
+  "theme": "外部顧客・Web公開",
+  "can": "顧客向けにエージェントを公開する",
+  "check": "公開知識と内部情報の分離、本人確認、有人経路",
+  "note": "事例は社内検証後に公開範囲を5%→50%→100%へ拡大。FAQ・個人別情報・予約変更で認証条件とテストを分ける（助言）。",
+  "url": "https://www.microsoft.com/en/customers/story/23524-holland-america-line-microsoft-copilot-studio",
+  "status": "修正",
+  "change": "事例原文に認証の記述がないため、該当部分を助言と明示し、原文にある段階公開を追記。3つの対応場面（新規予約、既存予約への追加、一般質問）は原文と一致。"
+ },
+ {
+  "theme": "運用の継続",
+  "can": "部署の改善を長く使えるようにする",
+  "check": "所有者・副担当・環境・接続・ログ・利用量",
+  "note": "所有者退職、資格情報失効、画面変更、容量超過を監視。フロー・エージェントの在庫と変更手順を管理。",
+  "url": "https://learn.microsoft.com/en-us/power-platform/admin/power-automate-licensing/faqs",
+  "status": "一致",
+  "change": "修正なし。公式では所有者不在のフローは性能低下のうえ、対応しなければ14日で停止。補足の設計指針は公式の記載ではなく運用上の助言。"
+ },
+ {
+  "theme": "本番前の評価",
+  "can": "代表質問・例外・操作を検証する",
+  "check": "正解セット、誤回答、回答不能、権限、失敗・再処理",
+  "note": "りそなの事例のように一般回答、過去Q&A、有人支援を段階的に使う。全件自己解決だけを目標にしない。",
+  "url": "https://www.microsoft.com/ja-jp/customers/story/26717-resona-holdings-microsoft-copilot-studio",
+  "status": "一致",
+  "change": "修正なし。表記のみ Q\\&A→Q&A。原文はiDeCoのエージェントの運用例。"
+ },
+ {
+  "theme": "Microsoft Research",
+  "can": "56社の6,000人超、6か月の実環境の無作為実験（MSR-TR-2025-18）",
+  "check": "利用者はメール読解が週30分（half an hour）減、文書完成が12%速い",
+  "note": "定期利用はnearly 40%。ベンダー研究。一部共著者のNBER論文は66社7,137人で値が異なり、混ぜない。",
+  "url": "https://www.microsoft.com/en-us/research/publication/early-impacts-of-m365-copilot/",
+  "status": "一致",
+  "change": "修正なし。公開ページの要旨で照合（本文PDFのSSRNは403で未確認）。論文は2025年4月公開。NBER w33795は要旨で66社7,137人、6か月実験の後半に利用者(処置群の80%)のメールが週2時間減。同一実験の更新版かは確認不可。"
+ }
+]

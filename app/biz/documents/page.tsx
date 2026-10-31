@@ -262,6 +262,166 @@ const STATIC_DOCS: { category: string; doc: DocItem }[] = [
       href: "/doc-q",
     },
   },
+  {
+    category: "製品別 活用事例集",
+    doc: {
+      title: "Copilot活用事例集",
+      points: ["国内6件・海外8件・英国の公的機関4件を1件1ページで解説", "申告・見込みなど、数字の性質を明記", "定着に向けた進め方と効果の測り方"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-32-cover.webp?v=20261031f",
+      href: "/doc-ag",
+    },
+  },
+  {
+    category: "製品別 活用事例集",
+    doc: {
+      title: "Copilot Studio活用事例集",
+      points: ["国内5件・海外11件を1件1ページで解説", "申告・見込みなど、数字の性質を明記", "始め方と自己解決率の測り方"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-33-cover.webp?v=20261031",
+      href: "/doc-ah",
+    },
+  },
+  {
+    category: "製品別 活用事例集",
+    doc: {
+      title: "Power Automate活用事例集",
+      points: ["国内5件・海外7件・標準機能4件を解説", "申告・見込みなど、数字の性質を明記", "始め方と削減工数の測り方"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-34-cover.webp?v=20261031",
+      href: "/doc-ai",
+    },
+  },
+  {
+    category: "部門別 Copilot活用アイデア",
+    doc: {
+      title: "営業のAI・自動化アイデア10選",
+      points: ["商談準備・提案書の初稿・受注連携など10件", "始める順番と、必要な製品の対応表つき", "公開事例6社と効果の測り方"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-22-cover.webp?v=20261031",
+      href: "/doc-w",
+    },
+  },
+  {
+    category: "部門別 Copilot活用アイデア",
+    doc: {
+      title: "総務のAI・自動化アイデア10選",
+      points: ["議事メモ・規程検索・申請受付など10件", "始める順番と、必要な製品の対応表つき", "公開事例6社と効果の測り方"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-23-cover.webp?v=20261031",
+      href: "/doc-x",
+    },
+  },
+  {
+    category: "部門別 Copilot活用アイデア",
+    doc: {
+      title: "人事のAI・自動化アイデア10選",
+      points: ["入社手続き・研修管理・FAQなど10件", "始める順番と、必要な製品の対応表つき", "公開事例6社と効果の測り方"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-25-cover.webp?v=20261031",
+      href: "/doc-y",
+    },
+  },
+  {
+    category: "部門別 Copilot活用アイデア",
+    doc: {
+      title: "マーケティング・広報のAI・自動化アイデア10選",
+      points: ["競合調査・媒体別の文案・実績報告など10件", "始める順番と、必要な製品の対応表つき", "公開事例6社と効果の測り方"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-24-cover.webp?v=20261031",
+      href: "/doc-z",
+    },
+  },
+  {
+    category: "部門別 Copilot活用アイデア",
+    doc: {
+      title: "経理・財務のAI・自動化アイデア10選",
+      points: ["請求書の受付・経費確認・月次締めなど10件", "始める順番と、必要な製品の対応表つき", "公開事例6社と効果の測り方"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-26-cover.webp?v=20261031",
+      href: "/doc-aa",
+    },
+  },
+  {
+    category: "部門別 Copilot活用アイデア",
+    doc: {
+      title: "調達・法務のAI・自動化アイデア10選",
+      points: ["契約書の要約・購買申請・監査証跡など10件", "始める順番と、必要な製品の対応表つき", "公開事例6社と効果の測り方"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-27-cover.webp?v=20261031",
+      href: "/doc-ab",
+    },
+  },
+  {
+    category: "部門別 Copilot活用アイデア",
+    doc: {
+      title: "情報システムのAI・自動化アイデア10選",
+      points: ["IT問い合わせ・アカウント・障害対応など10件", "始める順番と、必要な製品の対応表つき", "公開事例6社と効果の測り方"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-28-cover.webp?v=20261031",
+      href: "/doc-ac",
+    },
+  },
+  {
+    category: "部門別 Copilot活用アイデア",
+    doc: {
+      title: "製造・建設・物流のAI・自動化アイデア10選",
+      points: ["工程報告・日報集計・検査データ転記など10件", "始める順番と、必要な製品の対応表つき", "公開事例6社と効果の測り方"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-29-cover.webp?v=20261031",
+      href: "/doc-ad",
+    },
+  },
+  {
+    category: "部門別 Copilot活用アイデア",
+    doc: {
+      title: "顧客サポートのAI・自動化アイデア10選",
+      points: ["FAQ・回答案・応対履歴の要約など10件", "始める順番と、必要な製品の対応表つき", "公開事例6社と効果の測り方"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-30-cover.webp?v=20261031",
+      href: "/doc-ae",
+    },
+  },
+  {
+    category: "部門別 Copilot活用アイデア",
+    doc: {
+      title: "経営企画のAI・自動化アイデア10選",
+      points: ["経営会議資料・週次報告・効果測定など10件", "始める順番と、必要な製品の対応表つき", "公開事例6社と効果の測り方"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-31-cover.webp?v=20261031",
+      href: "/doc-af",
+    },
+  },
+  {
+    category: "Copilot導入ガイド",
+    doc: {
+      title: "Copilot導入の進め方と最初に選ぶ業務8選",
+      points: ["導入の4段階と、次へ進む判断", "最初に選ぶ8業務を1件1ページで解説", "始める前の確認15項目つき"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-35-cover.webp?v=20261031b",
+      href: "/doc-aj",
+    },
+  },
+  {
+    category: "Copilot導入ガイド",
+    doc: {
+      title: "製品の使い分けとライセンス確認ガイド",
+      points: ["4つの製品の関係と選び方", "課金とライセンスの確認点を整理", "契約前に確かめる15項目つき"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-36-cover.webp?v=20261031b",
+      href: "/doc-ak",
+    },
+  },
+  {
+    category: "Copilot導入ガイド",
+    doc: {
+      title: "Copilot効果測定ガイド",
+      points: ["公開された5つの評価の読み方", "自社で記録する8つの指標", "記録シートと報告前の確認12項目"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-37-cover.webp?v=20261031",
+      href: "/doc-al",
+    },
+  },
 ];
 
 // CMSにヒーローが無いときのフォールバック：3点セットDL訴求（/doc-a）。

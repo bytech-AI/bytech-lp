@@ -1,0 +1,458 @@
+{
+ "title": "製品の使い分けとライセンス確認ガイド",
+ "subtitle": "Copilot・Copilot Studio・Power Automateの選び方と、契約前に確かめること",
+ "edition": "2026年10月版",
+ "book": {
+  "layout": "stat",
+  "colors": [
+   "#6e1a44",
+   "#b83a76",
+   "#fbe9f1"
+  ],
+  "tag": "Copilot導入ガイド",
+  "name": "製品の使い分け",
+  "ttl": "ライセンス確認ガイド",
+  "illus": "assets/illus/cover-book.webp",
+  "pre": "契約前の確認",
+  "count": "15",
+  "unit": "項目",
+  "segments": [
+   {
+    "text": "製品の選び方"
+   },
+   {
+    "text": "課金の確認点"
+   },
+   {
+    "text": "2026年10月時点"
+   }
+  ],
+  "foot": "公式資料ベース・価格は記載なし"
+ },
+ "cover_sub": "Copilot・Copilot Studio・Power Automateの選び方",
+ "cover_pills": [
+  "製品の選び方",
+  "ライセンスの確認点",
+  "契約前の15項目"
+ ],
+ "cover_theme": "pan rose",
+ "cover_illus": "assets/illus/cover-book.webp",
+ "cover_title_html": "<small style=\"margin:-8px 0 0;line-height:1.15;font-size:32px\">製品の使い分けと</small>ライセンス<br>確認ガイド",
+ "book_title_html": "<b>製品の使い分け</b>と<br>ライセンス確認",
+ "category_label": "Copilot導入ガイド",
+ "book_pills": [
+  "製品の選び方",
+  "契約前の15項目"
+ ],
+ "slides": [
+  {
+   "type": "toc",
+   "items": [
+    {
+     "title": "製品の役割と選び方",
+     "desc": "4つの製品の関係",
+     "pages": "P.2 - 3"
+    },
+    {
+     "title": "製品ごとの確認事項",
+     "desc": "Copilot、Copilot Studio、Power Automate",
+     "pages": "P.4 - 6"
+    },
+    {
+     "title": "データと運用",
+     "desc": "資料、権限、体制",
+     "pages": "P.7 - 8"
+    },
+    {
+     "title": "契約前の確認",
+     "desc": "確かめる15項目",
+     "pages": "P.9"
+    }
+   ],
+   "foot": "2026年10月時点の公式資料をもとに整理しました。価格は記載していません。"
+  },
+  {
+   "type": "stack",
+   "eyebrow": "製品の役割",
+   "caption": "4つの製品の関係",
+   "title_html": "<b>Microsoft 365を土台</b>に、3つの製品を役割で使い分ける",
+   "lead": "それぞれ得意な作業が違います。名称はMicrosoft 365 CopilotからMicrosoft Copilotに変わっています。",
+   "ex_label": "例えば",
+   "pillars": [
+    {
+     "icon": "chat",
+     "role": "個人の作業を速くする",
+     "title": "Microsoft Copilot",
+     "desc": "<b>読む・探す・書く・会議を追う</b>。メールやファイルをまたいで整理します。",
+     "example": "議事録、文書の初稿、メール、社内情報の検索",
+     "illus": "assets/illus/product-copilot.webp"
+    },
+    {
+     "icon": "target",
+     "role": "チームの判断をそろえる",
+     "title": "Copilot Studio",
+     "desc": "<b>独自の業務エージェント</b>を作ります。知識と業務の手順を組み合わせます。",
+     "example": "FAQ、制度の照会、知識検索、処理の対話窓口",
+     "illus": "assets/illus/product-studio.webp"
+    },
+    {
+     "icon": "gear",
+     "role": "決まった手順を動かす",
+     "title": "Power Automate",
+     "desc": "<b>登録・通知・承認・転記</b>を実行します。標準連携から基幹連携まで広げられます。",
+     "example": "申請、督促、帳票、ERP連携、RPA",
+     "illus": "assets/illus/product-automate.webp"
+    }
+   ],
+   "base": {
+    "icon": "people",
+    "role": "資料と台帳を置く土台",
+    "title": "Microsoft 365",
+    "desc": "<b>Teams、SharePoint、Lists、Forms、Bookings</b>などで、入力・共有・共同編集・予約を行います。資料の置き場所と権限を整えることが、上の3つを使う前提になります。"
+   }
+  },
+  {
+   "type": "table",
+   "eyebrow": "製品の選び方",
+   "caption": "製品の選び方",
+   "title_html": "<b>やりたいこと</b>から製品を選ぶ",
+   "lead": "まず既存の契約で試せる範囲を確かめ、足りない部分だけ次の製品へ進みます。",
+   "header": [
+    "製品",
+    "主な使い方",
+    "着手する業務",
+    "考え方"
+   ],
+   "cols": [
+    230,
+    260,
+    320,
+    0
+   ],
+   "dense": "mid",
+   "rows": [
+    [
+     "Microsoft 365",
+     "入力・共有・共同編集・予約",
+     "入力フォーム、共同台帳、拠点連絡、予約",
+     "最初に既存契約の機能とアクセスを確認する"
+    ],
+    [
+     "Microsoft Copilot",
+     "読む・探す・書く・会議を追う",
+     "議事録、文書の初稿、メール、社内情報の検索",
+     "対象データ、利用者、出力の確認を明確にする"
+    ],
+    [
+     "Copilot Studio",
+     "独自の業務エージェントを作る",
+     "FAQ、制度の照会、知識検索、処理の対話窓口",
+     "知識の整備、認証、有人への経路、課金を確認する"
+    ],
+    [
+     "Power Automate",
+     "登録・通知・承認・転記を実行する",
+     "申請、督促、帳票、ERP連携、RPA",
+     "標準連携から、基幹・AI・無人RPAへ段階的に広げる"
+    ]
+   ]
+  },
+  {
+   "type": "table",
+   "eyebrow": "Copilotの確認事項",
+   "caption": "Copilotの確認事項",
+   "title_html": "<b>Copilot</b>は3つの区分を分けて確認する",
+   "lead": "Copilot Chat、Basic、有償の区分で、使える範囲が変わります。",
+   "header": [
+    "確認する項目",
+    "できること",
+    "導入時に確認すること",
+    "判断の補足"
+   ],
+   "cols": [
+    170,
+    290,
+    340,
+    0
+   ],
+   "dense": "mid",
+   "rows": [
+    [
+     "Microsoft 365の既存機能",
+     "Teams、SharePoint、Lists、Forms、Bookings等で入力・予約を電子化",
+     "契約ごとのアプリ利用権、Teamsの有無、現場・外部利用者の条件",
+     "既存契約の利用権を確認。Microsoft 365のすべてのプランに全機能があるわけではない。"
+    ],
+    [
+     "Copilot Chatの区分",
+     "Web調査、文章生成、アップロード資料の処理などから着手",
+     "Copilot Chat（Basic）、Microsoft 365 Copilot（Basic）、有償の別。テナント設定、対象データ",
+     "Outlook内では対応する組織情報を参照する機能がある。全Microsoft 365の広い組織横断検索とは範囲が異なる。"
+    ],
+    [
+     "Microsoft Copilot",
+     "会議・メール・ファイルをまたぐ情報整理とOfficeでの支援",
+     "追加ライセンス、前提のMicrosoft 365契約、300人以下はBusiness版、利用ポリシー",
+     "E7プランには同梱。デバイス単位のライセンスは対象外。事例では当時の製品名を残す場合がある。"
+    ],
+    [
+     "簡易知識エージェント",
+     "Agent Builder等で限定した資料から知識回答",
+     "簡易機能で足りるか、データ・権限・公開範囲、未割当者の社内データ参照は従量課金",
+     "簡易機能で足りるなら、Copilot Studioを使わない選択もある。"
+    ]
+   ],
+   "foot": "出典：Microsoft Learn（2026年10月に確認）/microsoft-365/bookings/bookings-overview、/copilot/overview、/microsoft-365/copilot/copilot-license-options"
+  },
+  {
+   "type": "table",
+   "eyebrow": "Copilot Studioの確認事項",
+   "caption": "Copilot Studioの確認事項",
+   "title_html": "<b>Copilot Studio</b>は実行方式で機能と課金が変わる",
+   "lead": "作る時の権限と、公開して使う時の条件を分けて確認します。",
+   "header": [
+    "確認する項目",
+    "できること",
+    "導入時に確認すること",
+    "判断の補足"
+   ],
+   "cols": [
+    170,
+    290,
+    340,
+    0
+   ],
+   "dense": "mid",
+   "rows": [
+    [
+     "Copilot Studio",
+     "対話・知識・業務ツール・フローを組み合わせる",
+     "作成者の権限、環境、実行方式、接続、公開先、実行者のID",
+     "方式で機能と課金が変わる。自然言語で作成できても接続・例外・テスト・運用の設計は必要。プレビューは本番対象と区別。"
+    ],
+    [
+     "Studioの利用料金",
+     "Copilot Creditsによる容量・従量課金等を使う",
+     "利用チャネル、実行主体、エージェントの方式、利用量",
+     "有償Copilot利用者の認証済み社内利用は条件付きで無課金。自律実行等は課金。GitHub Copilot方式は作成時から課金。"
+    ],
+    [
+     "Studio試用版",
+     "作成してテストチャットで動作を確認",
+     "公開権と本番用の課金・ライセンス設定",
+     "試用版での作成・テストと、本番への公開は別条件。"
+    ],
+    [
+     "Studioとフローの接続",
+     "エージェントからフローをツールとして呼び出す",
+     "対応トリガー・応答、公開、接続、呼出者の認証",
+     "既存フローはエージェント用トリガー・応答への変更が必要。同期応答、100秒以内、ソリューション内が条件。課金区分も確認。"
+    ]
+   ],
+   "foot": "出典：Microsoft Learn（2026年10月に確認）/microsoft-copilot-studio/fundamentals-what-is-copilot-studio、/microsoft-copilot-studio/requirements-messages-management、/microsoft-copilot-studio/billing-licensing、/microsoft-copilot-studio/flow-modify-use-with-agent"
+  },
+  {
+   "type": "table",
+   "eyebrow": "Power Automateの確認事項",
+   "caption": "Power Automateの確認事項",
+   "title_html": "<b>Power Automate</b>はコネクタとトリガーで条件が変わる",
+   "lead": "標準連携の範囲か、Premiumや追加容量が必要かを確認します。",
+   "header": [
+    "確認する項目",
+    "できること",
+    "導入時に確認すること",
+    "判断の補足"
+   ],
+   "cols": [
+    170,
+    290,
+    340,
+    0
+   ],
+   "dense": "mid",
+   "rows": [
+    [
+     "Power Automate標準連携",
+     "Forms・SharePoint・Teams等を使うクラウドフロー",
+     "各コネクタの標準／Premium区分、実行タイプ",
+     "標準コネクタのみならMicrosoft 365の権利で実装できる範囲がある。AI・SQL・HTTP・カスタム等を含む場合は別途確認。"
+    ],
+    [
+     "Premium・基幹連携",
+     "SQL、ERP、カスタムAPI等へ接続",
+     "自動／定期／手動トリガー、所有者・実行者・Process契約",
+     "追加ライセンスが必要になりうる。自動・定期と手動で適用者が異なる。単一の共有アカウントで人数分の権利を代用しない。"
+    ],
+    [
+     "有人・無人RPA",
+     "APIがない既存画面を操作",
+     "Premium／Process等、マシン、資格情報、実行同時数",
+     "個人のWindowsでの試行と、共有・クラウド起動・無人運用の権利は別。画面変更の保守負担も見積もる（当社の助言）。"
+    ],
+    [
+     "AI Builder・文書処理",
+     "PDFや画像の項目を抽出",
+     "課金はCopilot Credits中心。帳票形式、必須項目・型・重複、低信頼結果の確認工数",
+     "2026年11月1日以降の新規・更新ライセンスに付属クレジットなし。Premiumの要否は公式の2ページで記載が異なるため、契約前に要確認。"
+    ]
+   ],
+   "foot": "出典：Microsoft Learn（2026年10月に確認）/power-platform/admin/power-automate-licensing/faqs、/ai-builder/administer-licensing"
+  },
+  {
+   "type": "table",
+   "eyebrow": "データの確認事項",
+   "caption": "データの確認事項",
+   "title_html": "回答の質は<b>資料と権限</b>で決まる",
+   "lead": "製品の設定より先に、読ませる資料と見せる範囲を整えます。",
+   "header": [
+    "確認する項目",
+    "できること",
+    "導入時に確認すること",
+    "判断の補足"
+   ],
+   "cols": [
+    170,
+    290,
+    340,
+    0
+   ],
+   "dense": "mid",
+   "rows": [
+    [
+     "知識の鮮度と構造",
+     "SharePoint、Dataverse、Web等を知識ソースにする",
+     "対応ソース、認証、サイズ・更新・接続条件",
+     "資料の責任者・適用日・対象者を持たせる。複雑な規程は分割・条件確認・Q&A検索を併用。"
+    ],
+    [
+     "組織データのアクセス",
+     "既存の閲覧権限に基づいて回答する",
+     "SharePoint等の過剰共有、ラベル、外部共有",
+     "Microsoft Copilotのプロンプト・応答・Graph参照データは基盤モデル学習に不使用。過剰共有の修正は必要。外部は別途確認。"
+    ],
+    [
+     "外部顧客・Web公開",
+     "顧客向けにエージェントを公開する",
+     "公開知識と内部情報の分離、本人確認、有人経路",
+     "事例は社内検証後に公開範囲を5%→50%→100%へ拡大。FAQ・個人別情報・予約変更で認証条件とテストを分ける（助言）。"
+    ]
+   ],
+   "foot": "出典：Microsoft Learn（2026年10月に確認）/microsoft-copilot-studio/knowledge-copilot-studio、/microsoft-365/copilot/microsoft-365-copilot-privacy"
+  },
+  {
+   "type": "table",
+   "eyebrow": "運用の確認事項",
+   "caption": "運用の確認事項",
+   "title_html": "公開後も<b>止まらない体制</b>を決めておく",
+   "lead": "担当者の退職や画面の変更でも止まらないように、所有者と手順を決めます。",
+   "header": [
+    "確認する項目",
+    "できること",
+    "導入時に確認すること",
+    "判断の補足"
+   ],
+   "cols": [
+    170,
+    290,
+    340,
+    0
+   ],
+   "dense": "mid",
+   "rows": [
+    [
+     "取引を伴う操作",
+     "承認・登録・変更などの業務を実行する",
+     "呼出者と接続先の権限、確認、監査・再実行",
+     "回答用と操作用の経路を設計し、確定値・承認・重複防止・失敗時の処理を定める。"
+    ],
+    [
+     "運用の継続",
+     "部署の改善を長く使えるようにする",
+     "所有者・副担当・環境・接続・ログ・利用量",
+     "公式では、所有者のいないフローは対応しないと14日で停止する。所有者の退職、資格情報の失効、容量の超過を監視する。"
+    ],
+    [
+     "本番前の評価",
+     "代表質問・例外・操作を検証する",
+     "正解セット、誤回答、回答不能、権限、失敗・再処理",
+     "りそなの事例のように一般回答、過去Q&A、有人支援を段階的に使う。全件自己解決だけを目標にしない。"
+    ]
+   ],
+   "foot": "出典：Microsoft Learn（2026年10月に確認）/microsoft-copilot-studio/advanced-flow、/power-platform/admin/power-automate-licensing/faqs"
+  },
+  {
+   "type": "checklist",
+   "eyebrow": "契約前の確認",
+   "caption": "契約前の確認",
+   "title_html": "契約前に確かめる<b>15項目</b>",
+   "groups": [
+    {
+     "title": "契約",
+     "items": [
+      "現在のMicrosoft 365プランを確認した",
+      "Teamsを含む契約かを確認した",
+      "Copilotの対象人数と版を決めた",
+      "現場・外部利用者の条件を確認した",
+      "Premiumの要否を確認した"
+     ]
+    },
+    {
+     "title": "製品の条件",
+     "items": [
+      "コネクタの標準／Premiumを確認した",
+      "トリガーと所有者・実行者を確認した",
+      "Copilot Studioの実行方式を決めた",
+      "課金の単位と想定の利用量を出した",
+      "試用版と本番の条件の差を確認した"
+     ]
+    },
+    {
+     "title": "データ・運用",
+     "items": [
+      "過剰な共有を見直した",
+      "読ませる資料の責任者を決めた",
+      "所有者と副担当を決めた",
+      "接続、ログ、利用量の確認担当を決めた",
+      "公開前に試す質問と例外を用意した"
+     ]
+    }
+   ]
+  },
+  {
+   "type": "cta",
+   "caption": "ご相談",
+   "title_html": "どの業務から始めるか、<b>一緒に整理</b>します。",
+   "lead": "バイテック法人AI研修では、Copilotの業務活用から、Copilot Studioによるエージェントの内製、Power Automateによる業務の自動化までを研修でご支援します。",
+   "cards": [
+    {
+     "icon": "chat",
+     "title": "Copilot研修",
+     "desc": "会議・メール・資料作成など、<b>日々の業務での使い方</b>を実際の操作に沿って学びます。"
+    },
+    {
+     "icon": "target",
+     "title": "Copilot Studio研修",
+     "desc": "社内データやPower Automateと連携する<b>エージェントの構築と運用</b>を学びます。"
+    },
+    {
+     "icon": "yen",
+     "title": "助成金の活用サポート",
+     "desc": "人材開発支援助成金の対象となる研修の設計と、必要な情報をご案内します。<span class=\"ex\">支給の可否は管轄労働局の審査で決まります</span>"
+    }
+   ],
+   "cta_title": "まずは無料個別相談で、自社の課題をお聞かせください",
+   "cta_desc": "オンライン・約60分。どの業務から始めるか、研修内容と助成金の見込みまでご案内します。"
+  },
+  {
+   "type": "notes",
+   "items": [
+    "2026年10月に確認した公式資料をもとに整理しました。機能やライセンスは、利用チャネル、実行主体、契約、テナントの設定で異なり、変更される場合があります。",
+    "価格は記載していません。契約の判断は、Microsoftまたは販売代理店の最新の案内をご確認ください。",
+    "Microsoft 365 Copilotは現在、Microsoft Copilotに改称されています。公開事例や一部の公式資料には旧称が残っています。",
+    "AI Builderを含むフローのPremiumの要否は、公式資料の間で記載が異なるため、本資料では断定していません。",
+    "知識の設計、取引を伴う操作、運用の継続、RPAの保守に関する補足は、公式の記載ではなく当社の助言です。",
+    "社名・製品名は各社の商標または登録商標です。本資料はMicrosoftの公式資料ではありません。本資料の内容の無断転載・再配布はご遠慮ください。　発行：バイテック法人AI研修（2026年10月版）"
+   ]
+  }
+ ]
+}

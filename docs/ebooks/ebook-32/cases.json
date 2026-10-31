@@ -1,0 +1,1571 @@
+[
+ {
+  "id": "C01",
+  "verified": true,
+  "country": "日本",
+  "evidence": "利用者の申告",
+  "sheet_diff": "シートの「2026年6月の有償利用者580人」は誤り。原文は「ライセンスを付与された職員は580名」。「イベント資料作成」は原文ではPowerPointでのイベント会場レイアウト作成の報告。",
+  "type": "case",
+  "eyebrow": "国内の事例",
+  "icon": "people",
+  "name": "日本自動車連盟（JAF）",
+  "tagline": "講習修了者へ順次ライセンスを付与し、定着を図る",
+  "tags": [
+   "団体・サービス",
+   "580名にライセンス付与"
+  ],
+  "sections": [
+   {
+    "h": "使い方",
+    "items": [
+     "<b>業務マニュアル</b>を読み込ませ、調べる時間と理解する時間を短縮",
+     "<b>Teamsの書き込み</b>から依頼事項と締切を抽出し、スケジュール管理に活用",
+     "通常数十分の<b>会場レイアウト作成</b>を3分で作成、との職員の報告"
+    ]
+   },
+   {
+    "h": "進め方",
+    "items": [
+     "<b>約20人の試験導入</b>で、職員に広げる使い方を判断",
+     "<b>パイロット養成講習</b>の修了者へ順次ライセンスを付与",
+     "<b>DXアワードCopilot部門</b>と事例共有会で使い方を全国へ展開"
+    ]
+   }
+  ],
+  "kpis": [
+   {
+    "label": "業務時間削減効果（月あたり平均）",
+    "value": "11.8",
+    "unit": "時間",
+    "note": "2026年2月・講習受講者の調査"
+   },
+   {
+    "label": "2時間以上の削減効果を得た職員",
+    "value": "95.5",
+    "unit": "%",
+    "note": "同調査・全職員の値ではない"
+   },
+   {
+    "label": "満足度",
+    "value": "90",
+    "unit": "%超",
+    "note": "同調査"
+   },
+   {
+    "label": "ライセンスを付与された職員",
+    "value": "580",
+    "unit": "名",
+    "note": "2026年6月時点"
+   }
+  ],
+  "side": [],
+  "learn_title": "中堅企業が取り入れるなら（当社の見解）",
+  "learn": [
+   {
+    "title": "修了を利用条件に",
+    "desc": "講習の修了をライセンス付与の条件にして、使える状態を確認してから配る形なら少人数でも始めやすい。"
+   },
+   {
+    "title": "自社業務で演習する",
+    "desc": "一般的な紹介で終えず、自社の資料作成や報告整理を題材にして、効果を実感できる研修に組み立てる。"
+   },
+   {
+    "title": "社内発表の場を作る",
+    "desc": "職員同士で使い方を紹介する場を定期的に設け、推進側が想定していない使い方を社内に広げていく。"
+   }
+  ],
+  "source_full": "Microsoft「綿密な検証と独自の育成プログラムで Microsoft 365 Copilot 活用を定着化。JAF が進める生成 AI 活用による業務変革」（2026年8月3日）",
+  "foot_note": "数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。",
+  "urls": [
+   "https://www.microsoft.com/ja-jp/customers/story/26963-japan-automobile-federation-microsoft-365"
+  ],
+  "list_action": "講習修了者へ順次付与し、実務の題材で研修",
+  "list_result_html": "月平均<b>11.8時間</b>削減（講習受講者の調査）",
+  "uses": [
+   "検索",
+   "文書",
+   "資料作成",
+   "会議"
+  ]
+ },
+ {
+  "id": "C02",
+  "verified": true,
+  "country": "日本",
+  "evidence": "見込み・試算",
+  "sheet_diff": "シートの「約7割」は原文では「300人中7割」。300人はアンケートの母数で、PoCの規模は440ライセンス。削減時間は原文「平均約5時間/月」で、値は「約5」。",
+  "type": "case",
+  "eyebrow": "国内の事例",
+  "icon": "search",
+  "name": "JCB",
+  "tagline": "PoCの調査を根拠に440から1,600ライセンスへ拡大",
+  "tags": [
+   "金融",
+   "1,600ライセンスへ拡大"
+  ],
+  "sections": [
+   {
+    "h": "使い方",
+    "items": [
+     "<b>議事録・要約・内容把握</b>など会議関連が時間削減の用途で首位",
+     "<b>社内情報の収集・検索</b>が2位。関連情報や社内用語も検索",
+     "<b>メール要約</b>が5位。1人当たり6.7回/月の利用"
+    ]
+   },
+   {
+    "h": "進め方",
+    "items": [
+     "<b>440ライセンス</b>を約70の全部署に行き渡るよう配分してPoC",
+     "<b>勉強会動画と確認小テスト</b>の受講を利用者に必須化",
+     "Teamsで<b>週次Tips</b>を配信。社長も活用を薦めるメッセージを発信"
+    ]
+   }
+  ],
+  "kpis": [
+   {
+    "label": "1人当たり平均の削減効果",
+    "value": "約5",
+    "unit": "時間/月",
+    "note": "2024年PoCの調査に基づく期待値"
+   },
+   {
+    "label": "情報収集・検索の時間が減ったと回答",
+    "value": "7",
+    "unit": "割",
+    "note": "同PoCのアンケート・300人中"
+   },
+   {
+    "label": "上位5用途の合計",
+    "value": "約6",
+    "unit": "時間/月",
+    "note": "2025年1月の調査・1人平均の期待値"
+   },
+   {
+    "label": "月間利用率",
+    "value": "83",
+    "unit": "%",
+    "note": "2025年3月現在・半年間平均"
+   }
+  ],
+  "side": [],
+  "learn_title": "中堅企業が取り入れるなら（当社の見解）",
+  "learn": [
+   {
+    "title": "拡大の基準を決める",
+    "desc": "ライセンス費に見合う削減時間の線を先に決めておき、試行の結果と比べて拡大するかを判断する。"
+   },
+   {
+    "title": "全部署で試行する",
+    "desc": "少ない枠でも全部署に行き渡るよう配り、役職や職種、年齢が重ならないよう現場に人選を依頼する。"
+   },
+   {
+    "title": "毎週Tipsを届ける",
+    "desc": "業務で使えるプロンプトをチャットで週1回配信し、忙しい社員にも使うきっかけを定期的につくる。"
+   }
+  ],
+  "source_full": "Microsoft「業務変革に取り組む JCB。Microsoft 365 Copilot の利用率を高め、業務効率化、生産性を大幅に向上」（2025年5月22日）",
+  "foot_note": "数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。",
+  "urls": [
+   "https://www.microsoft.com/ja-jp/customers/story/23634-jcb-co-ltd-microsoft-365-copilot"
+  ],
+  "list_action": "PoC後に440から1,600ライセンスへ拡大",
+  "list_result_html": "平均約<b>5時間/月</b>の削減見込み（PoC調査）",
+  "uses": [
+   "会議",
+   "検索",
+   "メール",
+   "翻訳",
+   "データ分析"
+  ]
+ },
+ {
+  "id": "C03",
+  "verified": true,
+  "country": "日本",
+  "evidence": "利用者の申告",
+  "sheet_diff": "シートの「交代勤務への引継ぎ」は原文にない表現。原文は、交代勤務のある製造部門の班長が昼間の会議の要約を夜勤時に確認する用途。",
+  "type": "case",
+  "eyebrow": "国内の事例",
+  "icon": "gear",
+  "name": "デンソー",
+  "tagline": "300人の先行利用から3段階で本社3万人へ展開",
+  "tags": [
+   "製造・自動車",
+   "300人で先行利用"
+  ],
+  "sections": [
+   {
+    "h": "使い方",
+    "items": [
+     "<b>Teamsの会議要約</b>で欠席した会議の内容を把握",
+     "交代勤務の班長が<b>昼間の会議の要約</b>を夜勤時に確認",
+     "設計部門が<b>過去の設計情報</b>を対話形式で探し、要約も取得"
+    ]
+   },
+   {
+    "h": "進め方",
+    "items": [
+     "<b>300人、6,000人、30,000人</b>の3ステップで展開",
+     "<b>プロンプトと回答例</b>を載せた利用事例集を提供",
+     "効果測定レポートを<b>3カ月に1回</b>の本部長会議へ提出"
+    ]
+   }
+  ],
+  "kpis": [
+   {
+    "label": "1人当たり月の削減時間",
+    "value": "12",
+    "unit": "時間",
+    "note": "2023年10月〜先行300人・アンケート"
+   },
+   {
+    "label": "先行利用の人数",
+    "value": "300",
+    "unit": "人",
+    "note": "2023年10月・IT部門と有志"
+   },
+   {
+    "label": "第2ステップの人数",
+    "value": "6,000",
+    "unit": "人",
+    "note": "2024年4月・部門長と選出社員"
+   },
+   {
+    "label": "本格導入を決断した対象",
+    "value": "30,000",
+    "unit": "人",
+    "note": "2024年7月決断・本社"
+   }
+  ],
+  "side": [],
+  "learn_title": "中堅企業が取り入れるなら（当社の見解）",
+  "learn": [
+   {
+    "title": "部門長から使い始める",
+    "desc": "実行力のある部門長が先に使い、自らの意識を変えることで部門全体への浸透を図る進め方を取り入れる。"
+   },
+   {
+    "title": "例文をすぐ使える形に",
+    "desc": "プロンプトと回答例をコピーして使える形で配り、まず体験してから自分用に変えて習熟してもらう。"
+   },
+   {
+    "title": "経営会議で効果報告",
+    "desc": "アンケートの効果測定を定期的に経営層の会議へ報告し、部署ごとの利用状況を話題にできるようにする。"
+   }
+  ],
+  "source_full": "Microsoft「デンソー、Microsoft 365 Copilot 導入で社員の余力創出と品質向上を実現」（2024年12月3日）",
+  "foot_note": "数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。",
+  "urls": [
+   "https://www.microsoft.com/ja-jp/customers/story/19426-denso-corporation-microsoft-365-copilot"
+  ],
+  "list_action": "300人から3段階で本社3万人へ展開",
+  "list_result_html": "<b>月12時間</b>削減（先行300人・1人あたり）",
+  "uses": [
+   "会議",
+   "検索",
+   "翻訳",
+   "文書"
+  ]
+ },
+ {
+  "id": "C05",
+  "verified": true,
+  "country": "日本",
+  "evidence": "推定（算出方法あり）",
+  "sheet_diff": "シートの「算定法は発表にない」はMicrosoft発表に限った話。住友商事公式に算出方法の注記あり。値は原文「約12億円」で24年12月時点。実支出の削減額とする記述は原文になし。",
+  "type": "case",
+  "eyebrow": "国内の事例",
+  "icon": "company",
+  "name": "住友商事",
+  "tagline": "約9,000人が一斉利用し、社内の推進役が活用を広げる",
+  "tags": [
+   "商社",
+   "約9,000人で一斉利用"
+  ],
+  "sections": [
+   {
+    "h": "使い方",
+    "items": [
+     "<b>メール要約</b>、会議のまとめ、壁打ちなどの日常業務",
+     "<b>投資先分析や財務分析</b>など高度な利用シナリオ",
+     "森林資源事業ユニットで<b>契約書の比較</b>や決算書の分析に活用"
+    ]
+   },
+   {
+    "h": "進め方",
+    "items": [
+     "海外グループ会社を含む<b>約9,000人</b>が2024年4月に一斉利用開始",
+     "意欲的な社員が<b>Copilot Champion</b>に手を挙げ活用事例を発信",
+     "約50名のユニットで<b>全員必須の基礎編</b>と自由参加の応用編を実施"
+    ]
+   }
+  ],
+  "kpis": [
+   {
+    "label": "コスト削減効果",
+    "value": "約12",
+    "unit": "億円/年",
+    "note": "24年12月時点・アンケートから算出"
+   },
+   {
+    "label": "業務時間の削減効果",
+    "value": "約1",
+    "unit": "万時間/月",
+    "note": "24年12月時点・アンケートから算出"
+   },
+   {
+    "label": "月間アクティブユーザー",
+    "value": "約90",
+    "unit": "%",
+    "note": "25年10月現在"
+   },
+   {
+    "label": "一斉利用を開始した人数",
+    "value": "約9,000",
+    "unit": "人",
+    "note": "2024年4月・海外グループ会社含む"
+   }
+  ],
+  "side": [],
+  "learn_title": "中堅企業が取り入れるなら（当社の見解）",
+  "learn": [
+   {
+    "title": "算定式を明示する",
+    "desc": "削減時間と回数、人件費を掛ける式のように算出方法を社内で揃え、金額の根拠を説明できるようにする。"
+   },
+   {
+    "title": "推進役を手挙げで",
+    "desc": "意欲のある社員に推進役として手を挙げてもらい、現場の活用事例を発信する役割を担ってもらう。"
+   },
+   {
+    "title": "部署単位で研修する",
+    "desc": "全員必須の基礎編と自由参加の応用編を分け、部署内で活用方法を話し合う場を設けて底上げを図る。"
+   }
+  ],
+  "source_full": "住友商事「コスト削減効果は年間約12億。住商の「生成AI活用」最前線」（2025年11月4日）／Microsoft「日本の経済成長を AI で加速する」（2025年3月27日）",
+  "foot_note": "数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。",
+  "urls": [
+   "https://www.sumitomocorp.com/ja/jp/enrich/contents/0095",
+   "https://news.microsoft.com/ja-jp/features/250327-accelerating-japans-economic-growth-with-ai/",
+   "https://www.sumitomocorp.com/-/media/Files/hq/ir/explain/irday/20251218-Scripts.pdf?sc_lang=ja"
+  ],
+  "list_action": "全社導入し、推進役と研修で活用を拡大",
+  "list_result_html": "年間約<b>12億円</b>（アンケートと人件費で算出）",
+  "uses": [
+   "メール",
+   "会議",
+   "文書",
+   "データ分析"
+  ]
+ },
+ {
+  "id": "C06",
+  "verified": true,
+  "country": "日本",
+  "evidence": "規模・件数",
+  "sheet_diff": "シートの「実演」は原文になく、AIRが調査業務を一時的に請け負う施策。2025年6月はリサーチツール登場の時期で、施策の実施日は明記なし。シート未記載の44%・20億円はCopilot以外のAIサービスを含む。",
+  "type": "case",
+  "eyebrow": "国内の事例",
+  "icon": "doc",
+  "name": "INPEX",
+  "tagline": "調査依頼の代行を機に650から1,450ライセンスへ",
+  "tags": [
+   "エネルギー",
+   "1,450ライセンス"
+  ],
+  "sections": [
+   {
+    "h": "使い方",
+    "items": [
+     "<b>リサーチツール</b>でレポート作成や市場分析の依頼を処理",
+     "<b>社内規程や国内法令</b>を照会するAIエージェントを社内で共有",
+     "AIエージェント<b>バーチャル経営会議</b>で論点整理と想定質問を生成"
+    ]
+   },
+   {
+    "h": "進め方",
+    "items": [
+     "タスクフォース<b>AIR</b>がリサーチ業務を一時的に請け負う施策を実施",
+     "<b>ショート動画</b>を過去2年間で100本以上イントラネットに投稿",
+     "Copilot Studioの<b>高度な機能</b>は申請制にして管理"
+    ]
+   }
+  ],
+  "kpis": [
+   {
+    "label": "集まった調査依頼",
+    "value": "130",
+    "unit": "件ほど",
+    "note": "早いものは当日、遅くとも翌日に返却"
+   },
+   {
+    "label": "有償ライセンス",
+    "value": "1,450",
+    "unit": "",
+    "note": "2025年初頭は650・2026年5月公表"
+   },
+   {
+    "label": "業務時間削減",
+    "value": "44",
+    "unit": "%",
+    "note": "導入約1年後の実感調査・他AI含む"
+   },
+   {
+    "label": "金額換算の効果",
+    "value": "20",
+    "unit": "億円以上/年",
+    "note": "同社試算・他AI含む"
+   }
+  ],
+  "side": [],
+  "learn_title": "中堅企業が取り入れるなら（当社の見解）",
+  "learn": [
+   {
+    "title": "実依頼で効果を見せる",
+    "desc": "説明会より先に社員の実際の依頼を短期間で処理し、速さと内容を見せて利用の関心を引き出す。"
+   },
+   {
+    "title": "短い動画で周知する",
+    "desc": "長いセミナーで社員を拘束せず、隙間時間に見られる短い動画を社内で撮影して定期的に投稿する。"
+   },
+   {
+    "title": "作成権限を分ける",
+    "desc": "簡単なエージェント作成は個人に勧め、外部接続や自動化など管理が要る機能は申請制で分けて扱う。"
+   }
+  ],
+  "source_full": "Microsoft「INPEX が Microsoft 365 Copilot と Copilot Studio で AI活用基盤を構築、AIエージェントをフル活用し業務プロセス変革を目指す」（2026年5月28日）",
+  "foot_note": "数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。44%と20億円はCopilot以外のAIサービスの活用も含む結果です。",
+  "urls": [
+   "https://www.microsoft.com/ja-jp/customers/story/26549-inpex-corporation-microsoft-365-copilot"
+  ],
+  "list_action": "AI推進チームが調査依頼をリサーチツールで処理",
+  "list_result_html": "<b>130件</b>ほどを当日から翌日に返却",
+  "uses": [
+   "調査",
+   "エージェント"
+  ]
+ },
+ {
+  "id": "C07",
+  "verified": true,
+  "country": "日本",
+  "evidence": "規模・件数",
+  "sheet_diff": "",
+  "type": "case",
+  "eyebrow": "国内の事例",
+  "icon": "people",
+  "name": "東京建物",
+  "tagline": "教えすぎず、現場が約500体のエージェントを作成",
+  "tags": [
+   "不動産",
+   "全社展開（2025年5月完了）"
+  ],
+  "sections": [
+   {
+    "h": "使い方",
+    "items": [
+     "Teamsで<b>議事メモのたたき台</b>作成、要点整理、翻訳",
+     "<b>マニュアル</b>や過去の議事録を読み込ませて検索",
+     "人事部の規程参照エージェントを<b>全社公開</b>へ発展"
+    ]
+   },
+   {
+    "h": "進め方",
+    "items": [
+     "効果を示しやすい<b>議事メモ</b>を軸に先行部門でPoC",
+     "確実に使われる機能に絞り<b>教えすぎず</b>周知",
+     "現場には簡易な<b>Agent Builder</b>だけを周知"
+    ]
+   }
+  ],
+  "kpis": [
+   {
+    "label": "現場作成のエージェント",
+    "value": "約500",
+    "unit": "体",
+    "note": "全社展開から1年弱・製品別内訳なし"
+   },
+   {
+    "label": "月間アクティブ率",
+    "value": "約80",
+    "unit": "%",
+    "note": "平均値・月により90%超"
+   },
+   {
+    "label": "業務効率化に寄与と回答",
+    "value": "70",
+    "unit": "%以上",
+    "note": "全社アンケート・時点の記載なし"
+   }
+  ],
+  "side": [],
+  "learn_title": "中堅企業が取り入れるなら（当社の見解）",
+  "learn": [
+   {
+    "title": "最初は議事メモから",
+    "desc": "録音するだけで使える業務に絞ると、現場の手間を増やさずに効果を社内へ示しやすい。"
+   },
+   {
+    "title": "教える機能を絞る",
+    "desc": "全機能を教えず確実に使える機能だけを周知すると、期待外れによる離脱を抑えられる。"
+   },
+   {
+    "title": "簡易な道具から始める",
+    "desc": "まず簡易なAgent Builderに絞り、整理済みの資料の検索から試すと広げやすい。"
+   }
+  ],
+  "source_full": "Microsoft「Microsoft 365 Copilot を全社導入し、市民開発で約 500 体の AI エージェントを展開――東京建物が取り組んだ、“教えすぎない”、“作り込みすぎない”AI 活用」（2026/05/28）",
+  "foot_note": "数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。約500体は主にAgent Builderによるもので、Copilot Studio製とは限りません。",
+  "urls": [
+   "https://www.microsoft.com/ja-jp/customers/story/26555-tokyo-tatemono-microsoft-365"
+  ],
+  "list_action": "市民開発でAIエージェントを全社に展開",
+  "list_result_html": "<b>約500体</b>を現場で作成（全社展開から1年弱）",
+  "uses": [
+   "会議",
+   "検索",
+   "翻訳",
+   "資料作成",
+   "エージェント"
+  ]
+ },
+ {
+  "id": "C04",
+  "verified": true,
+  "country": "英国",
+  "evidence": "利用者の申告",
+  "sheet_diff": "シートの段階は「利用中」だが、原文は300人の試行と68,000人への拡大計画（公開時点）。4時間は要約欄ではUsers全般の表現で、本文の根拠は法務部門の後続分析のみ。本カードは法務の値として記載。",
+  "type": "case",
+  "eyebrow": "海外の事例",
+  "icon": "doc",
+  "name": "Vodafone",
+  "tagline": "法務の契約レビューで利用者平均週4時間を削減",
+  "tags": [
+   "通信",
+   "300人で先行利用"
+  ],
+  "sections": [
+   {
+    "h": "使い方",
+    "items": [
+     "法務チームが<b>文書を要約</b>し、判断までを短縮",
+     "<b>契約書のレビュー</b>を速く正確に行う補助",
+     "メール作成から<b>相談相手</b>としての利用へ発展"
+    ]
+   },
+   {
+    "h": "進め方",
+    "items": [
+     "<b>300人</b>の早期アクセス試行で効果を評価",
+     "試行の知見と<b>フィードバック</b>を導入方針の土台に",
+     "<b>68,000人</b>へ拡大する計画（公開時点）"
+    ]
+   }
+  ],
+  "kpis": [
+   {
+    "label": "法務の削減時間",
+    "value": "4",
+    "unit": "時間／人・週",
+    "note": "法務の利用者平均・算定法の記載なし"
+   },
+   {
+    "label": "先行試行の参加者",
+    "value": "300",
+    "unit": "人",
+    "note": "早期アクセスプログラム"
+   },
+   {
+    "label": "拡大の計画",
+    "value": "68,000",
+    "unit": "人",
+    "note": "公開時点の計画・実績ではない"
+   }
+  ],
+  "side": [],
+  "learn_title": "中堅企業が取り入れるなら（当社の見解）",
+  "learn": [
+   {
+    "title": "長文確認から試す",
+    "desc": "契約書など読む量の多い業務は要約の効果が分かりやすく、最初の題材として向いている。"
+   },
+   {
+    "title": "部門単位で効果測定",
+    "desc": "全社平均ではなく部門ごとに測ると、どの業務に効くのかを社内で具体的に説明しやすくなる。"
+   },
+   {
+    "title": "少人数の試行で判断",
+    "desc": "少人数の試行で知見とフィードバックを集めると、全社拡大を判断する根拠を作りやすい。"
+   }
+  ],
+  "source_full": "Microsoft「Time savings and an enhanced employee experience at Vodafone through its use of Microsoft 365 Copilot」（12/3/2024）",
+  "foot_note": "数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。4時間は法務部門の利用者の値であり、全社平均ではありません。",
+  "urls": [
+   "https://www.microsoft.com/en/customers/story/19346-vodafone-microsoft-365-copilot"
+  ],
+  "list_action": "法務の文書要約・契約レビューに活用",
+  "list_result_html": "法務の利用者平均で<b>4時間</b>／週を削減",
+  "uses": [
+   "文書",
+   "メール"
+  ]
+ },
+ {
+  "id": "C24",
+  "verified": true,
+  "country": "英国",
+  "evidence": "算定方法の記載なし",
+  "sheet_diff": "原文は「19k」「340k」の丸め表記（シートは19,000）。製品名は原文「Microsoft Copilot」で365に限定されない。シートの「文書・会議支援」は原文になく、原文は「personal productivity」のみ。",
+  "type": "case",
+  "eyebrow": "海外の事例",
+  "icon": "gear",
+  "name": "Capita",
+  "tagline": "個人の生産性向上から業務エージェントへ拡大",
+  "tags": [
+   "BPO",
+   "従業員34,000人"
+  ],
+  "sections": [
+   {
+    "h": "使い方",
+    "items": [
+     "まず<b>Microsoft 365 Copilot</b>で個人の生産性を向上",
+     "全従業員に<b>Agent Builder</b>、Researcher等を提供",
+     "<b>Copilot Studio</b>製エージェントでメールを振り分け"
+    ]
+   },
+   {
+    "h": "進め方",
+    "items": [
+     "<b>個人利用</b>の成果を受けてエージェントへ拡大",
+     "従業員が業務や作業向けに<b>エージェントを作成</b>",
+     "各エージェントの<b>責任と監督</b>を明確化"
+    ]
+   }
+  ],
+  "kpis": [
+   {
+    "label": "月間の削減時間",
+    "value": "19k",
+    "unit": "時間／月",
+    "note": "Copilot全体・算定法と内訳の記載なし"
+   },
+   {
+    "label": "月間のCopilot操作",
+    "value": "340k",
+    "unit": "回／月",
+    "note": "Copilot全体・削減時間と同時に公表"
+   },
+   {
+    "label": "エージェントとの対話",
+    "value": "70,000",
+    "unit": "回",
+    "note": "3か月間・配備エージェント全体"
+   },
+   {
+    "label": "メール応答時間",
+    "value": "60",
+    "unit": "%短縮",
+    "note": "Copilot Studio製エージェントの成果"
+   }
+  ],
+  "side": [],
+  "learn_title": "中堅企業が取り入れるなら（当社の見解）",
+  "learn": [
+   {
+    "title": "個人利用から始める",
+    "desc": "まず個人の業務で成果を出してから部門のエージェントへ進むと、無理なく段階を踏める。"
+   },
+   {
+    "title": "効果は分けて測る",
+    "desc": "個人の時短とエージェントの処理実績を分けて記録すると、効果の内訳を説明しやすい。"
+   },
+   {
+    "title": "責任者を決めて運用",
+    "desc": "エージェントごとに責任と監督を明確にしておくと、数が増えても管理を続けやすくなる。"
+   }
+  ],
+  "source_full": "Microsoft「Capita uses Microsoft Copilot to transform service delivery for clients」（9/10/2025）",
+  "foot_note": "数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。19kと340kはCopilot全体の値で、Copilot Studio等の製品別内訳は公表されていません。",
+  "urls": [
+   "https://www.microsoft.com/en/customers/story/25164-capita-microsoft-copilot-studio/"
+  ],
+  "list_action": "個人利用から業務エージェントへ拡大",
+  "list_result_html": "月<b>19k時間</b>削減（製品別内訳なし）",
+  "uses": [
+   "メール",
+   "エージェント"
+  ]
+ },
+ {
+  "id": "C30",
+  "verified": true,
+  "country": "米国",
+  "evidence": "利用者の申告",
+  "sheet_diff": "シート備考の「年5,000万ドル」は本URLに記載なし（未使用）。シートの「経営層が」は、原文ではCEO本人が起点で、その後に他の幹部へ共有。",
+  "type": "case",
+  "eyebrow": "海外の事例",
+  "icon": "people",
+  "name": "Lumen Technologies",
+  "tagline": "CEOの率先利用から経営層、全社へ利用を拡大",
+  "tags": [
+   "通信",
+   "従業員は数万人規模"
+  ],
+  "sections": [
+   {
+    "h": "使い方",
+    "items": [
+     "CEOが<b>メモ・メール・告知文</b>を自分の文体で作成",
+     "顧客対応担当が<b>技術情報や修理マニュアル</b>を参照",
+     "問題の<b>診断と回答</b>までを短縮"
+    ]
+   },
+   {
+    "h": "進め方",
+    "items": [
+     "CEOが<b>自身の利用状況を監査</b>し、少なさを確認",
+     "習慣の変化を他の幹部に共有し<b>経営層から全社へ</b>",
+     "完璧でない前提で<b>誤りの余地</b>を認め、質問を奨励"
+    ]
+   }
+  ],
+  "kpis": [
+   {
+    "label": "報告された削減時間",
+    "value": "約30",
+    "unit": "分／日",
+    "note": "従業員の報告・人数と時点の記載なし"
+   }
+  ],
+  "side": [],
+  "learn_title": "中堅企業が取り入れるなら（当社の見解）",
+  "learn": [
+   {
+    "title": "経営者が自ら使う",
+    "desc": "経営層が実務で使い、習慣の変化を共有すると、社内の利用を広げる大きなきっかけになる。"
+   },
+   {
+    "title": "利用実績を確認する",
+    "desc": "感覚に頼らず利用状況を確かめると、導入後の低調さに早く気づいて手を打ちやすくなる。"
+   },
+   {
+    "title": "失敗の余地をつくる",
+    "desc": "AIは完璧でない前提で試行錯誤を認めると、現場が質問しやすい雰囲気を作りやすい。"
+   }
+  ],
+  "source_full": "Microsoft WorkLab「A Role Model for AI-Driven Transformation」（2024年10月16日）",
+  "foot_note": "数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。約30分は従業員の報告値であり、測定値ではありません。",
+  "urls": [
+   "https://www.microsoft.com/en-us/worklab/a-role-model-for-ai-driven-transformation"
+  ],
+  "list_action": "CEOの率先利用から経営層、全社へ展開",
+  "list_result_html": "従業員の報告で約<b>30分</b>／日を削減",
+  "uses": [
+   "メール",
+   "文書",
+   "検索"
+  ]
+ },
+ {
+  "id": "C31",
+  "verified": true,
+  "country": "オーストラリア",
+  "evidence": "利用者の申告",
+  "sheet_diff": "",
+  "type": "case",
+  "eyebrow": "海外の事例",
+  "icon": "trend",
+  "name": "Grant Thornton Australia",
+  "tagline": "申告の削減時間が22分から41.43分へ増加",
+  "tags": [
+   "監査・税務",
+   "500ユーザーへ拡大"
+  ],
+  "sections": [
+   {
+    "h": "使い方",
+    "items": [
+     "<b>提案書</b>の下書きと顧客フィードバックの分析",
+     "業界調査の<b>要約</b>とプレゼン資料の準備",
+     "スプレッドシートの<b>数式の修正</b>"
+    ]
+   },
+   {
+    "h": "進め方",
+    "items": [
+     "<b>300ライセンス</b>で開始し、需要を受け500ユーザーへ",
+     "<b>ワークショップ</b>と昼の勉強会で研修",
+     "<b>運営委員会</b>とリスク委員会への報告経路を整備"
+    ]
+   }
+  ],
+  "kpis": [
+   {
+    "label": "1日の平均削減時間",
+    "value": "41.43",
+    "unit": "分／日",
+    "note": "2024年11月・利用者の申告"
+   },
+   {
+    "label": "2024年4月時点の値",
+    "value": "22",
+    "unit": "分／日",
+    "note": "2024年4月・利用者の申告"
+   },
+   {
+    "label": "週あたりの削減時間",
+    "value": "3.45",
+    "unit": "時間／週",
+    "note": "2024年11月・目標は3.75時間"
+   },
+   {
+    "label": "ライセンス保有者の利用率",
+    "value": "95",
+    "unit": "%超",
+    "note": "保有者対象・数か月継続"
+   }
+  ],
+  "side": [],
+  "learn_title": "中堅企業が取り入れるなら（当社の見解）",
+  "learn": [
+   {
+    "title": "習熟後も測り続ける",
+    "desc": "導入直後だけで判断せず時点を分けて測ると、習熟による効果の変化を把握しやすくなる。"
+   },
+   {
+    "title": "目標時間を先に置く",
+    "desc": "週あたりの時短目標を先に決めておくと、利用者の到達度を社内で具体的に説明しやすくなる。"
+   },
+   {
+    "title": "勉強会で事例を共有",
+    "desc": "ワークショップや昼の勉強会で各自の工夫を持ち寄ると、利用を定着させる土台になる。"
+   }
+  ],
+  "source_full": "Microsoft Source Asia「Reinventing the work week: Grant Thornton Australia embraces 9-day fortnight using Microsoft 365 Copilot」（2025年2月19日）",
+  "foot_note": "数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。9日勤務／2週は14か月の試行を経て2024年5月に恒久導入された制度で、Copilot単独の効果ではありません。",
+  "urls": [
+   "https://news.microsoft.com/source/asia/features/reinventing-the-work-week-grant-thornton-australia-embraces-9-day-fortnight-using-microsoft-365-copilot/"
+  ],
+  "list_action": "提案・調査要約・Excel数式修正に活用",
+  "list_result_html": "<b>41.43分</b>／日を削減（2024年11月・申告）",
+  "uses": [
+   "文書",
+   "資料作成",
+   "データ分析",
+   "調査"
+  ]
+ },
+ {
+  "id": "C32",
+  "verified": true,
+  "country": "英国",
+  "evidence": "見込み・試算",
+  "sheet_diff": "",
+  "type": "case",
+  "eyebrow": "海外の事例",
+  "icon": "people",
+  "name": "British Heart Foundation",
+  "tagline": "約300人の試行で初稿作成と会議の把握を検証",
+  "tags": [
+   "非営利・研究助成",
+   "約300人で試行"
+  ],
+  "sections": [
+   {
+    "h": "使い方",
+    "items": [
+     "<b>会議の議事録</b>作成と長文資料の要点整理",
+     "報告書・計画書の<b>初稿</b>を作らせ、人が仕上げる",
+     "送信前の<b>メール確認</b>。第二言語話者も活用"
+    ]
+   },
+   {
+    "h": "進め方",
+    "items": [
+     "<b>部署・役割・職位を問わず</b>ライセンスを配布",
+     "作業部会で<b>AI利用の戦略と方針</b>を議論",
+     "参加者は<b>Copilot Lab</b>でプロンプトの書き方を学習"
+    ]
+   }
+  ],
+  "kpis": [
+   {
+    "label": "見込まれる削減",
+    "value": "最大30",
+    "unit": "分／日",
+    "note": "初期試行の利用者推定。実測でない"
+   },
+   {
+    "label": "試行の対象",
+    "value": "約300",
+    "unit": "人",
+    "note": "2024年公表の試行段階"
+   },
+   {
+    "label": "導入前の探索時間",
+    "value": "15",
+    "unit": "分以上",
+    "note": "ファイル等の検索。削減の実測でない"
+   }
+  ],
+  "side": [],
+  "learn_title": "中堅企業が取り入れるなら（当社の見解）",
+  "learn": [
+   {
+    "title": "職種を混ぜて試す",
+    "desc": "対象を一部門に絞らず、部署・役割・職位をまたいで配る。使い方の幅と効果を見やすい。"
+   },
+   {
+    "title": "初稿と要約から始める",
+    "desc": "議事録、長文の要約、報告書の初稿から試す。人が仕上げる前提にすると導入しやすくなる。"
+   },
+   {
+    "title": "負担の軽減も評価する",
+    "desc": "削減時間に加え、認知負荷の軽減や第二言語でのメール作成の負担も評価項目に入れる。"
+   }
+  ],
+  "source_full": "Microsoft「British Heart Foundation accelerates innovation with Microsoft 365 Copilot」（2024年10月11日）",
+  "foot_note": "数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。",
+  "urls": [
+   "https://www.microsoft.com/en/customers/story/18915-british-heart-foundation-microsoft-copilot"
+  ],
+  "list_action": "約300人で会議把握・初稿・検索を試行",
+  "list_result_html": "<b>最大30分</b>／日の見込み（利用者の推定）",
+  "uses": [
+   "会議",
+   "検索",
+   "文書",
+   "メール",
+   "調査"
+  ]
+ },
+ {
+  "id": "C35",
+  "verified": true,
+  "country": "英国",
+  "evidence": "利用者の申告",
+  "sheet_diff": "",
+  "type": "case",
+  "eyebrow": "海外の事例",
+  "icon": "trend",
+  "name": "University of Manchester",
+  "tagline": "段階拡大で職務ごとの効果差と学習の必要性を把握",
+  "tags": [
+   "大学",
+   "300ライセンスへ段階拡大"
+  ],
+  "sections": [
+   {
+    "h": "使い方",
+    "items": [
+     "教員が<b>20問の選択式クイズ</b>を約1分で作成",
+     "<b>文字起こしデータ</b>の初期分析で主要テーマを抽出",
+     "能力モデルと原則の<b>初稿を15分</b>で作成"
+    ]
+   },
+   {
+    "h": "進め方",
+    "items": [
+     "<b>120→200→300</b>とライセンスを段階的に拡大",
+     "SharePointに研修資料と<b>今週のプロンプト</b>を掲載",
+     "Viva Engageの<b>コミュニティ</b>で質問と回答を共有"
+    ]
+   }
+  ],
+  "kpis": [
+   {
+    "label": "申告された効果の幅",
+    "value": "15分〜3時間超",
+    "unit": "／日",
+    "note": "2024年の利用者報告。平均でない"
+   },
+   {
+    "label": "定型作業の移管率",
+    "value": "40",
+    "unit": "%",
+    "note": "2024年8月第2陣。定型が少ない層"
+   },
+   {
+    "label": "定型作業の移管率",
+    "value": "18",
+    "unit": "%",
+    "note": "第2陣。定型が職務の最大75%の層"
+   },
+   {
+    "label": "会議の事務負担減",
+    "value": "98",
+    "unit": "%",
+    "note": "幹部との1時間半の会議での試験"
+   }
+  ],
+  "side": [],
+  "learn_title": "中堅企業が取り入れるなら（当社の見解）",
+  "learn": [
+   {
+    "title": "職務別に効果を見る",
+    "desc": "平均だけでなく、定型作業の多い層と少ない層で分けて集計し、支援の要否を判断する。"
+   },
+   {
+    "title": "週1のプロンプト共有",
+    "desc": "社内サイトに今週のプロンプトを載せ、利用者同士の質問の場を作る。学習を継続しやすい。"
+   },
+   {
+    "title": "権限を先に見直す",
+    "desc": "社内の権限と方針を見直し、不適切な共有に気づいた際の報告手順を利用者に周知する。"
+   }
+  ],
+  "source_full": "Microsoft「University of Manchester drives value from Microsoft 365 Copilot with emphasis on creative thinking and continuous learning」（2024年10月21日）",
+  "foot_note": "数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。",
+  "urls": [
+   "https://www.microsoft.com/en/customers/story/19241-university-of-manchester-microsoft-copilot"
+  ],
+  "list_action": "段階拡大と学習コミュニティで活用を検証",
+  "list_result_html": "<b>15分〜3時間超</b>／日（利用者申告の幅）",
+  "uses": [
+   "会議",
+   "検索",
+   "文書",
+   "メール",
+   "データ分析"
+  ]
+ },
+ {
+  "id": "C36",
+  "verified": true,
+  "country": "オーストラリア",
+  "evidence": "利用者の申告",
+  "sheet_diff": "シートは21,000人展開の文脈で下限1時間とするが、Telstra発表では1〜2時間と90%は300人の先行試行の調査結果。値は「1〜2」に修正。2024年8月時点は21,000ライセンスへの投資と段階展開の提案段階で、21,000人展開はMicrosoftの2025年7月の記事の記載。",
+  "type": "case",
+  "eyebrow": "海外の事例",
+  "icon": "company",
+  "name": "Telstra",
+  "tagline": "300人の先行試行を経て大規模展開へ進んだ通信会社",
+  "tags": [
+   "通信",
+   "300人の試行後に拡大"
+  ],
+  "sections": [
+   {
+    "h": "使い方",
+    "items": [
+     "<b>会議・メール・チャット</b>の要約",
+     "文書の<b>初稿</b>作成",
+     "複数の社内資料を束ねた<b>文書作成</b>で調査時間を短縮"
+    ]
+   },
+   {
+    "h": "進め方",
+    "items": [
+     "<b>300人</b>の先行試行の結果を受けて大規模導入へ",
+     "<b>従業員・労働組合との協議</b>を経て段階展開する方針",
+     "全社の<b>Data &amp; AI Academy</b>で利用者を育成"
+    ]
+   }
+  ],
+  "kpis": [
+   {
+    "label": "申告された削減",
+    "value": "1〜2",
+    "unit": "時間／週",
+    "note": "300人試行の調査。大半の利用者"
+   },
+   {
+    "label": "体験が改善と回答",
+    "value": "90",
+    "unit": "%",
+    "note": "同じ試行の調査結果"
+   },
+   {
+    "label": "先行試行",
+    "value": "300",
+    "unit": "人",
+    "note": "2024年8月のTelstra発表"
+   },
+   {
+    "label": "展開人数",
+    "value": "21,000",
+    "unit": "人",
+    "note": "2025年7月のMicrosoft記事の記載"
+   }
+  ],
+  "side": [],
+  "learn_title": "中堅企業が取り入れるなら（当社の見解）",
+  "learn": [
+   {
+    "title": "試行の調査で判断",
+    "desc": "小規模の先行試行で削減時間と利用体験を調査し、その結果を拡大の判断材料にして進める。"
+   },
+   {
+    "title": "経営層が旗を振る",
+    "desc": "Telstraは、IT部門主導より経営層の明確な後押しが定着を早めるとしている。参考になる。"
+   },
+   {
+    "title": "参照権限を事前確認",
+    "desc": "部門や地域ごとのデータ参照範囲を試し、情報漏えいを防ぐ。導入前の確認項目にする。"
+   }
+  ],
+  "source_full": "Telstra「Telstra and Microsoft expand strategic partnership to power Australia’s AI future」（2024年8月12日）／Telstra「Connecting Opportunity: Telstra’s Early Success with Copilot for Microsoft 365」（2024年3月19日）／Microsoft「AI-powered success—with more than 1,000 stories of customer transformation and innovation」（2025年7月24日）",
+  "foot_note": "数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。Ask Telstra等の別のAI施策の効果は含みません。",
+  "urls": [
+   "https://www.telstra.com.au/aboutus/media/media-releases/telstra-microsoft-ai-partnership",
+   "https://www.telstra.com.au/business-enterprise/news-research/articles/telstras-early-success-with-copilot-for-microsoft-365",
+   "https://www.microsoft.com/en-us/microsoft-cloud/blog/2025/07/24/ai-powered-success-with-1000-stories-of-customer-transformation-and-innovation/"
+  ],
+  "list_action": "300人の試行を経て21,000人へ展開",
+  "list_result_html": "<b>1〜2時間</b>／週（試行の利用者申告）",
+  "uses": [
+   "会議",
+   "検索",
+   "文書",
+   "メール"
+  ]
+ },
+ {
+  "id": "C37",
+  "verified": true,
+  "country": "カナダ",
+  "evidence": "規模・件数",
+  "sheet_diff": "シートの取り組みは全社の施策のように読めるが、原文の使い方はAI Enablement担当の幹部1人の例。カードでは幹部の例と明記。",
+  "type": "case",
+  "eyebrow": "海外の事例",
+  "icon": "people",
+  "name": "KPMG Canada",
+  "tagline": "40ライセンスから全従業員12,000人へ段階展開",
+  "tags": [
+   "専門サービス",
+   "12,000人へ展開"
+  ],
+  "sections": [
+   {
+    "h": "使い方",
+    "items": [
+     "幹部が<b>計画作成と進捗報告</b>の作業を圧縮",
+     "重複した予定の<b>欠席会議</b>をTeamsの要約で把握",
+     "Copilot Chatで<b>戦略案の弱点</b>を検証"
+    ]
+   },
+   {
+    "h": "進め方",
+    "items": [
+     "<b>40ライセンス</b>の早期試行から1,000人へ拡大",
+     "利用状況を<b>毎週追跡</b>し、チームで有用な事例を共有",
+     "<b>AI関連の目標</b>を人事評価に組み込み、研修も複数用意"
+    ]
+   }
+  ],
+  "kpis": [
+   {
+    "label": "展開人数",
+    "value": "12,000",
+    "unit": "人",
+    "note": "2025年に全従業員へ展開"
+   },
+   {
+    "label": "早期試行",
+    "value": "40",
+    "unit": "ライセンス",
+    "note": "2026年3月記事で約3年前"
+   },
+   {
+    "label": "拡大段階",
+    "value": "1,000",
+    "unit": "人",
+    "note": "全社展開前の段階"
+   }
+  ],
+  "side": [],
+  "learn_title": "中堅企業が取り入れるなら（当社の見解）",
+  "learn": [
+   {
+    "title": "小規模から段階拡大",
+    "desc": "少数の試行で反応を確かめ、部門単位、全社へと広げる。投資判断を分けて進められる。"
+   },
+   {
+    "title": "利用状況を毎週見る",
+    "desc": "導入後の利用状況を週次で追う。有用な事例も併せて集めると、次の施策を決めやすい。"
+   },
+   {
+    "title": "AI目標を評価に",
+    "desc": "個人の目標にAI活用を組み込み、研修と併せて運用する。自社の制度に合う形で検討する。"
+   }
+  ],
+  "source_full": "Microsoft Source Canada「For KPMG Canada’s Christine Andrew, Copilot isn’t just a time saver—it unlocks high-value impact」（2026年3月25日）",
+  "foot_note": "数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。",
+  "urls": [
+   "https://news.microsoft.com/source/canada/features/ai/copilot-in-the-c-suite-christine-andrew-kpmg/"
+  ],
+  "list_action": "幹部の計画・報告作成と会議把握に活用",
+  "list_result_html": "<b>12,000人</b>へ展開（時間削減の数値なし）",
+  "uses": [
+   "会議",
+   "文書",
+   "資料作成",
+   "調査"
+  ]
+ },
+ {
+  "id": "C33",
+  "verified": true,
+  "country": "英国",
+  "evidence": "利用者の申告",
+  "sheet_diff": "「時間帯回答の中央値」は原文では各区分の中間点（middle point）。「正式な対照群なし」は原文に明記された語ではなく、比較群の記述がないことからの判断。26分の数値・期間は一致。",
+  "type": "case",
+  "eyebrow": "公的機関の検証",
+  "icon": "company",
+  "name": "英国政府（GDS主導の横断試行）",
+  "tagline": "12組織2万人の試行。自己申告で平均26分/日",
+  "tags": [
+   "政府",
+   "12組織・2万人が3か月試行"
+  ],
+  "sections": [
+   {
+    "h": "調査方法",
+    "items": [
+     "<b>2万人</b>に付与。2024年9月30日〜12月31日の<b>3か月</b>",
+     "アンケート<b>7,115件</b>、利用データ14,500人分、FG5回",
+     "<b>無作為割当・対照群の記載なし</b>。時間は自己申告",
+     "区分回答の<b>中間点</b>で平均を算出（最大区分は60分と推定）"
+    ]
+   },
+   {
+    "h": "限界・否定的な知見",
+    "items": [
+     "<b>17%</b>は明確な時間削減を感じず",
+     "人事参加者は苦情・評価業務での<b>正確性</b>に強い懸念",
+     "削減時間の<b>使途は特定できず</b>。人の確認は常に必要",
+     "政策職はニュアンスや相反する意見を含む資料に苦戦"
+    ]
+   }
+  ],
+  "kpis": [
+   {
+    "label": "平均削減時間",
+    "value": "26",
+    "unit": "分/日",
+    "note": "2024年末。回答7,115件の自己申告"
+   },
+   {
+    "label": "明確な削減なし",
+    "value": "17",
+    "unit": "%",
+    "note": "同調査の回答者のうち"
+   },
+   {
+    "label": "満足度",
+    "value": "7.7",
+    "unit": "/10",
+    "note": "同調査の平均。推奨度は8.2"
+   },
+   {
+    "label": "利用率",
+    "value": "83",
+    "unit": "%",
+    "note": "2024年10月。以後約80%を維持"
+   }
+  ],
+  "side": [],
+  "learn_title": "中堅企業が取り入れるなら（当社の見解）",
+  "learn": [
+   {
+    "title": "申告値は幅で読む",
+    "desc": "自己申告の平均だけで判断せず、利用ログや実作業の計測と並べて効果を確かめるとよい。"
+   },
+   {
+    "title": "研修を先に組み込む",
+    "desc": "研修が効果に不可欠との結論。プロンプトの書き方を短い動画で学ぶ場を最初に用意する。"
+   },
+   {
+    "title": "人の確認を必ず残す",
+    "desc": "人事評価のように誤りの影響が大きい業務では、出力を必ず人が確認する運用にしておく。"
+   }
+  ],
+  "source_full": "Government Digital Service「Microsoft 365 Copilot Experiment: Cross-Government Findings Report」（2025年6月2日）",
+  "foot_note": "数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。12組織にDWP・HMRCを含むため、両省の結果と合算できません。",
+  "urls": [
+   "https://www.gov.uk/government/publications/microsoft-365-copilot-experiment-cross-government-findings-report/microsoft-365-copilot-experiment-cross-government-findings-report-html"
+  ],
+  "list_action": "12組織2万人で3か月の横断試行",
+  "list_result_html": "自己申告で平均<b>26分/日</b>（7,115件回答）",
+  "uses": [
+   "会議",
+   "検索",
+   "文書",
+   "メール",
+   "資料作成"
+  ]
+ },
+ {
+  "id": "C34",
+  "verified": true,
+  "country": "英国",
+  "evidence": "見込み・試算",
+  "sheet_diff": "指標名「試行で示された平均削減」は実績に読めるが、GOV.UK本文は「could save…43 minutes…or more」。Microsoft発表は箇条書きが「saved」、本文が「could save」で表現が割れる。算出方法・試行期間は公式発表に記載なし。",
+  "type": "case",
+  "eyebrow": "公的機関の検証",
+  "icon": "people",
+  "name": "NHS England",
+  "tagline": "43分は削減可能量。505,000人は計画段階",
+  "tags": [
+   "医療・公的機関",
+   "90組織・3万人超で試行"
+  ],
+  "sections": [
+   {
+    "h": "調査方法",
+    "items": [
+     "<b>90組織・3万人超</b>で試行。期間の記載なし",
+     "<b>算出方法の記載なし</b>。詳細な評価報告は確認できず",
+     "無作為割当・対照群の記載なし"
+    ]
+   },
+   {
+    "h": "限界・計画と実績の区別",
+    "items": [
+     "43分は<b>削減可能量</b>。実績の確定値とは書かれず",
+     "月<b>400,000時間</b>は全面展開を仮定した見込み",
+     "<b>505,000人</b>は12か月の導入計画で、完了人数ではない",
+     "効果なし等の否定的な結果は発表に記載なし"
+    ]
+   }
+  ],
+  "kpis": [
+   {
+    "label": "削減可能量",
+    "value": "43",
+    "unit": "分/人・日",
+    "note": "2025年10月発表。実績の確定値でない"
+   },
+   {
+    "label": "試行規模",
+    "value": "30,000",
+    "unit": "人超",
+    "note": "90組織。期間の記載なし"
+   },
+   {
+    "label": "展開計画",
+    "value": "505,000",
+    "unit": "人",
+    "note": "2026年6月発表。完了人数でない"
+   },
+   {
+    "label": "初期目標",
+    "value": "200,000",
+    "unit": "人",
+    "note": "12か月計画の最初の6か月の目標"
+   }
+  ],
+  "side": [],
+  "learn_title": "中堅企業が取り入れるなら（当社の見解）",
+  "learn": [
+   {
+    "title": "見込みと実績を分ける",
+    "desc": "可能性の数字は実績と分けて社内に示し、導入後に測った値へ順次置き換えて報告する。"
+   },
+   {
+    "title": "試算の前提を明記",
+    "desc": "全面展開や利用人数など、試算の前提条件を数字と一緒に書いて報告する形に統一する。"
+   },
+   {
+    "title": "人数の段階目標を置く",
+    "desc": "半年で何人、1年で何人と期間ごとの人数目標を決めて、展開の進み具合を月ごとに管理する。"
+   }
+  ],
+  "source_full": "Department of Health and Social Care ほか「Major NHS AI trial delivers unprecedented time and cost savings」（2025年10月21日）／Microsoft「NHS England accelerates AI adoption with Microsoft 365 Copilot to improve service delivery, reduce costs and create more time for care」（2026年6月8日）",
+  "foot_note": "数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。",
+  "urls": [
+   "https://www.gov.uk/government/news/major-nhs-ai-trial-delivers-unprecedented-time-and-cost-savings",
+   "https://news.microsoft.com/source/2026/06/08/nhs-england-accelerates-ai-adoption-with-microsoft-365-copilot-to-improve-service-delivery-reduce-costs-and-create-more-time-for-care"
+  ],
+  "list_action": "90組織3万人超で試行、505,000人へ展開計画",
+  "list_result_html": "<b>43分/人・日</b>は削減可能量（実績でなく見込み）",
+  "uses": [
+   "会議",
+   "メール"
+  ]
+ },
+ {
+  "id": "C57",
+  "verified": true,
+  "country": "英国",
+  "evidence": "利用者の申告",
+  "sheet_diff": "数値は一致。シートにない重要事項あり：申告値は約20%減額の調整後、別に500件を希望者へ直接配分。タスク演習とViva Insightsの結果は公開ページに未掲載で、未利用者を含む比較結果も掲載なし。",
+  "type": "case",
+  "eyebrow": "公的機関の検証",
+  "icon": "shield",
+  "name": "英国歳入関税庁（HMRC）",
+  "tagline": "無作為割当で検証。自己申告で週に約60分",
+  "tags": [
+   "政府",
+   "3,000件を無作為割当"
+  ],
+  "sections": [
+   {
+    "h": "調査方法",
+    "items": [
+     "2024年9〜12月の第3段階。<b>3,000件を無作為割当</b>",
+     "主データは<b>1,364人の調査</b>（無作為割当者の45%）",
+     "FG35人とタスク演習49人も実施。<b>演習結果は未掲載</b>",
+     "ライセンスなしの比較群の人数・結果は記載なし"
+    ]
+   },
+   {
+    "h": "限界・否定的な知見",
+    "items": [
+     "申告値を<b>約20%減額</b>。精密値でなく基準となる推定値",
+     "未利用者の<b>46%</b>が主因に安全・データ保護の懸念を選択",
+     "Official Sensitive未満の資料でしか使えず",
+     "実践的で職務に合う研修と習熟時間の不足が課題"
+    ]
+   }
+  ],
+  "kpis": [
+   {
+    "label": "平均削減時間",
+    "value": "約60",
+    "unit": "分/週",
+    "note": "フルタイム換算。1,364人調査の申告"
+   },
+   {
+    "label": "週の労働時間比",
+    "value": "2-3",
+    "unit": "%",
+    "note": "申告値を約20%減額した推定"
+   },
+   {
+    "label": "満足度",
+    "value": "7.1",
+    "unit": "/10",
+    "note": "2024年9〜12月の調査の平均"
+   },
+   {
+    "label": "利用率",
+    "value": "83",
+    "unit": "%",
+    "note": "付与者のうち試行中に使った割合"
+   }
+  ],
+  "side": [],
+  "learn_title": "中堅企業が取り入れるなら（当社の見解）",
+  "learn": [
+   {
+    "title": "配布先を無作為にする",
+    "desc": "希望者だけでなく部門比率に沿って配れば、前向きな人に偏らない評価に近づけられる。"
+   },
+   {
+    "title": "申告値は割り引く",
+    "desc": "回答者は積極利用者に偏る。未利用者も踏まえ、申告値を減らして保守的に見積もっておく。"
+   },
+   {
+    "title": "扱える情報を決める",
+    "desc": "未利用の主な理由は安全面の懸念。使ってよい資料の範囲を先に示して現場の不安を減らす。"
+   }
+  ],
+  "source_full": "HM Revenue & Customs「Evaluating the Impact of Microsoft Copilot in HMRC」（2026年7月9日）",
+  "foot_note": "数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。",
+  "urls": [
+   "https://www.gov.uk/government/publications/evaluation-report-phase-3-trial-of-microsoft-copilot/evaluating-the-impact-of-microsoft-copilot-in-hmrc"
+  ],
+  "list_action": "3,000件を無作為割当し効果を評価",
+  "list_result_html": "自己申告で<b>約60分/週</b>（週の2-3%）",
+  "uses": [
+   "会議",
+   "検索",
+   "文書",
+   "データ分析"
+  ]
+ },
+ {
+  "id": "C58",
+  "verified": true,
+  "country": "英国",
+  "evidence": "推定（算出方法あり）",
+  "sheet_diff": "「対象3,549人」は付与人数で、分析の回答は利用者1,716件・比較群2,535件。19分は区分回答の下限値を使う回帰係数で、AI関心を統制しない推定は10〜12分。シートに記載なし。",
+  "type": "case",
+  "eyebrow": "公的機関の検証",
+  "icon": "trend",
+  "name": "英国雇用年金省（DWP）",
+  "tagline": "未利用者と比較し回帰で推定。平均19分/日",
+  "tags": [
+   "政府",
+   "本部職員3,549人・非無作為"
+  ],
+  "sections": [
+   {
+    "h": "調査方法",
+    "items": [
+     "2024年10月〜2025年3月。<b>本部職員3,549人</b>、現場は対象外",
+     "利用者<b>1,716件</b>と未付与の比較群<b>2,535件</b>を調査",
+     "<b>SUR回帰</b>で属性・職務・AI関心を調整。面接19人",
+     "時間は8業務の<b>区分回答の下限値</b>で換算（自己申告）"
+    ]
+   },
+   {
+    "h": "限界・否定的な知見",
+    "items": [
+     "<b>無作為割当でない</b>。先着等の配布で過大評価の恐れ",
+     "<b>事前基準なし</b>、客観指標なし。結果は全て自己申告",
+     "AI関心を統制しない推定は<b>10〜12分</b>（統制後19分）",
+     "確認作業で<b>時間削減が相殺</b>された例あり"
+    ]
+   }
+  ],
+  "kpis": [
+   {
+    "label": "回帰推定の削減",
+    "value": "19",
+    "unit": "分/日",
+    "note": "8業務平均。95%CI[17,22]"
+   },
+   {
+    "label": "AI関心を統制せず",
+    "value": "10-12",
+    "unit": "分/日",
+    "note": "同表の他モデルの推定値"
+   },
+   {
+    "label": "職務満足の差",
+    "value": "0.56",
+    "unit": "点",
+    "note": "7段階尺度。比較群との回帰推定"
+   },
+   {
+    "label": "仕事の質の差",
+    "value": "0.49",
+    "unit": "点",
+    "note": "7段階尺度。本人の認識の回帰推定"
+   }
+  ],
+  "side": [],
+  "learn_title": "中堅企業が取り入れるなら（当社の見解）",
+  "learn": [
+   {
+    "title": "比較群を用意する",
+    "desc": "未利用者にも同じ調査を行い、職務や属性をそろえれば申告だけに頼る判断を避けられる。"
+   },
+   {
+    "title": "事前に基準を測る",
+    "desc": "事前データの欠如が限界とされた。導入前に業務時間と満足度を必ず測っておくとよい。"
+   },
+   {
+    "title": "確認の手間も測る",
+    "desc": "検証で削減が相殺された例がある。出力の確認にかかる時間も必ず含めて効果を見極める。"
+   }
+  ],
+  "source_full": "Department for Work and Pensions「An Evaluation of DWP’s Microsoft 365 Copilot Trial」（2026年1月29日）",
+  "foot_note": "数値は各社の公表値であり、当社による測定値ではありません。「取り入れるなら」は当社の見解です。",
+  "urls": [
+   "https://www.gov.uk/government/publications/an-evaluation-of-dwps-microsoft-copilot-365-trial/an-evaluation-of-dwps-microsoft-365-copilot-trial"
+  ],
+  "list_action": "未利用者と比較し回帰分析で効果を推定",
+  "list_result_html": "回帰推定で<b>19分/日</b>（非無作為・自己申告）",
+  "uses": [
+   "会議",
+   "検索",
+   "文書",
+   "メール",
+   "データ分析"
+  ]
+ }
+]

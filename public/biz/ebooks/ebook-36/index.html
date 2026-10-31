@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>製品の使い分けとライセンス確認ガイド｜全12スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* 業種別 活用事例集。設計は ebook-04/05 と同系統（四角の角丸なし・円とピルのみ角丸）。
+     ★事例はすべて各社の公開情報にもとづく。数値は出典の表記どおりに記載し、推測で丸めたり
+       脚色したりしないこと。出典はスライド下部に必ず明記する。他社名を出す資料のため、
+       まとめサイトの孫引きは使わず一次情報（プレスリリース・公式サイト）で裏を取る。 */
+  :root {
+    --blue: #2c5c9c; --blue-deep: #1a2e50; --blue-bright: #1a6fb5; --blue-pale: #8fb0d8;
+    --ink: #2a2f3a; --line: #e3e8ef; --amber: #f0b429; --tint: #eef4fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f4f6f8; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; color: var(--ink); padding: 48px 0 96px; }
+  .note { max-width: 1120px; margin: 0 auto 28px; font-size: 13px; font-weight: 700; color: #8a93a3; }
+  .en { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; }
+
+  .deck { display: flex; flex-direction: column; gap: 34px; align-items: center; counter-reset: pg -1; }
+  .slide-shell { width: 1120px; counter-increment: pg; }
+  .slide-shell figcaption { font-size: 12px; font-weight: 700; color: #8a93a3; margin: 8px 2px 0; letter-spacing: .04em; }
+  .slide { width: 1280px; height: 720px; transform: scale(0.875); transform-origin: top left; background: #fff; position: relative; overflow: hidden; }
+  .slide-shell .clip { height: 630px; overflow: hidden; border-radius: 0; box-shadow: 0 2px 10px rgba(26,35,48,.08); }
+
+  /* ===== 共通 ===== */
+  .s-body { position: absolute; inset: 0; padding: 36px 56px; z-index: 1; }
+  .s-eyebrow { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 700; color: var(--blue-pale); letter-spacing: .02em; }
+  .s-eyebrow::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); }
+  .s-logo { position: absolute; top: 38px; right: 56px; height: 30px; }
+  .s-foot { position: absolute; left: 56px; right: 120px; bottom: 14px; font-size: 10px; color: #9aa3b2; line-height: 1.6; z-index: 5; }
+  .s-num { position: absolute; right: 0; bottom: 0; width: 66px; height: 66px; background: var(--blue); border-radius: 66px 0 0 0; color: #fff; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 13px; font-weight: 700; display: flex; align-items: flex-end; justify-content: flex-end; padding: 0 14px 10px 0; z-index: 5; }
+  .s-num::before { content: counter(pg); }
+
+  /* ===== 見出し行（業種バッジ＋要点） ===== */
+  .hd { display: flex; align-items: center; gap: 18px; margin-top: 8px; }
+  .hd .badge { background: var(--blue); color: #fff; font-size: 24px; font-weight: 800; padding: 10px 22px; letter-spacing: .06em; white-space: nowrap; text-align: center; }
+  .hd .badge small { display: block; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; opacity: .8; margin-top: 3px; }
+  .hd .t { font-size: 25px; font-weight: 800; color: #1a2330; line-height: 1.4; letter-spacing: .01em; }
+  .hd .t b { color: var(--blue-bright); }
+
+  /* ===== 事例テーブル ===== */
+  table.cs { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 18px; table-layout: fixed; }
+  .cs th { background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; padding: 10px 14px; text-align: left; letter-spacing: .02em; }
+  .cs th:first-child { text-align: center; }
+  .cs td { font-size: 12.8px; font-weight: 500; color: #4a5568; padding: 13px 14px; border-bottom: 1px solid var(--line); vertical-align: middle; line-height: 1.55; }
+  .cs tr:nth-child(even) td { background: #f7f9fc; }
+  .cs td.no { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; text-align: center; font-weight: 800; color: var(--blue-pale); }
+  /* 社名は他社商標のためロゴを使わず、文字組みだけで見せる */
+  .cs td.co span { display: block; font-size: 14.5px; font-weight: 800; color: #1a2330; line-height: 1.4; }
+  .cs td.ar span { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; padding: 4px 9px; white-space: nowrap; }
+  .cs td.ar svg { flex: 0 0 auto; }
+  .cs td.rs { font-size: 13px; font-weight: 700; color: #1a2330; line-height: 1.5; }
+  .cs td.rs b { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 19px; font-weight: 800; color: var(--blue-bright); padding: 0 1px; }
+
+  /* ===== まとめ帯 ===== */
+  .band { display: flex; align-items: center; gap: 11px; background: var(--tint); border: 1.5px solid var(--blue); padding: 12px 20px; font-size: 13.5px; font-weight: 800; color: var(--blue-deep); margin-top: 12px; }
+  .band::before { content: "✓"; flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+
+
+  /* ===== 個別詳細スライド ===== */
+  .dhd { display: flex; align-items: flex-start; gap: 18px; margin-top: 8px; }
+  .dhd .no { background: var(--blue-deep); color: #fff; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 22px; font-weight: 800; padding: 12px 18px; letter-spacing: .06em; }
+  .dhd .mark { flex: 0 0 auto; width: 46px; height: 46px; background: var(--tint); border: 1.5px solid #cfdcee; color: var(--blue); display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .dhd .mark svg { width: 24px; height: 24px; }
+  .dhd .co { font-size: 25px; font-weight: 800; color: #1a2330; line-height: 1.3; }
+  .dhd .co small { display: block; font-size: 14px; font-weight: 700; color: #6b7789; margin-top: 5px; }
+  .dhd .tags { margin-left: auto; display: flex; gap: 7px; padding-top: 6px; }
+  .dhd .tags span { font-size: 11.5px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; border-radius: 999px; padding: 5px 13px; white-space: nowrap; }
+
+  .dt { display: grid; grid-template-columns: 1.18fr 1fr; gap: 20px; margin-top: 14px; align-items: start; }
+  .sec { border: 1px solid var(--line); }
+  .sec .h { background: #f2f5fa; border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 800; color: var(--blue-deep); padding: 9px 16px; display: flex; align-items: center; gap: 8px; }
+  .sec .h::before { content: ""; width: 5px; height: 15px; background: var(--blue); }
+  .sec .b { padding: 10px 16px 11px; }
+  .sec .i { position: relative; font-size: 12.6px; font-weight: 500; color: #4a5568; line-height: 1.7; padding: 4px 0 4px 15px; }
+  .sec .i::before { content: ""; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-pale); }
+  .sec .i b { color: #1a2330; font-weight: 800; }
+
+  .kpi { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi div { background: var(--tint); border-left: 4px solid var(--blue); padding: 11px 13px; }
+  .kpi .k { font-size: 10.5px; font-weight: 800; color: var(--blue); }
+  .kpi .v { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 24px; font-weight: 800; color: #1a2330; line-height: 1.15; margin-top: 3px; }
+  .kpi .v small { font-family: "Noto Sans JP", sans-serif; font-size: 11px; font-weight: 700; color: #6b7789; margin-left: 2px; }
+  .kpi .n { font-size: 10.5px; font-weight: 600; color: #7a8698; margin-top: 3px; }
+  .trend { margin-top: 10px; background: var(--blue-deep); color: #fff; padding: 12px 15px; display: flex; align-items: center; gap: 12px; }
+  .trend .l { font-size: 11.5px; font-weight: 800; opacity: .85; line-height: 1.5; }
+  .trend .r { margin-left: auto; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 15px; font-weight: 800; white-space: nowrap; }
+  .trend .r b { font-size: 22px; color: #8fd0ff; }
+
+  .learn { margin-top: 12px; border: 1.5px solid var(--blue); }
+  .learn .h { background: var(--blue); color: #fff; font-size: 12.5px; font-weight: 800; padding: 8px 16px; letter-spacing: .02em; }
+  .learn .g { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+  .learn .g div { padding: 9px 16px 10px; border-right: 1px solid var(--line); }
+  .learn .g div:last-child { border-right: none; }
+  .learn .t { font-size: 13px; font-weight: 800; color: var(--blue-deep); }
+  .learn .d { font-size: 11.4px; font-weight: 500; color: #4a5568; line-height: 1.6; margin-top: 3px; }
+
+
+  /* ===== 表紙（白地・左に大見出し／右にイラスト） ===== */
+  .cv { background: #fff; }
+  .cv .t { position: absolute; left: 72px; top: 104px; font-size: 74px; font-weight: 900; color: var(--blue); line-height: 1.34; letter-spacing: .02em; }
+  .cv .sub { position: absolute; left: 75px; top: 316px; font-size: 19px; font-weight: 800; color: #2a2f3a; letter-spacing: .05em; line-height: 1.7; }
+  .cv .meta { position: absolute; left: 75px; top: 392px; font-size: 14px; font-weight: 700; color: #8a93a3; letter-spacing: .06em; }
+  .cv .il { position: absolute; right: 44px; bottom: 74px; width: 560px; }
+  .cv .logo { position: absolute; left: 72px; bottom: 58px; height: 38px; }
+
+  /* ===== 目次 ===== */
+  .ix { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 26px; margin-top: 30px; }
+  .ix a, .ix div { display: flex; align-items: center; gap: 16px; background: #fff; border: 1px solid #d9e1ec; padding: 18px 20px; text-decoration: none; box-shadow: 0 4px 14px rgba(26,35,48,.05); }
+  .ix .n { flex: 0 0 auto; width: 46px; height: 46px; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; }
+  .ix .b { flex: 1; min-width: 0; display: block; }
+  .ix .nm { display: block; font-size: 19px; font-weight: 800; color: #1a2330; line-height: 1.35; }
+  .ix .ds { display: block; font-size: 12px; font-weight: 600; color: #7a8698; margin-top: 4px; line-height: 1.5; }
+  .ix .pg { flex: 0 0 auto; font-size: 12.5px; font-weight: 800; color: var(--blue); }
+  .ix .soon { border-style: dashed; opacity: .62; }
+  .ix .soon .n { background: #b9c4d4; }
+
+
+
+
+  /* ===== 目次（この資料の中身） ===== */
+  .ixh { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
+  .ixh .lb { background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; padding: 7px 16px; letter-spacing: .04em; white-space: nowrap; }
+  .ixh .tx { font-size: 15px; font-weight: 700; color: #4a5568; }
+  .ixh .pg { margin-left: auto; font-size: 13px; font-weight: 800; color: var(--blue); white-space: nowrap; }
+  .ixg { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 26px; margin-top: 14px; }
+  .ixg div { display: flex; align-items: center; gap: 13px; background: #fff; border: 1px solid var(--line); padding: 10px 14px; }
+  .ixg .n { flex: 0 0 auto; width: 30px; height: 30px; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 800; }
+  .ixg .nm { font-size: 14.5px; font-weight: 800; color: #1a2330; }
+  .ixg .ar { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 800; color: var(--blue); background: var(--tint); border: 1px solid #d5e3f4; padding: 3px 8px; margin-left: 8px; white-space: nowrap; }
+  .ixg .pg { margin-left: auto; font-size: 12px; font-weight: 800; color: #8a93a3; white-space: nowrap; }
+
+  /* ===== PDF出力 ===== */
+  @page { size: 1280px 720px; margin: 0; }
+  @media print {
+    body { padding: 0; background: #fff; }
+    * { box-shadow: none !important; }
+    .note { display: none; }
+    .deck { gap: 0; display: block; }
+    .slide-shell { width: 1280px; }
+    .slide-shell figcaption { display: none; }
+    .slide-shell .clip { height: 720px; overflow: hidden; border-radius: 0; box-shadow: none; }
+    .slide { transform: none; border: none; border-radius: 0; }
+    figure.slide-shell { page-break-after: always; break-after: page; margin: 0; }
+    figure.slide-shell:last-child { page-break-after: auto; }
+  }
+
+  /* ===== 表紙（ノウハウ形式） ===== */
+  .blue-bg { background: linear-gradient(135deg, #1c3a6b 0%, var(--blue) 46%, #3a76c4 100%); color: #fff; }
+  .waves { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .kcover .badge-row { position: absolute; top: 66px; left: 64px; display: flex; align-items: center; gap: 16px; }
+  .kcover .badge { background: var(--amber); color: #4a3605; font-size: 16px; font-weight: 800; padding: 10px 18px; border-radius: 8px; }
+  .kcover .badge-note { font-size: 20px; font-weight: 700; padding-bottom: 12px; border-bottom: 2px solid rgba(255,255,255,.85); letter-spacing: .04em; }
+  .kcover .sub { position: absolute; left: 66px; top: 236px; font-size: 23px; font-weight: 700; letter-spacing: .04em; }
+  .kcover .title { position: absolute; left: 62px; top: 288px; font-size: 68px; font-weight: 800; letter-spacing: .04em; line-height: 1.28; }
+  .kcover .title small { display: block; margin-top: 10px; font-size: 34px; font-weight: 800; }
+  .kcover .pills { position: absolute; right: 64px; top: 250px; display: grid; gap: 12px; }
+  .kcover .pills span { border: 1.5px solid rgba(255,255,255,.75); border-radius: 999px; padding: 7px 22px; font-size: 14px; font-weight: 800; text-align: center; background: rgba(255,255,255,.08); }
+  .kcover .date { position: absolute; left: 66px; top: 590px; font-size: 15px; font-weight: 600; letter-spacing: .18em; opacity: .8; }
+  .kcover .logo { position: absolute; right: 64px; bottom: 48px; height: 44px; }
+  /* ===== 縦方向をページいっぱいに使う ===== */
+  .s-body.fl { display: flex; flex-direction: column; padding-bottom: 62px; }
+  .s-body.fl > .grow { flex: 1 1 auto; min-height: 0; }
+  .s-body.fl > .band { flex: 0 0 auto; }
+  .cards.grow > div { display: flex; flex-direction: column; justify-content: flex-start; padding: 30px 28px; }
+  .cards.grow .ic { width: 58px; height: 58px; } .cards.grow .ic svg { width: 28px; height: 28px; }
+  .cards.grow .t { margin-top: 18px; font-size: 20px; } .cards.grow .d { margin-top: 12px; font-size: 14.5px; line-height: 1.95; }
+  .cards.grow .g { align-self: flex-start; margin-top: auto; font-size: 12px; padding: 5px 14px; }
+  .steps.grow { grid-auto-rows: 1fr; }
+  .tpl.grow { grid-auto-rows: 1fr; }
+  .chk.grow > div { display: flex; flex-direction: column; } .chk.grow .ci { flex: 1 1 0; display: flex; align-items: center; }
+  .chk.grow .ci::before { top: 50%; transform: translateY(-50%); }
+  .toc.grow { grid-auto-rows: 1fr; } .toc.grow > div { border-bottom: 1px solid var(--line); }
+  table.grow { height: 100%; }
+  .nts.grow { align-content: space-evenly; }
+  /* ===== 事例ページ（メリハリ版） ===== */
+  .vpt { margin-top: 10px; display: flex; align-items: center; gap: 14px; background: linear-gradient(90deg, #eaf2fc, #f6f9fd); border-left: 6px solid var(--blue-bright); padding: 9px 18px; }
+  .vpt p { font-size: 18px; font-weight: 900; color: var(--blue-deep); letter-spacing: .02em; }
+  .vpt .q { color: var(--blue-bright); display: flex; }
+  .vpt.red { background: linear-gradient(90deg, #fdecea, #fef7f6); border-left-color: #d6453d; } .vpt.red p { color: #7a1f1a; } .vpt.red .q { color: #d6453d; }
+  .vdt { display: grid; grid-template-columns: 1.15fr 1fr; gap: 18px; margin-top: 10px; align-items: start; }
+  .vdt + .learn { margin-top: 10px; }
+  .vsec + .vsec { margin-top: 10px; }
+  .vsec .vh { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 900; color: var(--blue-deep); padding-bottom: 6px; border-bottom: 2px solid var(--line); }
+  .vsec .vi { width: 24px; height: 24px; border-radius: 50%; background: var(--blue-deep); color: #fff; display: flex; align-items: center; justify-content: center; }
+  .vsec .vb { padding-top: 6px; }
+  .vsec .vb .i { position: relative; padding: 3px 0 3px 16px; font-size: 12.8px; font-weight: 500; color: #3a4252; line-height: 1.55; }
+  .vsec .vb .i::before { content: ""; position: absolute; left: 2px; top: 12px; width: 6px; height: 6px; background: var(--blue-bright); }
+  .vsec .vb b, .vpt b { color: #1a2330; background: linear-gradient(transparent 58%, #ffe27a 58%); font-weight: 800; }
+  .vsec.sm { margin-top: 8px; background: #f7f9fc; padding: 10px 12px; } .vsec.sm .vh { border-bottom-color: #e3e9f2; }
+  .vk { background: #fff; border: 1.5px solid var(--line); padding: 8px 14px; margin-bottom: 8px; }
+  .vk .k { font-size: 11.5px; font-weight: 800; color: var(--blue); }
+  .vk .n { font-size: 10.5px; font-weight: 600; color: #7a8698; margin-top: 2px; }
+  .vk.hero { background: var(--blue-deep); border: 0; color: #fff; padding: 14px 18px; }
+  .vk.hero .k { color: #a9c8f0; } .vk.hero .n { color: #c3d3ea; }
+  .vk.hero .v { font-size: 40px; font-weight: 900; line-height: 1.1; margin-top: 4px; } .vk.hero .v small { font-size: 16px; margin-left: 4px; }
+  .vk.hero.red { background: #7a1f1a; }
+  .vk.donut { display: flex; align-items: center; gap: 16px; } .vk.donut .k { font-size: 14px; }
+  .vk .dn { position: relative; width: 92px; height: 92px; flex: 0 0 auto; }
+  .vk .dn span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 900; color: #1a2330; }
+  .vk .dn small { font-size: 11px; }
+  .vk.chart .br { display: grid; grid-template-columns: 26px 1fr 96px; align-items: center; gap: 8px; margin-top: 6px; }
+  .vk.chart .bl { font-size: 11px; font-weight: 800; color: #7a8698; }
+  .vk.chart .bt { height: 16px; background: #f0f3f8; display: block; } .vk.chart .bt span { display: block; height: 100%; }
+  .vk.chart .bv { font-size: 14px; font-weight: 800; color: #5a6578; text-align: right; } .vk.chart .bv.hi { font-size: 18px; color: #1a2330; }
+  .vk.chart .bv small { font-size: 10.5px; margin-left: 2px; }
+  .vt { display: grid; gap: 8px; } .vt.c1 { grid-template-columns: 1fr; } .vt.c2 { grid-template-columns: 1fr 1fr; } .vt.c3 { grid-template-columns: 1fr 1fr 1fr; }
+  .vt > div { background: var(--tint); border-top: 3px solid var(--blue-bright); padding: 9px 12px; }
+  .vt .k { font-size: 11px; font-weight: 800; color: var(--blue); }
+  .vt .v { font-size: 22px; font-weight: 900; color: #1a2330; line-height: 1.2; margin-top: 2px; } .vt .v small { font-size: 11px; margin-left: 2px; color: #6b7789; }
+  .vt .n { font-size: 10px; font-weight: 600; color: #7a8698; margin-top: 2px; }
+  .learn .g > div { display: flex; gap: 10px; align-items: flex-start; padding-top: 7px; padding-bottom: 8px; }
+  .learn .ln { flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%; background: var(--amber); color: #4a3605; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .learn.red { border-color: #d6453d; } .learn.red .h { background: #d6453d; }
+  /* 事例ページも縦をページいっぱいに使う（下に余白を残さない） */
+  .s-body.fl > .dhd { flex: 0 0 auto; }
+  .vdt.grow { align-items: stretch; margin-top: 12px; }
+  .vdt.grow > .vl, .vdt.grow > .vr { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+  .vdt.grow > .vl { justify-content: space-between; }
+  .vdt.grow .vsec + .vsec { margin-top: 0; }
+  .vdt.grow .vsec { flex: 1 1 auto; display: flex; flex-direction: column; }
+  .vdt.grow .vsec .vb { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-evenly; }
+  .vdt.grow > .vr > * { flex: 1 1 auto; margin-bottom: 0; display: flex; flex-direction: column; justify-content: center; }
+  .vdt.grow > .vr > .vk.donut { flex-direction: row; justify-content: flex-start; }
+  .vdt.grow > .vr > .vt { display: grid; }
+  .vdt.grow > .vr > .vt > div { display: flex; flex-direction: column; justify-content: center; }
+  .vdt.grow > .vr > .vsec.sm { justify-content: flex-start; }
+  .vdt.measure > div > *, .vdt.measure .vb { flex: none !important; }
+  .s-body.fl > .learn { flex: 0 0 auto; margin-top: 14px; }
+  .vl.roomy .vsec .vb .i { font-size: 14px; line-height: 1.7; } .vl.roomy .vsec .vh { font-size: 15.5px; }
+  .learn .g > div { padding-top: 12px; padding-bottom: 13px; }
+  /* ツールのロゴ */
+  .cards .ic.lg { width: auto; height: 64px; border-radius: 0; background: none; gap: 10px; justify-content: flex-start; }
+  .cards .ic.lg img { height: 56px; width: 56px; object-fit: contain; }
+  .dhd .mark.lg { background: #fff; } .dhd .mark.lg img { width: 30px; height: 30px; object-fit: contain; }
+  /* ===== ノウハウ系の追加スライド型 ===== */
+  .kh { margin-top: 8px; }
+  .kh .t { font-size: 25px; font-weight: 900; color: #1a2330; line-height: 1.4; letter-spacing: .01em; }
+  .kh .t b { color: var(--blue-bright); }
+  .kh .l { margin-top: 8px; font-size: 13.5px; font-weight: 600; color: #5a6578; line-height: 1.7; }
+  .ld { margin-top: 18px; display: grid; gap: 10px; }
+  .ld .p { font-size: 14px; font-weight: 500; color: #3a4252; line-height: 1.85; }
+  .ld .p b { color: #1a2330; }
+  .cards { display: grid; gap: 16px; margin-top: 22px; }
+  .cards.c2 { grid-template-columns: 1fr 1fr; } .cards.c3 { grid-template-columns: 1fr 1fr 1fr; } .cards.c4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .cards.c6 { grid-template-columns: 1fr 1fr 1fr; }
+  .cards > div { border: 1.5px solid var(--line); border-top: 4px solid var(--blue); padding: 16px 18px 18px; background: #fff; }
+  .cards .ic { width: 40px; height: 40px; border-radius: 50%; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; }
+  .cards .t { margin-top: 10px; font-size: 16px; font-weight: 900; color: var(--blue-deep); line-height: 1.4; }
+  .cards .d { margin-top: 7px; font-size: 12.5px; font-weight: 500; color: #4a5568; line-height: 1.75; }
+  .cards .d b { color: #1a2330; }
+  .cards .g { margin-top: 10px; display: inline-block; background: var(--tint); color: var(--blue); font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 999px; }
+  .steps { margin-top: 20px; display: grid; gap: 10px; }
+  .steps > div { display: flex; align-items: center; gap: 16px; border: 1.5px solid var(--line); padding: 12px 18px; }
+  .steps .n { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: var(--blue-deep); color: #fff; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+  .steps .t { font-size: 15.5px; font-weight: 900; color: #1a2330; } .steps .t b { color: var(--blue-bright); }
+  .steps .d { margin-top: 3px; font-size: 12.5px; font-weight: 500; color: #5a6578; line-height: 1.6; }
+  .steps .sd { margin-left: auto; flex: 0 0 300px; font-size: 12px; font-weight: 700; color: var(--blue); background: var(--tint); padding: 8px 12px; line-height: 1.55; }
+  .ch { background: linear-gradient(135deg, #1a2e50 0%, #2c5c9c 70%, #3f7fc6 100%); }
+  .chp { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; text-align: center; }
+  .chp .s-logo { position: absolute; top: 38px; right: 56px; height: 30px; }
+  .chp .no { width: 92px; height: 92px; border: 2px solid rgba(255,255,255,.85); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 800; }
+  .chp .t { margin-top: 30px; font-size: 40px; font-weight: 900; letter-spacing: .04em; }
+  .chp .d { margin-top: 12px; font-size: 16px; font-weight: 700; opacity: .85; }
+  .chp .s-num { background: rgba(255,255,255,.18); }
+  table.kt td { font-size: 12.5px; } table.kt td.kc { font-weight: 800; color: #1a2330; background: var(--tint); }
+  table.kt td b { color: var(--blue-bright); }
+  .tpl { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px 20px; }
+  .tpl > div { border-left: 4px solid var(--blue); background: #f7f9fc; padding: 16px 20px; min-height: 118px; }
+  .tpl .at { font-size: 15px; font-weight: 900; color: var(--blue-deep); }
+  .tpl .al { margin-top: 7px; font-size: 13.5px; font-weight: 500; color: #3a4252; line-height: 1.8; }
+  .chk { margin-top: 16px; display: grid; gap: 16px; } .chk.c2 { grid-template-columns: 1fr 1fr; } .chk.c3 { grid-template-columns: 1fr 1fr 1fr; }
+  .chk > div { border: 1.5px solid var(--line); }
+  .chk .gh { background: var(--blue-deep); color: #fff; font-size: 15px; font-weight: 800; padding: 13px 16px; display: flex; align-items: center; gap: 9px; }
+  .chk .gh span { width: 20px; height: 20px; border-radius: 50%; background: #fff; color: var(--blue-deep); font-size: 11px; display: flex; align-items: center; justify-content: center; }
+  .chk .ci { position: relative; padding: 24px 16px 24px 42px; font-size: 14.5px; font-weight: 600; color: #3a4252; border-bottom: 1px solid var(--line); line-height: 1.5; }
+  .chk .ci:last-child { border-bottom: 0; }
+  .chk .ci::before { content: ""; position: absolute; left: 16px; top: 27px; width: 13px; height: 13px; border: 1.6px solid var(--blue); }
+  .ctab { margin-top: 20px; background: linear-gradient(90deg, #1a2e50, #2c5c9c); color: #fff; padding: 20px 26px; display: flex; align-items: center; gap: 20px; }
+  .ctab .t { font-size: 19px; font-weight: 900; } .ctab .d { margin-top: 5px; font-size: 12.5px; font-weight: 600; opacity: .85; line-height: 1.6; }
+  .ctab .bt { margin-left: auto; flex: 0 0 auto; background: #fff; color: var(--blue-deep); font-size: 14px; font-weight: 900; padding: 12px 24px; border-radius: 999px; }
+  .nts { margin-top: 24px; display: grid; gap: 16px; }
+  .nts .nt { position: relative; padding-left: 22px; font-size: 14px; font-weight: 500; color: #3a4252; line-height: 1.7; }
+  .nts .nt::before { content: "※"; position: absolute; left: 0; color: var(--blue-pale); }
+  .toc { margin-top: 22px; display: grid; gap: 12px; }
+  .toc > div { display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--line); padding: 14px 4px; }
+  .toc .n { font-size: 15px; font-weight: 800; color: var(--blue); width: 30px; }
+  .toc .nm { font-size: 18px; font-weight: 800; color: #1a2330; } .toc .nm small { margin-left: 14px; font-size: 12.5px; font-weight: 600; color: #7a8698; }
+  .toc .pg { margin-left: auto; font-size: 13px; font-weight: 700; color: #7a8698; }
+  .trend .l { flex: 0 0 150px; }
+  .trend .r { white-space: normal; text-align: right; line-height: 1.35; }
+  .cs td { padding-top: 11px; padding-bottom: 11px; }
+  .cs.cmp td { padding-top: 6px; padding-bottom: 6px; line-height: 1.45; }
+  /* 余白が出やすいページを埋める：通常の表は行を高く、カードは文字を大きく */
+  /* 行数が多めの表（10行前後）：詰めすぎず、ページを埋める中間の行高 */
+  table.kt.mid td { padding-top: 15px; padding-bottom: 15px; font-size: 14px; line-height: 1.6; }
+  table.kt.mid th { padding-top: 12px; padding-bottom: 12px; font-size: 14px; }
+  table.kt:not(.cmp):not(.mid) td { padding-top: 17px; padding-bottom: 17px; font-size: 13.5px; line-height: 1.65; }
+  .cards > div { padding: 22px 22px 24px; }
+  .cards .t { font-size: 17px; } .cards .d { font-size: 13.5px; line-height: 1.85; }
+  .ctab { margin-top: 28px; padding: 26px 30px; }
+  .steps > div { padding: 16px 20px; } .steps .t { font-size: 16.5px; } .steps .d { font-size: 13.5px; }
+  /* ===== 部門別の活用アイデア集 ===== */
+  .st { display: inline-block; font-size: 12px; font-weight: 800; padding: 4px 11px; border-radius: 999px; white-space: nowrap; }
+  .st.s1 { background: var(--amber); color: #4a3605; } .st.s2 { background: #dbe8f7; color: var(--blue-deep); } .st.s3 { background: var(--blue-deep); color: #fff; }
+  .ld { display: inline-flex; gap: 4px; align-items: center; }
+  .ld i { width: 10px; height: 10px; border-radius: 50%; background: #dfe5ee; } .ld i.on { background: var(--blue-bright); }
+  .imap { margin-top: 16px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .imap > div { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+  .imap .ph { background: var(--blue-deep); color: #fff; font-size: 16px; font-weight: 800; text-align: center; padding: 13px 18px 13px 8px; clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%); }
+  .imap .ii { flex: 1 1 0; border: 1.5px solid var(--line); border-top: 3px solid var(--blue); padding: 13px 14px; display: flex; flex-direction: column; background: #fff; }
+  .imap .ii .n { font-size: 15px; font-weight: 900; color: var(--blue-bright); }
+  .imap .ii .t { margin-top: 4px; font-size: 16px; font-weight: 900; color: #1a2330; line-height: 1.45; }
+  .imap .ii .m { margin-top: auto; padding-top: 8px; display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+  .irm { margin-top: 18px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .irm > div { border: 1.5px solid var(--line); display: flex; flex-direction: column; }
+  .irm .ph { padding: 15px 18px; font-size: 20px; font-weight: 900; display: flex; align-items: center; gap: 12px; }
+  .irm .ph span { font-size: 12px; font-weight: 800; letter-spacing: .08em; }
+  .irm .c1 .ph { background: var(--amber); color: #4a3605; } .irm .c2 .ph { background: #dbe8f7; color: var(--blue-deep); } .irm .c3 .ph { background: var(--blue-deep); color: #fff; }
+  .irm .d { padding: 15px 18px 0; font-size: 14px; font-weight: 500; color: #4a5568; line-height: 1.75; }
+  .irm .ls { padding: 12px 18px; flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-evenly; gap: 6px; }
+  .irm .ls p { font-size: 15.5px; font-weight: 800; color: #1a2330; padding: 7px 0; border-bottom: 1px solid var(--line); }
+  .irm .ls p:last-child { border-bottom: 0; }
+  .irm .ls.many { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; align-content: space-evenly; } .irm .ls.many p { font-size: 14.5px; padding: 8px 0; }
+  .irm .nx { margin: 0 18px 16px; padding: 11px 14px; background: var(--tint); font-size: 13px; font-weight: 600; color: #3a4252; line-height: 1.65; }
+  .irm .nx b { display: block; font-size: 12px; font-weight: 800; color: var(--blue); }
+  .ihd { margin-top: 8px; display: flex; align-items: center; gap: 16px; }
+  .ihd .no { flex: 0 0 auto; background: var(--blue-deep); color: #fff; font-size: 24px; font-weight: 800; padding: 9px 16px; }
+  .ihd .t { font-size: 26px; font-weight: 900; color: #1a2330; line-height: 1.3; }
+  .ihd .d { margin-top: 2px; font-size: 14px; font-weight: 700; color: #5a6578; }
+  .ihd .m { margin-left: auto; margin-right: 150px; display: flex; align-items: center; gap: 10px; }
+  .ihd .lb { margin-left: 6px; font-size: 12px; font-weight: 700; color: #6b7789; white-space: nowrap; }
+  .iba { margin-top: 8px; display: grid; grid-template-columns: 1fr 30px 1.16fr 228px; align-items: center; gap: 8px; }
+  .iba > div { align-self: stretch; padding: 12px 18px; display: flex; flex-direction: column; justify-content: center; }
+  .iba .bf { background: #f1f3f7; } .iba .af { background: var(--tint); border-left: 5px solid var(--blue-bright); }
+  .iba .k { font-size: 13px; font-weight: 800; color: #6b7789; } .iba .af .k { color: var(--blue-bright); }
+  .iba .v { margin-top: 4px; font-size: 17px; font-weight: 800; color: #1a2330; line-height: 1.55; } .iba .bf .v { color: #4a5568; font-weight: 700; }
+  .iba .ar { justify-self: center; width: 0; height: 0; border-left: 18px solid var(--blue-bright); border-top: 15px solid transparent; border-bottom: 15px solid transparent; }
+  .iba .il { width: 228px; height: 158px; object-fit: contain; }
+  .ifl { margin-top: 8px; }
+  .ifl .pd { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 800; color: var(--blue-deep); }
+  .ifl .pd b { margin-right: 4px; } .ifl .pd span { background: #fff; border: 1.5px solid #cfdcee; color: var(--blue); font-size: 13px; font-weight: 800; padding: 3px 12px; border-radius: 999px; }
+  .ifl .pd em { margin-left: auto; display: flex; align-items: center; gap: 6px; font-style: normal; font-size: 12.5px; font-weight: 700; color: #5a6578; }
+  .ifl .pd em i { width: 13px; height: 13px; } .ifl .pd em i.h { background: var(--amber); } .ifl .pd em i.a { margin-left: 10px; background: var(--blue); }
+  .ifl .fw { margin-top: 7px; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 4px; }
+  .ifl .fw > div { padding: 8px 28px 8px 13px; min-height: 72px; display: flex; align-items: center; gap: 10px; clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%); }
+  .ifl .fw > .a { background: var(--blue); color: #fff; } .ifl .fw > .h { background: #fde9b4; color: #3a2c05; }
+  .ifl .fw .n { flex: 0 0 auto; width: 32px; height: 32px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; }
+  .ifl .fw > .a .n { color: var(--blue); } .ifl .fw > .h .n { color: #a8780a; }
+  .ifl .fw p { font-size: 14.5px; font-weight: 800; line-height: 1.4; }
+  .ifl .fw small { display: block; font-size: 11.5px; font-weight: 800; opacity: .8; }
+  .igr { margin-top: 10px; display: grid; grid-template-columns: 1.08fr 1fr; gap: 12px; }
+  .igr .rows { display: grid; grid-auto-rows: 1fr; gap: 5px; min-height: 0; }
+  .igr .rows > div { display: grid; grid-template-columns: 124px 1fr; align-items: stretch; border: 1.5px solid var(--line); }
+  .igr .rows .h { display: flex; align-items: center; padding: 4px 11px; background: var(--tint); font-size: 13.5px; font-weight: 900; color: var(--blue-deep); }
+  .igr .rows .v { display: flex; align-items: center; padding: 4px 12px; font-size: 14px; font-weight: 700; color: #3a4252; line-height: 1.45; }
+  .igr .fs { display: flex; flex-direction: column; background: #fff9e8; border: 1.5px solid #f2d98d; padding: 9px 16px; min-height: 0; }
+  .igr .fs .h { font-size: 14px; font-weight: 900; color: #7a5a06; padding-bottom: 5px; border-bottom: 2px solid #f2d98d; }
+  .igr .fs .b { flex: 1 1 auto; display: flex; align-items: center; padding-top: 4px; font-size: 14.5px; font-weight: 600; color: #3a3320; line-height: 1.6; }
+  .cards .ex { display: block; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 14.5px; font-weight: 700; color: #3a4252; line-height: 1.9; }
+  table.kt b.big { font-size: 21px; font-weight: 900; }
+  /* 図解 */
+  .kcover .pills.row { right: auto; left: 66px; top: 500px; display: flex; }
+  .kcover.pan.teal { --pn: #e3f4f0; background: linear-gradient(135deg, #0a4f54 0%, #0f8078 100%) !important; }
+  .kcover.pan.violet { --pn: #ece8f8; background: linear-gradient(135deg, #2e2466 0%, #5a3fb0 100%) !important; }
+  .kcover.pan.amber { --pn: #fbeee2; background: linear-gradient(135deg, #7a2c10 0%, #c9601f 100%) !important; }
+  .kcover.pan.rose { --pn: #fbe9f1; background: linear-gradient(135deg, #6e1a44 0%, #b83a76 100%) !important; }
+  .kcover.pan .sub { font-size: 20px; }
+  .kcover.pan .cvil { width: 500px; right: 0; top: 0; height: 600px; border-radius: 0; background: var(--pn); }
+  .kcover.pan .cvil img { width: 464px; height: 400px; mix-blend-mode: multiply; }
+  .cvil { position: absolute; right: 44px; top: 96px; width: 450px; height: 450px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; }
+  .cvil img { width: 372px; height: 372px; object-fit: contain; }
+  .cards .cil { display: block; height: 182px; width: 100%; object-fit: contain; flex: 0 0 auto; }
+  .cards.grow:has(.cil) > div { padding: 12px 24px 14px; }
+  .cards:has(.cil) .t { margin-top: 8px; } .cards:has(.cil) .d { margin-top: 6px; font-size: 13.5px; line-height: 1.7; } .cards:has(.cil) .ex { margin-top: 9px; padding-top: 8px; font-size: 14px; line-height: 1.65; }
+  .cards:has(.cil) .g { margin-top: 8px; }
+  .imap .ii .n { display: flex; align-items: center; justify-content: space-between; }
+  .iar { margin-top: 14px; display: grid; grid-template-columns: repeat(3, 1fr); background: linear-gradient(90deg, #f7d778, #5a93d3 55%, #1a2e50); clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 50%, calc(100% - 22px) 100%, 0 100%); }
+  .iar span { padding: 8px 18px; font-size: 13.5px; font-weight: 800; color: #fff; text-align: center; } .iar span:first-child { color: #4a3605; }
+  .iar + .irm { margin-top: 12px; }
+  .istk { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .istk .pl { flex: 1 1 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; min-height: 0; }
+  .istk .pl > div { position: relative; border: 1.5px solid var(--line); border-top: 5px solid var(--blue); padding: 16px 20px; display: flex; flex-direction: column; }
+  .istk .ic { width: 50px; height: 50px; border-radius: 50%; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; }
+  .istk .pl .ic { position: absolute; top: 16px; right: 18px; }
+  .istk .ro { font-size: 13px; font-weight: 800; color: var(--blue-bright); }
+  .istk .t { margin-top: 3px; font-size: 21px; font-weight: 900; color: var(--blue-deep); line-height: 1.3; }
+  .istk .il { flex: 1 1 0; min-height: 0; width: 100%; object-fit: contain; margin: 8px 0; }
+  .istk .pl .d { margin-top: 10px; font-size: 14.5px; font-weight: 600; color: #4a5568; line-height: 1.75; }
+  .istk .d b { color: #1a2330; }
+  .istk .ex { margin-top: auto; background: var(--tint); padding: 10px 14px; font-size: 14px; font-weight: 800; color: #1a2330; line-height: 1.55; }
+  .istk .ex b { display: block; font-size: 12px; color: var(--blue); }
+  .istk .fd { flex: 0 0 auto; background: var(--blue-deep); color: #fff; padding: 15px 24px; display: flex; align-items: center; gap: 18px; }
+  .istk .fd .ic { flex: 0 0 auto; background: #fff; } .istk .fd .ro { color: #a9c8f0; } .istk .fd .t { color: #fff; white-space: nowrap; }
+  .istk .fd .d { margin-left: 26px; font-size: 14.5px; font-weight: 600; line-height: 1.7; color: #dbe6f4; } .istk .fd .d b { color: #fff; }
+  .inum { margin-top: 16px; display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 12px; }
+  .inum > div { border: 1.5px solid var(--line); border-top: 4px solid var(--blue); padding: 11px 16px; display: flex; flex-direction: column; min-height: 0; }
+  .inum .co { font-size: 15.5px; font-weight: 900; color: #1a2330; line-height: 1.35; }
+  .inum .ac { margin-top: 3px; font-size: 13.5px; font-weight: 600; color: #5a6578; line-height: 1.45; }
+  .inum .v { margin-top: 8px; font-size: 15px; font-weight: 800; color: #5a6578; } .inum .v b { font-size: 46px; font-weight: 900; color: var(--blue-bright); line-height: 1.15; margin: 0 3px; }
+  .inum .bs { margin-top: 4px; } .inum .bs p { display: grid; grid-template-columns: 36px 1fr 52px; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: #5a6578; }
+  .inum .bs i { height: 9px; background: #eef1f6; display: block; } .inum .bs u { display: block; height: 100%; background: #b9c7da; } .inum .bs u.on { background: var(--blue-bright); }
+  .inum .n { margin-top: auto; padding-top: 6px; font-size: 13px; font-weight: 600; color: #6b7789; line-height: 1.5; }
+  .inum.tall > div { display: flex; flex-direction: column; }
+  .inum.tall .bs { flex: 1; display: flex; flex-direction: column; justify-content: space-evenly; margin: 14px 0; }
+  .inum.tall .bs p { grid-template-columns: 44px 1fr 72px; font-size: 15px; font-weight: 700; }
+  .inum.tall .bs p span:last-child { font-size: 17px; text-align: right; }
+  .inum.tall .bs i { height: 30px; }
+  .inum.tall .bs u { height: 100%; }
+  .ifm { margin-top: 14px; display: flex; align-items: stretch; gap: 8px; }
+  .ifm > div { flex: 1 1 0; background: var(--tint); padding: 10px 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; }
+  .ifm .k { font-size: 12.5px; font-weight: 800; color: var(--blue); }
+  .ifm .v { margin-top: 2px; font-size: 25px; font-weight: 900; color: #1a2330; line-height: 1.2; } .ifm .v small { margin-left: 2px; font-size: 12px; font-weight: 800; color: #5a6578; }
+  .ifm .tt { flex: 1.3 1 0; background: var(--blue-deep); } .ifm .tt .k { color: #a9c8f0; } .ifm .tt .v { color: #fff; } .ifm .tt .v small { color: #dbe6f4; }
+  .ifm .op { align-self: center; font-size: 25px; font-weight: 900; color: var(--blue); }
+  .ifb { margin-top: 14px; display: grid; grid-template-columns: 1.15fr 1fr; gap: 14px; }
+  .ifb .bc { border: 1.5px solid var(--line); padding: 14px 18px; display: flex; flex-direction: column; justify-content: space-between; }
+  .ifb .h { font-size: 15px; font-weight: 900; color: var(--blue-deep); }
+  .ifb .br { display: grid; grid-template-columns: 66px 1fr; align-items: center; gap: 8px; }
+  .ifb .br .l { font-size: 13px; font-weight: 800; color: #3a4252; }
+  .ifb .tr { display: flex; height: 50px; }
+  .ifb .tr span { display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #fff; text-align: center; line-height: 1.25; border-right: 2px solid #fff; }
+  .ifb .tr .gr { background: #93a3b8; } .ifb .tr .bl { background: var(--blue); } .ifb .tr .am { background: var(--amber); color: #4a3605; } .ifb .tr .am2 { background: #f7d778; color: #4a3605; }
+  .ifb .n { font-size: 12.5px; font-weight: 600; color: #5a6578; line-height: 1.6; }
+  .ifb .mt, .imx .ck { display: grid; grid-auto-rows: 1fr; gap: 9px; min-height: 0; }
+  .ifb .mt > div, .imx .ck > div { border: 1.5px solid var(--line); padding: 9px 14px; display: flex; align-items: center; gap: 12px; }
+  .ifb .ic, .imx .ic { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: var(--tint); color: var(--blue); display: flex; align-items: center; justify-content: center; }
+  .ifb .t, .imx .ck .t { font-size: 15px; font-weight: 900; color: var(--blue-deep); }
+  .ifb .mt .d, .imx .ck .d { margin-top: 1px; font-size: 12.8px; font-weight: 600; color: #4a5568; line-height: 1.5; }
+  .imx { margin-top: 14px; display: grid; grid-template-columns: 1.45fr 1fr; gap: 16px; }
+  .imx table { width: 100%; height: 100%; border-collapse: collapse; }
+  .imx th { background: var(--blue-deep); color: #fff; font-size: 11.5px; font-weight: 800; padding: 6px 3px; line-height: 1.25; vertical-align: middle; }
+  .imx td { border-bottom: 1px solid var(--line); text-align: center; padding: 3px; }
+  .imx tr:nth-child(odd) td { background: #f7f9fc; }
+  .imx td.k { text-align: left; font-size: 13px; font-weight: 800; color: #1a2330; white-space: nowrap; padding-left: 10px; } .imx td.k b { margin-right: 8px; color: var(--blue-bright); }
+  .imx td i { display: inline-block; width: 15px; height: 15px; border-radius: 50%; background: var(--blue-bright); vertical-align: middle; }
+  .ilad { margin-top: 16px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; align-items: end; }
+  .ilad > div { position: relative; display: flex; flex-direction: column; padding: 16px 18px 14px; color: #fff; }
+  .ilad .c1 { height: 76%; background: #5a93d3; } .ilad .c2 { height: 84%; background: var(--blue); } .ilad .c3 { height: 92%; background: #24497e; } .ilad .c4 { height: 100%; background: var(--blue-deep); }
+  .ilad .n { font-size: 14px; font-weight: 900; opacity: .8; }
+  .ilad .ic { position: absolute; top: 14px; right: 14px; width: 44px; height: 44px; border-radius: 50%; background: #fff; color: var(--blue); display: flex; align-items: center; justify-content: center; }
+  .ilad .t { margin-top: 12px; font-size: 21px; font-weight: 900; }
+  .ilad .d { margin-top: 8px; font-size: 14.5px; font-weight: 600; line-height: 1.7; }
+  .ilad .eg { margin-top: 12px; padding: 9px 12px; border: 1.5px solid rgba(255,255,255,.55); font-size: 13.5px; font-weight: 700; line-height: 1.6; }
+  .ilad .nx { margin-top: auto; background: #fff; color: #1a2330; padding: 9px 12px; font-size: 13px; font-weight: 700; line-height: 1.5; }
+  .ilad .nx b { display: block; font-size: 11.5px; font-weight: 800; color: var(--blue); }
+  .icase { margin-top: 10px; margin-right: 60px; font-size: 13px; font-weight: 600; color: #4a5568; line-height: 1.5; }
+  .icase b { margin-right: 10px; font-size: 13px; font-weight: 800; color: var(--blue); }
+</style>
+
+<style id="ebook-embed-overrides">
+  body { padding: 0 !important; background: #e9edf3 !important; }
+  .note { display: none !important; }
+  .deck { gap: 16px !important; }
+  .slide-shell { width: 1280px !important; }
+  .slide-shell figcaption { display: none !important; }
+  .slide-shell .clip { height: 720px !important; border-radius: 0 !important; box-shadow: none !important; }
+  .slide { transform: none !important; border: none !important; border-radius: 0 !important; }
+</style>
+</head>
+<body>
+  <p class="note">製品の使い分けとライセンス確認ガイド｜全12スライド／事例・数値は各社・各機関の公開情報にもとづく</p>
+  <div class="deck">
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide blue-bg kcover pan rose">
+        <svg class="waves" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <path d="M700,-80 C980,60 820,300 1120,380 C1320,433 1360,560 1280,760 L1380,760 L1380,-80 Z" fill="rgba(255,255,255,0.07)"/>
+          <path d="M880,-120 C1150,40 980,260 1240,330 L1340,330 L1340,-120 Z" fill="rgba(90,160,230,0.28)"/>
+          <path d="M-80,560 C240,480 420,660 760,600 C1040,551 1180,640 1300,760 L-80,760 Z" fill="rgba(20,40,80,0.22)"/>
+          <path d="M-80,640 C300,560 560,720 900,660 C1120,621 1240,690 1310,760 L-80,760 Z" fill="rgba(90,160,230,0.18)"/>
+        </svg>
+        <div class="badge-row"><span class="badge">お役立ち資料</span><span class="badge-note">バイテック法人AI研修</span></div>
+        <p class="sub">Copilot・Copilot Studio・Power Automateの選び方</p>
+        <h1 class="title"><small style="margin:-8px 0 0;line-height:1.15;font-size:32px">製品の使い分けと</small>ライセンス<br>確認ガイド</h1>
+        <div class="pills row"><span>製品の選び方</span><span>ライセンスの確認点</span><span>契約前の15項目</span></div>
+        <div class="cvil"><img src="/biz/ebooks/ebook-36/assets/illus/cover-book.webp" alt=""></div>
+        <p class="date">UPDATE 2026.10</p>
+        <img class="logo" src="/biz/ebooks/ebook-36/assets/biz-logo-w.svg" alt="byTech BUSINESS">
+      </div>
+    </div><figcaption>表紙</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">Contents</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-36/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd" style="margin-top:4px"><p class="t" style="font-size:27px">目次</p></div>
+        <div class="grow toc"><div><span class="n">01</span><span class="nm">製品の役割と選び方<small>4つの製品の関係</small></span><span class="pg">P.2 - 3</span></div><div><span class="n">02</span><span class="nm">製品ごとの確認事項<small>Copilot、Copilot Studio、Power Automate</small></span><span class="pg">P.4 - 6</span></div><div><span class="n">03</span><span class="nm">データと運用<small>資料、権限、体制</small></span><span class="pg">P.7 - 8</span></div><div><span class="n">04</span><span class="nm">契約前の確認<small>確かめる15項目</small></span><span class="pg">P.9</span></div></div>
+        <p class="s-foot">2026年10月時点の公式資料をもとに整理しました。価格は記載していません。</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>目次</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">製品の役割</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-36/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t"><b>Microsoft 365を土台</b>に、3つの製品を役割で使い分ける</p><p class="l">それぞれ得意な作業が違います。名称はMicrosoft 365 CopilotからMicrosoft Copilotに変わっています。</p></div>
+        <div class="grow istk">
+          <div class="pl"><div><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span><p class="ro">個人の作業を速くする</p><p class="t">Microsoft Copilot</p><p class="d"><b>読む・探す・書く・会議を追う</b>。メールやファイルをまたいで整理します。</p><img class="il" src="/biz/ebooks/ebook-36/assets/illus/product-copilot.webp" alt=""><p class="ex"><b>例えば</b>議事録、文書の初稿、メール、社内情報の検索</p></div><div><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span><p class="ro">チームの判断をそろえる</p><p class="t">Copilot Studio</p><p class="d"><b>独自の業務エージェント</b>を作ります。知識と業務の手順を組み合わせます。</p><img class="il" src="/biz/ebooks/ebook-36/assets/illus/product-studio.webp" alt=""><p class="ex"><b>例えば</b>FAQ、制度の照会、知識検索、処理の対話窓口</p></div><div><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.2v2.6M12 19.2v2.6M4.4 4.4l1.9 1.9M17.7 17.7l1.9 1.9M2.2 12h2.6M19.2 12h2.6M4.4 19.6l1.9-1.9M17.7 6.3l1.9-1.9"/></svg></span><p class="ro">決まった手順を動かす</p><p class="t">Power Automate</p><p class="d"><b>登録・通知・承認・転記</b>を実行します。標準連携から基幹連携まで広げられます。</p><img class="il" src="/biz/ebooks/ebook-36/assets/illus/product-automate.webp" alt=""><p class="ex"><b>例えば</b>申請、督促、帳票、ERP連携、RPA</p></div></div>
+          <div class="fd"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.2 3.2 0 010 6.3M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></span><div><p class="ro">資料と台帳を置く土台</p><p class="t">Microsoft 365</p></div><p class="d"><b>Teams、SharePoint、Lists、Forms、Bookings</b>などで、入力・共有・共同編集・予約を行います。資料の置き場所と権限を整えることが、上の3つを使う前提になります。</p></div>
+        </div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>4つの製品の関係</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">製品の選び方</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-36/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t"><b>やりたいこと</b>から製品を選ぶ</p><p class="l">まず既存の契約で試せる範囲を確かめ、足りない部分だけ次の製品へ進みます。</p></div>
+        <table class="grow cs kt mid tall">
+          <colgroup><col style="width:230px"><col style="width:260px"><col style="width:320px"><col></colgroup>
+          <tr><th>製品</th><th>主な使い方</th><th>着手する業務</th><th>考え方</th></tr>
+          <tr><td class="kc">Microsoft 365</td><td>入力・共有・共同編集・予約</td><td>入力フォーム、共同台帳、拠点連絡、予約</td><td>最初に既存契約の機能とアクセスを確認する</td></tr>
+          <tr><td class="kc">Microsoft Copilot</td><td>読む・探す・書く・会議を追う</td><td>議事録、文書の初稿、メール、社内情報の検索</td><td>対象データ、利用者、出力の確認を明確にする</td></tr>
+          <tr><td class="kc">Copilot Studio</td><td>独自の業務エージェントを作る</td><td>FAQ、制度の照会、知識検索、処理の対話窓口</td><td>知識の整備、認証、有人への経路、課金を確認する</td></tr>
+          <tr><td class="kc">Power Automate</td><td>登録・通知・承認・転記を実行する</td><td>申請、督促、帳票、ERP連携、RPA</td><td>標準連携から、基幹・AI・無人RPAへ段階的に広げる</td></tr>
+        </table>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>製品の選び方</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">Copilotの確認事項</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-36/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t"><b>Copilot</b>は3つの区分を分けて確認する</p><p class="l">Copilot Chat、Basic、有償の区分で、使える範囲が変わります。</p></div>
+        <table class="grow cs kt mid tall">
+          <colgroup><col style="width:170px"><col style="width:290px"><col style="width:340px"><col></colgroup>
+          <tr><th>確認する項目</th><th>できること</th><th>導入時に確認すること</th><th>判断の補足</th></tr>
+          <tr><td class="kc">Microsoft 365の既存機能</td><td>Teams、SharePoint、Lists、Forms、Bookings等で入力・予約を電子化</td><td>契約ごとのアプリ利用権、Teamsの有無、現場・外部利用者の条件</td><td>既存契約の利用権を確認。Microsoft 365のすべてのプランに全機能があるわけではない。</td></tr>
+          <tr><td class="kc">Copilot Chatの区分</td><td>Web調査、文章生成、アップロード資料の処理などから着手</td><td>Copilot Chat（Basic）、Microsoft 365 Copilot（Basic）、有償の別。テナント設定、対象データ</td><td>Outlook内では対応する組織情報を参照する機能がある。全Microsoft 365の広い組織横断検索とは範囲が異なる。</td></tr>
+          <tr><td class="kc">Microsoft Copilot</td><td>会議・メール・ファイルをまたぐ情報整理とOfficeでの支援</td><td>追加ライセンス、前提のMicrosoft 365契約、300人以下はBusiness版、利用ポリシー</td><td>E7プランには同梱。デバイス単位のライセンスは対象外。事例では当時の製品名を残す場合がある。</td></tr>
+          <tr><td class="kc">簡易知識エージェント</td><td>Agent Builder等で限定した資料から知識回答</td><td>簡易機能で足りるか、データ・権限・公開範囲、未割当者の社内データ参照は従量課金</td><td>簡易機能で足りるなら、Copilot Studioを使わない選択もある。</td></tr>
+        </table>
+        <p class="s-foot">出典：Microsoft Learn（2026年10月に確認）/microsoft-365/bookings/bookings-overview、/copilot/overview、/microsoft-365/copilot/copilot-license-options</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>Copilotの確認事項</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">Copilot Studioの確認事項</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-36/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t"><b>Copilot Studio</b>は実行方式で機能と課金が変わる</p><p class="l">作る時の権限と、公開して使う時の条件を分けて確認します。</p></div>
+        <table class="grow cs kt mid tall">
+          <colgroup><col style="width:170px"><col style="width:290px"><col style="width:340px"><col></colgroup>
+          <tr><th>確認する項目</th><th>できること</th><th>導入時に確認すること</th><th>判断の補足</th></tr>
+          <tr><td class="kc">Copilot Studio</td><td>対話・知識・業務ツール・フローを組み合わせる</td><td>作成者の権限、環境、実行方式、接続、公開先、実行者のID</td><td>方式で機能と課金が変わる。自然言語で作成できても接続・例外・テスト・運用の設計は必要。プレビューは本番対象と区別。</td></tr>
+          <tr><td class="kc">Studioの利用料金</td><td>Copilot Creditsによる容量・従量課金等を使う</td><td>利用チャネル、実行主体、エージェントの方式、利用量</td><td>有償Copilot利用者の認証済み社内利用は条件付きで無課金。自律実行等は課金。GitHub Copilot方式は作成時から課金。</td></tr>
+          <tr><td class="kc">Studio試用版</td><td>作成してテストチャットで動作を確認</td><td>公開権と本番用の課金・ライセンス設定</td><td>試用版での作成・テストと、本番への公開は別条件。</td></tr>
+          <tr><td class="kc">Studioとフローの接続</td><td>エージェントからフローをツールとして呼び出す</td><td>対応トリガー・応答、公開、接続、呼出者の認証</td><td>既存フローはエージェント用トリガー・応答への変更が必要。同期応答、100秒以内、ソリューション内が条件。課金区分も確認。</td></tr>
+        </table>
+        <p class="s-foot">出典：Microsoft Learn（2026年10月に確認）/microsoft-copilot-studio/fundamentals-what-is-copilot-studio、/microsoft-copilot-studio/requirements-messages-management、/microsoft-copilot-studio/billing-licensing、/microsoft-copilot-studio/flow-modify-use-with-agent</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>Copilot Studioの確認事項</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">Power Automateの確認事項</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-36/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t"><b>Power Automate</b>はコネクタとトリガーで条件が変わる</p><p class="l">標準連携の範囲か、Premiumや追加容量が必要かを確認します。</p></div>
+        <table class="grow cs kt mid tall">
+          <colgroup><col style="width:170px"><col style="width:290px"><col style="width:340px"><col></colgroup>
+          <tr><th>確認する項目</th><th>できること</th><th>導入時に確認すること</th><th>判断の補足</th></tr>
+          <tr><td class="kc">Power Automate標準連携</td><td>Forms・SharePoint・Teams等を使うクラウドフロー</td><td>各コネクタの標準／Premium区分、実行タイプ</td><td>標準コネクタのみならMicrosoft 365の権利で実装できる範囲がある。AI・SQL・HTTP・カスタム等を含む場合は別途確認。</td></tr>
+          <tr><td class="kc">Premium・基幹連携</td><td>SQL、ERP、カスタムAPI等へ接続</td><td>自動／定期／手動トリガー、所有者・実行者・Process契約</td><td>追加ライセンスが必要になりうる。自動・定期と手動で適用者が異なる。単一の共有アカウントで人数分の権利を代用しない。</td></tr>
+          <tr><td class="kc">有人・無人RPA</td><td>APIがない既存画面を操作</td><td>Premium／Process等、マシン、資格情報、実行同時数</td><td>個人のWindowsでの試行と、共有・クラウド起動・無人運用の権利は別。画面変更の保守負担も見積もる（当社の助言）。</td></tr>
+          <tr><td class="kc">AI Builder・文書処理</td><td>PDFや画像の項目を抽出</td><td>課金はCopilot Credits中心。帳票形式、必須項目・型・重複、低信頼結果の確認工数</td><td>2026年11月1日以降の新規・更新ライセンスに付属クレジットなし。Premiumの要否は公式の2ページで記載が異なるため、契約前に要確認。</td></tr>
+        </table>
+        <p class="s-foot">出典：Microsoft Learn（2026年10月に確認）/power-platform/admin/power-automate-licensing/faqs、/ai-builder/administer-licensing</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>Power Automateの確認事項</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">データの確認事項</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-36/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">回答の質は<b>資料と権限</b>で決まる</p><p class="l">製品の設定より先に、読ませる資料と見せる範囲を整えます。</p></div>
+        <table class="grow cs kt mid tall">
+          <colgroup><col style="width:170px"><col style="width:290px"><col style="width:340px"><col></colgroup>
+          <tr><th>確認する項目</th><th>できること</th><th>導入時に確認すること</th><th>判断の補足</th></tr>
+          <tr><td class="kc">知識の鮮度と構造</td><td>SharePoint、Dataverse、Web等を知識ソースにする</td><td>対応ソース、認証、サイズ・更新・接続条件</td><td>資料の責任者・適用日・対象者を持たせる。複雑な規程は分割・条件確認・Q&A検索を併用。</td></tr>
+          <tr><td class="kc">組織データのアクセス</td><td>既存の閲覧権限に基づいて回答する</td><td>SharePoint等の過剰共有、ラベル、外部共有</td><td>Microsoft Copilotのプロンプト・応答・Graph参照データは基盤モデル学習に不使用。過剰共有の修正は必要。外部は別途確認。</td></tr>
+          <tr><td class="kc">外部顧客・Web公開</td><td>顧客向けにエージェントを公開する</td><td>公開知識と内部情報の分離、本人確認、有人経路</td><td>事例は社内検証後に公開範囲を5%→50%→100%へ拡大。FAQ・個人別情報・予約変更で認証条件とテストを分ける（助言）。</td></tr>
+        </table>
+        <p class="s-foot">出典：Microsoft Learn（2026年10月に確認）/microsoft-copilot-studio/knowledge-copilot-studio、/microsoft-365/copilot/microsoft-365-copilot-privacy</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>データの確認事項</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">運用の確認事項</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-36/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">公開後も<b>止まらない体制</b>を決めておく</p><p class="l">担当者の退職や画面の変更でも止まらないように、所有者と手順を決めます。</p></div>
+        <table class="grow cs kt mid tall">
+          <colgroup><col style="width:170px"><col style="width:290px"><col style="width:340px"><col></colgroup>
+          <tr><th>確認する項目</th><th>できること</th><th>導入時に確認すること</th><th>判断の補足</th></tr>
+          <tr><td class="kc">取引を伴う操作</td><td>承認・登録・変更などの業務を実行する</td><td>呼出者と接続先の権限、確認、監査・再実行</td><td>回答用と操作用の経路を設計し、確定値・承認・重複防止・失敗時の処理を定める。</td></tr>
+          <tr><td class="kc">運用の継続</td><td>部署の改善を長く使えるようにする</td><td>所有者・副担当・環境・接続・ログ・利用量</td><td>公式では、所有者のいないフローは対応しないと14日で停止する。所有者の退職、資格情報の失効、容量の超過を監視する。</td></tr>
+          <tr><td class="kc">本番前の評価</td><td>代表質問・例外・操作を検証する</td><td>正解セット、誤回答、回答不能、権限、失敗・再処理</td><td>りそなの事例のように一般回答、過去Q&A、有人支援を段階的に使う。全件自己解決だけを目標にしない。</td></tr>
+        </table>
+        <p class="s-foot">出典：Microsoft Learn（2026年10月に確認）/microsoft-copilot-studio/advanced-flow、/power-platform/admin/power-automate-licensing/faqs</p>
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>運用の確認事項</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">契約前の確認</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-36/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">契約前に確かめる<b>15項目</b></p></div>
+        <div class="grow chk c3"><div><p class="gh"><span>A</span>契約</p><p class="ci">現在のMicrosoft 365プランを確認した</p><p class="ci">Teamsを含む契約かを確認した</p><p class="ci">Copilotの対象人数と版を決めた</p><p class="ci">現場・外部利用者の条件を確認した</p><p class="ci">Premiumの要否を確認した</p></div><div><p class="gh"><span>B</span>製品の条件</p><p class="ci">コネクタの標準／Premiumを確認した</p><p class="ci">トリガーと所有者・実行者を確認した</p><p class="ci">Copilot Studioの実行方式を決めた</p><p class="ci">課金の単位と想定の利用量を出した</p><p class="ci">試用版と本番の条件の差を確認した</p></div><div><p class="gh"><span>C</span>データ・運用</p><p class="ci">過剰な共有を見直した</p><p class="ci">読ませる資料の責任者を決めた</p><p class="ci">所有者と副担当を決めた</p><p class="ci">接続、ログ、利用量の確認担当を決めた</p><p class="ci">公開前に試す質問と例外を用意した</p></div></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>契約前の確認</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">Contact</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-36/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="kh"><p class="t">どの業務から始めるか、<b>一緒に整理</b>します。</p><p class="l">バイテック法人AI研修では、Copilotの業務活用から、Copilot Studioによるエージェントの内製、Power Automateによる業務の自動化までを研修でご支援します。</p></div>
+        <div class="grow cards c3"><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span><p class="t">Copilot研修</p><p class="d">会議・メール・資料作成など、<b>日々の業務での使い方</b>を実際の操作に沿って学びます。</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg></span><p class="t">Copilot Studio研修</p><p class="d">社内データやPower Automateと連携する<b>エージェントの構築と運用</b>を学びます。</p></div><div><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M6 3l6 8 6-8M12 11v10M7.5 13h9M7.5 16.5h9"/></svg></span><p class="t">助成金の活用サポート</p><p class="d">人材開発支援助成金の対象となる研修の設計と、必要な情報をご案内します。<span class="ex">支給の可否は管轄労働局の審査で決まります</span></p></div></div>
+        <div class="ctab"><div><p class="t">まずは無料個別相談で、自社の課題をお聞かせください</p><p class="d">オンライン・約60分。どの業務から始めるか、研修内容と助成金の見込みまでご案内します。</p></div><span class="bt">無料個別相談を予約する ›</span></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>ご相談</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body fl">
+        <p class="s-eyebrow">Notes</p>
+        <img class="s-logo" src="/biz/ebooks/ebook-36/assets/biz-logo.svg" alt="byTech BUSINESS">
+        <div class="hd" style="margin-top:4px"><p class="t" style="font-size:27px">ご留意事項・出典</p></div><div class="grow nts"><p class="nt">2026年10月に確認した公式資料をもとに整理しました。機能やライセンスは、利用チャネル、実行主体、契約、テナントの設定で異なり、変更される場合があります。</p><p class="nt">価格は記載していません。契約の判断は、Microsoftまたは販売代理店の最新の案内をご確認ください。</p><p class="nt">Microsoft 365 Copilotは現在、Microsoft Copilotに改称されています。公開事例や一部の公式資料には旧称が残っています。</p><p class="nt">AI Builderを含むフローのPremiumの要否は、公式資料の間で記載が異なるため、本資料では断定していません。</p><p class="nt">知識の設計、取引を伴う操作、運用の継続、RPAの保守に関する補足は、公式の記載ではなく当社の助言です。</p><p class="nt">社名・製品名は各社の商標または登録商標です。本資料はMicrosoftの公式資料ではありません。本資料の内容の無断転載・再配布はご遠慮ください。　発行：バイテック法人AI研修（2026年10月版）</p></div>
+        
+        <div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>ご留意事項・出典</figcaption></figure>
+  </div>
+<script>
+  // 事例ページ：補足の節（.vsec.sm）を、左右の列の高さが揃う方へ移す
+  document.querySelectorAll(".vdt").forEach(function (d) {
+    var l = d.querySelector(".vl"), r = d.querySelector(".vr"), sm = l.querySelectorAll(".vsec.sm");
+    if (!sm.length) return;
+    function need(c) { var n = 0; Array.prototype.forEach.call(c.children, function (e) { n += e.scrollHeight + 10; }); return n; }
+    var sh = 0; sm.forEach(function (e) { sh += e.scrollHeight + 10; });
+    d.classList.add("measure");
+    var L = need(l), R = need(r);
+    if (Math.max(L - sh, R + sh) < Math.max(L, R)) sm.forEach(function (e) { r.appendChild(e); });
+    d.classList.remove("measure");
+  });
+  // 事例ページ：列に余裕があるときは本文を一段大きくする（下に余白を残さない）
+  document.querySelectorAll(".vdt").forEach(function (d) {
+    [d.querySelector(".vl"), d.querySelector(".vr")].forEach(function (col) {
+      d.classList.add("measure"); var need = 0; Array.prototype.forEach.call(col.children, function (e) { need += e.scrollHeight; }); d.classList.remove("measure");
+      if (col.clientHeight - need > 90) col.classList.add("roomy");
+    });
+  });
+</script>
+</body>
+</html>
