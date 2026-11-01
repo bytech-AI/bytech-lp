@@ -18,6 +18,7 @@ export type AboutCard = { no: string; h: string; thumb?: string; d: string };
 export type RecCard = { h: string; d: string };
 export type Plan = { name: string; amount: string; unit: string };
 export type Faq = { q: string; a: string };
+export type HeroTool = { logo: string; alt: string; w: number; h: number };
 
 export type CourseData = {
   slug: string;
@@ -26,7 +27,7 @@ export type CourseData = {
     /** FVグラデーション（使用ツールのブランドカラーベース）。CSSのbackground値をそのまま指定 */
     background: string;
     eyebrow: string;
-    title: string;
+    title: ReactNode;
     tag: string;
     toolLabel: string;
     toolLogo: string;
@@ -34,12 +35,16 @@ export type CourseData = {
     toolLogoW: number;
     toolLogoH: number;
     toolAlt: string;
+    /** 複数ツールを扱うコース用。toolLogo の後ろに並べる */
+    extraTools?: HeroTool[];
     visual: string;
     visualW: number;
     visualH: number;
     visualAlt: string;
     /** 長い見出しを1行にしたいコース用（テキスト列を広く・ビジュアルを小さく） */
     wideTitle?: boolean;
+    /** 1行に収まらない見出しを2行で組むコース用 */
+    longTitle?: boolean;
     /** PCでアイブロウコピーを1行表示するコース用 */
     nowrapEyebrow?: boolean;
     /** PCでヒーロービジュアルを少し小さく表示するコース用 */
@@ -48,21 +53,37 @@ export type CourseData = {
   docHref: string;
   // 共通部分（subLead / cards / plans / subsidy / faqs / curriculum.sub）は
   // 省略時に下部の DEFAULT_* が使われる。コース固有で変えたい時だけ指定する。
-  about: { title: string; lead: string; subLead?: ReactNode; cards?: AboutCard[] };
+  about: { title: ReactNode; lead: string; subLead?: ReactNode; cards?: AboutCard[] };
   spec: SpecItem[];
   recommend: { sub: ReactNode; cards: RecCard[]; nowrapSub?: boolean };
   curriculum: { sub?: ReactNode; steps: CurriculumStep[] };
   lessons: {
     learnHours: string;
-    freeHours: string;
+    freeHours?: string;
+    /** 時間の見出し。省略時は「学習時間」 */
+    timeLabel?: string;
     chapterCount?: number;
     lessonCount?: number;
+    items: Lesson[];
+  };
+  /** カリキュラム詳細の直後に出す、利用環境に合わせた調整のブロック */
+  environment?: { title: string; sub: ReactNode; cards: RecCard[] };
+  /** 利用環境の後に出す、任意の追加コースのブロック */
+  addon?: {
+    title: string;
+    sub: ReactNode;
+    learnHours: string;
+    timeLabel?: string;
     items: Lesson[];
   };
   plans?: { lead: string; primary: Plan[]; single: Plan };
   subsidy?: { title: string; image: string; imageAlt: string };
   /** 助成金未対応コースは true にすると助成金セクションを非表示 */
   noSubsidy?: boolean;
+  /** プランと料金が未確定のコースは true にすると料金セクションと構造化データのOfferを出さない */
+  noPlans?: boolean;
+  /** 構造化データの実施形態。省略時はオンライン・対面 */
+  courseModes?: string[];
   faqs?: Faq[];
 };
 
@@ -199,6 +220,41 @@ const PAGENAV_LINKS = [
   { href: "#faq", label: "よくあるご質問" },
 ];
 
+function LessonList({ items }: { items: Lesson[] }) {
+  return (
+    <div className="ct-clist__list">
+      {items.map((l) => (
+        <div className="ct-clist__item" key={l.no}>
+          <button className="ct-clist__row" type="button" aria-expanded="false">
+            <span className="ct-clist__no">{l.no}</span>
+            <span className="ct-clist__title-txt">{l.title}</span>
+            <span className="ct-clist__pills">
+              <span className="ct-clist__pill ct-clist__pill--ch">全{l.ch}レッスン</span>
+              {l.time && (
+                <span className="ct-clist__pill ct-clist__pill--time">{l.time}</span>
+              )}
+            </span>
+            <span className="ct-clist__toggle" aria-hidden="true" />
+          </button>
+          <div className="ct-clist__body">
+            <div className="ct-clist__body-inner">
+              {l.body && l.body.length > 0 ? (
+                <ul className="ct-clist__chapters">
+                  {l.body.map((b, i) => (
+                    <li key={i}>{b}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="ct-clist__body-lead">内容は準備中です。</p>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function CourseLp({ data }: { data: CourseData }) {
   const d = data;
   const aboutSubLead = d.about.subLead ?? DEFAULT_ABOUT_SUBLEAD;
@@ -241,12 +297,12 @@ export function CourseLp({ data }: { data: CourseData }) {
           name: "バイテック法人AI研修",
           url: "https://biz.bytech.jp/",
         },
-        offers,
+        ...(d.noPlans ? {} : { offers }),
         hasCourseInstance: [
           {
             "@type": "CourseInstance",
             name: d.courseName,
-            courseMode: ["Online", "Onsite"],
+            courseMode: d.courseModes ?? ["Online", "Onsite"],
             inLanguage: "ja",
           },
         ],
@@ -291,14 +347,19 @@ export function CourseLp({ data }: { data: CourseData }) {
               <p className={`ct-hero__eyebrow${d.hero.nowrapEyebrow ? " ct-hero__eyebrow--nowrap" : ""}`}>
                 {d.hero.eyebrow}
               </p>
-              <h1 className="ct-hero__title">{d.hero.title}</h1>
+              <h1 className={`ct-hero__title${d.hero.longTitle ? " ct-hero__title--long" : ""}`}>{d.hero.title}</h1>
               <span className="ct-hero__tag">{d.hero.tag}</span>
 
-              <div className="ct-hero__tools">
+              <div className={`ct-hero__tools${d.hero.extraTools?.length ? " ct-hero__tools--multi" : ""}`}>
                 <span className="ct-hero__tools-label">{d.hero.toolLabel}</span>
                 <span className="ct-hero__tool">
                   <img src={d.hero.toolLogo} alt={d.hero.toolAlt} width={d.hero.toolLogoW} height={d.hero.toolLogoH} />
                 </span>
+                {d.hero.extraTools?.map((t) => (
+                  <span className="ct-hero__tool" key={t.logo}>
+                    <img src={t.logo} alt={t.alt} width={t.w} height={t.h} />
+                  </span>
+                ))}
               </div>
             </div>
 
@@ -316,7 +377,7 @@ export function CourseLp({ data }: { data: CourseData }) {
               <img src="/biz/assets/img/common/hd-logo.svg" alt="バイテック法人AI研修" />
             </Link>
             <ul className="ct-pagenav__list">
-              {PAGENAV_LINKS.map((l) => (
+              {PAGENAV_LINKS.filter((l) => !(d.noPlans && l.href === "#price")).map((l) => (
                 <li key={l.href}>
                   <a href={l.href}>
                     {l.href === "#about" ? `${d.courseName}とは` : l.label}
@@ -465,44 +526,56 @@ export function CourseLp({ data }: { data: CourseData }) {
             </p>
             <div className="ct-clist__meta">
               <span className="ct-clist__meta-item">
-                <span className="ct-clist__meta-pill">学習時間</span>約<b>{d.lessons.learnHours}</b>時間
+                <span className="ct-clist__meta-pill">{d.lessons.timeLabel ?? "学習時間"}</span>約<b>{d.lessons.learnHours}</b>時間
               </span>
             </div>
           </div>
-          <div className="ct-clist__list">
-            {d.lessons.items.map((l) => (
-              <div className="ct-clist__item" key={l.no}>
-                <button className="ct-clist__row" type="button" aria-expanded="false">
-                  <span className="ct-clist__no">{l.no}</span>
-                  <span className="ct-clist__title-txt">{l.title}</span>
-                  <span className="ct-clist__pills">
-                    <span className="ct-clist__pill ct-clist__pill--ch">全{l.ch}レッスン</span>
-                    {l.time && (
-                      <span className="ct-clist__pill ct-clist__pill--time">{l.time}</span>
-                    )}
-                  </span>
-                  <span className="ct-clist__toggle" aria-hidden="true" />
-                </button>
-                <div className="ct-clist__body">
-                  <div className="ct-clist__body-inner">
-                    {l.body && l.body.length > 0 ? (
-                      <ul className="ct-clist__chapters">
-                        {l.body.map((b, i) => (
-                          <li key={i}>{b}</li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p className="ct-clist__body-lead">内容は準備中です。</p>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <LessonList items={d.lessons.items} />
         </section>
 
+        {/* 利用環境に合わせた調整 */}
+        {d.environment && (
+          <section className="ct-rec" id="environment">
+            <div className="ct-rec__head">
+              <h2 className="ct-rec__title">{d.environment.title}</h2>
+              <div className="ct-rec__bar" aria-hidden="true" />
+              <p className="ct-rec__sub">{d.environment.sub}</p>
+            </div>
+            <div className="ct-rec__grid">
+              {d.environment.cards.map((c) => (
+                <div className="ct-rec__card" key={c.h}>
+                  <div>
+                    <p className="ct-rec__card-h">{c.h}</p>
+                    <p className="ct-rec__card-desc">{c.d}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* 任意の追加コース */}
+        {d.addon && (
+          <section className="ct-clist" id="addon">
+            <div className="ct-clist__head">
+              <h2 className="ct-clist__title">{d.addon.title}</h2>
+              <div className="ct-clist__bar" aria-hidden="true" />
+              <p className="ct-clist__addon-sub">{d.addon.sub}</p>
+              <p className="ct-clist__count">
+                全{d.addon.items.length}チャプター｜{d.addon.items.reduce((total, lesson) => total + lesson.ch, 0)}レッスン
+              </p>
+              <div className="ct-clist__meta">
+                <span className="ct-clist__meta-item">
+                  <span className="ct-clist__meta-pill">{d.addon.timeLabel ?? "学習時間"}</span>約<b>{d.addon.learnHours}</b>時間
+                </span>
+              </div>
+            </div>
+            <LessonList items={d.addon.items} />
+          </section>
+        )}
+
         {/* 対応研修プラン */}
-        <section className="ct-wire" id="price">
+        {!d.noPlans && <section className="ct-wire" id="price">
           <div className="ct-plan__head">
             <p className="ct-about__eyebrow">{d.courseName.replace("研修", "")}を学べる</p>
             <h2 className="ct-about__title">対応研修プラン</h2>
@@ -526,7 +599,7 @@ export function CourseLp({ data }: { data: CourseData }) {
               </p>
             </div>
           </div>
-        </section>
+        </section>}
 
         {/* 助成金活用（助成金未対応コースは非表示） */}
         {!d.noSubsidy && (
