@@ -521,7 +521,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- /.fv -->
 
         <!-- FV直下の簡易予約カレンダー（SPのみ表示） -->
-        <section class="g2quick" id="quick-reserve">
+        <style id="geek-cal-compact">@media (max-width:767px){
+.g2quick .g2quick-lead{margin:0 0 8px}
+.g2quick .cs-header{padding:0}
+.g2quick .cs-progress{margin:0 0 8px}
+.g2quick .cs-step{flex-direction:row;gap:4px}
+.g2quick .cs-dot{width:20px;height:20px}
+.g2quick .cs-dot-num{font-size:11px}
+.g2quick .cs-dot-label{margin-top:0}
+.g2quick .cs-conn{flex:.2;height:2px;margin:0 6px}
+.g2quick .cs-card-body{padding:12px}
+.g2quick .cs-day-toggle{margin:-12px -12px 10px}
+.g2quick .cs-day-btn{display:flex;flex-direction:row;align-items:baseline;justify-content:center;gap:6px;padding:8px;font-size:14px;line-height:1.3}
+.g2quick .cs-day-btn .cs-day-label{display:inline;margin:0;font-size:12px}
+.g2quick .cs-slots{grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:0}
+.g2quick .cs-slot{padding:5px 2px;border-radius:8px}
+.g2quick .cs-slot-time{font-size:16px;line-height:1.25}
+.g2quick .cs-cap{display:block;margin:1px auto 0;padding:0;background:none;font-size:10px;line-height:1.3}
+.g2quick .cs-skeleton{height:46px}
+.g2quick .cs-btn-row{margin-top:10px}
+.g2quick .cs-btn{padding:10px 14px}
+.g2quick .cs-counter{margin-top:6px}
+.g2quick .cs-view-all{margin-top:6px}
+.g2quick .cs-view-all a{padding:5px 14px;font-size:12px}
+}</style><section class="g2quick" id="quick-reserve">
             <p class="g2quick-bubble">＼ まずは<em>無料</em>で相談！ ／</p>
             <p class="g2quick-lead">▼ <span>今日、明日</span>の空き枠を確認する ▼</p>
 <div class="cs-wrapper"><div class="cs-header"></div><div class="cs-progress"><div class="cs-step active" data-s="1"><div class="cs-dot"><span class="cs-dot-num">1</span></div><span class="cs-dot-label">日時選択</span></div><div class="cs-conn half"><div class="cs-conn-fill"></div></div><div class="cs-step" data-s="2"><div class="cs-dot"><span class="cs-dot-num">2</span></div><span class="cs-dot-label">お客様情報</span></div><div class="cs-conn"><div class="cs-conn-fill"></div></div><div class="cs-step" data-s="3"><div class="cs-dot"><span class="cs-dot-num">3</span></div><span class="cs-dot-label">確認・送信</span></div></div><div class="cs-card"><div class="cs-card-accent"></div><div class="cs-card-body"><div class="cs-panel active" id="csStep1"><div class="cs-day-toggle"> <button class="cs-day-btn active" id="csBtnToday" onclick="csSelectDay('today')">今日<span class="cs-day-label" id="csTodayLabel"></span></button> <button class="cs-day-btn" id="csBtnTomorrow" onclick="csSelectDay('tomorrow')">明日<span class="cs-day-label" id="csTomorrowLabel"></span></button></div><div class="cs-slots" id="csSlots"><div class="cs-skeleton"></div><div class="cs-skeleton"></div><div class="cs-skeleton"></div><div class="cs-skeleton"></div><div class="cs-skeleton"></div><div class="cs-skeleton"></div></div><div class="cs-btn-row"><button class="cs-btn cs-btn-next" id="csBtnStep1" disabled onclick="csGoTo(2)"><span class="cs-btn-text">次へ進む</span></button></div></div><div class="cs-panel" id="csStep2"><div class="cs-time-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span id="csTimeBarText">-</span></div><div class="cs-field"> <label class="cs-label">お名前 <span class="cs-req">必須</span></label><div class="cs-name-row"> <input type="text" class="cs-input" id="csLastName" placeholder="姓（例：山田）" autocomplete="family-name"> <input type="text" class="cs-input" id="csFirstName" placeholder="名（例：太郎）" autocomplete="given-name"></div><div class="cs-err" id="csErrName">姓・名ともに入力してください</div></div><div class="cs-field"><label class="cs-label">メールアドレス <span class="cs-req">必須</span></label><input type="email" class="cs-input" id="csEmail" placeholder="例：taro@example.com" autocomplete="email"><div class="cs-err" id="csErrEmail">正しいメールアドレスを入力してください</div></div><div class="cs-field"><label class="cs-label">電話番号 <span class="cs-req">必須</span></label><input type="tel" class="cs-input" id="csPhone" placeholder="例：09012345678（ハイフンなし）" autocomplete="tel"><div class="cs-err" id="csErrPhone">電話番号を入力してください</div></div><div class="cs-btn-row"><button class="cs-btn cs-btn-back" onclick="csGoTo(1)">戻る</button><button class="cs-btn cs-btn-next" onclick="csGoTo(3)"><span class="cs-btn-text">確認画面へ</span></button></div></div><div class="cs-panel" id="csStep3"><div class="pre-is-3"><div class="pre-is-4">予約内容</div><div class="pre-is-5"><span class="pre-is-6">日時</span><span id="csConfTime" class="pre-is-7">-</span></div><div class="pre-is-5"><span class="pre-is-6">お名前</span><span id="csConfName" class="pre-is-7">-</span></div><div class="pre-is-5"><span class="pre-is-6">メール</span><span id="csConfEmail" class="pre-is-8">-</span></div><div class="pre-is-5"><span class="pre-is-6">電話番号</span><span id="csConfPhone" class="pre-is-7">-</span></div></div><div class="cs-btn-row"><button class="cs-btn cs-btn-back" onclick="csGoTo(2)">修正する</button><button class="cs-btn cs-btn-submit" id="csBtnSubmit" onclick="csSubmit()"><span class="cs-btn-text">この内容で予約する</span><div class="cs-spinner"></div></button></div><div class="pre-is-9">送信いただいた情報は<a href="/privacy-policy" target="_blank" class="pre-is-10">プライバシーポリシー</a>・<a href="/membership-terms" target="_blank" class="pre-is-10">利用規約</a>に基づき適切に管理いたします。</div></div></div></div><div class="cs-counter" id="csCounter">1 / 3</div><div class="cs-view-all"><a href="#counseling">全ての日程を見る<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a></div></div>
