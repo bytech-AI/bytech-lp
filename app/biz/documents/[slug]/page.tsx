@@ -243,6 +243,12 @@ const EBOOKS: Ebook[] = [
     description:
       "英国政府やMicrosoft Researchなど公開された5つの評価を読み解き、自社で記録する8つの指標、削減工数の計算の仕方、記録シート、報告前の確認12項目をまとめた資料です。",
   },
+  {
+    slug: "ebook-38",
+    title: "リーダー・マネージャー向けAI研修 コース紹介資料",
+    description:
+      "法人向けリーダー・マネージャー向けAI研修のコース紹介資料です。カリキュラム（全8チャプター・35レッスン）、利用環境に合わせた調整、追加コース、研修開始までの流れ、よくあるご質問をまとめています。",
+  },
 ];
 
 const getEbook = (slug: string) => EBOOKS.find((e) => e.slug === slug);
