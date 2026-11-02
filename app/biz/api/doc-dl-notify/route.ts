@@ -106,6 +106,13 @@ const DOCS: Record<string, { intro: string; items: { title: string; view: string
       { title: "Dify研修 コース紹介資料", view: `${SITE}/documents/ebook-12`, pdf: `${SITE}/assets/docs/ebook-12.pdf` },
     ],
   },
+  "リーダー・マネージャー向けAI研修コース紹介資料": {
+    intro:
+      "法人向けリーダー・マネージャー向けAI研修のコース紹介資料です。カリキュラム（全8チャプター・35レッスン）から、使えるAIツールに合わせた研修内容の調整、研修開始までの流れまでまとめています。導入のご検討にお役立てください。",
+    items: [
+      { title: "リーダー・マネージャー向けAI研修 コース紹介資料", view: `${SITE}/documents/ebook-38`, pdf: `${SITE}/assets/docs/ebook-38.pdf` },
+    ],
+  },
   製造業のAI活用事例集: {
     intro:
       "国内メーカー10社が公開しているAI活用の取り組みを、一覧と1社1ページの詳細でまとめた資料です。設計・品質保証・設備保全・研究開発のどこから着手すると成果が出ているかが分かります。掲載している数値はすべて各社の公式発表にもとづく公表値です。",

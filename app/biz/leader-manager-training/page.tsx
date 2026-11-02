@@ -2,7 +2,7 @@ import { CourseLp, type CourseData } from "../_course/CourseLp";
 import { COURSE_FAQS } from "../_course/courseFaqs";
 import { buildCourseMetadata } from "../_course/courseMetadata";
 
-// 料金・助成金・研修後サポートが未確定のため noindex。courses.ts と sitemap にも未登録。
+// 料金・助成金・研修後サポートが未確定のため noindex・sitemap 未登録（courses.ts とトップには掲載済み）。
 export const metadata = {
   ...buildCourseMetadata({
     title: "リーダー・マネージャー向けAI研修｜バイテック法人AI研修",
@@ -40,7 +40,7 @@ const course: CourseData = {
     visualAlt: "計画立案からチームの育成までAIを活用するイメージ",
     longTitle: true,
   },
-  docHref: "/doc-a",
+  docHref: "/doc-am",
   about: {
     title: <span style={{ wordBreak: "keep-all" }}>リーダー・マネージャー<wbr />向けAI研修とは？</span>,
     subLead: (

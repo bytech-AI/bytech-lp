@@ -66,4 +66,11 @@ export const COURSES: CourseSummary[] = [
     color: "#3b52c8",
     logo: "/biz/assets/img/index/plan/logo/dify.webp",
   },
+  {
+    slug: "leader-manager-training",
+    name: "リーダー・マネージャー向けAI研修",
+    desc: "管理職がAIを使いこなし、部下の育成まで進めたい組織・チームにおすすめ。",
+    color: "#204aa8",
+    logo: "/biz/assets/img/course/about/leader-manager-01.webp",
+  },
 ];
