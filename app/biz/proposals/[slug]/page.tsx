@@ -50,6 +50,16 @@ const PROPOSALS: Proposal[] = [
     contact: "担当：安原",
     pdf: "proposal-bell-2610-c",
   },
+  {
+    // パスワード付き（proxy.ts の PROTECTED_PROPOSALS）。deck は --inline で画像を焼き込んで build する
+    slug: "renoveru-2611",
+    deck: "proposal-renoveru-2611",
+    title: "AI業務自動化研修（リーダー・マネージャー向けAI研修）のご提案",
+    client: "リノベる様",
+    description:
+      "営業部長・設計部長が、自部門の数字で3ヵ年計画・戦略を立て、KPI・実行プランまで落とし込めるようになる4ヶ月の研修のご提案書です。事前アンケートから見た現状、プランとコースの内容、営業・設計それぞれの4ヶ月ロードマップと週ごとの学習スケジュール、利用環境とセキュリティ、ご費用、導入の流れをまとめています。",
+    contact: "担当者",
+  },
 ];
 
 const getProposal = (slug: string) => PROPOSALS.find((p) => p.slug === slug);

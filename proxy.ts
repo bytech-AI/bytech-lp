@@ -3,9 +3,48 @@ import type { NextRequest } from 'next/server'
 
 const STATIC_ASSET_RE = /\.(png|jpg|jpeg|gif|svg|webp|avif|ico|woff|woff2|ttf|otf|css|js)$/i
 
-export function proxy(request: NextRequest) {
+// パスワード付きの個別提案書（Basic認証）。提案書ページと iframe の埋め込みHTMLの両方を守る。
+// 画像は埋め込みHTMLに data URI で焼き込み（build-ebook.mjs --inline）、静的アセットとして公開しない。
+// sha256 は「ユーザー名:パスワード」のハッシュ。パスワード本体はリポジトリに置かない。
+const PROTECTED_PROPOSALS = [
+  {
+    re: /^\/(?:biz\/)?(?:proposals\/renoveru-2611|ebooks\/proposal-renoveru-2611)(?:\/|$)/,
+    sha256: '31f47d8b8d4e109debb87d0014692b5b85bf101879953a6871e1de6d4add4c65',
+  },
+]
+
+async function sha256Hex(text: string) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text))
+  return Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, '0')).join('')
+}
+
+async function guardProposal(request: NextRequest, pathname: string) {
+  const target = PROTECTED_PROPOSALS.find((p) => p.re.test(pathname))
+  if (!target) return null
+  const auth = request.headers.get('authorization') || ''
+  if (auth.startsWith('Basic ')) {
+    let decoded = ''
+    try {
+      decoded = new TextDecoder().decode(Uint8Array.from(atob(auth.slice(6)), (c) => c.charCodeAt(0)))
+    } catch {}
+    if (decoded && (await sha256Hex(decoded)) === target.sha256) return 'ok' as const
+  }
+  return new NextResponse('パスワードが必要です', {
+    status: 401,
+    headers: {
+      'WWW-Authenticate': 'Basic realm="proposal", charset="UTF-8"',
+      'Cache-Control': 'no-store',
+      'Content-Type': 'text/plain; charset=utf-8',
+    },
+  })
+}
+
+export async function proxy(request: NextRequest) {
   let hostname = (request.headers.get('host') || '').toLowerCase()
   const pathname = request.nextUrl.pathname
+
+  const guard = await guardProposal(request, pathname)
+  if (guard && guard !== 'ok') return guard
 
   // [LOCAL-ONLY 一時対応・コミットしないこと] localhost を biz.bytech.jp として扱いプレビュー
   if (hostname.startsWith('localhost') || hostname.startsWith('127.0.0.1')) {

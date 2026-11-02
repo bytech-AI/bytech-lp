@@ -2,6 +2,7 @@
 //
 //   node scripts/build-ebook.mjs ebook-02          … 埋め込みHTMLのみ更新（通常はこちら）
 //   node scripts/build-ebook.mjs ebook-02 --pdf    … PDFも書き出す（配布物の更新指示があったときだけ）
+//   node scripts/build-ebook.mjs <slug> --inline    … 画像を data URI で埋め込み、assets/ を公開しない（パスワード付き提案書用）
 //
 // 入力:  docs/ebooks/<slug>/deck.html …… スライドの実体（1280x720・@media print定義済み）
 // 出力:  public/biz/ebooks/<slug>/index.html（+assets/） …… /documents/<slug> が iframe で表示する埋め込み版
@@ -21,6 +22,7 @@ const CHROME =
 
 const slug = process.argv[2];
 const withPdf = process.argv.includes("--pdf");
+const inline = process.argv.includes("--inline");
 if (!slug || !/^[a-z0-9-]+$/.test(slug)) {
   console.error("usage: node scripts/build-ebook.mjs <slug>   (例: ebook-02)");
   process.exit(1);
@@ -77,9 +79,19 @@ let html = readFileSync(deckPath, "utf-8");
 html = html.replace("</head>", EMBED_CSS);
 // 相対アセット参照を絶対パスへ。biz の proxy は拡張子つき相対パス(/ebooks/...svg)を
 // リライトせず素通しして404にするため、/biz/ 起点の絶対参照に変換して配信する。
-html = html.replaceAll('src="assets/', `src="/biz/ebooks/${slug}/assets/`);
+if (inline) {
+  // 静的アセットは1年immutableでCDNに残るため、認証付きの資料では画像をHTMLに焼き込む
+  const MIME = { webp: "image/webp", png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg", svg: "image/svg+xml" };
+  html = html.replace(/src="(assets\/[^"]+)"/g, (m, rel) => {
+    const ext = rel.split(".").pop().toLowerCase();
+    const data = readFileSync(join(deckDir, rel)).toString("base64");
+    return `src="data:${MIME[ext] || "application/octet-stream"};base64,${data}"`;
+  });
+} else {
+  html = html.replaceAll('src="assets/', `src="/biz/ebooks/${slug}/assets/`);
+}
 writeFileSync(join(embedDir, "index.html"), html);
-if (existsSync(join(deckDir, "assets"))) {
+if (!inline && existsSync(join(deckDir, "assets"))) {
   cpSync(join(deckDir, "assets"), join(embedDir, "assets"), { recursive: true });
 }
 
