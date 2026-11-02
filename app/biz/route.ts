@@ -240,7 +240,7 @@ export async function GET() {
   html = html.replace("</head>", () => `<script>${BIZ_SOURCE_SCRIPT}</script></head>`);
   html = html.replaceAll(
     "/biz/assets/css/style.css",
-    "/biz/assets/css/style.css?v=20260927",
+    "/biz/assets/css/style.css?v=20261103",
   );
   html = html.replace(
     '<nav class="top-header__nav"><a href="#course" class="top-nav-link">研修一覧</a>',

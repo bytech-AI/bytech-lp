@@ -398,6 +398,35 @@ $(function () {
 });
 
 /******************************************************************
+ * Slick autoplay: 画面外とスクロール中は止める
+ * 自動再生のスライド切り替えが画面外でも走り続け、スクロール中に重なると
+ * 描画が詰まって引っかかる（PCは複数枚表示で切り替えの描画範囲が広い）
+ ******************************************************************/
+$(function () {
+  const $sliders = $('.slick-initialized');
+  if (!$sliders.length) return;
+  const visible = new Set();
+  let scrolling = false;
+  let resumeTimer = 0;
+  const play = (el) => { if ($(el).hasClass('slick-initialized')) $(el).slick('slickPlay'); };
+  const pause = (el) => { if ($(el).hasClass('slick-initialized')) $(el).slick('slickPause'); };
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { visible.add(e.target); if (!scrolling) play(e.target); }
+        else { visible.delete(e.target); pause(e.target); }
+      });
+    });
+    $sliders.each(function () { pause(this); io.observe(this); });
+  }
+  window.addEventListener('scroll', () => {
+    if (!scrolling) { scrolling = true; visible.forEach(pause); }
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => { scrolling = false; visible.forEach(play); }, 400);
+  }, { passive: true });
+});
+
+/******************************************************************
  * fadein delay
  ******************************************************************/
 // 縦位置だけで判定（横にはみ出したslickのスライドも対象）。1フレーム1回に間引き、
