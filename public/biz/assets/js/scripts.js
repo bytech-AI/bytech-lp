@@ -16,19 +16,15 @@ jQuery(function ($) {
   // ======================================================
   // Fade-in
   // ======================================================
+  // 位置をまとめて読んでからクラスを付ける（読み書きを交互にすると要素ごとに強制レイアウトが走る）
   function revealOnScroll(selector, offset = 0, className = 'is-show') {
-    $(selector).each(function () {
-      const $elem = $(this);
-      if ($elem.hasClass(className)) return;
-
-      const elemTop = $elem.offset().top;
-      const scroll = $window.scrollTop();
-      const winH = $window.height();
-
-      if (scroll + winH > elemTop + offset) {
-        $elem.addClass(className);
-      }
+    const winH = window.innerHeight;
+    const hits = [];
+    document.querySelectorAll(selector).forEach((el) => {
+      if (el.classList.contains(className)) return;
+      if (el.getBoundingClientRect().top + offset < winH) hits.push(el);
     });
+    hits.forEach((el) => el.classList.add(className));
   }
 
   // ======================================================
@@ -185,13 +181,18 @@ jQuery(function ($) {
   // ======================================================
   // unify scroll event
   // ======================================================
+  // 1フレーム1回に間引く
+  let scrollTicking = false;
   $window.on('scroll', () => {
-    if (isScrollingByAnchor) return; // ← anchor中は一切処理しない
-
-    revealOnScroll('.fadein', 100);
-    headerShowHide();
-    headerShrink();
-    checkFooterOverlap();
+    if (isScrollingByAnchor || scrollTicking) return; // ← anchor中は一切処理しない
+    scrollTicking = true;
+    requestAnimationFrame(() => {
+      scrollTicking = false;
+      if (isScrollingByAnchor) return;
+      headerShowHide();
+      headerShrink();
+      checkFooterOverlap();
+    });
   });
 
   // ======================================================
@@ -397,16 +398,55 @@ $(function () {
 });
 
 /******************************************************************
+ * Slick autoplay: 画面外とスクロール中は止める
+ * 自動再生のスライド切り替えが画面外でも走り続け、スクロール中に重なると
+ * 描画が詰まって引っかかる（PCは複数枚表示で切り替えの描画範囲が広い）
+ ******************************************************************/
+$(function () {
+  const $sliders = $('.slick-initialized');
+  if (!$sliders.length) return;
+  const visible = new Set();
+  let scrolling = false;
+  let resumeTimer = 0;
+  const play = (el) => { if ($(el).hasClass('slick-initialized')) $(el).slick('slickPlay'); };
+  const pause = (el) => { if ($(el).hasClass('slick-initialized')) $(el).slick('slickPause'); };
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { visible.add(e.target); if (!scrolling) play(e.target); }
+        else { visible.delete(e.target); pause(e.target); }
+      });
+    });
+    $sliders.each(function () { pause(this); io.observe(this); });
+  }
+  window.addEventListener('scroll', () => {
+    if (!scrolling) { scrolling = true; visible.forEach(pause); }
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => { scrolling = false; visible.forEach(play); }, 400);
+  }, { passive: true });
+});
+
+/******************************************************************
  * fadein delay
  ******************************************************************/
-$(window).on('scroll', function () {
-  $('.fadein').each(function () {
-    if ($(this).hasClass('is-show')) return;
-    if ($(this).offset().top < $(window).scrollTop() + $(window).height() - 50) {
-      $(this).addClass('is-show');
-    }
+// 縦位置だけで判定（横にはみ出したslickのスライドも対象）。1フレーム1回に間引き、
+// 位置をまとめて読んでから付ける（読み書きを交互にすると要素ごとに強制レイアウトが走る）
+let fadeinTicking = false;
+window.addEventListener('scroll', function () {
+  if (fadeinTicking) return;
+  fadeinTicking = true;
+  requestAnimationFrame(function () {
+    fadeinTicking = false;
+    const pending = document.querySelectorAll('.fadein:not(.is-show)');
+    if (!pending.length) return;
+    const limit = window.innerHeight - 50;
+    const hits = [];
+    pending.forEach(function (el) {
+      if (el.getBoundingClientRect().top < limit) hits.push(el);
+    });
+    hits.forEach(function (el) { el.classList.add('is-show'); });
   });
-});
+}, { passive: true });
 
 /******************************************************************
  * Lottie
