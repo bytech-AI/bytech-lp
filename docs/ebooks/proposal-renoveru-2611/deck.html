@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>リノベる様 ご提案資料｜AI業務自動化研修 × リーダー・マネージャー向けAI研修</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* リノベる様向け個別提案書の「4ヶ月ロードマップ」パート。設計は proposal-bell-2610 と同系統
+     （四角の角丸なし・円とピルのみ角丸）。
+     ★受講者（営業・設計の部長）の担当範囲は、事前アンケート（91名）の所属部署から置いた仮説。
+     ★KPIの項目は例示で、貴社の実数値は入れていない。 */
+  :root {
+    --blue: #2c5c9c; --blue-deep: #1a2e50; --blue-bright: #1a6fb5; --blue-pale: #8fb0d8;
+    --ink: #2a2f3a; --line: #e3e8ef; --amber: #f0b429; --tint: #eef4fb;
+    --teal: #13807a; --teal-deep: #0d4f4b; --teal-tint: #e8f5f3; --teal-pale: #8fcfc8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f4f6f8; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; color: var(--ink); padding: 48px 0 96px; }
+  .note { max-width: 1120px; margin: 0 auto 28px; font-size: 13px; font-weight: 700; color: #8a93a3; }
+  .en { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; }
+
+  .deck { display: flex; flex-direction: column; gap: 34px; align-items: center; counter-reset: pg; }
+  .slide-shell { width: 1120px; counter-increment: pg; }
+  .slide-shell figcaption { font-size: 12px; font-weight: 700; color: #8a93a3; margin: 8px 2px 0; letter-spacing: .04em; }
+  .slide { width: 1280px; height: 720px; transform: scale(0.875); transform-origin: top left; background: #fff; position: relative; overflow: hidden; }
+  .slide-shell .clip { height: 630px; overflow: hidden; border-radius: 0; box-shadow: 0 2px 10px rgba(26,35,48,.08); }
+
+  /* ===== 共通 ===== */
+  .s-body { position: absolute; inset: 0; padding: 36px 56px; z-index: 1; }
+  .s-eyebrow { display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 700; color: var(--blue-pale); letter-spacing: .02em; }
+  .s-eyebrow::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); }
+  .s-logo { position: absolute; top: 38px; right: 56px; height: 30px; }
+  .s-title { font-size: 28px; font-weight: 800; color: #1a2330; line-height: 1.4; letter-spacing: .01em; margin-top: 10px; }
+  .s-title b { color: var(--blue-bright); }
+  .s-lead { font-size: 14px; font-weight: 600; color: #4a5568; line-height: 1.7; margin-top: 8px; }
+  .s-foot { position: absolute; left: 56px; right: 120px; bottom: 14px; font-size: 10px; color: #9aa3b2; line-height: 1.6; z-index: 5; }
+  .s-num { position: absolute; right: 0; bottom: 0; width: 66px; height: 66px; background: var(--blue); border-radius: 66px 0 0 0; color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: flex-end; justify-content: flex-end; padding: 0 14px 10px 0; z-index: 5; }
+  .s-num::before { content: counter(pg); }
+  .pill { display: inline-flex; align-items: center; font-size: 12px; font-weight: 800; padding: 4px 12px; border-radius: 999px; letter-spacing: .04em; white-space: nowrap; }
+  .pill.sales { background: var(--blue); color: #fff; }
+  .pill.design { background: var(--teal); color: #fff; }
+
+  /* ===== 01 扉 ===== */
+  .cv { background: var(--blue-deep); color: #fff; }
+  .cv::before { content: ""; position: absolute; right: 260px; top: -160px; width: 620px; height: 620px; border-radius: 50%; border: 90px solid rgba(143,208,255,.07); }
+  .cv::after { content: ""; position: absolute; right: 140px; bottom: -220px; width: 420px; height: 420px; border-radius: 50%; background: rgba(143,208,255,.05); }
+  .cv .eyebrow { position: absolute; left: 80px; top: 74px; display: inline-flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 800; color: #8fd0ff; letter-spacing: .14em; }
+  .cv .eyebrow::before { content: ""; width: 30px; height: 3px; background: #8fd0ff; }
+  .cv .to { position: absolute; left: 80px; top: 116px; font-size: 22px; font-weight: 800; letter-spacing: .04em; color: #dbe6f4; }
+  .cv .to small { font-size: 14px; font-weight: 700; color: #9fb3cf; margin-left: 8px; }
+  .cv .t { position: absolute; left: 78px; top: 176px; font-size: 54px; font-weight: 900; line-height: 1.34; letter-spacing: .02em; }
+  .cv .t b { color: #8fd0ff; }
+  .cv .goals { position: absolute; left: 80px; top: 352px; width: 700px; display: grid; gap: 12px; }
+  .cv .goals .g { display: flex; align-items: center; gap: 18px; background: rgba(255,255,255,.07); border-left: 4px solid #8fd0ff; padding: 16px 22px; }
+  .cv .goals .g .n { flex: 0 0 auto; font-size: 12px; font-weight: 800; color: #8fd0ff; letter-spacing: .12em; }
+  .cv .goals .g .v { font-size: 22px; font-weight: 800; line-height: 1.4; }
+  .cv .who { position: absolute; left: 80px; top: 540px; display: flex; gap: 10px; align-items: center; font-size: 14px; font-weight: 700; color: #b7c6dc; }
+  .cv .who .pill.sales { background: #8fd0ff; color: var(--blue-deep); }
+  .cv .who .pill.design { background: var(--teal-pale); color: var(--teal-deep); }
+  .cv .logo { position: absolute; left: 80px; bottom: 52px; height: 34px; }
+  .cv .side { position: absolute; right: 0; top: 0; bottom: 0; width: 430px; background: #fff; color: #1a2330; padding: 40px 44px 0; z-index: 2; }
+  .cv .side .il { display: block; height: 238px; margin: 0 auto 14px; }
+  .cv .months { display: grid; gap: 0; }
+  .cv .months .m { display: flex; align-items: center; gap: 14px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+  .cv .months .m:first-child { border-top: 1px solid var(--line); }
+  .cv .months .m .k { flex: 0 0 auto; width: 56px; font-size: 12.5px; font-weight: 800; color: #fff; background: var(--blue); text-align: center; padding: 4px 0; letter-spacing: .04em; }
+  .cv .months .m:nth-child(2) .k { background: #24508c; } .cv .months .m:nth-child(3) .k { background: #1f4379; } .cv .months .m:nth-child(4) .k { background: var(--blue-deep); }
+  .cv .months .m .v { font-size: 15.5px; font-weight: 800; line-height: 1.35; }
+  .cv .months .m .v small { display: block; font-size: 11px; font-weight: 700; color: #8a93a3; margin-top: 1px; }
+  .cv .months .end { margin-top: 14px; background: var(--blue-deep); color: #fff; padding: 12px 16px; font-size: 14px; font-weight: 800; line-height: 1.5; }
+
+  /* ===== 02 受講者の想定 ===== */
+  .who2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 18px; }
+  .who2 .col { border: 1px solid var(--line); }
+  .who2 .col .h { display: flex; align-items: center; gap: 12px; padding: 14px 20px; color: #fff; }
+  .who2 .col.sales .h { background: var(--blue); }
+  .who2 .col.design .h { background: var(--teal); }
+  .who2 .col .h .t { font-size: 19px; font-weight: 800; }
+  .who2 .col .h .n { margin-left: auto; font-size: 13px; font-weight: 700; opacity: .9; }
+  .who2 .col .h .n b { font-size: 24px; font-weight: 900; margin-right: 2px; }
+  .who2 .col .b { padding: 14px 20px 16px; }
+  .who2 .lb { font-size: 12px; font-weight: 800; color: #6b7789; letter-spacing: .06em; margin-bottom: 7px; }
+  .who2 .deps { display: flex; flex-wrap: wrap; gap: 6px; }
+  .who2 .deps span { font-size: 12px; font-weight: 700; color: #1a2330; background: #f2f5fa; padding: 4px 9px; }
+  .who2 .deps span i { font-style: normal; color: #8a93a3; margin-left: 4px; font-weight: 700; }
+  .who2 .col.design .deps span { background: var(--teal-tint); }
+  .who2 .col.sales .deps span { background: var(--tint); }
+  .lv { margin-top: 14px; }
+  .lv .bar { display: flex; height: 26px; }
+  .lv .bar div { display: flex; align-items: center; justify-content: center; font-size: 11.5px; font-weight: 800; color: #fff; }
+  .lv .leg { display: flex; justify-content: space-between; font-size: 10.5px; font-weight: 700; color: #8a93a3; margin-top: 5px; }
+  .who2 .pains { margin-top: 14px; display: grid; gap: 5px; }
+  .who2 .pains p { position: relative; font-size: 13px; font-weight: 600; color: #4a5568; line-height: 1.6; padding-left: 14px; }
+  .who2 .pains p::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-pale); }
+  .who2 .col.design .pains p::before { background: var(--teal-pale); }
+  .who2 .pains p b { color: #1a2330; font-weight: 800; }
+  .who2 .role { margin-top: 14px; padding: 11px 14px; font-size: 13.5px; font-weight: 800; color: #1a2330; line-height: 1.6; }
+  .who2 .col.sales .role { background: var(--tint); border-left: 4px solid var(--blue); }
+  .who2 .col.design .role { background: var(--teal-tint); border-left: 4px solid var(--teal); }
+
+  /* ===== 03 全体像 ===== */
+  .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 20px; }
+  .flow .m { position: relative; padding: 0 14px 0 0; }
+  .flow .m .hd { position: relative; height: 54px; background: var(--blue); color: #fff; display: flex; align-items: center; gap: 12px; padding: 0 20px 0 18px; clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 18px 50%); }
+  .flow .m:first-child .hd { clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%); }
+  .flow .m:nth-child(2) .hd { background: #24508c; }
+  .flow .m:nth-child(3) .hd { background: #1f4379; }
+  .flow .m:nth-child(4) .hd { background: var(--blue-deep); }
+  .flow .m .hd .k { font-size: 12px; font-weight: 800; color: #8fd0ff; letter-spacing: .06em; padding-left: 12px; }
+  .flow .m:first-child .hd .k { padding-left: 0; }
+  .flow .m .hd .t { font-size: 16px; font-weight: 800; }
+  .flow .m .bd { padding: 14px 4px 0 2px; }
+  .flow .m .q { font-size: 15px; font-weight: 800; color: #1a2330; line-height: 1.5; min-height: 68px; }
+  .flow .m .q b { color: var(--blue-bright); }
+  .flow .m .lst { margin-top: 8px; display: grid; gap: 4px; }
+  .flow .m .lst p { position: relative; font-size: 12.5px; font-weight: 600; color: #4a5568; line-height: 1.6; padding-left: 13px; }
+  .flow .m .lst p::before { content: ""; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: var(--blue-pale); }
+  .flow .m .out { margin-top: 12px; border: 1.5px solid var(--blue); background: var(--tint); padding: 9px 12px; }
+  .flow .m .out .k { font-size: 10.5px; font-weight: 800; color: var(--blue); letter-spacing: .08em; }
+  .flow .m .out .v { font-size: 13.5px; font-weight: 800; color: #1a2330; line-height: 1.5; margin-top: 2px; }
+  .chain { display: flex; align-items: center; gap: 0; margin-top: 20px; border: 1px solid var(--line); }
+  .chain .lb { flex: 0 0 auto; background: #f2f5fa; font-size: 12.5px; font-weight: 800; color: var(--blue-deep); padding: 0 18px; align-self: stretch; display: flex; align-items: center; }
+  .chain .c { flex: 1; display: flex; align-items: center; gap: 10px; padding: 12px 16px; }
+  .chain .c + .c { border-left: 1px dashed var(--line); }
+  .chain .c .n { flex: 0 0 auto; width: 28px; height: 28px; border-radius: 50%; background: var(--tint); color: var(--blue); font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .chain .c .t { font-size: 13.5px; font-weight: 800; color: #1a2330; }
+  .chain .c .d { font-size: 11.5px; font-weight: 600; color: #6b7789; margin-top: 1px; line-height: 1.45; }
+
+  /* ===== 04・05 部長別ロードマップ ===== */
+  .rm { display: grid; grid-template-columns: 112px repeat(4, 1fr); gap: 0 8px; margin-top: 14px; }
+  .rm .lb { display: flex; align-items: center; font-size: 12px; font-weight: 800; color: var(--blue-deep); background: #f2f5fa; padding: 0 12px; line-height: 1.45; border-bottom: 1px solid #fff; }
+  .rm .hd { color: #fff; padding: 10px 14px 11px; }
+  .rm .hd .k { font-size: 11.5px; font-weight: 800; letter-spacing: .08em; opacity: .85; }
+  .rm .hd .t { font-size: 15.5px; font-weight: 800; line-height: 1.35; margin-top: 2px; }
+  .rm .cell { border-bottom: 1px solid var(--line); padding: 9px 4px 10px; }
+  .rm .cell p { position: relative; font-size: 12px; font-weight: 600; color: #4a5568; line-height: 1.55; padding-left: 12px; }
+  .rm .cell p + p { margin-top: 3px; }
+  .rm .cell p::before { content: ""; position: absolute; left: 0; top: 7.5px; width: 5px; height: 5px; border-radius: 50%; background: var(--blue-pale); }
+  .rm .cell p b { color: #1a2330; font-weight: 800; }
+  .rm .cell.data p { font-size: 11.6px; color: #5a6578; }
+  .rm .cell.data p::before { border-radius: 0; width: 6px; height: 2px; top: 9px; }
+  .rm .cell.skill { background: #fafbfd; }
+  .rm .cell.skill p { font-size: 12.4px; font-weight: 700; color: #1a2330; }
+  .rm .cell.out { border-bottom: none; padding: 9px 0 0; }
+  .rm .cell.out div { height: 100%; padding: 9px 12px; font-size: 12.8px; font-weight: 800; line-height: 1.5; }
+  .rm.sales .hd { background: var(--blue); }
+  .rm.sales .hd.m2 { background: #24508c; } .rm.sales .hd.m3 { background: #1f4379; } .rm.sales .hd.m4 { background: var(--blue-deep); }
+  .rm.sales .cell.out div { background: var(--tint); border: 1.5px solid var(--blue); color: var(--blue-deep); }
+  .rm.design .lb { color: var(--teal-deep); background: #eef6f5; }
+  .rm.design .hd { background: var(--teal); }
+  .rm.design .hd.m2 { background: #0f6f69; } .rm.design .hd.m3 { background: #0e5f5a; } .rm.design .hd.m4 { background: var(--teal-deep); }
+  .rm.design .cell p::before { background: var(--teal-pale); }
+  .rm.design .cell.out div { background: var(--teal-tint); border: 1.5px solid var(--teal); color: var(--teal-deep); }
+  .rm-top { display: flex; align-items: center; gap: 12px; }
+  .s-title.design b { color: var(--teal); }
+
+  /* ===== 06 修了時の成果物 ===== */
+  .tree2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 16px; }
+  .tree2 .col { border: 1px solid var(--line); padding: 14px 18px 16px; }
+  .tree2 .col .top { display: flex; align-items: center; gap: 10px; }
+  .tree2 .col .top .t { font-size: 15.5px; font-weight: 800; color: #1a2330; }
+  .tree { display: grid; grid-template-columns: 150px 1fr; gap: 0; margin-top: 12px; }
+  .tree .root { display: flex; flex-direction: column; justify-content: center; color: #fff; padding: 12px 14px; }
+  .tree .root .k { font-size: 10.5px; font-weight: 800; letter-spacing: .08em; opacity: .85; }
+  .tree .root .v { font-size: 16px; font-weight: 900; line-height: 1.4; margin-top: 3px; }
+  .tree .br { display: grid; gap: 6px; padding-left: 22px; position: relative; }
+  .tree .br::before { content: ""; position: absolute; left: 10px; top: 16px; bottom: 16px; width: 2px; }
+  .tree .br .lf { position: relative; display: flex; align-items: center; gap: 10px; border: 1px solid var(--line); padding: 7px 12px; }
+  .tree .br .lf::before { content: ""; position: absolute; left: -12px; top: 50%; width: 12px; height: 2px; }
+  .tree .br .lf .t { flex: 0 0 auto; font-size: 12.8px; font-weight: 800; color: #1a2330; }
+  .tree .br .lf .d { font-size: 11.3px; font-weight: 600; color: #6b7789; line-height: 1.45; }
+  .tree2 .sales .tree .root { background: var(--blue); }
+  .tree2 .sales .tree .br::before, .tree2 .sales .tree .br .lf::before { background: var(--blue-pale); }
+  .tree2 .design .tree .root { background: var(--teal); }
+  .tree2 .design .tree .br::before, .tree2 .design .tree .br .lf::before { background: var(--teal-pale); }
+  .tree2 .plan { margin-top: 12px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--line); }
+  .tree2 .plan div { padding: 8px 10px; font-size: 11.3px; font-weight: 600; color: #4a5568; line-height: 1.45; }
+  .tree2 .plan div + div { border-left: 1px dashed var(--line); }
+  .tree2 .plan div b { display: block; font-size: 12px; font-weight: 800; color: #1a2330; }
+  .deliv { display: grid; grid-template-columns: auto repeat(4, 1fr); margin-top: 14px; background: var(--blue-deep); color: #fff; }
+  .deliv .l { display: flex; align-items: center; font-size: 12.5px; font-weight: 800; letter-spacing: .08em; color: #8fd0ff; padding: 0 20px; border-right: 1px solid rgba(255,255,255,.16); }
+  .deliv .c { padding: 12px 16px; display: flex; align-items: center; gap: 10px; }
+  .deliv .c + .c { border-left: 1px solid rgba(255,255,255,.12); }
+  .deliv .c .n { flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%; background: #8fd0ff; color: var(--blue-deep); font-size: 11.5px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .deliv .c .t { font-size: 13.5px; font-weight: 800; line-height: 1.4; }
+
+  /* ===== 縦幅いっぱいに配置（下に余白を残さない） ===== */
+  .slide:not(.cv) .s-body { display: flex; flex-direction: column; padding-bottom: 46px; }
+  .who2, .flow, .rm, .tree2 { flex: 1; min-height: 0; }
+  .who2 { margin-top: 20px; }
+  .who2 .col { display: flex; flex-direction: column; }
+  .who2 .col .h { padding: 18px 22px; }
+  .who2 .col .h .t { font-size: 21px; }
+  .who2 .col .b { flex: 1; display: flex; flex-direction: column; padding: 18px 22px 20px; }
+  .who2 .lb { font-size: 13px; margin-bottom: 9px; }
+  .who2 .deps span { font-size: 13.5px; padding: 6px 11px; }
+  .lv { margin-top: 22px; }
+  .lv .bar { height: 34px; }
+  .lv .bar div { font-size: 13px; }
+  .lv .leg { font-size: 11.5px; margin-top: 7px; }
+  .who2 .pains { margin-top: 22px; gap: 9px; }
+  .who2 .pains p { font-size: 14.5px; line-height: 1.7; padding-left: 16px; }
+  .who2 .pains p::before { top: 10px; }
+  .tasks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .tasks .tk { border: 1px solid var(--line); padding: 10px 8px 9px; text-align: center; }
+  .tasks .tk img { display: block; height: 78px; max-width: 100%; object-fit: contain; margin: 0 auto; }
+  .tasks .tk p { font-size: 12.3px; font-weight: 800; color: #1a2330; line-height: 1.45; margin-top: 7px; }
+  .who2 .col.design .tasks .tk { border-color: #d5ebe8; }
+  .who2 .role { margin-top: auto; padding: 16px 18px; font-size: 15px; }
+
+  .flow { margin-top: 22px; }
+  .flow .m { display: flex; flex-direction: column; }
+  .flow .m .hd { height: 60px; flex: 0 0 auto; }
+  .flow .m .hd .t { font-size: 17px; }
+  .flow .m .bd { flex: 1; display: flex; flex-direction: column; padding-top: 18px; }
+  .flow .m .mi { display: block; height: 128px; max-width: 100%; object-fit: contain; margin: 0 auto 12px; }
+  .flow .m .bd { padding-top: 14px !important; }
+  .flow .m .q { font-size: 16px; min-height: 50px; }
+  .flow .m .lst { margin-top: 8px; gap: 5px; }
+  .flow .m .lst p { font-size: 13.2px; line-height: 1.6; padding-left: 14px; }
+  .flow .m .lst p::before { top: 9px; }
+  .flow .m .out { margin-top: auto; padding: 10px 14px; }
+  .flow .m .out .k { font-size: 11.5px; }
+  .flow .m .out .v { font-size: 15px; }
+  .flow .m .gain { margin-top: auto; padding: 10px 0 10px; border-top: 1px dashed var(--line); font-size: 13px; font-weight: 700; color: #1a2330; line-height: 1.55; }
+  .flow .m .gain span { display: block; font-size: 11px; font-weight: 800; color: var(--blue); letter-spacing: .08em; margin-bottom: 2px; }
+  .flow .m .gain + .out { margin-top: 0; }
+  .chain { margin-top: 22px; }
+  .chain .c { padding: 16px 18px; }
+  .chain .c .t { font-size: 15px; }
+  .chain .c .d { font-size: 12.5px; }
+
+  .rm { grid-template-rows: auto 1.75fr 1fr 1fr auto; margin-top: 18px; }
+  .rm .lb { font-size: 13.5px; }
+  .rm .hd { padding: 12px 15px 13px; }
+  .rm .hd .k { font-size: 12.5px; }
+  .rm .hd .t { font-size: 17px; }
+  .rm .cell { padding: 12px 4px 12px; display: flex; flex-direction: column; justify-content: center; }
+  .rm .cell p { font-size: 13.6px; line-height: 1.6; padding-left: 13px; }
+  .rm .cell p + p { margin-top: 6px; }
+  .rm .cell p::before { top: 8.5px; }
+  .rm .cell.data p { font-size: 13px; }
+  .rm .cell.data p::before { top: 10.5px; }
+  .rm .cell.skill p { font-size: 14px; }
+  .rm .cell.out { padding: 12px 0 0; }
+  .rm .cell.out div { padding: 13px 14px; font-size: 14.5px; }
+
+  .tree2 { margin-top: 20px; }
+  .tree2 .col { display: flex; flex-direction: column; padding: 18px 22px 20px; }
+  .tree2 .col .top .t { font-size: 17px; }
+  .tree { flex: 1; margin-top: 16px; grid-template-columns: 170px 1fr; }
+  .tree .root { padding: 16px 18px; }
+  .tree .root .k { font-size: 12px; }
+  .tree .root .v { font-size: 21px; }
+  .tree .br { gap: 10px; }
+  .tree .br .lf { flex-direction: column; align-items: flex-start; justify-content: center; gap: 3px; padding: 10px 16px; }
+  .tree .br .lf .t { font-size: 15px; }
+  .tree .br .lf .d { font-size: 12.8px; }
+  .tree2 .plan { margin-top: 16px; }
+  .tree2 .plan div { padding: 11px 12px; font-size: 12.5px; }
+  .tree2 .plan div b { font-size: 13.5px; }
+  .deliv { margin-top: 20px; }
+  .deliv .l { font-size: 13.5px; }
+  .deliv .c { padding: 18px 18px; }
+  .deliv .c .n { width: 28px; height: 28px; font-size: 13px; }
+  .deliv .c .t { font-size: 15px; }
+
+  .stage { display: flex; align-items: stretch; margin-top: 14px; height: 58px; }
+  .stage .sl { flex: 0 0 112px; display: flex; align-items: center; font-size: 11.5px; font-weight: 800; line-height: 1.4; padding: 0 10px; margin-right: 8px; }
+  .stage .st { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 14px 0 30px; color: #fff; clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%, 16px 50%); margin-right: -10px; }
+  .stage .st:first-of-type { padding-left: 16px; clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%); }
+  .stage .st .t { font-size: 14.5px; font-weight: 800; line-height: 1.3; }
+  .stage .st .d { font-size: 11px; font-weight: 700; opacity: .85; margin-top: 2px; }
+  .stage.sales .sl { background: #f2f5fa; color: var(--blue-deep); }
+  .stage.sales .st:nth-of-type(1) { background: #3d6fb0; } .stage.sales .st:nth-of-type(2) { background: var(--blue); } .stage.sales .st:nth-of-type(3) { background: #24508c; } .stage.sales .st:nth-of-type(4) { background: #1f4379; } .stage.sales .st:nth-of-type(5) { background: var(--blue-deep); }
+  .stage.design .sl { background: #eef6f5; color: var(--teal-deep); }
+  .stage.design .st:nth-of-type(1) { background: #1e9a92; } .stage.design .st:nth-of-type(2) { background: var(--teal); } .stage.design .st:nth-of-type(3) { background: #0f6f69; } .stage.design .st:nth-of-type(4) { background: #0e5f5a; } .stage.design .st:nth-of-type(5) { background: var(--teal-deep); }
+  .stage + .rm { margin-top: 12px; }
+  .rm .cell p { font-size: 13px !important; }
+  .rm .cell.data p { font-size: 12.4px !important; }
+  .rm .cell.skill p { font-size: 13.4px !important; }
+
+  /* 02 の詰め */
+  .who2 .col .h { padding: 13px 22px; }
+  .who2 .col .b { padding: 14px 22px 16px; }
+  .who2 .deps span { padding: 5px 10px; font-size: 13px; }
+  .lv { margin-top: 14px; }
+  .lv .bar { height: 30px; }
+  .tasks .tk { padding: 8px 6px 7px; }
+  .tasks .tk img { height: 66px; }
+  .tasks .tk p { font-size: 12px; margin-top: 5px; }
+  .who2 .role { padding: 11px 16px; font-size: 14px; margin-top: 14px; }
+  /* 03 の詰め */
+  .flow .m .mi { height: 104px; margin-bottom: 10px; }
+  .flow .m .q { min-height: 0; font-size: 15.5px; }
+  .flow .m .lst { margin-bottom: 12px; }
+  .flow .m .lst p { font-size: 12.8px; }
+  /* 04/05 帯の右端 */
+  .stage .st:last-of-type { margin-right: 0; }
+
+  /* ===== 受講者の学習スケジュール ===== */
+  .gt-lv { position: relative; display: flex; align-items: flex-end; gap: 10px; padding: 0 10px; overflow: hidden; }
+  .gt-lv img { position: relative; z-index: 2; height: 100%; max-height: 150px; width: auto; max-width: 52%; object-fit: contain; object-position: bottom; }
+  .gt-lv .st { position: relative; z-index: 2; flex: 1; align-self: flex-end; color: #fff; padding: 8px 10px 9px; margin-bottom: 0; }
+  .gt-lv .st span { display: block; font-size: 11px; font-weight: 900; letter-spacing: .08em; color: #ffd464; }
+  .gt-lv .st b { display: block; font-size: 12.6px; font-weight: 800; line-height: 1.4; margin-top: 1px; }
+  .gt-lv.lv1 .st { min-height: 52px; } .gt-lv.lv2 .st { min-height: 72px; } .gt-lv.lv3 .st { min-height: 92px; } .gt-lv.lv4 .st { min-height: 112px; }
+  .gt-lv::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; }
+  .gt.sales .gt-lv .st { background: var(--blue); } .gt.sales .gt-lv.lv2 .st { background: #24508c; } .gt.sales .gt-lv.lv3 .st { background: #1f4379; } .gt.sales .gt-lv.lv4 .st { background: var(--blue-deep); }
+  .gt.design .gt-lv .st { background: var(--teal); } .gt.design .gt-lv.lv2 .st { background: #0f6f69; } .gt.design .gt-lv.lv3 .st { background: #0e5f5a; } .gt.design .gt-lv.lv4 .st { background: var(--teal-deep); }
+  .gt.sales .gt-lv::after { background: var(--blue); } .gt.design .gt-lv::after { background: var(--teal); }
+  .gt-prof { display: flex; align-items: center; gap: 0; margin-top: 14px; border: 1px solid var(--line); }
+  .gt-prof .pill { margin: 0 16px; }
+  .gt-prof p { flex: 1; padding: 10px 16px; font-size: 12.5px; font-weight: 700; color: #1a2330; line-height: 1.5; border-left: 1px solid var(--line); }
+  .gt-prof p b { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: .06em; margin-bottom: 2px; }
+  .gt-prof.sales p b { color: var(--blue); } .gt-prof.design p b { color: var(--teal); }
+  .gt-prof p:last-child { flex: 1.2; }
+  .gt { flex: 1; min-height: 0; display: grid; grid-template-columns: 128px repeat(16, 1fr); grid-template-rows: 30px 20px 2.3fr 0.9fr 1fr 1.15fr 0.8fr; gap: 4px 3px; margin-top: 16px; }
+  .gt-l { grid-column: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 12px; background: #f2f5fa; }
+  .gt-l b { font-size: 13.5px; font-weight: 800; color: #1a2330; }
+  .gt-l small { font-size: 10.5px; font-weight: 700; color: #7a8698; margin-top: 2px; line-height: 1.35; }
+  .gt-corner, .gt-wl { background: none; }
+  .gt-wl { grid-row: 2; font-size: 10.5px; font-weight: 800; color: #9aa3b2; align-items: flex-end; }
+  .gt-corner { grid-row: 1; }
+  .gt-m { grid-row: 1; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 13px; font-weight: 800; letter-spacing: .06em; }
+  .gt-w { grid-row: 2; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #6b7789; background: #f6f8fb; }
+  .gt-bar { display: flex; align-items: center; padding: 6px 10px; font-size: 11.8px; font-weight: 700; line-height: 1.4; }
+  .gt-bar.v { color: #fff; font-size: 12px; }
+  .gt-bar.i { flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px; font-size: 11.3px; color: #1a2330; background: #fff; }
+  .gt-bar.i i { font-style: normal; display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; color: #fff; font-size: 10.5px; font-weight: 800; }
+  .gt-bar.f { justify-content: center; text-align: center; font-size: 11.3px; color: #fff; }
+  .gt-bar.w { color: #1a2330; font-size: 12px; }
+  .gt-bar.o { justify-content: center; text-align: center; font-size: 11.3px; font-weight: 800; }
+  .gt.sales .gt-m:nth-of-type(2) { background: var(--blue); } .gt.sales .gt-m:nth-of-type(3) { background: #24508c; } .gt.sales .gt-m:nth-of-type(4) { background: #1f4379; } .gt.sales .gt-m:nth-of-type(5) { background: var(--blue-deep); }
+  .gt.design .gt-m:nth-of-type(2) { background: var(--teal); } .gt.design .gt-m:nth-of-type(3) { background: #0f6f69; } .gt.design .gt-m:nth-of-type(4) { background: #0e5f5a; } .gt.design .gt-m:nth-of-type(5) { background: var(--teal-deep); }
+  .gt.sales .gt-bar.v { background: var(--blue-pale); color: var(--blue-deep); }
+  .gt.sales .gt-bar.i { border: 1.5px solid var(--blue); } .gt.sales .gt-bar.i i { background: var(--blue); }
+  .gt.sales .gt-bar.f { background: var(--blue-deep); }
+  .gt.sales .gt-bar.w { background: var(--tint); border-left: 3px solid var(--blue); }
+  .gt.sales .gt-bar.o { background: #fff7e0; border: 1.5px solid var(--amber); color: #7a5300; }
+  .gt.design .gt-bar.v { background: var(--teal-pale); color: var(--teal-deep); }
+  .gt.design .gt-bar.i { border: 1.5px solid var(--teal); } .gt.design .gt-bar.i i { background: var(--teal); }
+  .gt.design .gt-bar.f { background: var(--teal-deep); }
+  .gt.design .gt-bar.w { background: var(--teal-tint); border-left: 3px solid var(--teal); }
+  .gt.design .gt-bar.o { background: #fff7e0; border: 1.5px solid var(--amber); color: #7a5300; }
+  .gt-after { display: flex; align-items: center; gap: 16px; margin-top: 12px; padding: 12px 20px; color: #fff; }
+  .gt-after.sales { background: var(--blue-deep); } .gt-after.design { background: var(--teal-deep); }
+  .gt-after span { flex: 0 0 auto; font-size: 12px; font-weight: 800; letter-spacing: .1em; color: #8fd0ff; border-right: 1px solid rgba(255,255,255,.25); padding-right: 16px; }
+  .gt-after.design span { color: var(--teal-pale); }
+  .gt-after p { font-size: 14.5px; font-weight: 700; line-height: 1.5; }
+  .gt-after p b { color: #ffd464; }
+
+  /* ===== 提案書として追加したスライド ===== */
+  .cv .goals { top: 330px; }
+  .cv .goals .g { padding: 13px 22px; }
+  .cv .goals .g .v { font-size: 20px; }
+  .cvplan { position: absolute; left: 80px; top: 478px; width: 700px; display: grid; gap: 7px; }
+  .cvplan p { display: flex; align-items: center; gap: 14px; font-size: 15px; font-weight: 700; color: #dbe6f4; }
+  .cvplan .k { flex: 0 0 64px; font-size: 11.5px; font-weight: 800; color: var(--blue-deep); background: #8fd0ff; text-align: center; padding: 3px 0; letter-spacing: .1em; }
+  .cvplan b { font-size: 18px; font-weight: 800; color: #fff; }
+  .cvplan small { font-size: 12.5px; font-weight: 700; color: #9fb3cf; }
+  .cvplan .w { gap: 8px; } .cvplan .w .k { margin-right: 6px; }
+  .cvplan .pill.sales { background: #fff; color: var(--blue-deep); } .cvplan .pill.design { background: var(--teal-pale); color: var(--teal-deep); }
+  .cvmeta { position: absolute; left: 270px; bottom: 58px; font-size: 13px; font-weight: 700; color: #9fb3cf; }
+
+  .fill { flex: 1; min-height: 0; }
+  .band { display: flex; align-items: center; gap: 18px; margin-top: 14px; background: var(--blue-deep); color: #fff; padding: 13px 22px; }
+  .band .k { flex: 0 0 auto; font-size: 12px; font-weight: 800; letter-spacing: .1em; color: #8fd0ff; padding-right: 18px; border-right: 1px solid rgba(255,255,255,.25); }
+  .band p { font-size: 15px; font-weight: 700; line-height: 1.55; }
+  .band p b { color: #ffd464; }
+
+  /* 要点 */
+  .sum { display: grid; grid-template-columns: 1.05fr 1.2fr 0.85fr; grid-template-rows: auto 1fr; gap: 14px; margin-top: 18px; }
+  .sum .bx { border: 1px solid var(--line); padding: 16px 20px; display: flex; flex-direction: column; }
+  .sum .bx .k { font-size: 12px; font-weight: 800; color: var(--blue); letter-spacing: .1em; margin-bottom: 10px; }
+  .sum .goal { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-top: 1px solid var(--line); }
+  .sum .goal:first-of-type { border-top: none; padding-top: 0; }
+  .sum .goal i { flex: 0 0 auto; font-style: normal; font-size: 11px; font-weight: 900; color: #fff; background: var(--blue); padding: 3px 8px; letter-spacing: .06em; }
+  .sum .goal p { font-size: 16px; font-weight: 800; color: #1a2330; line-height: 1.5; }
+  .sum .pc { display: grid; grid-template-columns: 64px 1fr; gap: 10px 12px; align-items: center; }
+  .sum .pc .t { font-size: 11px; font-weight: 800; color: #fff; background: var(--blue); text-align: center; padding: 4px 0; letter-spacing: .08em; }
+  .sum .pc .t.c { background: var(--teal); }
+  .sum .pc b { font-size: 17px; font-weight: 800; color: #1a2330; line-height: 1.35; }
+  .sum .pc b small { display: block; font-size: 11.8px; font-weight: 700; color: #6b7789; margin-top: 2px; }
+  .sum .price { background: var(--tint); border-color: #d3e1f2; }
+  .sum .price .v { font-size: 15px; font-weight: 800; color: #1a2330; }
+  .sum .price .v b { font-size: 46px; font-weight: 900; color: var(--blue-bright); letter-spacing: -.01em; margin-right: 2px; }
+  .sum .price .d { font-size: 12px; font-weight: 700; color: #4a5568; line-height: 1.6; margin-top: 6px; }
+  .sum .road { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--line); }
+  .sum .road .m { display: flex; flex-direction: column; padding: 14px 18px; border-left: 1px dashed var(--line); }
+  .sum .road .m:first-child { border-left: none; }
+  .sum .road .m img { height: 92px; object-fit: contain; align-self: center; margin-bottom: 8px; }
+  .sum .road .m .n { font-size: 12px; font-weight: 800; color: var(--blue); letter-spacing: .08em; }
+  .sum .road .m .t { font-size: 16px; font-weight: 800; color: #1a2330; margin-top: 2px; }
+  .sum .road .m .o { margin-top: auto; padding-top: 8px; font-size: 12.5px; font-weight: 700; color: #4a5568; line-height: 1.5; }
+  .sum .road .m .o b { display: block; font-size: 10.5px; font-weight: 800; color: #9a6b00; letter-spacing: .08em; }
+
+  /* 現状（アンケート） */
+  .now { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 18px; }
+  .now .stats { display: grid; grid-template-rows: repeat(3, 1fr); gap: 12px; }
+  .now .st { display: grid; grid-template-columns: 150px 1fr; align-items: center; gap: 18px; border: 1px solid var(--line); padding: 14px 20px; }
+  .now .st .v { font-size: 15px; font-weight: 800; color: #1a2330; }
+  .now .st .v b { font-size: 50px; font-weight: 900; color: var(--blue-bright); letter-spacing: -.02em; margin-right: 2px; }
+  .now .st .t { font-size: 15px; font-weight: 800; color: #1a2330; line-height: 1.5; }
+  .now .st .t small { display: block; font-size: 12px; font-weight: 600; color: #6b7789; margin-top: 3px; }
+  .now .st .bars { display: grid; gap: 5px; margin-top: 8px; }
+  .now .st .bars p { display: grid; grid-template-columns: 64px 1fr 36px; align-items: center; gap: 8px; font-size: 11.5px; font-weight: 700; color: #4a5568; }
+  .now .st .bars p span { height: 10px; background: #eef2f7; position: relative; }
+  .now .st .bars p span i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--blue); }
+  .now .gap { display: flex; flex-direction: column; border: 1px solid var(--line); }
+  .now .gap .hd { background: var(--blue-deep); color: #fff; padding: 14px 20px; font-size: 16px; font-weight: 800; line-height: 1.5; }
+  .now .gap .hd b { color: #ffd464; }
+  .now .gap .bd { flex: 1; display: flex; flex-direction: column; padding: 16px 20px; gap: 10px; }
+  .now .gap .lv5 { display: flex; align-items: stretch; height: 34px; }
+  .now .gap .lv5 div { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 11.5px; font-weight: 800; color: #fff; background: #c3cddb; margin-right: 3px; }
+  .now .gap .lv5 div.on { background: var(--blue); } .now .gap .lv5 div.go { background: #fff7e0; color: #7a5300; border: 1.5px dashed var(--amber); }
+  .now .gap .cap { font-size: 12px; font-weight: 700; color: #6b7789; line-height: 1.5; }
+  .now .gap .lb { font-size: 12px; font-weight: 800; color: var(--blue); letter-spacing: .08em; margin-top: 4px; }
+  .now .gap .q { position: relative; font-size: 13.5px; font-weight: 700; color: #1a2330; line-height: 1.6; background: #f6f8fb; padding: 9px 14px 9px 30px; }
+  .now .gap .q::before { content: "“"; position: absolute; left: 10px; top: 2px; font-size: 26px; font-weight: 900; color: var(--blue-pale); }
+  .now .gap .q small { display: block; font-size: 11px; font-weight: 700; color: #8a93a3; margin-top: 2px; }
+
+  /* ご提案内容（プラン×コース） */
+  .pcx { display: grid; grid-template-columns: 1fr 70px 1fr; align-items: stretch; margin-top: 18px; }
+  .pcx .col { border: 1px solid var(--line); display: flex; flex-direction: column; }
+  .pcx .col .h { padding: 14px 22px; color: #fff; background: var(--blue); }
+  .pcx .col.c .h { background: var(--teal); }
+  .pcx .col .h .k { font-size: 11.5px; font-weight: 800; letter-spacing: .12em; opacity: .85; }
+  .pcx .col .h .t { font-size: 22px; font-weight: 900; margin-top: 2px; }
+  .pcx .col .h .d { font-size: 12.5px; font-weight: 700; opacity: .9; margin-top: 3px; }
+  .pcx .col .bd { flex: 1; display: flex; flex-direction: column; padding: 14px 22px 16px; }
+  .pcx .spec { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); }
+  .pcx .spec div { padding: 9px 12px; border-left: 1px solid var(--line); }
+  .pcx .spec div:first-child { border-left: none; }
+  .pcx .spec div span { display: block; font-size: 10.5px; font-weight: 800; color: #8a93a3; letter-spacing: .06em; }
+  .pcx .spec div b { display: block; font-size: 15px; font-weight: 800; color: #1a2330; margin-top: 2px; line-height: 1.35; }
+  .pcx .pt { display: grid; gap: 8px; margin-top: 14px; }
+  .pcx .pt p { display: flex; gap: 12px; align-items: center; font-size: 13.5px; font-weight: 700; color: #1a2330; line-height: 1.5; }
+  .pcx .pt p img { flex: 0 0 auto; width: 54px; height: 46px; object-fit: contain; }
+  .pcx .pt p small { display: block; font-size: 11.8px; font-weight: 600; color: #6b7789; }
+  .pcx .steps { display: grid; gap: 8px; margin-top: 14px; }
+  .pcx .steps p { display: grid; grid-template-columns: 74px 1fr; align-items: center; gap: 12px; border: 1px solid #d5ebe8; padding: 9px 12px; }
+  .pcx .steps p span { font-size: 11px; font-weight: 900; color: #fff; background: var(--teal); text-align: center; padding: 4px 0; letter-spacing: .06em; }
+  .pcx .steps p b { font-size: 14px; font-weight: 800; color: #1a2330; line-height: 1.45; }
+  .pcx .steps p b small { display: block; font-size: 11.5px; font-weight: 600; color: #6b7789; }
+  .pcx .x { display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: 900; color: #c3cddb; }
+  .pcx .why { margin-top: auto; padding-top: 12px; font-size: 12.8px; font-weight: 700; color: #4a5568; line-height: 1.6; }
+  .pcx .why b { color: #1a2330; }
+
+  /* 目的とカリキュラムの対応 */
+  .map { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px; }
+  .map .g { border: 1px solid var(--line); display: flex; flex-direction: column; }
+  .map .g .h { display: flex; align-items: center; gap: 14px; padding: 13px 20px; background: var(--blue-deep); color: #fff; }
+  .map .g .h i { font-style: normal; font-size: 11px; font-weight: 900; color: var(--blue-deep); background: #8fd0ff; padding: 3px 9px; letter-spacing: .08em; }
+  .map .g .h b { font-size: 18px; font-weight: 800; }
+  .map .g .bd { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 14px 16px 16px; }
+  .map .ch { display: flex; flex-direction: column; }
+  .map .ch img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border: 1px solid var(--line); }
+  .map .ch .n { font-size: 11px; font-weight: 800; color: var(--blue); letter-spacing: .08em; margin-top: 8px; }
+  .map .ch .t { font-size: 14.5px; font-weight: 800; color: #1a2330; line-height: 1.4; margin-top: 2px; }
+  .map .ch .d { font-size: 12px; font-weight: 600; color: #4a5568; line-height: 1.6; margin-top: 4px; }
+  .base { display: grid; grid-template-columns: auto 1fr 1fr; margin-top: 14px; border: 1px solid var(--line); }
+  .base .l { display: flex; align-items: center; background: #f2f5fa; padding: 0 18px; font-size: 12.5px; font-weight: 800; color: var(--blue-deep); }
+  .base div { display: flex; align-items: center; gap: 14px; padding: 10px 18px; }
+  .base div + div { border-left: 1px dashed var(--line); }
+  .base img { width: 84px; aspect-ratio: 16/9; object-fit: cover; border: 1px solid var(--line); }
+  .base p { font-size: 13.5px; font-weight: 800; color: #1a2330; line-height: 1.45; }
+  .base p small { display: block; font-size: 11.5px; font-weight: 600; color: #6b7789; }
+
+  /* カリキュラム一覧 */
+  .cur { margin-top: 16px; display: grid; grid-template-columns: 56px 270px 1fr 96px; grid-auto-rows: 1fr; border-top: 2px solid var(--blue-deep); }
+  .cur > div { display: flex; align-items: center; padding: 6px 12px; border-bottom: 1px solid var(--line); font-size: 12.3px; font-weight: 600; color: #4a5568; line-height: 1.5; }
+  .cur .hd { font-size: 11.5px; font-weight: 800; color: #6b7789; background: #f6f8fb; letter-spacing: .04em; }
+  .cur .no { font-size: 18px; font-weight: 900; color: var(--blue); justify-content: center; }
+  .cur .ti { font-size: 13.8px; font-weight: 800; color: #1a2330; }
+  .cur .ti small { margin-left: 6px; font-size: 11px; font-weight: 700; color: #8a93a3; }
+  .cur .mo { justify-content: center; }
+  .cur .mo span { font-size: 11.5px; font-weight: 800; color: #fff; padding: 4px 10px; }
+  .cur .mo .m1 { background: var(--blue); } .cur .mo .m2 { background: #24508c; } .cur .mo .m3 { background: #1f4379; } .cur .mo .m4 { background: var(--blue-deep); }
+  .cur .key { background: #fffbef; }
+  .cur .key.ti::after { content: "重点"; margin-left: 8px; font-size: 10.5px; font-weight: 800; color: #7a5300; background: #fff0c2; padding: 2px 7px; }
+
+  /* ツールとセキュリティ */
+  .env { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 22px; margin-top: 18px; }
+  .env .bx { border: 1px solid var(--line); display: flex; flex-direction: column; }
+  .env .bx .h { padding: 12px 20px; font-size: 16px; font-weight: 800; color: #1a2330; border-bottom: 1px solid var(--line); background: #f6f8fb; }
+  .env .bx .h small { font-size: 11.5px; font-weight: 700; color: #8a93a3; margin-left: 8px; }
+  .env .bx .bd { flex: 1; display: flex; flex-direction: column; padding: 14px 20px 16px; gap: 10px; }
+  .env .tl { display: grid; grid-template-columns: 34px 92px 1fr 44px; align-items: center; gap: 10px; }
+  .env .tl img { width: 30px; height: 30px; object-fit: contain; }
+  .env .tl b { font-size: 14px; font-weight: 800; color: #1a2330; }
+  .env .tl span { height: 14px; background: #eef2f7; position: relative; }
+  .env .tl span i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--blue); }
+  .env .tl em { font-style: normal; font-size: 13px; font-weight: 800; color: var(--blue-deep); text-align: right; }
+  .env .msg { margin-top: auto; background: var(--tint); border-left: 4px solid var(--blue); padding: 11px 14px; font-size: 13px; font-weight: 700; color: #1a2330; line-height: 1.6; }
+  .env .rule { display: grid; grid-template-columns: 70px 1fr; gap: 14px; align-items: center; padding: 8px 0; border-top: 1px solid var(--line); }
+  .env .rule:first-child { border-top: none; padding-top: 0; }
+  .env .rule img { width: 64px; height: 60px; object-fit: contain; }
+  .env .rule b { display: block; font-size: 14.5px; font-weight: 800; color: #1a2330; }
+  .env .rule p { font-size: 12.3px; font-weight: 600; color: #4a5568; line-height: 1.6; margin-top: 2px; }
+  .env .rule p em { font-style: normal; font-weight: 800; color: var(--blue-deep); background: #f2f5fa; padding: 1px 5px; }
+
+  /* 料金 */
+  .fee { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 22px; margin-top: 18px; }
+  .fee .main { border: 2px solid var(--blue); display: flex; flex-direction: column; }
+  .fee .main .h { background: var(--blue); color: #fff; padding: 14px 24px; display: flex; align-items: baseline; gap: 14px; }
+  .fee .main .h b { font-size: 21px; font-weight: 900; }
+  .fee .main .h span { font-size: 13px; font-weight: 700; opacity: .9; }
+  .fee .main .bd { flex: 1; display: flex; flex-direction: column; padding: 18px 24px; }
+  .fee .yen { display: flex; align-items: baseline; gap: 6px; }
+  .fee .yen b { font-size: 64px; font-weight: 900; color: var(--blue-bright); letter-spacing: -.02em; line-height: 1; }
+  .fee .yen span { font-size: 20px; font-weight: 800; color: #1a2330; }
+  .fee .yen small { font-size: 13px; font-weight: 700; color: #6b7789; margin-left: 6px; }
+  .fee .yen .off { margin-left: auto; font-size: 12.5px; font-weight: 800; color: #7a5300; background: #fff0c2; padding: 4px 10px; align-self: center; }
+  .fee .ptab { margin-top: 14px; display: grid; grid-template-columns: 0.7fr 1fr 1.1fr 0.9fr; border-top: 2px solid var(--blue-deep); }
+  .fee .ptab div { padding: 8px 12px; border-bottom: 1px solid var(--line); font-size: 14px; font-weight: 700; color: #4a5568; text-align: right; }
+  .fee .ptab .hd { font-size: 11.5px; font-weight: 800; color: #6b7789; background: #f6f8fb; text-align: right; }
+  .fee .ptab .hd:first-child, .fee .ptab .n { text-align: left; }
+  .fee .ptab .hd.b { color: #fff; background: var(--blue); }
+  .fee .ptab .n { font-size: 15px; font-weight: 800; color: #1a2330; }
+  .fee .ptab .o { text-decoration: line-through; color: #9aa3b2; }
+  .fee .ptab div.b { background: var(--tint); font-size: 18px; font-weight: 900; color: var(--blue-bright); }
+  .fee .ptab .d { color: #7a5300; font-weight: 800; }
+  .fee .ex { margin-top: 12px; display: flex; align-items: center; gap: 12px; background: var(--tint); padding: 10px 16px; font-size: 14px; font-weight: 800; color: #1a2330; }
+  .fee .ex b { font-size: 22px; font-weight: 900; color: var(--blue-deep); }
+  .fee .inc { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; }
+  .fee .inc p { position: relative; padding-left: 24px; font-size: 13.5px; font-weight: 700; color: #1a2330; line-height: 1.5; }
+  .fee .inc p::before { content: "✓"; position: absolute; left: 0; top: 0; width: 18px; height: 18px; border-radius: 50%; background: var(--blue); color: #fff; font-size: 11px; font-weight: 900; display: flex; align-items: center; justify-content: center; }
+  .fee .inc p small { display: block; font-size: 11.5px; font-weight: 600; color: #6b7789; }
+  .fee .side { display: flex; flex-direction: column; gap: 14px; }
+  .fee .gr { border: 1px solid var(--line); flex: 1; display: flex; flex-direction: column; }
+  .fee .gr .h { padding: 12px 20px; background: #f6f8fb; border-bottom: 1px solid var(--line); font-size: 15px; font-weight: 800; color: #1a2330; }
+  .fee .gr .bd { flex: 1; padding: 12px 20px 14px; display: flex; flex-direction: column; gap: 8px; }
+  .fee .gr p { font-size: 12.8px; font-weight: 600; color: #4a5568; line-height: 1.65; }
+  .fee .gr p b { color: #1a2330; font-weight: 800; }
+  .fee .gr .ck { display: grid; gap: 6px; }
+  .fee .gr .ck p { position: relative; padding-left: 16px; font-size: 12.3px; }
+  .fee .gr .ck p::before { content: ""; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--amber); }
+  .fee .gr .tag { align-self: flex-start; font-size: 11px; font-weight: 800; color: #7a5300; background: #fff0c2; padding: 3px 9px; }
+
+  /* 他社との違い */
+  .cmp { margin-top: 16px; display: grid; grid-template-columns: 150px 1fr 1.25fr; grid-auto-rows: 1fr; }
+  .cmp > div { padding: 10px 16px; border-bottom: 1px solid var(--line); display: flex; align-items: center; font-size: 13px; font-weight: 600; color: #4a5568; line-height: 1.55; }
+  .cmp .hd { font-size: 13.5px; font-weight: 800; color: #fff; justify-content: center; }
+  .cmp .hd.a { background: #8a93a3; } .cmp .hd.b { background: var(--blue); }
+  .cmp .hd.z { background: none; }
+  .cmp .k { font-size: 13.5px; font-weight: 800; color: var(--blue-deep); background: #f2f5fa; }
+  .cmp .a::before { content: "✕"; flex: 0 0 auto; margin-right: 10px; color: #b4bcc8; font-weight: 900; }
+  .cmp .b { background: var(--tint); color: #1a2330; font-weight: 700; }
+  .cmp .b::before { content: "✓"; flex: 0 0 auto; margin-right: 10px; color: var(--blue); font-weight: 900; }
+  .cmp .b b { color: var(--blue-bright); font-weight: 800; }
+  .cmp .hd.a::before, .cmp .hd.b::before { content: none; }
+
+  /* 導入の流れ */
+  .stp { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 18px; }
+  .stp .s { position: relative; border: 1px solid var(--line); border-left: none; padding: 16px 18px; display: flex; flex-direction: column; }
+  .stp .s:first-child { border-left: 1px solid var(--line); }
+  .stp .s img { height: 84px; object-fit: contain; align-self: center; margin: 4px 0 10px; }
+  .stp .s .n { font-size: 11.5px; font-weight: 800; color: var(--blue); letter-spacing: .1em; }
+  .stp .s .t { font-size: 17px; font-weight: 800; color: #1a2330; margin-top: 2px; }
+  .stp .s .d { font-size: 12.8px; font-weight: 600; color: #4a5568; line-height: 1.65; margin-top: 6px; }
+  .stp .s + .s::before { content: ""; position: absolute; left: -9px; top: 50%; width: 16px; height: 16px; background: #fff; border-top: 2px solid var(--blue-pale); border-right: 2px solid var(--blue-pale); transform: translateY(-50%) rotate(45deg); }
+  .next { display: grid; grid-template-columns: 1.3fr 1fr; gap: 18px; margin-top: 14px; }
+  .next .bx { border: 1px solid var(--line); padding: 14px 20px; }
+  .next .bx .k { font-size: 12px; font-weight: 800; color: var(--blue); letter-spacing: .1em; margin-bottom: 8px; }
+  .next .bx p { display: flex; gap: 10px; font-size: 13.5px; font-weight: 700; color: #1a2330; line-height: 1.55; margin-top: 6px; }
+  .next .bx p i { flex: 0 0 auto; font-style: normal; width: 22px; height: 22px; border-radius: 50%; background: var(--blue); color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .next .tl2 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 4px; }
+  .next .tl2 div { border-top: 4px solid var(--blue-pale); padding: 8px 6px 0; }
+  .next .tl2 div:nth-child(2) { border-color: var(--blue); } .next .tl2 div:nth-child(3) { border-color: var(--blue-deep); }
+  .next .tl2 b { display: block; font-size: 13.5px; font-weight: 800; color: #1a2330; }
+  .next .tl2 small { display: block; font-size: 11.5px; font-weight: 600; color: #6b7789; line-height: 1.5; margin-top: 2px; }
+
+  /* 仕上げの調整 */
+  .sum .road .m img { height: 120px; }
+  .sum .road .m .x { font-size: 12.8px; font-weight: 600; color: #4a5568; line-height: 1.6; margin-top: 6px; }
+  .sum .road .m .o { font-size: 13.5px; font-weight: 800; color: #1a2330; }
+  .pcx .col .bd { padding: 18px 24px 18px; }
+  .pcx .pt { gap: 14px; margin-top: 20px; }
+  .pcx .pt p { font-size: 16px; }
+  .pcx .pt p img { width: 72px; height: 62px; }
+  .pcx .pt p small { font-size: 13px; margin-top: 2px; }
+  .pcx .steps { gap: 12px; margin-top: 20px; }
+  .pcx .steps p { padding: 13px 14px; }
+  .pcx .steps p b { font-size: 16px; }
+  .pcx .steps p b small { font-size: 12.8px; margin-top: 2px; }
+  .pcx .why { font-size: 13.5px; }
+  .cur { grid-template-columns: 56px 340px 1fr 96px; }
+  .cur .ti small { margin-left: 8px; white-space: nowrap; }
+  .cur > div { font-size: 13px; }
+  .now .st .t { font-size: 16.5px; } .now .st .t small { font-size: 13px; }
+  .now .st .bars p { font-size: 13px; grid-template-columns: 70px 1fr 40px; } .now .st .bars p span { height: 13px; }
+  .env .bx .bd { gap: 18px; padding: 20px 22px; }
+  .env .tl { grid-template-columns: 40px 100px 1fr 48px; }
+  .env .tl img { width: 36px; height: 36px; }
+  .env .tl b { font-size: 16px; } .env .tl span { height: 20px; } .env .tl em { font-size: 15px; }
+  .env .msg { font-size: 14px; padding: 14px 16px; }
+  .env .rule { flex: 1; grid-template-columns: 96px 1fr; padding: 12px 0; }
+  .env .rule img { width: 88px; height: 84px; }
+  .env .rule b { font-size: 16.5px; } .env .rule p { font-size: 13.5px; line-height: 1.7; margin-top: 4px; }
+  .fee .yen { flex-wrap: wrap; } .fee .yen small { white-space: nowrap; }
+  .fee .yen .off { margin-left: 0; flex-basis: 100%; max-width: max-content; margin-top: 8px; font-size: 13px; }
+  .fee .ptab div { padding: 10px 14px; font-size: 15px; } .fee .ptab div.b { font-size: 20px; }
+  .fee .inc { margin-top: auto; padding-top: 14px; }
+  .fee .gr .bd { gap: 12px; padding: 16px 22px; }
+  .fee .gr p { font-size: 14px; line-height: 1.75; } .fee .gr .ck { gap: 9px; } .fee .gr .ck p { font-size: 13.5px; }
+  .cmp > div { font-size: 14.5px; } .cmp .k { font-size: 15px; } .cmp .hd { font-size: 15px; }
+  .stp .s img { height: 140px; margin: 14px 0 16px; }
+  .stp .s .t { font-size: 19px; } .stp .s .d { font-size: 14px; line-height: 1.75; }
+  .next .bx p { font-size: 14px; }
+
+  .fee .ptab { grid-template-columns: 0.6fr 1fr 1.25fr 0.9fr; } .fee .ptab .hd { white-space: nowrap; }
+  .cur { grid-template-columns: 56px 380px 1fr 96px; } .cur .key.ti::after { white-space: nowrap; }
+
+  .cv .t { top: 160px; font-size: 44px; line-height: 1.36; }
+  .cv .t .tsub { display: block; font-size: 24px; font-weight: 800; color: #b7c6dc; letter-spacing: .12em; margin-top: 10px; }
+  .cv .goals { top: 350px; } .cvplan { top: 486px; }
+  .pcx .col.c .spec { grid-template-columns: repeat(4, 1fr); }
+  .env .cl { display: flex; align-items: center; gap: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+  .env .cl img { width: 64px; height: 64px; }
+  .env .cl b { font-size: 26px; font-weight: 900; color: #1a2330; }
+  .env .cl p { font-size: 13.5px; font-weight: 700; color: #4a5568; line-height: 1.6; margin-top: 2px; }
+  .env .use { display: grid; gap: 12px; }
+  .env .use p { display: flex; align-items: center; gap: 14px; }
+  .env .use i { flex: 0 0 74px; font-style: normal; font-size: 11.5px; font-weight: 800; color: #fff; background: var(--blue); text-align: center; padding: 4px 0; }
+  .env .use span { font-size: 15px; font-weight: 800; color: #1a2330; line-height: 1.4; }
+  .env .use small { display: block; font-size: 12.5px; font-weight: 600; color: #6b7789; margin-top: 2px; }
+
+  .fee .ptab { grid-template-columns: 0.7fr 1fr 1.2fr; }
+  .fee .ptab .o { text-decoration: none; color: #4a5568; }
+  .env .use { flex: 1; align-content: space-evenly; }
+
+  .fee .main .bd { justify-content: flex-start; }
+  .fee .ptab { flex: 1; margin-top: 18px; grid-auto-rows: 1fr; grid-template-rows: auto; }
+  .fee .ptab div { display: flex; align-items: center; justify-content: flex-end; font-size: 17px; }
+  .fee .ptab .hd { font-size: 12.5px; } .fee .ptab .hd:first-child, .fee .ptab .n { justify-content: flex-start; }
+  .fee .ptab .n { font-size: 18px; } .fee .ptab div.b { font-size: 24px; }
+  .fee .inc2 { gap: 0 !important; padding: 6px 22px 16px !important; }
+  .fee .inc2 p { position: relative; padding: 13px 0 13px 30px; border-bottom: 1px solid var(--line); font-size: 13px; color: #6b7789; line-height: 1.6; }
+  .fee .inc2 p b { display: block; font-size: 15.5px; font-weight: 800; color: #1a2330; }
+  .fee .inc2 p::before { content: "✓"; position: absolute; left: 0; top: 16px; width: 20px; height: 20px; border-radius: 50%; background: var(--blue); color: #fff; font-size: 11px; font-weight: 900; display: flex; align-items: center; justify-content: center; }
+  .fee .inc2 p.go { margin-top: auto; border: none; background: var(--tint); padding: 12px 16px; font-size: 14px; font-weight: 800; color: var(--blue-deep); }
+  .fee .inc2 p.go::before { content: none; }
+
+  .fee .inc2 p { padding: 20px 0 20px 32px; font-size: 13.5px; } .fee .inc2 p b { font-size: 16.5px; } .fee .inc2 p::before { top: 23px; }
+  .fee .inc2 p.go { padding: 14px 16px; }
+
+  .env .why2 { font-size: 12.5px; font-weight: 800; color: var(--blue); letter-spacing: .1em; margin-bottom: -6px; }
+  .env .use { align-content: space-between; }
+  .env .use i { flex-basis: 64px; }
+
+  @media print {
+    body { padding: 0; background: #fff; }
+    * { box-shadow: none !important; }
+    .note { display: none; }
+    .deck { gap: 0; display: block; }
+    .slide-shell { width: 1280px; }
+    .slide-shell figcaption { display: none; }
+    .slide-shell .clip { height: 720px; overflow: hidden; border-radius: 0; box-shadow: none; }
+    .slide { transform: none; border: none; border-radius: 0; }
+    figure.slide-shell { page-break-after: always; break-after: page; margin: 0; }
+    figure.slide-shell:last-child { page-break-after: auto; }
+  }
+</style>
+</head>
+<body>
+  <p class="note">リノベる様 ご提案書｜プラン：AI業務自動化研修／コース：リーダー・マネージャー向けAI研修｜全16スライド</p>
+  <div class="deck">
+
+    <!-- ===== 01 扉 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide cv">
+        <p class="eyebrow">AI業務自動化研修</p>
+        <p class="to">リノベる株式会社 様<small>御中</small></p>
+        <p class="t">部長がAIで<b>3ヵ年計画とKPI</b>を<br>自ら描き、回せる組織を実現する<span class="tsub">ご提案資料</span></p>
+        <div class="goals">
+          <div class="g"><span class="n">GOAL 1</span><span class="v">3ヵ年計画・戦略を、自分で立案できる</span></div>
+          <div class="g"><span class="n">GOAL 2</span><span class="v">計画を KPI・実行プランまで落とし込める</span></div>
+        </div>
+        <div class="cvplan"><p><span class="k">プラン</span><b>AI業務自動化研修</b><small>4ヶ月</small></p><p><span class="k">コース</span><b>リーダー・マネージャー向けAI研修</b><small>全8章・35レッスン</small></p><p class="w"><span class="k">受講者</span><span class="pill sales">営業部長</span><span class="pill design">設計部長</span></p></div>
+        <p class="cvmeta">2026年11月　｜　バイテック法人AI研修（株式会社AI棒）</p>
+        <img class="logo" src="assets/biz-logo-w.svg" alt="byTech BUSINESS">
+        <div class="side">
+        <img class="il" src="assets/illus/cover.webp" alt="">
+        <div class="months">
+          <div class="m"><span class="k">1ヶ月目</span><span class="v">現状を数字でつかむ<small>実績の要因分解</small></span></div>
+          <div class="m"><span class="k">2ヶ月目</span><span class="v">3ヵ年の戦略を描く<small>調査・シナリオ・反論</small></span></div>
+          <div class="m"><span class="k">3ヶ月目</span><span class="v">KPI・実行プランに落とす<small>KPIツリー・週次の仕組み</small></span></div>
+          <div class="m"><span class="k">4ヶ月目</span><span class="v">組織で回し、経営に通す<small>部下への展開・経営提案</small></span></div>
+          <p class="end">修了時：経営会議に出せる<br>3ヵ年計画と90日実行プラン</p>
+        </div>
+        </div>
+      </div>
+    </div><figcaption>表紙</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">ご提案の要点｜この1枚でご判断いただけるように</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">部長が自部門の数字で、<b>3ヵ年計画とKPI</b>を4ヶ月で仕上げる研修です。</h2>
+        <div class="sum fill">
+          <div class="bx"><p class="k">貴社の研修目的</p>
+            <div class="goal"><i>GOAL 1</i><p>3ヵ年計画・戦略を、部長が自分で立案できる</p></div>
+            <div class="goal"><i>GOAL 2</i><p>計画を KPI・実行プランまで落とし込める</p></div></div>
+          <div class="bx"><p class="k">ご提案内容</p>
+            <div class="pc"><span class="t">プラン</span><b>AI業務自動化研修<small>4ヶ月・eラーニング＋個人面談（月2回）</small></b>
+            <span class="t c">コース</span><b>リーダー・マネージャー向けAI研修<small>全8章・35レッスン／使用ツール：Claude</small></b>
+            <span class="t" style="background:#6b7789">受講者</span><b>営業部長・設計部長<small>部門ごとに、自部門の実データで進めます</small></b></div></div>
+          <div class="bx price"><p class="k">ご費用（1名・税込）</p>
+            <p class="v"><b>25</b>万円</p>
+            <p class="d">5名 125万円／10名 250万円／15名 375万円（すべて税込）</p></div>
+          <div class="road">
+            <div class="m"><img src="assets/illus/m1.webp" alt=""><span class="n">1ヶ月目</span><span class="t">現状を数字でつかむ</span><p class="x">自部門の実績をAIで要因分解し、詰まっている所を特定</p><p class="o"><b>成果物</b>現状分析レポート</p></div>
+            <div class="m"><img src="assets/illus/m2.webp" alt=""><span class="n">2ヶ月目</span><span class="t">3ヵ年の戦略を描く</span><p class="x">市場調査と3シナリオ比較で、3年後の姿を根拠付きで選ぶ</p><p class="o"><b>成果物</b>3ヵ年計画のドラフト</p></div>
+            <div class="m"><img src="assets/illus/m3.webp" alt=""><span class="n">3ヶ月目</span><span class="t">KPI・実行に落とす</span><p class="x">KPIツリーで行動指標まで分解し、週次レポートを自動化</p><p class="o"><b>成果物</b>KPIツリー・実行計画表</p></div>
+            <div class="m"><img src="assets/illus/m4.webp" alt=""><span class="n">4ヶ月目</span><span class="t">組織で回し、通す</span><p class="x">課ごとの目標と1on1に落とし、経営会議で承認を取る</p><p class="o"><b>成果物</b>経営会議提出版＋90日実行プラン</p></div>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒　｜　金額はすべて税込です。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>ご提案の要点</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">貴社の現状（事前アンケートより）</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">AIは<b>毎日の作業には使えています</b>。次は、計画と組織を動かす使い方です。</h2>
+        <div class="now fill">
+          <div class="stats">
+            <div class="st"><p class="v"><b>78</b>%</p><p class="t">がAIを「ほぼ毎日〜毎日」使っている<small>週1〜2回が18%。ほとんど使っていないのは1名のみ</small></p></div>
+            <div class="st"><p class="v"><b>66</b>%</p><p class="t">が「何度か往復して質を上げられる」Lv3以上<small>一方、ツール連携・自動化までできるLv5は5名（5%）</small></p></div>
+            <div class="st"><div><p class="v" style="font-size:13px;color:#6b7789">使っているAIツール</p></div><div class="bars">
+              <p>ChatGPT<span><i style="width:90%"></i></span>90%</p><p>Gemini<span><i style="width:63%"></i></span>63%</p><p>Claude<span><i style="width:18%"></i></span>18%</p><p>Copilot<span><i style="width:5%"></i></span>5%</p></div></div>
+          </div>
+          <div class="gap">
+            <p class="hd">メンバーは「使える」段階。<b>使い方を計画・KPI・組織の仕組みに広げる</b>のは、部長の役割です。</p>
+            <div class="bd">
+              <div class="lv5"><div class="on">Lv1</div><div class="on">Lv2</div><div class="on">Lv3 最多</div><div>Lv4</div><div class="go">Lv5 自動化</div></div>
+              <p class="cap">自己評価レベルの分布（91名）。Lv3が47名で最多、Lv4・Lv5は合わせて13名。</p>
+              <p class="lb">回答に挙がった声（抜粋）</p>
+              <p class="q">進捗把握や現状把握のための数字を見える化したい<small>施工SV課</small></p>
+              <p class="q">提出見積と当社標準金額の差異をチェックし、交渉の根拠を自動で作りたい<small>施工SV課</small></p>
+              <p class="q">AIエージェントに役割を持たせてチームをつくり、動かせるようになりたい<small>ソリューションプランナー3課</small></p>
+            </div>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒　｜　出典：貴社 事前アンケート（2026年9月4日〜11日・91名回答）。割合は四捨五入。ツールは複数回答。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>01 貴社の現状</figcaption></figure>
+
+    <!-- ===== 02 受講者の想定 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">前提｜受講者と、率いるチームの現状（仮説）</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">事前アンケート<b>91名</b>の所属から、2人の部長が率いるチームを想定しました。</h2>
+        <div class="who2">
+          <div class="col sales">
+            <div class="h"><span class="pill" style="background:#fff;color:var(--blue)">営業部長</span><span class="t">反響から契約までを統括</span><span class="n"><b>37</b>名</span></div>
+            <div class="b">
+              <p class="lb">想定する担当範囲</p>
+              <div class="deps"><span>ソリューションプランナー1課<i>11</i></span><span>2課<i>9</i></span><span>3課<i>6</i></span><span>インサイドセールス課<i>8</i></span><span>セールスマーケティング課<i>3</i></span></div>
+              <div class="lv">
+                <p class="lb">メンバーのAI活用レベル（自己評価）</p>
+                <div class="bar"><div style="width:2.7%;background:#c3cddb"></div><div style="width:27%;background:var(--blue-pale)">Lv2 10</div><div style="width:59.5%;background:var(--blue)">Lv3 22</div><div style="width:8.1%;background:#1f4379">3</div><div style="width:2.7%;background:var(--blue-deep)"></div></div>
+                <div class="leg"><span>Lv1 1名</span><span>Lv3＝何度か往復して質を上げられる</span><span>Lv4 3名・Lv5 1名</span></div>
+              </div>
+<p class="lb" style="margin-top:20px">時間がかかっている主な業務（回答から抜粋）</p>
+              <div class="tasks"><div class="tk"><img src="assets/illus/p-s1.webp" alt=""><p>物件の選定・精査</p></div><div class="tk"><img src="assets/illus/p-s2.webp" alt=""><p>管理規約・竣工図の読み込み</p></div><div class="tk"><img src="assets/illus/p-s3.webp" alt=""><p>ラフプラン・資料作成</p></div><div class="tk"><img src="assets/illus/p-s4.webp" alt=""><p>予約調整・追客メール</p></div></div>
+              <p class="role">部長の課題：歩留まりのどこを直せば契約が伸びるかを数字で示し、5課の動きを1つの計画にそろえること</p>
+            </div>
+          </div>
+          <div class="col design">
+            <div class="h"><span class="pill" style="background:#fff;color:var(--teal)">設計部長</span><span class="t">設計から施工・品質までを統括</span><span class="n"><b>54</b>名</span></div>
+            <div class="b">
+              <p class="lb">想定する担当範囲</p>
+              <div class="deps"><span>デザイン課・1〜3課<i>22</i></span><span>デザインSV課<i>8</i></span><span>デザインソリューション課<i>10</i></span><span>施工管理課<i>9</i></span><span>施工SV課<i>5</i></span></div>
+              <div class="lv">
+                <p class="lb">メンバーのAI活用レベル（自己評価）</p>
+                <div class="bar"><div style="width:37%;background:var(--teal-pale)">Lv2 20</div><div style="width:46.3%;background:var(--teal)">Lv3 25</div><div style="width:9.3%;background:#0e5f5a">5</div><div style="width:7.4%;background:var(--teal-deep)">4</div></div>
+                <div class="leg"><span>Lv1 0名</span><span>Lv2＝相談・壁打ち程度が37%</span><span>Lv4 5名・Lv5 4名</span></div>
+              </div>
+<p class="lb" style="margin-top:20px">時間がかかっている主な業務（回答から抜粋）</p>
+              <div class="tasks"><div class="tk"><img src="assets/illus/p-d1.webp" alt=""><p>見積の作成・チェック</p></div><div class="tk"><img src="assets/illus/p-d2.webp" alt=""><p>図面チェック・議事録</p></div><div class="tk"><img src="assets/illus/p-d3.webp" alt=""><p>提出物の格納確認</p></div><div class="tk"><img src="assets/illus/p-d4.webp" alt=""><p>工事パートナーの開拓・質疑</p></div></div>
+              <p class="role">部長の課題：案件が増えても品質と原価を守れる体制（人・パートナー・仕組み）を3年で設計すること</p>
+            </div>
+          </div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒　｜　出典：貴社 事前アンケート（2026年9月4日〜11日・91名回答）。部長の担当範囲は所属部署名から当社が置いた仮説で、実際の組織とは異なる場合があります。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>02 前提｜受講者と率いるチーム（仮説）</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">ご提案内容</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">4ヶ月の<b>AI業務自動化研修</b>の中身を、部長向けの<b>リーダー・マネージャー研修</b>で組みます。</h2>
+        <div class="pcx fill">
+          <div class="col"><div class="h"><p class="k">PLAN｜研修プラン</p><p class="t">AI業務自動化研修</p><p class="d">業務プロセスそのものをAIで仕組み化する4ヶ月プラン</p></div>
+            <div class="bd">
+              <div class="spec"><div><span>期間</span><b>4ヶ月</b></div><div><span>実施方法</span><b>eラーニング<br>＋ハンズオン</b></div><div><span>訓練時間</span><b>10時間〜</b></div></div>
+              <div class="pt">
+                <p><img src="assets/icon/comp-01.webp" alt=""><span>動画で学ぶ<small>その月の型を、空き時間に視聴</small></span></p>
+                <p><img src="assets/icon/comp-02.webp" alt=""><span>個人面談 月2回（全8回）<small>講師と1対1。自部門の資料で計画を作り込む</small></span></p>
+                <p><img src="assets/icon/comp-04.webp" alt=""><span>実務で作る<small>面談の間に自部門で試し、次の面談に持ち寄る</small></span></p>
+              </div>
+              <p class="why"><b>4ヶ月を選ぶ理由：</b>3ヵ年計画のドラフトだけでなく、KPIを週次で追う仕組み（自動レポート）と、課への展開・経営承認まで期間内に終えるためです。</p>
+            </div></div>
+          <div class="x">×</div>
+          <div class="col c"><div class="h"><p class="k">COURSE｜研修コース</p><p class="t">リーダー・マネージャー向けAI研修</p><p class="d">計画立案と人材育成にAIを使う、管理職向けのコース</p></div>
+            <div class="bd">
+              <div class="spec"><div><span>構成</span><b>全8章<br>35レッスン</b></div><div><span>視聴時間</span><b>約5時間</b></div><div><span>受講形式</span><b>オンライン</b></div><div><span>使用ツール</span><b>Claude</b></div></div>
+              <div class="steps">
+                <p><span>STEP 01</span><b>AI活用の全体理解<small>5段階と自部署の現在地／多往復で仕事を進める</small></b></p>
+                <p><span>STEP 02</span><b>管理職業務での活用<small>数値分析・3シナリオの計画／戦略立案／エージェント作成</small></b></p>
+                <p><span>STEP 03</span><b>組織への定着<small>部下の育成・1on1／利用ルール・効果測定・90日計画</small></b></p>
+              </div>
+              <p class="why"><b>このコースを選ぶ理由：</b>「計画を立てる」「KPIに落とす」「組織で回す」が、そのまま章立てになっているためです。</p>
+            </div></div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒　｜　プランの内容はバイテック法人AI研修の標準仕様、コースの構成は2026年11月時点のものです。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>02 ご提案内容</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">目的とカリキュラムの対応</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">2つの目的に、<b>重点の4章</b>を割り当てます。</h2>
+        <div class="map fill">
+          <div class="g"><div class="h"><i>GOAL 1</i><b>3ヵ年計画・戦略を立案できる</b></div><div class="bd">
+            <div class="ch"><img src="assets/ui/ui-03.webp" alt=""><p class="n">第4章｜2ヶ月目</p><p class="t">数値分析と中期計画</p><p class="d">実績の要因分解、前提の置き方、3シナリオの比較と感度分析、検算</p></div>
+            <div class="ch"><img src="assets/ui/ui-04.webp" alt=""><p class="n">第5章｜2ヶ月目</p><p class="t">戦略立案と施策検討</p><p class="d">市場・競合調査、仮説の検証、反対意見の洗い出し、経営への提案</p></div></div></div>
+          <div class="g"><div class="h"><i>GOAL 2</i><b>KPI・実行プランに落とし込める</b></div><div class="bd">
+            <div class="ch"><img src="assets/ui/ui-05.webp" alt=""><p class="n">第6章｜3ヶ月目</p><p class="t">業務を設計し直す・エージェント作成</p><p class="d">業務の棚卸し、人が確認する点の設計、週次レポートの定期実行</p></div>
+            <div class="ch"><img src="assets/ui/ui-07.webp" alt=""><p class="n">第8章｜4ヶ月目</p><p class="t">ルールと効果測定</p><p class="d">利用ルール、承認の流れ、効果の測り方、90日計画の作成</p></div></div></div>
+        </div>
+        <div class="base"><p class="l">土台と展開</p>
+          <div><img src="assets/ui/ui-01.webp" alt=""><p>第1〜3章｜1ヶ月目<small>AI活用の5段階・多往復で仕事を進める・専用の相談役</small></p></div>
+          <div><img src="assets/ui/ui-06.webp" alt=""><p>第7章｜4ヶ月目<small>部下のAI成果物の見方・1on1と目標設定・リーダー育成</small></p></div></div>
+        <p class="s-foot">© 株式会社AI棒　｜　章と月の対応は標準の進め方です。受講者の進み具合に合わせて前後します。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>03 目的とカリキュラムの対応</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">カリキュラム（全8章・35レッスン／視聴 約5時間）</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">動画は<b>約5時間</b>。残りの時間は、面談と自部門の計画づくりに使います。</h2>
+        <div class="cur fill"><div class="hd" style="justify-content:center">No.</div><div class="hd">チャプター</div><div class="hd">主な内容</div><div class="hd" style="justify-content:center">実施月</div><div class="no">01</div><div class="ti">管理職の役割と研修ゴール設定<small>3レッスン</small></div><div class="">なぜ今、管理職がAIを学ぶのか／自社の現状を読み解く／現在地を診断する</div><div class="mo"><span class="m1">1ヶ月目</span></div><div class="no">02</div><div class="ti">何ができるかを知る｜AI活用の5段階<small>4レッスン</small></div><div class="">1回の指示から自動化まで／実演：1つの案件を5段階で／エージェントと自動化の違い／任せる仕事と任せない仕事</div><div class="mo"><span class="m1">1ヶ月目</span></div><div class="no">03</div><div class="ti">多往復で仕事を進める｜壁打ちと相談役<small>4レッスン</small></div><div class="">目的・前提・制約の渡し方／作業の分解／AIに反論させる／資料を持たせた部署専用の相談役</div><div class="mo"><span class="m1">1ヶ月目</span></div><div class="no key">04</div><div class="ti key">数値分析と中期計画<small>5レッスン</small></div><div class="key">実績の要因分解／前提の置き方／3つのシナリオ／感度分析／検算と人の判断</div><div class="mo key"><span class="m2">2ヶ月目</span></div><div class="no key">05</div><div class="ti key">戦略立案と施策検討<small>5レッスン</small></div><div class="key">市場・競合調査／仮説の検証／反対意見の洗い出し／実行順の決定／経営への提案</div><div class="mo key"><span class="m2">2ヶ月目</span></div><div class="no key">06</div><div class="ti key">業務を設計し直す｜部署のエージェント<small>5レッスン</small></div><div class="key">業務の棚卸し／自動化の判断基準／人が確認する点／ノーコードでエージェント作成／週次レポートの定期実行</div><div class="mo key"><span class="m3">3ヶ月目</span></div><div class="no">07</div><div class="ti">部下の育成｜AI時代のマネジメント<small>5レッスン</small></div><div class="">AI成果物の見方／AI依存への対応／スキル格差への対応／リーダーを育てる／1on1と目標設定</div><div class="mo"><span class="m4">4ヶ月目</span></div><div class="no key">08</div><div class="ti key">組織に定着させる｜ルールと効果測定<small>4レッスン</small></div><div class="key">利用ルール／承認の流れ／効果測定／経営への報告と90日計画</div><div class="mo key"><span class="m4">4ヶ月目</span></div></div>
+        <p class="s-foot">© 株式会社AI棒　｜　カリキュラムは最新のアップデートに合わせて随時更新します。視聴時間は目安です。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>04 カリキュラム</figcaption></figure>
+
+    <!-- ===== 03 全体像 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">全体像｜4ヶ月で「描く → 落とす → 回す」まで</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">毎月1つ、<b>経営会議に持っていける成果物</b>を作りながら進めます。</h2>
+        <div class="flow">
+          <div class="m">
+            <div class="hd"><span class="k">1ヶ月目</span><span class="t">現状を数字でつかむ</span></div>
+            <div class="bd"><img class="mi" src="assets/illus/m1.webp" alt="">
+              <p class="q">いまの実績は、<b>どこで伸び、どこで詰まっている</b>のか</p>
+              <div class="lst"><p>AI活用の5段階を体験し、自分の業務で壁打ち</p><p>自部門の実績データをAIで要因分解</p><p>数字の検算と、相関と因果の見分け方</p></div>
+              <div class="out"><p class="k">成果物</p><p class="v">現状分析レポート<br>（ボトルネック3つ）</p></div>
+            </div>
+          </div>
+          <div class="m">
+            <div class="hd"><span class="k">2ヶ月目</span><span class="t">3ヵ年の戦略を描く</span></div>
+            <div class="bd"><img class="mi" src="assets/illus/m2.webp" alt="">
+              <p class="q">3年後に<b>どの姿を選ぶか</b>、根拠を持って決める</p>
+              <div class="lst"><p>市場・競合を出典付きで調べる</p><p>標準・強気・弱気の3シナリオと感度分析</p><p>経営・現場・顧客の立場から反論を出させる</p></div>
+              <div class="out"><p class="k">成果物</p><p class="v">3ヵ年計画のドラフト<br>（戦略と数値計画）</p></div>
+            </div>
+          </div>
+          <div class="m">
+            <div class="hd"><span class="k">3ヶ月目</span><span class="t">KPI・実行に落とす</span></div>
+            <div class="bd"><img class="mi" src="assets/illus/m3.webp" alt="">
+              <p class="q">計画を、<b>現場が毎週追える数字と行動</b>に分解する</p>
+              <div class="lst"><p>KPIツリーで目標を行動指標まで分解</p><p>年→四半期→月へ落とし、施策に順位をつける</p><p>週次KPIレポートを自動で作る仕組み</p></div>
+              <div class="out"><p class="k">成果物</p><p class="v">KPIツリー・実行計画表<br>週次レポートの自動化</p></div>
+            </div>
+          </div>
+          <div class="m">
+            <div class="hd"><span class="k">4ヶ月目</span><span class="t">組織で回し、通す</span></div>
+            <div class="bd"><img class="mi" src="assets/illus/m4.webp" alt="">
+              <p class="q">課長・メンバーに展開し、<b>経営の承認を取る</b></p>
+              <div class="lst"><p>課ごとの目標設定と1on1への反映</p><p>部下のAI成果物の見方、利用ルール</p><p>経営会議用の構成・想定問答・数字の根拠</p></div>
+              <div class="out"><p class="k">成果物</p><p class="v">経営会議提出版 3ヵ年計画<br>＋90日実行プラン</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="chain">
+          <p class="lb">毎月の進め方</p>
+          <div class="c"><span class="n">1</span><div><p class="t">動画で学ぶ</p><p class="d">その月の型を事前に視聴</p></div></div>
+          <div class="c"><span class="n">2</span><div><p class="t">個人面談 月2回</p><p class="d">自部門の資料で講師と作り込む</p></div></div>
+          
+          <div class="c"><span class="n">3</span><div><p class="t">実務で使う</p><p class="d">面談の間に自部門で試す</p></div></div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒　｜　各月の題材は、受講者ご本人が扱っている実際の数字・資料を使います（社外秘の扱いは利用ルールに沿って初回に決めます）。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>03 全体像｜4ヶ月の流れ</figcaption></figure>
+
+    <!-- ===== 04 営業部長 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">営業部長｜4ヶ月ロードマップ</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">反響から請負契約までの歩留まりを起点に、<b>契約を伸ばす3ヵ年計画</b>を作る。</h2>
+<div class="stage sales"><p class="sl">起点にする<br>営業の数字</p><div class="st"><p class="t">反響</p><p class="d">広告・ショールーム別</p></div><div class="st"><p class="t">CL予約・実施</p><p class="d">アサインと追客の速さ</p></div><div class="st"><p class="t">物件確定</p><p class="d">精査・ラフ提案の日数</p></div><div class="st"><p class="t">請負契約</p><p class="d">課別・担当別の転換率</p></div><div class="st"><p class="t">契約単価</p><p class="d">提案内容と価格帯</p></div></div>
+        <div class="rm sales">
+          <div></div>
+          <div class="hd"><p class="k">1ヶ月目</p><p class="t">営業の現状を数字でつかむ</p></div>
+          <div class="hd m2"><p class="k">2ヶ月目</p><p class="t">3ヵ年の営業戦略を描く</p></div>
+          <div class="hd m3"><p class="k">3ヶ月目</p><p class="t">KPI・行動計画に落とす</p></div>
+          <div class="hd m4"><p class="k">4ヶ月目</p><p class="t">5課で回し、経営に通す</p></div>
+
+          <p class="lb">やること</p>
+          <div class="cell"><p>SFの実績を渡し、<b>反響→CL→物件確定→請負</b>の歩留まりを課別・担当別に分解</p><p>伸びた月・落ちた月の要因をAIに仮説出しさせ、元データで検算</p></div>
+          <div class="cell"><p>中古マンション流通・リノベ市場・競合の動きを<b>出典付きで調査</b></p><p>反響数・転換率・単価の前提を変えた<b>3シナリオ</b>を作り、感度分析</p><p>経営・現場・お客様の立場から反論を出させ、案を絞る</p></div>
+          <div class="cell"><p>契約件数を<b>KPIツリー</b>で行動指標まで分解</p><p>年→四半期→月の目標と、施策の優先順位（効果・費用・難易度）</p><p>SFから<b>週次KPIレポート</b>を自動で作る仕組みを作る</p></div>
+          <div class="cell"><p>課長ごとの目標と、<b>1on1で追う指標</b>を決める</p><p>メンバーのAI成果物の確認点と利用ルールを整える</p><p>経営会議用に構成・想定問答・数字の根拠をまとめる</p></div>
+
+          <p class="lb">貴社の題材<br>（例）</p>
+          <div class="cell data"><p>SF・HubSpotの商談データ</p><p>IS課の予約・アサイン実績</p></div>
+          <div class="cell data"><p>直営ショールームと定額制リノベの拡大方針</p><p>マーケ課の広告メニュー別実績</p></div>
+          <div class="cell data"><p>課別の転換率・リードタイム</p><p>物件精査・ラフ作成にかかる工数</p></div>
+          <div class="cell data"><p>課長会議・1on1の運用</p><p>経営会議の提出フォーマット</p></div>
+
+          <p class="lb">身につく<br>こと</p>
+          <div class="cell skill"><p>AIに目的・前提・制約を渡し、数字の分析を任せて検証できる</p></div>
+          <div class="cell skill"><p>戦略の選択肢を比較し、根拠と前提を明示して選べる</p></div>
+          <div class="cell skill"><p>計画を、現場が毎週追える数字と行動に分解できる</p></div>
+          <div class="cell skill"><p>計画を部下に落とし、進捗を回す仕組みを作れる</p></div>
+
+          <p class="lb">成果物</p>
+          <div class="cell out"><div>営業部の現状分析レポート（ボトルネック3つ）</div></div>
+          <div class="cell out"><div>営業部 3ヵ年計画ドラフト（契約件数・単価・体制）</div></div>
+          <div class="cell out"><div>営業KPIツリー・実行計画表・週次レポート</div></div>
+          <div class="cell out"><div>経営会議提出版の計画書＋90日実行プラン</div></div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒　｜　題材・KPIは当社の想定例です。初回の面談で、部長ご本人の担当範囲と使えるデータに合わせて確定します。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>04 営業部長のロードマップ</figcaption></figure>
+
+    <!-- ===== 営業受講者の学習スケジュール ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">営業部長｜4ヶ月の学習スケジュール（例）</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">動画で型を学び、面談で<b>自部門の計画</b>に仕上げる。1週ごとの動きはこうなります。</h2>
+        <div class="gt sales"><div class="gt-l gt-corner"></div><div class="gt-m" style="grid-column:2 / span 4">1ヶ月目</div><div class="gt-m" style="grid-column:6 / span 4">2ヶ月目</div><div class="gt-m" style="grid-column:10 / span 4">3ヶ月目</div><div class="gt-m" style="grid-column:14 / span 4">4ヶ月目</div><div class="gt-l gt-wl">週</div><div class="gt-w" style="grid-column:2">1</div><div class="gt-w" style="grid-column:3">2</div><div class="gt-w" style="grid-column:4">3</div><div class="gt-w" style="grid-column:5">4</div><div class="gt-w" style="grid-column:6">5</div><div class="gt-w" style="grid-column:7">6</div><div class="gt-w" style="grid-column:8">7</div><div class="gt-w" style="grid-column:9">8</div><div class="gt-w" style="grid-column:10">9</div><div class="gt-w" style="grid-column:11">10</div><div class="gt-w" style="grid-column:12">11</div><div class="gt-w" style="grid-column:13">12</div><div class="gt-w" style="grid-column:14">13</div><div class="gt-w" style="grid-column:15">14</div><div class="gt-w" style="grid-column:16">15</div><div class="gt-w" style="grid-column:17">16</div><div class="gt-l" style="grid-row:3"><b>できること</b><small>月ごとに1段ずつ</small></div><div class="gt-lv lv1" style="grid-row:3;grid-column:2 / span 4"><img src="assets/illus/lv-sales-1.webp" alt=""><div class="st"><span>Lv.1</span><b>数字で現状を語れる</b></div></div><div class="gt-lv lv2" style="grid-row:3;grid-column:6 / span 4"><img src="assets/illus/lv-sales-2.webp" alt=""><div class="st"><span>Lv.2</span><b>3年後の戦略を描ける</b></div></div><div class="gt-lv lv3" style="grid-row:3;grid-column:10 / span 4"><img src="assets/illus/lv-sales-3.webp" alt=""><div class="st"><span>Lv.3</span><b>KPIと行動に落とせる</b></div></div><div class="gt-lv lv4" style="grid-row:3;grid-column:14 / span 4"><img src="assets/illus/lv-sales-4.webp" alt=""><div class="st"><span>Lv.4</span><b>5課を動かし経営に通せる</b></div></div><div class="gt-l" style="grid-row:4"><b>動画で学ぶ</b><small>全8章・空き時間に</small></div><div class="gt-bar v" style="grid-row:4;grid-column:2 / 4">第1〜2章｜役割とゴール・AI活用の5段階</div><div class="gt-bar v" style="grid-row:4;grid-column:4 / 6">第3章｜多往復で仕事を進める</div><div class="gt-bar v" style="grid-row:4;grid-column:6 / 10">第4〜5章｜数値分析と中期計画・戦略立案</div><div class="gt-bar v" style="grid-row:4;grid-column:10 / 14">第6章｜業務を設計し直す・エージェント作成</div><div class="gt-bar v" style="grid-row:4;grid-column:14 / 18">第7〜8章｜部下の育成・組織への定着</div><div class="gt-l" style="grid-row:5"><b>個人面談</b><small>月2回・講師と1対1</small></div><div class="gt-bar i" style="grid-row:5;grid-column:2 / 4"><i>1</i>キックオフ・データ確認</div><div class="gt-bar i" style="grid-row:5;grid-column:4 / 6"><i>2</i>歩留まり分析の検算</div><div class="gt-bar i" style="grid-row:5;grid-column:6 / 8"><i>3</i>調査結果の読み解き</div><div class="gt-bar i" style="grid-row:5;grid-column:8 / 10"><i>4</i>3シナリオの比較</div><div class="gt-bar i" style="grid-row:5;grid-column:10 / 12"><i>5</i>KPIツリーの設計</div><div class="gt-bar i" style="grid-row:5;grid-column:12 / 14"><i>6</i>週次レポートの自動化</div><div class="gt-bar i" style="grid-row:5;grid-column:14 / 16"><i>7</i>課長への展開方法</div><div class="gt-bar i" style="grid-row:5;grid-column:16 / 18"><i>8</i>経営会議の想定問答</div><div class="gt-l" style="grid-row:6"><b>実務で作る</b><small>自部門の資料で</small></div><div class="gt-bar w" style="grid-row:6;grid-column:2 / 4">SFから実績を出し、歩留まりを分解</div><div class="gt-bar w" style="grid-row:6;grid-column:4 / 6">要因を検算し、分析レポートに</div><div class="gt-bar w" style="grid-row:6;grid-column:6 / 8">市場・競合を出典付きで調査</div><div class="gt-bar w" style="grid-row:6;grid-column:8 / 10">3シナリオを作り、反論で絞る</div><div class="gt-bar w" style="grid-row:6;grid-column:10 / 12">契約件数をKPIツリーに分解</div><div class="gt-bar w" style="grid-row:6;grid-column:12 / 14">実行計画表と週次レポート</div><div class="gt-bar w" style="grid-row:6;grid-column:14 / 16">課長の目標と1on1の指標</div><div class="gt-bar w" style="grid-row:6;grid-column:16 / 18">経営会議用の資料を仕上げる</div><div class="gt-l" style="grid-row:7"><b>成果物</b><small>月末に提出</small></div><div class="gt-bar o" style="grid-row:7;grid-column:4 / 6">現状分析レポート</div><div class="gt-bar o" style="grid-row:7;grid-column:8 / 10">3ヵ年計画ドラフト</div><div class="gt-bar o" style="grid-row:7;grid-column:12 / 14">KPIツリー・実行計画</div><div class="gt-bar o" style="grid-row:7;grid-column:16 / 18">経営会議提出版</div></div>
+        <div class="gt-after sales"><span>4ヶ月後</span><p>毎週月曜にSFから<b>週次KPIレポート</b>が自動で届き、課長との1on1で同じ数字を追える状態。</p></div>
+        <p class="s-foot">© 株式会社AI棒　｜　週ごとの内容は進め方の例です。初回の面談で、ご本人の予定と業務の繁閑に合わせて組み直します。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>営業受講者の学習スケジュール</figcaption></figure>
+
+    <!-- ===== 05 設計部長 ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">設計部長｜4ヶ月ロードマップ</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title design">案件が増えても品質と原価を守る、<b>設計・施工体制の3ヵ年計画</b>を作る。</h2>
+<div class="stage design"><p class="sl">起点にする<br>設計・施工の数字</p><div class="st"><p class="t">設計</p><p class="d">パートナー数とキャパ</p></div><div class="st"><p class="t">見積</p><p class="d">標準単価との差</p></div><div class="st"><p class="t">着工</p><p class="d">設計開始からの日数</p></div><div class="st"><p class="t">施工</p><p class="d">提出物・写真の遅れ</p></div><div class="st"><p class="t">完工・アフター</p><p class="d">是正・クレーム件数</p></div></div>
+        <div class="rm design">
+          <div></div>
+          <div class="hd"><p class="k">1ヶ月目</p><p class="t">設計・施工の現状をつかむ</p></div>
+          <div class="hd m2"><p class="k">2ヶ月目</p><p class="t">3ヵ年の体制と戦略を描く</p></div>
+          <div class="hd m3"><p class="k">3ヶ月目</p><p class="t">KPI・改善計画に落とす</p></div>
+          <div class="hd m4"><p class="k">4ヶ月目</p><p class="t">課とパートナーで回す</p></div>
+
+          <p class="lb">やること</p>
+          <div class="cell"><p>案件データから<b>件数・リードタイム・見積の乖離・是正件数</b>を課別に分解</p><p>どの工程に負荷が集まっているかをAIに整理させ、現場感と照らす</p></div>
+          <div class="cell"><p>案件数が増えたとき<b>どこが先に詰まるか</b>を3シナリオで試算</p><p>設計・工事パートナーの数と、内製と外注の割合の方針を比べる</p><p>現場・パートナー・お客様の立場から反論を出させる</p></div>
+          <div class="cell"><p>完工件数・粗利・品質を<b>KPIツリー</b>で分解</p><p>見積・図面・提出物チェックのAI化を、効果順に並べる</p><p>社内ルールで質疑に答える<b>相談役</b>と、週次の進捗レポートを作る</p></div>
+          <div class="cell"><p>課長・SVの目標と<b>1on1で追う指標</b>を決める</p><p>AIに任せる確認と人が見る確認を分け、承認の流れを決める</p><p>経営会議用に構成・想定問答・数字の根拠をまとめる</p></div>
+
+          <p class="lb">貴社の題材<br>（例）</p>
+          <div class="cell data"><p>SF・ハウスゲート・楽楽販売の案件データ</p><p>課別の担当件数</p></div>
+          <div class="cell data"><p>定額制リノベの完工数増と拠点拡大</p><p>工事パートナーのキャパ</p></div>
+          <div class="cell data"><p>標準単価と提出見積の差</p><p>設計パートナーからの質疑と社内ルール</p></div>
+          <div class="cell data"><p>是正・クレームの記録</p><p>経営会議の提出フォーマット</p></div>
+
+          <p class="lb">身につく<br>こと</p>
+          <div class="cell skill"><p>案件と工程のデータをAIで整理し、負荷の偏りを数字で示せる</p></div>
+          <div class="cell skill"><p>体制の選択肢を、品質・原価・スピードで比べて選べる</p></div>
+          <div class="cell skill"><p>品質と原価の目標を、課ごとの改善指標に分解できる</p></div>
+          <div class="cell skill"><p>AIと人の役割を分け、品質を落とさず仕組みを回せる</p></div>
+
+          <p class="lb">成果物</p>
+          <div class="cell out"><div>設計・施工の現状分析レポート（ボトルネック3つ）</div></div>
+          <div class="cell out"><div>設計部 3ヵ年計画ドラフト（件数・粗利・体制）</div></div>
+          <div class="cell out"><div>設計KPIツリー・改善計画・相談役と週次レポート</div></div>
+          <div class="cell out"><div>経営会議提出版の計画書＋90日実行プラン</div></div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒　｜　題材・KPIは当社の想定例です。定額制リノベの完工数増・拠点拡大は貴社公表情報（2026年10月19日）。初回の面談で担当範囲と使えるデータに合わせて確定します。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>05 設計部長のロードマップ</figcaption></figure>
+
+    <!-- ===== 設計受講者の学習スケジュール ===== -->
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">設計部長｜4ヶ月の学習スケジュール（例）</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title design">動画で型を学び、面談で<b>自部門の計画</b>に仕上げる。1週ごとの動きはこうなります。</h2>
+        <div class="gt design"><div class="gt-l gt-corner"></div><div class="gt-m" style="grid-column:2 / span 4">1ヶ月目</div><div class="gt-m" style="grid-column:6 / span 4">2ヶ月目</div><div class="gt-m" style="grid-column:10 / span 4">3ヶ月目</div><div class="gt-m" style="grid-column:14 / span 4">4ヶ月目</div><div class="gt-l gt-wl">週</div><div class="gt-w" style="grid-column:2">1</div><div class="gt-w" style="grid-column:3">2</div><div class="gt-w" style="grid-column:4">3</div><div class="gt-w" style="grid-column:5">4</div><div class="gt-w" style="grid-column:6">5</div><div class="gt-w" style="grid-column:7">6</div><div class="gt-w" style="grid-column:8">7</div><div class="gt-w" style="grid-column:9">8</div><div class="gt-w" style="grid-column:10">9</div><div class="gt-w" style="grid-column:11">10</div><div class="gt-w" style="grid-column:12">11</div><div class="gt-w" style="grid-column:13">12</div><div class="gt-w" style="grid-column:14">13</div><div class="gt-w" style="grid-column:15">14</div><div class="gt-w" style="grid-column:16">15</div><div class="gt-w" style="grid-column:17">16</div><div class="gt-l" style="grid-row:3"><b>できること</b><small>月ごとに1段ずつ</small></div><div class="gt-lv lv1" style="grid-row:3;grid-column:2 / span 4"><img src="assets/illus/lv-design-1.webp" alt=""><div class="st"><span>Lv.1</span><b>工程と負荷を数字で示せる</b></div></div><div class="gt-lv lv2" style="grid-row:3;grid-column:6 / span 4"><img src="assets/illus/lv-design-2.webp" alt=""><div class="st"><span>Lv.2</span><b>3年後の体制を描ける</b></div></div><div class="gt-lv lv3" style="grid-row:3;grid-column:10 / span 4"><img src="assets/illus/lv-design-3.webp" alt=""><div class="st"><span>Lv.3</span><b>品質・原価をKPIに落とせる</b></div></div><div class="gt-lv lv4" style="grid-row:3;grid-column:14 / span 4"><img src="assets/illus/lv-design-4.webp" alt=""><div class="st"><span>Lv.4</span><b>課とパートナーを動かせる</b></div></div><div class="gt-l" style="grid-row:4"><b>動画で学ぶ</b><small>全8章・空き時間に</small></div><div class="gt-bar v" style="grid-row:4;grid-column:2 / 4">第1〜2章｜役割とゴール・AI活用の5段階</div><div class="gt-bar v" style="grid-row:4;grid-column:4 / 6">第3章｜多往復で仕事を進める</div><div class="gt-bar v" style="grid-row:4;grid-column:6 / 10">第4〜5章｜数値分析と中期計画・戦略立案</div><div class="gt-bar v" style="grid-row:4;grid-column:10 / 14">第6章｜業務を設計し直す・エージェント作成</div><div class="gt-bar v" style="grid-row:4;grid-column:14 / 18">第7〜8章｜部下の育成・組織への定着</div><div class="gt-l" style="grid-row:5"><b>個人面談</b><small>月2回・講師と1対1</small></div><div class="gt-bar i" style="grid-row:5;grid-column:2 / 4"><i>1</i>キックオフ・データ確認</div><div class="gt-bar i" style="grid-row:5;grid-column:4 / 6"><i>2</i>負荷の偏りの読み解き</div><div class="gt-bar i" style="grid-row:5;grid-column:6 / 8"><i>3</i>体制案の洗い出し</div><div class="gt-bar i" style="grid-row:5;grid-column:8 / 10"><i>4</i>3シナリオの比較</div><div class="gt-bar i" style="grid-row:5;grid-column:10 / 12"><i>5</i>KPIツリーの設計</div><div class="gt-bar i" style="grid-row:5;grid-column:12 / 14"><i>6</i>相談役の作り込み</div><div class="gt-bar i" style="grid-row:5;grid-column:14 / 16"><i>7</i>確認点と承認の流れ</div><div class="gt-bar i" style="grid-row:5;grid-column:16 / 18"><i>8</i>経営会議の想定問答</div><div class="gt-l" style="grid-row:6"><b>実務で作る</b><small>自部門の資料で</small></div><div class="gt-bar w" style="grid-row:6;grid-column:2 / 4">案件データを出し、工程別に分解</div><div class="gt-bar w" style="grid-row:6;grid-column:4 / 6">負荷と品質の課題をレポートに</div><div class="gt-bar w" style="grid-row:6;grid-column:6 / 8">パートナー数と内製・外注の比較</div><div class="gt-bar w" style="grid-row:6;grid-column:8 / 10">案件増の3シナリオで試算</div><div class="gt-bar w" style="grid-row:6;grid-column:10 / 12">件数・粗利・品質をKPIツリーに</div><div class="gt-bar w" style="grid-row:6;grid-column:12 / 14">質疑に答える相談役と週次レポート</div><div class="gt-bar w" style="grid-row:6;grid-column:14 / 16">課長・SVの目標と承認の流れ</div><div class="gt-bar w" style="grid-row:6;grid-column:16 / 18">経営会議用の資料を仕上げる</div><div class="gt-l" style="grid-row:7"><b>成果物</b><small>月末に提出</small></div><div class="gt-bar o" style="grid-row:7;grid-column:4 / 6">現状分析レポート</div><div class="gt-bar o" style="grid-row:7;grid-column:8 / 10">3ヵ年計画ドラフト</div><div class="gt-bar o" style="grid-row:7;grid-column:12 / 14">KPIツリー・改善計画</div><div class="gt-bar o" style="grid-row:7;grid-column:16 / 18">経営会議提出版</div></div>
+        <div class="gt-after design"><span>4ヶ月後</span><p>設計パートナーからの質疑に<b>社内ルールで答える相談役</b>が動き、週次の進捗レポートで品質と原価の指標を追える状態。</p></div>
+        <p class="s-foot">© 株式会社AI棒　｜　週ごとの内容は進め方の例です。初回の面談で、ご本人の予定と業務の繁閑に合わせて組み直します。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>設計受講者の学習スケジュール</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">利用環境とセキュリティ</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">研修は、資料の多い計画づくりに向く<b>Claude</b>で進めます。</h2>
+        <div class="env fill">
+          <div class="bx"><p class="h">研修で使うツール</p><div class="bd">
+            <div class="cl"><img src="assets/ui/claude.svg" alt=""><div><b>Claude</b><p>動画の演習も面談での作り込みも、すべてClaudeで進めます。アンケートでの利用は18%のため、初回は基本の操作から始めます。</p></div></div>
+            <p class="why2">Claudeを選ぶ理由</p>
+            <div class="use">
+              <p><i>理由 1</i><span>長い資料をまとめて読み込める<small>管理規約・竣工図・過去の計画書など、量の多い資料を一度に渡して整理・分析できる</small></span></p>
+              <p><i>理由 2</i><span>往復しながら考えを深めやすい<small>前提を渡して3シナリオを比べ、反対意見を出させる計画づくりに向いている</small></span></p>
+              <p><i>理由 3</i><span>資料を持たせた相談役を作れる<small>社内ルールや過去資料を持たせ、課からの質問に答える部署専用の相談役にできる</small></span></p>
+            </div>
+            <p class="msg">法人向けプランでは、入力した内容は初期設定でAIの学習に使われません。契約プランと管理者設定は開始前に確認します。</p>
+          </div></div>
+          <div class="bx"><p class="h">安心して使うための3つのルール</p><div class="bd">
+            <div class="rule"><img src="assets/icon/sec-01.webp" alt=""><div><b>入力してよい情報を決める</b><p>学習に使われない設定をそろえ、<em>お客様の個人情報</em><em>物件・契約の情報</em>など入力しない情報を社内ルールにします。</p></div></div>
+            <div class="rule"><img src="assets/icon/sec-02.webp" alt=""><div><b>つなぐ前に確認する</b><p>SFやスプレッドシートとAIを連携するときは、どのデータがどこへ送られるかを確認してから進めます。</p></div></div>
+            <div class="rule"><img src="assets/icon/sec-03.webp" alt=""><div><b>部長が判断できる状態にする</b><p>扱えない数字は加工して使い、課から「これは使っていい？」と聞かれたときに部長が答えられるようにします。</p></div></div>
+          </div></div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒　｜　利用率は事前アンケート（91名・複数回答）。使える機能はClaudeの契約プランと管理者設定で変わるため、開始前に確認します。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>10 利用環境とセキュリティ</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">ご費用</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title"><b>1名 25万円（税込）</b>でご提案します。</h2>
+        <div class="fee fill">
+          <div class="main"><div class="h"><b>AI業務自動化研修</b><span>コース：リーダー・マネージャー向けAI研修</span></div><div class="bd">
+            <div class="yen"><b>250,000</b><span>円</span><small>／1名（税込）</small></div>
+            <div class="ptab">
+              <div class="hd">受講人数</div><div class="hd">1名あたり（税込）</div><div class="hd b">合計（税込）</div>
+              <div class="n">5名</div><div class="o">250,000円</div><div class="b">1,250,000円</div>
+              <div class="n">10名</div><div class="o">250,000円</div><div class="b">2,500,000円</div>
+              <div class="n">15名</div><div class="o">250,000円</div><div class="b">3,750,000円</div>
+            </div>
+            </div></div>
+          <div class="side"><div class="gr"><p class="h">料金に含まれるもの</p><div class="bd inc2">
+            <p><b>動画教材（全8章・35レッスン）</b>視聴 約5時間。期間中はいつでも見直せます</p>
+            <p><b>個人面談 月2回（全8回）</b>講師と1対1で、自部門の計画を作り込みます</p>
+            <p><b>貴社の業務に合わせた課題設定</b>事前ヒアリングで、題材と使えるデータを確認します</p>
+            <p><b>Claudeの環境に合わせた調整</b>契約プランと管理者設定に合わせて手順をそろえます</p>
+            <p class="go">お申し込み後、すぐに研修の準備を始められます。</p>
+          </div></div></div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒　｜　金額はすべて税込。人数が変わる場合も1名25万円（税込）で計算します。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>11 ご費用</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">他社のAI研修との違い</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">研修で終わらせず、<b>経営会議に出せる計画</b>を持って修了します。</h2>
+        <div class="cmp fill">
+          <div class="hd z"></div><div class="hd a">一般的な管理職向けAI研修</div><div class="hd b">今回のご提案</div>
+          <div class="k">題材</div><div class="a"><span>サンプルの事例やデータで演習。自部門に持ち帰ると、使い方を考え直す必要がある</span></div><div class="b"><span><b>自部門の実績データ</b>で、現状分析から3ヵ年計画までを作る</span></div>
+          <div class="k">ゴール</div><div class="a"><span>プロンプトの書き方やツールの操作を覚えて終わる</span></div><div class="b"><span>3ヵ年計画・KPIツリー・90日実行プランという<b>成果物</b>で修了する</span></div>
+          <div class="k">講師との関係</div><div class="a"><span>集合研修で、個別の業務までは踏み込めない</span></div><div class="b"><span>月2回の<b>個人面談</b>で、部長ごとの論点と数字に合わせて進める</span></div>
+          <div class="k">部門の違い</div><div class="a"><span>営業も設計も同じ教材・同じ課題</span></div><div class="b"><span>営業は歩留まりと契約単価、設計は工程・品質・原価と、<b>部門別のロードマップ</b>で進める</span></div>
+          <div class="k">研修後</div><div class="a"><span>受講者個人のスキルで止まる</span></div><div class="b"><span>週次KPIレポートの自動化と課への展開まで行い、<b>組織で回る状態</b>にする</span></div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒　｜　「一般的な研修」は当社が見聞きする典型例で、特定の会社を指すものではありません。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>12 他社との違い</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+        <p class="s-eyebrow">導入の流れと次のステップ</p>
+        <img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+        <h2 class="s-title">ご承認から<b>研修開始</b>まで、4つのステップで進めます。</h2>
+        <div class="stp fill">
+          <div class="s"><span class="n">STEP 01</span><span class="t">ご提案・お見積り</span><img src="assets/icon/step-01.webp" alt=""><p class="d">本資料をもとに、受講人数とプラン内容を確定します。人数分のお見積りをお出しします。</p></div>
+          <div class="s"><span class="n">STEP 02</span><span class="t">お申し込み</span><img src="assets/icon/step-03.webp" alt=""><p class="d">申込フォームにご入力ください。お申し込み後、すぐに事前ヒアリングの日程を調整します。</p></div>
+          <div class="s"><span class="n">STEP 03</span><span class="t">事前ヒアリング</span><img src="assets/icon/step-02.webp" alt=""><p class="d">部長ごとの担当範囲、使えるデータ、AIツールの契約を確認し、ロードマップを確定します。</p></div>
+          <div class="s"><span class="n">STEP 04</span><span class="t">研修開始</span><img src="assets/icon/step-04.webp" alt=""><p class="d">学習システムのID・パスワードを発行し、第1回の個人面談から4ヶ月の研修が始まります。</p></div>
+        </div>
+        <div class="next">
+          <div class="bx"><p class="k">次のステップ</p>
+            <p><i>1</i>受講いただく部長の人数と、お名前をお知らせください</p>
+            <p><i>2</i>部門別ロードマップの仮説（担当範囲・KPI例）について、ずれている点をご指摘ください</p>
+            <p><i>3</i>研修を始めたい時期をお知らせください</p></div>
+          <div class="bx"><p class="k">開始時期の目安</p><div class="tl2">
+            <div><b>お申し込み</b><small>すぐに準備開始</small></div>
+            <div><b>研修開始</b><small>事前ヒアリング後、ご希望の時期から</small></div>
+            <div><b>4ヶ月後 修了</b><small>経営会議提出版の3ヵ年計画</small></div></div></div>
+        </div>
+        <p class="s-foot">© 株式会社AI棒　｜　日程は貴社のご都合に合わせて調整します。</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>13 導入の流れ</figcaption></figure>
+
+  </div>
+</body>
+</html>
