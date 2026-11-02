@@ -203,6 +203,16 @@ const STATIC_DOCS: { category: string; doc: DocItem }[] = [
     },
   },
   {
+    category: "研修コース紹介",
+    doc: {
+      title: "リーダー・マネージャー向けAI研修 コース紹介資料",
+      points: ["カリキュラム全8チャプター・35レッスンの詳細", "使えるAIツールに合わせた研修内容の調整", "研修開始までの流れ・FAQ"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-38-cover.webp",
+      href: "/doc-am",
+    },
+  },
+  {
     category: "業種別事例集",
     doc: {
       title: "製造業のAI活用事例集",

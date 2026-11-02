@@ -52,4 +52,10 @@ export const COURSE_DOCS: Record<string, CourseDoc> = {
     href: "/doc-m",
     cover: "/biz/assets/img/documents/ebook-12-cover.webp",
   },
+  "leader-manager-training": {
+    title: "リーダー・マネージャー向けAI研修 コース紹介資料",
+    desc: "カリキュラム（全8チャプター・35レッスン／視聴時間 約5時間）から、利用環境に合わせた調整、研修開始までの流れまでをまとめた資料です。",
+    href: "/doc-am",
+    cover: "/biz/assets/img/documents/ebook-38-cover.webp",
+  },
 };
