@@ -84,6 +84,11 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // パスワード付き提案書（proxy.ts の PROTECTED_PROPOSALS）は CDN に残さない
+      {
+        source: "/biz/ebooks/proposal-renoveru-2611/:path*",
+        headers: [{ key: "Cache-Control", value: "private, no-store" }],
+      },
     ];
   },
   // /blog（WPブログ）は Cloudflare の Origin Rule で WPサーバーへ振り分けるため、
