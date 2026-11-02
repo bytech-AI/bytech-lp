@@ -74,7 +74,7 @@ const course: CourseData = {
   spec: [
     { ja: "視聴時間", value: <>約<b>5</b>時間</> },
     { ja: "レッスン数", value: <>全<b>35</b>レッスン</> },
-    { ja: "受講形式", value: <>オンライン（ワークショップ全<b>3</b>回）</> },
+    { ja: "受講形式", value: <>オンライン</> },
     { ja: "使用ツール", value: <>自社のAIツールに合わせて選択</> },
   ],
   recommend: {
