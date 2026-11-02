@@ -297,7 +297,7 @@ const PAGE_CSS = `
         .eb-head { max-width: 860px; }
         /* タイトルは Noto Sans JP 800（上のGoogle Fontsリンクで読み込み）。
            フォールバックはW8を持つ Hiragino Sans（ProNはW6止まりで800が潰れるため不可） */
-        .eb-title { font-family: "Noto Sans JP", "Hiragino Sans", var(--font-noto-jp), sans-serif; font-size: 38px; font-weight: 800; line-height: 1.45; letter-spacing: .01em; margin: 0 0 26px; color: #1a2330; }
+        .eb-title { text-wrap: balance; font-family: "Noto Sans JP", "Hiragino Sans", var(--font-noto-jp), sans-serif; font-size: 38px; font-weight: 800; line-height: 1.45; letter-spacing: .01em; margin: 0 0 26px; color: #1a2330; }
         .eb-desc { font-size: 15px; line-height: 2; margin: 0; color: #465060; }
 
         .eb-dl { display: flex; justify-content: center; margin: 46px 0 0; }
