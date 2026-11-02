@@ -703,13 +703,20 @@
         (function(){
           var logo = document.getElementById('top-logo');
           var threshold = 100;
+          // スクロールのたびに src を代入すると、同じ画像でも毎回描き直されてスクロールがくつく。
+          // 切り替わる時だけ代入し、処理は1フレーム1回にまとめる
+          var dark = null, ticking = false;
+          function update(){
+            ticking = false;
+            var next = window.scrollY > threshold;
+            if(next === dark) return;
+            dark = next;
+            logo.setAttribute('src', next ? logo.dataset.dark : logo.dataset.white);
+          }
           window.addEventListener('scroll', function(){
-            if(window.scrollY > threshold){
-              logo.src = logo.dataset.dark;
-            } else {
-              logo.src = logo.dataset.white;
-            }
-          });
+            if(!ticking){ ticking = true; requestAnimationFrame(update); }
+          }, {passive: true});
+          update();
         })();
       </script><script>
         (function(){
