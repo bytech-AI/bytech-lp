@@ -243,6 +243,12 @@ const EBOOKS: Ebook[] = [
     description:
       "英国政府やMicrosoft Researchなど公開された5つの評価を読み解き、自社で記録する8つの指標、削減工数の計算の仕方、記録シート、報告前の確認12項目をまとめた資料です。",
   },
+  {
+    slug: "ebook-38",
+    title: "リーダー・マネージャー向けAI研修 コース紹介資料",
+    description:
+      "法人向けリーダー・マネージャー向けAI研修のコース紹介資料です。カリキュラム（全8チャプター・35レッスン）、利用環境に合わせた調整、追加コース、研修開始までの流れ、よくあるご質問をまとめています。",
+  },
 ];
 
 const getEbook = (slug: string) => EBOOKS.find((e) => e.slug === slug);
@@ -291,7 +297,7 @@ const PAGE_CSS = `
         .eb-head { max-width: 860px; }
         /* タイトルは Noto Sans JP 800（上のGoogle Fontsリンクで読み込み）。
            フォールバックはW8を持つ Hiragino Sans（ProNはW6止まりで800が潰れるため不可） */
-        .eb-title { font-family: "Noto Sans JP", "Hiragino Sans", var(--font-noto-jp), sans-serif; font-size: 38px; font-weight: 800; line-height: 1.45; letter-spacing: .01em; margin: 0 0 26px; color: #1a2330; }
+        .eb-title { text-wrap: balance; font-family: "Noto Sans JP", "Hiragino Sans", var(--font-noto-jp), sans-serif; font-size: 38px; font-weight: 800; line-height: 1.45; letter-spacing: .01em; margin: 0 0 26px; color: #1a2330; }
         .eb-desc { font-size: 15px; line-height: 2; margin: 0; color: #465060; }
 
         .eb-dl { display: flex; justify-content: center; margin: 46px 0 0; }
