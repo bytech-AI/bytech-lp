@@ -16,19 +16,15 @@ jQuery(function ($) {
   // ======================================================
   // Fade-in
   // ======================================================
+  // 位置をまとめて読んでからクラスを付ける（読み書きを交互にすると要素ごとに強制レイアウトが走る）
   function revealOnScroll(selector, offset = 0, className = 'is-show') {
-    $(selector).each(function () {
-      const $elem = $(this);
-      if ($elem.hasClass(className)) return;
-
-      const elemTop = $elem.offset().top;
-      const scroll = $window.scrollTop();
-      const winH = $window.height();
-
-      if (scroll + winH > elemTop + offset) {
-        $elem.addClass(className);
-      }
+    const winH = window.innerHeight;
+    const hits = [];
+    document.querySelectorAll(selector).forEach((el) => {
+      if (el.classList.contains(className)) return;
+      if (el.getBoundingClientRect().top + offset < winH) hits.push(el);
     });
+    hits.forEach((el) => el.classList.add(className));
   }
 
   // ======================================================
@@ -185,13 +181,18 @@ jQuery(function ($) {
   // ======================================================
   // unify scroll event
   // ======================================================
+  // 1フレーム1回に間引く
+  let scrollTicking = false;
   $window.on('scroll', () => {
-    if (isScrollingByAnchor) return; // ← anchor中は一切処理しない
-
-    revealOnScroll('.fadein', 100);
-    headerShowHide();
-    headerShrink();
-    checkFooterOverlap();
+    if (isScrollingByAnchor || scrollTicking) return; // ← anchor中は一切処理しない
+    scrollTicking = true;
+    requestAnimationFrame(() => {
+      scrollTicking = false;
+      if (isScrollingByAnchor) return;
+      headerShowHide();
+      headerShrink();
+      checkFooterOverlap();
+    });
   });
 
   // ======================================================
@@ -399,14 +400,24 @@ $(function () {
 /******************************************************************
  * fadein delay
  ******************************************************************/
-$(window).on('scroll', function () {
-  $('.fadein').each(function () {
-    if ($(this).hasClass('is-show')) return;
-    if ($(this).offset().top < $(window).scrollTop() + $(window).height() - 50) {
-      $(this).addClass('is-show');
-    }
+// 縦位置だけで判定（横にはみ出したslickのスライドも対象）。1フレーム1回に間引き、
+// 位置をまとめて読んでから付ける（読み書きを交互にすると要素ごとに強制レイアウトが走る）
+let fadeinTicking = false;
+window.addEventListener('scroll', function () {
+  if (fadeinTicking) return;
+  fadeinTicking = true;
+  requestAnimationFrame(function () {
+    fadeinTicking = false;
+    const pending = document.querySelectorAll('.fadein:not(.is-show)');
+    if (!pending.length) return;
+    const limit = window.innerHeight - 50;
+    const hits = [];
+    pending.forEach(function (el) {
+      if (el.getBoundingClientRect().top < limit) hits.push(el);
+    });
+    hits.forEach(function (el) { el.classList.add('is-show'); });
   });
-});
+}, { passive: true });
 
 /******************************************************************
  * Lottie
