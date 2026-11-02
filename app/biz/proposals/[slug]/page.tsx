@@ -19,6 +19,8 @@ type Proposal = {
   contact: string;
   /** 配布用PDF（public/biz/assets/docs/<pdf>.pdf）。指定した提案書だけDLボタンを出す */
   pdf?: string;
+  /** パスワード付きの提案書。PDFは public/biz/ebooks/<deck>/<deck>.pdf（認証の内側）に置く */
+  protectedPdf?: boolean;
 };
 
 const PROPOSALS: Proposal[] = [
@@ -59,6 +61,7 @@ const PROPOSALS: Proposal[] = [
     description:
       "営業部長・設計部長が、自部門の数字で3ヵ年計画・戦略を立て、KPI・実行プランまで落とし込めるようになる4ヶ月の研修のご提案書です。事前アンケートから見た現状、プランとコースの内容、営業・設計それぞれの4ヶ月ロードマップと週ごとの学習スケジュール、利用環境とセキュリティ、ご費用、導入の流れをまとめています。",
     contact: "担当者",
+    protectedPdf: true,
   },
 ];
 
@@ -178,7 +181,11 @@ export default async function ProposalPage({
   // biz ホストはクリーンURLで参照。proxy の汎用リライトで内部の /biz/ebooks/... に解決される。
   const embedSrc = `/ebooks/${proposal.deck}/index.html`;
   // biz ホストはクリーンURLで参照（/biz付きだと301を挟む）。proxy が内部の /biz/assets/... に解決する。
-  const pdfHref = proposal.pdf ? `/assets/docs/${proposal.pdf}.pdf` : null;
+  const pdfHref = proposal.protectedPdf
+    ? `/ebooks/${proposal.deck}/${proposal.deck}.pdf`
+    : proposal.pdf
+      ? `/assets/docs/${proposal.pdf}.pdf`
+      : null;
   const pdfName = `${proposal.client}_${proposal.title}.pdf`;
 
   return (

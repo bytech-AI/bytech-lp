@@ -31,8 +31,9 @@ if (!slug || !/^[a-z0-9-]+$/.test(slug)) {
 const root = resolve(import.meta.dirname, "..");
 const deckDir = join(root, "docs", "ebooks", slug);
 const deckPath = join(deckDir, "deck.html");
-const pdfOut = join(root, "public", "biz", "assets", "docs", `${slug}.pdf`);
 const embedDir = join(root, "public", "biz", "ebooks", slug);
+// --inline（パスワード付き）はPDFも認証の内側（埋め込みHTMLと同じフォルダ）に置く
+const pdfOut = inline ? join(embedDir, `${slug}.pdf`) : join(root, "public", "biz", "assets", "docs", `${slug}.pdf`);
 
 if (!existsSync(deckPath)) {
   console.error(`原稿が見つかりません: ${deckPath}`);
