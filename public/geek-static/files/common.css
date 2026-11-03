@@ -2919,6 +2919,12 @@ body[class][class] .u-text-black {
   vertical-align: middle;
 }
 .g2c-name .c-new { position: relative; top: -2px; font-size: 12px; }
+/* SPはタブが3枚で狭いので、NEWはコース名の上に置いて語の途中で折り返さないようにする */
+@media (max-width: 767px) {
+  .g2c-tab .c-new { display: table; margin: 0 auto 4px; padding: 2px 6px; font-size: 9px; }
+}
+/* コース名は語の途中で折り返さず、スペースの位置で改行する */
+.g2c-tab { word-break: keep-all; overflow-wrap: anywhere; }
 /* コースの切り替えタブ。見た目はお悩みセクションのペルソナタブ（.gp__tab）を流用し、ここでは並びだけ決める */
 .g2c-tabs {
   display: flex;
@@ -3099,16 +3105,16 @@ body[class][class] .u-text-black {
 }
 .g2c-phase-text { margin: 0; color: #5d6a78; font-size: 13px; font-weight: 700; line-height: 1.85; }
 .g2c-phase[data-phase="5"] .g2c-phase-header { background: #0a2b27; }
-.g2c-panel--ag .g2c-phase[data-phase="1"] .g2c-phase-header { background: #6dccc0; }
-.g2c-panel--ag .g2c-phase[data-phase="2"] .g2c-phase-header { background: #62baaf; }
-.g2c-panel--ag .g2c-phase[data-phase="3"] .g2c-phase-header { background: #57a89e; }
-.g2c-panel--ag .g2c-phase[data-phase="4"] .g2c-phase-header { background: #4c968d; }
-.g2c-panel--ag .g2c-phase[data-phase="5"] .g2c-phase-header { background: #41847c; }
-.g2c-panel--ag .g2c-phase[data-phase="6"] .g2c-phase-header { background: #36736b; }
-.g2c-panel--ag .g2c-phase[data-phase="7"] .g2c-phase-header { background: #2b615a; }
-.g2c-panel--ag .g2c-phase[data-phase="8"] .g2c-phase-header { background: #204f49; }
-.g2c-panel--ag .g2c-phase[data-phase="9"] .g2c-phase-header { background: #153d38; }
-.g2c-panel--ag .g2c-phase[data-phase="10"] .g2c-phase-header { background: #0a2b27; }
+.g2c-panel--ten .g2c-phase[data-phase="1"] .g2c-phase-header { background: #6dccc0; }
+.g2c-panel--ten .g2c-phase[data-phase="2"] .g2c-phase-header { background: #62baaf; }
+.g2c-panel--ten .g2c-phase[data-phase="3"] .g2c-phase-header { background: #57a89e; }
+.g2c-panel--ten .g2c-phase[data-phase="4"] .g2c-phase-header { background: #4c968d; }
+.g2c-panel--ten .g2c-phase[data-phase="5"] .g2c-phase-header { background: #41847c; }
+.g2c-panel--ten .g2c-phase[data-phase="6"] .g2c-phase-header { background: #36736b; }
+.g2c-panel--ten .g2c-phase[data-phase="7"] .g2c-phase-header { background: #2b615a; }
+.g2c-panel--ten .g2c-phase[data-phase="8"] .g2c-phase-header { background: #204f49; }
+.g2c-panel--ten .g2c-phase[data-phase="9"] .g2c-phase-header { background: #153d38; }
+.g2c-panel--ten .g2c-phase[data-phase="10"] .g2c-phase-header { background: #0a2b27; }
 .g2c-phase-meta {
   flex-shrink: 0;
   margin-left: 10px;
