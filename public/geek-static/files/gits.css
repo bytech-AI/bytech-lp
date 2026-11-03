@@ -358,6 +358,14 @@ html { scrollbar-color: var(--gits-teal) transparent; }
 }
 /* おすすめプランは「オススメ」バッジと四隅のブラケットが重なるので出さない */
 .g2p-card-rec > .gits-hud { display: none; }
+/* コース一覧はタブの直下にパネルが付くので、上の2隅は出さない（下の2隅だけ） */
+.g2c-tabs ~ .g2c-panel > .gits-hud {
+  background:
+    linear-gradient(var(--c), var(--c)) left bottom / var(--s) 2px no-repeat,
+    linear-gradient(var(--c), var(--c)) left bottom / 2px var(--s) no-repeat,
+    linear-gradient(var(--c), var(--c)) right bottom / var(--s) 2px no-repeat,
+    linear-gradient(var(--c), var(--c)) right bottom / 2px var(--s) no-repeat;
+}
 
 /* ---- FV見出しの帯: HUDのラベル・パネル風（角落とし＋ティールの縁＋走査線） ---- */
 .body .fv__copy-sub {
