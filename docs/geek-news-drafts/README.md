@@ -1,32 +1,34 @@
 # geek.bytech.jp/news の記事下書き
 
-GEEKのお知らせ（`app/geek-news`）は microCMS（サービス `bytech-biz`）の **`geek-news`** APIから読む。
-APIが無い・取得に失敗したときは「現在公開中のお知らせはありません。」と出る。
+GEEKのお知らせ（`app/geek-news`）は **GEEK専用の microCMS サービス** の `news` API から読む。
+bytech-biz サービスはプランのAPI数上限（5つ）に達していて geek 用のAPIを足せないため、サービスを分けている。
+環境変数が無い・取得に失敗したときは「現在公開中のお知らせはありません。」と出る。
 
-## microCMS 側の準備（初回だけ）
+## 環境変数（Vercel・ローカルの .env）
 
-1. 管理画面で API を追加する
-   - API名: GEEKのお知らせ／エンドポイント: `geek-news`／型: リスト形式
-2. スキーマ（biz の `news` と同じ項目名にする。コードを共通で使うため）
-   | フィールドID | 種類 | 備考 |
-   | --- | --- | --- |
-   | `title` | テキストフィールド | 必須 |
-   | `category` | セレクトフィールド | 選択肢は「お知らせ」「メディア掲載」の2つ |
-   | `content` | リッチエディタ | 本文 |
-   | `thumbnail` | 画像 | 任意。未設定なら GEEK の OGP 画像を出す |
-   | `description` | テキストフィールド | 任意。meta description に使う |
-3. APIキー（`.env` / Vercel の `MICROCMS_API_KEY`）の権限で `geek-news` の GET を許可する
-   - 下書きをスクリプトで入れるなら PUT も許可する
+| 名前 | 中身 |
+| --- | --- |
+| `MICROCMS_GEEK_SERVICE_DOMAIN` | GEEK用サービスのサービスID（`https://<ここ>.microcms.io`） |
+| `MICROCMS_GEEK_API_KEY` | GEEK用サービスのAPIキー（`news` の GET が要る） |
+| `MICROCMS_GEEK_NEWS_ENDPOINT` | 任意。既定は `news` |
 
-エンドポイント名を変える場合だけ、Vercel に `MICROCMS_GEEK_NEWS_ENDPOINT` を設定する（既定は `geek-news`）。
+## news API のスキーマ（biz の news と同じ項目名。コードを共通で使うため）
+
+| フィールドID | 種類 | 備考 |
+| --- | --- | --- |
+| `title` | テキストフィールド | 必須 |
+| `category` | セレクトフィールド | 選択肢は「お知らせ」「メディア掲載」の2つ |
+| `content` | リッチエディタ | 本文 |
+| `thumbnail` | 画像 | 任意。未設定なら GEEK の OGP 画像を出す |
+| `description` | テキストフィールド | 任意。meta description に使う |
+
+APIはマネジメントAPI `POST https://<サービスID>.microcms-management.io/api/v1/apis` でも作れる（キーに「APIの作成」権限が要る）。
 
 ## 下書きの投入
 
-このフォルダの `*.html`（先頭コメントに title / category / description）を下書きで登録する。
+このフォルダの `*.html`（先頭コメントに title / category / description）を登録する。記事ID（URLの `/news/<id>`）はファイル名になる。
 
 ```sh
 node scripts/create-news-drafts.mjs --geek            # 下書きで登録
 node scripts/create-news-drafts.mjs --geek --publish  # 公開で登録
 ```
-
-記事ID（URLの `/news/<id>`）はファイル名になる。PUT 権限が無いキーだと `PUT is forbidden` で失敗するので、その場合は管理画面に本文を貼って作る。

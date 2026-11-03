@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { GEEK_CHROME_SCRIPT, GeekFooter, GeekHeader, GeekStyles } from "../../geek-course/GeekChrome";
-import { GEEK_NEWS_ENDPOINT, getNewsById, newsBody, newsCategory } from "@/lib/microcms";
+import { GEEK_NEWS, getNewsById, newsBody, newsCategory } from "@/lib/microcms";
 import { formatNewsDate, geekNewsThumbnail } from "../news-utils";
 import "../geek-news.css";
 
@@ -11,7 +11,7 @@ type Props = { params: Promise<{ id: string }> };
 const SITE = "https://geek.bytech.jp";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const item = await getNewsById((await params).id, GEEK_NEWS_ENDPOINT);
+  const item = await getNewsById((await params).id, GEEK_NEWS);
   if (!item) return { title: "お知らせ｜バイテックGEEK【公式】" };
   const description = item.description || item.title;
   const image = geekNewsThumbnail(item);
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function GeekNewsDetailPage({ params }: Props) {
-  const item = await getNewsById((await params).id, GEEK_NEWS_ENDPOINT);
+  const item = await getNewsById((await params).id, GEEK_NEWS);
   if (!item) notFound();
   const body = newsBody(item);
   const image = geekNewsThumbnail(item);

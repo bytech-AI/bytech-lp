@@ -2,7 +2,8 @@
 //
 // 使い方: node scripts/create-news-drafts.mjs [--publish] [--geek]
 //   既定は下書き(status=draft)。--publish を付けたときだけ公開状態で作成する。
-//   --geek を付けると docs/geek-news-drafts/*.html を geek-news（geek.bytech.jp/news）に登録する。
+//   --geek を付けると docs/geek-news-drafts/*.html を GEEK 専用サービスの news（geek.bytech.jp/news）に登録する。
+//   そのときは MICROCMS_GEEK_SERVICE_DOMAIN / MICROCMS_GEEK_API_KEY を使う。
 //
 // 前提: .env の MICROCMS_API_KEY に PUT 権限が必要。
 //   読み取り専用キーだと {"message":"PUT is forbidden."} が返る。
@@ -20,12 +21,13 @@ for (const line of readFileSync(join(ROOT, ".env"), "utf8").split(/\r?\n/)) {
   const m = /^([A-Z0-9_]+)=(.*)$/.exec(line.trim());
   if (m && !process.env[m[1]]) process.env[m[1]] = m[2];
 }
-const domain = process.env.MICROCMS_SERVICE_DOMAIN;
-const apiKey = process.env.MICROCMS_API_KEY;
-const endpoint = GEEK
-  ? process.env.MICROCMS_GEEK_NEWS_ENDPOINT || "geek-news"
-  : process.env.MICROCMS_NEWS_ENDPOINT || "news";
-if (!domain || !apiKey) throw new Error("MICROCMS_SERVICE_DOMAIN / MICROCMS_API_KEY が未設定です");
+const env = (name) => process.env[GEEK ? name.replace("MICROCMS_", "MICROCMS_GEEK_") : name];
+const domain = env("MICROCMS_SERVICE_DOMAIN");
+const apiKey = env("MICROCMS_API_KEY");
+const endpoint = env("MICROCMS_NEWS_ENDPOINT") || "news";
+if (!domain || !apiKey) {
+  throw new Error(GEEK ? "MICROCMS_GEEK_SERVICE_DOMAIN / MICROCMS_GEEK_API_KEY が未設定です" : "MICROCMS_SERVICE_DOMAIN / MICROCMS_API_KEY が未設定です");
+}
 
 // 先頭のコメント3行がメタ、それ以降が本文HTML
 function parse(file) {

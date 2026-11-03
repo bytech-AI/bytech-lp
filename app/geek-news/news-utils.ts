@@ -1,6 +1,6 @@
 import type { MicroCmsNews } from "@/lib/microcms";
 
-// microCMS の geek-news API の「種別」セレクトと同じ並び・表記にする
+// GEEK の microCMS（news API）の「種別」セレクトと同じ並び・表記にする
 export const GEEK_NEWS_CATEGORIES = ["お知らせ", "メディア掲載"];
 
 export function formatNewsDate(value?: string) {

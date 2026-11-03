@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- geek のトップ(/)は静的HTMLへのリライトなので Link にしない */
 import type { Metadata } from "next";
 import { GEEK_CHROME_SCRIPT, GeekFooter, GeekHeader, GeekStyles } from "../geek-course/GeekChrome";
-import { GEEK_NEWS_ENDPOINT, getNews } from "@/lib/microcms";
+import { GEEK_NEWS, getNews } from "@/lib/microcms";
 import { NewsList } from "./NewsList";
 import "./geek-news.css";
 
 // geek.bytech.jp/news（proxy.ts で /geek-news へリライト）。
-// 記事は microCMS（bytech-biz）の geek-news API。種別は「お知らせ」「メディア掲載」。
+// 記事は GEEK 専用の microCMS サービスの news API（lib/microcms.ts の GEEK_NEWS）。種別は「お知らせ」「メディア掲載」。
 
 const description = "バイテックGEEKからのお知らせ、メディア掲載情報をご案内します。";
 
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 };
 
 export default async function GeekNewsPage() {
-  const news = await getNews(100, GEEK_NEWS_ENDPOINT);
+  const news = await getNews(100, GEEK_NEWS);
   return (
     <>
       <GeekStyles />
