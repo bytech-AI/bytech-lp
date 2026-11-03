@@ -20,6 +20,16 @@ type MicroCmsResponse = {
 const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN;
 const apiKey = process.env.MICROCMS_API_KEY;
 const endpoint = process.env.MICROCMS_NEWS_ENDPOINT || "news";
+
+// お知らせの取得先。biz は bytech-biz サービス、geek.bytech.jp は GEEK 専用のサービス
+// （bytech-biz はプランのAPI数上限で geek 用APIを足せないため、サービスごと分けている）
+export type NewsSource = { domain?: string; key?: string; endpoint: string };
+const BIZ_NEWS: NewsSource = { domain: serviceDomain, key: apiKey, endpoint };
+export const GEEK_NEWS: NewsSource = {
+  domain: process.env.MICROCMS_GEEK_SERVICE_DOMAIN,
+  key: process.env.MICROCMS_GEEK_API_KEY,
+  endpoint: process.env.MICROCMS_GEEK_NEWS_ENDPOINT || "news",
+};
 const documentsEndpoint = process.env.MICROCMS_DOCUMENTS_ENDPOINT || "documents";
 
 const demoNews: MicroCmsNews[] = [];
@@ -49,13 +59,17 @@ export function newsPath(news: MicroCmsNews) {
   return `/news/${encodeURIComponent(news.id)}`;
 }
 
-export async function getNews(limit = 100): Promise<MicroCmsNews[]> {
-  const url = apiUrl(`?limit=${limit}&orders=-publishedAt`);
-  if (!url || !apiKey) return demoNews;
+function newsUrl(src: NewsSource, path: string) {
+  return src.domain ? `https://${src.domain}.microcms.io/api/v1/${src.endpoint}${path}` : null;
+}
+
+export async function getNews(limit = 100, src: NewsSource = BIZ_NEWS): Promise<MicroCmsNews[]> {
+  const url = newsUrl(src, `?limit=${limit}&orders=-publishedAt`);
+  if (!url || !src.key) return demoNews;
 
   try {
     const response = await fetch(url, {
-      headers: { "X-MICROCMS-API-KEY": apiKey },
+      headers: { "X-MICROCMS-API-KEY": src.key },
       next: { revalidate: 300 },
     });
     if (!response.ok) return demoNews;
@@ -66,13 +80,13 @@ export async function getNews(limit = 100): Promise<MicroCmsNews[]> {
   }
 }
 
-export async function getNewsById(id: string): Promise<MicroCmsNews | null> {
-  const url = apiUrl(`/${encodeURIComponent(id)}`);
-  if (!url || !apiKey) return demoNews.find((item) => item.id === id) || null;
+export async function getNewsById(id: string, src: NewsSource = BIZ_NEWS): Promise<MicroCmsNews | null> {
+  const url = newsUrl(src, `/${encodeURIComponent(id)}`);
+  if (!url || !src.key) return demoNews.find((item) => item.id === id) || null;
 
   try {
     const response = await fetch(url, {
-      headers: { "X-MICROCMS-API-KEY": apiKey },
+      headers: { "X-MICROCMS-API-KEY": src.key },
       next: { revalidate: 300 },
     });
     if (!response.ok) return demoNews.find((item) => item.id === id) || null;

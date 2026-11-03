@@ -201,6 +201,14 @@ export async function proxy(request: NextRequest) {
     if (normalizedPath === '/engineer-course') {
       return NextResponse.rewrite(new URL('/geek-course', request.url))
     }
+    // お知らせ（microCMS の geek-news。Next のルート app/geek-news）
+    if (normalizedPath === '/news') {
+      return NextResponse.rewrite(new URL('/geek-news', request.url))
+    }
+    const geekNewsMatch = /^\/news\/([A-Za-z0-9_-]+)$/.exec(normalizedPath)
+    if (geekNewsMatch) {
+      return NextResponse.rewrite(new URL(`/geek-news/${geekNewsMatch[1]}`, request.url))
+    }
     const geekLegal: Record<string, string> = {
       '/privacy-policy': '/geek-privacy-policy-static/index.html',
       '/membership-terms': '/geek-membership-terms-static/index.html',
@@ -270,7 +278,9 @@ export async function proxy(request: NextRequest) {
     pathname === '/geek' ||
     pathname === '/geek/' ||
     pathname === '/geek-course' ||
-    pathname === '/geek-course/'
+    pathname === '/geek-course/' ||
+    pathname === '/geek-news' ||
+    pathname.startsWith('/geek-news/')
   ) {
     return new NextResponse(null, { status: 404 })
   }
