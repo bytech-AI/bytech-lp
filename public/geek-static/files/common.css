@@ -2919,6 +2919,13 @@ body[class][class] .u-text-black {
   vertical-align: middle;
 }
 .g2c-name .c-new { position: relative; top: -2px; font-size: 12px; }
+/* 新コースの公開時期（期限は data-new-until。過ぎたらNEWと同じスクリプトで消す） */
+.c-soon {
+  display: inline-block; margin-right: 10px; padding: 2px 8px;
+  border: 1px solid #ff3410; border-radius: 3px; background: #fff; color: #ff3410;
+  font-size: 12px; font-weight: 900; line-height: 1.3; vertical-align: middle;
+  position: relative; top: -2px;
+}
 /* SPはタブが狭いので、NEWはコース名の上に置いて語の途中で折り返さないようにする */
 @media (max-width: 767px) {
   .g2c-tab .c-new { display: table; margin: 0 auto 4px; padding: 2px 6px; font-size: 9px; }
@@ -4594,7 +4601,9 @@ body[class][class] .u-text-black {
 .g2lv-thumb { display: block; width: 100%; height: auto; }
 .g2lv-body { display: flex; flex: 1; flex-direction: column; padding: 16px 18px 18px; }
 .g2lv-name { margin: 0; font-size: 17px; font-weight: 900; line-height: 1.5; }
-.g2lv-name .c-new { position: relative; top: -1px; }
+.g2lv-badges { display: flex; gap: 6px; margin: 0 0 8px; }
+.g2lv-badges:empty { display: none; }
+.g2lv-badges > span { top: 0; margin-right: 0; }
 .g2lv-desc { flex: 1; margin: 8px 0 0; color: #3d4a58; font-size: 13px; font-weight: 700; line-height: 1.75; word-break: auto-phrase; }
 .g2lv-meta { margin: 12px 0 0; color: #00AC9B; font-size: 12px; font-weight: 800; }
 .g2lv-cta {
