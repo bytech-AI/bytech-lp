@@ -20,6 +20,8 @@ type MicroCmsResponse = {
 const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN;
 const apiKey = process.env.MICROCMS_API_KEY;
 const endpoint = process.env.MICROCMS_NEWS_ENDPOINT || "news";
+// geek.bytech.jp のお知らせ。同じサービス(bytech-biz)に別APIとして置く
+export const GEEK_NEWS_ENDPOINT = process.env.MICROCMS_GEEK_NEWS_ENDPOINT || "geek-news";
 const documentsEndpoint = process.env.MICROCMS_DOCUMENTS_ENDPOINT || "documents";
 
 const demoNews: MicroCmsNews[] = [];
@@ -49,8 +51,8 @@ export function newsPath(news: MicroCmsNews) {
   return `/news/${encodeURIComponent(news.id)}`;
 }
 
-export async function getNews(limit = 100): Promise<MicroCmsNews[]> {
-  const url = apiUrl(`?limit=${limit}&orders=-publishedAt`);
+export async function getNews(limit = 100, ep = endpoint): Promise<MicroCmsNews[]> {
+  const url = apiUrl(`?limit=${limit}&orders=-publishedAt`, ep);
   if (!url || !apiKey) return demoNews;
 
   try {
@@ -66,8 +68,8 @@ export async function getNews(limit = 100): Promise<MicroCmsNews[]> {
   }
 }
 
-export async function getNewsById(id: string): Promise<MicroCmsNews | null> {
-  const url = apiUrl(`/${encodeURIComponent(id)}`);
+export async function getNewsById(id: string, ep = endpoint): Promise<MicroCmsNews | null> {
+  const url = apiUrl(`/${encodeURIComponent(id)}`, ep);
   if (!url || !apiKey) return demoNews.find((item) => item.id === id) || null;
 
   try {

@@ -1,7 +1,8 @@
 // docs/news-drafts/*.html を microCMS の news に「下書き」として一括登録する。
 //
-// 使い方: node scripts/create-news-drafts.mjs [--publish]
+// 使い方: node scripts/create-news-drafts.mjs [--publish] [--geek]
 //   既定は下書き(status=draft)。--publish を付けたときだけ公開状態で作成する。
+//   --geek を付けると docs/geek-news-drafts/*.html を geek-news（geek.bytech.jp/news）に登録する。
 //
 // 前提: .env の MICROCMS_API_KEY に PUT 権限が必要。
 //   読み取り専用キーだと {"message":"PUT is forbidden."} が返る。
@@ -10,8 +11,9 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join, basename } from "node:path";
 
 const ROOT = process.cwd();
-const DIR = join(ROOT, "docs", "news-drafts");
 const PUBLISH = process.argv.includes("--publish");
+const GEEK = process.argv.includes("--geek");
+const DIR = join(ROOT, "docs", GEEK ? "geek-news-drafts" : "news-drafts");
 
 // .env を読む（dotenv非依存）
 for (const line of readFileSync(join(ROOT, ".env"), "utf8").split(/\r?\n/)) {
@@ -20,7 +22,9 @@ for (const line of readFileSync(join(ROOT, ".env"), "utf8").split(/\r?\n/)) {
 }
 const domain = process.env.MICROCMS_SERVICE_DOMAIN;
 const apiKey = process.env.MICROCMS_API_KEY;
-const endpoint = process.env.MICROCMS_NEWS_ENDPOINT || "news";
+const endpoint = GEEK
+  ? process.env.MICROCMS_GEEK_NEWS_ENDPOINT || "geek-news"
+  : process.env.MICROCMS_NEWS_ENDPOINT || "news";
 if (!domain || !apiKey) throw new Error("MICROCMS_SERVICE_DOMAIN / MICROCMS_API_KEY が未設定です");
 
 // 先頭のコメント3行がメタ、それ以降が本文HTML

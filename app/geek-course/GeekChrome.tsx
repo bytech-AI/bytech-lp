@@ -45,6 +45,7 @@ const NAV: NavItem[] = [
   { href: "/record", ja: "ClaudeCode実録", en: "Record", footerOnly: true },
   { href: "/#faq", ja: "よくある質問", en: "FAQ" },
   { href: "/#blog", ja: "記事一覧", en: "Articles" },
+  { href: "/news", ja: "お知らせ", en: "News", footerOnly: true },
   { href: "/skills", ja: "おすすめSkills", en: "Skills" },
 ];
 
