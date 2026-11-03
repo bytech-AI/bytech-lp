@@ -4577,60 +4577,28 @@ body[class][class] .u-text-black {
   .g2skl-icon svg { width: 22px; height: 22px; }
 }
 
-/* === geek2: レベルアップコース（メインのコース一覧の下。テーマを絞った追加コースを濃紺の帯で並べる） === */
-.g2lv { padding: min(110px, 7.6388888889vw) 0 min(150px, 10.4vw); background: #071a3a; color: #fff; }
-.g2lv .c-sec-ttl__ja { color: #fff; }
-.g2lv-lead { margin: 18px 0 0; text-align: center; color: rgba(255,255,255,.78); font-size: 15px; font-weight: 700; line-height: 1.8; }
-.g2lv-course {
-  margin-top: var(--g2-title-content-gap);
-  padding: clamp(20px, 3.4vw, 40px);
-  background: linear-gradient(180deg, rgba(79,216,200,.08), rgba(79,216,200,.02));
-  border: 1px solid rgba(79,216,200,.35);
-}
-.g2lv-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); align-items: center; }
-.g2lv-thumb img { display: block; width: 100%; height: auto; }
-.g2lv-tag { margin: 0 0 10px; color: #4fd8c8; font-family: "Share Tech Mono", ui-monospace, Menlo, monospace; font-size: 13px; letter-spacing: .14em; }
-.g2lv-name { margin: 0; font-size: clamp(22px, 2.6vw, 30px); font-weight: 900; line-height: 1.4; }
-.g2lv-desc { margin: 14px 0 0; word-break: auto-phrase; color: rgba(255,255,255,.86); font-size: 14px; font-weight: 700; line-height: 1.85; }
-.g2lv-spec { margin: 20px 0 0; padding: 0; list-style: none; border-top: 1px solid rgba(79,216,200,.25); }
-.g2lv-spec li { display: flex; gap: 14px; padding: 9px 0; border-bottom: 1px solid rgba(79,216,200,.25); font-size: 14px; font-weight: 800; }
-.g2lv-spec span { flex: 0 0 76px; font-size: 13px; color: #4fd8c8; font-family: "Share Tech Mono", ui-monospace, Menlo, monospace; font-weight: 400; letter-spacing: .12em; }
+/* === geek2: レベルアップコース（メインのコース一覧の下。テーマを絞った追加コースをカードで並べる。今後増える前提） === */
+.g2lv { background: #fff; padding: 0 0 min(150px, 10.4vw); color: #071a3a; }
+.g2lv-lead { margin: 18px 0 0; text-align: center; color: #5d6a78; font-size: 15px; font-weight: 700; line-height: 1.8; }
+.g2lv-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: var(--g2-title-content-gap) 0 0; padding: 0; list-style: none; }
+.g2lv-card { display: flex; flex-direction: column; background: #fff; border: 1px solid #d6dde3; }
+.g2lv-thumb { display: block; width: 100%; height: auto; }
+.g2lv-body { display: flex; flex: 1; flex-direction: column; padding: 16px 18px 18px; }
+.g2lv-name { margin: 0; font-size: 17px; font-weight: 900; line-height: 1.5; }
+.g2lv-name .c-new { position: relative; top: -1px; }
+.g2lv-desc { flex: 1; margin: 8px 0 0; color: #3d4a58; font-size: 13px; font-weight: 700; line-height: 1.75; word-break: auto-phrase; }
+.g2lv-meta { margin: 12px 0 0; color: #00AC9B; font-size: 12px; font-weight: 800; }
 .g2lv-cta {
   display: flex; align-items: center; justify-content: center;
-  margin-top: 24px; min-height: 56px; padding: 0 20px;
+  width: min(100%, 400px); min-height: 56px; margin: 36px auto 0; padding: 0 20px;
   background: #ff3410; color: #fff !important; font-size: 15px; font-weight: 900; text-decoration: none;
   transition: opacity .2s;
 }
 .g2lv-cta::after { content: ""; width: 8px; height: 8px; margin-left: 12px; border-top: 2px solid #fff; border-right: 2px solid #fff; transform: rotate(45deg); }
 .g2lv-cta:hover { opacity: .85; }
-.g2lv-chs { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 32px 0 0; padding: 0; list-style: none; }
-.g2lv-ch { display: flex; flex-direction: column; gap: 6px; padding: 14px 14px 12px; background: rgba(4,18,43,.7); border: 1px solid rgba(79,216,200,.22); border-left: 3px solid #00AC9B; }
-.g2lv-ch-no, .g2lv-ch-meta { font-family: "Share Tech Mono", ui-monospace, Menlo, monospace; letter-spacing: .1em; }
-.g2lv-ch-no { color: #4fd8c8; font-size: 12px; }
-.g2lv-ch-ttl { flex: 1; font-size: 14px; font-weight: 800; line-height: 1.5; word-break: auto-phrase; }
-.g2lv-ch-meta { color: rgba(255,255,255,.55); font-size: 11px; }
-.g2lv-more { margin-top: 16px; }
-.g2lv-more summary {
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  padding: 14px; border: 1px solid rgba(79,216,200,.35); color: #4fd8c8;
-  font-size: 14px; font-weight: 800; cursor: pointer; list-style: none;
-}
-.g2lv-more summary::-webkit-details-marker { display: none; }
-.g2lv-more summary::after { content: "+"; font-family: "Share Tech Mono", ui-monospace, Menlo, monospace; font-size: 18px; line-height: 1; }
-.g2lv-more[open] summary::after { content: "−"; }
-.g2lv-les-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 32px; padding: 24px 4px 4px; }
-.g2lv-les-ch { margin: 0 0 8px; font-size: 14px; font-weight: 900; }
-.g2lv-les-ch span { margin-right: 10px; color: #4fd8c8; font-family: "Share Tech Mono", ui-monospace, Menlo, monospace; font-weight: 400; }
-.g2lv-les ol { margin: 0; padding: 0; list-style: none; }
-.g2lv-les li { display: flex; gap: 12px; padding: 7px 0; border-bottom: 1px dashed rgba(79,216,200,.2); color: rgba(255,255,255,.86); font-size: 13px; font-weight: 700; line-height: 1.6; }
-.g2lv-les li span { flex: 0 0 34px; color: rgba(255,255,255,.5); font-family: "Share Tech Mono", ui-monospace, Menlo, monospace; }
-@media (max-width: 1024px) { .g2lv-chs { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 1024px) { .g2lv-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 767px) {
-  .g2lv { padding: min(80px, 21.3333333333vw) 0 min(110px, 29vw); }
+  .g2lv { padding-bottom: min(110px, 29vw); }
   .g2lv-lead { font-size: 14px; }
-  .g2lv-hero { grid-template-columns: 1fr; }
-  .g2lv-chs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 24px; }
-  .g2lv-ch { padding: 12px 10px 10px; }
-  .g2lv-ch-ttl { font-size: 13px; }
-  .g2lv-les-grid { grid-template-columns: 1fr; }
+  .g2lv-list { grid-template-columns: 1fr; gap: 16px; }
 }

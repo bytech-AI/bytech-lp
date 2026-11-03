@@ -17,7 +17,7 @@
 
 /* ---- 背景: 薄い方眼（電脳空間のグリッド） ---- */
 /* 「なぜ今、Claude Codeを学ぶべきか？」（section.about）は元の写真背景を活かすので対象外 */
-.values, .features, .g2c-course, .g2p-price,
+.values, .features, .g2c-course, .g2lv, .g2p-price,
 .g2flow-flow, .flow, .faq, .g2skl {
   background-image:
     linear-gradient(var(--gits-line) 1px, transparent 1px),
@@ -203,7 +203,7 @@ html { scrollbar-color: var(--gits-teal) transparent; }
 @media (max-width: 767px) {
   .gits-readout { display: none; }
   .c-sec-ttl::after { width: 120px; }
-  .values, .features, .g2c-course, .g2p-price,
+  .values, .features, .g2c-course, .g2lv, .g2p-price,
   .g2flow-flow, .flow, .faq, .g2skl { background-size: 32px 32px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -211,7 +211,7 @@ html { scrollbar-color: var(--gits-teal) transparent; }
 }
 
 /* 暗転セクション内の強調色は明るいティールに（暗い背景での可読性） */
-.skills .c-sec-ttl__ja span, .g2blog .c-sec-ttl__ja span, .g2lv .c-sec-ttl__ja span { color: var(--gits-cyan) !important; }
+.skills .c-sec-ttl__ja span, .g2blog .c-sec-ttl__ja span { color: var(--gits-cyan) !important; }
 .g2com .gits-idx { color: #fff; }
 
 /* ページ側の `.body span/div/p { font-family: Noto Sans JP !important }` より強くするため .body を前置 */
@@ -408,12 +408,3 @@ html { scrollbar-color: var(--gits-teal) transparent; }
 /* 吹き出しは「OFF」も含めて同じ数字用フォントに（円は和文フォントに自動フォールバック） */
 .body #price .g2p-off { font-family: "Oswald", "Noto Sans JP", sans-serif !important; font-weight: 600 !important; letter-spacing: .04em; }
 .body #price .g2p-off b { font-size: 22px; }
-
-/* レベルアップコース（濃紺の帯）: 方眼を明るい線で */
-.g2lv {
-  background-image:
-    linear-gradient(rgba(79,216,200,.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(79,216,200,.06) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-.g2lv .gits-idx { color: #ff3410; }
