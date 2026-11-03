@@ -2903,6 +2903,29 @@ body[class][class] .u-text-black {
   background: #eef2f5;
   border-radius: 12px;
 }
+/* 新しく追加したコースの NEWマーク（期限は data-new-until、過ぎたら index.html のスクリプトで消す） */
+.c-new {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  background: #ff3410;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  line-height: 1.2;
+  vertical-align: middle;
+}
+.g2c-name .c-new { position: relative; top: -2px; font-size: 12px; }
+/* コースの切り替えタブ。見た目はお悩みセクションのペルソナタブ（.gp__tab）を流用し、ここでは並びだけ決める */
+.g2c-tabs {
+  display: flex;
+  gap: 0;
+  margin-top: var(--g2-title-content-gap);
+}
+.g2c-tabs + .g2c-panel, .g2c-tabs ~ .g2c-panel { margin-top: 0; border-top-left-radius: 0; border-top-right-radius: 0; }
 .g2c-panel-head {
   display: flex;
   align-items: baseline;
@@ -3076,6 +3099,16 @@ body[class][class] .u-text-black {
 }
 .g2c-phase-text { margin: 0; color: #5d6a78; font-size: 13px; font-weight: 700; line-height: 1.85; }
 .g2c-phase[data-phase="5"] .g2c-phase-header { background: #0a2b27; }
+.g2c-panel--ag .g2c-phase[data-phase="1"] .g2c-phase-header { background: #6dccc0; }
+.g2c-panel--ag .g2c-phase[data-phase="2"] .g2c-phase-header { background: #62baaf; }
+.g2c-panel--ag .g2c-phase[data-phase="3"] .g2c-phase-header { background: #57a89e; }
+.g2c-panel--ag .g2c-phase[data-phase="4"] .g2c-phase-header { background: #4c968d; }
+.g2c-panel--ag .g2c-phase[data-phase="5"] .g2c-phase-header { background: #41847c; }
+.g2c-panel--ag .g2c-phase[data-phase="6"] .g2c-phase-header { background: #36736b; }
+.g2c-panel--ag .g2c-phase[data-phase="7"] .g2c-phase-header { background: #2b615a; }
+.g2c-panel--ag .g2c-phase[data-phase="8"] .g2c-phase-header { background: #204f49; }
+.g2c-panel--ag .g2c-phase[data-phase="9"] .g2c-phase-header { background: #153d38; }
+.g2c-panel--ag .g2c-phase[data-phase="10"] .g2c-phase-header { background: #0a2b27; }
 .g2c-phase-meta {
   flex-shrink: 0;
   margin-left: 10px;

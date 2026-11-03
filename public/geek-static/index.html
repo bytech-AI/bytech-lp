@@ -89,13 +89,13 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 
 <link rel="stylesheet" id="swiper_style-css" href="/geek-static/files/swiper-bundle.min.css" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="/geek-static/files/swiper-bundle.min.css"></noscript>
-<link rel="stylesheet" id="my_style-css" href="/geek-static/files/common.css?v=20260822skl1" media="all">
+<link rel="stylesheet" id="my_style-css" href="/geek-static/files/common.css?v=20261103ag4" media="all">
 <link rel="stylesheet" id="header_style-css" href="/geek-static/files/header.css?v=20261018t" media="all">
 <link rel="stylesheet" id="footer_style-css" href="/geek-static/files/footer.css?v=20260902a" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="/geek-static/files/footer.css?v=20260902a"></noscript>
 <link rel="stylesheet" id="top_style-css" href="/geek-static/files/top.css?v=20260704zz7" media="all">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Share+Tech+Mono&display=swap" media="print" onload="this.media='all'">
-<link rel="stylesheet" id="gits_style-css" href="/geek-static/files/gits.css?v=20261018zd" media="all">
+<link rel="stylesheet" id="gits_style-css" href="/geek-static/files/gits.css?v=20261103ag" media="all">
 <script id="jquery-core-js" src="/geek-static/files/jquery.min.js"></script>
 <script id="jquery-migrate-js" src="/geek-static/files/jquery-migrate.min.js"></script>
 <link rel="https://api.w.org/" href="#"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="#">
@@ -1185,7 +1185,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     .auto__ttl{display:flex;align-items:center;gap:6px;font-size:12px}
                     .auto__ttl svg{width:18px;height:18px;color:#ff8a6a}
                     .auto__chips{display:flex;gap:6px;width:100%;padding:0 8px}
-                    .auto__chips span{flex:1;position:relative;border-radius:6px;background:#fff;color:#131313;padding:6px 2px;font-size:11.5px}
+                    .auto__chips span{flex:1;position:relative;display:flex;align-items:center;justify-content:center;border-radius:6px;background:#fff;color:#131313;padding:6px 2px;font-size:11.5px;line-height:1.4;text-align:center}
                     .auto__chips span+span::before{content:"▶";position:absolute;left:-7px;top:50%;transform:translateY(-50%);font-size:7px;color:#ff8a6a}
                     .dg-a__steps .auto em{background:#e8663d;color:#fff}
                     .dg-a__steps li+li::before{content:"";position:absolute;left:-7px;top:50%;width:6px;height:2px;background:#9aa5a4}
@@ -2049,7 +2049,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <span class="c-sec-ttl__en">Course</span>
                     <span class="c-sec-ttl__ja">バイテックGEEKのコース一覧</span>
                 </h2>
-                <div class="g2c-panel">
+                <div class="g2c-tabs" role="tablist" aria-label="コースを選ぶ">
+                    <button type="button" class="g2c-tab gp__tab" role="tab" id="g2c-tab-cc" aria-controls="g2c-panel-cc" aria-selected="true">Claude Code<br class="sp"> エンジニアコース</button>
+                    <button type="button" class="g2c-tab gp__tab" role="tab" id="g2c-tab-ag" aria-controls="g2c-panel-ag" aria-selected="false" tabindex="-1"><span class="c-new" data-new-until="2027-01-03">NEW</span>Antigravity<br class="sp"> 開発コース</button>
+                </div>
+                <div class="g2c-panel" role="tabpanel" id="g2c-panel-cc" aria-labelledby="g2c-tab-cc">
                     <div class="g2c-panel-head">
                         <h3 class="g2c-name">Claude Code エンジニアコース</h3>
                         <p class="g2c-sub">（履修期間：2〜6ヶ月／月額・定額制）</p>
@@ -2442,9 +2446,512 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </div>
                     </div>
                 </div>
+                <div class="g2c-panel g2c-panel--ag" role="tabpanel" id="g2c-panel-ag" aria-labelledby="g2c-tab-ag" hidden>
+                    <div class="g2c-panel-head">
+                        <h3 class="g2c-name"><span class="c-new" data-new-until="2027-01-03">NEW</span>Antigravity 開発コース</h3>
+                        <p class="g2c-sub">（履修期間：2〜6ヶ月／月額・定額制）</p>
+                        <p class="g2c-desc">AIエージェントのAntigravityに指示を出して、GASによるGoogle Workspace（スプレッドシート・Gmail・カレンダー・Drive）の業務自動化から社内ツールづくりまでができるようになる学習コース</p>
+                    </div>
+                    <div class="g2c-card">
+                        <div class="g2c-cover">
+                            <img src="/geek-static/files/antigravity-course.webp" alt="Antigravity開発コース" width="1920" height="1080" loading="lazy">
+                            <a class="g2c-cover-cta" href="#counseling">
+                                <span class="g2c-cover-cta-main">無料カウンセリングで相談する</span>
+                                <span class="g2c-cover-cta-arrow" aria-hidden="true"></span>
+                            </a>
+                        </div>
+                        <div class="g2c-phases">
+                        <details class="g2c-phase" data-phase="1">
+                            <summary class="g2c-phase-header">
+                                <span class="g2c-phase-badge">PHASE 1</span>
+                                <span class="g2c-phase-title">Google環境の全体像と準備</span>
+                                <span class="g2c-phase-meta">全5レッスン</span>
+                                <span class="g2c-phase-toggle" aria-hidden="true">+</span>
+                            </summary>
+                            <div class="g2c-phase-body">
+                                <ol class="g2c-lessons">
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">1-1</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">コースのゴールと進め方</p>
+                                            <p class="g2c-lesson-desc">修了時に作れるもの（自動化・社内ツール・要件定義書・検証記録・運用手順）と進め方を説明できる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">1-2</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">Gemini・NotebookLM・Workspace Studio・GAS・Antigravityの使い分け</p>
+                                            <p class="g2c-lesson-desc">やりたい業務に合わせて、5つの道具のどれを使うか選べる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">1-3</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">利用条件と必要な契約</p>
+                                            <p class="g2c-lesson-desc">自分の環境で使える機能と、管理者に頼む設定を確かめられる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">1-4</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">Antigravityを導入する</p>
+                                            <p class="g2c-lesson-desc">Mac・WindowsにAntigravityを入れて起動できる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">1-5</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">最初のGASを動かす</p>
+                                            <p class="g2c-lesson-desc">スプレッドシートからApps Scriptを開き、短いスクリプトを承認して実行できる</p>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </details>
+                        <details class="g2c-phase" data-phase="2">
+                            <summary class="g2c-phase-header">
+                                <span class="g2c-phase-badge">PHASE 2</span>
+                                <span class="g2c-phase-title">事故を防ぐ初期設定</span>
+                                <span class="g2c-phase-meta">全4レッスン</span>
+                                <span class="g2c-phase-toggle" aria-hidden="true">+</span>
+                            </summary>
+                            <div class="g2c-phase-body">
+                                <ol class="g2c-lessons">
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">2-1</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">AIに許す操作を決める（権限）</p>
+                                            <p class="g2c-lesson-desc">AIに許す操作、確認させる操作、禁止する操作を設定できる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">2-2</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">変更内容を確かめる（差分の確認）</p>
+                                            <p class="g2c-lesson-desc">AIが変えた箇所を差分で読み、意図どおりか判断できる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">2-3</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">元に戻せるようにする（Gitと版の履歴）</p>
+                                            <p class="g2c-lesson-desc">変更を記録し、失敗したときに前の状態へ戻せる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">2-4</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">会社のデータの扱い</p>
+                                            <p class="g2c-lesson-desc">AIに渡してよいデータと渡さないデータを分けられる</p>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </details>
+                        <details class="g2c-phase" data-phase="3">
+                            <summary class="g2c-phase-header">
+                                <span class="g2c-phase-badge">PHASE 3</span>
+                                <span class="g2c-phase-title">依頼と計画</span>
+                                <span class="g2c-phase-meta">全3レッスン</span>
+                                <span class="g2c-phase-toggle" aria-hidden="true">+</span>
+                            </summary>
+                            <div class="g2c-phase-body">
+                                <ol class="g2c-lessons">
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">3-1</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">依頼の要素</p>
+                                            <p class="g2c-lesson-desc">目的、材料、完成の形、確かめ方をそろえて依頼できる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">3-2</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">計画を出させて確かめる</p>
+                                            <p class="g2c-lesson-desc">作る前に計画を出させ、読んで直してから進められる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">3-3</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">要件を整理する</p>
+                                            <p class="g2c-lesson-desc">AIと対話して、作るものの要件定義書をまとめられる</p>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </details>
+                        <details class="g2c-phase" data-phase="4">
+                            <summary class="g2c-phase-header">
+                                <span class="g2c-phase-badge">PHASE 4</span>
+                                <span class="g2c-phase-title">GASで業務を自動化する</span>
+                                <span class="g2c-phase-meta">全9レッスン</span>
+                                <span class="g2c-phase-toggle" aria-hidden="true">+</span>
+                            </summary>
+                            <div class="g2c-phase-body">
+                                <ol class="g2c-lessons">
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">4-1</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">AntigravityとGASをつなぐ</p>
+                                            <p class="g2c-lesson-desc">手元のAntigravityで書いたGASを、Googleのプロジェクトへ反映できる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">4-2</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">スプレッドシートを自動で処理する</p>
+                                            <p class="g2c-lesson-desc">転記、集計、整形をGASで自動化できる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">4-3</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">メニューとボタンから実行する</p>
+                                            <p class="g2c-lesson-desc">シートに専用のメニューやボタンを付け、だれでも処理を実行できるようにできる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">4-4</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">シートを編集したときに動かす</p>
+                                            <p class="g2c-lesson-desc">セルの入力や変更をきっかけに、色付けや通知を自動で行える</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">4-5</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">フォームの回答を自動で処理する</p>
+                                            <p class="g2c-lesson-desc">フォームの回答が来たら、振り分けや記録を自動で行える</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">4-6</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">定期実行を設定する（トリガー）</p>
+                                            <p class="g2c-lesson-desc">決めた時刻にGASを自動で動かせる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">4-7</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">たくさんの行を処理する</p>
+                                            <p class="g2c-lesson-desc">実行時間の上限を超えないように、まとめて読み書きしたり分けて処理したりできる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">4-8</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">失敗したときに通知する</p>
+                                            <p class="g2c-lesson-desc">定期実行が失敗したときに、メールなどで気づける</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">4-9</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">秘密情報をコードに書かない</p>
+                                            <p class="g2c-lesson-desc">APIキーなどをスクリプトプロパティに置き、コードに書かずに使える</p>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </details>
+                        <details class="g2c-phase" data-phase="5">
+                            <summary class="g2c-phase-header">
+                                <span class="g2c-phase-badge">PHASE 5</span>
+                                <span class="g2c-phase-title">Gmail・カレンダー・Drive・資料をつなぐ</span>
+                                <span class="g2c-phase-meta">全8レッスン</span>
+                                <span class="g2c-phase-toggle" aria-hidden="true">+</span>
+                            </summary>
+                            <div class="g2c-phase-body">
+                                <ol class="g2c-lessons">
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">5-1</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">Gmailの下書きを自動で作る</p>
+                                            <p class="g2c-lesson-desc">定型の返信や案内を、下書きとして自動で作れる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">5-2</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">受信メールを読み取ってシートに記録する</p>
+                                            <p class="g2c-lesson-desc">条件に合うメールの内容を、シートへ自動で書き出せる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">5-3</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">宛先ごとに文面を変えてメールを作る（差し込み）</p>
+                                            <p class="g2c-lesson-desc">シートの一覧から、宛先ごとに名前や内容を差し込んだメールを作れる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">5-4</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">カレンダーに予定を入れる</p>
+                                            <p class="g2c-lesson-desc">シートの一覧から予定を自動で登録できる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">5-5</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">予定や締め切りを知らせる</p>
+                                            <p class="g2c-lesson-desc">締め切りの近い案件を、担当者へ自動で知らせられる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">5-6</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">Driveのファイルを整理する</p>
+                                            <p class="g2c-lesson-desc">ファイルの振り分けと名前の付け替えを自動化できる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">5-7</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">定型資料を自動で作る</p>
+                                            <p class="g2c-lesson-desc">ひな形とシートのデータから、ドキュメントやスライドを自動で作れる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">5-8</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">PDFにして保存・送付する</p>
+                                            <p class="g2c-lesson-desc">作った資料をPDFにしてDriveへ保存し、下書きメールに添付できる</p>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </details>
+                        <details class="g2c-phase" data-phase="6">
+                            <summary class="g2c-phase-header">
+                                <span class="g2c-phase-badge">PHASE 6</span>
+                                <span class="g2c-phase-title">Workspace MCPで横断作業をする（発展）</span>
+                                <span class="g2c-phase-meta">全2レッスン</span>
+                                <span class="g2c-phase-toggle" aria-hidden="true">+</span>
+                            </summary>
+                            <div class="g2c-phase-body">
+                                <ol class="g2c-lessons">
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">6-1</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">Workspace MCPの接続の準備</p>
+                                            <p class="g2c-lesson-desc">Workspace MCPをAntigravityにつなぎ、使える範囲を確かめられる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">6-2</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">サービスをまたぐ作業を頼む</p>
+                                            <p class="g2c-lesson-desc">Gmail・カレンダー・Drive・シートをまたぐ作業をAIに頼み、結果を確かめられる</p>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </details>
+                        <details class="g2c-phase" data-phase="7">
+                            <summary class="g2c-phase-header">
+                                <span class="g2c-phase-badge">PHASE 7</span>
+                                <span class="g2c-phase-title">データとGemini APIを活用する</span>
+                                <span class="g2c-phase-meta">全5レッスン</span>
+                                <span class="g2c-phase-toggle" aria-hidden="true">+</span>
+                            </summary>
+                            <div class="g2c-phase-body">
+                                <ol class="g2c-lessons">
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">7-1</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">スプレッドシートのデータを分析する</p>
+                                            <p class="g2c-lesson-desc">シートのデータから傾向を読み、分析の結果をまとめられる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">7-2</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">グラフとダッシュボードで見える化する</p>
+                                            <p class="g2c-lesson-desc">GASでグラフと一覧を自動で更新し、毎週見る数字を一目で分かる形にできる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">7-3</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">外部のデータを取り込む</p>
+                                            <p class="g2c-lesson-desc">GASからWebのAPIを呼び、外部のデータをシートへ定期的に取り込める</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">7-4</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">Gemini APIの準備</p>
+                                            <p class="g2c-lesson-desc">APIキーを作り、費用と利用量の上限を確かめられる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">7-5</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">要約と分類を自動化する</p>
+                                            <p class="g2c-lesson-desc">GASからGemini APIを呼び、問い合わせの要約と分類を自動で行える</p>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </details>
+                        <details class="g2c-phase" data-phase="8">
+                            <summary class="g2c-phase-header">
+                                <span class="g2c-phase-badge">PHASE 8</span>
+                                <span class="g2c-phase-title">社内ツールを作る</span>
+                                <span class="g2c-phase-meta">全5レッスン</span>
+                                <span class="g2c-phase-toggle" aria-hidden="true">+</span>
+                            </summary>
+                            <div class="g2c-phase-body">
+                                <ol class="g2c-lessons">
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">8-1</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">作るツールを決める</p>
+                                            <p class="g2c-lesson-desc">使う人と困りごとから、作る社内ツールを決められる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">8-2</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">GASでWebアプリを作る</p>
+                                            <p class="g2c-lesson-desc">画面のあるWebアプリをGASで作り、ブラウザで確かめられる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">8-3</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">社内の人だけが使えるようにする（認証）</p>
+                                            <p class="g2c-lesson-desc">アクセスできる人を社内に絞り、利用者ごとに表示を変えられる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">8-4</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">エラーを調べる</p>
+                                            <p class="g2c-lesson-desc">実行ログとエラー文をAIに渡して、原因を突き止めて直せる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">8-5</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">公開前の確認</p>
+                                            <p class="g2c-lesson-desc">使う人の操作を想定して確かめ、検証記録に残せる</p>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </details>
+                        <details class="g2c-phase" data-phase="9">
+                            <summary class="g2c-phase-header">
+                                <span class="g2c-phase-badge">PHASE 9</span>
+                                <span class="g2c-phase-title">エージェントを社内で育てる</span>
+                                <span class="g2c-phase-meta">全4レッスン</span>
+                                <span class="g2c-phase-toggle" aria-hidden="true">+</span>
+                            </summary>
+                            <div class="g2c-phase-body">
+                                <ol class="g2c-lessons">
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">9-1</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">ルールで作業をそろえる</p>
+                                            <p class="g2c-lesson-desc">毎回伝えている注意点をルールに書き、作業をそろえられる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">9-2</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">スキルを作る</p>
+                                            <p class="g2c-lesson-desc">社内の業務手順をスキルにまとめ、呼び出して使える</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">9-3</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">外部連携の基準を決める</p>
+                                            <p class="g2c-lesson-desc">外部サービスや拡張機能をつなぐ前に確かめることを決められる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">9-4</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">AIに任せる範囲と費用を決める</p>
+                                            <p class="g2c-lesson-desc">任せる作業、人が確かめる作業、費用の上限を運用手順に書ける</p>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </details>
+                        <details class="g2c-phase" data-phase="10">
+                            <summary class="g2c-phase-header">
+                                <span class="g2c-phase-badge">PHASE 10</span>
+                                <span class="g2c-phase-title">総合制作</span>
+                                <span class="g2c-phase-meta">全4レッスン</span>
+                                <span class="g2c-phase-toggle" aria-hidden="true">+</span>
+                            </summary>
+                            <div class="g2c-phase-body">
+                                <ol class="g2c-lessons">
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">10-1</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">自社の定型業務を棚卸しする</p>
+                                            <p class="g2c-lesson-desc">自社の定型業務を書き出し、GASで自動化するものを選べる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">10-2</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">要件定義と計画</p>
+                                            <p class="g2c-lesson-desc">選んだ業務の要件定義書と計画を作れる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">10-3</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">制作と検証</p>
+                                            <p class="g2c-lesson-desc">計画に沿ってGASで作り、検証記録を残しながら仕上げられる</p>
+                                        </div>
+                                    </li>
+                                    <li class="g2c-lesson">
+                                        <span class="g2c-lesson-no">10-4</span>
+                                        <div class="g2c-lesson-main">
+                                            <p class="g2c-lesson-title">運用手順をまとめて引き継ぐ</p>
+                                            <p class="g2c-lesson-desc">作ったものを他の人が動かせるように、運用手順にまとめられる</p>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </details>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         <!-- /.g2c-course -->
+        <script>/* NEWマーク: data-new-until の日付（日本時間）になったら消す。追加から2ヶ月表示 */(function(){var t=new Date(Date.now()+9*3600e3).toISOString().slice(0,10);document.querySelectorAll('[data-new-until]').forEach(function(el){if(t>=el.getAttribute('data-new-until'))el.remove();});})();</script>
+        <script>
+        (function(){
+          var tabs=[].slice.call(document.querySelectorAll('.g2c-tab'));
+          function select(t){
+            tabs.forEach(function(x){
+              var on=x===t;
+              x.setAttribute('aria-selected',on?'true':'false');
+              x.tabIndex=on?0:-1;
+              document.getElementById(x.getAttribute('aria-controls')).hidden=!on;
+            });
+          }
+          tabs.forEach(function(t,i){
+            t.addEventListener('click',function(){select(t);});
+            t.addEventListener('keydown',function(e){
+              var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;
+              if(!d)return;
+              var n=tabs[(i+d+tabs.length)%tabs.length];select(n);n.focus();e.preventDefault();
+            });
+          });
+        })();
+        </script>
 
         <section class="skills u-secpad-sp">
             <div class="inner">
