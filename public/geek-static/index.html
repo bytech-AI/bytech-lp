@@ -89,7 +89,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 
 <link rel="stylesheet" id="swiper_style-css" href="/geek-static/files/swiper-bundle.min.css" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="/geek-static/files/swiper-bundle.min.css"></noscript>
-<link rel="stylesheet" id="my_style-css" href="/geek-static/files/common.css?v=20261103ag3" media="all">
+<link rel="stylesheet" id="my_style-css" href="/geek-static/files/common.css?v=20261103ag4" media="all">
 <link rel="stylesheet" id="header_style-css" href="/geek-static/files/header.css?v=20261018t" media="all">
 <link rel="stylesheet" id="footer_style-css" href="/geek-static/files/footer.css?v=20260902a" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="/geek-static/files/footer.css?v=20260902a"></noscript>
@@ -1185,7 +1185,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     .auto__ttl{display:flex;align-items:center;gap:6px;font-size:12px}
                     .auto__ttl svg{width:18px;height:18px;color:#ff8a6a}
                     .auto__chips{display:flex;gap:6px;width:100%;padding:0 8px}
-                    .auto__chips span{flex:1;position:relative;border-radius:6px;background:#fff;color:#131313;padding:6px 2px;font-size:11.5px}
+                    .auto__chips span{flex:1;position:relative;display:flex;align-items:center;justify-content:center;border-radius:6px;background:#fff;color:#131313;padding:6px 2px;font-size:11.5px;line-height:1.4;text-align:center}
                     .auto__chips span+span::before{content:"▶";position:absolute;left:-7px;top:50%;transform:translateY(-50%);font-size:7px;color:#ff8a6a}
                     .dg-a__steps .auto em{background:#e8663d;color:#fff}
                     .dg-a__steps li+li::before{content:"";position:absolute;left:-7px;top:50%;width:6px;height:2px;background:#9aa5a4}
@@ -2051,7 +2051,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </h2>
                 <div class="g2c-tabs" role="tablist" aria-label="コースを選ぶ">
                     <button type="button" class="g2c-tab gp__tab" role="tab" id="g2c-tab-cc" aria-controls="g2c-panel-cc" aria-selected="true">Claude Code<br class="sp"> エンジニアコース</button>
-                    <button type="button" class="g2c-tab gp__tab" role="tab" id="g2c-tab-ag" aria-controls="g2c-panel-ag" aria-selected="false" tabindex="-1">Antigravity<br class="sp"> 開発コース</button>
+                    <button type="button" class="g2c-tab gp__tab" role="tab" id="g2c-tab-ag" aria-controls="g2c-panel-ag" aria-selected="false" tabindex="-1"><span class="c-new" data-new-until="2027-01-03">NEW</span>Antigravity<br class="sp"> 開発コース</button>
                 </div>
                 <div class="g2c-panel" role="tabpanel" id="g2c-panel-cc" aria-labelledby="g2c-tab-cc">
                     <div class="g2c-panel-head">
@@ -2448,7 +2448,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
                 <div class="g2c-panel g2c-panel--ag" role="tabpanel" id="g2c-panel-ag" aria-labelledby="g2c-tab-ag" hidden>
                     <div class="g2c-panel-head">
-                        <h3 class="g2c-name">Antigravity 開発コース</h3>
+                        <h3 class="g2c-name"><span class="c-new" data-new-until="2027-01-03">NEW</span>Antigravity 開発コース</h3>
                         <p class="g2c-sub">（履修期間：2〜6ヶ月／月額・定額制）</p>
                         <p class="g2c-desc">AIエージェントのAntigravityに指示を出して、GASによるGoogle Workspace（スプレッドシート・Gmail・カレンダー・Drive）の業務自動化から社内ツールづくりまでができるようになる学習コース</p>
                     </div>
@@ -2930,6 +2930,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
         </section>
         <!-- /.g2c-course -->
+        <script>/* NEWマーク: data-new-until の日付（日本時間）になったら消す。追加から2ヶ月表示 */(function(){var t=new Date(Date.now()+9*3600e3).toISOString().slice(0,10);document.querySelectorAll('[data-new-until]').forEach(function(el){if(t>=el.getAttribute('data-new-until'))el.remove();});})();</script>
         <script>
         (function(){
           var tabs=[].slice.call(document.querySelectorAll('.g2c-tab'));

@@ -2903,6 +2903,22 @@ body[class][class] .u-text-black {
   background: #eef2f5;
   border-radius: 12px;
 }
+/* 新しく追加したコースの NEWマーク（期限は data-new-until、過ぎたら index.html のスクリプトで消す） */
+.c-new {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  background: #ff3410;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  line-height: 1.2;
+  vertical-align: middle;
+}
+.g2c-name .c-new { position: relative; top: -2px; font-size: 12px; }
 /* コースの切り替えタブ。見た目はお悩みセクションのペルソナタブ（.gp__tab）を流用し、ここでは並びだけ決める */
 .g2c-tabs {
   display: flex;
