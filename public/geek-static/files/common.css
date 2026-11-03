@@ -3076,6 +3076,7 @@ body[class][class] .u-text-black {
 }
 .g2c-phase-text { margin: 0; color: #5d6a78; font-size: 13px; font-weight: 700; line-height: 1.85; }
 .g2c-phase[data-phase="5"] .g2c-phase-header { background: #0a2b27; }
+.g2c-phase[data-phase="6"] .g2c-phase-header { background: #061c19; }
 .g2c-phase-meta {
   flex-shrink: 0;
   margin-left: 10px;
