@@ -17,7 +17,7 @@
 
 /* ---- 背景: 薄い方眼（電脳空間のグリッド） ---- */
 /* 「なぜ今、Claude Codeを学ぶべきか？」（section.about）は元の写真背景を活かすので対象外 */
-.values, .features, .g2c-course, .g2p-price,
+.values, .features, .g2c-course, .g2lv, .g2p-price,
 .g2flow-flow, .flow, .faq, .g2skl {
   background-image:
     linear-gradient(var(--gits-line) 1px, transparent 1px),
@@ -203,7 +203,7 @@ html { scrollbar-color: var(--gits-teal) transparent; }
 @media (max-width: 767px) {
   .gits-readout { display: none; }
   .c-sec-ttl::after { width: 120px; }
-  .values, .features, .g2c-course, .g2p-price,
+  .values, .features, .g2c-course, .g2lv, .g2p-price,
   .g2flow-flow, .flow, .faq, .g2skl { background-size: 32px 32px; }
 }
 @media (prefers-reduced-motion: reduce) {
