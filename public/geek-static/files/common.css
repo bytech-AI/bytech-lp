@@ -4585,7 +4585,7 @@ body[class][class] .u-text-black {
 }
 
 /* === geek2: レベルアップコース（メインのコース一覧の下。テーマを絞った追加コースをカードで並べる。今後増える前提） === */
-.g2lv { background: #fff; padding: 8px 0 min(150px, 10.4vw); color: #071a3a; }
+.g2lv { background: #fff; padding: 8px 0 min(56px, 4vw); color: #071a3a; }
 .g2lv-bridge { display: flex; justify-content: center; padding-bottom: 20px; }
 .g2lv-bridge-line { position: relative; display: block; width: 2px; height: 72px; background: repeating-linear-gradient(#00AC9B 0 6px, transparent 6px 12px); }
 .g2lv-bridge-line::after { content: ""; position: absolute; left: 50%; bottom: -2px; width: 12px; height: 12px; border-right: 2px solid #00AC9B; border-bottom: 2px solid #00AC9B; transform: translateX(-50%) rotate(45deg); }
@@ -4616,7 +4616,7 @@ body[class][class] .u-text-black {
 .g2lv-cta:hover { opacity: .85; }
 @media (max-width: 1024px) { .g2lv-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 767px) {
-  .g2lv { padding-bottom: min(110px, 29vw); }
+  .g2lv { padding-bottom: 40px; }
   .g2lv-lead { font-size: 14px; }
   .g2lv-bridge-line { height: 48px; }
   .g2lv-kicker { margin-bottom: 28px; padding: 8px 18px; }
