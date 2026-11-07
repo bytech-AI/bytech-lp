@@ -1,0 +1,96 @@
+/* /e-learning/trial 無料トライアル申込ページ。tr- プレフィックス。
+   影は使わず、枠線と面の色で区切る（/e-learning と同じ方針）。 */
+
+.tr-page { background: #f5f7fb; }
+.tr-inner { max-width: 1120px; margin: 0 auto; padding: clamp(96px, 10vw, 120px) 20px clamp(56px, 7vw, 96px); }
+.tr-breadcrumb { max-width: none; margin: 0 0 clamp(20px, 3vw, 32px); padding: 0; }
+.tr-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
+
+/* 左：説明 */
+.tr-intro { position: sticky; top: 100px; }
+.tr-eyebrow { margin: 0; font-family: var(--font-montserrat), sans-serif; font-size: 13px; font-weight: 700; letter-spacing: .24em; color: #1c45a3; }
+.tr-title { margin: 10px 0 0; font-size: clamp(30px, 3.6vw, 44px); font-weight: 900; line-height: 1.3; color: #1c2635; }
+.tr-lead { margin: 18px 0 0; font-size: 15px; line-height: 1.9; color: #5a6b83; }
+.tr-points { margin: 28px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+.tr-points li { display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; background: #fff; border: 1px solid #e2e8f1; border-radius: 14px; }
+.tr-points__no {
+  flex: 0 0 auto; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 10px;
+  background: linear-gradient(135deg, #1c45a3, #3f7fe0); color: #fff;
+  font-family: var(--font-montserrat), sans-serif; font-size: 14px; font-weight: 700;
+}
+.tr-points__h { margin: 0; font-size: 15px; font-weight: 900; color: #1c2635; }
+.tr-points__d { margin: 4px 0 0; font-size: 13px; line-height: 1.75; color: #5a6b83; }
+.tr-price { margin-top: 20px; padding: 20px 22px; border-radius: 14px; background: linear-gradient(150deg, #0d2357 0%, #1c45a3 60%, #2f66cc 100%); color: #fff; }
+.tr-price__h { margin: 0; font-size: 12px; font-weight: 700; opacity: .85; }
+.tr-price__v { margin: 6px 0 0; font-size: 14px; font-weight: 700; }
+.tr-price__v b { margin: 0 2px 0 6px; font-family: var(--font-montserrat), sans-serif; font-size: 32px; }
+.tr-price__v span { margin-left: 10px; font-size: 13px; opacity: .9; }
+.tr-price__note { margin: 6px 0 0; font-size: 11px; opacity: .75; }
+
+/* 右：フォーム */
+.tr-card { padding: clamp(24px, 3.4vw, 44px); background: #fff; border: 1px solid #e2e8f1; border-radius: 20px; }
+.tr-card__title { margin: 0 0 22px; font-size: 20px; font-weight: 900; color: #1c2635; }
+.tr-form { position: relative; }
+.tr-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+.tr-field { margin-bottom: 20px; }
+.tr-label { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 14px; font-weight: 700; color: #1c2635; }
+.tr-req, .tr-opt { padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; }
+.tr-req { background: #e0353f; color: #fff; }
+.tr-opt { background: #eef1f6; color: #5a6b83; }
+.tr-input {
+  display: block; width: 100%; padding: 13px 14px;
+  background: #f7f9fc; border: 1px solid #d9e0ea; border-radius: 10px;
+  font: inherit; font-size: 15px; color: #1c2635;
+  transition: border-color .2s ease, background .2s ease;
+}
+.tr-input:focus { outline: none; border-color: #1c45a3; background: #fff; }
+.tr-textarea { resize: vertical; min-height: 110px; line-height: 1.7; }
+select.tr-input { appearance: none; -webkit-appearance: none; background-image: linear-gradient(45deg, transparent 50%, #5a6b83 50%), linear-gradient(135deg, #5a6b83 50%, transparent 50%); background-position: calc(100% - 20px) 50%, calc(100% - 15px) 50%; background-size: 5px 5px; background-repeat: no-repeat; }
+.tr-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.tr-chip { position: relative; cursor: pointer; }
+.tr-chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.tr-chip span {
+  display: inline-block; padding: 9px 14px; border: 1px solid #d9e0ea; border-radius: 999px;
+  background: #f7f9fc; font-size: 13px; font-weight: 700; color: #1c2635;
+  transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+.tr-chip input:checked + span { background: #1c45a3; border-color: #1c45a3; color: #fff; }
+.tr-chip input:focus-visible + span { outline: 2px solid #3f7fe0; outline-offset: 2px; }
+.tr-error { margin-top: 6px; font-size: 12px; font-weight: 700; color: #e0353f; }
+.tr-submit {
+  display: flex; align-items: center; justify-content: center; gap: 14px; width: 100%;
+  margin-top: 8px; padding: 18px 24px; border: 0; border-radius: 999px; cursor: pointer;
+  background: #e0353f; color: #fff; font: inherit; font-size: 16px; font-weight: 900;
+  transition: background .2s ease, transform .2s ease;
+}
+.tr-submit:hover { background: #cf2a34; transform: translateY(-2px); }
+.tr-submit__ico { position: relative; width: 18px; height: 18px; }
+.tr-submit__ico::before { content: ""; position: absolute; top: 50%; left: 0; width: 16px; height: 2px; background: #fff; transform: translateY(-50%); }
+.tr-submit__ico::after { content: ""; position: absolute; top: 50%; right: 1px; width: 7px; height: 7px; border-top: 2px solid #fff; border-right: 2px solid #fff; transform: translateY(-50%) rotate(45deg); }
+.tr-consent { margin: 14px 0 0; text-align: center; font-size: 12px; color: #76849a; }
+.tr-consent a { color: #1c45a3; }
+
+@media (max-width: 900px) {
+  .tr-grid { grid-template-columns: 1fr; }
+  .tr-intro { position: static; }
+}
+@media (max-width: 560px) {
+  .tr-row { grid-template-columns: 1fr; }
+  .tr-price__v span { display: block; margin: 4px 0 0; }
+}
+
+/* 完了ページ */
+.tr-thanks { max-width: 760px; margin: 0 auto; text-align: center; }
+.tr-thanks .tr-title { font-size: clamp(22px, 3vw, 32px); }
+.tr-thanks__links { display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 32px; }
+.tr-thanks__btn { width: auto; text-decoration: none; }
+.tr-thanks__sub { font-size: 14px; font-weight: 700; color: #1c45a3; }
+
+/* course.css はSPでヒーロー上のロゴを白化する。このページは明るい背景なので元の紺ロゴに戻す */
+@media (max-width: 768px) {
+  .biz-root .top-header__logo img { filter: none; }
+}
+@media (max-width: 560px) {
+  .tr-thanks .tr-lead { text-align: left; }
+  .tr-thanks .tr-lead br { display: none; }
+}
