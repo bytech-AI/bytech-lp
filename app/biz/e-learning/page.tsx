@@ -19,8 +19,7 @@ export const metadata = buildCourseMetadata({
 });
 
 const DOC_HREF = "/doc-e";
-// 無料トライアルの申込先。専用フォームができるまでは無料相談の予約ページで受ける
-const TRIAL_HREF = "/counseling";
+const TRIAL_HREF = "/e-learning/trial";
 
 // 各プログラムのレッスン数・視聴時間（各研修ページのスペック欄と揃える。更新時は両方直す）
 const PROGRAM_STATS: Record<string, { lessons: number; hours: string }> = {
@@ -72,7 +71,7 @@ const ISSUES = [
   {
     h: "何を学ばせればいいか\n決められない",
     d: "AIツールが多すぎて、自社の社員にどれを、どの順番で学ばせればよいか判断がつかない。",
-    a: "社内で使えるツールと業務内容から、受講するプログラムと学習範囲を一緒に決めます。",
+    a: "1IDで全プログラムが見放題。社内で使えるツールと業務内容から、優先して学ぶプログラムと順番を一緒に決めます。",
   },
   {
     h: "研修の日程調整と\nコストが重い",
@@ -109,14 +108,14 @@ const FEATURES = [
 ];
 
 const FLOW = [
-  { no: "01", h: "プログラムを選ぶ", d: "社内で使えるAIツールと業務内容をうかがい、受講するプログラムと学習範囲を決めます。" },
+  { no: "01", h: "学ぶ順番を決める", d: "社内で使えるAIツールと業務内容をうかがい、優先して学ぶプログラムと順番を決めます。" },
   { no: "02", h: "アカウントを発行", d: "受講者ごとに専用LMSのアカウントを発行。初回オリエンテーションで学習の進め方をご案内します。" },
   { no: "03", h: "各自のペースで学ぶ", d: "受講期間中はレッスン動画が見放題。空き時間に少しずつ進め、業務で試しながら身につけます。" },
   { no: "04", h: "進捗を確認する", d: "管理画面で受講状況を確認し、停滞している受講者へ声かけ。全員の修了を目指します。" },
 ];
 
 const INCLUDED = [
-  { icon: "play", h: "レッスン動画が見放題", d: "選択プログラムの全レッスンを、受講期間内は何度でも視聴できます。" },
+  { icon: "play", h: "全プログラムが見放題", d: `全${programs.length}プログラム・${lessonsFloor}本以上のレッスンを、契約期間中は何度でも視聴できます。` },
   { icon: "user", h: "専用LMSのアカウント", d: "受講者ごとに学習管理システムのアカウントを発行します。" },
   { icon: "chart", h: "受講状況・進捗の確認", d: "誰がどこまで進んだかを、管理画面でひと目で把握できます。" },
   { icon: "chat", h: "初回オリエンテーション", d: "学習の進め方をご案内し、受講者が迷わず始められます。" },
@@ -128,8 +127,8 @@ const FAQS = [
     a: "はい。多くの受講者が生成AI未経験からのスタートです。基礎から順に学べる構成のため、業務で活用できるレベルまで無理なくスキルアップできます。",
   },
   {
-    q: "どのプログラムを選べばよいですか？",
-    a: "まだ使うAIを決めていなければ定番のChatGPT、Microsoft 365環境ならCopilot、Google Workspace環境ならGemini・NotebookLM、文章・資料作成の質を重視するならClaudeがおすすめです。無料個別相談でもご提案します。",
+    q: "受講できるプログラムに制限はありますか？",
+    a: "ありません。1IDで全プログラムを見放題で受講できます。最初に学ぶものに迷ったら、まだ使うAIを決めていなければ定番のChatGPT、Microsoft 365環境ならCopilot、Google Workspace環境ならGemini・NotebookLM、文章・資料作成の質を重視するならClaudeがおすすめです。無料個別相談でもご提案します。",
   },
   {
     q: "学習中に質問はできますか？",
@@ -149,7 +148,7 @@ const FAQS = [
   },
   {
     q: "料金はどのように決まりますか？",
-    a: "導入費用100,000円（税抜）と、受講者1名（1ID）あたり月額2,980円です。ご契約は10ID・6ヶ月から承ります。ID数と期間に応じた総額は、お見積りにてご提示します。",
+    a: "導入費用100,000円（税抜）と、受講者1名（1ID）あたり月額2,980円（税抜）です。ご契約は10ID・6ヶ月から承ります。ID数と期間に応じた総額は、お見積りにてご提示します。",
   },
 ];
 
@@ -255,12 +254,12 @@ export default function ELearningPage() {
                 <span><em>動画で均一に</em>底上げ。</span>
               </h1>
               <p className="el-hero__lead">
-                ChatGPT・Gemini・Copilot・Claudeなど{programs.length}プログラム。
+                ChatGPT・Gemini・Copilot・Claudeなど{programs.length}プログラムが、1IDで全部見放題。
                 <br className="el-pc" />
                 時間や場所を選ばず、各自のペースで実務に使えるAIスキルを学べます。
               </p>
               <ul className="el-hero__stats">
-                <li><b>{programs.length}</b>プログラム</li>
+                <li><b>{programs.length}</b>プログラム見放題</li>
                 <li><b>{lessonsFloor}</b>本以上のレッスン</li>
                 <li>月額<b>2,980</b>円／ID</li>
               </ul>
@@ -403,10 +402,10 @@ export default function ELearningPage() {
         {/* ============ プログラム一覧 ============ */}
         <section className="el-sec el-sec--gray" id="programs">
           <div className="ct-about__head">
-            <p className="ct-about__eyebrow">使っているAIツール・目的に合わせて選べる</p>
+            <p className="ct-about__eyebrow">1IDで全プログラムが見放題</p>
             <h2 className="ct-about__title">eラーニングのプログラム</h2>
             <p className="ct-about__lead el-head-lead">
-              各プログラムの詳しいカリキュラムは研修ページでご確認いただけます。
+              使っているAIツールや目的に合わせて、必要なものから自由に学べます。各プログラムの詳しいカリキュラムは研修ページでご確認いただけます。
             </p>
           </div>
           <div className="el-programs">
@@ -476,7 +475,7 @@ export default function ELearningPage() {
               <div className="el-price__monthly">
                 <span className="el-price__label">月額費用</span>
                 <p className="el-price__amount">
-                  2,980<small>円</small><em>／ID・月</em>
+                  2,980<small>円</small><em>／ID・月（税抜）</em>
                 </p>
                 {/* 2,980 ÷ 30日 ≒ 99円 */}
                 <p className="el-price__daily">1日あたり<b>約99円</b>で学び続けられる</p>
@@ -488,14 +487,14 @@ export default function ELearningPage() {
               <ul className="el-price__chips">
                 <li>10IDからご契約可</li>
                 <li>最低契約期間 6ヶ月</li>
-                <li>全社展開に対応</li>
+                <li>全プログラム見放題</li>
                 <li>オンライン（専用LMS）</li>
               </ul>
               <a className="el-price__trial" href={TRIAL_HREF}>
                 まずは無料トライアルで試す
                 <span className="el-price__trial-arrow" aria-hidden="true" />
               </a>
-              <p className="el-price__tax">※ご契約は10ID・6ヶ月から承ります。ID数と期間に応じた総額は、お見積りにてご提示します。</p>
+              <p className="el-price__tax">※価格はすべて税抜です。ご契約は10ID・6ヶ月から承ります。ID数と期間に応じた総額は、お見積りにてご提示します。</p>
             </div>
             <div className="el-price__inc">
               <p className="el-price__inc-h">料金に含まれるもの</p>
@@ -530,7 +529,7 @@ export default function ELearningPage() {
               </div>
               <div className="el-compare__row" role="row">
                 <span role="rowheader">料金</span>
-                <span role="cell">導入100,000円（税抜）＋月額2,980円／ID</span>
+                <span role="cell">導入100,000円＋月額2,980円／ID（税抜）</span>
                 <span role="cell" className="is-feature">200,000円〜／名</span>
               </div>
               <div className="el-compare__row" role="row">
