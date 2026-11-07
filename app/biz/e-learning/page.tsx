@@ -12,7 +12,7 @@ import "./e-learning.css";
 export const metadata = buildCourseMetadata({
   title: "法人向けAI研修のeラーニング｜バイテック法人AI研修",
   description:
-    "ChatGPT・Gemini・Copilot・Claudeなど9プログラム、580本以上のレッスン動画で全社員のAIスキルを底上げする法人向けeラーニング。専用LMSで受講状況を管理でき、1名・1プログラム100,000円〜。",
+    "ChatGPT・Gemini・Copilot・Claudeなど9プログラム、580本以上のレッスン動画で全社員のAIスキルを底上げする法人向けeラーニング。専用LMSで受講状況を管理でき、導入費用100,000円・月額2,980円／IDで始められます。",
   socialDescription:
     "9プログラム・580本以上のレッスン動画で、全社員のAIスキルを均一に底上げする法人向けeラーニング。",
   path: "/e-learning",
@@ -130,7 +130,7 @@ const FAQS = [
   },
   {
     q: "料金はどのように決まりますか？",
-    a: "受講者1名・1プログラムごとに100,000円〜（税抜）です。受講人数、プログラムの種類・数、受講期間の延長などにより変動するため、正式な料金はお見積りにてご提示します。",
+    a: "導入費用100,000円と、受講者1名（1ID）あたり月額2,980円です（いずれも税抜）。ID数に応じた総額は、お見積りにてご提示します。",
   },
 ];
 
@@ -175,7 +175,8 @@ const jsonLd = {
         url: "https://biz.bytech.jp/",
       },
       offers: [
-        { "@type": "Offer", name: "eラーニング", price: "100000", priceCurrency: "JPY", category: "円〜／名" },
+        { "@type": "Offer", name: "eラーニング 導入費用", price: "100000", priceCurrency: "JPY" },
+        { "@type": "Offer", name: "eラーニング 月額費用", price: "2980", priceCurrency: "JPY", category: "円／ID・月" },
       ],
       hasCourseInstance: [
         { "@type": "CourseInstance", name: "法人向けAI研修 eラーニング", courseMode: ["Online"], inLanguage: "ja" },
@@ -242,7 +243,7 @@ export default function ELearningPage() {
               <ul className="el-hero__stats">
                 <li><b>{programs.length}</b>プログラム</li>
                 <li><b>{lessonsFloor}</b>本以上のレッスン</li>
-                <li><b>1</b>名から受講可</li>
+                <li>月額<b>2,980</b>円／ID</li>
               </ul>
               <Cta />
             </div>
@@ -371,7 +372,7 @@ export default function ELearningPage() {
             <p className="ct-about__eyebrow">使っているAIツール・目的に合わせて選べる</p>
             <h2 className="ct-about__title">eラーニングのプログラム</h2>
             <p className="ct-about__lead el-head-lead">
-              1名につき1プログラムを受講できます。各プログラムの詳しいカリキュラムは研修ページでご確認いただけます。
+              各プログラムの詳しいカリキュラムは研修ページでご確認いただけます。
             </p>
           </div>
           <div className="el-programs">
@@ -435,15 +436,25 @@ export default function ELearningPage() {
           <div className="el-price">
             <div className="el-price__main">
               <p className="el-price__name">eラーニング</p>
-              <p className="el-price__amount">100,000<small>円〜／名（税抜）</small></p>
+              <div className="el-price__rows">
+                <div className="el-price__row">
+                  <span className="el-price__label">導入費用</span>
+                  <p className="el-price__amount">100,000<small>円</small></p>
+                </div>
+                <span className="el-price__plus" aria-hidden="true">＋</span>
+                <div className="el-price__row">
+                  <span className="el-price__label">月額費用</span>
+                  <p className="el-price__amount el-price__amount--main">2,980<small>円／ID</small></p>
+                </div>
+              </div>
+              <p className="el-price__tax">※価格はすべて税抜です。</p>
               <dl className="el-price__spec">
-                <div><dt>課金単位</dt><dd>受講者1名ごと</dd></div>
-                <div><dt>プログラム</dt><dd>1名につき1プログラム</dd></div>
+                <div><dt>課金単位</dt><dd>受講者1名（1ID）ごとの月額</dd></div>
                 <div><dt>対象人数</dt><dd>1名〜（全社展開可）</dd></div>
                 <div><dt>実施形態</dt><dd>オンライン（専用LMS）</dd></div>
               </dl>
               <p className="el-price__note">
-                受講人数、プログラムの種類・数、受講期間の延長などにより変動します。正式な料金はお見積りにてご提示します。
+                ID数に応じた総額は、お見積りにてご提示します。
               </p>
             </div>
             <div className="el-price__inc">
@@ -470,7 +481,7 @@ export default function ELearningPage() {
               </div>
               <div className="el-compare__row" role="row">
                 <span role="rowheader">料金</span>
-                <span role="cell">100,000円〜／名</span>
+                <span role="cell">導入100,000円＋月額2,980円／ID</span>
                 <span role="cell" className="is-feature">200,000円〜／名</span>
               </div>
               <div className="el-compare__row" role="row">
