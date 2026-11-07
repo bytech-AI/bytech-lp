@@ -40,6 +40,19 @@ const totalLessons = programs.reduce((sum, c) => sum + PROGRAM_STATS[c.slug].les
 // 「580本以上」のように10の位で切り捨てて表記する
 const lessonsFloor = Math.floor(totalLessons / 10) * 10;
 
+// 導入企業ロゴ（bizトップの logo-marquee と同じ顔ぶれ・同じ素材）
+const CLIENT_LOGOS = [
+  { src: "ntt-data", alt: "株式会社NTTデータ ビジネスシステムズ" },
+  { src: "royce", alt: "ROYCE'" },
+  { src: "revamp", alt: "REVAMP" },
+  { src: "daiichi-life", alt: "第一生命グループ" },
+  { src: "nitten", alt: "NITTEN" },
+  { src: "nihonbashi-marutamaya", alt: "日本橋丸玉屋" },
+  { src: "wako-holdings", alt: "WAKO HOLDINGS" },
+  { src: "win", alt: "株式会社ウイン" },
+  { src: "ota-kenzai", alt: "OTA KENZAI" },
+];
+
 const PAGENAV_LINKS = [
   { href: "#issues", label: "お悩み" },
   { href: "#features", label: "特長" },
@@ -291,6 +304,22 @@ export default function ELearningPage() {
                 <b>18<small>/ 20名</small></b>
                 <i><em /></i>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 導入企業ロゴのスライダー。2周分並べて -50% 送りで継ぎ目なくループさせる */}
+        <section className="el-logos" aria-label="導入企業ロゴ">
+          <p className="el-logos__eyebrow">業種・規模を問わず、<br className="el-sp" />さまざまな企業に導入いただいています</p>
+          <div className="el-logos__viewport">
+            <div className="el-logos__track">
+              {[0, 1].map((loop) =>
+                CLIENT_LOGOS.map((l) => (
+                  <div className="el-logos__item" key={`${loop}-${l.src}`} aria-hidden={loop === 1 ? true : undefined}>
+                    <img src={`/biz/assets/img/logos/${l.src}.webp`} alt={loop === 0 ? l.alt : ""} width={966} height={402} loading="lazy" />
+                  </div>
+                )),
+              )}
             </div>
           </div>
         </section>
