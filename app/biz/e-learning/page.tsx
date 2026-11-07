@@ -101,10 +101,10 @@ const FLOW = [
 ];
 
 const INCLUDED = [
-  "選択プログラムの全レッスン動画（受講期間内は見放題）",
-  "専用LMS（学習管理システム）のアカウント発行",
-  "受講状況・進捗の確認",
-  "学習の進め方をご案内する初回オリエンテーション",
+  { icon: "play", h: "レッスン動画が見放題", d: "選択プログラムの全レッスンを、受講期間内は何度でも視聴できます。" },
+  { icon: "user", h: "専用LMSのアカウント", d: "受講者ごとに学習管理システムのアカウントを発行します。" },
+  { icon: "chart", h: "受講状況・進捗の確認", d: "誰がどこまで進んだかを、管理画面でひと目で把握できます。" },
+  { icon: "chat", h: "初回オリエンテーション", d: "学習の進め方をご案内し、受講者が迷わず始められます。" },
 ];
 
 const FAQS = [
@@ -435,36 +435,46 @@ export default function ELearningPage() {
           </div>
           <div className="el-price">
             <div className="el-price__main">
-              <p className="el-price__name">eラーニング</p>
-              <div className="el-price__rows">
-                <div className="el-price__row">
-                  <span className="el-price__label">導入費用</span>
-                  <p className="el-price__amount">100,000<small>円</small></p>
-                </div>
-                <span className="el-price__plus" aria-hidden="true">＋</span>
-                <div className="el-price__row">
-                  <span className="el-price__label">月額費用</span>
-                  <p className="el-price__amount el-price__amount--main">2,980<small>円／ID</small></p>
-                </div>
-              </div>
-              <p className="el-price__tax">※価格はすべて税抜です。</p>
-              <dl className="el-price__spec">
-                <div><dt>課金単位</dt><dd>受講者1名（1ID）ごとの月額</dd></div>
-                <div><dt>対象人数</dt><dd>1名〜（全社展開可）</dd></div>
-                <div><dt>実施形態</dt><dd>オンライン（専用LMS）</dd></div>
-              </dl>
-              <p className="el-price__note">
-                ID数に応じた総額は、お見積りにてご提示します。
+              <div className="el-price__glow" aria-hidden="true" />
+              <p className="el-price__name">
+                eラーニング<span>PRICE</span>
               </p>
+              <div className="el-price__monthly">
+                <span className="el-price__label">月額費用</span>
+                <p className="el-price__amount">
+                  2,980<small>円</small><em>／ID・月</em>
+                </p>
+                {/* 2,980 ÷ 30日 ≒ 99円 */}
+                <p className="el-price__daily">1日あたり<b>約99円</b>で学び続けられる</p>
+              </div>
+              <div className="el-price__init">
+                <span className="el-price__label el-price__label--sub">導入費用</span>
+                <p>100,000<small>円</small></p>
+              </div>
+              <ul className="el-price__chips">
+                <li>1名から受講可</li>
+                <li>全社展開に対応</li>
+                <li>オンライン（専用LMS）</li>
+              </ul>
+              <p className="el-price__tax">※価格はすべて税抜です。ID数に応じた総額は、お見積りにてご提示します。</p>
             </div>
             <div className="el-price__inc">
               <p className="el-price__inc-h">料金に含まれるもの</p>
-              <ul>
-                {INCLUDED.map((t) => <li key={t}>{t}</li>)}
+              <ul className="el-price__inc-list">
+                {INCLUDED.map((t) => (
+                  <li key={t.h}>
+                    <span className={`el-price__ico el-price__ico--${t.icon}`} aria-hidden="true" />
+                    <p className="el-price__inc-t">{t.h}</p>
+                    <p className="el-price__inc-d">{t.d}</p>
+                  </li>
+                ))}
               </ul>
               <a className="el-price__sim" href="/estimate">
-                見積もりシミュレーターで試算する
-                <span className="ct-dl__card-ico" aria-hidden="true" />
+                <span>
+                  <small>受講人数を入れるだけ</small>
+                  見積もりを試算する
+                </span>
+                <span className="el-price__sim-arrow" aria-hidden="true" />
               </a>
             </div>
           </div>
