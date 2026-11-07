@@ -314,7 +314,6 @@ export default function ELearningPage() {
 
         {/* 導入企業ロゴのスライダー。2周分並べて -50% 送りで継ぎ目なくループさせる */}
         <section className="el-logos" aria-label="導入企業ロゴ">
-          <p className="el-logos__eyebrow">業種・規模を問わず、<br className="el-sp" />さまざまな企業に導入いただいています</p>
           <div className="el-logos__viewport">
             <div className="el-logos__track">
               {[0, 1].map((loop) =>
