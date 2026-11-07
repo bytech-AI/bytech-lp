@@ -144,8 +144,12 @@ const FAQS = [
     a: "eラーニング単体は助成金の対象外です。ハンズオン（1on1）を組み合わせたAI業務効率化研修は人材開発支援助成金の対象となり、1名200,000円の研修を実質50,000円で受講できます（中小企業の場合の概算）。",
   },
   {
+    q: "契約期間の決まりはありますか？",
+    a: "最低契約期間は6ヶ月です。ご契約は10IDから承ります。",
+  },
+  {
     q: "料金はどのように決まりますか？",
-    a: "導入費用100,000円（税抜）と、受講者1名（1ID）あたり月額2,980円です。ご契約は10IDから承ります。ID数に応じた総額は、お見積りにてご提示します。",
+    a: "導入費用100,000円（税抜）と、受講者1名（1ID）あたり月額2,980円です。ご契約は10ID・6ヶ月から承ります。ID数と期間に応じた総額は、お見積りにてご提示します。",
   },
 ];
 
@@ -484,6 +488,7 @@ export default function ELearningPage() {
               </div>
               <ul className="el-price__chips">
                 <li>10IDからご契約可</li>
+                <li>最低契約期間 6ヶ月</li>
                 <li>全社展開に対応</li>
                 <li>オンライン（専用LMS）</li>
               </ul>
@@ -491,7 +496,7 @@ export default function ELearningPage() {
                 まずは無料トライアルで試す
                 <span className="el-price__trial-arrow" aria-hidden="true" />
               </a>
-              <p className="el-price__tax">※ID数に応じた総額は、お見積りにてご提示します。</p>
+              <p className="el-price__tax">※ご契約は10ID・6ヶ月から承ります。ID数と期間に応じた総額は、お見積りにてご提示します。</p>
             </div>
             <div className="el-price__inc">
               <p className="el-price__inc-h">料金に含まれるもの</p>
