@@ -19,6 +19,8 @@ export const metadata = buildCourseMetadata({
 });
 
 const DOC_HREF = "/doc-e";
+// 無料トライアルの申込先。専用フォームができるまでは無料相談の予約ページで受ける
+const TRIAL_HREF = "/counseling";
 
 // 各プログラムのレッスン数・視聴時間（各研修ページのスペック欄と揃える。更新時は両方直す）
 const PROGRAM_STATS: Record<string, { lessons: number; hours: string }> = {
@@ -62,7 +64,7 @@ const ISSUES = [
   {
     h: "研修の日程調整と\nコストが重い",
     d: "拠点や部署が分かれていて、全員を集めた研修は日程調整だけで数か月かかる。講師や会場の費用も大きい。",
-    a: "動画で各自のペースで学べるため、講師・会場・日程調整が不要。1名から始められます。",
+    a: "動画で各自のペースで学べるため、講師・会場・日程調整が不要。10IDから始められます。",
   },
 ];
 
@@ -121,8 +123,8 @@ const FAQS = [
     a: "eラーニング単体は教材内で完結する自習型です。チャットでの質問や講師との面談が必要な場合は、ハンズオン（1on1）を組み合わせたAI業務効率化研修／AI業務自動化研修をご検討ください。",
   },
   {
-    q: "受講人数に上限はありますか？",
-    a: "1名から受講でき、チーム・組織単位での受講や全社展開にも対応しています。人数や体制に応じて最適なプランをご提案します。",
+    q: "何IDから契約できますか？上限はありますか？",
+    a: "ご契約は10IDからです。上限はなく、チーム・組織単位での受講や全社展開にも対応しています。人数や体制に応じて最適なプランをご提案します。",
   },
   {
     q: "助成金は使えますか？",
@@ -130,7 +132,7 @@ const FAQS = [
   },
   {
     q: "料金はどのように決まりますか？",
-    a: "導入費用100,000円と、受講者1名（1ID）あたり月額2,980円です（いずれも税抜）。ID数に応じた総額は、お見積りにてご提示します。",
+    a: "導入費用100,000円（税抜）と、受講者1名（1ID）あたり月額2,980円です。ご契約は10IDから承ります。ID数に応じた総額は、お見積りにてご提示します。",
   },
 ];
 
@@ -207,8 +209,8 @@ function Cta({ light = false }: { light?: boolean }) {
         資料をダウンロード
         <span className="ct-hero__cta-arrow" aria-hidden="true" />
       </a>
-      <a className="el-cta__btn el-cta__btn--talk" href="/counseling">
-        無料で相談する
+      <a className="el-cta__btn el-cta__btn--talk" href={TRIAL_HREF}>
+        無料トライアル
       </a>
     </div>
   );
@@ -362,7 +364,7 @@ export default function ELearningPage() {
             <div className="el-num"><span>プログラム数</span><b>{programs.length}</b><small>種類</small></div>
             <div className="el-num"><span>レッスン数</span><b>{lessonsFloor}</b><small>本以上</small></div>
             <div className="el-num"><span>1レッスン</span><b>数</b><small>分〜</small></div>
-            <div className="el-num"><span>受講人数</span><b>1</b><small>名から</small></div>
+            <div className="el-num"><span>ご契約</span><b>10</b><small>IDから</small></div>
           </div>
         </section>
 
@@ -449,14 +451,18 @@ export default function ELearningPage() {
               </div>
               <div className="el-price__init">
                 <span className="el-price__label el-price__label--sub">導入費用</span>
-                <p>100,000<small>円</small></p>
+                <p>100,000<small>円（税抜）</small></p>
               </div>
               <ul className="el-price__chips">
-                <li>1名から受講可</li>
+                <li>10IDからご契約可</li>
                 <li>全社展開に対応</li>
                 <li>オンライン（専用LMS）</li>
               </ul>
-              <p className="el-price__tax">※価格はすべて税抜です。ID数に応じた総額は、お見積りにてご提示します。</p>
+              <a className="el-price__trial" href={TRIAL_HREF}>
+                まずは無料トライアルで試す
+                <span className="el-price__trial-arrow" aria-hidden="true" />
+              </a>
+              <p className="el-price__tax">※ID数に応じた総額は、お見積りにてご提示します。</p>
             </div>
             <div className="el-price__inc">
               <p className="el-price__inc-h">料金に含まれるもの</p>
@@ -491,7 +497,7 @@ export default function ELearningPage() {
               </div>
               <div className="el-compare__row" role="row">
                 <span role="rowheader">料金</span>
-                <span role="cell">導入100,000円＋月額2,980円／ID</span>
+                <span role="cell">導入100,000円（税抜）＋月額2,980円／ID</span>
                 <span role="cell" className="is-feature">200,000円〜／名</span>
               </div>
               <div className="el-compare__row" role="row">
@@ -557,7 +563,7 @@ export default function ELearningPage() {
         {/* ============ 中間CTA ============ */}
         <section className="el-band">
           <div className="el-band__inner">
-            <p className="el-band__title">まずは資料で、料金とプログラムをご確認ください</p>
+            <p className="el-band__title">まずは資料と無料トライアルで、使い心地をご確認ください</p>
             <p className="el-band__desc">eラーニング・セミナー・ハンズオン・ワークショップの違いと料金目安を、1冊にまとめています。</p>
             <Cta light />
           </div>
