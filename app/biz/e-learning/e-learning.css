@@ -290,7 +290,7 @@
 }
 .el-price__monthly { margin-top: clamp(20px, 2.6vw, 30px); }
 .el-price__label {
-  display: inline-block; padding: 4px 12px; border-radius: 999px;
+  display: inline-block; padding: 4px 12px; border-radius: 999px; white-space: nowrap;
   background: #ffd65c; color: #0d2357; font-size: 12px; font-weight: 900; letter-spacing: .06em;
 }
 .el-price__label--sub { background: rgba(255, 255, 255, .16); color: #fff; }
@@ -384,7 +384,8 @@
 @media (max-width: 480px) {
   .el-price__inc-list { grid-template-columns: 1fr; }
   .el-price__sim { font-size: 14px; padding-left: 20px; }
-  .el-price__init p { font-size: 24px; }
+  .el-price__init { padding: 14px 16px; }
+  .el-price__init p { font-size: 22px; white-space: nowrap; }
 }
 
 /* ステップアップ比較 */
