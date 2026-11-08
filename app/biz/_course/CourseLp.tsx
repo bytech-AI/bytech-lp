@@ -16,7 +16,15 @@ export type Lesson = { no: number; title: string; ch: number; time: string | nul
 export type SpecItem = { ja: string; value: ReactNode };
 export type AboutCard = { no: string; h: string; thumb?: string; d: string };
 export type RecCard = { h: string; d: string };
-export type Plan = { name: string; amount: string; unit: string };
+export type Plan = {
+  name: string;
+  amount: string;
+  unit: string;
+  /** 金額の下に出す補足（初期費用・契約条件など） */
+  note?: string;
+  /** 詳細ページ。あればカードの下にリンクを出す */
+  href?: string;
+};
 export type Faq = { q: string; a: string };
 export type HeroTool = { logo: string; alt: string; w: number; h: number };
 
@@ -128,7 +136,7 @@ export const DEFAULT_PLANS = {
     { name: "AI効率化研修", amount: "200,000", unit: "円〜／名" },
     { name: "AI自動化研修", amount: "300,000", unit: "円〜／名" },
   ],
-  single: { name: "eラーニング", amount: "100,000", unit: "円〜／名" },
+  single: { name: "eラーニング", amount: "2,980", unit: "円／月・1ID（税抜）", note: "導入費用100,000円（税抜）・10ID／6ヶ月から。全プログラム見放題", href: "/e-learning" },
 };
 
 export const DEFAULT_SUBSIDY = {
@@ -597,6 +605,12 @@ export function CourseLp({ data }: { data: CourseData }) {
               <p className="ct-price__amount">
                 {plans.single.amount}<small>{plans.single.unit}</small>
               </p>
+              {plans.single.note && <p className="ct-price__note">{plans.single.note}</p>}
+              {plans.single.href && (
+                <Link href={plans.single.href} className="ct-price__link">
+                  {plans.single.name}の詳細を見る →
+                </Link>
+              )}
             </div>
           </div>
         </section>}

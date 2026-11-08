@@ -566,6 +566,8 @@ html { scroll-behavior: smooth; }
 .ct-price__name { margin: 0 0 10px; font-size: 15px; font-weight: 800; color: #204aa8; }
 .ct-price__amount { font: 900 clamp(26px,4vw,38px)/1 "Futura", "Futura Medium", var(--font-jost), sans-serif; }
 .ct-price__amount small { font-size: 14px; font-weight: 700; }
+.ct-price__note { margin: 12px 0 0; font-size: 13px; line-height: 1.7; color: #4a5568; }
+.ct-price__link { display: inline-block; margin-top: 12px; font-size: 14px; font-weight: 700; color: #204aa8; text-decoration: underline; }
 
 /* 「さらに」吹き出し（トップ/ の .pl-order__more を移植・背景は/CTAのピンク） */
 .ct-bubble { display: block; width: fit-content; position: relative; margin: 0 auto 20px; padding: 6px 24px; background: linear-gradient(135deg, #e83e8c, #d6266f); color: #fff; border-radius: 999px; text-align: center; font-size: clamp(16px, 2vw, 20px); font-weight: 800; letter-spacing: .08em; }

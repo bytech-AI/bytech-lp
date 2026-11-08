@@ -11,10 +11,11 @@ import { COURSES } from "../_course/courses";
 // 送信後はformrun側の完了画面へ遷移する（管理画面のリダイレクト先を /estimate/thanks に設定すること）。
 const ESTIMATE_ACTION = "https://form.run/api/v1/r/x4332ymk27jj5z0fd8z7fu4t";
 
-// 研修形式と単価。eラーニングは受講者1名あたり、他形式は1回あたりの価格。
+// 研修形式と単価。eラーニングは1IDあたりの月額（導入費用 setup・最低ID数 minQty・最低契約月数 months を足して計算）、
+// AI効率化研修・AI自動化研修は受講者1名あたり、他形式は1回あたりの価格。
 // AI効率化研修・AI自動化研修以外は助成金対象外。
 const PLANS = [
-  { name: "eラーニング", unit: 100000, billingUnit: "名", subsidized: null, subsidyEligible: false },
+  { name: "eラーニング", unit: 2980, billingUnit: "ID・月", setup: 100000, minQty: 10, months: 6, subsidized: null, subsidyEligible: false },
   { name: "セミナー", unit: 200000, billingUnit: "回", subsidized: null, subsidyEligible: false },
   { name: "ハンズオン", unit: 300000, billingUnit: "回", subsidized: null, subsidyEligible: false },
   { name: "ワークショップ", unit: 500000, billingUnit: "回", subsidized: null, subsidyEligible: false },
@@ -165,7 +166,7 @@ const FORM_HTML = `
       <p class="es-result__message">内容を確認のうえ、担当よりメールにてご連絡します。</p>
     </div>
     <dl class="es-summary" id="esSummary"></dl>
-    <p class="es-note">※研修内容や人数、カリキュラムのカスタマイズにより費用は変動します。助成金の適用可否・金額は企業規模や条件により異なります。</p>
+    <p class="es-note">※研修内容や人数、カリキュラムのカスタマイズにより費用は変動します。助成金の適用可否・金額は企業規模や条件により異なります。eラーニングは導入費用100,000円＋1IDあたり月額2,980円（いずれも税抜）を、10ID・6ヶ月から計算しています。</p>
     <!-- 選択内容の隠しフィールド。個別フィールドはformrun管理画面で同名登録が必要（未登録だと通知に載らない・doc-aと同様）。
          「お問い合わせ」はフォーム既定の必須項目のため、未登録でも全内容が届くよう選択内容のまとめを入れる。 -->
     <input type="hidden" name="研修コース" id="esHidCourse">
@@ -571,6 +572,9 @@ export default function EstimatePage() {
                   {
                     unit: p.unit,
                     billingUnit: p.billingUnit,
+                    setup: "setup" in p ? p.setup : 0,
+                    minQty: "minQty" in p ? p.minQty : 1,
+                    months: "months" in p ? p.months : 1,
                     subsidized: p.subsidized,
                     subsidyEligible: p.subsidyEligible,
                   },
@@ -692,7 +696,8 @@ export default function EstimatePage() {
     var conf=PLAN_CONF[state.plan];
     var priceText='',priceHtml='',subsidyText='';
     if(conf){
-      var total=conf.unit*(conf.billingUnit==='名'?p:1);
+      var qty=conf.billingUnit==='回'?1:Math.max(p,conf.minQty);
+      var total=conf.setup+conf.unit*qty*conf.months;
       priceHtml=fmt(total)+'<small>円〜</small>';
       priceText=fmt(total)+'円〜';
       if(!conf.subsidyEligible){
