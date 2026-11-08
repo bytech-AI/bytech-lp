@@ -178,9 +178,15 @@ export default function ELearningTrialPage() {
 
             <div className="tr-card">
               <p className="tr-card__title">お申し込みフォーム</p>
-              <p className="tr-notice">
-                同業他社からのお申し込みが多いため、ご入力いただいた情報をもとに審査のうえでトライアルをご案内しています。審査の結果、ご希望に添えない場合がございます。あらかじめご了承ください。
-              </p>
+              <div className="tr-notice">
+                <span className="tr-notice__ico" aria-hidden="true">!</span>
+                <div>
+                  <p className="tr-notice__h">お申し込みは審査制です</p>
+                  <p className="tr-notice__d">
+                    同業他社からのお申し込みが多いため、ご入力いただいた情報をもとに審査のうえでご案内しています。審査の結果、ご希望に添えない場合がございます。
+                  </p>
+                </div>
+              </div>
               <div dangerouslySetInnerHTML={{ __html: FORM_HTML }} />
             </div>
           </div>
