@@ -365,8 +365,6 @@ const course: CourseData = {
       },
     ],
   },
-  noPlans: true,
-  noSubsidy: true,
   courseModes: ["Online"],
   faqs: COURSE_FAQS["leader-manager-training"],
 };
