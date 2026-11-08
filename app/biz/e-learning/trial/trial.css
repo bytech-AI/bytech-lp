@@ -30,6 +30,7 @@
 /* 右：フォーム */
 .tr-card { padding: clamp(24px, 3.4vw, 44px); background: #fff; border: 1px solid #e2e8f1; border-radius: 20px; }
 .tr-card__title { margin: 0 0 22px; font-size: 20px; font-weight: 900; color: #1c2635; }
+.tr-notice { margin: -8px 0 24px; padding: 14px 16px; background: #f7f9fc; border: 1px solid #e2e8f1; border-left: 3px solid #1c45a3; border-radius: 8px; font-size: 13px; line-height: 1.8; color: #5a6b83; }
 .tr-form { position: relative; }
 .tr-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
 .tr-field { margin-bottom: 20px; }

@@ -22,7 +22,8 @@ export default function ELearningTrialThanksPage() {
             <h1 className="tr-title">無料トライアルの<br />お申し込みを受け付けました</h1>
             <p className="tr-lead">
               お申し込みいただき、ありがとうございます。<br />
-              担当者より、ご入力いただいたメールアドレス宛にトライアルの開始方法をご案内します。
+              お申し込み内容を確認のうえ、担当者よりご入力いただいたメールアドレス宛にトライアルの開始方法をご案内します。<br />
+              ※審査の結果、ご希望に添えない場合がございます。
             </p>
             <div className="tr-thanks__links">
               <Link className="tr-submit tr-thanks__btn" href="/e-learning" prefetch={false}>

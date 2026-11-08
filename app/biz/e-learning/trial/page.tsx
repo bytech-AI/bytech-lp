@@ -30,7 +30,7 @@ const PROGRAM_OPTIONS = COURSES.map((c) => c.name.replace(/研修$/, ""));
 const POINTS = [
   { h: "全プログラムを体験", d: "ChatGPT・Gemini・Copilot・Claudeなど、すべてのプログラムのレッスン動画をご覧いただけます。" },
   { h: "管理画面も確認できる", d: "受講者の進捗を確認する学習管理画面の使い勝手も、導入前にお確かめいただけます。" },
-  { h: "担当者がご案内", d: "お申し込み後、担当者からトライアルの開始方法をメールでご案内します。" },
+  { h: "審査後に担当者がご案内", d: "お申し込み内容を確認のうえ、担当者からトライアルの開始方法をメールでご案内します。" },
 ];
 
 const FORM_HTML = `
@@ -178,6 +178,9 @@ export default function ELearningTrialPage() {
 
             <div className="tr-card">
               <p className="tr-card__title">お申し込みフォーム</p>
+              <p className="tr-notice">
+                同業他社からのお申し込みが多いため、ご入力いただいた情報をもとに審査のうえでトライアルをご案内しています。審査の結果、ご希望に添えない場合がございます。あらかじめご了承ください。
+              </p>
               <div dangerouslySetInnerHTML={{ __html: FORM_HTML }} />
             </div>
           </div>
