@@ -2,18 +2,14 @@ import { CourseLp, type CourseData } from "../_course/CourseLp";
 import { COURSE_FAQS } from "../_course/courseFaqs";
 import { buildCourseMetadata } from "../_course/courseMetadata";
 
-// 料金・助成金・研修後サポートが未確定のため noindex・sitemap 未登録（courses.ts とトップには掲載済み）。
-export const metadata = {
-  ...buildCourseMetadata({
-    title: "リーダー・マネージャー向けAI研修｜バイテック法人AI研修",
-    description:
-      "計画立案から部下の育成まで、実案件でAIを使ってチームを前に進める力を身につける管理職向けの法人研修。Gemini、Microsoft Copilot、ChatGPT、Claudeに対応。",
-    socialDescription:
-      "計画立案から部下の育成まで、実案件でAIを使ってチームを前に進める力を身につける管理職向けの法人研修。",
-    path: "/leader-manager-training",
-  }),
-  robots: "noindex",
-};
+export const metadata = buildCourseMetadata({
+  title: "リーダー・マネージャー向けAI研修｜バイテック法人AI研修",
+  description:
+    "計画立案から部下の育成まで、実案件でAIを使ってチームを前に進める力を身につける管理職向けの法人研修。Gemini、Microsoft Copilot、ChatGPT、Claudeに対応。",
+  socialDescription:
+    "計画立案から部下の育成まで、実案件でAIを使ってチームを前に進める力を身につける管理職向けの法人研修。",
+  path: "/leader-manager-training",
+});
 
 const course: CourseData = {
   slug: "leader-manager-training",
