@@ -155,20 +155,20 @@
 }
 
 /* ============ 導入企業ロゴ ============ */
-.el-logos { padding: 26px 0; background: #fff; overflow: hidden; border-bottom: 1px solid #eef1f6; }
+.el-logos { padding: 12px 0; background: #fff; overflow: hidden; border-bottom: 1px solid #eef1f6; }
 .el-logos__viewport {
   overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 .el-logos__track { display: flex; width: max-content; animation: el-logo-scroll 36s linear infinite; }
-.el-logos__item { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 168px; height: 76px; margin: 0 10px; }
-.el-logos__item img { display: block; max-width: 100%; max-height: 88%; width: auto; height: auto; object-fit: contain; }
+.el-logos__item { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 168px; height: 60px; margin: 0 10px; }
+.el-logos__item img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
 @keyframes el-logo-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .el-logos__track { animation: none; } }
 @media (max-width: 600px) {
-  .el-logos { padding: 18px 0; }
-    .el-logos__item { width: 120px; height: 56px; margin: 0 6px; }
+  .el-logos { padding: 8px 0; }
+    .el-logos__item { width: 120px; height: 46px; margin: 0 6px; }
   .el-logos__track { animation-duration: 28s; }
 }
 
