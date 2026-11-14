@@ -9,9 +9,9 @@ import "./trial.css";
 // eラーニング無料トライアルの申込ページ。
 // フォームは formrun SDK の自前フォーム（/doc-a・/counseling と同方式。class/action/method は formrun 指定のため変更不可）。
 // React管理外(dangerouslySetInnerHTML)にして SDK とハイドレーションの競合を避ける。
-// ※ formrun 管理画面でトライアル用フォームを作り、TRIAL_FORM_ACTION を差し替えること。
+// formrun のトライアル用フォーム（2026-11-14 作成）。
 //   完了後のリダイレクト先は /e-learning/trial/thanks に設定する。
-const TRIAL_FORM_ACTION = "https://form.run/api/v1/r/REPLACE_WITH_TRIAL_FORM_ID";
+const TRIAL_FORM_ACTION = "https://form.run/api/v1/r/lsnbni2ggg3bgt4lsk8krruz";
 
 export const metadata = {
   ...buildCourseMetadata({
