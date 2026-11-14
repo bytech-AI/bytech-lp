@@ -256,7 +256,6 @@ export function BizFooter() {
               {COURSES.map((c) => (
                 <li key={c.slug}><a href={`/${c.slug}`}>{c.name}</a></li>
               ))}
-              <li><a href="/e-learning">eラーニング</a></li>
             </ul>
           </div>
           <div>
