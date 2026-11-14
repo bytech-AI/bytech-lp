@@ -5,6 +5,7 @@ import { buildCourseMetadata } from "../../_course/courseMetadata";
 import "../../_course/course.css";
 import "../e-learning.css";
 import "./trial.css";
+import { Devices } from "../Devices";
 
 // eラーニング無料トライアルの申込ページ。
 // フォームは formrun SDK の自前フォーム（/doc-a・/counseling と同方式。class/action/method は formrun 指定のため変更不可）。
@@ -204,6 +205,9 @@ export default function ELearningTrialPage() {
               <p className="tr-lead">
                 導入前に、レッスン動画の内容と学習管理画面の使い勝手をお確かめいただけます。フォームにご入力のうえ、お申し込みください。
               </p>
+              <div className="tr-mock">
+                <Devices programs={COURSES} />
+              </div>
               <ul className="tr-points">
                 {POINTS.map((p, i) => (
                   <li key={p.h}>
