@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>法人向けAIeラーニング サービス概要｜全19スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* eラーニング サービス概要資料（ebook-39）。内容は biz.bytech.jp/e-learning（app/biz/e-learning/page.tsx）に合わせる。
+     スタイルは研修コース紹介資料（ebook-05〜12・38）と共通。四角要素の角丸なし・円とピルのみ角丸。
+     特長・AI機能の図版はLPの画面を撮影したもの（assets/feat・assets/ai）。LPを直したら撮り直すこと。 */
+  :root {
+    --blue: #2c5c9c; --blue-deep: #1a2e50; --blue-bright: #1a6fb5; --blue-pale: #8fb0d8;
+    --ink: #2a2f3a; --line: #e3e8ef; --amber: #f0b429; --tint: #eef4fb;
+    --acc: #2f6fd6; --acc-deep: #163a86; --acc-tint: #e8f0fc;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f4f6f8; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; color: var(--ink); padding: 48px 0 96px; }
+  .note { max-width: 1120px; margin: 0 auto 28px; font-size: 13px; font-weight: 700; color: #8a93a3; }
+  .en { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; }
+
+  .deck { display: flex; flex-direction: column; gap: 34px; align-items: center; counter-reset: pg -1; }
+  .slide-shell { width: 1120px; counter-increment: pg; }
+  .slide-shell figcaption { font-size: 12px; font-weight: 700; color: #8a93a3; margin: 8px 2px 0; letter-spacing: .04em; }
+  .slide { width: 1280px; height: 720px; transform: scale(0.875); transform-origin: top left; background: #fff; position: relative; overflow: hidden; }
+  .slide-shell .clip { height: 630px; overflow: hidden; border-radius: 0; box-shadow: 0 2px 10px rgba(26,35,48,.08); }
+
+  /* ===== 共通 ===== */
+  .s-body { position: absolute; inset: 0; padding: 44px 64px; z-index: 1; }
+  .s-eyebrow { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; display: flex; align-items: center; gap: 9px; font-size: 15.5px; font-weight: 700; color: var(--blue-pale); letter-spacing: .02em; }
+  .s-eyebrow::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--acc); }
+  .s-title { font-size: 34px; font-weight: 800; color: #1a2330; letter-spacing: .02em; margin-top: 8px; line-height: 1.5; }
+  .s-title b { color: var(--acc); }
+  .s-title i { font-style: normal; color: var(--blue-bright); }
+  .s-logo { position: absolute; top: 46px; right: 64px; height: 34px; }
+  .s-lead { font-size: 16.5px; font-weight: 600; line-height: 1.85; color: #4a5568; margin-top: 10px; }
+  .s-lead b { color: var(--acc); font-weight: 800; }
+  .s-foot { position: absolute; left: 64px; bottom: 22px; font-size: 12.5px; color: #8a93a3; z-index: 5; }
+  .s-num { position: absolute; right: 0; bottom: 0; width: 72px; height: 72px; background: var(--blue); border-radius: 72px 0 0 0; color: #fff; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 14px; font-weight: 700; display: flex; align-items: flex-end; justify-content: flex-end; padding: 0 16px 11px 0; z-index: 5; }
+  .s-num::before { content: counter(pg); }
+  .blue-bg { background: linear-gradient(135deg, #1c3a6b 0%, var(--blue) 46%, #3a76c4 100%); color: #fff; }
+  svg.waves { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .band { display: flex; align-items: center; gap: 11px; background: var(--acc-tint); border: 1.5px solid var(--acc); padding: 12px 20px; font-size: 14.5px; font-weight: 800; color: var(--acc-deep); }
+  .band::before { content: "✓"; flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; background: var(--acc); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+
+  /* ===== 表紙 ===== */
+  .cover .badge-row { position: absolute; top: 62px; left: 64px; display: flex; align-items: center; gap: 16px; }
+  .cover .badge { background: var(--amber); color: #4a3605; font-size: 16px; font-weight: 800; padding: 10px 18px; }
+  .cover .badge-note { font-size: 20px; font-weight: 700; padding-bottom: 12px; border-bottom: 2px solid rgba(255,255,255,.85); letter-spacing: .04em; }
+  .cover .sub { position: absolute; left: 66px; top: 228px; max-width: 620px; font-size: 21px; font-weight: 700; letter-spacing: .03em; line-height: 1.65; }
+  .cover .title { position: absolute; left: 62px; top: 330px; max-width: 640px; font-weight: 800; letter-spacing: .03em; line-height: 1.2; }
+  .cover .title small { display: block; font-size: 38px; letter-spacing: .08em; margin-top: 10px; font-weight: 700; }
+  .cover .date { position: absolute; left: 66px; top: 600px; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 15px; font-weight: 600; letter-spacing: .18em; opacity: .8; }
+  .cover .logo { position: absolute; right: 64px; bottom: 48px; height: 44px; }
+  .cover .tool-logo { position: absolute; right: 70px; top: 318px; width: 470px; height: 190px; object-fit: contain; object-position: right center; }
+  /* 暗色のロゴは紺の表紙で沈むため白一色に転換して置く */
+  .cover .tool-logo.mono { filter: brightness(0) invert(1); }
+
+  /* ===== 目次 ===== */
+  .toc { margin-top: 26px; display: flex; flex-direction: column; gap: 11px; max-width: 830px; }
+  .toc .row { display: flex; align-items: center; gap: 20px; font-size: 19px; font-weight: 800; color: #1a2330; background: #fff; border: 1px solid #d9e1ec; border-radius: 999px; padding: 10px 16px; }
+  .toc .no { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; flex: 0 0 auto; width: 42px; height: 42px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; }
+
+  /* ===== 3カード（研修とは） ===== */
+  .card3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 22px; }
+  .fc { background: #fff; border: 1px solid var(--line); overflow: hidden; display: flex; flex-direction: column; }
+  .fc img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .fc .bd { padding: 14px 18px 16px; }
+  .fc .no { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 13px; font-weight: 800; color: var(--acc); letter-spacing: .06em; }
+  .fc .h { font-size: 17px; font-weight: 800; color: #1a2330; line-height: 1.45; margin-top: 3px; }
+  .fc .d { font-size: 12.6px; font-weight: 500; color: #4a5568; line-height: 1.75; margin-top: 8px; }
+
+  /* ===== 4カード（おすすめ） ===== */
+  .card4 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; margin-top: 24px; }
+  .rc { background: #fff; border: 1px solid var(--line); border-left: 5px solid var(--acc); padding: 16px 20px; }
+  .rc .h { display: flex; align-items: flex-start; gap: 10px; font-size: 17px; font-weight: 800; color: #1a2330; line-height: 1.5; }
+  .rc .h::before { content: "✓"; flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; background: var(--acc); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; margin-top: 2px; }
+  .rc .d { font-size: 13px; font-weight: 500; color: #4a5568; line-height: 1.75; margin-top: 7px; padding-left: 32px; }
+
+  /* ===== スペック＋ステップ ===== */
+  .spec4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 24px; }
+  .sp4 { background: var(--acc-tint); border: 1px solid rgba(0,0,0,.06); padding: 16px 14px; text-align: center; }
+  .sp4 .k { font-size: 13px; font-weight: 800; color: var(--acc-deep); }
+  .sp4 .v { font-size: 19px; font-weight: 800; color: #1a2330; margin-top: 5px; line-height: 1.3; }
+  .sp4 .v b { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 32px; font-weight: 800; color: var(--acc); padding: 0 2px; }
+  .stepN { display: grid; align-items: stretch; margin-top: 22px; gap: 0; }
+  .st { background: #fff; border: 1px solid var(--line); padding: 0 0 16px; }
+  .st .hd { background: var(--blue); color: #fff; padding: 9px 12px; display: flex; align-items: center; gap: 9px; }
+  .st .hd .n { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 11.5px; font-weight: 800; border: 1.5px solid rgba(255,255,255,.75); padding: 3px 8px; white-space: nowrap; }
+  .st .hd .t { font-size: 15.5px; font-weight: 800; }
+  .st .li { font-size: 12.4px; font-weight: 700; color: #2a3446; padding: 8px 14px 0 26px; position: relative; line-height: 1.5; }
+  .st .li::before { content: ""; position: absolute; left: 14px; top: 14px; width: 6px; height: 6px; border-radius: 50%; background: var(--acc); }
+  .st-arrow { display: flex; align-items: center; justify-content: center; }
+  .st-arrow::before { content: ""; width: 13px; height: 22px; background: var(--blue-pale); clip-path: polygon(0 0, 52% 0, 100% 50%, 52% 100%, 0 100%, 46% 50%); }
+
+  /* ===== カリキュラム ===== */
+  .cur-hd { display: flex; align-items: center; gap: 16px; margin-top: 22px; }
+  .cur-hd .n { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; background: var(--acc); color: #fff; font-size: 15px; font-weight: 800; padding: 8px 16px; letter-spacing: .06em; white-space: nowrap; }
+  .cur-hd .t { font-size: 24px; font-weight: 800; color: #1a2330; }
+  .cur-hd .prog { margin-left: auto; display: flex; align-items: center; gap: 7px; }
+  .cur-hd .prog i { width: 36px; height: 7px; background: #e3eaf2; }
+  .cur-hd .prog i.on { background: var(--acc); }
+  .cur-hd .prog span { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 12.5px; font-weight: 700; color: #8a93a3; margin-left: 5px; }
+  .cur { display: grid; gap: 22px; margin-top: 20px; }
+  .cur.c2 { grid-template-columns: 1fr 1fr; max-width: 820px; }
+  .cur.c3 { grid-template-columns: 1fr 1fr 1fr; }
+  .cur.c4 { grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .cc { background: #fff; border: 1px solid var(--line); overflow: hidden; display: flex; flex-direction: column; }
+  .cc img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-bottom: 1px solid var(--line); }
+  .cc .bd { padding: 13px 16px 16px; flex: 1; }
+  .cc .cat { display: inline-block; font-size: 11.5px; font-weight: 800; color: var(--acc-deep); background: var(--acc-tint); padding: 4px 10px; }
+  .cc .h { font-size: 16px; font-weight: 800; color: #1a2330; line-height: 1.5; margin-top: 8px; }
+  .cc .tg { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .cc .tg span { font-size: 10.8px; font-weight: 700; color: var(--blue); background: var(--tint); border-radius: 999px; padding: 3px 9px; }
+  .cc .d { font-size: 12.2px; font-weight: 500; color: #4a5568; line-height: 1.7; margin-top: 9px; }
+  .cur.c4 .cc .h { font-size: 15px; }
+  .cur.c4 .cc .d { font-size: 11.6px; }
+
+  /* ===== レッスン一覧 ===== */
+  table.ls { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 20px; }
+  .ls th { background: var(--blue); color: #fff; font-size: 13.5px; font-weight: 800; padding: 10px 12px; text-align: left; }
+  .ls th:nth-child(1), .ls th:nth-child(3), .ls th:nth-child(4) { text-align: center; }
+  .ls td { font-size: 12.8px; font-weight: 500; color: #2a3446; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  .ls tr:nth-child(even) td { background: #f7f9fc; }
+  .ls td.no { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; text-align: center; font-weight: 800; color: var(--acc); width: 54px; }
+  .ls td.ti { font-weight: 800; color: #1a2330; width: 320px; }
+  .ls td.ch, .ls td.tm { text-align: center; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-weight: 700; width: 92px; }
+  .ls td.bo { font-size: 11.8px; color: #4a5568; line-height: 1.55; }
+
+  /* ===== 料金プラン ===== */
+  .plan3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 22px; margin-top: 26px; }
+  .pl { background: #fff; border: 1.5px solid var(--line); }
+  .pl.main { border-color: var(--acc); }
+  .pl .hd { background: #f1f3f7; color: #1a2330; font-size: 19px; font-weight: 800; padding: 13px 18px; text-align: center; }
+  .pl.main .hd { background: var(--acc); color: #fff; }
+  .pl .bd { padding: 20px 20px 22px; text-align: center; }
+  .pl .v { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 33px; font-weight: 800; color: #1a2330; line-height: 1.1; }
+  .pl .v small { font-family: "Noto Sans JP", sans-serif; font-size: 14px; font-weight: 700; color: #6b7789; margin-left: 3px; }
+  .pl .tax { font-size: 11.5px; font-weight: 600; color: #8a93a3; margin-top: 6px; }
+  .pl .d { font-size: 13px; font-weight: 500; color: #4a5568; line-height: 1.8; margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--line); text-align: left; }
+  .pl .sub { display: inline-block; font-size: 11.5px; font-weight: 800; color: var(--acc-deep); background: var(--acc-tint); padding: 4px 12px; margin-top: 12px; }
+
+  /* ===== 助成金 ===== */
+  .sub2 { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 26px; }
+  .sb { border: 1.5px solid var(--acc); }
+  .sb .hd { background: var(--acc); color: #fff; font-size: 18px; font-weight: 800; padding: 12px 18px; text-align: center; }
+  .sb .bd { padding: 20px; display: grid; grid-template-columns: 1fr 30px 1fr; align-items: center; gap: 8px; }
+  .sb .c { text-align: center; padding: 14px 8px; }
+  .sb .c.g { background: #f1f3f7; }
+  .sb .c.b { background: var(--acc-tint); border: 1.5px solid var(--acc); }
+  .sb .k { font-size: 11.5px; font-weight: 800; color: #6b7789; }
+  .sb .c.b .k { color: var(--acc-deep); }
+  .sb .v { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 27px; font-weight: 800; color: #1a2330; line-height: 1.15; margin-top: 3px; }
+  .sb .v small { font-family: "Noto Sans JP", sans-serif; font-size: 12px; font-weight: 700; color: #6b7789; }
+  .sb .arr { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 22px; font-weight: 800; color: var(--acc); text-align: center; }
+  .sup5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 26px; }
+  .sup5 div { background: var(--tint); padding: 14px 8px; text-align: center; font-size: 13.5px; font-weight: 800; color: var(--blue); line-height: 1.45; }
+
+  /* ===== 流れ ===== */
+  .flow { display: grid; grid-template-columns: 1fr 22px 1fr 22px 1fr 22px 1fr 22px 1fr; gap: 6px; margin-top: 30px; align-items: stretch; }
+  .fs { background: #fff; border: 1px solid var(--line); padding: 18px 14px 16px; text-align: center; position: relative; }
+  .fs .n { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; width: 40px; height: 40px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; margin: 0 auto; }
+  .fs .t { font-size: 16.5px; font-weight: 800; color: #1a2330; margin-top: 10px; line-height: 1.4; min-height: 46px; }
+  .fs .d { font-size: 12.3px; font-weight: 500; color: #4a5568; line-height: 1.7; margin-top: 6px; text-align: left; }
+  .fs .opt { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); font-size: 10.5px; font-weight: 800; background: var(--amber); color: #4a3605; border-radius: 999px; padding: 3px 10px; white-space: nowrap; }
+  .farr { display: flex; align-items: center; justify-content: center; }
+  .farr::before { content: ""; width: 14px; height: 24px; background: var(--blue-pale); clip-path: polygon(0 0, 52% 0, 100% 50%, 52% 100%, 0 100%, 46% 50%); }
+  .cta { margin-top: 26px; padding: 26px 38px; color: #fff; display: flex; align-items: center; justify-content: space-between; gap: 30px; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--acc-deep) 0%, var(--acc) 70%); }
+  .cta .l .t { font-size: 20px; font-weight: 800; }
+  .cta .l .d { font-size: 13.5px; font-weight: 500; opacity: .94; margin-top: 6px; }
+  .cta .btn { flex: 0 0 auto; background: #fff; color: var(--acc-deep); border-radius: 999px; padding: 15px 30px; font-size: 16px; font-weight: 800; }
+
+  /* ===== FAQ ===== */
+  .faq { margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 24px; }
+  .qa { background: #fff; border: 1px solid var(--line); padding: 14px 18px; }
+  .qa .q { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; font-weight: 800; color: #1a2330; line-height: 1.5; }
+  .qa .q::before { content: "Q"; flex: 0 0 auto; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; width: 24px; height: 24px; border-radius: 50%; background: var(--acc); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 800; }
+  .qa .a { display: flex; align-items: flex-start; gap: 10px; font-size: 12.6px; font-weight: 500; color: #4a5568; line-height: 1.75; margin-top: 7px; }
+  .qa .a::before { content: "A"; flex: 0 0 auto; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; width: 24px; height: 24px; border-radius: 50%; background: var(--acc-tint); color: var(--acc-deep); display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 800; }
+
+  /* ===== 留意事項 ===== */
+  .legal { margin-top: 36px; max-width: 1040px; }
+  .toc { display: grid; grid-template-columns: 1fr 1fr; grid-auto-flow: column; grid-template-rows: repeat(4, auto); gap: 18px 26px; max-width: none; margin-top: 40px; }
+  .toc .row { padding: 16px 20px; font-size: 20px; }
+  .legal .li { display: flex; gap: 12px; font-size: 14.5px; font-weight: 500; color: #4a5568; line-height: 1.9; padding: 14px 2px; border-bottom: 1px solid #eef1f5; }
+  .legal .li::before { content: "※"; flex: 0 0 auto; color: var(--acc); font-weight: 800; }
+
+  /* ===== PDF出力 ===== */
+  @page { size: 1280px 720px; margin: 0; }
+  @media print {
+    body { padding: 0; background: #fff; }
+    /* box-shadow はPDF化でラスタ画像になり、Preview等でカード間に灰色の帯として出るため無効化 */
+    * { box-shadow: none !important; }
+    .note { display: none; }
+    .deck { gap: 0; display: block; }
+    .slide-shell { width: 1280px; }
+    .slide-shell figcaption { display: none; }
+    .slide-shell .clip { height: 720px; overflow: hidden; border-radius: 0; box-shadow: none; }
+    .slide { transform: none; border: none; border-radius: 0; }
+    figure.slide-shell { page-break-after: always; break-after: page; margin: 0; }
+    figure.slide-shell:last-child { page-break-after: auto; }
+  }
+  /* ===== eラーニング資料の追加分 ===== */
+  /* 表紙：左に文字、右に実写＋LMS風カード */
+  .cover.photo { color: #fff; background: linear-gradient(120deg, #142f5c 0%, #1f4a8a 52%, #2c63b4 100%); overflow: hidden; }
+  .cover .ph { position: absolute; right: 0; top: 0; width: 720px; height: 720px; object-fit: cover; object-position: 60% center; clip-path: polygon(170px 0, 100% 0, 100% 100%, 0 100%); }
+  .cover .badge-row, .cover .sub, .cover .title, .cover .tool-row, .cover .price, .cover .date, .cover .logo { z-index: 2; }
+  .cover .sub { top: 196px; font-size: 20px; max-width: 560px; }
+  .cover .title { top: 290px; }
+  .cover .tool-row { position: absolute; left: 66px; top: 532px; display: flex; gap: 10px; align-items: center; }
+  .cover .tool-row span { width: 50px; height: 50px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; }
+  .cover .tool-row img { width: 30px; height: 30px; object-fit: contain; }
+  .cover .tool-row em { font-style: normal; font-size: 14px; font-weight: 700; margin-left: 6px; opacity: .9; }
+  .cover .price { position: absolute; left: 66px; top: 596px; font-size: 17px; font-weight: 800; color: #fff; white-space: nowrap; }
+  .cover .price b { font-size: 40px; margin: 0 4px; letter-spacing: .01em; color: #ffd76a; }
+  .cover .date { top: auto; bottom: 22px; left: 66px; font-size: 12px; }
+  .cover .logo { right: auto; left: 470px; bottom: 54px; height: 36px; }
+  .cover .ui { position: absolute; z-index: 3; background: #fff; color: #1a2330; border: 1px solid rgba(255,255,255,.6); }
+  .cover .ui-rank { right: 48px; top: 70px; width: 236px; padding: 14px 16px 8px; }
+  .cover .ui-rank .t, .cover .ui-ms .t { font-size: 12px; font-weight: 800; color: var(--acc-deep); display: flex; align-items: center; gap: 6px; }
+  .cover .ui-rank .t::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #d0356b; }
+  .cover .ui-rank p.r { display: grid; grid-template-columns: 22px 1fr auto; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 700; padding: 7px 4px; }
+  .cover .ui-rank p.r i { width: 20px; height: 20px; border-radius: 50%; background: #eef2f8; font-style: normal; font-size: 11px; display: flex; align-items: center; justify-content: center; }
+  .cover .ui-rank p.r:first-of-type i { background: #ffd23f; }
+  .cover .ui-rank p.r.me { background: #eaf1fd; color: var(--acc-deep); }
+  .cover .ui-rank p.r b { color: var(--acc-deep); }
+  .cover .ui-ms { left: 600px; bottom: 112px; width: 330px; padding: 14px 18px 16px; background: linear-gradient(120deg, #2c55a8, #5d8ae0); color: #fff; border: 0; }
+  .cover .ui-ms .hd { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 800; }
+  .cover .ui-ms .hd img { width: 34px; height: 34px; border-radius: 50%; border: 2px solid #fff; object-fit: cover; }
+  .cover .ui-ms .hd span { margin-left: auto; font-size: 12px; opacity: .9; } .cover .ui-ms .hd span b { font-size: 18px; }
+  .cover .ui-ms ol { list-style: none; display: flex; justify-content: space-between; margin-top: 14px; position: relative; }
+  .cover .ui-ms ol::before { content: ""; position: absolute; left: 22px; right: 22px; top: 11px; height: 2px; background: rgba(255,255,255,.5); }
+  .cover .ui-ms li { position: relative; width: 33%; text-align: center; font-size: 10.5px; font-weight: 700; }
+  .cover .ui-ms li i { display: flex; margin: 0 auto 5px; width: 24px; height: 24px; border-radius: 50%; background: #fff; color: var(--acc-deep); font-style: normal; font-size: 11px; font-weight: 800; align-items: center; justify-content: center; }
+  .cover .ui-ms li.now i { background: #ffd23f; color: #3a2a00; }
+  .cover .ui-pill { left: 640px; top: 168px; display: flex; align-items: center; gap: 10px; padding: 10px 16px 10px 10px; border-radius: 999px; font-size: 13px; font-weight: 800; }
+  .cover .ui-pill i { width: 30px; height: 30px; border-radius: 50%; background: #e0702a; color: #fff; font-style: normal; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+  .cover .ui-pill small { display: block; font-size: 10.5px; color: #8a93a3; font-weight: 700; }
+  .sp4 { padding: 22px 14px; } .sp4 .k { font-size: 15px; } .sp4 .v { font-size: 20px; margin-top: 8px; } .sp4 .v b { font-size: 38px; } .sp4 .v.small { font-size: 17px; line-height: 1.5; }
+  .card3t { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 26px; }
+  .card3t .rc { min-height: 0; padding: 26px 24px; } .card3t .rc .h { font-size: 20px; } .card3t .rc .d { font-size: 15px; line-height: 1.8; margin-top: 10px; }
+  .spec4 + .card3t { margin-top: 28px; } .sp4 { padding: 30px 14px; }
+  /* 課題→解決 */
+  .iss { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 24px; margin-top: 22px; }
+  .is { border: 1px solid var(--line); background: #fff; display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 0; }
+  .is img { width: 100%; height: 178px; object-fit: cover; object-position: center 40%; display: block; }
+  .is .bd { padding: 14px 18px 4px; }
+  .is .h { font-size: 18px; font-weight: 800; color: #1a2330; line-height: 1.45; }
+  .is .h em { font-style: normal; color: #d0356b; }
+  .is .d { font-size: 13.5px; color: #4a5568; line-height: 1.75; margin-top: 6px; }
+  .is .ar { margin: 12px auto 0; width: 0; height: 0; border: 12px solid transparent; border-bottom: 0; border-top-color: var(--acc); }
+  .is .sol { margin-top: 10px; background: var(--acc-tint); padding: 14px 18px; flex: 1; }
+  .is .sol .k { white-space: nowrap; font-size: 16px; font-weight: 800; color: var(--acc-deep); line-height: 1.5; }
+  .is .sol .a { font-size: 13.5px; color: #2a3446; line-height: 1.7; margin-top: 6px; }
+  /* 学習サイクル */
+  .cyc { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 22px; }
+  .cy { border: 1px solid var(--line); background: #fff; }
+  .cy img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+  .cyc { margin-top: 26px; } .cy .bd { padding: 18px 18px 22px; } .cy .h { font-size: 20px; } .cy .d { font-size: 14px; line-height: 1.8; margin-top: 8px; } .cy .tg { margin-top: 14px; } .cy .tg span { font-size: 12px; }
+  .cy .bd { padding: 14px 16px 16px; }
+  .cy .no { font-size: 12.5px; font-weight: 800; color: var(--acc); letter-spacing: .08em; }
+  .cy .h { font-size: 18px; font-weight: 800; color: #1a2330; margin-top: 2px; }
+  .cy .d { font-size: 13px; color: #4a5568; line-height: 1.7; margin-top: 6px; }
+  .cy .tg { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+  .cy .tg span { font-size: 11px; font-weight: 700; color: var(--blue); background: var(--tint); border-radius: 999px; padding: 3px 9px; }
+  /* 特長（1枚1特長：左に文章、右に図） */
+  .feat { position: absolute; left: 64px; right: 64px; top: 150px; bottom: 74px; display: grid; grid-template-columns: 1fr 1.18fr; gap: 44px; align-items: center; }
+  .feat .pt { display: flex; align-items: baseline; gap: 14px; }
+  .feat .pt b { font-size: 62px; font-weight: 900; line-height: 1; color: var(--acc); letter-spacing: -.02em; }
+  .feat .pt span { font-size: 15px; font-weight: 800; color: var(--blue-pale); letter-spacing: .14em; }
+  .feat .h { font-size: 30px; font-weight: 800; color: #1a2330; line-height: 1.5; margin-top: 14px; }
+  .feat .d { font-size: 15px; color: #4a5568; line-height: 1.85; margin-top: 14px; }
+  .feat .ck { margin-top: 16px; background: #f5f7fb; border: 1px solid #e6ecf5; padding: 14px 16px; display: grid; gap: 8px; }
+  .feat .ck p { display: flex; gap: 10px; font-size: 14.5px; font-weight: 700; color: #2a3446; line-height: 1.55; }
+  .feat .ck p::before { content: "✓"; flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%; background: var(--acc); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 11px; margin-top: 2px; }
+  .feat .tg { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .feat .tg span { font-size: 12px; font-weight: 700; color: var(--acc-deep); background: var(--acc-tint); border-radius: 999px; padding: 4px 12px; }
+  .feat .tg span::before { content: "#"; margin-right: 2px; opacity: .6; }
+  .feat .vis { display: flex; align-items: center; justify-content: center; height: 100%; }
+  .feat .vis img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .feat.long .d { font-size: 13.8px; line-height: 1.75; } .feat.long .h { font-size: 27px; }
+  /* AI機能 */
+  .ai4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 22px; }
+  .ai { border: 1px solid var(--line); border-top: 4px solid var(--c); background: #fff; display: flex; flex-direction: column; height: 486px; }
+  .ai .tx { padding: 18px 18px 14px; }
+  .ai .en { font-size: 12.5px; font-weight: 800; color: var(--c); letter-spacing: .04em; }
+  .ai .h { font-size: 18px; font-weight: 800; color: #1a2330; line-height: 1.5; margin-top: 6px; min-height: 54px; }
+  .ai .d { font-size: 13.5px; color: #4a5568; line-height: 1.75; margin-top: 8px; }
+  .ai .im { margin-top: auto; flex: none; height: 258px; overflow: hidden; background: var(--t); display: flex; align-items: center; justify-content: center; padding: 14px; }
+  .ai .im img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; background: #fff; }
+  /* プログラム一覧 */
+  table.pg { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 18px; }
+  .pg th { background: var(--blue); color: #fff; font-size: 14px; font-weight: 800; padding: 11px 14px; text-align: left; }
+  .pg th.c { text-align: center; }
+  .pg td { font-size: 14.5px; color: #2a3446; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  .pg tr:nth-child(even) td { background: #f7f9fc; }
+  .pg td.nm { font-weight: 800; color: #1a2330; width: 330px; }
+  .pg td.nm span { display: flex; align-items: center; gap: 12px; }
+  .pg td.nm .mk { width: 32px; height: 32px; border-radius: 50%; color: #fff; font-style: normal; font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+  .pg td.nm img { width: 32px; height: 32px; object-fit: contain; }
+  .pg td.c { text-align: center; font-weight: 800; color: var(--acc); width: 120px; }
+  .pg td.ds { font-size: 13px; color: #4a5568; }
+  /* 料金 */
+  .fee { display: grid; grid-template-columns: 1.05fr 1fr; gap: 26px; margin-top: 26px; }
+  .pm { border: 1.5px solid var(--acc); }
+  .pm .hd { background: var(--acc); color: #fff; font-size: 19px; font-weight: 800; padding: 12px 20px; text-align: center; }
+  .pm .bd { padding: 34px 30px 30px; }
+  .pm .row { display: flex; align-items: baseline; justify-content: space-between; padding: 24px 0; border-bottom: 1px dashed var(--line); }
+  .pm .row .k { font-size: 15px; font-weight: 800; color: #4a5568; }
+  .pm .row .v { font-size: 17px; font-weight: 800; color: #1a2330; }
+  .pm .row .v b { font-size: 44px; color: var(--acc); margin: 0 4px; letter-spacing: -.01em; }
+  .pm .row.sub .v b { font-size: 30px; color: #1a2330; }
+  .pm .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .pm .chips span { font-size: 13px; font-weight: 800; color: var(--acc-deep); background: var(--acc-tint); padding: 6px 12px; }
+  .pm .note { font-size: 12px; color: #8a93a3; margin-top: 12px; line-height: 1.7; }
+  .inc .t { font-size: 17px; font-weight: 800; color: #1a2330; }
+  .inc .li { display: flex; gap: 12px; padding: 19px 0; border-bottom: 1px solid #eef1f5; }
+  .inc .li::before { content: "✓"; flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%; background: var(--acc); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; margin-top: 2px; }
+  .inc .li b { display: block; font-size: 15.5px; font-weight: 800; color: #1a2330; }
+  .inc .li span { font-size: 13px; color: #4a5568; line-height: 1.65; }
+  .rule { margin-top: 20px; background: #f5f7fb; padding: 12px 16px; font-size: 12.5px; color: #4a5568; line-height: 1.8; }
+  .rule b { color: var(--acc-deep); }
+  /* 助成金 */
+  .gr { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 20px; }
+  .gc { border: 1px solid var(--line); background: #fff; padding: 18px 20px; }
+  .gc .t { font-size: 16px; font-weight: 800; color: var(--acc-deep); padding-bottom: 10px; border-bottom: 2px solid var(--acc); }
+  .gc .t small { font-size: 12px; color: #8a93a3; margin-left: 8px; }
+  table.rt { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  .rt th, .rt td { border: 1px solid var(--line); padding: 10px 6px; font-size: 13px; text-align: center; }
+  .rt thead th { background: #f1f3f7; font-weight: 800; font-size: 12px; }
+  .rt tbody th { font-weight: 800; background: #f7f9fc; }
+  .rt td b { font-size: 26px; font-weight: 900; color: #1a2330; }
+  .rt td.up { background: var(--acc-tint); } .rt td.up b { color: var(--acc); }
+  .gc .sm { font-size: 11.5px; color: #8a93a3; line-height: 1.7; margin-top: 10px; }
+  .sim .r { display: flex; justify-content: space-between; align-items: baseline; padding: 9px 0; border-bottom: 1px dashed var(--line); font-size: 14px; font-weight: 700; color: #4a5568; }
+  .sim .r b { font-size: 22px; color: #1a2330; }
+  .sim .r.m b { color: #d0356b; }
+  .sim .r.t { border-bottom: 0; } .sim .r.t b { font-size: 30px; color: var(--acc); }
+  .sim .per { margin-top: 8px; background: var(--acc-tint); padding: 8px 12px; font-size: 13.5px; font-weight: 800; color: var(--acc-deep); text-align: center; }
+  .req .li { display: flex; gap: 8px; font-size: 13.5px; font-weight: 700; color: #2a3446; line-height: 1.6; padding: 8px 0; border-bottom: 1px solid #eef1f5; }
+  .req .li::before { content: ""; flex: 0 0 auto; width: 7px; height: 7px; border-radius: 50%; background: var(--acc); margin-top: 8px; }
+  .req .li b { color: var(--acc); }
+  .gnote { margin-top: 16px; display: flex; gap: 12px; align-items: center; border: 1.5px solid #e9a23b; background: #fff8ec; padding: 12px 18px; font-size: 13.5px; font-weight: 700; color: #5a4416; line-height: 1.6; }
+  .gnote span { flex: 0 0 auto; background: #e9a23b; color: #fff; font-size: 12px; font-weight: 800; padding: 4px 10px; }
+  .gsrc { font-size: 11.5px; color: #8a93a3; margin-top: 10px; }
+  /* 3ステップ */
+  .st3 { display: grid; grid-template-columns: 1fr 30px 1fr 30px 1fr; margin-top: 24px; }
+  .s3 { position: relative; border: 1px solid var(--line); padding: 24px 22px 0; min-height: 340px; overflow: hidden; }
+  .s3:nth-child(1) { background: linear-gradient(180deg, #fff, #eef4fe); }
+  .s3:nth-child(3) { background: linear-gradient(180deg, #dce8fb, #a9c6f3); }
+  .s3:nth-child(5) { background: linear-gradient(180deg, #3b6fd1, #1a3a86); color: #fff; border-color: transparent; }
+  .s3 .n { font-size: 13px; font-weight: 800; letter-spacing: .1em; color: var(--acc); }
+  .s3:nth-child(5) .n { color: #ffd76a; }
+  .s3 .h { font-size: 22px; font-weight: 800; margin-top: 4px; }
+  .s3 .d { font-size: 13.5px; line-height: 1.75; margin-top: 8px; max-width: 250px; }
+  .s3 img { position: absolute; right: 8px; bottom: 0; height: 150px; }
+  .faq.e { gap: 16px 22px; margin-top: 24px; } .faq.e .qa { padding: 20px 22px; min-height: 146px; } .faq.e .qa .q { font-size: 16px; } .faq.e .qa .a { font-size: 13.8px; line-height: 1.8; margin-top: 8px; }
+  .toc { display: grid; grid-template-columns: 1fr 1fr; grid-auto-flow: column; grid-template-rows: repeat(4, auto); gap: 18px 26px; max-width: none; margin-top: 40px; }
+  .toc .row { padding: 16px 20px; font-size: 20px; }
+  .legal .li { font-size: 15.5px; padding: 22px 0; }
+</style>
+</head>
+<body>
+  <p class="note">法人向けAIeラーニング サービス概要｜全19スライド（概要・課題・学習サイクル・特長・AI機能・プログラム・料金・助成金・流れ・FAQ）</p>
+  <div class="deck">
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide cover photo">
+        <img class="ph" src="assets/photo/feature-photo-01.webp" alt="">
+        <div class="badge-row">
+          <span class="badge">サービス紹介</span>
+          <span class="badge-note">バイテック法人AI研修</span>
+        </div>
+        <p class="sub">1,000本以上のAI講座が見放題。<br>専用LMSとAI機能で、全社員が学び続けられる。</p>
+        <h1 class="title" style="font-size:62px">法人向けAI<br>eラーニング<small>サービス概要資料</small></h1>
+        <div class="tool-row"><span><img src="assets/tools/chatgpt.webp" alt="ChatGPT"></span><span><img src="assets/tools/gemini.webp" alt="Gemini"></span><span><img src="assets/tools/copilot.webp" alt="Microsoft Copilot"></span><span><img src="assets/tools/claude.svg" alt="Claude"></span><em>主要なAIツールに対応</em></div>
+        <p class="price">1IDあたり 月額<b>2,980</b>円〜（税抜）</p>
+        <div class="ui ui-pill"><i>R</i><p>AI週次レポートが届きました<small>11/4〜11/10｜営業部</small></p></div>
+        <div class="ui ui-rank"><p class="t">チーム内ランキング｜今週</p><p class="r"><i>1</i>佐藤さん<b>4.2h</b></p><p class="r me"><i>2</i>あなた<b>3.6h</b></p><p class="r"><i>3</i>鈴木さん<b>2.9h</b></p></div>
+        <div class="ui ui-ms"><p class="hd"><img src="assets/photo/feature-avatar-01.webp" alt="">あなたのマイルストーン<span>達成 <b>3</b>/7</span></p><ol><li><i>✓</i>ChatGPT入門</li><li class="now"><i>4</i>資料作成をAIで</li><li><i>5</i>業務の自動化</li></ol></div>
+        <p class="date en">UPDATE 2026.11</p>
+      </div>
+    </div><figcaption>01 表紙</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+<p class="s-eyebrow">Contents</p>
+<h2 class="s-title">目次</h2>
+<img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+<div class="toc"><p class="row"><span class="no en">01</span>eラーニングとは</p><p class="row"><span class="no en">02</span>こんな課題を解決します</p><p class="row"><span class="no en">03</span>学び続けるための学習サイクル</p><p class="row"><span class="no en">04</span>5つの特長</p><p class="row"><span class="no en">05</span>AI機能（受講者向け・研修管理者向け）</p><p class="row"><span class="no en">06</span>プログラム一覧</p><p class="row"><span class="no en">07</span>料金・助成金</p><p class="row"><span class="no en">08</span>受講開始までの流れ・よくあるご質問</p></div>
+<p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>02 目次</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+<p class="s-eyebrow">01 eラーニングとは</p>
+<h2 class="s-title">1,000本以上のAI講座と専用LMSで、<br><b>全社員のAIスキルを底上げ</b>する</h2>
+<img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+<p class="s-lead">ChatGPT・Gemini・Copilot・Claudeなど、生成AIの業務活用に絞った法人向けeラーニングです。社内で使うAIツールに合わせて講座を選び、メンバー登録だけでその日から受講できます。</p>
+<div class="spec4"><div class="sp4"><p class="k">AI講座・課題</p><p class="v"><b>1,000</b>本以上</p></div><div class="sp4"><p class="k">対応AIツール</p><p class="v small">ChatGPT・Gemini<br>Copilot・Claude ほか</p></div><div class="sp4"><p class="k">月額料金</p><p class="v"><b>2,980</b>円〜／ID</p></div><div class="sp4"><p class="k">受講形式</p><p class="v small">オンライン<br>（PC・スマホ）</p></div></div>
+<div class="card3t"><div class="rc"><p class="h">AIツールごとの講座が見放題</p><p class="d">基本操作から資料作成・業務の自動化まで。1IDで全プログラムを受講できます。</p></div><div class="rc"><p class="h">専用LMSとAI機能で続く</p><p class="d">目的に合わせたマイルストーンとAIチャットで、一人ひとりが迷わず学び続けられます。</p></div><div class="rc"><p class="h">管理とレポートは自動</p><p class="d">ID発行・受講状況の集計・週次レポートまで自動。担当者の手間をかけません。</p></div></div>
+<p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>03 eラーニングとは</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+<p class="s-eyebrow">02 こんな課題を解決します</p>
+<h2 class="s-title">社内のAI教育で、<b>こんなお悩み</b>はありませんか？</h2>
+<img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS"><div class="iss"><div class="is"><img src="assets/photo/issue-01.webp" alt=""><div class="bd"><p class="h">動画を配っても<br><em>見られずに終わる</em></p><p class="d">IDを配っただけで、誰がどこまで進んだか分からない。忙しい社員ほど後回しにして期限を迎えてしまう。</p></div><span class="ar"></span><div class="sol"><p class="k">チーム内ランキングとリマインドで継続</p><p class="a">チーム内のメンバー同士の学習ランキングと、受講が止まったときのリマインドで、忙しい社員も後回しにせず続けられます。</p></div></div><div class="is"><img src="assets/photo/issue-02.webp" alt=""><div class="bd"><p class="h"><em>何を学ばせればいいか</em><br>決められない</p><p class="d">AIツールが多すぎて、自社の社員にどれを、どの順番で学ばせればよいか判断がつかない。</p></div><span class="ar"></span><div class="sol"><p class="k">目的に合わせたマイルストーンを設計</p><p class="a">業種や学ぶ目的に合わせて、ゴールまでのマイルストーンと期日を設定。何から・どの順番で学べばよいかが明確になります。</p></div></div><div class="is"><img src="assets/photo/issue-03.webp" alt=""><div class="bd"><p class="h"><em>研修の日程調整と</em><br>コストが重い</p><p class="d">拠点や部署が分かれていて、全員を集めた研修は日程調整だけで数か月かかる。講師や会場の費用も大きい。</p></div><span class="ar"></span><div class="sol"><p class="k">場所と時間を選ばず、各自のペースで</p><p class="a">PC・スマホから各自の空き時間に受講できるため、講師の手配や会場、全員の日程調整は必要ありません。5IDから始められます。</p></div></div></div>
+<p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>04 こんな課題を解決します</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+<p class="s-eyebrow">03 学習サイクル</p>
+<h2 class="s-title">目的の登録から達成まで、<b>4つのステップで学び続ける</b></h2>
+<img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS"><div class="cyc"><div class="cy"><img src="assets/photo/cycle-01.webp" alt=""><div class="bd"><p class="no en">STEP 1｜ONBOARDING</p><p class="h">目的を登録する</p><p class="d">学ぶ目的・担当業務・AIの経験・使える学習時間などの質問に答えるだけで、一人ひとりの出発点が決まります。</p><div class="tg"><span>学ぶ目的</span><span>担当業務</span><span>学習時間</span></div></div></div><div class="cy"><img src="assets/photo/cycle-02.webp" alt=""><div class="bd"><p class="no en">STEP 2｜MILESTONE</p><p class="h">道のりを設計する</p><p class="d">「自分の仕事を速く」から「チームの業務を自動化」まで、目的に合ったマイルストーンを段階的に置きます。</p><div class="tg"><span>目的別のゴール</span><span>職種別テンプレート</span><span>段階的な目標</span></div></div></div><div class="cy"><img src="assets/photo/cycle-03.webp" alt=""><div class="bd"><p class="no en">STEP 3｜ROADMAP</p><p class="h">期日を決めて進める</p><p class="d">達成したい日から逆算して、マイルストーンごとに期限を設定。月ごとのロードマップで、今やることが分かります。</p><div class="tg"><span>達成日から逆算</span><span>月ごとのロードマップ</span><span>予定と実績</span></div></div></div><div class="cy"><img src="assets/photo/cycle-04.webp" alt=""><div class="bd"><p class="no en">STEP 4｜PRACTICE</p><p class="h">AIと積み上げて達成</p><p class="d">分からないことはAIバディに壁打ち。実践課題とトレーニングを重ねて自分のゴールを達成し、次の目標へ進みます。</p><div class="tg"><span>AIバディと壁打ち</span><span>実践課題</span><span>トレーニング</span></div></div></div></div>
+<p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>05 学習サイクル</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+<p class="s-eyebrow">04 5つの特長｜POINT 1 / 5</p>
+<h2 class="s-title">最後まで続く仕組み</h2>
+<img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+<div class="feat"><div><p class="pt"><b class="en">01</b><span class="en">KEEP GOING</span></p><p class="h">配って終わりにしない、<br>最後まで続く仕組み</p><p class="d">目的に合わせたマイルストーンと期日で、今やることが明確に。チーム内のメンバー同士のランキングと、受講が止まったときのリマインドで、忙しい社員も後回しにせず学び続けられます。</p><div class="ck"><p>1レッスン数分の動画を、スマホで空き時間に</p><p>チーム内ランキングとリマインドで後回しを防ぐ</p></div><div class="tg"><span>1レッスン数分</span><span>スマホ対応</span><span>チーム内ランキング</span></div></div><div class="vis"><img src="assets/feat/feature-01.webp" alt=""></div></div>
+<p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>06 特長1</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+<p class="s-eyebrow">04 5つの特長｜POINT 2 / 5</p>
+<h2 class="s-title">自社のAIツールに合う講座</h2>
+<img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+<div class="feat"><div><p class="pt"><b class="en">02</b><span class="en">CUSTOM FIT</span></p><p class="h">社内で使うAIに合わせて、<br>講座をカスタマイズできる。</p><p class="d">ChatGPT・Copilot・Gemini・Claudeなど、主要なAIツールごとに講座を用意。社内で導入しているツールや部署の業務に合わせて、1,000本以上の講座から必要なものを選んで学べます。</p><div class="ck"><p>主要なAIツールごとに専用の講座がそろう</p><p>入門から業務の自動化まで、1,000本以上が見放題</p></div><div class="tg"><span>ChatGPT</span><span>Copilot</span><span>Gemini</span><span>Claude</span></div></div><div class="vis"><img src="assets/feat/feature-02.webp" alt=""></div></div>
+<p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>07 特長2</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+<p class="s-eyebrow">04 5つの特長｜POINT 3 / 5</p>
+<h2 class="s-title">毎週点検で常に最新</h2>
+<img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+<div class="feat"><div><p class="pt"><b class="en">03</b><span class="en">UP TO DATE</span></p><p class="h">AIの変化に合わせて、<br>講座を毎週アップデート</p><p class="d">AIツールは画面や機能がすぐに変わります。週に1回すべての講座を点検し、仕様変更や新機能に合わせて内容を更新するため、古い手順を学んでしまう心配がありません。</p><div class="ck"><p>週に1回、すべての講座の内容を点検</p><p>ツールの画面変更や新機能に合わせて更新</p></div><div class="tg"><span>毎週点検</span><span>最新のAIに対応</span></div></div><div class="vis"><img src="assets/feat/feature-03.webp" alt=""></div></div>
+<p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>08 特長3</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+<p class="s-eyebrow">04 5つの特長｜POINT 4 / 5</p>
+<h2 class="s-title">進捗・レポートを自動化</h2>
+<img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+<div class="feat long"><div><p class="pt"><b class="en">04</b><span class="en">AUTO REPORT</span></p><p class="h">進捗の集計もレポートも自動、<br>担当者の手間をかけない</p><p class="d">メンバーを登録すると、ID・パスワードは本人のメールアドレスへ自動で届きます。部署ごとに管理者を置けば、それぞれが担当するメンバーの学習状況だけを確認できます。進捗や受講時間は自動で集計され、受講レポートも自動で作成されます。</p><div class="ck"><p>メンバー登録で、ID・パスワードを自動送付</p><p>部署ごとに管理者を置き、担当範囲だけを管理</p><p>部署・個人ごとの受講状況をひと目で確認</p><p>受講レポートを自動で作成</p></div><div class="tg"><span>ID自動発行</span><span>部署別の管理</span><span>自動レポート</span></div></div><div class="vis"><img src="assets/feat/feature-04.webp" alt=""></div></div>
+<p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>09 特長4</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+<p class="s-eyebrow">04 5つの特長｜POINT 5 / 5</p>
+<h2 class="s-title">1ID月額2,980円〜</h2>
+<img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+<div class="feat"><div><p class="pt"><b class="en">05</b><span class="en">LOW COST</span></p><p class="h">1ID月額2,980円、<br>低コストで小さく試せる。</p><p class="d">1IDあたり月額2,980円（税抜）で全講座が見放題。5IDから始めて、効果を確かめながら全社へ広げられます。人材開発支援助成金（定額制訓練）を活用すれば、さらに費用を抑えられます。</p><div class="ck"><p>5IDから導入して、必要に応じてIDを追加</p><p>助成金（定額制訓練）でさらに費用を抑えられる</p></div><div class="tg"><span>5IDから</span><span>助成金対応</span><span>無料トライアル</span></div></div><div class="vis"><img src="assets/feat/feature-05.webp" alt=""></div></div>
+<p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>10 特長5</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+<p class="s-eyebrow">05 AI機能｜受講者向け</p>
+<h2 class="s-title"><b>受講者</b>がうれしいAI機能</h2>
+<img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS"><div class="ai4"><div class="ai" style="--c:#3f7ad6;--t:#ecf2fb"><div class="tx"><p class="en">AI Chat Support</p><p class="h">つまずいたら、AIにすぐ質問できる</p><p class="d">レッスン内容に沿って、AIがチャットで質の高い回答を返します。疑問をその場で解消して、学習を止めません。</p></div><div class="im"><img src="assets/ai/chat.webp" alt=""></div></div><div class="ai" style="--c:#2a9a9c;--t:#e9f5f5"><div class="tx"><p class="en">AI Milestone</p><p class="h">目的に合わせて、AIが学習計画を設計</p><p class="d">身につけたいスキルや業務内容をもとに、AIがマイルストーンを設計。何から学ぶかで迷わなくなります。</p></div><div class="im"><img src="assets/ai/plan.webp" alt=""></div></div><div class="ai" style="--c:#4c63c9;--t:#edeffa"><div class="tx"><p class="en">AI Practice</p><p class="h">学んだ内容を、AIで実務トレーニング</p><p class="d">実際の業務に近いお題にAIと取り組み、フィードバックを受けながら「知っている」を「できる」に変えます。</p></div><div class="im"><img src="assets/ai/practice.webp" alt=""></div></div><div class="ai" style="--c:#2f8ccc;--t:#eaf4fa"><div class="tx"><p class="en">AI Advice</p><p class="h">AIがスキル習得にアドバイス</p><p class="d">受講状況やトレーニング結果から、伸ばしたいポイントと次に学ぶレッスンをAIが提案します。</p></div><div class="im"><img src="assets/ai/advice.webp" alt=""></div></div></div>
+<p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>11 AI機能（受講者向け）</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+<p class="s-eyebrow">05 AI機能｜研修管理者向け</p>
+<h2 class="s-title"><b>研修管理者</b>がうれしいAI機能</h2>
+<img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS"><div class="ai4"><div class="ai" style="--c:#e0702a;--t:#fcf0e8"><div class="tx"><p class="en">AI Weekly Report</p><p class="h">受講者一人ひとりの学習を、AIが毎週レポート</p><p class="d">週に一度、受講者ごとに「今週のサマリー」「改善点」「今後の伸びしろ」をまとめてお届け。声かけやフォローの判断にそのまま使えます。</p></div><div class="im"><img src="assets/ai/report.webp" alt=""></div></div><div class="ai" style="--c:#d9485f;--t:#fbecee"><div class="tx"><p class="en">AI Alert</p><p class="h">止まりそうな人を、AIが早めにお知らせ</p><p class="d">ログインの間隔や進み具合の変化から、学習が止まりそうなメンバーをお知らせ。本人に送る声かけ文の案もAIが作ります。</p></div><div class="im"><img src="assets/ai/alert.webp" alt=""></div></div><div class="ai" style="--c:#6f5bd6;--t:#f0edfb"><div class="tx"><p class="en">AI Skill Map</p><p class="h">メンバーごとのAIスキルを、AIが見える化</p><p class="d">学習の進み具合や実務トレーニングの結果から、メンバー一人ひとりのAIスキルを表示。苦手なスキルに合う講座もメンバーごとに提案します。</p></div><div class="im"><img src="assets/ai/skill.webp" alt=""></div></div><div class="ai" style="--c:#1f9a7a;--t:#e8f5f1"><div class="tx"><p class="en">AI Member Milestone</p><p class="h">メンバーごとのマイルストーンを、AIが作成</p><p class="d">担当業務やAIの習熟度をもとに、何をどの順番で学ぶかをメンバーごとにAIが作成。承認するだけで各メンバーに届きます。</p></div><div class="im"><img src="assets/ai/assign.webp" alt=""></div></div></div>
+<p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>12 AI機能（研修管理者向け）</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+<p class="s-eyebrow">06 プログラム一覧</p>
+<h2 class="s-title">1IDで<b>すべてのプログラム</b>が見放題</h2>
+<img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS"><table class="pg"><thead><tr><th>プログラム</th><th class="c">レッスン数</th><th class="c">視聴時間</th><th>こんな組織・チームに</th></tr></thead><tbody><tr><td class="nm"><span><img src="assets/tools/chatgpt.webp" alt="">ChatGPT</span></td><td class="c">45本</td><td class="c">約6時間</td><td class="ds">定番の生成AIから全社活用を始めたい組織・チームにおすすめ。</td></tr><tr><td class="nm"><span><img src="assets/tools/gemini.webp" alt="">Gemini</span></td><td class="c">67本</td><td class="c">約5時間</td><td class="ds">Google Workspaceを利用する組織・チームにおすすめ。</td></tr><tr><td class="nm"><span><img src="assets/tools/claude.svg" alt="">Claude</span></td><td class="c">81本</td><td class="c">約6.4時間</td><td class="ds">Claude Cowork・Codeまで幅広く活用したい組織・チームにおすすめ。</td></tr><tr><td class="nm"><span><img src="assets/logo/claudecode-color.svg" alt="">Claude Code</span></td><td class="c">44本</td><td class="c">約12時間</td><td class="ds">非エンジニアでも業務の自動化・開発を進めたい組織・チームにおすすめ。</td></tr><tr><td class="nm"><span><img src="assets/logo/copilot.webp" alt="">Copilot</span></td><td class="c">48本</td><td class="c">約7時間</td><td class="ds">Microsoft 365を利用する組織・チームにおすすめ。</td></tr><tr><td class="nm"><span><img src="assets/logo/studio.webp" alt="">Copilot Studio</span></td><td class="c">70本</td><td class="c">約9時間</td><td class="ds">Copilot活用からAIエージェント内製まで進めたい組織・チームにおすすめ。</td></tr><tr><td class="nm"><span><i class="mk" style="background:#e0702a">創</i>AIクリエイティブ</span></td><td class="c">108本</td><td class="c">約12時間</td><td class="ds">画像・動画・デザイン制作を内製したい組織・チームにおすすめ。</td></tr><tr><td class="nm"><span><img src="assets/logo/dify.webp" alt="">Dify</span></td><td class="c">85本</td><td class="c">約10時間</td><td class="ds">AIアプリ・業務自動化を内製したい組織・チームにおすすめ。</td></tr><tr><td class="nm"><span><i class="mk" style="background:#1c45a3">管</i>リーダー・マネージャー向けAI</span></td><td class="c">35本</td><td class="c">約5時間</td><td class="ds">管理職がAIを使いこなし、部下の育成まで進めたい組織・チームにおすすめ。</td></tr></tbody></table>
+<p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>13 プログラム一覧</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+<p class="s-eyebrow">07 料金</p>
+<h2 class="s-title">導入費用＋<b>月額2,980円／ID</b>のシンプルな料金</h2>
+<img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+<div class="fee"><div class="pm"><p class="hd">eラーニング</p><div class="bd"><div class="row"><span class="k">月額費用</span><span class="v"><b>2,980</b>円／ID・月</span></div><div class="row sub"><span class="k">導入費用（初回のみ）</span><span class="v"><b>100,000</b>円</span></div><div class="chips"><span>5IDからご契約可</span><span>最低契約期間 6ヶ月</span><span>全プログラム見放題</span><span>オンライン（専用LMS）</span></div><p class="note">※価格はすべて税抜です。ID数と期間に応じた総額は、お見積りにてご提示します。</p></div></div>
+<div class="inc"><p class="t">料金に含まれるもの</p><div class="li"><p><b>全プログラムが見放題</b><span>1,000本以上の講座を、契約期間中は何度でも視聴できます。</span></p></div><div class="li"><p><b>専用LMSのアカウント</b><span>メンバーを登録すると、ID・パスワードを本人のメールへ自動でお送りします。</span></p></div><div class="li"><p><b>受講状況・進捗の確認</b><span>誰がどこまで進んだかを、管理画面でひと目で把握できます。</span></p></div><div class="li"><p><b>PC・スマホで受講</b><span>オンラインで、時間や場所を選ばず自分のペースで学べます。</span></p></div>
+<p class="rule"><b>IDの追加</b>：いつでも可（追加した月から月額満額）　<b>更新</b>：6ヶ月ごとに自動更新<br><b>管理者</b>：受講せず管理だけを行う研修管理者は料金がかかりません</p></div></div>
+<p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>14 料金</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+<p class="s-eyebrow">07 助成金</p>
+<h2 class="s-title"><b>定額制訓練</b>で、費用の最大75%を助成</h2>
+<img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS">
+<p class="s-lead">バイテックのeラーニングは、人材開発支援助成金（人への投資促進コース）の「定額制訓練」の対象です。導入費用と月額費用の両方が助成の対象になります。</p>
+<div class="gr"><div class="gc"><p class="t">助成率</p><table class="rt"><thead><tr><th></th><th>通常</th><th>賃金要件などを<br>満たす場合</th></tr></thead><tbody><tr><th>中小企業</th><td><b>60</b>%</td><td class="up"><b>75</b>%</td></tr><tr><th>大企業</th><td><b>45</b>%</td><td class="up"><b>60</b>%</td></tr></tbody></table><p class="sm">※賃金要件：訓練終了後1年以内に賃金を5%以上引き上げる等。1事業所あたり年度2,500万円が上限です。</p></div>
+<div class="gc sim"><p class="t">試算例<small>中小企業・10ID・12か月</small></p><p class="r">ご利用料金<span><b>457,600</b>円</span></p><p class="r m">助成額（60%）<span>−<b>274,560</b>円</span></p><p class="r t">実質負担<span><b>183,040</b>円</span></p><p class="per">1IDあたり 実質 月約1,525円</p><p class="sm">※導入費用100,000円＋月額2,980円×10ID×12か月（税抜）で試算。75%の場合は実質114,400円。</p></div>
+<div class="gc req"><p class="t">主な要件</p><p class="li">雇用保険に加入している従業員が対象</p><p class="li">受講者1人あたり<b>10時間以上</b>の受講</p><p class="li">労働時間内の受講であること</p><p class="li">計画届は契約開始の<b>1か月前まで</b></p><p class="li">訓練終了後<b>2か月以内</b>に支給申請</p><p class="sm">申請に必要な「受講時間が10時間以上の受講者の一覧」は、バイテックが発行します。</p></div></div>
+<p class="gnote"><span>ご注意</span>人への投資促進コースは、2026年度（令和8年度）が最終年度となる見込みです。計画届は契約開始の1か月前までに提出が必要なため、お早めにご検討ください。</p>
+<p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>15 助成金</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+<p class="s-eyebrow">08 受講開始までの流れ</p>
+<h2 class="s-title">商談なし、<b>3ステップで受講開始</b></h2>
+<img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS"><div class="st3"><div class="s3"><p class="n en">STEP 1 / Sign up</p><p class="h">管理者を登録</p><p class="d">Webから申し込み、研修管理者としてアカウントを登録します。入力は1ページだけ。</p><img src="assets/photo/step-01.webp" alt=""></div><div class="farr"></div><div class="s3"><p class="n en">STEP 2 / Members</p><p class="h">メンバーを追加</p><p class="d">画面の案内に沿って、メンバーの名前・メールアドレス・部署を入力するだけ。部署ごとの組織図が自動でできあがります。</p><img src="assets/photo/step-02.webp" alt=""></div><div class="farr"></div><div class="s3"><p class="n en">STEP 3 / Start</p><p class="h">受講スタート</p><p class="d">ライセンスの付与が完了すると、登録したメールアドレスにID・パスワードが自動で届きます。</p><img src="assets/photo/step-03.webp" alt=""></div></div><div class="cta"><div class="l"><p class="t">まずは無料トライアルで、使い心地をお試しください</p><p class="d">ご利用をお決めの方は、Webからそのままお申し込みいただけます（biz.bytech.jp/e-learning）。</p></div><span class="btn">無料トライアルを申し込む ›</span></div>
+<p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>16 受講開始までの流れ</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+<p class="s-eyebrow">08 よくあるご質問</p>
+<h2 class="s-title">サービス・料金について</h2>
+<img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS"><div class="faq e"><div class="qa"><p class="q">無料の動画や社内の勉強会でも十分では？</p><p class="a">教材を「用意する」ことと、社員が学び「続ける」ことは別の課題です。業務での使い方を実際の画面操作で学べるAI特化のレッスンに加え、専用LMSでの進捗管理までご用意しています。</p></div><div class="qa"><p class="q">一般的なeラーニングサービスとの違いは？</p><p class="a">ビジネススキル全般ではなく、ChatGPT・Gemini・Copilot・Claudeなど生成AIの業務活用に絞ったプログラムです。ツールごとに基本操作から業務の自動化まで体系立てて学べます。</p></div><div class="qa"><p class="q">AI未経験の社員でも受講できますか？</p><p class="a">はい。多くの受講者が生成AI未経験からのスタートです。基礎から順に学べる構成のため、業務で活用できるレベルまで無理なくスキルアップできます。</p></div><div class="qa"><p class="q">受講できるプログラムに制限はありますか？</p><p class="a">ありません。1IDで全プログラムを見放題で受講できます。最初に学ぶものに迷ったら、Microsoft 365環境ならCopilot、Google Workspace環境ならGeminiがおすすめです。</p></div><div class="qa"><p class="q">料金はどのように決まりますか？</p><p class="a">導入費用100,000円（税抜）と、受講者1名（1ID）あたり月額2,980円（税抜）です。ご契約は5ID・6ヶ月から承ります。総額はお見積りにてご提示します。</p></div><div class="qa"><p class="q">何IDから契約できますか？上限はありますか？</p><p class="a">ご契約は5IDからです。上限はなく、チーム・組織単位での受講や全社展開にも対応しています。</p></div></div>
+<p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>17 よくあるご質問（サービス・料金）</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+<p class="s-eyebrow">08 よくあるご質問</p>
+<h2 class="s-title">契約・IDの管理について</h2>
+<img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS"><div class="faq e"><div class="qa"><p class="q">契約期間の決まりはありますか？</p><p class="a">最低契約期間は6ヶ月です。契約満了日の1か月前までにお申し出がない場合は、同じID数で6ヶ月ごとに自動更新となります。</p></div><div class="qa"><p class="q">契約期間の途中でIDを追加できますか？</p><p class="a">はい、管理画面からいつでも追加できます。追加した月から月額料金（日割りなし）がかかり、利用期間は本契約の満了日までのため、更新日は全IDでそろいます。</p></div><div class="qa"><p class="q">研修管理者は複数人置けますか？料金はかかりますか？</p><p class="a">はい。主管理者が、部署・チームごとに部署管理者を任命できます。部署管理者が見られるのは担当範囲のメンバーだけです。受講せず管理だけを行う管理者に料金はかかりません。</p></div><div class="qa"><p class="q">退職・異動したメンバーのIDを、別の社員に使えますか？</p><p class="a">できません。1IDは受講者お一人専用で、IDの共有や別の方への付け替えはお受けしていません。新しく受講する方は、IDを追加してご登録ください。</p></div><div class="qa"><p class="q">IDを減らしたり、解約したりできますか？</p><p class="a">契約期間中のID数の削減・中途解約はお受けしておらず、ご返金もいたしかねます。ID数の削減や更新しない場合は、満了日の1か月前までにお申し出ください。</p></div><div class="qa"><p class="q">助成金は使えますか？</p><p class="a">はい。人材開発支援助成金（人への投資促進コース）の「定額制訓練」の対象です。受講者1人あたり10時間以上の受講などの要件があります。</p></div></div>
+<p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>18 よくあるご質問（契約・ID）</figcaption></figure>
+
+    <figure class="slide-shell"><div class="clip">
+      <div class="slide">
+        <div class="s-body">
+<p class="s-eyebrow">ご留意事項</p>
+<h2 class="s-title">ご利用にあたって</h2>
+<img class="s-logo" src="assets/biz-logo.svg" alt="byTech BUSINESS"><div class="legal"><p class=li>料金・プログラム・レッスン数・視聴時間は2026年11月時点のものです。価格はすべて税抜です。</p><p class=li>資料内の画面イメージは説明用に作成したもので、実際の画面とは異なる場合があります。表示している数値・氏名は例です。</p><p class=li>助成金は令和8年度の制度内容をもとに記載しています。支給の可否・金額は労働局の審査によります。</p><p class=li>掲載しているツール名・サービス名は各社の商標または登録商標です。社外への転載・再配布はご遠慮ください。</p><p class=li>発行：バイテック法人AI研修（株式会社AI棒）　2026年11月版</p></div>
+<p class="s-foot">© 株式会社AI棒</p><div class="s-num en"></div>
+        </div>
+      </div>
+    </div><figcaption>19 ご留意事項</figcaption></figure>
+
+  </div>
+</body>
+</html>

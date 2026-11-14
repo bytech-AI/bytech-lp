@@ -1,5 +1,5 @@
 // biz サブページ共通のヘッダー/フッター。TOP(biz-top-static)と同一のマークアップを再現し、
-// 該当CSS(public/biz/assets/css/style.css の .top-header* / .footer*)を移植して内包する。
+// 該当CSS(public/biz/assets/css/style.css の .top-header*)を移植して内包する。フッターは .ftr（独自デザイン）。
 // TOPは静的HTML・当ページ群はReactのため、Reactページ間で共有できるコンポーネントとして提供する。
 //
 // - ヘッダーは position:fixed のガラスnav（テキストは #333 で明背景でも可読）。ロゴは明背景ページ用に
@@ -11,23 +11,54 @@
 import { COURSES } from "../_course/courses";
 
 const CHROME_CSS = `
-/* ===== Footer ===== */
-.footer { background: #16202E; color: #fff; padding: 50px 0 20px; }
-.footer__inner { max-width: 1200px; margin: 0 auto 30px; display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 50px; }
-.footer__col--lead { display: flex; align-items: flex-start; }
-.footer__lead { font-size: clamp(18px, 2.6vw, 28px); font-weight: 700; line-height: 1.5; }
-.footer__title { font-size: 14px; color: #3A82CA; font-weight: 700; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.2); }
-.footer__title--service { margin-top: 40px; }
-.footer__list { list-style: none; padding: 0; margin: 0; }
-.footer__list li { margin-bottom: 12px; }
-.footer__list li a { color: #d1d8e8; font-size: 14px; text-decoration: none; transition: opacity 0.2s ease; }
-.footer__list li a:hover { opacity: 0.6; }
-.footer__bottom { max-width: 1200px; margin: 0 auto; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2); display: flex; justify-content: space-between; align-items: center; }
-.footer__logo { width: 110px; }
-.footer__copy { font-size: 10px; color: #b8c0ce; }
-@media (max-width: 1100px){
-  .footer__inner { grid-template-columns: 1fr; gap: 20px; padding-left: 5vw; padding-right: 5vw; }
-  .footer__bottom { padding-left: 5vw; padding-right: 5vw; }
+/* ===== Footer（biz全ページ共通。bizトップ public/biz-top-static/index.html にも同じCSS/マークアップを複製しているので、変更時は両方直す） ===== */
+.ftr { position: relative; overflow: hidden; padding: 0; background: #0b1426; color: #fff; letter-spacing: normal; }
+.ftr::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(60% 80% at 0% 0%, rgba(28,69,163,.55) 0%, rgba(28,69,163,0) 60%),
+    radial-gradient(40% 60% at 100% 100%, rgba(232,62,140,.18) 0%, rgba(232,62,140,0) 60%),
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 48px 48px,
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 48px 48px; }
+.ftr > * { position: relative; }
+.ftr__top { max-width: 1200px; margin: 0 auto; padding: clamp(56px, 6vw, 88px) 24px clamp(40px, 4vw, 56px); display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 2.7fr); gap: clamp(40px, 5vw, 80px); }
+.ftr__logo { display: block; width: 140px; height: auto; }
+.ftr__lead { margin: 28px 0 0; font-size: clamp(24px, 2.4vw, 32px); font-weight: 900; line-height: 1.45; letter-spacing: .02em; }
+.ftr__lead em { font-style: normal; background: linear-gradient(90deg, #6fa8ff, #e83e8c); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.ftr__desc { margin: 16px 0 0; font-size: 13px; line-height: 1.9; color: #9fb0c8; }
+.ftr__btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.ftr__btn { white-space: nowrap; display: inline-flex; align-items: center; gap: 10px; padding: 13px 18px; border-radius: 4px; font-size: 14px; font-weight: 700; color: #fff; text-decoration: none; transition: background .2s ease, border-color .2s ease; }
+.ftr__btn::after { content: "→"; transition: transform .2s ease; }
+.ftr__btn:hover::after { transform: translateX(3px); }
+.ftr__btn--fill { background: #e83e8c; }
+.ftr__btn--fill:hover { background: #d42f7b; }
+.ftr__btn--line { border: 1px solid rgba(255,255,255,.35); }
+.ftr__btn--line:hover { border-color: #fff; background: rgba(255,255,255,.06); }
+.ftr__nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; }
+.ftr__title { margin: 0 0 18px; font-family: var(--font-montserrat), "Montserrat", sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .22em; color: #6fa8ff; }
+.ftr__title span { display: block; margin-top: 4px; font-family: inherit; font-size: 14px; letter-spacing: .04em; color: #fff; }
+.ftr__title--sub { margin-top: 36px; }
+.ftr__list { list-style: none; margin: 0; padding: 0; }
+.ftr__list li { margin: 0 0 11px; }
+.ftr__list a { position: relative; display: inline-block; color: #c3cee0; font-size: 13px; line-height: 1.6; text-decoration: none; transition: color .2s ease; }
+.ftr__list a::after { content: ""; position: absolute; left: 0; bottom: -2px; width: 100%; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
+.ftr__list a:hover { color: #fff; }
+.ftr__list a:hover::after { transform: scaleX(1); }
+.ftr__list a[target="_blank"] { display: inline; }
+.ftr__list a[target="_blank"]::after { content: ""; position: static; display: inline-block; width: 12px; height: 12px; margin-left: 6px; vertical-align: -1px; background: #6b7d99; transform: none; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='square'%3E%3Cpath d='M14 4h6v6M20 4l-9 9M18 14v6H4V6h6'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='square'%3E%3Cpath d='M14 4h6v6M20 4l-9 9M18 14v6H4V6h6'/%3E%3C/svg%3E") center / contain no-repeat; transition: background .2s ease; }
+.ftr__list a[target="_blank"]:hover::after { background: #fff; }
+.ftr__bottom { max-width: 1200px; margin: 0 auto; padding: 20px 24px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid rgba(255,255,255,.12); }
+.ftr__copy { margin: 0; font-size: 11px; color: #8394ad; letter-spacing: .04em; }
+.ftr__totop { display: inline-flex; align-items: center; gap: 8px; color: #c3cee0; font-family: var(--font-montserrat), "Montserrat", sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .18em; text-decoration: none; }
+.ftr__totop::after { content: "↑"; display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid rgba(255,255,255,.3); border-radius: 4px; letter-spacing: 0; transition: border-color .2s ease; }
+.ftr__totop:hover::after { border-color: #fff; }
+@media (max-width: 1100px) {
+  .ftr__top { grid-template-columns: 1fr; }
+  .ftr__nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 24px; }
+}
+@media (max-width: 560px) {
+  .ftr__top, .ftr__bottom { padding-left: 20px; padding-right: 20px; }
+  .ftr__btn { flex: 1 1 100%; justify-content: space-between; }
+  .ftr__nav { gap: 32px 16px; }
 }
 
 /* ===== Top Header ===== */
@@ -217,54 +248,72 @@ export function BizHeader({ docHref = "/doc-a" }: { docHref?: string } = {}) {
   );
 }
 
+
+// フッター（ブランド＋CTA、研修プログラム一覧、メニュー4列）
 export function BizFooter() {
   return (
-    <footer className="footer" id="pageFooter">
-      <div className="footer__inner">
-        <div className="footer__col footer__col--lead">
-          <p className="footer__lead">生成AI活用を、<br />現場の当たり前に。</p>
+    <footer className="ftr" id="pageFooter">
+      <div className="ftr__top">
+        <div>
+          <img loading="lazy" src="/biz/assets/img/common/ft-logo_w.svg" alt="バイテック法人AI研修" className="ftr__logo" />
+          <p className="ftr__lead">生成AI活用を、<br /><em>現場の当たり前に。</em></p>
+          <p className="ftr__desc">ChatGPT・Gemini・Copilot・Claudeなど、業務で使うAIを全社に定着させる法人向けAI研修です。</p>
+          <div className="ftr__btns">
+            <a className="ftr__btn ftr__btn--fill" href="/documents">資料をダウンロード</a>
+            <a className="ftr__btn ftr__btn--line" href="/counseling">無料個別相談</a>
+          </div>
         </div>
-        <div className="footer__col">
-          <p className="footer__title">バイテック法人AI研修について</p>
-          <ul className="footer__list">
-            <li><a href="/#about">バイテック法人AI研修とは</a></li>
-            <li><a href="/#course">研修一覧</a></li>
-            <li><a href="/#feature">3つの特徴</a></li>
-            <li><a href="/#works">導入事例</a></li>
-            <li><a href="/faq">よくある質問</a></li>
-            <li><a href="/documents">お役立ち資料</a></li>
-            <li><a href="/archive">セミナーアーカイブ</a></li>
-            <li><a href="/news">お知らせ</a></li>
-          </ul>
-        </div>
-        <div className="footer__col">
-          <p className="footer__title">サポート</p>
-          <ul className="footer__list">
-            <li><a href="/user-terms/">利用規約</a></li>
-            <li><a href="/specified_commercial/">特定商取引法に関する表示</a></li>
-            <li><a href="/system-requirements/">システム要件</a></li>
-            <li><a href="/refund-policy/">返金ポリシー</a></li>
-          </ul>
-        </div>
-        <div className="footer__col">
-          <p className="footer__title">会社情報</p>
-          <ul className="footer__list">
-            <li><a href="https://ai-bou.co.jp" target="_blank" rel="noopener">会社概要</a></li>
-            <li><a href="/privacy-policy/">プライバシーポリシー</a></li>
-          </ul>
-          <p className="footer__title footer__title--service">サービス</p>
-          <ul className="footer__list">
-            <li><a href="https://bytech.jp" target="_blank" rel="noopener">個人向けAIスクール【バイテック】</a></li>
-            <li><a href="https://biz.bytech.jp/blog/" target="_blank" rel="noopener">オウンドメディア【バイテックBLOG Biz】</a></li>
-            <li><a href="https://ai-bou.co.jp/ai-sanbo" target="_blank" rel="noopener">企業向けAI顧問サービス【AI参謀】</a></li>
-            <li><a href="https://degit.jp" target="_blank" rel="noopener">AI動画編集スクール【デジット】</a></li>
-            <li><a href="https://ai-katsu.jp/" target="_blank" rel="noopener">AI活用ナレッジメディア【AI活】</a></li>
-          </ul>
-        </div>
+        <nav className="ftr__nav" aria-label="フッターメニュー">
+          <div>
+            <p className="ftr__title">PROGRAM<span>研修プログラム</span></p>
+            <ul className="ftr__list">
+              {COURSES.map((c) => (
+                <li key={c.slug}><a href={`/${c.slug}`}>{c.name}</a></li>
+              ))}
+              <li><a href="/e-learning">eラーニング</a></li>
+            </ul>
+          </div>
+          <div>
+            <p className="ftr__title">ABOUT<span>バイテック法人AI研修</span></p>
+            <ul className="ftr__list">
+              <li><a href="/#about">バイテック法人AI研修とは</a></li>
+              <li><a href="/#feature">3つの特徴</a></li>
+              <li><a href="/#works">導入事例</a></li>
+              <li><a href="/faq">よくある質問</a></li>
+              <li><a href="/documents">お役立ち資料</a></li>
+              <li><a href="/archive">セミナーアーカイブ</a></li>
+              <li><a href="/news">お知らせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <p className="ftr__title">SUPPORT<span>サポート</span></p>
+            <ul className="ftr__list">
+              <li><a href="/user-terms/">利用規約</a></li>
+              <li><a href="/specified_commercial/">特定商取引法に関する表示</a></li>
+              <li><a href="/system-requirements/">システム要件</a></li>
+              <li><a href="/refund-policy/">返金ポリシー</a></li>
+            </ul>
+            <p className="ftr__title ftr__title--sub">COMPANY<span>会社情報</span></p>
+            <ul className="ftr__list">
+              <li><a href="https://ai-bou.co.jp" target="_blank" rel="noopener">会社概要</a></li>
+              <li><a href="/privacy-policy/">プライバシーポリシー</a></li>
+            </ul>
+          </div>
+          <div>
+            <p className="ftr__title">SERVICE<span>関連サービス</span></p>
+            <ul className="ftr__list">
+              <li><a href="https://bytech.jp" target="_blank" rel="noopener">個人向けAIスクール【バイテック】</a></li>
+              <li><a href="https://biz.bytech.jp/blog/" target="_blank" rel="noopener">オウンドメディア【バイテックBLOG Biz】</a></li>
+              <li><a href="https://ai-bou.co.jp/ai-sanbo" target="_blank" rel="noopener">企業向けAI顧問サービス【AI参謀】</a></li>
+              <li><a href="https://degit.jp" target="_blank" rel="noopener">AI動画編集スクール【デジット】</a></li>
+              <li><a href="https://ai-katsu.jp/" target="_blank" rel="noopener">AI活用ナレッジメディア【AI活】</a></li>
+            </ul>
+          </div>
+        </nav>
       </div>
-      <div className="footer__bottom">
-        <img loading="lazy" src="/biz/assets/img/common/ft-logo_w.svg" alt="バイテック法人AI研修" className="footer__logo" />
-        <p className="footer__copy">2025 株式会社AI棒</p>
+      <div className="ftr__bottom">
+        <p className="ftr__copy">© 2025 株式会社AI棒</p>
+        <a className="ftr__totop" href="#">PAGE TOP</a>
       </div>
     </footer>
   );

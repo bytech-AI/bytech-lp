@@ -113,6 +113,13 @@ const DOCS: Record<string, { intro: string; items: { title: string; view: string
       { title: "リーダー・マネージャー向けAI研修 コース紹介資料", view: `${SITE}/documents/ebook-38`, pdf: `${SITE}/assets/docs/ebook-38.pdf` },
     ],
   },
+  法人向けAIeラーニングサービス概要資料: {
+    intro:
+      "法人向けAIeラーニングのサービス概要資料です。1,000本以上のAI講座と専用LMS・AI機能、プログラム一覧、料金（1IDあたり月額2,980円）と助成金の活用、受講開始までの流れまでまとめています。導入のご検討にお役立てください。",
+    items: [
+      { title: "法人向けAIeラーニング サービス概要資料", view: `${SITE}/documents/ebook-39`, pdf: `${SITE}/assets/docs/ebook-39.pdf` },
+    ],
+  },
   製造業のAI活用事例集: {
     intro:
       "国内メーカー10社が公開しているAI活用の取り組みを、一覧と1社1ページの詳細でまとめた資料です。設計・品質保証・設備保全・研究開発のどこから着手すると成果が出ているかが分かります。掲載している数値はすべて各社の公式発表にもとづく公表値です。",

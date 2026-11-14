@@ -79,7 +79,7 @@ const FORM_HTML = `
   <div class="tr-field">
     <label class="tr-label">導入を検討しているID数<span class="tr-req">必須</span></label>
     <div class="tr-chips">
-      ${["10〜29ID", "30〜49ID", "50〜99ID", "100ID以上", "未定"]
+      ${["5〜9ID", "10〜29ID", "30〜49ID", "50〜99ID", "100ID以上", "未定"]
         .map((v, i) => `<label class="tr-chip"><input type="radio" name="検討ID数" value="${v}"${i === 0 ? " data-formrun-required" : ""}><span>${v}</span></label>`)
         .join("")}
     </div>
@@ -116,6 +116,27 @@ const FREE_MAIL_SCRIPT = `(function(){
     form.addEventListener('submit',function(e){ if(isFree(email.value)){ e.preventDefault(); e.stopImmediatePropagation(); check(); email.focus(); } }, true);
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();`;
+
+// 申込みのDiscord通知: formrun 送信成功時のみ /api/trial-notify へ beacon（トップFVの資料DL通知と同じ仕組み）
+const TRIAL_NOTIFY_SCRIPT = `(function(){
+  var SUBMIT_RE=/form\\.run\\/api\\/v1\\/r\\//;
+  function notify(){try{
+    var form=document.querySelector('form.formrun'); if(!form) return;
+    var fd=new FormData(form), payload={};
+    fd.forEach(function(v,k){ if(k.charAt(0)==='_') return; payload[k]=payload[k]?payload[k]+'、'+v:String(v); });
+    payload['ページ']=location.pathname;
+    if(window.btBizSource) Object.assign(payload, window.btBizSource());
+    var body=new Blob([JSON.stringify(payload)],{type:'application/json'});
+    if(!(navigator.sendBeacon&&navigator.sendBeacon('/api/trial-notify',body)))
+      fetch('/api/trial-notify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload),keepalive:true}).catch(function(){});
+  }catch(e){}}
+  var open=XMLHttpRequest.prototype.open;
+  XMLHttpRequest.prototype.open=function(m,u){this.__frUrl=String(u||'');return open.apply(this,arguments);};
+  var send=XMLHttpRequest.prototype.send;
+  XMLHttpRequest.prototype.send=function(){var x=this; if(SUBMIT_RE.test(x.__frUrl)) x.addEventListener('load',function(){ if(x.status>=200&&x.status<300) notify(); }); return send.apply(this,arguments);};
+  var of=window.fetch;
+  if(of) window.fetch=function(input,init){var u=typeof input==='string'?input:(input&&input.url)||''; var p=of.apply(this,arguments); if(SUBMIT_RE.test(u)) p.then(function(r){ if(r&&r.ok) notify(); }).catch(function(){}); return p;};
 })();`;
 
 // formrun.js が広告ブロッカー等で読めない時だけネイティブの required を付ける（/doc-a と同じフォールバック）
@@ -172,7 +193,7 @@ export default function ELearningTrialPage() {
                 <p className="tr-price__v">
                   月額<b>2,980</b>円／ID<span>＋ 導入費用 100,000円</span>
                 </p>
-                <p className="tr-price__note">※税抜。ご契約は10ID・6ヶ月から承ります。</p>
+                <p className="tr-price__note">※税抜。ご契約は5ID・6ヶ月から承ります。</p>
               </div>
             </div>
 
@@ -195,6 +216,7 @@ export default function ELearningTrialPage() {
 
       <script dangerouslySetInnerHTML={{ __html: FREE_MAIL_SCRIPT }} />
       <script dangerouslySetInnerHTML={{ __html: REQUIRED_FALLBACK_SCRIPT }} />
+      <script dangerouslySetInnerHTML={{ __html: TRIAL_NOTIFY_SCRIPT }} />
       <script src="https://sdk.form.run/js/v2/formrun.js" defer />
 
       <BizFooter />

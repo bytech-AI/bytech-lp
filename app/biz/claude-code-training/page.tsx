@@ -299,7 +299,7 @@ const course: CourseData = {
       { name: "AI効率化研修", amount: "200,000", unit: "円〜／名" },
       { name: "AI自動化研修", amount: "300,000", unit: "円〜／名" },
     ],
-    single: { name: "eラーニング", amount: "2,980", unit: "円／月・1ID（税抜）", note: "導入費用100,000円（税抜）・10ID／6ヶ月から。全プログラム見放題", href: "/e-learning" },
+    single: { name: "eラーニング", amount: "2,980", unit: "円／月・1ID（税抜）", note: "導入費用100,000円（税抜）・5ID／6ヶ月から。全プログラム見放題", href: "/e-learning" },
   },
   faqs: COURSE_FAQS["claude-code-training"],
 };

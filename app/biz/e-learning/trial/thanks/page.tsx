@@ -29,7 +29,7 @@ export default function ELearningTrialThanksPage() {
               <Link className="tr-submit tr-thanks__btn" href="/e-learning" prefetch={false}>
                 eラーニングのページへ戻る
               </Link>
-              <a className="tr-thanks__sub" href="/doc-e">研修タイプ比較ガイドをダウンロード →</a>
+              <a className="tr-thanks__sub" href="/doc-an">eラーニングのサービス概要資料をダウンロード →</a>
             </div>
           </section>
         </div>

@@ -19,7 +19,6 @@ const STATIC_PAGES: Entry[] = [
   { path: "/copilot-studio-training", lastmod: "2026-07-26", priority: "0.9" },
   { path: "/creative-ai-training", lastmod: "2026-07-26", priority: "0.9" },
   { path: "/dify-training", lastmod: "2026-07-26", priority: "0.9" },
-  { path: "/e-learning", lastmod: "2026-11-07", priority: "0.9" },
   { path: "/archive", lastmod: "2026-07-16", priority: "0.8" },
   { path: "/counseling", lastmod: "2026-07-24", priority: "0.8" },
   { path: "/estimate", lastmod: "2026-09-26", priority: "0.8" },

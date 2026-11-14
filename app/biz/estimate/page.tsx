@@ -15,7 +15,7 @@ const ESTIMATE_ACTION = "https://form.run/api/v1/r/x4332ymk27jj5z0fd8z7fu4t";
 // AI効率化研修・AI自動化研修は受講者1名あたり、他形式は1回あたりの価格。
 // AI効率化研修・AI自動化研修以外は助成金対象外。
 const PLANS = [
-  { name: "eラーニング", unit: 2980, billingUnit: "ID・月", setup: 100000, minQty: 10, months: 6, subsidized: null, subsidyEligible: false },
+  { name: "eラーニング", unit: 2980, billingUnit: "ID・月", setup: 100000, minQty: 5, months: 6, subsidized: null, subsidyEligible: false },
   { name: "セミナー", unit: 200000, billingUnit: "回", subsidized: null, subsidyEligible: false },
   { name: "ハンズオン", unit: 300000, billingUnit: "回", subsidized: null, subsidyEligible: false },
   { name: "ワークショップ", unit: 500000, billingUnit: "回", subsidized: null, subsidyEligible: false },
@@ -166,7 +166,7 @@ const FORM_HTML = `
       <p class="es-result__message">内容を確認のうえ、担当よりメールにてご連絡します。</p>
     </div>
     <dl class="es-summary" id="esSummary"></dl>
-    <p class="es-note">※研修内容や人数、カリキュラムのカスタマイズにより費用は変動します。助成金の適用可否・金額は企業規模や条件により異なります。eラーニングは導入費用100,000円＋1IDあたり月額2,980円（いずれも税抜）を、10ID・6ヶ月から計算しています。</p>
+    <p class="es-note">※研修内容や人数、カリキュラムのカスタマイズにより費用は変動します。助成金の適用可否・金額は企業規模や条件により異なります。eラーニングは導入費用100,000円＋1IDあたり月額2,980円（いずれも税抜）を、5ID・6ヶ月から計算しています。</p>
     <!-- 選択内容の隠しフィールド。個別フィールドはformrun管理画面で同名登録が必要（未登録だと通知に載らない・doc-aと同様）。
          「お問い合わせ」はフォーム既定の必須項目のため、未登録でも全内容が届くよう選択内容のまとめを入れる。 -->
     <input type="hidden" name="研修コース" id="esHidCourse">

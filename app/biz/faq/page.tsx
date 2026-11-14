@@ -19,6 +19,10 @@ export const metadata: Metadata = {
   },
 };
 
+// FVのカテゴリボタンは基本カテゴリ（サービス〜セキュリティ）の6つだけ出す
+const HERO_CATS = 6;
+const FAQ_COUNT = FAQ_GROUPS.reduce((n, g) => n + g.items.length, 0);
+
 // FAQPage 構造化データ（Google のFAQリッチリザルト用）。data.ts を唯一のソースにする。
 const faqJsonLd = {
   "@context": "https://schema.org",
@@ -47,8 +51,41 @@ export default function FaqPage() {
             <span>›</span>
             <span>よくあるご質問</span>
           </nav>
-          <header className="news-fv">
-            <h1>よくあるご質問</h1>
+          <header className="faq-hero">
+            <div className="faq-hero__body">
+              <p className="faq-hero__eyebrow">FAQ</p>
+              <h1 className="faq-hero__title">よくあるご質問</h1>
+              <p className="faq-hero__lead">
+                サービス内容・研修カリキュラム・料金・導入の流れまで、
+                <br className="faq-hero__pc" />
+                お客さまからよくいただくご質問をまとめました。
+              </p>
+              <p className="faq-hero__count">
+                <b>{FAQ_COUNT}</b>件のご質問に回答しています
+              </p>
+              {/* 主要カテゴリへのショートカット（研修コース別カテゴリは左ナビから） */}
+              <ul className="faq-hero__cats">
+                {FAQ_GROUPS.slice(0, HERO_CATS).map((group, i) => (
+                  <li key={group.category}>
+                    <a href={`#faq-cat-${i}`}>{group.category}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {/* 右側の装飾：Q と A の吹き出し */}
+            <div className="faq-hero__art" aria-hidden="true">
+              <p className="faq-hero__bubble faq-hero__bubble--q">
+                <span>Q</span>
+                <i />
+                <i />
+              </p>
+              <p className="faq-hero__bubble faq-hero__bubble--a">
+                <span>A</span>
+                <i />
+                <i />
+                <i />
+              </p>
+            </div>
           </header>
 
           <FaqList />
