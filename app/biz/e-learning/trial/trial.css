@@ -101,3 +101,4 @@ select.tr-input { appearance: none; -webkit-appearance: none; background-image: 
   .tr-thanks .tr-lead { text-align: left; }
   .tr-thanks .tr-lead br { display: none; }
 }
+.tr-recaptcha { display: flex; justify-content: center; margin: 8px 0 20px; }
