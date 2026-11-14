@@ -9,9 +9,12 @@ import "./trial.css";
 // eラーニング無料トライアルの申込ページ。
 // フォームは formrun SDK の自前フォーム（/doc-a・/counseling と同方式。class/action/method は formrun 指定のため変更不可）。
 // React管理外(dangerouslySetInnerHTML)にして SDK とハイドレーションの競合を避ける。
-// ※ formrun 管理画面でトライアル用フォームを作り、TRIAL_FORM_ACTION を差し替えること。
+// formrun のトライアル用フォーム（2026-11-14 作成）。
 //   完了後のリダイレクト先は /e-learning/trial/thanks に設定する。
-const TRIAL_FORM_ACTION = "https://form.run/api/v1/r/REPLACE_WITH_TRIAL_FORM_ID";
+const TRIAL_FORM_ACTION = "https://form.run/api/v1/r/lsnbni2ggg3bgt4lsk8krruz";
+// Google reCAPTCHA v2（チェックボックス）のサイトキー。シークレットキーは formrun の
+// フォーム設定＞スパム対策＞Google Recaptchaの設置 に入れる。空ならreCAPTCHAを出さない
+const RECAPTCHA_SITE_KEY = "";
 
 export const metadata = {
   ...buildCourseMetadata({
@@ -77,6 +80,29 @@ const FORM_HTML = `
     </div>
   </div>
   <div class="tr-field">
+    <label class="tr-label">会社のWebサイトURL<span class="tr-req">必須</span></label>
+    <input class="tr-input" type="text" inputmode="url" name="会社URL" placeholder="https://example.co.jp" data-formrun-required>
+    <div class="tr-error" data-formrun-show-if-error="会社URL">会社のWebサイトURLを入力してください</div>
+  </div>
+  <div class="tr-row">
+    <div class="tr-field">
+      <label class="tr-label">従業員数<span class="tr-req">必須</span></label>
+      <select class="tr-input" name="従業員数" data-formrun-required>
+        <option value="" disabled selected>選択してください</option>
+        ${["1〜49名", "50〜99名", "100〜299名", "300〜999名", "1,000名以上"].map((v) => `<option>${v}</option>`).join("")}
+      </select>
+      <div class="tr-error" data-formrun-show-if-error="従業員数">従業員数を選択してください</div>
+    </div>
+    <div class="tr-field">
+      <label class="tr-label">導入検討時期<span class="tr-req">必須</span></label>
+      <select class="tr-input" name="導入検討時期" data-formrun-required>
+        <option value="" disabled selected>選択してください</option>
+        ${["1ヶ月以内", "3ヶ月以内", "半年以内", "時期未定・情報収集中"].map((v) => `<option>${v}</option>`).join("")}
+      </select>
+      <div class="tr-error" data-formrun-show-if-error="導入検討時期">導入検討時期を選択してください</div>
+    </div>
+  </div>
+  <div class="tr-field">
     <label class="tr-label">導入を検討しているID数<span class="tr-req">必須</span></label>
     <div class="tr-chips">
       ${["5〜9ID", "10〜29ID", "30〜49ID", "50〜99ID", "100ID以上", "未定"]
@@ -98,6 +124,7 @@ const FORM_HTML = `
   <div class="_formrun_gotcha" aria-hidden="true" style="position:absolute;height:1px;width:1px;overflow:hidden;">
     <input type="text" name="_formrun_gotcha" tabindex="-1" autocomplete="off">
   </div>
+  ${RECAPTCHA_SITE_KEY ? `<div class="tr-recaptcha g-recaptcha" data-sitekey="${RECAPTCHA_SITE_KEY}"></div>` : ""}
   <button class="tr-submit" type="submit" data-formrun-error-text="未入力の項目があります" data-formrun-submitting-text="送信中...">無料トライアルを申し込む<span class="tr-submit__ico" aria-hidden="true"></span></button>
   <p class="tr-consent">フォームの送信をもって<a href="/privacy-policy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意したものとします。</p>
 </form>
@@ -218,6 +245,7 @@ export default function ELearningTrialPage() {
       <script dangerouslySetInnerHTML={{ __html: REQUIRED_FALLBACK_SCRIPT }} />
       <script dangerouslySetInnerHTML={{ __html: TRIAL_NOTIFY_SCRIPT }} />
       <script src="https://sdk.form.run/js/v2/formrun.js" defer />
+      {RECAPTCHA_SITE_KEY && <script src="https://www.google.com/recaptcha/api.js?hl=ja" async defer />}
 
       <BizFooter />
     </>
