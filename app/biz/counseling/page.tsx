@@ -3,6 +3,8 @@ export default function CounselingPage() {
     <>
       <link rel="stylesheet" href="/biz/assets/css/style.min.css" />
       <style dangerouslySetInnerHTML={{ __html: `
+        /* style.min.css の html,body{overflow-x:hidden} は body をスクロール領域にしてトラックパッドで引っかかるので clip に */
+        html, body { overflow-x: clip; }
         body {
           font-family: var(--font-noto-jp), sans-serif;
           color: #333;

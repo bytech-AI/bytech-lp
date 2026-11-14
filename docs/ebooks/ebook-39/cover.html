@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 640px; height: 996px; background: transparent; }
+  .bk { position: relative; width: 640px; height: 996px; background: linear-gradient(160deg, #142f5c 0%, #1f4a8a 60%, #2c63b4 100%); border-radius: 18px; overflow: hidden; font-family: "Noto Sans JP", sans-serif; color: #fff; }
+  .ph { position: absolute; left: 0; top: 0; width: 640px; height: 520px; object-fit: cover; object-position: 62% 30%;
+    -webkit-mask-image: linear-gradient(180deg, #000 62%, transparent 100%); mask-image: linear-gradient(180deg, #000 62%, transparent 100%); }
+  .eb { position: absolute; top: 30px; left: 32px; background: #f2b632; color: #4a3605; font-size: 15px; font-weight: 800; padding: 8px 18px; }
+  .ui { position: absolute; background: #fff; color: #1a2330; }
+  .rank { right: 26px; top: 88px; width: 214px; padding: 12px 14px 6px; }
+  .rank .t { font-size: 11.5px; font-weight: 800; color: #1c45a3; display: flex; align-items: center; gap: 6px; }
+  .rank .t::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #d0356b; }
+  .rank .r { display: grid; grid-template-columns: 20px 1fr auto; gap: 8px; align-items: center; font-size: 12px; font-weight: 700; padding: 6px 4px; }
+  .rank .r i { width: 19px; height: 19px; border-radius: 50%; background: #eef2f8; font-style: normal; font-size: 10px; display: flex; align-items: center; justify-content: center; }
+  .rank .r:first-of-type i { background: #ffd23f; }
+  .rank .r.me { background: #eaf1fd; color: #1c45a3; }
+  .rank .r b { color: #1c45a3; }
+  .ms { left: 26px; top: 336px; width: 300px; padding: 12px 16px 14px; background: linear-gradient(120deg, #2c55a8, #5d8ae0); color: #fff; }
+  .ms .hd { display: flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 800; }
+  .ms .hd img { width: 30px; height: 30px; border-radius: 50%; border: 2px solid #fff; object-fit: cover; }
+  .ms .hd span { margin-left: auto; font-size: 11px; } .ms .hd b { font-size: 16px; }
+  .ms ol { list-style: none; display: flex; justify-content: space-between; margin-top: 12px; position: relative; }
+  .ms ol::before { content: ""; position: absolute; left: 20px; right: 20px; top: 10px; height: 2px; background: rgba(255,255,255,.5); }
+  .ms li { position: relative; width: 33%; text-align: center; font-size: 10px; font-weight: 700; }
+  .ms li i { display: flex; margin: 0 auto 4px; width: 22px; height: 22px; border-radius: 50%; background: #fff; color: #1c45a3; font-style: normal; font-size: 10px; font-weight: 800; align-items: center; justify-content: center; }
+  .ms li.now i { background: #ffd23f; color: #3a2a00; }
+  .sub { position: absolute; top: 528px; left: 0; right: 0; text-align: center; font-size: 14px; font-weight: 700; opacity: .92; }
+  .ttl { position: absolute; top: 566px; left: 0; right: 0; text-align: center; font-size: 54px; font-weight: 900; line-height: 1.2; letter-spacing: .01em; }
+  .ttl small { display: block; margin-top: 8px; font-size: 34px; color: #ffd76a; letter-spacing: .08em; }
+  .tools { position: absolute; top: 790px; left: 0; right: 0; display: flex; justify-content: center; gap: 12px; }
+  .tools span { width: 48px; height: 48px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; }
+  .tools img { width: 28px; height: 28px; object-fit: contain; }
+  .ft { position: absolute; left: 0; right: 0; bottom: 0; height: 132px; background: #fff; color: #1b2e51; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+  .ft p { font-size: 25px; font-weight: 900; letter-spacing: .02em; }
+  .ft p b { color: #2f6fd6; font-size: 32px; margin: 0 2px; }
+  .ft div { display: flex; gap: 10px; }
+  .ft span { border: 1.5px solid #1b2e51; font-size: 13px; font-weight: 800; padding: 4px 14px; border-radius: 999px; }
+</style></head><body><div class="bk">
+  <img class="ph" src="assets/photo/feature-photo-01.webp" alt="">
+  <p class="eb">サービス紹介</p>
+  <div class="ui rank"><p class="t">チーム内ランキング｜今週</p><p class="r"><i>1</i>佐藤さん<b>4.2h</b></p><p class="r me"><i>2</i>あなた<b>3.6h</b></p><p class="r"><i>3</i>鈴木さん<b>2.9h</b></p></div>
+  <div class="ui ms"><p class="hd"><img src="assets/photo/feature-avatar-01.webp" alt="">あなたのマイルストーン<span>達成 <b>3</b>/7</span></p><ol><li><i>✓</i>ChatGPT入門</li><li class="now"><i>4</i>資料作成をAIで</li><li><i>5</i>業務の自動化</li></ol></div>
+  <p class="sub">1,000本以上のAI講座が見放題。専用LMSとAI機能で学び続ける</p>
+  <p class="ttl">法人向けAI<br>eラーニング<small>サービス概要資料</small></p>
+  <div class="tools"><span><img src="assets/tools/chatgpt.webp" alt=""></span><span><img src="assets/tools/gemini.webp" alt=""></span><span><img src="assets/tools/copilot.webp" alt=""></span><span><img src="assets/tools/claude.svg" alt=""></span></div>
+  <div class="ft"><p>1IDあたり月額<b>2,980</b>円〜（税抜）</p><div><span>1,000本以上が見放題</span><span>5IDから</span><span>助成金対応</span></div></div>
+</div></body></html>

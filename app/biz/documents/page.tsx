@@ -123,6 +123,16 @@ const STATIC_DOCS: { category: string; doc: DocItem }[] = [
     },
   },
   {
+    category: "サービス概要",
+    doc: {
+      title: "法人向けAIeラーニング サービス概要資料",
+      points: ["1,000本以上のAI講座と専用LMS・AI機能", "プログラム一覧と料金・助成金", "受講開始までの3ステップ・FAQ"],
+      thumbLabel: "DOCUMENT",
+      thumb: "/biz/assets/img/documents/ebook-39-cover.webp",
+      href: "/doc-an",
+    },
+  },
+  {
     category: "研修コース紹介",
     doc: {
       title: "ChatGPT研修 コース紹介資料",
