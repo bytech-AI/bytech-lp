@@ -209,20 +209,6 @@ export function BizHeader({ docHref = "/doc-a" }: { docHref?: string } = {}) {
           <a href="/#feature" className="top-nav-link">3つの特徴</a>
           <a href="/#works" className="top-nav-link">導入事例</a>
           <div className="top-nav-item">
-            <a href="/archive" className="top-nav-link">アーカイブ<span className="top-nav-caret" aria-hidden="true" /></a>
-            <div className="top-mega-menu" aria-label="セミナーアーカイブの内容">
-              <span className="top-mega-menu__eyebrow">Seminar Archive</span>
-              <p className="top-mega-menu__heading">実務に活かせるAIセミナー</p>
-              <p className="top-mega-menu__desc">過去に開催したセミナーを、テーマや気になる課題から探せます。</p>
-              <div className="top-mega-menu__grid">
-                <a className="top-mega-menu__card" href="/seminars/seminar-6"><span className="top-mega-menu__thumb"><img src="/biz/assets/img/seminars/seminar-6.webp" alt="" loading="lazy" /></span><span className="top-mega-menu__card-title">CodexでLP制作</span><span className="top-mega-menu__card-desc">制作からネット公開まで</span></a>
-                <a className="top-mega-menu__card" href="/seminars/seminar-5"><span className="top-mega-menu__thumb"><img src="/biz/assets/img/seminars/seminar-5.webp" alt="" loading="lazy" /></span><span className="top-mega-menu__card-title">Codexで資料制作</span><span className="top-mega-menu__card-desc">伝わるプレゼンを効率化</span></a>
-                <a className="top-mega-menu__card" href="/seminars/seminar-4"><span className="top-mega-menu__thumb"><img src="/biz/assets/img/seminars/seminar-4.webp" alt="" loading="lazy" /></span><span className="top-mega-menu__card-title">Geminiで画像量産</span><span className="top-mega-menu__card-desc">スプレッドシートで効率化</span></a>
-              </div>
-              <a className="top-mega-menu__all" href="/archive">セミナーをすべて見る</a>
-            </div>
-          </div>
-          <div className="top-nav-item">
             <a href="/documents" className="top-nav-link">お役立ち資料<span className="top-nav-caret" aria-hidden="true" /></a>
             <div className="top-mega-menu top-mega-menu--docs" aria-label="お役立ち資料の内容">
               <span className="top-mega-menu__eyebrow">Useful Documents</span>
@@ -281,7 +267,6 @@ export function BizFooter() {
               <li><a href="/#works">導入事例</a></li>
               <li><a href="/faq">よくある質問</a></li>
               <li><a href="/documents">お役立ち資料</a></li>
-              <li><a href="/archive">セミナーアーカイブ</a></li>
               <li><a href="/news">お知らせ</a></li>
             </ul>
           </div>
