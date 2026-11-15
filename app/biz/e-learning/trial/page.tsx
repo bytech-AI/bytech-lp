@@ -15,7 +15,7 @@ import { Devices } from "../Devices";
 const TRIAL_FORM_ACTION = "https://form.run/api/v1/r/lsnbni2ggg3bgt4lsk8krruz";
 // Google reCAPTCHA v2（チェックボックス）のサイトキー。シークレットキーは formrun の
 // フォーム設定＞スパム対策＞Google Recaptchaの設置 に入れる。空ならreCAPTCHAを出さない
-const RECAPTCHA_SITE_KEY = "";
+const RECAPTCHA_SITE_KEY = "6LdQ_yAuAAAAACxI6Jlz_pueKZYsbAj6ulS_FHIc";
 
 export const metadata = {
   ...buildCourseMetadata({
