@@ -105,3 +105,6 @@ select.tr-input { appearance: none; -webkit-appearance: none; background-image: 
   .tr-thanks .tr-lead br { display: none; }
 }
 .tr-recaptcha { display: flex; justify-content: center; margin: 8px 0 20px; }
+/* .biz-root * { all: revert } が iframe の width/height 属性と枠線の指定まで打ち消し、
+   既定の 300×150・立体枠線に戻ってボタンに重なるため、reCAPTCHA の寸法を CSS で指定し直す */
+.biz-root .tr-recaptcha iframe { display: block; width: 304px; height: 78px; border: 0; }
