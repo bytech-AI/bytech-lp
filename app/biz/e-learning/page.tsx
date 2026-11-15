@@ -6,6 +6,7 @@ import { COURSES } from "../_course/courses";
 import { buildCourseMetadata } from "../_course/courseMetadata";
 import "../_course/course.css";
 import "./e-learning.css";
+import { Devices } from "./Devices";
 
 // ── eラーニング研修の個別ページ（schoo.jp/biz・manebi.co.jp の構成を参考に、研修LPと同じ ct- のトンマナで組む）。
 //    構成：とは？→お悩み→特長→AI機能→受講者の声→CTA→料金→プログラム→CTA→受講開始までの3ステップ→FAQ→資料DL
@@ -622,7 +623,7 @@ function Cta() {
       <a className="el-cta__btn el-cta__btn--dark" href={TRIAL_HREF}>
         <span className="el-cta__badge">まずは無料でお試し！</span>
         <span className="el-cta__visual el-cta__visual--mock">
-          <Devices />
+          <Devices programs={programs} />
         </span>
         <span className="el-cta__text">無料トライアル</span>
         <span className="el-cta__ico el-cta__ico--arrow" aria-hidden="true" />
@@ -674,7 +675,7 @@ function CtaBand({ final = false }: { final?: boolean }) {
               無料トライアルはこちら
             </a>
             <div className="el-band__visual el-band__visual--trial">
-              <Devices />
+              <Devices programs={programs} />
             </div>
           </div>
           {final && (
@@ -941,67 +942,6 @@ function AiMock({ kind }: { kind: (typeof AI_FEATURES)[number]["key"] }) {
 }
 
 // FVの帯とサイクル図の中央で共用するPC・スマホのモック
-function Devices() {
-  return (
-    <div className="el-devices" aria-hidden="true">
-      <div className="el-laptop">
-        <div className="el-laptop__lid">
-          <div className="el-laptop__screen">
-            <div className="el-lms">
-              <div className="el-lms__list">
-                <p className="el-lms__course">Claude研修</p>
-                <ul>
-                  <li className="is-done">Claudeの基本操作</li>
-                  <li className="is-done">指示の出し方</li>
-                  <li className="is-now">アイデアを出す</li>
-                  <li>企画書にまとめる</li>
-                  <li>資料をレビューする</li>
-                  <li>業務フローに組み込む</li>
-                </ul>
-                <div className="el-lms__progress">
-                  <span>受講進捗</span>
-                  <b>62%</b>
-                  <i><em /></i>
-                </div>
-              </div>
-              <div className="el-lms__main">
-                <p className="el-lms__title"><span>Chapter 3</span>新規事業のアイデアを出す</p>
-                <div className="el-lms__player">
-                  <img src="/biz/assets/img/e-learning/lesson.webp" alt="" width={960} height={540} />
-                  <span className="el-lms__seek"><i /></span>
-                </div>
-                <div className="el-lms__actions">
-                  <span className="is-primary">次のレッスンへ</span>
-                  <span>メモ</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="el-laptop__base" />
-      </div>
-
-      <div className="el-phone">
-        <div className="el-phone__screen">
-          <p className="el-phone__brand"><img src="/biz/assets/img/common/hd-logo-dark.svg" alt="" /></p>
-          <div className="el-phone__hero">
-            <img src="/biz/assets/img/course/about/chat-gpt-01.webp" alt="" />
-            <span>ChatGPT研修</span>
-          </div>
-          <p className="el-phone__head">受講中のプログラム</p>
-          {programs.slice(1, 4).map((c, i) => (
-            <div className="el-phone__item" key={c.slug} style={{ ["--el-accent" as string]: c.color }}>
-              <span className="el-phone__logo"><img src={c.logo} alt="" /></span>
-              <span className="el-phone__name">{c.name.replace(/研修$/, "")}</span>
-              <span className="el-phone__bar"><i style={{ width: `${[35, 80, 15][i]}%` }} /></span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default function ELearningPage() {
   return (
     <>
@@ -1071,7 +1011,7 @@ export default function ELearningPage() {
                 </ul>
               </div>
 
-              <Devices />
+              <Devices programs={programs} />
             </div>
           </div>
         </section>
@@ -1142,7 +1082,7 @@ export default function ELearningPage() {
             <div className="el-cycle__hub">
               <img className="el-cycle__hub-logo" src="/biz/assets/img/common/hd-logo-dark.svg" alt="バイテック法人AI研修" />
               <div className="el-cycle__devices">
-                <Devices />
+                <Devices programs={programs} />
               </div>
             </div>
 
@@ -1609,7 +1549,7 @@ export default function ELearningPage() {
             </div>
             <div className="el-direct__action">
               <div className="el-direct__visual">
-                <Devices />
+                <Devices programs={programs} />
               </div>
               <a className="el-direct__btn" href={TRIAL_HREF}>
                 <span className="el-direct__badge">入力は1ページで完了</span>
