@@ -484,6 +484,17 @@ async function inlineBlockingCss(html: string, relativePath: string): Promise<st
   return html;
 }
 
+// コードで組み立てたHTML（/news など）を、静的ページと同じ共通ヘッダー/フッター・計測タグ付きで返す。
+// 旧WP由来の最適化（カルーセル・JS剥がし等）は不要なので通さない。
+export async function renderedHtmlResponse(html: string, init?: { status?: number; key?: string }) {
+  const chrome = await loadChrome();
+  const out = injectHeadingWeight(injectAnalytics(injectChrome(html, chrome), init?.key ?? "rendered"));
+  return new Response(out, {
+    status: init?.status ?? 200,
+    headers: { ...headers, "cache-control": "public, max-age=300, s-maxage=300, stale-while-revalidate=86400" },
+  });
+}
+
 export async function staticHtmlResponse(relativePath: string) {
   const [html, chrome] = await Promise.all([readStaticHtml(relativePath), loadChrome()]);
   const out = await inlineBlockingCss(
