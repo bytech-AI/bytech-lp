@@ -4227,27 +4227,37 @@ body[class][class] .u-text-black {
 /* ヘッダーナビのアンカー着地オフセット（フローティング固定ヘッダー分） */
 #about, #problem, #course, #price, #results, #voice, #faq, #record, #blog { scroll-margin-top: 92px; }
 
-/* === SP固定フッターCTA（FVから一定スクロールで出現・メインCTAと同デザイン） === */
+/* === SP固定CTA：右の側面（画面の下寄り）に縦のタブ（cari_evo の .app-cta と同じ作り）。FVから一定スクロールで出現・予約フォームとフッターでは隠す === */
 .sp-fixcta { display: none; }
 @media (max-width: 767px) {
   .sp-fixcta {
-    display: block;
     position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+    right: 0;
+    bottom: calc(96px + env(safe-area-inset-bottom, 0px));
     z-index: 1500;
-    padding: 6px 14px calc(8px + env(safe-area-inset-bottom, 0px));
-    background: transparent;
-    text-align: center;
-    transform: translateY(140%);
-    transition: transform 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 46px;
+    padding: 6px 0 12px;
+    border: 2px solid rgba(255, 255, 255, .9);
+    border-right: 0;
+    border-radius: 16px 0 0 16px;
+    background: linear-gradient(180deg, #ff6a3d, #ff3410 55%, #d42a08);
+    box-shadow: 0 8px 20px rgba(255, 52, 16, .38);
+    color: #fff;
+    text-decoration: none;
+    transform: translateX(110%);
+    visibility: hidden;
+    transition: transform .4s cubic-bezier(.2, .8, .2, 1), visibility .4s;
+    -webkit-tap-highlight-color: transparent;
   }
-  .sp-fixcta.is-visible { transform: translateY(0); }
-  .sp-fixcta .cta__btn {
-    width: 100%;
-    padding: 10px 58px 10px 20px;
-  }
+  .sp-fixcta.is-visible { transform: translateX(0); visibility: visible; }
+  .sp-fixcta:active { filter: brightness(.95); }
+  .sp-fixcta__free { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #00ac9b; color: #fff; font-size: 11px; font-weight: 900; }
+  .sp-fixcta__label { writing-mode: vertical-rl; font-size: 14px; font-weight: 800; letter-spacing: .12em; line-height: 1; }
+  .sp-fixcta svg { width: 16px; height: 16px; }
 }
 
 /* === geek2: Claude Codeを学べる記事（bytech.jp/blog へのカルーセル） === */
