@@ -376,65 +376,35 @@
   .bt-popup__cta { min-height: 40px; border-radius: 11px; font-size: 14px; }
 }
 
-/* SP-only fixed counseling CTA */
+/* SP-only fixed counseling CTA：右の側面（画面の下寄り）に縦のタブ。親指が届きやすい位置（cari_evo の .app-cta と同じ作り） */
 .bt-sp-fixed-cta { display: none; }
 @media (max-width: 767px) {
   .bt-sp-fixed-cta {
     position: fixed;
     right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 9999;
-    display: block;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(16px);
-    transition: opacity .3s ease, visibility .3s ease, transform .3s ease;
-    padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
-    background: transparent;
-    box-shadow: none;
-  }
-  .bt-sp-fixed-cta.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
-  .bt-sp-fixed-cta__link {
-    position: relative;
-    overflow: hidden;
+    bottom: calc(96px + env(safe-area-inset-bottom));
+    z-index: 9989;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    gap: 16px;
-    min-height: 54px;
-    border-radius: 999px;
-    background: linear-gradient(100deg, #ffc224, #ffd874);
+    gap: 8px;
+    width: 46px;
+    padding: 6px 0 12px;
+    border: 2px solid rgba(255, 255, 255, .9);
+    border-right: 0;
+    border-radius: 16px 0 0 16px;
+    background: linear-gradient(180deg, #ffd874, #ffc224 55%, #f0ad00);
+    box-shadow: 0 8px 20px rgba(199, 145, 0, .38);
     color: #26221a;
-    text-align: center;
     text-decoration: none;
-    font-size: 15px;
-    font-weight: 900;
-    line-height: 1.25;
-    box-shadow: 0 5px 14px rgba(199, 145, 0, .3);
+    transform: translateX(110%);
+    visibility: hidden;
+    transition: transform .4s cubic-bezier(.2, .8, .2, 1), visibility .4s;
+    -webkit-tap-highlight-color: transparent;
   }
-  .bt-sp-fixed-cta__link::after {
-    content: "";
-    position: absolute;
-    top: -35%;
-    left: -55%;
-    width: 35%;
-    height: 170%;
-    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .9), transparent);
-    transform: skewX(-20deg);
-    animation: btSpCtaShine 3s ease-in-out infinite;
-    pointer-events: none;
-  }
-  .bt-sp-fixed-cta__link span { position: relative; z-index: 1; display: flex; flex-direction: column; }
-  .bt-sp-fixed-cta__link small { font-size: 9px; font-weight: 700; }
-  .bt-sp-fixed-cta__link i { position: relative; z-index: 1; width: 10px; height: 10px; border-top: 2px solid #26221a; border-right: 2px solid #26221a; transform: rotate(45deg); }
-}
-@keyframes btSpCtaShine {
-  0%, 58% { left: -55%; opacity: 0; }
-  62% { opacity: 1; }
-  82% { left: 125%; opacity: 1; }
-  83%, 100% { left: 125%; opacity: 0; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .bt-sp-fixed-cta__link::after { animation: none; }
+  .bt-sp-fixed-cta.is-visible { transform: translateX(0); visibility: visible; }
+  .bt-sp-fixed-cta:active { filter: brightness(.95); }
+  .bt-sp-fixed-cta__free { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #533afc; color: #fff; font-size: 11px; font-weight: 900; }
+  .bt-sp-fixed-cta__label { writing-mode: vertical-rl; font-size: 14px; font-weight: 800; letter-spacing: .12em; line-height: 1; }
+  .bt-sp-fixed-cta svg { width: 16px; height: 16px; }
 }

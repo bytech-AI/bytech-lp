@@ -83,14 +83,14 @@ document.querySelectorAll('.faq__item').forEach(function(item) {
     '<p class="bt-popup__footnote">などをご案内し、お客様からのご質問にも<br>丁寧にお答えします。</p>' +
     '<span class="bt-popup__cta">候補日程を見る<i aria-hidden="true"></i></span>';
 
-  // SPのみ、画面下部にも無料カウンセリングCTAを固定表示する。
-  var fixedCta = document.createElement('div');
+  // SPのみ、右の側面（画面の下寄り）に無料カウンセリングの縦タブを固定表示する。
+  var fixedCta = document.createElement('a');
   fixedCta.className = 'bt-sp-fixed-cta';
+  fixedCta.href = '/counseling';
   fixedCta.innerHTML =
-    '<a href="/counseling" class="bt-sp-fixed-cta__link">' +
-      '<span><small>簡単30秒で予約完了！</small>無料カウンセリングを予約する</span>' +
-      '<i aria-hidden="true"></i>' +
-    '</a>';
+    '<span class="bt-sp-fixed-cta__free">無料</span>' +
+    '<span class="bt-sp-fixed-cta__label">カウンセリング予約</span>' +
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>';
   document.body.appendChild(fixedCta);
 
   var hero = document.querySelector('.hero');
