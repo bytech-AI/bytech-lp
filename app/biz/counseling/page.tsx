@@ -275,6 +275,8 @@ export default function CounselingPage() {
         <p>&copy; 2025 バイテック法人AI研修 All Rights Reserved.</p>
       </footer>
 
+      {/* 予約の送信中表示（全LP共通。public/_shared/booking-sending.js） */}
+      <script src="/_shared/booking-sending.js?v=20261119" data-accent="#5c8fe0" defer />
       {/* 予約ウィジェット — ネイティブ<script>（next/scriptはNext16でinline評価が壊れ未実行になるため不使用） */}
       <script dangerouslySetInnerHTML={{ __html: `
 /* 流入元メモ（ASP経由の予約をメディア単位で特定するため）: 外部サイトから来た時の紹介元と到着時のクエリをタブ内に保持し、予約・トラッキング時に送る */
