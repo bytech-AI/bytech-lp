@@ -30,6 +30,12 @@ export const GEEK_NEWS: NewsSource = {
   key: process.env.MICROCMS_GEEK_API_KEY,
   endpoint: process.env.MICROCMS_GEEK_NEWS_ENDPOINT || "news",
 };
+// bytech.jp（バイテックAIスクール）はブログと同じ bytech-blog サービスに news API を同居させる
+export const SCHOOL_NEWS: NewsSource = {
+  domain: process.env.MICROCMS_SCHOOL_SERVICE_DOMAIN,
+  key: process.env.MICROCMS_SCHOOL_API_KEY,
+  endpoint: process.env.MICROCMS_SCHOOL_NEWS_ENDPOINT || "news",
+};
 const documentsEndpoint = process.env.MICROCMS_DOCUMENTS_ENDPOINT || "documents";
 
 const demoNews: MicroCmsNews[] = [];
