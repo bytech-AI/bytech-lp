@@ -12,18 +12,18 @@
 .tr-title { margin: 10px 0 0; font-size: clamp(30px, 3.6vw, 44px); font-weight: 900; line-height: 1.3; color: #1c2635; }
 .tr-lead { margin: 18px 0 0; font-size: 15px; line-height: 1.9; color: #5a6b83; }
 /* PC＋スマホのモック（/e-learning と共通の .el-devices）。FV用のはみ出し配置を打ち消して左カラムに収める */
-.tr-mock { display: flex; justify-content: center; margin: 28px 0 0; padding: 28px 20px 22px; background: linear-gradient(150deg, #e7eefb 0%, #f2f6fd 100%); border: 1px solid #e2e8f1; border-radius: 14px; }
+.tr-mock { display: flex; justify-content: center; margin: 28px 0 0; padding: 28px 20px 22px; background: linear-gradient(150deg, #e7eefb 0%, #f2f6fd 100%); border: 1px solid #e2e8f1; border-radius: 6px; }
 .tr-mock .el-devices { order: 0; align-self: auto; width: min(400px, 100%); min-width: 0; margin: 0; padding-right: 56px; }
 .tr-points { margin: 20px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
-.tr-points li { display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; background: #fff; border: 1px solid #e2e8f1; border-radius: 14px; }
+.tr-points li { display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; background: #fff; border: 1px solid #e2e8f1; border-radius: 6px; }
 .tr-points__no {
-  flex: 0 0 auto; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 10px;
+  flex: 0 0 auto; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 4px;
   background: linear-gradient(135deg, #1c45a3, #3f7fe0); color: #fff;
   font-family: var(--font-montserrat), sans-serif; font-size: 14px; font-weight: 700;
 }
 .tr-points__h { margin: 0; font-size: 15px; font-weight: 900; color: #1c2635; }
 .tr-points__d { margin: 4px 0 0; font-size: 13px; line-height: 1.75; color: #5a6b83; }
-.tr-price { margin-top: 20px; padding: 20px 22px; border-radius: 14px; background: linear-gradient(150deg, #0d2357 0%, #1c45a3 60%, #2f66cc 100%); color: #fff; }
+.tr-price { margin-top: 20px; padding: 20px 22px; border-radius: 6px; background: linear-gradient(150deg, #0d2357 0%, #1c45a3 60%, #2f66cc 100%); color: #fff; }
 .tr-price__h { margin: 0; font-size: 12px; font-weight: 700; opacity: .85; }
 .tr-price__v { margin: 6px 0 0; font-size: 14px; font-weight: 700; }
 .tr-price__v b { margin: 0 2px 0 6px; font-family: var(--font-montserrat), sans-serif; font-size: 32px; }
@@ -31,9 +31,9 @@
 .tr-price__note { margin: 6px 0 0; font-size: 11px; opacity: .75; }
 
 /* 右：フォーム */
-.tr-card { padding: clamp(24px, 3.4vw, 44px); background: #fff; border: 1px solid #e2e8f1; border-radius: 20px; }
+.tr-card { padding: clamp(24px, 3.4vw, 44px); background: #fff; border: 1px solid #e2e8f1; border-radius: 8px; }
 .tr-card__title { margin: 0 0 22px; font-size: 20px; font-weight: 900; color: #1c2635; }
-.tr-notice { display: flex; gap: 12px; align-items: flex-start; margin: -6px 0 26px; padding: 14px 16px; background: #fff8e8; border-radius: 10px; }
+.tr-notice { display: flex; gap: 12px; align-items: flex-start; margin: -6px 0 26px; padding: 14px 16px; background: #fff8e8; border-radius: 4px; }
 .tr-notice__ico {
   flex: 0 0 auto; display: grid; place-items: center; width: 22px; height: 22px; margin-top: 1px; border-radius: 50%;
   background: #f0a52b; color: #fff; font-family: var(--font-montserrat), sans-serif; font-size: 13px; font-weight: 900; line-height: 1;
